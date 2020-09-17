@@ -94,6 +94,12 @@ export default {
             };
             this.signup(signupDetails);
         }
+    },
+    mounted() {
+        this.email = localStorage.getItem('email');
+    },
+    destroyed() {
+        localStorage.clear();
     }
 };
 </script>

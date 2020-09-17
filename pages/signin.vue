@@ -34,7 +34,7 @@
 
                             <div v-if="errors" class="form-group text-muted">
                                 Don't have an account?
-                                <a href="/signup">signup</a>
+                                <a href="/signup">Signup</a>
                             </div>
                             <div class="form-group text-muted">
                                 Forgot your password?

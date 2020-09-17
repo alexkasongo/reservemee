@@ -14,13 +14,15 @@
                         <h1 class="mb-5 text-dark">Create, Offer & Get Paid!</h1>
                         </div>-->
                         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                            <form>
+                            <form @submit.prevent="onSubmit">
                                 <div class="form-row">
                                     <div class="col-12 col-md-9 mb-2 mb-md-0">
                                         <input
                                             type="email"
                                             class="form-control form-control-lg"
                                             placeholder="Enter your email..."
+                                            required
+                                            v-model="email"
                                         />
                                     </div>
                                     <div class="col-12 col-md-3">
@@ -283,7 +285,8 @@ export default {
             offer: offer,
             sell: sell,
             user: '',
-            loading: true
+            loading: true,
+            email: ''
         };
     },
     mounted() {
@@ -298,6 +301,12 @@ export default {
                 console.log(`index.vue - 306 - user is null`);
             }
         });
+    },
+    methods: {
+        onSubmit() {
+            localStorage.setItem('email', this.email);
+            this.$router.push('/signup');
+        }
     }
 };
 </script>

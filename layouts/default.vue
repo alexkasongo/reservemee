@@ -107,7 +107,7 @@ export default {
                     console.log('🏝 🚧');
                     this.user = '';
                 });
-            this.$router.push('/signin');
+            this.$router.push('/');
             this.loading = false;
         },
         viewProfile(id) {
