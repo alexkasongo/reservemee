@@ -212,6 +212,7 @@
             </section>
 
             <!-- Footer -->
+            <hr />
             <footer class="footer bg-light">
                 <div class="container">
                     <div class="row">
@@ -385,7 +386,6 @@ export default {
 .testimonials {
     padding-top: 7rem;
     padding-bottom: 7rem;
-    margin-bottom: 2rem;
     .testimonial-item {
         max-width: 18rem;
         img {
