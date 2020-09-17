@@ -55,7 +55,7 @@
                                 </div>
                             </div>
 
-                            <button class="btn btn-primary">Submit</button>
+                            <button class="btn btn-dark">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -97,10 +97,10 @@ export default {
     },
     mounted() {
         this.email = localStorage.getItem('email');
-    },
-    destroyed() {
-        localStorage.clear();
     }
+    // destroyed() {
+    //     localStorage.clear();
+    // }
 };
 </script>
 

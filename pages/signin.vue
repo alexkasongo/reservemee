@@ -41,7 +41,7 @@
                                 <a href="/password-reset">Reset password</a>
                             </div>
 
-                            <button class="btn btn-primary">Signin</button>
+                            <button class="btn btn-dark">Signin</button>
                         </form>
                     </div>
                 </div>
@@ -79,6 +79,9 @@ export default {
             };
             this.login(loginDetails);
         }
+    },
+    mounted() {
+        this.email = localStorage.getItem('email');
     }
 };
 </script>
