@@ -1,0 +1,18 @@
+.footer {
+  bottom: 0;
+  @include absolute;
+  @include flexbox;
+  @include justify-content(space-between);
+  @include fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 1;
+
+  &__logo {
+    width: 100px;
+  }
+  &__ul {
+    @include flexbox;
+  }
+}

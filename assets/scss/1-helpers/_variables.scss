@@ -1,0 +1,65 @@
+/*
+* Color Variables
+* Using http://chir.ag/projects/name-that-color/#6195ED for color names
+*/
+$white: #fff;
+$silver: #cccccc;
+$gray: #939598;
+$mine-shaft: #3b3b3b;
+$black: #333;
+$amaranth: #c33c54;
+$peppermint: #f1faee;
+$beryl-green: #deebc8;
+$chartreuse: #8efe11;
+$aqua-island: #a8dadc;
+$wedgewood: #158876;
+$cello: #131b23;
+
+/*
+* Fonts
+*/
+$primary-font: "Lato-Regular", sans-serif;
+$bold-font: "Lato-Bold", sans-serif;
+$Light-font: "Lato-Light", sans-serif;
+
+/*
+* Font Sizes
+*/
+$font-h1: 56px;
+$font-h2: 36px;
+$font-h3: 28px;
+$font-h4: 24px;
+$font-h5: 20px;
+$font-h6: 16px;
+
+/*
+* Primary and Secondary Font Colours
+*/
+$primary-font-color: var(--color);
+$secondary-font-color: $gray;
+$tertiary-font-color: var(--color-tertiary);
+
+/*
+* Body Color
+*/
+$body-background: $white;
+
+/*
+* Box shadow
+*/
+$box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+
+/*
+* Break points
+*/
+$mobile: 640px;
+$tablet: 768px;
+$small-desktop: 1024px;
+$large-desktop: 1280px;
+
+/*
+* Z-index
+*/
+$header-zindex: 1000;
+$header-open-zindex: 2000;
+$header-close-zindex: 2100;

@@ -1,0 +1,18 @@
+.homepage {
+  height: 100vh;
+  position: relative;
+
+  .mode-toggle {
+    -webkit-writing-mode: vertical-rl;
+    -ms-writing-mode: tb-rl;
+    writing-mode: vertical-rl;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    @include button;
+    @include color($chartreuse);
+    z-index: 2;
+  }
+}

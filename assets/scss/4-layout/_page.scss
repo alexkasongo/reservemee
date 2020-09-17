@@ -1,0 +1,24 @@
+.page {
+  @media (min-width: $tablet) {
+  }
+  @media (min-width: $desktop) {
+  }
+  &__container {
+    @media (min-width: $tablet) {
+    }
+    @media (min-width: $desktop) {
+    }
+  }
+  &__banner {
+    @media (min-width: $tablet) {
+    }
+    @media (min-width: $desktop) {
+    }
+  }
+  &__title {
+    @media (min-width: $tablet) {
+    }
+    @media (min-width: $desktop) {
+    }
+  }
+}

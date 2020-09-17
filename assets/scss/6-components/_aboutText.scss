@@ -1,0 +1,25 @@
+.about {
+  @include absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  &__text {
+    @include custom-text($size: 24px);
+    text-align: center;
+    @media (min-width: $mobile) {
+      @include custom-text($size: 30px);
+    }
+  }
+  &__link {
+    cursor: default;
+    @include custom-text($size: 24px);
+    @media (min-width: $mobile) {
+      @include custom-text($size: 30px);
+    }
+  }
+  &__link:hover {
+    // color: $primary-font-color;
+    color: $wedgewood;
+  }
+}

@@ -1,0 +1,24 @@
+/*
+* LINKS
+*/
+a {
+  background-image: linear-gradient(to top, #000 50%, transparent 50%);
+  background-size: 100% 200%;
+  background-position: top;
+  transition: background-position 0.2s ease-in-out;
+  text-decoration: none;
+  @include custom-text($size: 20px);
+}
+
+a:hover {
+  background-position: bottom;
+}
+
+a:focus {
+  outline: none;
+}
+
+a:active {
+  position: relative;
+  top: 1px;
+}

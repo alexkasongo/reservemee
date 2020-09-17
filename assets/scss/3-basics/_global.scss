@@ -1,0 +1,58 @@
+/*
+* css global reset settings
+*/
+:root {
+  --color: #243746;
+  --color-primary: #158876;
+  --color-secondary: #0e2233;
+  --color-tertiary: #c33c54;
+  --bg: #f3f5f4;
+  --bg-secondary: #fff;
+  --border-color: #ddd;
+}
+
+.dark-mode {
+  --color: #ebf4f1;
+  --color-primary: #8efe11;
+  --color-secondary: #fdf9f3;
+  --color-tertiary: #ebf4f1;
+  --bg: #333;
+  --bg-secondary: #071521;
+  --border-color: #0d2538;
+}
+.sepia-mode {
+  --color: #433422;
+  --color-secondary: #504231;
+  --color-tertiary: #c33c54;
+  --bg: #f1e7d0;
+  --bg-secondary: #eae0c9;
+  --border-color: #ded0bf;
+}
+
+html,
+body {
+  @include clearfix;
+  background-color: $body-background;
+  font-family: $primary-font;
+  min-height: 100%;
+  overflow-x: hidden;
+  @include box-sizing(border-box);
+
+  // global appearance mode
+  background-color: var(--bg);
+  color: var(--color);
+  transition: background-color 0.3s;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+*:focus {
+  outline-color: grey;
+  outline-style: solid;
+  outline-width: thin;
+}
+a {
+  color: var(--color-primary);
+}

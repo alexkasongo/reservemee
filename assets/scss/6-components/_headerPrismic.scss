@@ -1,0 +1,13 @@
+.site-header {
+  @include flexbox;
+  @include justify-content(space-between);
+  @include fixed;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 1;
+
+  &__ul {
+    @include flexbox;
+  }
+}
