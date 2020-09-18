@@ -1,7 +1,7 @@
 <template>
     <div class="content">
         <!-- <h1>DASHBOARD</h1> -->
-        <div class="container">
+        <div>
             <div class="row">
                 <div class="col-sm-12">
                     <!-- meta -->
