@@ -1,6 +1,9 @@
 <template>
     <div class="mt-3">
-        <div class="content">
+        <div v-if="!user" class="mt-2">
+            <p>loading...</p>
+        </div>
+        <div v-if="user" class="content">
             <!-- <h1>DASHBOARD</h1> -->
             <div>
                 <div class="row">
@@ -11,7 +14,7 @@
                                 <div class="col-sm-6">
                                     <span class="float-left mr-3">
                                         <img
-                                            src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                            src="https://robohash.org/EWW.png?set=set5&size=150x150"
                                             alt
                                             class="thumb-lg rounded-circle"
                                         />
@@ -37,6 +40,40 @@
                 <!-- end row -->
                 <div class="row">
                     <div class="col-xl-4">
+                        <div v-if="user">
+                            <div v-if="!loading">
+                                <div v-if="categories.length <= 0">
+                                    <div class="w-100">
+                                        <div class="card">
+                                            <div class="card-header">Dashboard</div>
+                                            <div class="card-body">
+                                                <h3 v-if="user">Welcome {{ user.displayName }}</h3>
+                                                <p>You currently have no services. Start by creating a category.</p>
+
+                                                <button
+                                                    @click="onCreateInitCat"
+                                                    type="button"
+                                                    class="btn btn-block btn-success"
+                                                >Create Category</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="!user.emailVerified" class="w-100">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 v-if="user">Your email address is not verified.</h3>
+                                        <p>Verified: {{ user.emailVerified }}</p>
+                                        <button
+                                            @click="verifyEmail"
+                                            type="button"
+                                            class="btn btn-block btn-success"
+                                        >Verify Email</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Personal-Information -->
                         <div class="mb-5">
                             <h4 class="header-title mt-0">Store Bio</h4>
@@ -95,7 +132,7 @@
                                             href
                                             data-original-title="Facebook"
                                         >
-                                            <i class="fa fa-facebook"></i>
+                                            <i class="fa text-dark fa-facebook"></i>
                                         </a>
                                     </li>
                                     <li class="list-inline-item">
@@ -107,7 +144,7 @@
                                             href
                                             data-original-title="Twitter"
                                         >
-                                            <i class="fa fa-twitter"></i>
+                                            <i class="fa text-dark fa-twitter"></i>
                                         </a>
                                     </li>
                                     <li class="list-inline-item">
@@ -119,14 +156,14 @@
                                             href
                                             data-original-title="Skype"
                                         >
-                                            <i class="fa fa-skype"></i>
+                                            <i class="fa text-dark fa-skype"></i>
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <!-- Personal-Information -->
-                        <div class="card-box ribbon-box">
+                        <div class="ribbon-box">
                             <div class="ribbon ribbon-primary">Messages</div>
                             <div class="clearfix"></div>
                             <div class="inbox-widget">
@@ -303,7 +340,7 @@
                             <!-- end col -->
                         </div>
                         <!-- end row -->
-                        <div class="mb-5">
+                        <!-- <div class="mb-5">
                             <div>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -334,13 +371,11 @@
                                                         <i class="fa fa-map-pin"></i> Tom's Too Restaurant
                                                     </div>
                                                     <div class="m-t-15">
-                                                        <a href="#" class="pull-right">Contact</a>
-                                                        <img
-                                                            src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                            width="16"
-                                                            class="img-circle pull-left m-r-5"
-                                                            alt
-                                                        /> Richard Leong
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-icon btn-sm waves-effect waves-light btn-success pull-right mb-3"
+                                                        >Contact</button>
+                                                        Richard Leong
                                                     </div>
                                                 </div>
                                             </div>
@@ -371,67 +406,155 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card-manage services">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-uppercase mb-0">Manage Services</h5>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table no-wrap user-table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th
+                                                        scope="col"
+                                                        class="border-0 text-uppercase font-medium pl-4"
+                                                    >#</th>
+                                                    <th
+                                                        scope="col"
+                                                        class="border-0 text-uppercase font-medium"
+                                                    >Category</th>
+                                                    <th
+                                                        scope="col"
+                                                        class="border-0 text-uppercase font-medium"
+                                                    >Description</th>
+                                                    <th
+                                                        scope="col"
+                                                        class="border-0 text-uppercase font-medium"
+                                                    >Services</th>
+                                                    <th
+                                                        scope="col"
+                                                        class="border-0 text-uppercase font-medium"
+                                                    >Manage</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="pl-4">1</td>
+                                                    <td>
+                                                        <p class="m-0">Gel System</p>
+                                                        <span
+                                                            class="text-muted"
+                                                        >Texas, United states</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted">Visual Designer</span>
+                                                        <br />
+                                                        <span class="text-muted">Past : teacher</span>
+                                                    </td>
+                                                    <td style="vertical-align:middle">
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
+                                                        >View Services</button>
+                                                    </td>
+                                                    <td>
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-outline-dark btn-circle btn-lg btn-circle ml-2"
+                                                        >
+                                                            <i class="fa fa-pencil"></i>
+                                                        </button>
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-outline-dark btn-circle btn-lg btn-circle ml-2"
+                                                        >
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="pl-4">1</td>
+                                                    <td>
+                                                        <p class="m-0">Nail Cleaning</p>
+                                                        <span
+                                                            class="text-muted"
+                                                        >Texas, United states</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted">Visual Designer</span>
+                                                        <br />
+                                                        <span class="text-muted">Past : teacher</span>
+                                                    </td>
+                                                    <td style="vertical-align:middle">
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
+                                                        >View Services</button>
+                                                    </td>
+                                                    <td>
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-outline-dark btn-circle btn-lg btn-circle ml-2"
+                                                        >
+                                                            <i class="fa fa-pencil"></i>
+                                                        </button>
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-outline-dark btn-circle btn-lg btn-circle ml-2"
+                                                        >
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="pl-4">1</td>
+                                                    <td>
+                                                        <p class="m-0">Classic Nail Polish</p>
+                                                        <span
+                                                            class="text-muted"
+                                                        >Texas, United states</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted">Visual Designer</span>
+                                                        <br />
+                                                        <span class="text-muted">Past : teacher</span>
+                                                    </td>
+                                                    <td style="vertical-align:middle">
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
+                                                        >View Services</button>
+                                                    </td>
+                                                    <td>
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-outline-dark btn-circle btn-lg btn-circle ml-2"
+                                                        >
+                                                            <i class="fa fa-pencil"></i>
+                                                        </button>
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-outline-dark btn-circle btn-lg btn-circle ml-2"
+                                                        >
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="header-title mb-3">My Services</h4>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <!-- <th></th> -->
-                                            <th>Project Name</th>
-                                            <th>Start Date</th>
-                                            <th>Due Date</th>
-                                            <th>Status</th>
-                                            <th>Assign</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <!-- <td></td> -->
-                                            <td>Adminox Admin</td>
-                                            <td>01/01/2015</td>
-                                            <td>07/05/2015</td>
-                                            <td>
-                                                <span class="label label-info">Work in Progress</span>
-                                            </td>
-                                            <td>Coderthemes</td>
-                                        </tr>
-                                        <tr>
-                                            <!-- <td></td> -->
-                                            <td>Adminox Frontend</td>
-                                            <td>01/01/2015</td>
-                                            <td>07/05/2015</td>
-                                            <td>
-                                                <span class="label label-success">Pending</span>
-                                            </td>
-                                            <td>Coderthemes</td>
-                                        </tr>
-                                        <tr>
-                                            <!-- <td></td> -->
-                                            <td>Adminox Admin</td>
-                                            <td>01/01/2015</td>
-                                            <td>07/05/2015</td>
-                                            <td>
-                                                <span class="label label-pink">Done</span>
-                                            </td>
-                                            <td>Coderthemes</td>
-                                        </tr>
-                                        <tr>
-                                            <!-- <td></td> -->
-                                            <td>Adminox Frontend</td>
-                                            <td>01/01/2015</td>
-                                            <td>07/05/2015</td>
-                                            <td>
-                                                <span class="label label-purple">Work in Progress</span>
-                                            </td>
-                                            <td>Coderthemes</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="row mb-5" v-if="!loading">
+                            <div class="col-xl-12">
+                                <Bookings class="services" />
                             </div>
                         </div>
                     </div>
+
                     <!-- end col -->
                 </div>
                 <!-- end row -->
@@ -441,42 +564,6 @@
         <div>
             <div class="home__grid-left">
                 <div class="w-100">
-                    <div v-if="loading" class="mt-2">
-                        <p>loading...</p>
-                    </div>
-                    <div v-if="!loading">
-                        <div v-if="categories.length == 0">
-                            <div class="w-100">
-                                <div class="card">
-                                    <div class="card-header">Dashboard</div>
-                                    <div class="card-body">
-                                        <h3 v-if="user">Welcome {{ user.displayName }}</h3>
-                                        <p>You currently have no services. Start by creating a category.</p>
-
-                                        <button
-                                            @click="onCreateInitCat"
-                                            type="button"
-                                            class="btn btn-block btn-primary"
-                                        >Create Category</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div v-if="!user.emailVerified" class="w-100">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 v-if="user">Your email address is not verified.</h3>
-                                    <p>Verified: {{ user.emailVerified }}</p>
-                                    <button
-                                        @click="verifyEmail"
-                                        type="button"
-                                        class="btn btn-block btn-primary"
-                                    >Verify Email</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div v-if="categories.length > 0" class="d-flex justify-content-start mt-3">
                         <div class="w-100">
                             <div class="card">
@@ -518,11 +605,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div v-if="!loading">
-                <div class="home__grid-right">
-                    <Bookings />
                 </div>
             </div>
         </div>
@@ -708,10 +790,10 @@ export default {
     float: left;
     clear: both;
     padding: 5px 12px 5px 12px;
-    margin-left: -30px;
+    margin-left: 0px;
     margin-bottom: 15px;
     font-family: Rubik, sans-serif;
-    box-shadow: 0 0 13px 0 rgba(236, 236, 241, 0.44);
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
     color: #fff;
     font-size: 13px;
 }
@@ -725,7 +807,7 @@ export default {
 }
 .badge {
     font-family: Rubik, sans-serif;
-    box-shadow: 0 0 13px 0 rgba(236, 236, 241, 0.44);
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
     padding: 0.35em 0.5em;
     font-weight: 500;
 }
@@ -742,7 +824,7 @@ export default {
 .card {
     border: none;
     margin-bottom: 24px;
-    box-shadow: 0 0 13px 0 rgba(236, 236, 241, 0.44);
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
 }
 
 .avatar-xs {
@@ -757,7 +839,7 @@ export default {
     margin-bottom: 0.75rem;
     display: block;
     position: relative;
-    box-shadow: 0 0 13px 0 rgba(236, 236, 241, 0.44);
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
 }
 .widget .widget-header,
 .widget-reminder-content,
@@ -862,5 +944,46 @@ a.widget-header-title {
 .widget-reminder-time,
 a.widget-header-title {
     padding: 0.625rem;
+}
+/* manage users */
+.services {
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+}
+.card-manage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: 0;
+}
+.btn-circle.btn-lg,
+.btn-group-lg > .btn-circle.btn {
+    width: 50px;
+    height: 50px;
+    padding: 14px 15px;
+    font-size: 18px;
+    line-height: 23px;
+}
+.text-muted {
+    color: #8898aa !important;
+}
+[type='button']:not(:disabled),
+[type='reset']:not(:disabled),
+[type='submit']:not(:disabled),
+button:not(:disabled) {
+    cursor: pointer;
+}
+.btn-circle {
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+}
+.user-table tbody tr .category-select {
+    max-width: 150px;
 }
 </style>
