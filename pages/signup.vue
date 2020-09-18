@@ -10,7 +10,7 @@
 
                     <div class="card-body">
                         <form @submit.prevent="onSubmit">
-                            <div class="form-group" novalidate>
+                            <div class="form-group">
                                 <input
                                     type="text"
                                     placeholder="Name"

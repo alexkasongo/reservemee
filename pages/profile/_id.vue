@@ -4,7 +4,7 @@
             <p>loading...</p>
         </div>
         <!-- Breadcrumb -->
-        <nav aria-label="breadcrumb" class="main-breadcrumb">
+        <!-- <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="index.html">Home</a>
@@ -14,7 +14,7 @@
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Profile Settings</li>
             </ol>
-        </nav>
+        </nav>-->
         <!-- /Breadcrumb -->
 
         <div class="row gutters-sm">
@@ -65,6 +65,29 @@
                                         d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
                                     />
                                 </svg>Account Settings
+                            </a>
+                            <a
+                                href="#store"
+                                data-toggle="tab"
+                                class="nav-item nav-link has-icon nav-link-faded"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="feather feather-settings mr-2"
+                                >
+                                    <circle cx="12" cy="12" r="3" />
+                                    <path
+                                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                                    />
+                                </svg>Store Settings
                             </a>
                             <a
                                 href="#security"
@@ -181,6 +204,27 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="#store" data-toggle="tab" class="nav-link has-icon">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="feather feather-settings"
+                                    >
+                                        <circle cx="12" cy="12" r="3" />
+                                        <path
+                                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                                        />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="#security" data-toggle="tab" class="nav-link has-icon">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -251,7 +295,7 @@
                                         id="fullName"
                                         aria-describedby="fullNameHelp"
                                         placeholder="Enter your fullname"
-                                        value="Test User"
+                                        :value="name"
                                     />
                                     <small
                                         id="fullNameHelp"
@@ -290,7 +334,7 @@
                                 <div
                                     class="form-group small text-muted"
                                 >All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.</div>
-                                <button type="button" class="btn btn-primary">Update Profile</button>
+                                <button type="button" class="btn btn-dark">Update Profile</button>
                                 <button type="reset" class="btn btn-light">Reset Changes</button>
                             </form>
                         </div>
@@ -298,22 +342,6 @@
                             <h6>ACCOUNT SETTINGS</h6>
                             <hr />
                             <form>
-                                <!-- <div class="form-group">
-                                    <label for="username">Username</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="username"
-                                        aria-describedby="usernameHelp"
-                                        placeholder="Enter your username"
-                                        value="kennethvaldez"
-                                    />
-                                    <small
-                                        id="usernameHelp"
-                                        class="form-text text-muted"
-                                    >After changing your username, your old username becomes available for anyone else to claim.</small>
-                                </div>
-                                <hr />-->
                                 <div class="form-group">
                                     <label class="d-block text-danger">Delete Account</label>
                                     <p
@@ -327,6 +355,84 @@
                                 >Delete Account</button>
                             </form>
                         </div>
+                        <div class="tab-pane" id="store">
+                            <h6>YOUR STORE INFORMATION</h6>
+                            <hr />
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Logo</label>
+                                    <input
+                                        required
+                                        class="form-control"
+                                        name="imageUrl"
+                                        label="Image URL"
+                                        id="image-url"
+                                        v-model="storeLogo"
+                                    />
+                                </div>
+                                <div
+                                    required
+                                    class="form-group imgPreview"
+                                    v-bind:style="{ 'background-image': 'url(' + storeLogo + ')' }"
+                                ></div>
+                                <div class="form-group">
+                                    <label for="fullName">STORE NAME</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="fullName"
+                                        aria-describedby="storeNameHelp"
+                                        placeholder="Enter your store name"
+                                        v-model="storeName"
+                                    />
+                                    <small
+                                        id="fullNameHelp"
+                                        class="form-text text-muted"
+                                    >Your name may appear around here where you are mentioned. You can change or remove it at any time.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bio">Your Store Bio</label>
+                                    <textarea
+                                        class="form-control autosize"
+                                        id="bio"
+                                        placeholder="Write a description of your store"
+                                        v-model="storeBio"
+                                        style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 62px;"
+                                    ></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Store Banner</label>
+                                    <input
+                                        required
+                                        class="form-control"
+                                        name="imageUrl"
+                                        label="Image URL"
+                                        id="image-url"
+                                        v-model="storeBanner"
+                                    />
+                                </div>
+                                <div
+                                    required
+                                    class="form-group imgPreview"
+                                    v-bind:style="{ 'background-image': 'url(' + storeBanner + ')' }"
+                                ></div>
+                                <div class="form-group">
+                                    <label for="location">Location</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="location"
+                                        placeholder="Enter your location"
+                                        v-model="location"
+                                    />
+                                </div>
+                                <div
+                                    class="form-group small text-muted"
+                                >All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.</div>
+                                <button type="button" class="btn btn-dark">Update Profile</button>
+                                <button type="reset" class="btn btn-light">Reset Changes</button>
+                            </form>
+                        </div>
                         <div class="tab-pane" id="security">
                             <h6>SECURITY SETTINGS</h6>
                             <hr />
@@ -336,7 +442,7 @@
                                     <input
                                         type="password"
                                         class="form-control"
-                                        placeholder="Enter your old password"
+                                        placeholder="Enter your current password"
                                         v-model="currentPassword"
                                     />
                                     <div
@@ -549,22 +655,32 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
     data() {
         return {
+            name: '',
+            location: '',
+            storeName: '',
+            storeLogo: 'https://via.placeholder.com/500',
+            storeBanner: 'https://via.placeholder.com/500',
             alert: '',
             currentPassword: '',
             newPassword: '',
             confirmNewPassword: '',
-            errors: ''
+            errors: '',
+            storeBio: ''
         };
     },
     computed: {
         ...mapGetters({
-            userEmail: 'userEmail',
+            user: 'user',
+            userData: 'user',
             userId: 'userId',
             categories: 'categories'
         }),
         loading() {
             return this.$store.getters.loading;
         }
+    },
+    mounted() {
+        this.name = this.user.name;
     },
     methods: {
         ...mapActions(['']),
@@ -575,6 +691,7 @@ export default {
                 .then(() => {
                     console.log('🏝 🚧');
                     this.user = '';
+                    localStorage.clear('email');
                 });
             this.$router.push('/signin');
         },
@@ -600,7 +717,7 @@ export default {
         reauthenticate(currentPassword) {
             const user = firebase.auth().currentUser;
             const cred = firebase.auth.EmailAuthProvider.credential(
-                this.userEmail,
+                this.userData.email,
                 currentPassword
             );
             return user.reauthenticateWithCredential(cred);
@@ -638,5 +755,11 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.imgPreview {
+    height: 200px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 </style>

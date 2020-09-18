@@ -106,6 +106,7 @@ export default {
                 .then(() => {
                     console.log('🏝 🚧');
                     this.user = '';
+                    localStorage.clear('email');
                 });
             this.$router.push('/');
             this.loading = false;
