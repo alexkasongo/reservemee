@@ -1,6 +1,6 @@
 <template>
     <!-- ManageServices -->
-    <div v-if="categories.length !== 0" class="row">
+    <div class="row">
         <div class="col-md-12">
             <div class="card-manage services">
                 <div class="card-body">
@@ -83,12 +83,26 @@ export default {
     computed: {
         ...mapGetters({
             services: 'services',
-            categories: 'categories',
-            userId: 'userId',
-            userData: 'userData'
+            categories: 'categories'
         }),
         loading() {
             return this.$store.getters.loading;
+        }
+    },
+    methods: {
+        onCreateService() {
+            this.$router.push('/service/create-service');
+        },
+        onCreateCategory() {
+            this.$router.push('/service/create-category');
+        },
+        goToService(service) {
+            this.$router.push({
+                name: 'service-id',
+                params: {
+                    id: service
+                }
+            });
         }
     }
 };

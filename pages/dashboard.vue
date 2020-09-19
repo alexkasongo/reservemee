@@ -41,7 +41,7 @@
                         <!-- StoreSummary -->
 
                         <!-- ManageServices -->
-                        <ManageServices />
+                        <ManageServices v-if="categories.length !== 0" />
                         <!-- ManageServices -->
 
                         <div class="row mb-5" v-if="!loading">
@@ -100,31 +100,6 @@ export default {
             return this.$store.getters.loading;
         }
     },
-    methods: {
-        ...mapActions(['createUserTable']),
-        onCreateService() {
-            this.$router.push('/service/create-service');
-        },
-        onCreateInitCat() {
-            this.createUserTable(this.userId);
-            this.$router.push('/service/create-category');
-        },
-        onCreateCategory() {
-            this.$router.push('/service/create-category');
-        },
-        verifyEmail() {
-            this.$router.push('/verification');
-        },
-        goToService(service) {
-            this.$router.push({
-                name: 'service-id',
-                params: {
-                    id: service
-                }
-            });
-        }
-    },
-    beforeMount() {},
     mounted() {
         /*
          ** fires each time the page loads, it loads the logged in user object

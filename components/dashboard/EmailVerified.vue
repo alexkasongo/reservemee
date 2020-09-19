@@ -23,6 +23,11 @@ export default {
         ...mapGetters({
             user: 'user'
         })
+    },
+    methods: {
+        verifyEmail() {
+            this.$router.push('/verification');
+        }
     }
 };
 </script>

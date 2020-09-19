@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'CategoryCheck',
@@ -27,6 +27,13 @@ export default {
         ...mapGetters({
             user: 'user'
         })
+    },
+    methods: {
+        ...mapActions(['createUserTable']),
+        onCreateInitCat() {
+            this.createUserTable(this.userId);
+            this.$router.push('/service/create-category');
+        }
     }
 };
 </script>
