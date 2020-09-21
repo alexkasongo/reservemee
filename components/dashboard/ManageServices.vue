@@ -41,12 +41,14 @@
                                 </td>
                                 <td>
                                     <button
+                                        @click="updCategory(category.id)"
                                         type="button"
                                         class="btn btn-outline-dark btn-circle btn-lg btn-circle ml-2"
                                     >
                                         <i class="fa fa-pencil"></i>
                                     </button>
                                     <button
+                                        @click="removeCategory(category.id)"
                                         type="button"
                                         class="btn btn-outline-dark btn-circle btn-lg btn-circle ml-2"
                                     >
@@ -76,20 +78,22 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'ManageServices',
     computed: {
         ...mapGetters({
             services: 'services',
-            categories: 'categories'
+            categories: 'categories',
+            user: 'user'
         }),
         loading() {
             return this.$store.getters.loading;
         }
     },
     methods: {
+        ...mapActions(['createCategory', 'loadCategories', 'deleteCategory']),
         onCreateService() {
             this.$router.push('/service/create-service');
         },
@@ -103,6 +107,22 @@ export default {
                     id: service
                 }
             });
+        },
+        updCategory(id) {
+            this.$router.push({
+                name: 'update-category-id',
+                params: {
+                    id: id
+                }
+            });
+        },
+        removeCategory(id) {
+            const payload = {
+                userId: this.user.uid,
+                id: id
+            };
+            this.deleteCategory(payload);
+            this.loadCategories(this.user.uid);
         }
     }
 };

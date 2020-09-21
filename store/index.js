@@ -124,6 +124,7 @@ export const actions = {
                     categories.push({
                         id: key,
                         name: obj[key].name,
+                        description: obj[key].description,
                     })
                 }
                 // console.log(`index.js - 142 - 🏅`, categories);
@@ -209,6 +210,7 @@ export const actions = {
 
         const category = {
             name: payload.category,
+            description: payload.description,
             userId: payload.userId,
         }
 

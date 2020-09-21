@@ -3,6 +3,7 @@
         <div v-if="loading" class="col-md-6 mt-2">
             <p>loading...</p>
         </div>
+        <!-- Display Categories if they exist here -->
         <div v-if="categories.length > 0" class="d-flex justify-content-start">
             <div class="w-100">
                 <div class="card">
@@ -17,7 +18,10 @@
                         <li
                             class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                         >
-                            {{ category.name | capitalize }}
+                            <div>
+                                <p>{{ category.name | capitalize }}</p>
+                                <p>{{ category.description }}</p>
+                            </div>
                             <div class="editBtns mb-2">
                                 <a href="#" @click="updCategory(category.id)" class="text-dark">
                                     <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -35,6 +39,8 @@
                 >Note that deleting a category deletes all serivices in that category.</small>
             </div>
         </div>
+
+        <!-- Create Category + description here -->
         <form @submit.prevent="onSubmit" class="mt-3">
             <div class="form-group">
                 <label for="exampleFormControlFile1">Create New Category</label>
@@ -48,6 +54,16 @@
                     required
                 />
             </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Description</label>
+                <textarea
+                    required
+                    class="form-control"
+                    style="min-width: 100%;"
+                    placeholder="Describe the service"
+                    v-model="description"
+                ></textarea>
+            </div>
             <button type="submit" :disabled="loading" class="btn btn-primary mt-2">Create</button>
         </form>
     </div>
@@ -59,7 +75,8 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
     data() {
         return {
-            category: ''
+            category: '',
+            description: ''
         };
     },
     computed: {
@@ -80,6 +97,7 @@ export default {
 
             let data = {
                 category: res,
+                description: this.description,
                 userId: this.userId
             };
             this.createCategory(data);
