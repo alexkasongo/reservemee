@@ -1,7 +1,6 @@
 import Vue from 'vue'
 
-
-export default function capitalize(value) {
+export function capitalize(value) {
     if (!value) return '';
     value = value.toString();
     let initialFormat = value.replace(/-/g, ' ');
@@ -14,6 +13,20 @@ export default function capitalize(value) {
             formattedValue[i].substring(1);
     }
     return formattedValue.join(' ');
-}
+};
 
-Vue.filter('capitalize', capitalize);
+export function truncate(text, length, suffix) {
+    if (text.length > length) {
+        return text.substring(0, length) + suffix;
+    } else {
+        return text;
+    }
+};
+
+const filters = { capitalize, truncate }
+
+Object.keys(filters).forEach(key => {
+    Vue.filter(key, filters[key])
+})
+
+// Vue.filter('capitalize', capitalize);
