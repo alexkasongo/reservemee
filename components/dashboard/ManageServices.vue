@@ -23,14 +23,16 @@
                         <tbody v-for="category in categories" :key="category.id">
                             <tr>
                                 <td class="pl-4">1</td>
-                                <td>
+                                <td style="vertical-align:middle">
                                     <p class="m-0">{{ category.name }}</p>
-                                    <span class="text-muted">Texas, United states</span>
+                                    <!-- <span class="text-muted">Texas, United states</span> -->
                                 </td>
-                                <td>
-                                    <span class="text-muted">Visual Designer</span>
-                                    <br />
-                                    <span class="text-muted">Past : teacher</span>
+                                <td style="vertical-align:middle">
+                                    <span
+                                        class="text-muted"
+                                    >{{category.description | truncate(20, '...')}}</span>
+                                    <!-- <br />
+                                    <span class="text-muted">Past : teacher</span>-->
                                 </td>
                                 <td style="vertical-align:middle">
                                     <button

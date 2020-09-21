@@ -3,6 +3,32 @@
         <div v-if="loading" class="col-md-6 mt-2">
             <p>loading...</p>
         </div>
+        <!-- Create Category + description here -->
+        <form @submit.prevent="onSubmit" class="mt-3 mb-4">
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Create New Category</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="category"
+                    label="Category"
+                    placeholder="Category name"
+                    v-model="category"
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Description</label>
+                <textarea
+                    required
+                    class="form-control"
+                    style="min-width: 100%;"
+                    placeholder="Describe the service"
+                    v-model="description"
+                ></textarea>
+            </div>
+            <button type="submit" :disabled="loading" class="btn btn-primary mt-2">Create</button>
+        </form>
         <!-- Display Categories if they exist here -->
         <div v-if="categories.length > 0" class="d-flex justify-content-start">
             <div class="w-100">
@@ -39,33 +65,6 @@
                 >Note that deleting a category deletes all serivices in that category.</small>
             </div>
         </div>
-
-        <!-- Create Category + description here -->
-        <form @submit.prevent="onSubmit" class="mt-3">
-            <div class="form-group">
-                <label for="exampleFormControlFile1">Create New Category</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    name="category"
-                    label="Category"
-                    placeholder="Category name"
-                    v-model="category"
-                    required
-                />
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Description</label>
-                <textarea
-                    required
-                    class="form-control"
-                    style="min-width: 100%;"
-                    placeholder="Describe the service"
-                    v-model="description"
-                ></textarea>
-            </div>
-            <button type="submit" :disabled="loading" class="btn btn-primary mt-2">Create</button>
-        </form>
     </div>
 </template>
 
