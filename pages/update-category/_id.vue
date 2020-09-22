@@ -18,7 +18,6 @@
             <div class="form-group">
                 <label for="exampleInputPassword1">Description</label>
                 <textarea
-                    required
                     class="form-control"
                     style="min-width: 100%;"
                     placeholder="Describe the service"
@@ -31,7 +30,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     data() {
@@ -42,7 +41,8 @@ export default {
     },
     computed: {
         ...mapGetters({
-            categories: 'categories'
+            categories: 'categories',
+            user: 'user'
         }),
         loading() {
             return this.$store.getters.loading;
@@ -56,10 +56,35 @@ export default {
             return data[0];
         }
     },
+    methods: {
+        ...mapActions(['updateCategory', 'loadServices']),
+        onSubmit() {
+            let categoryName = this.category.replace(/\s+/g, '-').toLowerCase();
+
+            let data = {
+                userId: this.user.uid,
+                id: this.$route.params.id,
+                name: categoryName,
+                description: this.description
+            };
+
+            this.updateCategory(data);
+            this.loadServices(this.user.uid);
+            this.$router.push(`/dashboard`);
+        }
+    },
     mounted() {
-        this.category = this.filteredCategories.name;
-        this.description = this.filteredCategories.description;
-        console.log(`_id.vue - 61 - 🏝`, this.filteredCategories);
+        //FIXME without the if() we get error on update page reload
+        //NOTE issue seems to be coming from store getter. Possible fix
+        // could be creating a filtered getter that filters through services using
+        // uid. or storing state in localStorage
+        if (this.filteredCategories === undefined) {
+            this.$router.back();
+        } else {
+            this.category = this.filteredCategories.name;
+            this.description = this.filteredCategories.description;
+            console.log(`_id.vue - 61 - 🏝`, this.filteredCategories);
+        }
     }
 };
 </script>

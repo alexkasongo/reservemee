@@ -46,7 +46,7 @@
                         >
                             <div>
                                 <p>{{ category.name | capitalize }}</p>
-                                <p>{{ category.description | truncate(150, '...')}}</p>
+                                <p>{{ category.description }}</p>
                             </div>
                             <div class="editBtns mb-2">
                                 <a href="#" @click="updCategory(category.id)" class="text-dark">

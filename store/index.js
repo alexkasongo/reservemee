@@ -294,7 +294,8 @@ export const actions = {
         commit('SET_LOADING', true)
 
         firebase.database().ref('users/' + payload.userId).child('categories/' + payload.id).set({
-            name: payload.category,
+            name: payload.name,
+            description: payload.description,
             uid: payload.id,
         }).then(() => {
             commit('SET_LOADING', false)

@@ -20,17 +20,15 @@
                                 <th scope="col" class="border-0 text-uppercase font-medium">Manage</th>
                             </tr>
                         </thead>
-                        <tbody v-for="category in categories" :key="category.id">
+                        <tbody v-for="(category, categoryKey) in categories" :key="category.id">
                             <tr>
-                                <td class="pl-4">1</td>
+                                <td class="pl-4">{{categoryKey + 1}}</td>
                                 <td style="vertical-align:middle">
-                                    <p class="m-0">{{ category.name }}</p>
+                                    <p class="m-0">{{ category.name | capitalize }}</p>
                                     <!-- <span class="text-muted">Texas, United states</span> -->
                                 </td>
                                 <td style="vertical-align:middle">
-                                    <span
-                                        class="text-muted"
-                                    >{{category.description | truncate(20, '...')}}</span>
+                                    <span class="text-muted">{{category.description }}</span>
                                     <!-- <br />
                                     <span class="text-muted">Past : teacher</span>-->
                                 </td>
@@ -126,6 +124,9 @@ export default {
             this.deleteCategory(payload);
             this.loadCategories(this.user.uid);
         }
+    },
+    mounted() {
+        this.loadCategories(this.user.uid);
     }
 };
 </script>
