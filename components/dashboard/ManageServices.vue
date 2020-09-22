@@ -22,7 +22,7 @@
                         </thead>
                         <tbody v-for="(category, categoryKey) in categories" :key="category.id">
                             <tr>
-                                <td class="pl-4">{{categoryKey + 1}}</td>
+                                <td style="vertical-align:middle" class="pl-4">{{categoryKey + 1}}</td>
                                 <td style="vertical-align:middle">
                                     <p class="m-0">{{ category.name | capitalize }}</p>
                                     <!-- <span class="text-muted">Texas, United states</span> -->
