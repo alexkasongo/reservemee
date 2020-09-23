@@ -10,6 +10,7 @@ export const state = () => ({
     loading: false,
     services: [],
     categories: [],
+    storeProfile: '',
     updateId: '',
     verificationSent: false
 });
@@ -22,6 +23,7 @@ export const getters = {
     signupError: (state) => state.signupError,
     services: (state) => (state.services),
     categories: (state) => state.categories,
+    storeProfile: (state) => state.storeProfile[0],
     loading: (state) => state.loading,
     updateId: (state) => {
         const data = state.services.filter((res) => {
@@ -86,6 +88,7 @@ export const actions = {
                 }
             )
     },
+    //FIXME error on page reload
     async loadUserIdData({ commit }, payload) {
         commit('SET_LOADING', true)
         //to make it realtime use on() instead of once()
@@ -93,13 +96,17 @@ export const actions = {
             .then((data) => {
                 console.log(`index.js - 109 - 🇳🇫`, data.val());
                 const userData = []
+                const storteData = []
                 const obj = data.val()
+                const storeObj = data.val().storeProfile
 
                 if (obj) {
                     userData.push(obj)
+                    storteData.push(storeObj)
                 }
 
                 commit('USER_DATA', userData)
+                commit('SET_LOADED_STORE', storteData)
                 commit('SET_LOADING', false)
             })
             .catch(
@@ -360,6 +367,9 @@ export const mutations = {
     },
     SET_LOADED_CATEGORIES: (state, payload) => {
         state.categories = payload
+    },
+    SET_LOADED_STORE: (state, payload) => {
+        state.storeProfile = payload
     },
     SET_LOADING(state, payload) {
         state.loading = payload

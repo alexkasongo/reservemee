@@ -1,6 +1,6 @@
 <template>
     <div class="mt-3">
-        <div v-if="loading" class="mt-2">
+        <div v-if="!user" class="mt-2">
             <p>loading...</p>
         </div>
         <!-- Breadcrumb -->
@@ -17,7 +17,7 @@
         </nav>-->
         <!-- /Breadcrumb -->
 
-        <div class="row gutters-sm">
+        <div v-if="user" class="row gutters-sm">
             <!-- TITLES -->
             <div class="col-md-4 d-none d-md-block">
                 <div class="card">
@@ -160,6 +160,17 @@
             <!-- TITLES END -->
 
             <div class="col-md-8">
+                <!-- CategoryCheck -->
+                <div class="w-100">
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading">Well done!</h4>
+                        <p>Welcome to your profile settings. Be sure to go through all the settings and fill in all the required fields.</p>
+                        <hr />
+                        <p>{{storeProfile}}</p>
+                        <p class="mb-0">You can always update your information any given time.</p>
+                    </div>
+                </div>
+                <!-- CategoryCheck -->
                 <div class="card">
                     <!-- CARD HEADER -->
                     <div class="card-header border-bottom mb-3 d-flex d-md-none">
@@ -443,7 +454,7 @@
                                 <div
                                     class="form-group small text-muted"
                                 >All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.</div>
-                                <button type="submit" class="btn btn-dark">Update Profile</button>
+                                <button type="submit" class="btn btn-dark">Save</button>
                                 <button type="reset" class="btn btn-light">Reset Changes</button>
                             </form>
                         </div>
@@ -678,18 +689,16 @@ export default {
     computed: {
         ...mapGetters({
             user: 'user',
-            userData: 'user',
-            categories: 'categories'
+            userData: 'userData',
+            categories: 'categories',
+            storeProfile: 'storeProfile'
         }),
         loading() {
             return this.$store.getters.loading;
         }
     },
-    mounted() {
-        this.name = this.user.name;
-    },
     methods: {
-        ...mapActions(['updateStoreProfile']),
+        ...mapActions(['updateStoreProfile', 'loadStoreProfile']),
         async signout() {
             await firebase
                 .auth()
@@ -771,6 +780,10 @@ export default {
 
             this.updateStoreProfile(data);
         }
+    },
+    mounted() {
+        // load user name
+        this.name = this.user.name;
     }
 };
 </script>
