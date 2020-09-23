@@ -392,13 +392,13 @@
                                         name="imageUrl"
                                         label="Image URL"
                                         id="image-url"
-                                        v-model="storeLogo"
+                                        v-model="form.storeLogo"
                                     />
                                 </div>
                                 <div
                                     required
                                     class="form-group imgPreview"
-                                    v-bind:style="{ 'background-image': 'url(' + storeLogo + ')' }"
+                                    v-bind:style="{ 'background-image': 'url(' + form.storeLogo + ')' }"
                                 ></div>
                                 <div class="form-group">
                                     <label for="fullName">Store Name</label>
@@ -408,7 +408,7 @@
                                         id="fullName"
                                         aria-describedby="storeNameHelp"
                                         placeholder="Enter your store name"
-                                        v-model="storeName"
+                                        v-model="form.storeName"
                                     />
                                     <small
                                         id="fullNameHelp"
@@ -421,7 +421,7 @@
                                         class="form-control autosize"
                                         id="bio"
                                         placeholder="Write a description of your store"
-                                        v-model="storeBio"
+                                        v-model="form.storeBio"
                                         style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 62px;"
                                     ></textarea>
                                 </div>
@@ -433,13 +433,13 @@
                                         name="imageUrl"
                                         label="Image URL"
                                         id="image-url"
-                                        v-model="storeBanner"
+                                        v-model="form.storeBanner"
                                     />
                                 </div>
                                 <div
                                     required
                                     class="form-group imgPreview"
-                                    v-bind:style="{ 'background-image': 'url(' + storeBanner + ')' }"
+                                    v-bind:style="{ 'background-image': 'url(' + form.storeBanner + ')' }"
                                 ></div>
                                 <div class="form-group">
                                     <label for="location">Location</label>
@@ -448,7 +448,7 @@
                                         class="form-control"
                                         id="location"
                                         placeholder="Enter your location"
-                                        v-model="storeLocation"
+                                        v-model="form.storeLocation"
                                     />
                                 </div>
                                 <div
@@ -674,16 +674,18 @@ export default {
     data() {
         return {
             name: '',
-            storeName: '',
-            storeLogo: 'https://via.placeholder.com/500',
-            storeBanner: 'https://via.placeholder.com/500',
-            storeLocation: '',
             alert: '',
             currentPassword: '',
             newPassword: '',
             confirmNewPassword: '',
             errors: '',
-            storeBio: ''
+            form: {
+                storeLogo: 'https://via.placeholder.com/500',
+                storeName: '',
+                storeBio: '',
+                storeBanner: 'https://via.placeholder.com/500',
+                storeLocation: ''
+            }
         };
     },
     computed: {
@@ -698,7 +700,11 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['updateStoreProfile', 'loadStoreProfile']),
+        ...mapActions([
+            'updateStoreProfile',
+            'loadStoreProfile',
+            'loadUserIdData'
+        ]),
         async signout() {
             await firebase
                 .auth()
@@ -767,23 +773,37 @@ export default {
         },
         onSubmit() {
             //NOTE replace empty space with a dash and lowercase all uppercases
-            let storeName = this.storeName.replace(/\s+/g, '-').toLowerCase();
+            let storeName = this.form.storeName
+                .replace(/\s+/g, '-')
+                .toLowerCase();
 
             const data = {
                 userId: this.user.uid,
-                storeLogo: this.storeLogo,
+                storeLogo: this.form.storeLogo,
                 storeName: storeName,
-                storeBio: this.storeBio,
-                storeBanner: this.storeBanner,
-                storeLocation: this.storeLocation
+                storeBio: this.form.storeBio,
+                storeBanner: this.form.storeBanner,
+                storeLocation: this.form.storeLocation
             };
 
             this.updateStoreProfile(data);
+            alert('Saved...');
+            this.loadUserIdData(this.user.uid);
         }
     },
     mounted() {
         // load user name
         this.name = this.user.name;
+
+        // set store information in local storage
+        let storedForm = JSON.parse(localStorage.getItem('form'));
+        console.log(`_id.vue - 796 - variable`, storedForm);
+
+        this.form.storeLogo = storedForm[0].storeLogo;
+        this.form.storeName = storedForm[0].storeName;
+        this.form.storeBio = storedForm[0].storeBio;
+        this.form.storeBanner = storedForm[0].storeBanner;
+        this.form.storeLocation = storedForm[0].storeLocation;
     }
 };
 </script>
