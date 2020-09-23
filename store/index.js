@@ -96,17 +96,20 @@ export const actions = {
             .then((data) => {
                 console.log(`index.js - 109 - 🇳🇫`, data.val());
                 const userData = []
-                const storteData = []
+                const storeData = []
                 const obj = data.val()
                 const storeObj = data.val().storeProfile
 
                 if (obj) {
                     userData.push(obj)
-                    storteData.push(storeObj)
+                    storeData.push(storeObj)
                 }
 
+                localStorage.setItem('form', JSON.stringify(storeData));
+
+
                 commit('USER_DATA', userData)
-                commit('SET_LOADED_STORE', storteData)
+                commit('SET_LOADED_STORE', storeData)
                 commit('SET_LOADING', false)
             })
             .catch(
