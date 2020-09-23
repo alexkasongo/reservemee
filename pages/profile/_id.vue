@@ -18,6 +18,7 @@
         <!-- /Breadcrumb -->
 
         <div class="row gutters-sm">
+            <!-- TITLES -->
             <div class="col-md-4 d-none d-md-block">
                 <div class="card">
                     <div class="card-body">
@@ -156,8 +157,11 @@
                     </div>
                 </div>
             </div>
+            <!-- TITLES END -->
+
             <div class="col-md-8">
                 <div class="card">
+                    <!-- CARD HEADER -->
                     <div class="card-header border-bottom mb-3 d-flex d-md-none">
                         <ul class="nav nav-tabs card-header-tabs nav-gap-x-1" role="tablist">
                             <li class="nav-item">
@@ -283,7 +287,10 @@
                             </li>
                         </ul>
                     </div>
+                    <!-- CARD HEADER END -->
+
                     <div class="card-body tab-content">
+                        <!-- PROFILE -->
                         <div class="tab-pane active" id="profile">
                             <h6>YOUR PROFILE INFORMATION</h6>
                             <hr />
@@ -339,6 +346,9 @@
                                 <button type="reset" class="btn btn-light">Reset Changes</button>
                             </form>
                         </div>
+                        <!-- PROFILE END -->
+
+                        <!-- ACCOUNT -->
                         <div class="tab-pane" id="account">
                             <h6>ACCOUNT SETTINGS</h6>
                             <hr />
@@ -356,10 +366,13 @@
                                 >Delete Account</button>
                             </form>
                         </div>
+                        <!-- ACCOUNT END -->
+
+                        <!-- STORE INFORMATION -->
                         <div class="tab-pane" id="store">
                             <h6>YOUR STORE INFORMATION</h6>
                             <hr />
-                            <form>
+                            <form @submit.prevent="onSubmit">
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1">Logo</label>
                                     <input
@@ -377,7 +390,7 @@
                                     v-bind:style="{ 'background-image': 'url(' + storeLogo + ')' }"
                                 ></div>
                                 <div class="form-group">
-                                    <label for="fullName">STORE NAME</label>
+                                    <label for="fullName">Store Name</label>
                                     <input
                                         type="text"
                                         class="form-control"
@@ -424,16 +437,19 @@
                                         class="form-control"
                                         id="location"
                                         placeholder="Enter your location"
-                                        v-model="location"
+                                        v-model="storeLocation"
                                     />
                                 </div>
                                 <div
                                     class="form-group small text-muted"
                                 >All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.</div>
-                                <button type="button" class="btn btn-dark">Update Profile</button>
+                                <button type="submit" class="btn btn-dark">Update Profile</button>
                                 <button type="reset" class="btn btn-light">Reset Changes</button>
                             </form>
                         </div>
+                        <!-- STORE INFORMATION END -->
+
+                        <!-- SECURITY SETTINGS -->
                         <div class="tab-pane" id="security">
                             <h6>SECURITY SETTINGS</h6>
                             <hr />
@@ -497,6 +513,9 @@
                                 </div>
                             </form>
                         </div>
+                        <!-- SECURITY SETTINGS END -->
+
+                        <!-- NOTIFICATION SETTINGS -->
                         <div class="tab-pane" id="notification">
                             <h6>NOTIFICATION SETTINGS</h6>
                             <hr />
@@ -604,6 +623,9 @@
                                 </div>
                             </form>
                         </div>
+                        <!-- NOTIFICATION SETTINGS END -->
+
+                        <!-- BILLING -->
                         <div class="tab-pane" id="billing">
                             <h6>BILLING SETTINGS</h6>
                             <hr />
@@ -623,6 +645,7 @@
                                 </div>
                             </form>
                         </div>
+                        <!-- BILLING END -->
                     </div>
                 </div>
             </div>
@@ -640,10 +663,10 @@ export default {
     data() {
         return {
             name: '',
-            location: '',
             storeName: '',
             storeLogo: 'https://via.placeholder.com/500',
             storeBanner: 'https://via.placeholder.com/500',
+            storeLocation: '',
             alert: '',
             currentPassword: '',
             newPassword: '',
@@ -656,7 +679,6 @@ export default {
         ...mapGetters({
             user: 'user',
             userData: 'user',
-            userId: 'userId',
             categories: 'categories'
         }),
         loading() {
@@ -667,7 +689,7 @@ export default {
         this.name = this.user.name;
     },
     methods: {
-        ...mapActions(['']),
+        ...mapActions(['updateStoreProfile']),
         async signout() {
             await firebase
                 .auth()
@@ -706,7 +728,6 @@ export default {
             );
             return user.reauthenticateWithCredential(cred);
         },
-
         changePasswordNow(currentPassword, newPassword) {
             this.reauthenticate(currentPassword)
                 .then(() => {
@@ -734,6 +755,21 @@ export default {
                 .ref('categories')
                 .child(`${this.categories[0].id}`);
             categoryDelete.remove();
+        },
+        onSubmit() {
+            //NOTE replace empty space with a dash and lowercase all uppercases
+            let storeName = this.storeName.replace(/\s+/g, '-').toLowerCase();
+
+            const data = {
+                userId: this.user.uid,
+                storeLogo: this.storeLogo,
+                storeName: storeName,
+                storeBio: this.storeBio,
+                storeBanner: this.storeBanner,
+                storeLocation: this.storeLocation
+            };
+
+            this.updateStoreProfile(data);
         }
     }
 };

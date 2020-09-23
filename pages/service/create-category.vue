@@ -81,7 +81,6 @@ export default {
     computed: {
         ...mapGetters({
             categories: 'categories',
-            userId: 'userId',
             user: 'user'
         }),
         loading() {
@@ -97,7 +96,7 @@ export default {
             let data = {
                 category: res,
                 description: this.description,
-                userId: this.userId
+                userId: this.user.uid
             };
             this.createCategory(data);
             // this.loadCategories();

@@ -180,8 +180,8 @@ export const actions = {
             });
     },
     /*
-    ** On first login we create the user table using the UID 
-    ** when the user clicks on create new category
+    ** Not necessery. Firebase dynamically handles this
+    ** just use firebase set() function
     */
     async createUserTable({ commit }, payload) {
         commit('SET_LOADING', true)
@@ -189,7 +189,7 @@ export const actions = {
 
         await firebase.database().ref('users/' + payload).set({
             categories: '',
-            services: '',
+            services: ''
             //some more user data can go here
         })
             .then(() => {
@@ -202,8 +202,8 @@ export const actions = {
             })
     },
     /*
-   ** Using uid we can we create categories unique to the user
-   */
+    ** Using uid we can we create categories unique to the user
+    */
     async createCategory({ commit }, payload) {
         commit('SET_LOADING', true)
         // console.log(`index.js - 151 - 🎨`, payload);
@@ -314,6 +314,29 @@ export const actions = {
             .database()
             .ref('users/' + payload.userId).child('categories/' + payload.id).remove();
         commit('SET_LOADING', false)
+    },
+    /*
+    ** update store profile information, no need to create
+    ** profile created on signup
+    */
+    async updateStoreProfile({ commit }, payload) {
+        commit('SET_LOADING', true)
+
+        firebase.database().ref('users/' + payload.userId).child('storeProfile/').set({
+            storeLogo: payload.storeLogo,
+            storeName: payload.storeName,
+            storeBio: payload.storeBio,
+            storeBanner: payload.storeBanner,
+            storeLocation: payload.storeLocation
+        }).then(() => {
+            commit('SET_LOADING', false)
+        })
+            .catch((error) => {
+                commit('ERRORS', error);
+                console.log(`index.js - 66 - 🚧`, error);
+                commit('SET_LOADING', false)
+            });
+
     },
     // we receive service id as payload to use for filtering
     updateData({ commit }, payload) {

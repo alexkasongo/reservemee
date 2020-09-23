@@ -31,7 +31,7 @@ export default {
     methods: {
         ...mapActions(['createUserTable']),
         onCreateInitCat() {
-            this.createUserTable(this.userId);
+            // this.createUserTable(this.user.uid);
             this.$router.push('/service/create-category');
         }
     }
