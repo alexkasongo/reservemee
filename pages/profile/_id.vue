@@ -680,10 +680,10 @@ export default {
             confirmNewPassword: '',
             errors: '',
             form: {
-                storeLogo: 'https://via.placeholder.com/500',
+                storeLogo: '', // https://via.placeholder.com/500
                 storeName: '',
                 storeBio: '',
-                storeBanner: 'https://via.placeholder.com/500',
+                storeBanner: '', // https://via.placeholder.com/500
                 storeLocation: ''
             }
         };
@@ -795,15 +795,20 @@ export default {
         // load user name
         this.name = this.user.name;
 
-        // set store information in local storage
-        let storedForm = JSON.parse(localStorage.getItem('form'));
-        console.log(`_id.vue - 796 - variable`, storedForm);
+        // REVIEW this code is a little buggy and needs review
 
-        this.form.storeLogo = storedForm[0].storeLogo;
-        this.form.storeName = storedForm[0].storeName;
-        this.form.storeBio = storedForm[0].storeBio;
-        this.form.storeBanner = storedForm[0].storeBanner;
-        this.form.storeLocation = storedForm[0].storeLocation;
+        let storedForm = JSON.parse(localStorage.getItem('form'));
+
+        if (storedForm[0] !== null) {
+            // set store information in local storage
+            console.log(`_id.vue - 796 - variable`, storedForm);
+
+            this.form.storeLogo = storedForm[0].storeLogo;
+            this.form.storeName = storedForm[0].storeName;
+            this.form.storeBio = storedForm[0].storeBio;
+            this.form.storeBanner = storedForm[0].storeBanner;
+            this.form.storeLocation = storedForm[0].storeLocation;
+        }
     }
 };
 </script>

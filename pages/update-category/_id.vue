@@ -1,6 +1,5 @@
 <template>
     <div class="w-100">
-        <p>Update category {{ this.$route.params.id }}</p>
         <!-- Update Category + description here -->
         <form @submit.prevent="onSubmit" class="mt-3 mb-4">
             <div class="form-group">
@@ -78,13 +77,36 @@ export default {
         //NOTE issue seems to be coming from store getter. Possible fix
         // could be creating a filtered getter that filters through services using
         // uid. or storing state in localStorage
-        if (this.filteredCategories === undefined) {
-            this.$router.back();
+        // if (this.filteredCategories === undefined) {
+        //     this.$router.back();
+        // } else {
+        //     this.category = this.filteredCategories.name;
+        //     this.description = this.filteredCategories.description;
+        //     console.log(`_id.vue - 61 - 🏝`, this.filteredCategories);
+        // }
+
+        //ANCHOR FIXING
+        // REVIEW
+
+        // if the update form exists in local storage, do nothing
+        if (localStorage.getItem('categoryForm')) {
+            // get the information in local storage
+            let storedForm = JSON.parse(localStorage.getItem('categoryForm'));
         } else {
-            this.category = this.filteredCategories.name;
-            this.description = this.filteredCategories.description;
-            console.log(`_id.vue - 61 - 🏝`, this.filteredCategories);
+            localStorage.setItem(
+                'categoryForm',
+                JSON.stringify(this.filteredCategories)
+            );
         }
+
+        let storedForm = JSON.parse(localStorage.getItem('categoryForm'));
+
+        // set the values in the form. Values should remain in the form on page reload
+        this.category = storedForm.name;
+        this.description = storedForm.description;
+    },
+    destroyed() {
+        localStorage.removeItem('categoryForm');
     }
 };
 </script>
