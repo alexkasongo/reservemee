@@ -315,6 +315,7 @@
                                         placeholder="Enter your fullname"
                                         v-model="profileInfo.name"
                                     />
+                                    <!-- <pre>{{ user.name }}</pre> -->
                                     <small
                                         id="fullNameHelp"
                                         class="form-text text-muted"
@@ -780,19 +781,6 @@ export default {
             // this.alert = 'Saved...';
             // this.loadUserIdData(this.user.uid);
             // this.loadUser();
-            firebase.auth().onAuthStateChanged((user) => {
-                if (user !== null) {
-                    const userDetails = {
-                        name: user.displayName,
-                        email: user.email,
-                        photoUrl: user.photoURL,
-                        emailVerified: user.emailVerified,
-                        uid: user.uid
-                    };
-
-                    this.loadUser(userDetails);
-                }
-            });
         },
         closeAlert() {
             this.closeAlert();
@@ -813,28 +801,37 @@ export default {
             };
 
             this.updateStoreProfile(data);
-            alert('Saved...');
-            this.alert = 'Saved...';
+            // this.alert = 'Saved...';
         }
     },
     mounted() {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user !== null) {
+                // this.profileInfo.name = this.user.displayName;
+                console.log(`_id.vue - 826 - 🙈`, user.displayName);
+                this.profileInfo.name = user.displayName;
+            }
+        });
+        /*
+         ** Prepopulate form
+         */
         // REVIEW this code is a little buggy and needs review
-        let user = JSON.parse(localStorage.getItem('user'));
-        let storedForm = JSON.parse(localStorage.getItem('form'));
-        this.currentUser.name = user.name;
-        this.profileInfo.name = user.name;
+        // this.profileInfo.name = this.user.name;
+        // let user = JSON.parse(localStorage.getItem('user'));
+        // let storedForm = JSON.parse(localStorage.getItem('form'));
+        // this.currentUser.name = user.name;
+        // this.profileInfo.name = user.name;
         //  if the form in local storage is not empty, perform the logic below
-        if (storedForm[0] !== null) {
-            // set store information in local storage
-
-            this.form.storeLogo = storedForm[0].storeLogo;
-            this.form.storeName = storedForm[0].storeName;
-            this.form.storeBio = storedForm[0].storeBio;
-            this.form.storeBanner = storedForm[0].storeBanner;
-            this.form.storeLocation = storedForm[0].storeLocation;
-        } else {
-            this.alert = 'Please update your store information';
-        }
+        // if (storedForm[0] !== null) {
+        // set store information in local storage
+        //     this.form.storeLogo = storedForm[0].storeLogo;
+        //     this.form.storeName = storedForm[0].storeName;
+        //     this.form.storeBio = storedForm[0].storeBio;
+        //     this.form.storeBanner = storedForm[0].storeBanner;
+        //     this.form.storeLocation = storedForm[0].storeLocation;
+        // } else {
+        //     this.alert = 'Please update your store information';
+        // }
     }
 };
 </script>

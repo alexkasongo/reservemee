@@ -341,6 +341,8 @@ export const actions = {
             storeBanner: payload.storeBanner,
             storeLocation: payload.storeLocation
         }).then(() => {
+            // update successful
+            alert('Saved...');
             commit('SET_LOADING', false)
         })
             .catch((error) => {
@@ -365,6 +367,7 @@ export const actions = {
             photoURL: payload.photoUrl,
         }).then((res) => {
             // Update successful.
+            alert('Saved...');
             commit('SET_ALERT', true)
             commit('SET_LOADING', false)
         }).catch((error) => {
