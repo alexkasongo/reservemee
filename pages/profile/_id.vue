@@ -166,8 +166,7 @@
                         <h4 class="alert-heading">Well done!</h4>
                         <p>Welcome to your profile settings. Be sure to go through all the settings and fill in all the required fields.</p>
                         <hr />
-                        <p>{{storeProfile}}</p>
-                        <p class="mb-0">You can always update your information any given time.</p>
+                        <p class="mb-0">{{ storeAlert }}</p>
                     </div>
                 </div>
                 <!-- CategoryCheck -->
@@ -305,7 +304,7 @@
                         <div class="tab-pane active" id="profile">
                             <h6>YOUR PROFILE INFORMATION</h6>
                             <hr />
-                            <form>
+                            <form @submit.prevent="onUpdProfileInfo">
                                 <div class="form-group">
                                     <label for="fullName">Full Name</label>
                                     <input
@@ -314,7 +313,7 @@
                                         id="fullName"
                                         aria-describedby="fullNameHelp"
                                         placeholder="Enter your fullname"
-                                        :value="name"
+                                        v-model="profileInfo.name"
                                     />
                                     <small
                                         id="fullNameHelp"
@@ -330,16 +329,6 @@
                                         style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 62px;"
                                     >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae earum consectetur minus dolor amet iusto? Dolores cupiditate nam distinctio fugiat consequuntur a quod laborum labore magni sapiente. Culpa, recusandae.</textarea>
                                 </div>
-                                <!-- <div class="form-group">
-                                    <label for="url">URL</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="url"
-                                        placeholder="Enter your website address"
-                                        value="http://alexkasongo.com"
-                                    />
-                                </div>-->
                                 <div class="form-group">
                                     <label for="location">Location</label>
                                     <input
@@ -353,7 +342,7 @@
                                 <div
                                     class="form-group small text-muted"
                                 >All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.</div>
-                                <button type="button" class="btn btn-dark">Update Profile</button>
+                                <button type="submit" class="btn btn-dark">Update Profile</button>
                                 <button type="reset" class="btn btn-light">Reset Changes</button>
                             </form>
                         </div>
@@ -383,7 +372,7 @@
                         <div class="tab-pane" id="store">
                             <h6>YOUR STORE INFORMATION</h6>
                             <hr />
-                            <form @submit.prevent="onSubmit">
+                            <form @submit.prevent="onUpdStoreInfo">
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1">Logo</label>
                                     <input
@@ -673,12 +662,18 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
     data() {
         return {
-            name: '',
             alert: '',
             currentPassword: '',
             newPassword: '',
             confirmNewPassword: '',
             errors: '',
+            currentUser: {
+                name: ''
+            },
+            profileInfo: {
+                name: '',
+                photoUrl: ''
+            },
             form: {
                 storeLogo: '', // https://via.placeholder.com/500
                 storeName: '',
@@ -692,7 +687,8 @@ export default {
         ...mapGetters({
             user: 'user',
             categories: 'categories',
-            storeProfile: 'storeProfile'
+            storeProfile: 'storeProfile',
+            storeAlert: 'alert'
         }),
         loading() {
             return this.$store.getters.loading;
@@ -702,7 +698,9 @@ export default {
         ...mapActions([
             'updateStoreProfile',
             'loadStoreProfile',
-            'loadUserIdData'
+            'loadUserIdData',
+            'updateUserProfile',
+            'loadUser'
         ]),
         async signout() {
             await firebase
@@ -770,7 +768,18 @@ export default {
                 .child(`${this.categories[0].id}`);
             categoryDelete.remove();
         },
-        onSubmit() {
+        onUpdProfileInfo() {
+            console.log(`_id.vue - 765 - 🥶`, this.profileInfo.name);
+            const payload = {
+                name: this.profileInfo.name,
+                photoUrl: this.profileInfo.photoUrl
+            };
+            this.updateUserProfile(payload);
+            // this.alert = 'Saved...';
+            // this.loadUserIdData(this.user.uid);
+            // this.loadUser();
+        },
+        onUpdStoreInfo() {
             //NOTE replace empty space with a dash and lowercase all uppercases
             let storeName = this.form.storeName
                 .replace(/\s+/g, '-')
@@ -787,26 +796,26 @@ export default {
 
             this.updateStoreProfile(data);
             alert('Saved...');
-            this.loadUserIdData(this.user.uid);
+            this.alert = 'Saved...';
         }
     },
     mounted() {
-        // load user name
-        this.name = this.user.name;
-
         // REVIEW this code is a little buggy and needs review
-
+        let user = JSON.parse(localStorage.getItem('user'));
         let storedForm = JSON.parse(localStorage.getItem('form'));
-
+        this.currentUser.name = user.name;
+        this.profileInfo.name = user.name;
+        //  if the form in local storage is not empty, perform the logic below
         if (storedForm[0] !== null) {
             // set store information in local storage
-            console.log(`_id.vue - 796 - variable`, storedForm);
 
             this.form.storeLogo = storedForm[0].storeLogo;
             this.form.storeName = storedForm[0].storeName;
             this.form.storeBio = storedForm[0].storeBio;
             this.form.storeBanner = storedForm[0].storeBanner;
             this.form.storeLocation = storedForm[0].storeLocation;
+        } else {
+            this.alert = 'Please update your store information';
         }
     }
 };

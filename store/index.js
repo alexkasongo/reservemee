@@ -8,6 +8,7 @@ export const state = () => ({
     userId: '',
     signupError: '',
     loading: false,
+    alert: false,
     services: [],
     categories: [],
     storeProfile: '',
@@ -25,6 +26,7 @@ export const getters = {
     categories: (state) => state.categories,
     storeProfile: (state) => state.storeProfile[0],
     loading: (state) => state.loading,
+    alert: (state) => state.alert,
     updateId: (state) => {
         const data = state.services.filter((res) => {
             return res.id === state.updateId
@@ -36,6 +38,7 @@ export const getters = {
 
 export const actions = {
     async loadUser({ commit }, payload) {
+        localStorage.setItem('user', JSON.stringify(payload));
         commit('LOADED_USER', payload);
     },
     async loadUserId({ commit }, payload) {
@@ -104,7 +107,6 @@ export const actions = {
                     userData.push(obj)
                     storeData.push(storeObj)
                 }
-
                 localStorage.setItem('form', JSON.stringify(storeData));
 
 
@@ -348,10 +350,29 @@ export const actions = {
             });
 
     },
+    /*
+    ** update logged in user profile info
+    */
     // we receive service id as payload to use for filtering
-    updateData({ commit }, payload) {
-        console.log(`index.js - 165 - variable`, payload);
-        commit('UPDATE_ID', payload)
+    async updateUserProfile({ commit }, payload) {
+        console.log(`index.js - 333 - 🏝`, payload);
+        commit('SET_LOADING', true)
+
+        const user = await firebase.auth().currentUser;
+
+        user.updateProfile({
+            displayName: payload.name,
+            photoURL: payload.photoUrl,
+        }).then((res) => {
+            // Update successful.
+            commit('SET_ALERT', true)
+            commit('SET_LOADING', false)
+        }).catch((error) => {
+            // An error happened.
+            commit('ERRORS', error);
+            console.log(`index.js - 66 - 🚧`, error);
+            commit('SET_LOADING', false)
+        });
     },
 };
 
@@ -376,6 +397,9 @@ export const mutations = {
     },
     SET_LOADING(state, payload) {
         state.loading = payload
+    },
+    SET_ALERT(state, payload) {
+        state.alert = payload
     },
     UPDATE_ID(state, payload) {
         state.updateId = payload
