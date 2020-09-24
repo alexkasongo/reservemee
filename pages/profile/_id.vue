@@ -166,7 +166,7 @@
                         <h4 class="alert-heading">Well done!</h4>
                         <p>Welcome to your profile settings. Be sure to go through all the settings and fill in all the required fields.</p>
                         <hr />
-                        <p class="mb-0">{{ storeAlert }}</p>
+                        <p class="mb-0">Alert: {{ storeAlert }}</p>
                     </div>
                 </div>
                 <!-- CategoryCheck -->
@@ -662,6 +662,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
     data() {
         return {
+            loggedInUser: '',
             alert: '',
             currentPassword: '',
             newPassword: '',
@@ -700,7 +701,8 @@ export default {
             'loadStoreProfile',
             'loadUserIdData',
             'updateUserProfile',
-            'loadUser'
+            'loadUser',
+            'closeAlert'
         ]),
         async signout() {
             await firebase
@@ -778,6 +780,22 @@ export default {
             // this.alert = 'Saved...';
             // this.loadUserIdData(this.user.uid);
             // this.loadUser();
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user !== null) {
+                    const userDetails = {
+                        name: user.displayName,
+                        email: user.email,
+                        photoUrl: user.photoURL,
+                        emailVerified: user.emailVerified,
+                        uid: user.uid
+                    };
+
+                    this.loadUser(userDetails);
+                }
+            });
+        },
+        closeAlert() {
+            this.closeAlert();
         },
         onUpdStoreInfo() {
             //NOTE replace empty space with a dash and lowercase all uppercases
