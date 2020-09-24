@@ -691,7 +691,6 @@ export default {
     computed: {
         ...mapGetters({
             user: 'user',
-            userData: 'userData',
             categories: 'categories',
             storeProfile: 'storeProfile'
         }),
@@ -738,7 +737,7 @@ export default {
         reauthenticate(currentPassword) {
             const user = firebase.auth().currentUser;
             const cred = firebase.auth.EmailAuthProvider.credential(
-                this.userData.email,
+                this.user.email,
                 currentPassword
             );
             return user.reauthenticateWithCredential(cred);
