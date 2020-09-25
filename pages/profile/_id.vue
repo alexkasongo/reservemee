@@ -166,7 +166,7 @@
                         <h4 class="alert-heading">Well done!</h4>
                         <p>Welcome to your profile settings. Be sure to go through all the settings and fill in all the required fields.</p>
                         <hr />
-                        <p>{{ test }}</p>
+                        <p>{{ userInfo[0] }}</p>
                         <p class="mb-0">Alert: {{ storeAlert }}</p>
                     </div>
                 </div>
@@ -366,11 +366,11 @@
                                         v-model="form.storeLogo"
                                     />
                                 </div>
-                                <!-- <div
+                                <div
                                     required
                                     class="form-group imgPreview"
                                     v-bind:style="{ 'background-image': 'url(' + form.storeLogo + ')' }"
-                                ></div>-->
+                                ></div>
                                 <div class="form-group">
                                     <label for="fullName">Store Name</label>
                                     <input
@@ -407,11 +407,11 @@
                                         v-model="form.storeBanner"
                                     />
                                 </div>
-                                <!-- <div
+                                <div
                                     required
                                     class="form-group imgPreview"
                                     v-bind:style="{ 'background-image': 'url(' + form.storeBanner + ')' }"
-                                ></div>-->
+                                ></div>
                                 <div class="form-group">
                                     <label for="location">Location</label>
                                     <input
@@ -697,6 +697,9 @@ export default {
         }),
         loading() {
             return this.$store.getters.loading;
+        },
+        userInfo() {
+            return this.$store.state.userData;
         }
     },
     methods: {
@@ -817,31 +820,16 @@ export default {
             }
         });
         /*
-         ** Prepopulate form
+         ** Prepopulate form.
+         ** Page reload on a dynamic route empties Vuex store therefore I installed
+         ** vue persistedstate plugin which Persists and rehydrates the Vuex state between page reloads.
          */
-        // FIXME this code is a little buggy and needs review
-        // this.profileInfo.name = this.user.name;
-        // let user = JSON.parse(localStorage.getItem('user'));
-        // let storedForm = JSON.parse(localStorage.getItem('form'));
-        // this.currentUser.name = user.name;
-        // this.profileInfo.name = user.name;
-        //  if the form in local storage is not empty, perform the logic below
-        // if (storedForm[0] !== null) {
-        // set store information in local storage
-        //     this.form.storeLogo = storedForm[0].storeLogo;
-        //     this.form.storeName = storedForm[0].storeName;
-        //     this.form.storeBio = storedForm[0].storeBio;
-        //     this.form.storeBanner = storedForm[0].storeBanner;
-        //     this.form.storeLocation = storedForm[0].storeLocation;
-        // } else {
-        //     this.alert = 'Please update your store information';
-        // }
-
-        this.form.storeLogo = this.storeProfile.storeLogo;
-        this.form.storeName = this.storeProfile.storeName;
-        this.form.storeBio = this.storeProfile.storeBio;
-        this.form.storeBanner = this.storeProfile.storeBanner;
-        this.form.storeLocation = this.storeProfile.storeLocation;
+        // REVIEW has been fixed using persistedstate and needs review
+        this.form.storeLogo = this.userInfo[0].storeProfile.storeLogo;
+        this.form.storeName = this.userInfo[0].storeProfile.storeName;
+        this.form.storeBio = this.userInfo[0].storeProfile.storeBio;
+        this.form.storeBanner = this.userInfo[0].storeProfile.storeBanner;
+        this.form.storeLocation = this.userInfo[0].storeProfile.storeLocation;
     }
 };
 </script>

@@ -3,6 +3,8 @@ import 'firebase/auth';
 import 'firebase/database';
 
 export const state = () => ({
+    count: 0, // persistedstate test counter
+
     user: '',
     userData: '',
     userId: '',
@@ -90,7 +92,7 @@ export const actions = {
                 }
             )
     },
-    //FIXME error on page reload
+    //REVIEW error on page reload has been resolved using persistedstate plugin
     async loadUserIdData({ commit }, payload) {
         commit('SET_LOADING', true)
         //to make it realtime use on() instead of once()
@@ -106,8 +108,6 @@ export const actions = {
                     userData.push(obj)
                     // storeData.push(storeObj)
                 }
-                // localStorage.setItem('form', JSON.stringify(storeData));
-
 
                 commit('USER_DATA', userData)
                 // commit('SET_LOADED_STORE', storeData)
@@ -330,7 +330,7 @@ export const actions = {
     ** update store profile information, no need to create
     ** profile created on signup
     */
-    async updateStoreProfile({ commit }, payload) {
+    async updateStoreProfile({ commit, dispatch }, payload) {
         commit('SET_LOADING', true)
 
         firebase.database().ref('users/' + payload.userId).child('storeProfile/').set({
@@ -342,7 +342,8 @@ export const actions = {
         }).then(() => {
             // update successful
             alert('Saved...');
-            commit('SET_LOADING', false)
+            dispatch('loadUserIdData', payload.userId);
+            commit('SET_LOADING', false);
         })
             .catch((error) => {
                 commit('ERRORS', error);
@@ -378,6 +379,9 @@ export const actions = {
 };
 
 export const mutations = {
+    increment: state => state.count++, // persistedstate test mutation
+    decrement: state => state.count--, // persistedstate test mutation
+
     LOADED_USER: (state, payload) => (state.user = payload),
     NOTIFICATION: (state, payload) => (state.verificationSent = payload),
     LOGGEDIN_USER: (state, user) => (state.user = JSON.parse(JSON.stringify(user))),
