@@ -38,7 +38,6 @@ export const getters = {
 
 export const actions = {
     async loadUser({ commit }, payload) {
-        localStorage.setItem('user', JSON.stringify(payload));
         commit('LOADED_USER', payload);
     },
     async loadUserId({ commit }, payload) {
@@ -86,7 +85,7 @@ export const actions = {
             .catch(
                 (error) => {
                     commit('ERRORS', error);
-                    console.log(`index.js - 80 - 🚧`, error);
+                    console.log(`index.js - 89 - 🚧`, error);
                     commit('SET_LOADING', false)
                 }
             )
@@ -97,27 +96,27 @@ export const actions = {
         //to make it realtime use on() instead of once()
         await firebase.database().ref('users/' + payload).once('value')
             .then((data) => {
-                console.log(`index.js - 109 - 🇳🇫`, data.val());
+                console.log(`index.js - 96 - You called me 🥶`, data.val());
                 const userData = []
-                const storeData = []
+                // const storeData = []
                 const obj = data.val()
-                const storeObj = data.val().storeProfile
+                // const storeObj = data.val().storeProfile
 
                 if (obj) {
                     userData.push(obj)
-                    storeData.push(storeObj)
+                    // storeData.push(storeObj)
                 }
-                localStorage.setItem('form', JSON.stringify(storeData));
+                // localStorage.setItem('form', JSON.stringify(storeData));
 
 
                 commit('USER_DATA', userData)
-                commit('SET_LOADED_STORE', storeData)
+                // commit('SET_LOADED_STORE', storeData)
                 commit('SET_LOADING', false)
             })
             .catch(
                 (error) => {
                     commit('ERRORS', error);
-                    console.log(`index.js - 80 - 🚧`, error);
+                    console.log(`index.js - 120 - 🚧`, error);
                     commit('SET_LOADING', false)
                 }
             )
@@ -357,7 +356,6 @@ export const actions = {
     */
     // we receive service id as payload to use for filtering
     async updateUserProfile({ commit }, payload) {
-        console.log(`index.js - 333 - 🏝`, payload);
         commit('SET_LOADING', true)
 
         const user = await firebase.auth().currentUser;

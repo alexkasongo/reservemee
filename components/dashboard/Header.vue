@@ -55,7 +55,6 @@ export default {
     mounted() {
         firebase.auth().onAuthStateChanged((user) => {
             if (user !== null) {
-                console.log(`_id.vue - 826 - 🙈`, user.displayName);
                 this.user = user;
             }
         });

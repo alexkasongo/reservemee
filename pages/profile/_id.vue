@@ -166,6 +166,7 @@
                         <h4 class="alert-heading">Well done!</h4>
                         <p>Welcome to your profile settings. Be sure to go through all the settings and fill in all the required fields.</p>
                         <hr />
+                        <p>{{ test }}</p>
                         <p class="mb-0">Alert: {{ storeAlert }}</p>
                     </div>
                 </div>
@@ -349,26 +350,6 @@
                         </div>
                         <!-- PROFILE END -->
 
-                        <!-- ACCOUNT -->
-                        <div class="tab-pane" id="account">
-                            <h6>ACCOUNT SETTINGS</h6>
-                            <hr />
-                            <form>
-                                <div class="form-group">
-                                    <label class="d-block text-danger">Delete Account</label>
-                                    <p
-                                        class="text-muted font-size-sm"
-                                    >Once you delete your account, there is no going back. Please be certain.</p>
-                                </div>
-                                <button
-                                    @click="deleteAccount"
-                                    class="btn btn-danger"
-                                    type="button"
-                                >Delete Account</button>
-                            </form>
-                        </div>
-                        <!-- ACCOUNT END -->
-
                         <!-- STORE INFORMATION -->
                         <div class="tab-pane" id="store">
                             <h6>YOUR STORE INFORMATION</h6>
@@ -385,11 +366,11 @@
                                         v-model="form.storeLogo"
                                     />
                                 </div>
-                                <div
+                                <!-- <div
                                     required
                                     class="form-group imgPreview"
                                     v-bind:style="{ 'background-image': 'url(' + form.storeLogo + ')' }"
-                                ></div>
+                                ></div>-->
                                 <div class="form-group">
                                     <label for="fullName">Store Name</label>
                                     <input
@@ -426,11 +407,11 @@
                                         v-model="form.storeBanner"
                                     />
                                 </div>
-                                <div
+                                <!-- <div
                                     required
                                     class="form-group imgPreview"
                                     v-bind:style="{ 'background-image': 'url(' + form.storeBanner + ')' }"
-                                ></div>
+                                ></div>-->
                                 <div class="form-group">
                                     <label for="location">Location</label>
                                     <input
@@ -647,6 +628,26 @@
                             </form>
                         </div>
                         <!-- BILLING END -->
+
+                        <!-- ACCOUNT -->
+                        <div class="tab-pane" id="account">
+                            <h6>ACCOUNT SETTINGS</h6>
+                            <hr />
+                            <form>
+                                <div class="form-group">
+                                    <label class="d-block text-danger">Delete Account</label>
+                                    <p
+                                        class="text-muted font-size-sm"
+                                    >Once you delete your account, there is no going back. Please be certain.</p>
+                                </div>
+                                <button
+                                    @click="deleteAccount"
+                                    class="btn btn-danger"
+                                    type="button"
+                                >Delete Account</button>
+                            </form>
+                        </div>
+                        <!-- ACCOUNT END -->
                     </div>
                 </div>
             </div>
@@ -663,6 +664,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
     data() {
         return {
+            test: '',
             loggedInUser: '',
             alert: '',
             currentPassword: '',
@@ -690,7 +692,8 @@ export default {
             user: 'user',
             categories: 'categories',
             storeProfile: 'storeProfile',
-            storeAlert: 'alert'
+            storeAlert: 'alert',
+            userData: 'userData'
         }),
         loading() {
             return this.$store.getters.loading;
@@ -772,7 +775,6 @@ export default {
             categoryDelete.remove();
         },
         onUpdProfileInfo() {
-            console.log(`_id.vue - 765 - 🥶`, this.profileInfo.name);
             const payload = {
                 name: this.profileInfo.name,
                 photoUrl: this.profileInfo.photoUrl
@@ -810,14 +812,14 @@ export default {
         // allowing for reactive user update experience
         firebase.auth().onAuthStateChanged((user) => {
             if (user !== null) {
-                console.log(`_id.vue - 826 - 🙈`, user.displayName);
                 this.profileInfo.name = user.displayName;
+                console.log(`_id.vue - 816 - variable`, user);
             }
         });
         /*
          ** Prepopulate form
          */
-        // REVIEW this code is a little buggy and needs review
+        // FIXME this code is a little buggy and needs review
         // this.profileInfo.name = this.user.name;
         // let user = JSON.parse(localStorage.getItem('user'));
         // let storedForm = JSON.parse(localStorage.getItem('form'));
@@ -834,6 +836,12 @@ export default {
         // } else {
         //     this.alert = 'Please update your store information';
         // }
+
+        this.form.storeLogo = this.storeProfile.storeLogo;
+        this.form.storeName = this.storeProfile.storeName;
+        this.form.storeBio = this.storeProfile.storeBio;
+        this.form.storeBanner = this.storeProfile.storeBanner;
+        this.form.storeLocation = this.storeProfile.storeLocation;
     }
 };
 </script>

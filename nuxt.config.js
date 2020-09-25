@@ -35,8 +35,15 @@ export default {
   */
   plugins: [
     '~/plugins/firebase.js',
-    '~plugins/filters.js'
+    '~plugins/filters.js',
+    { src: '~/plugins/localStorage.js', ssr: false },
   ],
+  /*
+  ** Router Settings
+  */
+  router: {
+    middleware: ['authenticated']
+  },
   /*
   ** Auto import components
   ** See https://nuxtjs.org/api/configuration-components
