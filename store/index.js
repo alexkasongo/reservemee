@@ -14,7 +14,7 @@ export const state = () => ({
     services: [],
     categories: [],
     storeProfile: '',
-    updateId: '',
+    filteredServiceId: '',
     verificationSent: false
 });
 
@@ -29,9 +29,9 @@ export const getters = {
     storeProfile: (state) => state.storeProfile[0],
     loading: (state) => state.loading,
     alert: (state) => state.alert,
-    updateId: (state) => {
+    filteredService: (state) => {
         const data = state.services.filter((res) => {
-            return res.id === state.updateId
+            return res.id === state.filteredServiceId
         });
 
         return data[0]
@@ -376,6 +376,9 @@ export const actions = {
             commit('SET_LOADING', false)
         });
     },
+    updateServiceId({ commit }, payload) {
+        commit('UPDATE_SERVICE_ID', payload)
+    }
 };
 
 export const mutations = {
@@ -406,8 +409,8 @@ export const mutations = {
     SET_ALERT(state, payload) {
         state.alert = payload
     },
-    UPDATE_ID(state, payload) {
-        state.updateId = payload
+    UPDATE_SERVICE_ID(state, payload) {
+        state.filteredServiceId = payload
     },
     LOADED_USER_ID: (state, payload) => (state.userId = payload)
 };

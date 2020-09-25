@@ -123,7 +123,7 @@ export default {
         onCreate() {
             this.$router.push('/service/create-service');
         },
-        ...mapActions(['deleteService', 'updateData', 'loadServices']),
+        ...mapActions(['deleteService', 'updateServiceId', 'loadServices']),
         removeService(id) {
             const data = {
                 userId: this.userId,
@@ -134,7 +134,7 @@ export default {
             this.loadServices(this.userId);
         },
         updService(id) {
-            this.updateData(id);
+            this.updateServiceId(id);
             this.$router.push({
                 name: 'update-service-id',
                 params: {

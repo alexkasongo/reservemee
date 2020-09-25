@@ -86,14 +86,23 @@ export default {
         ...mapGetters({
             categories: 'categories',
             services: 'services',
-            updateId: 'updateId',
+            filteredService: 'filteredService',
             user: 'user'
         }),
+        serviceUpdateInfo() {
+            const data = this.$store.state.services;
+
+            const filter = data.filter((res) => {
+                return res.id === this.$store.state.filteredServiceId;
+            });
+
+            return data[0];
+        },
         loading() {
             return this.$store.getters.loading;
         },
         titleCase() {
-            let formatted = this.updateId.category;
+            let formatted = this.serviceUpdateInfo.category;
 
             let removedHyphen = formatted.replace(/-/g, ' ');
             var splitStr = removedHyphen.toLowerCase().split(' ');
@@ -109,7 +118,7 @@ export default {
         ...mapActions([
             'createService',
             'updateService',
-            'updateData',
+            'filteredService',
             'loadServices',
             'loadUserId'
         ]),
@@ -130,26 +139,27 @@ export default {
             this.loadServices(this.user.uid);
             this.$router.push(`/service/${res}`);
         },
-        loadUpdateData() {
-            this.updateData(this.$route.params.id);
+        loadfilteredService() {
+            this.filteredService(this.$route.params.id);
         }
     },
     mounted() {
         //FIXME without the if() we get error on update page reload
-        //NOTE issue seems to be coming from store updateId getter. Possible fix
+        //NOTE issue seems to be coming from store filteredService getter. Possible fix
         // could be creating a filtered getter that filters through services using
         // uid.
-        if (this.updateId === undefined) {
-            this.$router.back();
-        } else {
-            this.loadUpdateData();
-            this.loadServices();
-            this.category = this.titleCase;
-            this.name = this.updateId.name;
-            this.description = this.updateId.description;
-            this.price = this.updateId.price;
-            this.imageUrl = this.updateId.imageUrl;
-        }
+        // if (this.filteredService === undefined) {
+        //     this.$router.back();
+        // } else {
+        // this.loadfilteredService();
+        // this.loadServices();
+        //FIXME HERE
+        this.category = this.titleCase;
+        this.name = this.serviceUpdateInfo.name;
+        this.description = this.serviceUpdateInfo.description;
+        this.price = this.serviceUpdateInfo.price;
+        this.imageUrl = this.serviceUpdateInfo.imageUrl;
+        // }
     }
 };
 </script>
