@@ -805,9 +805,11 @@ export default {
         }
     },
     mounted() {
+        // observer to keep track of the user's sign-in status.
+        // on onUpdProfileInfo user details are updated in firebase triggering observer
+        // allowing for reactive user update experience
         firebase.auth().onAuthStateChanged((user) => {
             if (user !== null) {
-                // this.profileInfo.name = this.user.displayName;
                 console.log(`_id.vue - 826 - 🙈`, user.displayName);
                 this.profileInfo.name = user.displayName;
             }
