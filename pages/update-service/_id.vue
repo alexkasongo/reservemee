@@ -8,10 +8,9 @@
             <div class="form-group">
                 <label for="exampleInputEmail1">Select Category</label>
                 <select class="form-control" required v-model="category">
-                    <option
-                        v-for="category in categories"
-                        :key="category.id"
-                    >{{ category.name | capitalize }}</option>
+                    <option v-for="category in categories" :key="category.id">
+                        {{ category.name | capitalize }}
+                    </option>
                 </select>
             </div>
             <div>
@@ -30,7 +29,7 @@
                     <textarea
                         required
                         class="form-control"
-                        style="min-width: 100%;"
+                        style="min-width: 100%"
                         placeholder="Describe the service"
                         v-model="description"
                     ></textarea>
@@ -49,7 +48,9 @@
                 <div
                     required
                     class="form-group imgPreview"
-                    v-bind:style="{ 'background-image': 'url(' + imageUrl + ')' }"
+                    v-bind:style="{
+                        'background-image': 'url(' + imageUrl + ')'
+                    }"
                 ></div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Price</label>
@@ -63,7 +64,13 @@
                         v-model="price"
                     />
                 </div>
-                <button type="submit" :disabled="loading" class="btn btn-primary mt-2">Update</button>
+                <button
+                    type="submit"
+                    :disabled="loading"
+                    class="btn btn-primary mt-2"
+                >
+                    Update
+                </button>
             </div>
         </form>
     </div>
@@ -97,6 +104,14 @@ export default {
             });
 
             return data[0];
+        },
+        serviceUpdateInfo: {
+            get() {
+                return this.$store.state.services;
+            },
+            set(value) {
+                this.value = value;
+            }
         },
         loading() {
             return this.$store.getters.loading;
