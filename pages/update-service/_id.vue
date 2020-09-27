@@ -105,14 +105,6 @@ export default {
 
             return data[0];
         },
-        serviceUpdateInfo: {
-            get() {
-                return this.$store.state.services;
-            },
-            set(value) {
-                this.value = value;
-            }
-        },
         loading() {
             return this.$store.getters.loading;
         },
@@ -133,7 +125,7 @@ export default {
         ...mapActions([
             'createService',
             'updateService',
-            'filteredService',
+            // 'filteredService',
             'loadServices',
             'loadUserId'
         ]),
