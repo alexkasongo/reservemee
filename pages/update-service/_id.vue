@@ -125,7 +125,6 @@ export default {
         ...mapActions([
             'createService',
             'updateService',
-            // 'filteredService',
             'loadServices',
             'loadUserId'
         ]),
