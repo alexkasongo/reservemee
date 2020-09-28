@@ -14,18 +14,22 @@
                             />
                         </span>
                         <div class="media-body text-white">
-                            <h4 class="mt-1 mb-1 font-18">{{user.displayName}}</h4>
+                            <h4 class="mt-1 mb-1 font-18">
+                                {{ user.displayName }}
+                            </h4>
                             <p class="font-13 text-light">Hair Braider</p>
-                            <p class="text-light mb-0">Lynnwood, United States</p>
+                            <p class="text-light mb-0">
+                                Lynnwood, United States
+                            </p>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <!-- <div class="col-sm-6">
                         <div class="text-right">
                             <button type="button" class="btn btn-light waves-effect">
                                 <i class="mdi mdi-account-settings-variant mr-1"></i> Edit Profile
                             </button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!--/ meta -->
@@ -62,5 +66,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

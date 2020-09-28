@@ -393,7 +393,14 @@ export const actions = {
             })
             .then(() => {
                 // update successful
-                alert('Saved...');
+                this.$swal({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 dispatch('loadUserIdData', payload.userId);
                 commit('SET_LOADING', false);
             })
@@ -418,7 +425,14 @@ export const actions = {
         })
             .then((res) => {
                 // Update successful.
-                alert('Saved...');
+                this.$swal({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 commit('SET_ALERT', true);
                 commit('SET_LOADING', false);
             })

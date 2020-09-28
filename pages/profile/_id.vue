@@ -40,9 +40,11 @@
                                     stroke-linejoin="round"
                                     class="feather feather-user mr-2"
                                 >
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                                    <circle cx="12" cy="7" r="4" />
-                                </svg>Profile Information
+                                    <path
+                                        d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                                    />
+                                    <circle cx="12" cy="7" r="4" /></svg
+                                >Profile Information
                             </a>
                             <a
                                 href="#store"
@@ -65,8 +67,8 @@
                                     <circle cx="20" cy="21" r="2" />
                                     <path
                                         d="M5.67 6H23l-1.68 8.39a2 2 0 0 1-2 1.61H8.75a2 2 0 0 1-2-1.74L5.23 2.74A2 2 0 0 0 3.25 1H1"
-                                    />
-                                </svg>Store Settings
+                                    /></svg
+                                >Store Settings
                             </a>
                             <a
                                 href="#security"
@@ -85,8 +87,10 @@
                                     stroke-linejoin="round"
                                     class="feather feather-shield mr-2"
                                 >
-                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                                </svg>Security
+                                    <path
+                                        d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                                    /></svg
+                                >Security
                             </a>
                             <a
                                 href="#notification"
@@ -105,9 +109,11 @@
                                     stroke-linejoin="round"
                                     class="feather feather-bell mr-2"
                                 >
-                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                                </svg>Notification
+                                    <path
+                                        d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
+                                    />
+                                    <path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg
+                                >Notification
                             </a>
                             <a
                                 href="#billing"
@@ -126,9 +132,16 @@
                                     stroke-linejoin="round"
                                     class="feather feather-credit-card mr-2"
                                 >
-                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-                                    <line x1="1" y1="10" x2="23" y2="10" />
-                                </svg>Billing
+                                    <rect
+                                        x="1"
+                                        y="4"
+                                        width="22"
+                                        height="16"
+                                        rx="2"
+                                        ry="2"
+                                    />
+                                    <line x1="1" y1="10" x2="23" y2="10" /></svg
+                                >Billing
                             </a>
                             <a
                                 href="#account"
@@ -150,8 +163,8 @@
                                     <circle cx="12" cy="12" r="3" />
                                     <path
                                         d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
-                                    />
-                                </svg>Account Settings
+                                    /></svg
+                                >Account Settings
                             </a>
                         </nav>
                     </div>
@@ -164,17 +177,26 @@
                 <div class="w-100">
                     <div class="alert alert-success" role="alert">
                         <h4 class="alert-heading">Well done!</h4>
-                        <p>Welcome to your profile settings. Be sure to go through all the settings and fill in all the required fields.</p>
+                        <p>
+                            Welcome to your profile settings. Be sure to go
+                            through all the settings and fill in all the
+                            required fields.
+                        </p>
                         <hr />
-                        <p>{{ userInfo[0] }}</p>
+                        <!-- <p>{{ userInfo[0] }}</p> -->
                         <p class="mb-0">Alert: {{ storeAlert }}</p>
                     </div>
                 </div>
                 <!-- CategoryCheck -->
                 <div class="card">
                     <!-- CARD HEADER -->
-                    <div class="card-header border-bottom mb-3 d-flex d-md-none">
-                        <ul class="nav nav-tabs card-header-tabs nav-gap-x-1" role="tablist">
+                    <div
+                        class="card-header border-bottom mb-3 d-flex d-md-none"
+                    >
+                        <ul
+                            class="nav nav-tabs card-header-tabs nav-gap-x-1"
+                            role="tablist"
+                        >
                             <li class="nav-item">
                                 <a
                                     href="#profile"
@@ -193,13 +215,19 @@
                                         stroke-linejoin="round"
                                         class="feather feather-user"
                                     >
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                        <path
+                                            d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                                        />
                                         <circle cx="12" cy="7" r="4" />
                                     </svg>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#account" data-toggle="tab" class="nav-link has-icon">
+                                <a
+                                    href="#account"
+                                    data-toggle="tab"
+                                    class="nav-link has-icon"
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -220,7 +248,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#store" data-toggle="tab" class="nav-link has-icon">
+                                <a
+                                    href="#store"
+                                    data-toggle="tab"
+                                    class="nav-link has-icon"
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -241,7 +273,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#security" data-toggle="tab" class="nav-link has-icon">
+                                <a
+                                    href="#security"
+                                    data-toggle="tab"
+                                    class="nav-link has-icon"
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -254,12 +290,18 @@
                                         stroke-linejoin="round"
                                         class="feather feather-shield"
                                     >
-                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                        <path
+                                            d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                                        />
                                     </svg>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#notification" data-toggle="tab" class="nav-link has-icon">
+                                <a
+                                    href="#notification"
+                                    data-toggle="tab"
+                                    class="nav-link has-icon"
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -272,13 +314,19 @@
                                         stroke-linejoin="round"
                                         class="feather feather-bell"
                                     >
-                                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                                        <path
+                                            d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
+                                        />
                                         <path d="M13.73 21a2 2 0 0 1-3.46 0" />
                                     </svg>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#billing" data-toggle="tab" class="nav-link has-icon">
+                                <a
+                                    href="#billing"
+                                    data-toggle="tab"
+                                    class="nav-link has-icon"
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -291,7 +339,14 @@
                                         stroke-linejoin="round"
                                         class="feather feather-credit-card"
                                     >
-                                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                                        <rect
+                                            x="1"
+                                            y="4"
+                                            width="22"
+                                            height="16"
+                                            rx="2"
+                                            ry="2"
+                                        />
                                         <line x1="1" y1="10" x2="23" y2="10" />
                                     </svg>
                                 </a>
@@ -320,7 +375,10 @@
                                     <small
                                         id="fullNameHelp"
                                         class="form-text text-muted"
-                                    >Your name may appear around here where you are mentioned. You can change or remove it at any time.</small>
+                                        >Your name may appear around here where
+                                        you are mentioned. You can change or
+                                        remove it at any time.</small
+                                    >
                                 </div>
                                 <div class="form-group">
                                     <label for="bio">Your Bio</label>
@@ -328,8 +386,15 @@
                                         class="form-control autosize"
                                         id="bio"
                                         placeholder="Write something about you"
-                                        style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 62px;"
-                                    >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae earum consectetur minus dolor amet iusto? Dolores cupiditate nam distinctio fugiat consequuntur a quod laborum labore magni sapiente. Culpa, recusandae.</textarea>
+                                        style="
+                                            overflow: hidden;
+                                            overflow-wrap: break-word;
+                                            resize: none;
+                                            height: 62px;
+                                        "
+                                    >
+Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae earum consectetur minus dolor amet iusto? Dolores cupiditate nam distinctio fugiat consequuntur a quod laborum labore magni sapiente. Culpa, recusandae.</textarea
+                                    >
                                 </div>
                                 <div class="form-group">
                                     <label for="location">Location</label>
@@ -341,11 +406,19 @@
                                         value="Bay Area, San Francisco, CA"
                                     />
                                 </div>
-                                <div
-                                    class="form-group small text-muted"
-                                >All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.</div>
-                                <button type="submit" class="btn btn-dark">Update Profile</button>
-                                <button type="reset" class="btn btn-light">Reset Changes</button>
+                                <div class="form-group small text-muted">
+                                    All of the fields on this page are optional
+                                    and can be deleted at any time, and by
+                                    filling them out, you're giving us consent
+                                    to share this data wherever your user
+                                    profile appears.
+                                </div>
+                                <button type="submit" class="btn btn-dark">
+                                    Update Profile
+                                </button>
+                                <button type="reset" class="btn btn-light">
+                                    Reset Changes
+                                </button>
                             </form>
                         </div>
                         <!-- PROFILE END -->
@@ -356,7 +429,9 @@
                             <hr />
                             <form @submit.prevent="onUpdStoreInfo">
                                 <div class="form-group">
-                                    <label for="exampleFormControlFile1">Logo</label>
+                                    <label for="exampleFormControlFile1"
+                                        >Logo</label
+                                    >
                                     <input
                                         required
                                         class="form-control"
@@ -369,7 +444,10 @@
                                 <div
                                     required
                                     class="form-group imgPreview"
-                                    v-bind:style="{ 'background-image': 'url(' + form.storeLogo + ')' }"
+                                    v-bind:style="{
+                                        'background-image':
+                                            'url(' + form.storeLogo + ')'
+                                    }"
                                 ></div>
                                 <div class="form-group">
                                     <label for="fullName">Store Name</label>
@@ -384,7 +462,10 @@
                                     <small
                                         id="fullNameHelp"
                                         class="form-text text-muted"
-                                    >Your name may appear around here where you are mentioned. You can change or remove it at any time.</small>
+                                        >Your name may appear around here where
+                                        you are mentioned. You can change or
+                                        remove it at any time.</small
+                                    >
                                 </div>
                                 <div class="form-group">
                                     <label for="bio">Your Store Bio</label>
@@ -393,11 +474,18 @@
                                         id="bio"
                                         placeholder="Write a description of your store"
                                         v-model="form.storeBio"
-                                        style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 62px;"
+                                        style="
+                                            overflow: hidden;
+                                            overflow-wrap: break-word;
+                                            resize: none;
+                                            height: 62px;
+                                        "
                                     ></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleFormControlFile1">Store Banner</label>
+                                    <label for="exampleFormControlFile1"
+                                        >Store Banner</label
+                                    >
                                     <input
                                         required
                                         class="form-control"
@@ -410,7 +498,10 @@
                                 <div
                                     required
                                     class="form-group imgPreview"
-                                    v-bind:style="{ 'background-image': 'url(' + form.storeBanner + ')' }"
+                                    v-bind:style="{
+                                        'background-image':
+                                            'url(' + form.storeBanner + ')'
+                                    }"
                                 ></div>
                                 <div class="form-group">
                                     <label for="location">Location</label>
@@ -422,11 +513,19 @@
                                         v-model="form.storeLocation"
                                     />
                                 </div>
-                                <div
-                                    class="form-group small text-muted"
-                                >All of the fields on this page are optional and can be deleted at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.</div>
-                                <button type="submit" class="btn btn-dark">Save</button>
-                                <button type="reset" class="btn btn-light">Reset Changes</button>
+                                <div class="form-group small text-muted">
+                                    All of the fields on this page are optional
+                                    and can be deleted at any time, and by
+                                    filling them out, you're giving us consent
+                                    to share this data wherever your user
+                                    profile appears.
+                                </div>
+                                <button type="submit" class="btn btn-dark">
+                                    Save
+                                </button>
+                                <button type="reset" class="btn btn-light">
+                                    Reset Changes
+                                </button>
                             </form>
                         </div>
                         <!-- STORE INFORMATION END -->
@@ -437,7 +536,9 @@
                             <hr />
                             <form>
                                 <div class="form-group">
-                                    <label class="d-block">Change Password</label>
+                                    <label class="d-block"
+                                        >Change Password</label
+                                    >
                                     <input
                                         type="password"
                                         class="form-control"
@@ -447,7 +548,9 @@
                                     <div
                                         v-if="errors"
                                         class="form-group text-muted"
-                                    >{{ errors.message }}</div>
+                                    >
+                                        {{ errors.message }}
+                                    </div>
                                     <input
                                         type="password"
                                         class="form-control mt-1"
@@ -463,33 +566,45 @@
                                     <div
                                         v-if="errors"
                                         class="form-group text-muted"
-                                    >{{ errors.message }}</div>
+                                    >
+                                        {{ errors.message }}
+                                    </div>
                                     <button
                                         @click="changePassword"
                                         class="btn btn-info mt-2"
                                         type="button"
-                                    >Change</button>
+                                    >
+                                        Change
+                                    </button>
                                 </div>
                             </form>
                             <hr />
                             <form>
                                 <div class="form-group mb-0">
                                     <label class="d-block">Sessions</label>
-                                    <p
-                                        class="font-size-sm text-secondary"
-                                    >This is a list of devices that have logged into your account. Revoke any sessions that you do not recognize.</p>
+                                    <p class="font-size-sm text-secondary">
+                                        This is a list of devices that have
+                                        logged into your account. Revoke any
+                                        sessions that you do not recognize.
+                                    </p>
                                     <ul class="list-group list-group-sm">
                                         <li class="list-group-item has-icon">
                                             <div>
-                                                <h6 class="mb-0">San Francisco City 190.24.335.55</h6>
-                                                <small
-                                                    class="text-muted"
-                                                >Your current session seen in United States</small>
+                                                <h6 class="mb-0">
+                                                    San Francisco City
+                                                    190.24.335.55
+                                                </h6>
+                                                <small class="text-muted"
+                                                    >Your current session seen
+                                                    in United States</small
+                                                >
                                             </div>
                                             <button
                                                 class="btn btn-light btn-sm ml-auto"
                                                 type="button"
-                                            >More info</button>
+                                            >
+                                                More info
+                                            </button>
                                         </li>
                                     </ul>
                                 </div>
@@ -503,10 +618,13 @@
                             <hr />
                             <form>
                                 <div class="form-group">
-                                    <label class="d-block mb-0">Security Alerts</label>
-                                    <div
-                                        class="small text-muted mb-3"
-                                    >Receive security alert notifications via email</div>
+                                    <label class="d-block mb-0"
+                                        >Security Alerts</label
+                                    >
+                                    <div class="small text-muted mb-3">
+                                        Receive security alert notifications via
+                                        email
+                                    </div>
                                     <div class="custom-control custom-checkbox">
                                         <input
                                             type="checkbox"
@@ -517,7 +635,9 @@
                                         <label
                                             class="custom-control-label"
                                             for="customCheck1"
-                                        >Email each time a vulnerability is found</label>
+                                            >Email each time a vulnerability is
+                                            found</label
+                                        >
                                     </div>
                                     <div class="custom-control custom-checkbox">
                                         <input
@@ -529,11 +649,15 @@
                                         <label
                                             class="custom-control-label"
                                             for="customCheck2"
-                                        >Email a digest summary of vulnerability</label>
+                                            >Email a digest summary of
+                                            vulnerability</label
+                                        >
                                     </div>
                                 </div>
                                 <div class="form-group mb-0">
-                                    <label class="d-block">SMS Notifications</label>
+                                    <label class="d-block"
+                                        >SMS Notifications</label
+                                    >
                                     <ul class="list-group list-group-sm">
                                         <li class="list-group-item has-icon">
                                             Comments
@@ -613,17 +737,25 @@
                             <hr />
                             <form>
                                 <div class="form-group">
-                                    <label class="d-block mb-0">Payment Method</label>
-                                    <div
-                                        class="small text-muted mb-3"
-                                    >You have not added a payment method</div>
-                                    <button class="btn btn-info" type="button">Add Payment Method</button>
+                                    <label class="d-block mb-0"
+                                        >Payment Method</label
+                                    >
+                                    <div class="small text-muted mb-3">
+                                        You have not added a payment method
+                                    </div>
+                                    <button class="btn btn-info" type="button">
+                                        Add Payment Method
+                                    </button>
                                 </div>
                                 <div class="form-group mb-0">
-                                    <label class="d-block">Payment History</label>
+                                    <label class="d-block"
+                                        >Payment History</label
+                                    >
                                     <div
                                         class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm"
-                                    >You have not made any payment.</div>
+                                    >
+                                        You have not made any payment.
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -635,16 +767,21 @@
                             <hr />
                             <form>
                                 <div class="form-group">
-                                    <label class="d-block text-danger">Delete Account</label>
-                                    <p
-                                        class="text-muted font-size-sm"
-                                    >Once you delete your account, there is no going back. Please be certain.</p>
+                                    <label class="d-block text-danger"
+                                        >Delete Account</label
+                                    >
+                                    <p class="text-muted font-size-sm">
+                                        Once you delete your account, there is
+                                        no going back. Please be certain.
+                                    </p>
                                 </div>
                                 <button
                                     @click="deleteAccount"
                                     class="btn btn-danger"
                                     type="button"
-                                >Delete Account</button>
+                                >
+                                    Delete Account
+                                </button>
                             </form>
                         </div>
                         <!-- ACCOUNT END -->
@@ -783,9 +920,6 @@ export default {
                 photoUrl: this.profileInfo.photoUrl
             };
             this.updateUserProfile(payload);
-            // this.alert = 'Saved...';
-            // this.loadUserIdData(this.user.uid);
-            // this.loadUser();
         },
         closeAlert() {
             this.closeAlert();
@@ -816,7 +950,6 @@ export default {
         firebase.auth().onAuthStateChanged((user) => {
             if (user !== null) {
                 this.profileInfo.name = user.displayName;
-                console.log(`_id.vue - 816 - variable`, user);
             }
         });
         /*
@@ -825,11 +958,15 @@ export default {
          ** vue persistedstate plugin which Persists and rehydrates the Vuex state between page reloads.
          */
         // REVIEW has been fixed using persistedstate and needs review
-        this.form.storeLogo = this.userInfo[0].storeProfile.storeLogo;
-        this.form.storeName = this.userInfo[0].storeProfile.storeName;
-        this.form.storeBio = this.userInfo[0].storeProfile.storeBio;
-        this.form.storeBanner = this.userInfo[0].storeProfile.storeBanner;
-        this.form.storeLocation = this.userInfo[0].storeProfile.storeLocation;
+        if (this.userInfo[0].storeProfile === undefined) {
+            return;
+        } else {
+            this.form.storeLogo = this.userInfo[0].storeProfile.storeLogo;
+            this.form.storeName = this.userInfo[0].storeProfile.storeName;
+            this.form.storeBio = this.userInfo[0].storeProfile.storeBio;
+            this.form.storeBanner = this.userInfo[0].storeProfile.storeBanner;
+            this.form.storeLocation = this.userInfo[0].storeProfile.storeLocation;
+        }
     }
 };
 </script>
