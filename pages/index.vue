@@ -29,7 +29,9 @@
                                         <button
                                             type="submit"
                                             class="btn btn-block btn-lg btn-dark"
-                                        >Sign up!</button>
+                                        >
+                                            Sign up!
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -85,37 +87,51 @@
                     <div class="row no-gutters">
                         <div
                             class="col-lg-6 order-lg-2 text-white showcase-img"
-                            :style="{ backgroundImage: `url(${create})`}"
+                            :style="{ backgroundImage: `url(${create})` }"
                         ></div>
                         <div class="col-lg-6 order-lg-1 my-auto showcase-text">
                             <h2>Create</h2>
-                            <p
-                                class="lead mb-0"
-                            >Prioris generis est docilitas, memoria; Si enim ad populum me vocas, eum. Non est ista, inquam, Piso, magna dissensio. Prioris generis est docilitas, memoria; Si enim ad populum me vocas, eum. Non est ista, inquam, Piso, magna dissensio.</p>
+                            <p class="lead mb-0">
+                                Prioris generis est docilitas, memoria; Si enim
+                                ad populum me vocas, eum. Non est ista, inquam,
+                                Piso, magna dissensio. Prioris generis est
+                                docilitas, memoria; Si enim ad populum me vocas,
+                                eum. Non est ista, inquam, Piso, magna
+                                dissensio.
+                            </p>
                         </div>
                     </div>
                     <div class="row no-gutters">
                         <div
                             class="col-lg-6 text-white showcase-img"
-                            :style="{ backgroundImage: `url(${offer})`}"
+                            :style="{ backgroundImage: `url(${offer})` }"
                         ></div>
                         <div class="col-lg-6 my-auto showcase-text">
                             <h2>Offer</h2>
-                            <p
-                                class="lead mb-0"
-                            >Prioris generis est docilitas, memoria; Si enim ad populum me vocas, eum. Non est ista, inquam, Piso, magna dissensio.Prioris generis est docilitas, memoria; Si enim ad populum me vocas, eum. Non est ista!</p>
+                            <p class="lead mb-0">
+                                Prioris generis est docilitas, memoria; Si enim
+                                ad populum me vocas, eum. Non est ista, inquam,
+                                Piso, magna dissensio.Prioris generis est
+                                docilitas, memoria; Si enim ad populum me vocas,
+                                eum. Non est ista!
+                            </p>
                         </div>
                     </div>
                     <div class="row no-gutters">
                         <div
                             class="col-lg-6 order-lg-2 text-white showcase-img"
-                            :style="{ backgroundImage: `url(${sell})`}"
+                            :style="{ backgroundImage: `url(${sell})` }"
                         ></div>
                         <div class="col-lg-6 order-lg-1 my-auto showcase-text">
                             <h2>Sell</h2>
-                            <p
-                                class="lead mb-0"
-                            >Prioris generis est docilitas, memoria; Si enim ad populum me vocas, eum. Non est ista, inquam, Piso, magna dissensio. Prioris generis est docilitas, memoria; Si enim ad populum me vocas, eum. Non est ista, inquam, Piso, magna dissensio!</p>
+                            <p class="lead mb-0">
+                                Prioris generis est docilitas, memoria; Si enim
+                                ad populum me vocas, eum. Non est ista, inquam,
+                                Piso, magna dissensio. Prioris generis est
+                                docilitas, memoria; Si enim ad populum me vocas,
+                                eum. Non est ista, inquam, Piso, magna
+                                dissensio!
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -127,7 +143,9 @@
                     <h2 class="mb-5">What people are saying...</h2>
                     <div class="row">
                         <div class="col-lg-4">
-                            <div class="testimonial-item mx-auto mb-5 mb-lg-0 user-container">
+                            <div
+                                class="testimonial-item mx-auto mb-5 mb-lg-0 user-container"
+                            >
                                 <div class="user mb-3">
                                     <div class="user__container"></div>
                                 </div>
@@ -137,13 +155,15 @@
                                 alt
                                 />-->
                                 <h5>Margaret E.</h5>
-                                <p
-                                    class="font-weight-light mb-0"
-                                >"This is fantastic! Thanks so much guys!"</p>
+                                <p class="font-weight-light mb-0">
+                                    "This is fantastic! Thanks so much guys!"
+                                </p>
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <div class="testimonial-item mx-auto mb-5 mb-lg-0 user-container">
+                            <div
+                                class="testimonial-item mx-auto mb-5 mb-lg-0 user-container"
+                            >
                                 <div class="user mb-3">
                                     <div class="user__container"></div>
                                 </div>
@@ -153,13 +173,16 @@
                                 alt
                                 />-->
                                 <h5>Fred S.</h5>
-                                <p
-                                    class="font-weight-light mb-0"
-                                >"Bookme is amazing. I've been using it to create lots of super nice services."</p>
+                                <p class="font-weight-light mb-0">
+                                    "Bookme is amazing. I've been using it to
+                                    create lots of super nice services."
+                                </p>
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <div class="testimonial-item mx-auto mb-5 mb-lg-0 user-container">
+                            <div
+                                class="testimonial-item mx-auto mb-5 mb-lg-0 user-container"
+                            >
                                 <div class="user mb-3">
                                     <div class="user__container"></div>
                                 </div>
@@ -169,9 +192,10 @@
                                 alt
                                 />-->
                                 <h5>Sarah W.</h5>
-                                <p
-                                    class="font-weight-light mb-0"
-                                >"Thanks so much for making and thinking of the small guy!"</p>
+                                <p class="font-weight-light mb-0">
+                                    "Thanks so much for making and thinking of
+                                    the small guy!"
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -182,13 +206,15 @@
             <section
                 v-if="!user"
                 class="call-to-action text-white text-center"
-                :style="{ backgroundImage: `url(${image})`}"
+                :style="{ backgroundImage: `url(${image})` }"
             >
                 <div class="overlay"></div>
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-9 mx-auto">
-                            <h2 class="mb-4">Ready to get started? Sign up now!</h2>
+                            <h2 class="mb-4">
+                                Ready to get started? Sign up now!
+                            </h2>
                         </div>
                         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
                             <form>
@@ -204,7 +230,9 @@
                                         <button
                                             type="submit"
                                             class="btn btn-block btn-lg btn-dark"
-                                        >Sign up!</button>
+                                        >
+                                            Sign up!
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -218,7 +246,9 @@
             <footer class="footer bg-light">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+                        <div
+                            class="col-lg-6 h-100 text-center text-lg-left my-auto"
+                        >
                             <ul class="list-inline mb-2">
                                 <li class="list-inline-item">
                                     <a href="#" class="text-dark">About</a>
@@ -229,32 +259,44 @@
                                 </li>
                                 <li class="list-inline-item">&sdot;</li>
                                 <li class="list-inline-item">
-                                    <a href="#" class="text-dark">Terms of Use</a>
+                                    <a href="#" class="text-dark"
+                                        >Terms of Use</a
+                                    >
                                 </li>
                                 <li class="list-inline-item">&sdot;</li>
                                 <li class="list-inline-item">
-                                    <a href="#" class="text-dark">Privacy Policy</a>
+                                    <a href="#" class="text-dark"
+                                        >Privacy Policy</a
+                                    >
                                 </li>
                             </ul>
-                            <p
-                                class="text-muted small mb-4 mb-lg-0"
-                            >&copy; Aleko: Bookme 2020. All Rights Reserved.</p>
+                            <p class="text-muted small mb-4 mb-lg-0">
+                                &copy; Aleko: Bookme 2020. All Rights Reserved.
+                            </p>
                         </div>
-                        <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+                        <div
+                            class="col-lg-6 h-100 text-center text-lg-right my-auto"
+                        >
                             <ul class="list-inline mb-0">
                                 <li class="list-inline-item mr-3">
                                     <a href="#">
-                                        <i class="fa fa-facebook fa-2x fa-fw text-dark"></i>
+                                        <i
+                                            class="fa fa-facebook fa-2x fa-fw text-dark"
+                                        ></i>
                                     </a>
                                 </li>
                                 <li class="list-inline-item mr-3">
                                     <a href="#">
-                                        <i class="fa fa-twitter-square fa-2x fa-fw text-dark"></i>
+                                        <i
+                                            class="fa fa-twitter-square fa-2x fa-fw text-dark"
+                                        ></i>
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
                                     <a href="#">
-                                        <i class="fa fa-instagram fa-2x fa-fw text-dark"></i>
+                                        <i
+                                            class="fa fa-instagram fa-2x fa-fw text-dark"
+                                        ></i>
                                     </a>
                                 </li>
                             </ul>
@@ -344,8 +386,6 @@ export default {
 .masthead {
     position: relative;
     background-color: #82b5a5;
-    // background: url('https://images.unsplash.com/photo-1585236849635-77909c36d38c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80')
-    // no-repeat center center;
     @include background;
     background-position: center;
     padding-top: 8rem;
@@ -416,8 +456,6 @@ footer.footer {
 .call-to-action {
     position: relative;
     background-color: gray;
-    // background: url('https://images.unsplash.com/photo-1585236849635-77909c36d38c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80')
-    // no-repeat center center;
     @include background;
     background-position: center;
     padding-top: 7rem;

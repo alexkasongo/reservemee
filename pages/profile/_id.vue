@@ -176,7 +176,9 @@
                 <!-- CategoryCheck -->
                 <div class="w-100">
                     <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading">Well done!</h4>
+                        <h4 class="alert-heading">
+                            Well done {{ user.displayName }}!
+                        </h4>
                         <p>
                             Welcome to your profile settings. Be sure to go
                             through all the settings and fill in all the
@@ -544,6 +546,7 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                         class="form-control"
                                         placeholder="Enter your current password"
                                         v-model="currentPassword"
+                                        required
                                     />
                                     <div
                                         v-if="errors"
@@ -556,12 +559,14 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                         class="form-control mt-1"
                                         placeholder="New password"
                                         v-model="newPassword"
+                                        required
                                     />
                                     <input
                                         type="password"
                                         class="form-control mt-1"
                                         placeholder="Confirm new password"
                                         v-model="confirmNewPassword"
+                                        required
                                     />
                                     <div
                                         v-if="errors"
@@ -801,6 +806,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
     data() {
         return {
+            user: '',
             test: '',
             loggedInUser: '',
             alert: '',
@@ -826,7 +832,7 @@ export default {
     },
     computed: {
         ...mapGetters({
-            user: 'user',
+            // user: 'user',
             categories: 'categories',
             storeProfile: 'storeProfile',
             storeAlert: 'alert',
@@ -862,20 +868,45 @@ export default {
         changePassword() {
             if (this.newPassword !== this.confirmNewPassword) {
                 console.log('Passwords do not match');
-            } else if (this.newPassword === this.confirmNewPassword) {
-                console.log('Passwords match');
-                console.log(
-                    `current:`,
-                    this.currentPassword,
-                    `new:`,
-                    this.confirmNewPassword
-                );
+                this.$swal({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Passwords do not match.',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            } else {
+                this.$swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, change it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        if (this.newPassword === this.confirmNewPassword) {
+                            console.log('Passwords match');
+                            console.log(
+                                `current:`,
+                                this.currentPassword,
+                                `new:`,
+                                this.confirmNewPassword
+                            );
 
-                const currentPassword = this.currentPassword;
-                const newPassword = this.confirmNewPassword;
+                            const currentPassword = this.currentPassword;
+                            const newPassword = this.confirmNewPassword;
 
-                this.reauthenticate(currentPassword);
-                this.changePasswordNow(currentPassword, newPassword);
+                            this.reauthenticate(currentPassword);
+                            this.changePasswordNow(
+                                currentPassword,
+                                newPassword
+                            );
+                        }
+                    }
+                });
             }
         },
         reauthenticate(currentPassword) {
@@ -893,7 +924,14 @@ export default {
                     user.updatePassword(newPassword)
                         .then(() => {
                             console.log('Password updated! 🙈 🙏🏾 🏆 ');
-                            alert('Password updated! 🙈 🙏🏾');
+                            this.$swal({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Password changed.',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
                             this.signout();
                         })
                         .catch((error) => {
@@ -949,6 +987,7 @@ export default {
         // allowing for reactive user update experience
         firebase.auth().onAuthStateChanged((user) => {
             if (user !== null) {
+                this.user = user;
                 this.profileInfo.name = user.displayName;
             }
         });

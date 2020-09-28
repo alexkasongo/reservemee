@@ -18,24 +18,39 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active"></li>
                     <li class="nav-item active">
-                        <nuxt-link v-if="user" to="/dashboard" class="nav-link">Dashboard</nuxt-link>
+                        <nuxt-link v-if="user" to="/dashboard" class="nav-link"
+                            >Dashboard</nuxt-link
+                        >
                     </li>
                     <li class="nav-item active">
-                        <a v-if="user" @click="signout" class="nav-link">Sign out</a>
+                        <a v-if="user" @click="signout" class="nav-link"
+                            >Sign out</a
+                        >
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <a v-if="user" @click="viewProfile(user.uid)" class="navbar-brand">Profile</a>
+                    <a
+                        v-if="user"
+                        @click="viewProfile(user.uid)"
+                        class="navbar-brand"
+                        >Profile</a
+                    >
                 </form>
                 <form class="form-inline my-2 my-lg-0">
                     <!-- <div v-if="loading"> -->
-                    <nuxt-link v-if="!user" to="/signup" class="nav-link text-dark">Sign Up</nuxt-link>
+                    <nuxt-link
+                        v-if="!user"
+                        to="/signup"
+                        class="nav-link text-dark"
+                        >Sign Up</nuxt-link
+                    >
                     <nuxt-link
                         v-if="!user"
                         class="btn btn-dark"
-                        style="background-color:transparent; color:black;"
+                        style="background-color: transparent; color: black"
                         to="/signin"
-                    >Sign In</nuxt-link>
+                        >Sign In</nuxt-link
+                    >
                     <!-- </div> -->
                 </form>
             </div>
@@ -122,12 +137,12 @@ export default {
     },
     mounted() {
         firebase.auth().onAuthStateChanged((user) => {
-            // show loading when mounted
-            this.loading = true;
-            this.user = user;
-            // stop loading when all content is loaded
-            this.loading = false;
-            if (user !== null) {
+            if (user) {
+                // User is signed in.
+                // show loading when mounted
+                this.loading = true;
+                this.user = user;
+
                 const userDetails = {
                     name: user.displayName,
                     email: user.email,
@@ -142,7 +157,16 @@ export default {
                 this.loadUserIdData(user.uid);
                 this.loadCategories(user.uid);
                 this.loadServices(user.uid);
+
+                // stop loading when all content is loaded
+                this.loading = false;
+            } else {
+                // No user is signed in.
             }
+
+            // if (user !== null) {
+
+            // }
         });
     }
 };

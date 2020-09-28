@@ -65,7 +65,6 @@ export const actions = {
     },
     // called in main
     async loadServices({ commit }, payload) {
-        console.log(`index.js - 79 - PLEASE🙏🏾`, payload);
         commit('SET_LOADING', true);
         //to make it realtime use on() instead of once()
         await firebase
@@ -105,19 +104,14 @@ export const actions = {
             .ref('users/' + payload)
             .once('value')
             .then((data) => {
-                console.log(`index.js - 96 - You called me 🥶`, data.val());
                 const userData = [];
-                // const storeData = []
                 const obj = data.val();
-                // const storeObj = data.val().storeProfile
 
                 if (obj) {
                     userData.push(obj);
-                    // storeData.push(storeObj)
                 }
 
                 commit('USER_DATA', userData);
-                // commit('SET_LOADED_STORE', storeData)
                 commit('SET_LOADING', false);
             })
             .catch((error) => {
@@ -136,7 +130,6 @@ export const actions = {
             .child('categories')
             .once('value')
             .then((data) => {
-                console.log(`index.js - 140 - 🎹`, data.val());
                 const categories = [];
                 const obj = data.val();
                 for (let key in obj) {
@@ -146,7 +139,6 @@ export const actions = {
                         description: obj[key].description
                     });
                 }
-                // console.log(`index.js - 142 - 🏅`, categories);
                 commit('SET_LOADED_CATEGORIES', categories);
                 commit('SET_LOADING', false);
             })
@@ -350,7 +342,7 @@ export const actions = {
                 this.$swal({
                     toast: true,
                     position: 'top-end',
-                    icon: 'info',
+                    icon: 'success',
                     title: 'Updated',
                     showConfirmButton: false,
                     timer: 1500
