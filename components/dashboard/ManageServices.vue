@@ -4,40 +4,75 @@
         <div class="col-md-12">
             <div class="card-manage services">
                 <div class="card-body">
-                    <h5 class="card-title text-uppercase mb-0">Manage Services</h5>
+                    <h5 class="card-title text-uppercase mb-0">
+                        Manage Services
+                    </h5>
                 </div>
                 <div class="table-responsive">
                     <table class="table no-wrap user-table mb-0">
                         <thead>
                             <tr>
-                                <th scope="col" class="border-0 text-uppercase font-medium pl-4">#</th>
-                                <th scope="col" class="border-0 text-uppercase font-medium">Category</th>
+                                <th
+                                    scope="col"
+                                    class="border-0 text-uppercase font-medium pl-4"
+                                >
+                                    #
+                                </th>
                                 <th
                                     scope="col"
                                     class="border-0 text-uppercase font-medium"
-                                >Description</th>
-                                <th scope="col" class="border-0 text-uppercase font-medium">Services</th>
-                                <th scope="col" class="border-0 text-uppercase font-medium">Manage</th>
+                                >
+                                    Category
+                                </th>
+                                <th
+                                    scope="col"
+                                    class="border-0 text-uppercase font-medium"
+                                >
+                                    Description
+                                </th>
+                                <th
+                                    scope="col"
+                                    class="border-0 text-uppercase font-medium"
+                                >
+                                    Services
+                                </th>
+                                <th
+                                    scope="col"
+                                    class="border-0 text-uppercase font-medium"
+                                >
+                                    Manage
+                                </th>
                             </tr>
                         </thead>
-                        <tbody v-for="(category, categoryKey) in categories" :key="category.id">
+                        <tbody
+                            v-for="(category, categoryKey) in categories"
+                            :key="category.id"
+                        >
                             <tr>
-                                <td style="vertical-align:middle" class="pl-4">{{categoryKey + 1}}</td>
-                                <td style="vertical-align:middle">
-                                    <p class="m-0">{{ category.name | capitalize }}</p>
+                                <td style="vertical-align: middle" class="pl-4">
+                                    {{ categoryKey + 1 }}
+                                </td>
+                                <td style="vertical-align: middle">
+                                    <p class="m-0">
+                                        {{ category.name | capitalize }}
+                                    </p>
                                     <!-- <span class="text-muted">Texas, United states</span> -->
                                 </td>
-                                <td style="vertical-align:middle">
-                                    <span class="text-muted">{{category.description }}</span>
+                                <td style="vertical-align: middle">
+                                    <span class="text-muted">{{
+                                        category.description
+                                    }}</span>
                                     <!-- <br />
                                     <span class="text-muted">Past : teacher</span>-->
                                 </td>
-                                <td style="vertical-align:middle">
+                                <td style="vertical-align: middle">
                                     <button
                                         @click="goToService(category.name)"
                                         type="button"
                                         class="btn btn-icon btn-sm waves-effect waves-light btn-success"
-                                    >View Services</button>
+                                    >
+                                        View Services
+                                    </button>
                                 </td>
                                 <td>
                                     <button
@@ -60,14 +95,38 @@
                     </table>
                 </div>
             </div>
-            <div v-if="categories.length > 0" class="d-flex justify-content-start mt-3">
+            <div
+                v-if="categories.length > 0"
+                class="d-flex justify-content-start mt-3"
+            >
                 <div class="w-100">
-                    <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
-                        <label class="btn btn-success" @click="onCreateCategory">
-                            <input type="radio" name="options" id="option2" autocomplete="off" /> Create Category
+                    <div
+                        class="btn-group btn-group-toggle w-100"
+                        data-toggle="buttons"
+                    >
+                        <label
+                            class="btn btn-success"
+                            @click="onCreateCategory"
+                        >
+                            <input
+                                type="radio"
+                                name="options"
+                                id="option2"
+                                autocomplete="off"
+                            />
+                            Create Category
                         </label>
-                        <label class="btn btn-secondary" @click="onCreateService">
-                            <input type="radio" name="options" id="option3" autocomplete="off" /> Create Service
+                        <label
+                            class="btn btn-secondary"
+                            @click="onCreateService"
+                        >
+                            <input
+                                type="radio"
+                                name="options"
+                                id="option3"
+                                autocomplete="off"
+                            />
+                            Create Service
                         </label>
                     </div>
                 </div>
@@ -121,8 +180,25 @@ export default {
                 userId: this.user.uid,
                 id: id
             };
-            this.deleteCategory(payload);
-            this.loadCategories(this.user.uid);
+            this.$swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.deleteCategory(payload);
+                    this.loadCategories(this.user.uid);
+                    this.$swal(
+                        'Deleted!',
+                        'Category has been Deleted.',
+                        'success'
+                    );
+                }
+            });
         }
     },
     mounted() {
@@ -131,5 +207,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

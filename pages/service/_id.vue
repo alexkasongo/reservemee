@@ -14,13 +14,25 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col" class="border-0 bg-light">
+                                            <th
+                                                scope="col"
+                                                class="border-0 bg-light"
+                                            >
                                                 <div
                                                     class="p-2 px-3 text-uppercase"
-                                                >{{ formattedCategory }}</div>
+                                                >
+                                                    {{ formattedCategory }}
+                                                </div>
                                             </th>
-                                            <th scope="col" class="border-0 bg-light">
-                                                <div class="py-2 text-uppercase text-right">Price</div>
+                                            <th
+                                                scope="col"
+                                                class="border-0 bg-light"
+                                            >
+                                                <div
+                                                    class="py-2 text-uppercase text-right"
+                                                >
+                                                    Price
+                                                </div>
                                             </th>
                                         </tr>
                                     </thead>
@@ -39,21 +51,33 @@
                                                         width="70"
                                                         class="img-fluid rounded shadow-sm"
                                                     />
-                                                    <div class="d-inline-block align-middle mt-2">
+                                                    <div
+                                                        class="d-inline-block align-middle mt-2"
+                                                    >
                                                         <h5 class="mb-0">
                                                             <a
                                                                 href="#"
                                                                 class="text-dark d-inline-block align-middle"
-                                                            >{{ service.name }}</a>
+                                                                >{{
+                                                                    service.name
+                                                                }}</a
+                                                            >
                                                         </h5>
                                                         <span
                                                             class="text-muted font-weight-normal font-italic d-block"
-                                                        >{{ service.description }}</span>
+                                                            >{{
+                                                                service.description
+                                                            }}</span
+                                                        >
                                                     </div>
                                                 </div>
                                             </th>
                                             <td class="border-0 align-middle">
-                                                <strong>${{ service.price }}.00</strong>
+                                                <strong
+                                                    >${{
+                                                        service.price
+                                                    }}.00</strong
+                                                >
                                             </td>
                                         </tr>
                                         <div class="editBtns mb-2">
@@ -62,11 +86,16 @@
                                                 @click="updService(service.id)"
                                                 class="text-dark"
                                             >
-                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                <i
+                                                    class="fa fa-pencil"
+                                                    aria-hidden="true"
+                                                ></i>
                                             </a>
                                             <a
                                                 href="#"
-                                                @click="removeService(service.id)"
+                                                @click="
+                                                    removeService(service.id)
+                                                "
                                                 class="text-dark"
                                             >
                                                 <i class="fa fa-trash"></i>
@@ -87,7 +116,9 @@
                 @click="onCreate"
                 type="button"
                 class="btn btn-primary btn-block"
-            >Create New Service</button>
+            >
+                Create New Service
+            </button>
         </div>
     </div>
 </template>

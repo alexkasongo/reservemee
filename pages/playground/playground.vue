@@ -6,6 +6,11 @@
             <button @click="decrement">-</button>
         </p>
         <small>Check out your localStorage to see the updates.</small>
+
+        <br />
+        <br />
+
+        <button @click="showAlert">Sweet Notification</button>
     </div>
 </template>
 
@@ -22,10 +27,20 @@ export default {
         },
         decrement() {
             this.$store.commit('decrement');
+        },
+        showAlert() {
+            // Use sweetalert2
+            this.$swal({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+            });
         }
     }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

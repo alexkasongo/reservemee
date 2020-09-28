@@ -246,11 +246,27 @@ export const actions = {
                     ...category,
                     id: key
                 });
+                this.$swal({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Created',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 commit('SET_LOADING', false);
             })
             .catch((error) => {
                 commit('ERRORS', error);
                 console.log(`index.js - 66 - 🚧`, error);
+                this.$swal({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Failed',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 commit('SET_LOADING', false);
             });
     },
@@ -284,12 +300,6 @@ export const actions = {
                 console.log(`index.js - 66 - 🚧`, error);
                 commit('SET_LOADING', false);
             });
-    },
-    async deleteService({ commit }, payload) {
-        commit('SET_LOADING', true);
-        console.log(`index.js - 154 - variable`, payload);
-        await firebase.database().ref(`/services/${payload}`).remove();
-        commit('SET_LOADING', false);
     },
     async updateService({ commit }, payload) {
         commit('SET_LOADING', true);
@@ -337,6 +347,14 @@ export const actions = {
                 uid: payload.id
             })
             .then(() => {
+                this.$swal({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'info',
+                    title: 'Updated',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 commit('SET_LOADING', false);
             })
             .catch((error) => {

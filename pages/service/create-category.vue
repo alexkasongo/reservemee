@@ -22,12 +22,18 @@
                 <textarea
                     required
                     class="form-control"
-                    style="min-width: 100%;"
+                    style="min-width: 100%"
                     placeholder="Describe the service"
                     v-model="description"
                 ></textarea>
             </div>
-            <button type="submit" :disabled="loading" class="btn btn-primary mt-2">Create</button>
+            <button
+                type="submit"
+                :disabled="loading"
+                class="btn btn-primary mt-2"
+            >
+                Create
+            </button>
         </form>
         <!-- Display Categories if they exist here -->
         <div v-if="categories.length > 0" class="d-flex justify-content-start">
@@ -49,20 +55,31 @@
                                 <p>{{ category.description }}</p>
                             </div>
                             <div class="editBtns mb-2">
-                                <a href="#" @click="updCategory(category.id)" class="text-dark">
-                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                <a
+                                    href="#"
+                                    @click="updCategory(category.id)"
+                                    class="text-dark"
+                                >
+                                    <i
+                                        class="fa fa-pencil"
+                                        aria-hidden="true"
+                                    ></i>
                                 </a>
-                                <a href="#" @click="removeCategory(category.id)" class="text-dark">
+                                <a
+                                    href="#"
+                                    @click="removeCategory(category.id)"
+                                    class="text-dark"
+                                >
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </div>
                         </li>
                     </ul>
                 </div>
-                <small
-                    id="fullNameHelp"
-                    class="form-text text-muted mt-2"
-                >Note that deleting a category deletes all serivices in that category.</small>
+                <small id="fullNameHelp" class="form-text text-muted mt-2"
+                    >Note that deleting a category deletes all serivices in that
+                    category.</small
+                >
             </div>
         </div>
     </div>
@@ -89,7 +106,18 @@ export default {
     },
     methods: {
         ...mapActions(['createCategory', 'loadCategories', 'deleteCategory']),
-        onSubmit(event) {
+        showAlert() {
+            // Use sweetalert2
+            this.$swal({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Successful',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        },
+        async onSubmit(event) {
             // category with dashes
             let res = this.category.replace(/\s+/g, '-').toLowerCase();
 
@@ -98,7 +126,7 @@ export default {
                 description: this.description,
                 userId: this.user.uid
             };
-            this.createCategory(data);
+            await this.createCategory(data);
             // this.loadCategories();
         },
         goToService(service) {
@@ -122,8 +150,25 @@ export default {
                 userId: this.user.uid,
                 id: id
             };
-            this.deleteCategory(payload);
-            this.loadCategories(this.user.uid);
+            this.$swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.deleteCategory(payload);
+                    this.loadCategories(this.user.uid);
+                    this.$swal(
+                        'Deleted!',
+                        'Category has been Deleted.',
+                        'success'
+                    );
+                }
+            });
         }
     },
     mounted() {}

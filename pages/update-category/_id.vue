@@ -18,12 +18,18 @@
                 <label for="exampleInputPassword1">Description</label>
                 <textarea
                     class="form-control"
-                    style="min-width: 100%;"
+                    style="min-width: 100%"
                     placeholder="Describe the service"
                     v-model="description"
                 ></textarea>
             </div>
-            <button type="submit" :disabled="loading" class="btn btn-primary mt-2">Update</button>
+            <button
+                type="submit"
+                :disabled="loading"
+                class="btn btn-primary mt-2"
+            >
+                Update
+            </button>
         </form>
     </div>
 </template>
@@ -69,7 +75,7 @@ export default {
 
             this.updateCategory(data);
             this.loadServices(this.user.uid);
-            this.$router.push(`/dashboard`);
+            // this.$router.push(`/dashboard`);
         }
     },
     mounted() {
@@ -111,5 +117,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
