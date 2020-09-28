@@ -4,6 +4,7 @@
         <form @submit.prevent="onSubmit" class="mt-3 mb-4">
             <div class="form-group">
                 <label for="exampleFormControlFile1">Update Category</label>
+                <!-- prefilled text should be capitalized, no dashes -->
                 <input
                     type="text"
                     class="form-control"
@@ -75,25 +76,10 @@ export default {
 
             this.updateCategory(data);
             this.loadServices(this.user.uid);
-            // this.$router.push(`/dashboard`);
         }
     },
     mounted() {
-        //FIXME without the if() we get error on update page reload
-        //NOTE issue seems to be coming from store getter. Possible fix
-        // could be creating a filtered getter that filters through services using
-        // uid. or storing state in localStorage
-        // if (this.filteredCategories === undefined) {
-        //     this.$router.back();
-        // } else {
-        //     this.category = this.filteredCategories.name;
-        //     this.description = this.filteredCategories.description;
-        //     console.log(`_id.vue - 61 - 🏝`, this.filteredCategories);
-        // }
-
-        //ANCHOR FIXING
         // REVIEW
-
         // if the update form exists in local storage, do nothing
         if (localStorage.getItem('categoryForm')) {
             // get the information in local storage

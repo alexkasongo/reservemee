@@ -10,7 +10,7 @@
         <br />
         <br />
 
-        <button @click="showAlert">Sweet Notification</button>
+        <v-btn @click="showAlert" elevation="2">Click Me</v-btn>
     </div>
 </template>
 

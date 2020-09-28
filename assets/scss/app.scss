@@ -3,12 +3,16 @@
 */
 
 /*
+* 1 - VUETIFY
+*/
+@import '~vuetify/src/styles/styles.sass';
+/*
 * 1 - HELPERS
 */
-@import "1-helpers/variables";
-@import "1-helpers/mixins";
-@import "1-helpers/flexbox-mixin";
-@import "1-helpers/modifiers";
+@import '1-helpers/variables';
+@import '1-helpers/mixins';
+@import '1-helpers/flexbox-mixin';
+@import '1-helpers/modifiers';
 
 /*
 * 2 - TOOLS
@@ -45,8 +49,8 @@
 // @import "6-components/headerPrismic";
 // @import "6-components/aboutText";
 // @import "6-components/footerPrismic";
-@import "6-components/header";
-@import "6-components/manageServices";
+@import '6-components/header';
+@import '6-components/manageServices';
 
 /*
 * 7 - SLICES
