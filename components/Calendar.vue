@@ -38,7 +38,7 @@
                             <v-icon small> mdi-chevron-right </v-icon>
                         </v-btn>
                         <v-toolbar-title v-if="$refs.calendar">
-                            {{ $refs.calendar.title }}
+                            {{ this.title }}
                         </v-toolbar-title>
                         <v-spacer></v-spacer>
                         <v-menu bottom right>
@@ -98,79 +98,39 @@
                                     type="time"
                                     label="end (required)"
                                 ></v-text-field> -->
-                                <!-- TIME PICKER -->
+
+                                <!-- START TIME PICKER -->
+                                <h3>Start Time</h3>
                                 <v-row>
-                                    <v-col cols="11" sm="5">
-                                        <v-menu
-                                            ref="menu"
-                                            v-model="timeStart"
-                                            :close-on-content-click="false"
-                                            :nudge-right="40"
-                                            :return-value.sync="start"
-                                            transition="scale-transition"
-                                            offset-y
-                                            max-width="290px"
-                                            min-width="290px"
-                                        >
-                                            <template
-                                                v-slot:activator="{ on, attrs }"
-                                            >
-                                                <v-text-field
-                                                    v-model="start"
-                                                    label="Start"
-                                                    prepend-icon="mdi-clock-time-four-outline"
-                                                    readonly
-                                                    v-bind="attrs"
-                                                    v-on="on"
-                                                ></v-text-field>
-                                            </template>
-                                            <v-time-picker
-                                                v-if="timeStart"
-                                                v-model="start"
-                                                full-width
-                                                @click:minute="
-                                                    $refs.menu.save(start)
-                                                "
-                                            ></v-time-picker>
-                                        </v-menu>
-                                    </v-col>
-                                    <v-spacer></v-spacer>
-                                    <v-col cols="11" sm="5">
-                                        <v-menu
-                                            ref="end"
-                                            v-model="timeEnd"
-                                            :close-on-content-click="false"
-                                            :nudge-right="40"
-                                            :return-value.sync="end"
-                                            transition="scale-transition"
-                                            offset-y
-                                            max-width="290px"
-                                            min-width="290px"
-                                        >
-                                            <template
-                                                v-slot:activator="{ on, attrs }"
-                                            >
-                                                <v-text-field
-                                                    v-model="end"
-                                                    label="Start"
-                                                    prepend-icon="mdi-clock-time-four-outline"
-                                                    readonly
-                                                    v-bind="attrs"
-                                                    v-on="on"
-                                                ></v-text-field>
-                                            </template>
-                                            <v-time-picker
-                                                v-if="timeEnd"
-                                                v-model="end"
-                                                full-width
-                                                @click:minute="
-                                                    $refs.menu.save(end)
-                                                "
-                                            ></v-time-picker>
-                                        </v-menu>
-                                    </v-col>
+                                    <v-row justify="center">
+                                        <v-date-picker
+                                            v-model="startDate"
+                                        ></v-date-picker>
+                                    </v-row>
+                                    <br />
+                                    <v-row justify="center">
+                                        <v-time-picker
+                                            v-model="startTime"
+                                        ></v-time-picker>
+                                    </v-row>
                                 </v-row>
-                                <!-- TIME PICKER END-->
+                                <!-- START TIME PICKER END-->
+                                <!-- END TIME PICKER -->
+                                <h3>End Time</h3>
+                                <v-row>
+                                    <v-row justify="center">
+                                        <v-date-picker
+                                            v-model="endDate"
+                                        ></v-date-picker>
+                                    </v-row>
+                                    <br />
+                                    <v-row justify="center">
+                                        <v-time-picker
+                                            v-model="endTime"
+                                        ></v-time-picker>
+                                    </v-row>
+                                </v-row>
+                                <!-- END TIME PICKER END-->
                                 <v-text-field
                                     v-model="color"
                                     type="color"
@@ -276,8 +236,12 @@ import { db } from '@/plugins/firebase';
 export default {
     name: 'Calendar',
     data: () => ({
-        test: null,
-        time: null,
+        // Date and time picker logic
+        startDate: new Date().toISOString().substr(0, 10),
+        startTime: new Date(),
+        endDate: new Date().toISOString().substr(0, 10),
+        endTime: new Date(),
+        // Date and time picker logic END
         timeStart: false,
         timeEnd: false,
         today: new Date().toISOString().substr(0, 10),
@@ -301,6 +265,64 @@ export default {
         events: [],
         dialog: false
     }),
+    computed: {
+        title() {
+            const { start, end } = this;
+            if (!start || !end) {
+                return '';
+            }
+            const startMonth = this.monthFormatter(start);
+            const endMonth = this.monthFormatter(end);
+            const suffixMonth = startMonth === endMonth ? '' : endMonth;
+            const startYear = start.year;
+            const endYear = end.year;
+            const suffixYear = startYear === endYear ? '' : endYear;
+            const startDay = start.day + this.nth(start.day);
+            const endDay = end.day + this.nth(end.day);
+            switch (this.type) {
+                case 'month':
+                    return `${startMonth} ${startYear}`;
+                case 'week':
+                case '4day':
+                    return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`;
+                case 'day':
+                    return `${startMonth} ${startDay} ${startYear}`;
+            }
+            return '';
+        },
+        monthFormatter() {
+            return this.$refs.calendar.getFormatter({
+                timeZone: 'UTC',
+                month: 'long'
+            });
+        },
+        submittableStartDateTime() {
+            const date = new Date(this.startDate);
+            if (typeof this.startTime === 'string') {
+                const hours = this.startTime.match(/^(\d+)/)[1];
+                const minutes = this.startTime.match(/:(\d+)/)[1];
+                date.setHours(hours);
+                date.setMinutes(minutes);
+            } else {
+                date.setHours(this.startTime.getHours());
+                date.setMinutes(this.startTime.getMinutes());
+            }
+            return date;
+        },
+        submittableEndDateTime() {
+            const date = new Date(this.endDate);
+            if (typeof this.endTime === 'string') {
+                const hours = this.endTime.match(/^(\d+)/)[1];
+                const minutes = this.endTime.match(/:(\d+)/)[1];
+                date.setHours(hours);
+                date.setMinutes(minutes);
+            } else {
+                date.setHours(this.endTime.getHours());
+                date.setMinutes(this.endTime.getMinutes());
+            }
+            return date;
+        }
+    },
     mounted() {
         this.getEvents();
         console.log(`Calendar.vue - 306 - variable`, this.start);
@@ -314,26 +336,30 @@ export default {
             let events = [];
             // loop through and push events on each itteration
             snapshot.forEach((doc) => {
-                let appData = doc.data();
+                let appData = [];
                 appData.id = doc.id;
+                appData.color = doc.data().color;
+                appData.details = doc.data().details;
+                appData.end = doc.data().end.toDate();
+                appData.name = doc.data().name;
+                appData.start = doc.data().start.toDate();
                 events.push(appData);
             });
             console.log(`Calendar.vue - 143 - 🥶`, events);
-            // this.events = events;
+            this.events = events;
         },
         async addEvent() {
-            // const start = new Date(this.start).toISOString().substr(0, 10);
-            // const start = new DateTime(this.start)
-            // this.end = new Date(this.end).toISOString().substring(0, 10);
-            console.log(`Calendar.vue - 327 - variable`, this.start, this.end);
+            const start = this.submittableStartDateTime;
+            const end = this.submittableEndDateTime;
+            console.log(`Calendar.vue - 327 - variable`, start, end);
             // if (this.name && this.start && this.end) {
-            //     await db.collection('calEvent').add({
-            //         name: this.name,
-            //         details: this.details,
-            //         start: start,
-            //         end: end,
-            //         color: this.color
-            //     });
+            await db.collection('calEvent').add({
+                name: this.name,
+                details: this.details,
+                start: start,
+                end: end,
+                color: this.color
+            });
             // } else {
             //     alert('Name, Start and End date are required');
             // }
@@ -399,9 +425,8 @@ export default {
             nativeEvent.stopPropagation();
         },
         updateRange({ start, end }) {
-            // this.start = start;
-            // this.end = end;
-            console.log(`Calendar.vue - 400 - here 🥇`);
+            this.start = start;
+            this.end = end;
         },
         nth(d) {
             return d > 3 && d < 21
