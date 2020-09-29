@@ -10,17 +10,18 @@
     },
     "dependencies": {
         "@nuxtjs/axios": "^5.12.0",
+        "@nuxtjs/firebase": "^6.1.1",
+        "@nuxtjs/vuetify": "^1.11.2",
         "axios": "^0.20.0",
         "bootstrap": "^4.5.0",
         "bootstrap-vue": "^2.15.0",
-        "firebase": "^7.19.1",
+        "firebase": "^7.21.1",
         "nuxt": "^2.14.0",
         "vue-sweetalert2": "^3.0.8",
+        "vue-textarea-autosize": "^1.1.1",
         "vuex-persistedstate": "^3.1.0"
     },
     "devDependencies": {
-        "@nuxtjs/style-resources": "^1.0.0",
-        "@nuxtjs/vuetify": "^1.11.2",
         "eslint-config-prettier": "^6.11.0",
         "eslint-plugin-prettier": "^3.1.4",
         "node-sass": "^4.14.1",

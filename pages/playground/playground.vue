@@ -10,12 +10,20 @@
         <br />
         <br />
 
-        <v-btn @click="showAlert" elevation="2">Click Me</v-btn>
+        <v-btn color="primary" @click="showAlert" elevation="2">Click Me</v-btn>
     </div>
+    <!-- <div>
+        <Calendar />
+    </div> -->
 </template>
 
 <script>
+import Calendar from '@/components/Calendar.vue';
+
 export default {
+    components: {
+        Calendar
+    },
     computed: {
         count() {
             return this.$store.state.count;
