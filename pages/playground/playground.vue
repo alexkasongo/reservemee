@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <!-- <v-app>
         <p>{{ count }}</p>
         <p>
             <button @click="increment">+</button>
@@ -11,10 +11,10 @@
         <br />
 
         <v-btn color="primary" @click="showAlert" elevation="2">Click Me</v-btn>
-    </div>
-    <!-- <div>
+    </v-app> -->
+    <div>
         <Calendar />
-    </div> -->
+    </div>
 </template>
 
 <script>
