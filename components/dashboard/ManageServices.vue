@@ -2,7 +2,7 @@
     <!-- ManageServices -->
     <div class="row">
         <div class="col-md-12">
-            <div class="card-manage services">
+            <div class="card-manage services-card">
                 <div class="card-body">
                     <h5 class="card-title text-uppercase mb-0">
                         Manage Services

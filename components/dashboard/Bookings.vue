@@ -1,13 +1,30 @@
 <template>
     <div>
         <div class="card mt-3">
-            <img class="card-img-top" src="~/assets/images/e-commerce.png" alt="Card image cap" />
             <div class="card-body">
                 <h5 class="card-title">Bookings</h5>
-                <p
-                    class="card-text"
-                >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="/service/bookings" class="btn btn-primary btn-block">View Bookings</a>
+                <p class="card-text">
+                    View all bookings. Confirm, edit and update.
+                </p>
+                <nuxt-link to="/service/bookings" class="btn btn-dark btn-block"
+                    >View Bookings</nuxt-link
+                >
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Calendar</h5>
+                <p class="card-text">
+                    View, update and create calendar events. Use the calandar
+                    quickly view all booked appoints and create open/availble
+                    hours for your customers.
+                </p>
+
+                <nuxt-link
+                    to="/playground/playground"
+                    class="btn btn-dark btn-block"
+                    >View Calendar</nuxt-link
+                >
             </div>
         </div>
     </div>
@@ -19,5 +36,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

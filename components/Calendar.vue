@@ -232,6 +232,7 @@
 
 <script>
 import { db } from '@/plugins/firebase';
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'Calendar',
@@ -286,6 +287,9 @@ export default {
         ]
     }),
     computed: {
+        ...mapGetters({
+            user: 'user'
+        }),
         title() {
             const { start, end } = this;
             if (!start || !end) {
@@ -316,6 +320,7 @@ export default {
                 month: 'long'
             });
         },
+        //FIXME date displays one day behind
         submittableStartDateTime() {
             const date = new Date(this.startDate);
             if (typeof this.startTime === 'string') {
@@ -329,6 +334,7 @@ export default {
             }
             return date;
         },
+        //FIXME date displays one day behind
         submittableEndDateTime() {
             const date = new Date(this.endDate);
             if (typeof this.endTime === 'string') {
@@ -352,7 +358,7 @@ export default {
          ** FIRESTORE LOGIC
          */
         async getEvents() {
-            let snapshot = await db.collection('calEvent').get();
+            let snapshot = await db.collection(this.user.uid).get();
             let events = [];
             // loop through and push events on each itteration
             snapshot.forEach((doc) => {
@@ -378,7 +384,7 @@ export default {
                 this.submittableStartDateTime &&
                 this.submittableEndDateTime
             ) {
-                await db.collection('calEvent').add({
+                await db.collection(this.user.uid).add({
                     name: this.name,
                     details: this.details,
                     start: start,
@@ -399,14 +405,17 @@ export default {
             this.color = '#1976D2';
         },
         async updateEvent(ev) {
-            await db.collection('calEvent').doc(this.currentlyEditing).update({
-                details: ev.details
-            });
+            await db
+                .collection(this.user.uid)
+                .doc(this.currentlyEditing)
+                .update({
+                    details: ev.details
+                });
             this.selectedOpen = false;
             this.currentlyEditing = null;
         },
         async deleteEvent(ev) {
-            await db.collection('calEvent').doc(ev).delete();
+            await db.collection(this.user.uid).doc(ev).delete();
 
             this.selectedOpen = false;
             this.getEvents();
