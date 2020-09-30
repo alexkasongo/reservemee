@@ -60,7 +60,11 @@ export default {
             return this.$store.state.count;
         },
         submittableDateTime() {
+            //REVIEW new date() returns date one day behind
             const date = new Date(this.startDate);
+            // to fix, I add 1 day to current date
+            date.setDate(date.getDate() + 1);
+            const timezone = date.getTimezoneOffset();
             if (typeof this.startTime === 'string') {
                 const hours = this.startTime.match(/^(\d+)/)[1];
                 const minutes = this.startTime.match(/:(\d+)/)[1];

@@ -287,9 +287,12 @@ export default {
         ]
     }),
     computed: {
-        ...mapGetters({
-            user: 'user'
-        }),
+        // ...mapGetters({
+        //     user: 'user'
+        // }),
+        user() {
+            return this.$store.state.user;
+        },
         title() {
             const { start, end } = this;
             if (!start || !end) {
@@ -320,9 +323,11 @@ export default {
                 month: 'long'
             });
         },
-        //FIXME date displays one day behind
         submittableStartDateTime() {
+            //REVIEW new date() returns date one day behind
             const date = new Date(this.startDate);
+            // to fix, I add 1 day to current date
+            date.setDate(date.getDate() + 1);
             if (typeof this.startTime === 'string') {
                 const hours = this.startTime.match(/^(\d+)/)[1];
                 const minutes = this.startTime.match(/:(\d+)/)[1];
@@ -334,9 +339,11 @@ export default {
             }
             return date;
         },
-        //FIXME date displays one day behind
         submittableEndDateTime() {
-            const date = new Date(this.endDate);
+            //REVIEW new date() returns date one day behind
+            const date = new Date(this.startDate);
+            // to fix, I add 1 day to current date
+            date.setDate(date.getDate() + 1);
             if (typeof this.endTime === 'string') {
                 const hours = this.endTime.match(/^(\d+)/)[1];
                 const minutes = this.endTime.match(/:(\d+)/)[1];
@@ -351,7 +358,6 @@ export default {
     },
     mounted() {
         this.getEvents();
-        console.log(`Calendar.vue - 306 - variable`, this.start);
     },
     methods: {
         /*

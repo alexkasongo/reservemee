@@ -1,8 +1,7 @@
-import createPersistedState from 'vuex-persistedstate'
+import createPersistedState from 'vuex-persistedstate';
 
 export default ({ store }) => {
     createPersistedState({
-        paths: ['userData', 'services', 'filteredServiceId'],
-
-    })(store)
-}
+        paths: ['userData', 'services', 'filteredServiceId', 'user']
+    })(store);
+};
