@@ -53,7 +53,14 @@ export default {
                     .then(() => {
                         // Email sent.
                         this.alert = 'Email sent.';
-                        alert(`index.js - 173 - EMAIL SENT`);
+                        this.$swal({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            title: `An Email has been sent to you.`,
+                            showConfirmButton: true,
+                            timer: 60000
+                        });
                         this.$router.push('/signin');
                     })
                     .catch((error) => {

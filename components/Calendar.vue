@@ -89,7 +89,7 @@
                                     label="detail"
                                 ></v-text-field>
 
-                                <!-- START TIME PICKER -->
+                                <!-- START DATE/TIME PICKER -->
                                 <v-spacer></v-spacer>
                                 <v-row>
                                     <v-col cols="11" sm="5">
@@ -107,7 +107,7 @@
                                             >
                                                 <v-text-field
                                                     v-model="startDate"
-                                                    label="Picker in menu"
+                                                    label="Start Date"
                                                     prepend-icon="mdi-calendar"
                                                     readonly
                                                     v-bind="attrs"
@@ -159,7 +159,7 @@
                                             >
                                                 <v-text-field
                                                     v-model="startTime"
-                                                    label="Picker in menu"
+                                                    label="Start Time"
                                                     prepend-icon="mdi-clock-time-four-outline"
                                                     readonly
                                                     v-bind="attrs"
@@ -181,9 +181,9 @@
                                     </v-col>
                                     <v-spacer></v-spacer>
                                 </v-row>
-                                <!-- START TIME PICKER END-->
+                                <!-- START DATE/TIME PICKER END-->
 
-                                <!-- END TIME PICKER -->
+                                <!-- END DATE/TIME PICKER -->
                                 <v-row>
                                     <v-col cols="11" sm="5">
                                         <v-menu
@@ -200,7 +200,7 @@
                                             >
                                                 <v-text-field
                                                     v-model="endDate"
-                                                    label="Picker in menu"
+                                                    label="End Date"
                                                     prepend-icon="mdi-calendar"
                                                     readonly
                                                     v-bind="attrs"
@@ -250,7 +250,7 @@
                                             >
                                                 <v-text-field
                                                     v-model="endTime"
-                                                    label="Picker in menu"
+                                                    label="End Time"
                                                     prepend-icon="mdi-clock-time-four-outline"
                                                     readonly
                                                     v-bind="attrs"
@@ -270,7 +270,7 @@
                                     </v-col>
                                     <v-spacer></v-spacer>
                                 </v-row>
-                                <!-- END TIME PICKER END-->
+                                <!-- END END/TIME PICKER END-->
                                 <v-text-field
                                     v-model="color"
                                     type="color"
@@ -290,6 +290,7 @@
                 </v-dialog>
                 <!-- Add event dialog end -->
 
+                <!-- Pop up -->
                 <v-sheet height="600">
                     <v-calendar
                         ref="calendar"
@@ -330,14 +331,6 @@
                                 </form>
                                 <!-- Edit card -->
                                 <form v-else>
-                                    <!-- <v-textarea
-                                        filled
-                                        v-model="selectedEvent.details"
-                                        type="text"
-                                        style="width: 100%"
-                                        :min-height="100"
-                                        placeholder="add note"
-                                    ></v-textarea> -->
                                     <v-container>
                                         <v-text-field
                                             v-model="selectedEvent.name"
@@ -375,7 +368,7 @@
                                                     >
                                                         <v-text-field
                                                             v-model="startDate"
-                                                            label="Picker in menu"
+                                                            label="Start Date"
                                                             prepend-icon="mdi-calendar"
                                                             readonly
                                                             v-bind="attrs"
@@ -414,7 +407,7 @@
                                             <v-spacer></v-spacer>
                                             <v-col cols="11" sm="5">
                                                 <v-menu
-                                                    ref="endDate"
+                                                    ref="startTime"
                                                     v-model="menu6"
                                                     :close-on-content-click="
                                                         false
@@ -436,7 +429,7 @@
                                                     >
                                                         <v-text-field
                                                             v-model="startTime"
-                                                            label="Picker in menu"
+                                                            label="Start Time"
                                                             prepend-icon="mdi-clock-time-four-outline"
                                                             readonly
                                                             v-bind="attrs"
@@ -449,7 +442,7 @@
                                                         full-width
                                                         format="24hr"
                                                         @click:minute="
-                                                            $refs.endDate.save(
+                                                            $refs.startTime.save(
                                                                 startTime
                                                             )
                                                         "
@@ -482,7 +475,7 @@
                                                     >
                                                         <v-text-field
                                                             v-model="endDate"
-                                                            label="Picker in menu"
+                                                            label="End Date"
                                                             prepend-icon="mdi-calendar"
                                                             readonly
                                                             v-bind="attrs"
@@ -541,7 +534,7 @@
                                                     >
                                                         <v-text-field
                                                             v-model="endTime"
-                                                            label="Picker in menu"
+                                                            label="End Time"
                                                             prepend-icon="mdi-clock-time-four-outline"
                                                             readonly
                                                             v-bind="attrs"
@@ -565,7 +558,7 @@
                                         </v-row>
                                         <!-- EDIT END TIME PICKER-->
                                         <v-text-field
-                                            v-model="color"
+                                            v-model="selectedEvent.color"
                                             type="color"
                                             label="color (click to open color menu)"
                                         ></v-text-field>
@@ -600,6 +593,7 @@
                         </v-card>
                     </v-menu>
                 </v-sheet>
+                <!-- Pop up end -->
             </v-col>
         </v-row>
     </v-app>
@@ -789,7 +783,7 @@ export default {
             this.details = '';
             this.start = '';
             this.end = '';
-            this.color = '#1976D2';
+            this.color = '';
         },
         async updateEvent(ev) {
             const start = this.submittableStartDateTime;
@@ -807,7 +801,7 @@ export default {
                         name: ev.name,
                         start: start,
                         end: end,
-                        color: this.color,
+                        color: ev.color,
                         timed: true
                         // booked: false
                     });
@@ -853,10 +847,54 @@ export default {
         editEvent(ev) {
             this.currentlyEditing = ev.id;
         },
+
         showEvent({ nativeEvent, event }) {
+            // parse date object and get date out
+            let startDate = new Date(event.start);
+            let sd = startDate.toISOString().substr(0, 10);
+            let endDate = new Date(event.end);
+            let ed = endDate.toISOString().substr(0, 10);
+
+            // Get start time
+            let startTime = new Date(event.start);
+            let day = startTime.getDate(),
+                month = startTime.getMonth() + 1,
+                year = startTime.getFullYear(),
+                hour = startTime.getHours(),
+                min = startTime.getMinutes();
+
+            month = (month < 10 ? '0' : '') + month;
+            day = (day < 10 ? '0' : '') + day;
+            hour = (hour < 10 ? '0' : '') + hour;
+            min = (min < 10 ? '0' : '') + min;
+
+            let st = hour + ':' + min;
+
+            // Get end time
+            let endTime = new Date(event.end);
+            let day2 = endTime.getDate(),
+                month2 = endTime.getMonth() + 1,
+                year2 = endTime.getFullYear(),
+                hour2 = endTime.getHours(),
+                min2 = endTime.getMinutes();
+
+            month2 = (month2 < 10 ? '0' : '') + month2;
+            day2 = (day2 < 10 ? '0' : '') + day2;
+            hour2 = (hour2 < 10 ? '0' : '') + hour2;
+            min2 = (min2 < 10 ? '0' : '') + min2;
+
+            let et = hour2 + ':' + min2;
+
+            console.log(`Calendar.vue - 869 - 🥎`, et);
+
             const open = () => {
                 this.selectedEvent = event;
                 this.selectedElement = nativeEvent.target;
+                this.startDate = sd;
+                this.endDate = ed;
+
+                this.startTime = st;
+                this.endTime = et;
                 setTimeout(() => {
                     this.selectedOpen = true;
                 }, 10);
