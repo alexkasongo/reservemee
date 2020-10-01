@@ -330,15 +330,248 @@
                                 </form>
                                 <!-- Edit card -->
                                 <form v-else>
-                                    <v-textarea
+                                    <!-- <v-textarea
                                         filled
                                         v-model="selectedEvent.details"
                                         type="text"
                                         style="width: 100%"
                                         :min-height="100"
                                         placeholder="add note"
-                                    ></v-textarea>
+                                    ></v-textarea> -->
+                                    <v-container>
+                                        <v-text-field
+                                            v-model="selectedEvent.name"
+                                            type="text"
+                                            label="event name (required)"
+                                        ></v-text-field>
+                                        <v-text-field
+                                            v-model="selectedEvent.details"
+                                            type="text"
+                                            label="detail"
+                                        ></v-text-field>
+
+                                        <!-- EDIT START TIME PICKER END -->
+                                        <v-spacer></v-spacer>
+                                        <v-row>
+                                            <v-col cols="11" sm="5">
+                                                <v-menu
+                                                    ref="dateEdit"
+                                                    v-model="menu5"
+                                                    :close-on-content-click="
+                                                        false
+                                                    "
+                                                    :return-value.sync="
+                                                        startDate
+                                                    "
+                                                    transition="scale-transition"
+                                                    offset-y
+                                                    min-width="290px"
+                                                >
+                                                    <template
+                                                        v-slot:activator="{
+                                                            on,
+                                                            attrs
+                                                        }"
+                                                    >
+                                                        <v-text-field
+                                                            v-model="startDate"
+                                                            label="Picker in menu"
+                                                            prepend-icon="mdi-calendar"
+                                                            readonly
+                                                            v-bind="attrs"
+                                                            v-on="on"
+                                                        ></v-text-field>
+                                                    </template>
+                                                    <v-date-picker
+                                                        v-model="startDate"
+                                                        no-title
+                                                        scrollable
+                                                    >
+                                                        <v-spacer></v-spacer>
+                                                        <v-btn
+                                                            text
+                                                            color="primary"
+                                                            @click="
+                                                                menu5 = false
+                                                            "
+                                                        >
+                                                            Cancel
+                                                        </v-btn>
+                                                        <v-btn
+                                                            text
+                                                            color="primary"
+                                                            @click="
+                                                                $refs.dateEdit.save(
+                                                                    startDate
+                                                                )
+                                                            "
+                                                        >
+                                                            OK
+                                                        </v-btn>
+                                                    </v-date-picker>
+                                                </v-menu>
+                                            </v-col>
+                                            <v-spacer></v-spacer>
+                                            <v-col cols="11" sm="5">
+                                                <v-menu
+                                                    ref="endDate"
+                                                    v-model="menu6"
+                                                    :close-on-content-click="
+                                                        false
+                                                    "
+                                                    :nudge-right="40"
+                                                    :return-value.sync="
+                                                        startTime
+                                                    "
+                                                    transition="scale-transition"
+                                                    offset-y
+                                                    max-width="290px"
+                                                    min-width="290px"
+                                                >
+                                                    <template
+                                                        v-slot:activator="{
+                                                            on,
+                                                            attrs
+                                                        }"
+                                                    >
+                                                        <v-text-field
+                                                            v-model="startTime"
+                                                            label="Picker in menu"
+                                                            prepend-icon="mdi-clock-time-four-outline"
+                                                            readonly
+                                                            v-bind="attrs"
+                                                            v-on="on"
+                                                        ></v-text-field>
+                                                    </template>
+                                                    <v-time-picker
+                                                        v-if="menu6"
+                                                        v-model="startTime"
+                                                        full-width
+                                                        format="24hr"
+                                                        @click:minute="
+                                                            $refs.endDate.save(
+                                                                startTime
+                                                            )
+                                                        "
+                                                    ></v-time-picker>
+                                                </v-menu>
+                                            </v-col>
+                                            <v-spacer></v-spacer>
+                                        </v-row>
+                                        <!-- EDIT START TIME PICKER END-->
+
+                                        <!-- EDIT END TIME PICKER -->
+                                        <v-row>
+                                            <v-col cols="11" sm="5">
+                                                <v-menu
+                                                    ref="end"
+                                                    v-model="menu7"
+                                                    :close-on-content-click="
+                                                        false
+                                                    "
+                                                    :return-value.sync="endDate"
+                                                    transition="scale-transition"
+                                                    offset-y
+                                                    min-width="290px"
+                                                >
+                                                    <template
+                                                        v-slot:activator="{
+                                                            on,
+                                                            attrs
+                                                        }"
+                                                    >
+                                                        <v-text-field
+                                                            v-model="endDate"
+                                                            label="Picker in menu"
+                                                            prepend-icon="mdi-calendar"
+                                                            readonly
+                                                            v-bind="attrs"
+                                                            v-on="on"
+                                                        ></v-text-field>
+                                                    </template>
+                                                    <v-date-picker
+                                                        v-model="endDate"
+                                                        no-title
+                                                        scrollable
+                                                    >
+                                                        <v-spacer></v-spacer>
+                                                        <v-btn
+                                                            text
+                                                            color="primary"
+                                                            @click="
+                                                                menu7 = false
+                                                            "
+                                                        >
+                                                            Cancel
+                                                        </v-btn>
+                                                        <v-btn
+                                                            text
+                                                            color="primary"
+                                                            @click="
+                                                                $refs.end.save(
+                                                                    endDate
+                                                                )
+                                                            "
+                                                        >
+                                                            OK
+                                                        </v-btn>
+                                                    </v-date-picker>
+                                                </v-menu>
+                                            </v-col>
+                                            <v-spacer></v-spacer>
+                                            <v-col cols="11" sm="5">
+                                                <v-menu
+                                                    ref="endTime"
+                                                    v-model="menu8"
+                                                    :close-on-content-click="
+                                                        false
+                                                    "
+                                                    :nudge-right="40"
+                                                    :return-value.sync="endTime"
+                                                    transition="scale-transition"
+                                                    offset-y
+                                                    max-width="290px"
+                                                    min-width="290px"
+                                                >
+                                                    <template
+                                                        v-slot:activator="{
+                                                            on,
+                                                            attrs
+                                                        }"
+                                                    >
+                                                        <v-text-field
+                                                            v-model="endTime"
+                                                            label="Picker in menu"
+                                                            prepend-icon="mdi-clock-time-four-outline"
+                                                            readonly
+                                                            v-bind="attrs"
+                                                            v-on="on"
+                                                        ></v-text-field>
+                                                    </template>
+                                                    <v-time-picker
+                                                        v-if="menu8"
+                                                        v-model="endTime"
+                                                        full-width
+                                                        format="24hr"
+                                                        @click:minute="
+                                                            $refs.endTime.save(
+                                                                endTime
+                                                            )
+                                                        "
+                                                    ></v-time-picker>
+                                                </v-menu>
+                                            </v-col>
+                                            <v-spacer></v-spacer>
+                                        </v-row>
+                                        <!-- EDIT END TIME PICKER-->
+                                        <v-text-field
+                                            v-model="color"
+                                            type="color"
+                                            label="color (click to open color menu)"
+                                        ></v-text-field>
+                                    </v-container>
                                 </form>
+
                                 <!-- Edit card -->
                             </v-card-text>
                             <v-card-actions>
@@ -385,6 +618,10 @@ export default {
         menu2: false,
         menu3: false,
         menu4: false,
+        menu5: false,
+        menu6: false,
+        menu7: false,
+        menu8: false,
         modal: false,
         // Date and time picker logic
         startDate: new Date().toISOString().substr(0, 10),
@@ -416,10 +653,6 @@ export default {
         dialog: false
     }),
     computed: {
-        testing() {
-            const date = new Date(this.date);
-            console.log(`Calendar.vue - 374 - 🥎`, date);
-        },
         user() {
             return this.$store.state.user;
         },
@@ -559,14 +792,38 @@ export default {
             this.color = '#1976D2';
         },
         async updateEvent(ev) {
-            await db
-                .collection(this.user.uid)
-                .doc(this.currentlyEditing)
-                .update({
-                    details: ev.details
+            const start = this.submittableStartDateTime;
+            const end = this.submittableEndDateTime;
+            if (
+                ev.name &&
+                this.submittableStartDateTime &&
+                this.submittableEndDateTime
+            ) {
+                await db
+                    .collection(this.user.uid)
+                    .doc(this.currentlyEditing)
+                    .update({
+                        details: ev.details,
+                        name: ev.name,
+                        start: start,
+                        end: end,
+                        color: this.color,
+                        timed: true
+                        // booked: false
+                    });
+                this.selectedOpen = false;
+                this.currentlyEditing = null;
+                this.getEvents();
+            } else {
+                this.$swal({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Name, Start and End date are required',
+                    showConfirmButton: true,
+                    timer: 10000
                 });
-            this.selectedOpen = false;
-            this.currentlyEditing = null;
+            }
         },
         async deleteEvent(ev) {
             await db.collection(this.user.uid).doc(ev).delete();
