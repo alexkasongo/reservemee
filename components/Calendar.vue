@@ -885,8 +885,7 @@ export default {
 
             let et = hour2 + ':' + min2;
 
-            console.log(`Calendar.vue - 869 - 🥎`, et);
-
+            // set local state
             const open = () => {
                 this.selectedEvent = event;
                 this.selectedElement = nativeEvent.target;
@@ -899,19 +898,20 @@ export default {
                     this.selectedOpen = true;
                 }, 10);
             };
-
+            // set popup opening detay
             if (this.selectedOpen) {
                 this.selectedOpen = false;
                 setTimeout(open, 10);
             } else {
                 open();
             }
-
+            // stop event from bubbling
             nativeEvent.stopPropagation();
         },
         updateRange({ start, end }) {
             console.log(`Calendar.vue - 428 - 🥛`);
         },
+        // add these to numbers
         nth(d) {
             return d > 3 && d < 21
                 ? 'th'

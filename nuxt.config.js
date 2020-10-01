@@ -61,6 +61,8 @@ export default {
      ** Nuxt.js modules
      */
     modules: [
+        // add pwa functionality
+        '@nuxtjs/pwa',
         // Doc: https://bootstrap-vue.js.org
         'bootstrap-vue/nuxt',
         // Doc: https://axios.nuxtjs.org/usage

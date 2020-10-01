@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-3">
+    <v-app class="mt-3">
         <div v-if="!user" class="mt-2">
             <p>loading...</p>
         </div>
@@ -173,23 +173,6 @@
             <!-- TITLES END -->
 
             <div class="col-md-8">
-                <!-- CategoryCheck -->
-                <div class="w-100">
-                    <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading">
-                            Well done {{ user.displayName }}!
-                        </h4>
-                        <p>
-                            Welcome to your profile settings. Be sure to go
-                            through all the settings and fill in all the
-                            required fields.
-                        </p>
-                        <hr />
-                        <!-- <p>{{ userInfo[0] }}</p> -->
-                        <p class="mb-0">Alert: {{ storeAlert }}</p>
-                    </div>
-                </div>
-                <!-- CategoryCheck -->
                 <div class="card">
                     <!-- CARD HEADER -->
                     <div
@@ -415,9 +398,9 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                     to share this data wherever your user
                                     profile appears.
                                 </div>
-                                <button type="submit" class="btn btn-dark">
+                                <v-btn type="submit" color="secondary">
                                     Update Profile
-                                </button>
+                                </v-btn>
                                 <button type="reset" class="btn btn-light">
                                     Reset Changes
                                 </button>
@@ -522,9 +505,9 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                     to share this data wherever your user
                                     profile appears.
                                 </div>
-                                <button type="submit" class="btn btn-dark">
-                                    Save
-                                </button>
+                                <v-btn type="submit" color="secondary">
+                                    Save Settings
+                                </v-btn>
                                 <button type="reset" class="btn btn-light">
                                     Reset Changes
                                 </button>
@@ -563,7 +546,7 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                     />
                                     <input
                                         type="password"
-                                        class="form-control mt-1"
+                                        class="form-control mt-1 mb-4"
                                         placeholder="Confirm new password"
                                         v-model="confirmNewPassword"
                                         required
@@ -574,13 +557,13 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                     >
                                         {{ errors.message }}
                                     </div>
-                                    <button
+                                    <v-btn
                                         @click="changePassword"
-                                        class="btn btn-info mt-2"
+                                        color="red darken-1"
                                         type="button"
                                     >
                                         Change
-                                    </button>
+                                    </v-btn>
                                 </div>
                             </form>
                             <hr />
@@ -748,9 +731,9 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                     <div class="small text-muted mb-3">
                                         You have not added a payment method
                                     </div>
-                                    <button class="btn btn-info" type="button">
+                                    <v-btn color="primary" type="button">
                                         Add Payment Method
-                                    </button>
+                                    </v-btn>
                                 </div>
                                 <div class="form-group mb-0">
                                     <label class="d-block"
@@ -780,13 +763,13 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                         no going back. Please be certain.
                                     </p>
                                 </div>
-                                <button
+                                <v-btn
                                     @click="deleteAccount"
-                                    class="btn btn-danger"
+                                    color="red darken-1"
                                     type="button"
                                 >
                                     Delete Account
-                                </button>
+                                </v-btn>
                             </form>
                         </div>
                         <!-- ACCOUNT END -->
@@ -794,7 +777,7 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                 </div>
             </div>
         </div>
-    </div>
+    </v-app>
 </template>
 
 <script>

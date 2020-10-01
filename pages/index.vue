@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <v-app id="app" data-app>
         <div v-if="loading" class="col-md-6 mt-2">
             <p>loading...</p>
         </div>
@@ -39,47 +39,6 @@
                     </div>
                 </div>
             </header>
-
-            <!-- Icons Grid -->
-            <!-- <section class="features-icons bg-light text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex">
-                                <i class="fa fa-television m-auto text-dark"></i>
-                            </div>
-                            <h3>Progressive Wep App</h3>
-                            <p
-                                class="lead mb-0"
-                            >This app will look great on any device, no matter the size!</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex">
-                                <i class="fa fa-bell-o m-auto text-dark"></i>
-                            </div>
-                            <h3>Realtime</h3>
-                            <p
-                                class="lead mb-0"
-                            >Receive realtime notifications. Never miss a single booking!</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex">
-                                <i class="fa fa-check-circle-o m-auto text-dark"></i>
-                            </div>
-                            <h3>Easy to Use</h3>
-                            <p
-                                class="lead mb-0"
-                            >Ready to use with your own content, or customize the source files!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </section>-->
 
             <!-- Image Showcases -->
             <section class="showcase">
@@ -305,7 +264,7 @@
                 </div>
             </footer>
         </div>
-    </div>
+    </v-app>
 </template>
 
 <script>

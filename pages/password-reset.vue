@@ -1,8 +1,8 @@
 <template>
-    <div class="container">
+    <v-app id="app" data-app>
         <form>
-            <div class="form-group">
-                <label class="d-block">Reset Password</label>
+            <div class="form-group mt-4">
+                <label class="d-block">Forgot your password?</label>
                 <input
                     type="email"
                     class="form-control"
@@ -11,21 +11,19 @@
                 />
                 <input
                     type="email"
-                    class="form-control mt-1"
+                    class="form-control mt-1 mb-3"
                     placeholder="Confirm your email address"
                     v-model="emailConfirm"
                 />
-                <small class="form-text text-muted">{{ errors.message }}</small>
-                <button
-                    @click="resetPassword"
-                    class="btn btn-info mt-2"
-                    type="button"
-                >
+                <!-- <small class="form-text text-muted mb-4">{{
+                    errors.message
+                }}</small> -->
+                <v-btn @click="resetPassword" color="secondary" type="button">
                     Send me reset password instructions
-                </button>
+                </v-btn>
             </div>
         </form>
-    </div>
+    </v-app>
 </template>
 
 <script>

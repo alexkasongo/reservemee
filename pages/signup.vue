@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <v-app id="app" data-app>
         <div v-if="loading" class="col-md-6 mt-2">
             <p>loading...</p>
         </div>
@@ -40,7 +40,9 @@
                                 />
                             </div>
 
-                            <div v-if="errors" class="form-group text-muted">{{ errors.message }}</div>
+                            <div v-if="errors" class="form-group text-muted">
+                                {{ errors.message }}
+                            </div>
 
                             <div class="form-group">
                                 <div class="form-check">
@@ -51,17 +53,21 @@
                                         id="invalidCheck2"
                                         required
                                     />
-                                    <label class="form-check-label">Agree to terms and conditions</label>
+                                    <label class="form-check-label"
+                                        >Agree to terms and conditions</label
+                                    >
                                 </div>
                             </div>
 
-                            <button class="btn btn-dark">Submit</button>
+                            <v-btn type="submit" color="secondary"
+                                >Submit</v-btn
+                            >
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </v-app>
 </template>
 
 <script>
@@ -104,5 +110,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

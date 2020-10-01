@@ -1,6 +1,7 @@
 {
     "name": "bookme",
     "version": "1.0.0",
+    "author": "Alex Kasongo",
     "private": true,
     "scripts": {
         "dev": "nuxt",
@@ -11,6 +12,7 @@
     "dependencies": {
         "@nuxtjs/axios": "^5.12.0",
         "@nuxtjs/firebase": "^6.1.1",
+        "@nuxtjs/pwa": "^3.0.2",
         "@nuxtjs/vuetify": "^1.11.2",
         "axios": "^0.20.0",
         "bootstrap": "^4.5.0",

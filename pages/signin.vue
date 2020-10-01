@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <v-app id="app" data-app>
         <div v-if="loading" class="col-md-6 mt-2">
             <p>loading...</p>
         </div>
@@ -45,13 +45,15 @@
                                 >
                             </div>
 
-                            <button class="btn btn-dark">Signin</button>
+                            <v-btn type="submit" color="secondary" elevation="2"
+                                >Signin</v-btn
+                            >
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </v-app>
 </template>
 
 <script>
