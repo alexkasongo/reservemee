@@ -88,47 +88,187 @@
                                     type="text"
                                     label="detail"
                                 ></v-text-field>
-                                <!-- <v-text-field
-                                    v-model="start"
-                                    type="time"
-                                    label="start (required)"
-                                ></v-text-field>
-                                <v-text-field
-                                    v-model="end"
-                                    type="time"
-                                    label="end (required)"
-                                ></v-text-field> -->
 
                                 <!-- START TIME PICKER -->
-                                <h3>Start Time</h3>
+                                <v-spacer></v-spacer>
                                 <v-row>
-                                    <v-row justify="center">
-                                        <v-date-picker
-                                            v-model="startDate"
-                                        ></v-date-picker>
-                                    </v-row>
-                                    <br />
-                                    <v-row justify="center">
-                                        <v-time-picker
-                                            v-model="startTime"
-                                        ></v-time-picker>
-                                    </v-row>
+                                    <v-col cols="11" sm="5">
+                                        <v-menu
+                                            ref="date"
+                                            v-model="menu"
+                                            :close-on-content-click="false"
+                                            :return-value.sync="startDate"
+                                            transition="scale-transition"
+                                            offset-y
+                                            min-width="290px"
+                                        >
+                                            <template
+                                                v-slot:activator="{ on, attrs }"
+                                            >
+                                                <v-text-field
+                                                    v-model="startDate"
+                                                    label="Picker in menu"
+                                                    prepend-icon="mdi-calendar"
+                                                    readonly
+                                                    v-bind="attrs"
+                                                    v-on="on"
+                                                ></v-text-field>
+                                            </template>
+                                            <v-date-picker
+                                                v-model="startDate"
+                                                no-title
+                                                scrollable
+                                            >
+                                                <v-spacer></v-spacer>
+                                                <v-btn
+                                                    text
+                                                    color="primary"
+                                                    @click="menu = false"
+                                                >
+                                                    Cancel
+                                                </v-btn>
+                                                <v-btn
+                                                    text
+                                                    color="primary"
+                                                    @click="
+                                                        $refs.date.save(
+                                                            startDate
+                                                        )
+                                                    "
+                                                >
+                                                    OK
+                                                </v-btn>
+                                            </v-date-picker>
+                                        </v-menu>
+                                    </v-col>
+                                    <v-spacer></v-spacer>
+                                    <v-col cols="11" sm="5">
+                                        <v-menu
+                                            ref="endDate"
+                                            v-model="menu2"
+                                            :close-on-content-click="false"
+                                            :nudge-right="40"
+                                            :return-value.sync="startTime"
+                                            transition="scale-transition"
+                                            offset-y
+                                            max-width="290px"
+                                            min-width="290px"
+                                        >
+                                            <template
+                                                v-slot:activator="{ on, attrs }"
+                                            >
+                                                <v-text-field
+                                                    v-model="startTime"
+                                                    label="Picker in menu"
+                                                    prepend-icon="mdi-clock-time-four-outline"
+                                                    readonly
+                                                    v-bind="attrs"
+                                                    v-on="on"
+                                                ></v-text-field>
+                                            </template>
+                                            <v-time-picker
+                                                v-if="menu2"
+                                                v-model="startTime"
+                                                full-width
+                                                format="24hr"
+                                                @click:minute="
+                                                    $refs.endDate.save(
+                                                        startTime
+                                                    )
+                                                "
+                                            ></v-time-picker>
+                                        </v-menu>
+                                    </v-col>
+                                    <v-spacer></v-spacer>
                                 </v-row>
                                 <!-- START TIME PICKER END-->
+
                                 <!-- END TIME PICKER -->
-                                <h3>End Time</h3>
                                 <v-row>
-                                    <v-row justify="center">
-                                        <v-date-picker
-                                            v-model="endDate"
-                                        ></v-date-picker>
-                                    </v-row>
-                                    <br />
-                                    <v-row justify="center">
-                                        <v-time-picker
-                                            v-model="endTime"
-                                        ></v-time-picker>
-                                    </v-row>
+                                    <v-col cols="11" sm="5">
+                                        <v-menu
+                                            ref="end"
+                                            v-model="menu3"
+                                            :close-on-content-click="false"
+                                            :return-value.sync="endDate"
+                                            transition="scale-transition"
+                                            offset-y
+                                            min-width="290px"
+                                        >
+                                            <template
+                                                v-slot:activator="{ on, attrs }"
+                                            >
+                                                <v-text-field
+                                                    v-model="endDate"
+                                                    label="Picker in menu"
+                                                    prepend-icon="mdi-calendar"
+                                                    readonly
+                                                    v-bind="attrs"
+                                                    v-on="on"
+                                                ></v-text-field>
+                                            </template>
+                                            <v-date-picker
+                                                v-model="endDate"
+                                                no-title
+                                                scrollable
+                                            >
+                                                <v-spacer></v-spacer>
+                                                <v-btn
+                                                    text
+                                                    color="primary"
+                                                    @click="menu = false"
+                                                >
+                                                    Cancel
+                                                </v-btn>
+                                                <v-btn
+                                                    text
+                                                    color="primary"
+                                                    @click="
+                                                        $refs.end.save(endDate)
+                                                    "
+                                                >
+                                                    OK
+                                                </v-btn>
+                                            </v-date-picker>
+                                        </v-menu>
+                                    </v-col>
+                                    <v-spacer></v-spacer>
+                                    <v-col cols="11" sm="5">
+                                        <v-menu
+                                            ref="endTime"
+                                            v-model="menu4"
+                                            :close-on-content-click="false"
+                                            :nudge-right="40"
+                                            :return-value.sync="endTime"
+                                            transition="scale-transition"
+                                            offset-y
+                                            max-width="290px"
+                                            min-width="290px"
+                                        >
+                                            <template
+                                                v-slot:activator="{ on, attrs }"
+                                            >
+                                                <v-text-field
+                                                    v-model="endTime"
+                                                    label="Picker in menu"
+                                                    prepend-icon="mdi-clock-time-four-outline"
+                                                    readonly
+                                                    v-bind="attrs"
+                                                    v-on="on"
+                                                ></v-text-field>
+                                            </template>
+                                            <v-time-picker
+                                                v-if="menu4"
+                                                v-model="endTime"
+                                                full-width
+                                                format="24hr"
+                                                @click:minute="
+                                                    $refs.endTime.save(endTime)
+                                                "
+                                            ></v-time-picker>
+                                        </v-menu>
+                                    </v-col>
+                                    <v-spacer></v-spacer>
                                 </v-row>
                                 <!-- END TIME PICKER END-->
                                 <v-text-field
@@ -188,6 +328,7 @@
                                 >
                                     {{ selectedEvent.details }}
                                 </form>
+                                <!-- Edit card -->
                                 <form v-else>
                                     <v-textarea
                                         filled
@@ -198,6 +339,7 @@
                                         placeholder="add note"
                                     ></v-textarea>
                                 </form>
+                                <!-- Edit card -->
                             </v-card-text>
                             <v-card-actions>
                                 <v-btn
@@ -237,6 +379,13 @@ import { mapGetters } from 'vuex';
 export default {
     name: 'Calendar',
     data: () => ({
+        time: null,
+        date: new Date().toISOString().substr(0, 10),
+        menu: false,
+        menu2: false,
+        menu3: false,
+        menu4: false,
+        modal: false,
         // Date and time picker logic
         startDate: new Date().toISOString().substr(0, 10),
         startTime: new Date(),
@@ -264,32 +413,13 @@ export default {
         selectedElement: null,
         selectedOpen: false,
         events: [],
-        dialog: false,
-        names: [],
-        colors: [
-            'blue',
-            'indigo',
-            'deep-purple',
-            'cyan',
-            'green',
-            'orange',
-            'grey darken-1'
-        ],
-        names: [
-            'Meeting',
-            'Holiday',
-            'PTO',
-            'Travel',
-            'Event',
-            'Birthday',
-            'Conference',
-            'Party'
-        ]
+        dialog: false
     }),
     computed: {
-        // ...mapGetters({
-        //     user: 'user'
-        // }),
+        testing() {
+            const date = new Date(this.date);
+            console.log(`Calendar.vue - 374 - 🥎`, date);
+        },
         user() {
             return this.$store.state.user;
         },
@@ -384,23 +514,41 @@ export default {
         async addEvent() {
             const start = this.submittableStartDateTime;
             const end = this.submittableEndDateTime;
-            console.log(`Calendar.vue - 327 - variable`, start, end);
             if (
                 this.name &&
                 this.submittableStartDateTime &&
                 this.submittableEndDateTime
             ) {
-                await db.collection(this.user.uid).add({
-                    name: this.name,
-                    details: this.details,
-                    start: start,
-                    end: end,
-                    color: this.color,
-                    timed: true,
-                    booked: false
-                });
+                await db
+                    .collection(this.user.uid)
+                    .add({
+                        name: this.name,
+                        details: this.details,
+                        start: start,
+                        end: end,
+                        color: this.color,
+                        timed: true,
+                        booked: false
+                    })
+                    .then(() => {
+                        this.$swal({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Event added successfully.',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    });
             } else {
-                alert('Name, Start and End date are required');
+                this.$swal({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Name, Start and End date are required',
+                    showConfirmButton: true,
+                    timer: 10000
+                });
             }
 
             this.getEvents();

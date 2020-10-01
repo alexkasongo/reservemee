@@ -30,15 +30,19 @@
                                 />
                             </div>
 
-                            <div v-if="errors" class="form-group text-muted">{{ errors.message }}</div>
+                            <div v-if="errors" class="form-group text-muted">
+                                {{ errors.message }}
+                            </div>
 
                             <div v-if="errors" class="form-group text-muted">
                                 Don't have an account?
-                                <a href="/signup">Signup</a>
+                                <nuxt-link to="/signup">Signup</nuxt-link>
                             </div>
                             <div class="form-group text-muted">
                                 Forgot your password?
-                                <a href="/password-reset">Reset password</a>
+                                <nuxt-link to="/password-reset"
+                                    >Reset password</nuxt-link
+                                >
                             </div>
 
                             <button class="btn btn-dark">Signin</button>
@@ -86,5 +90,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

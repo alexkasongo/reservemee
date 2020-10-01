@@ -36,6 +36,82 @@
 
         <br />
         <br />
+
+        <v-row>
+            <v-col cols="11" sm="5">
+                <v-menu
+                    ref="menu"
+                    v-model="menu"
+                    :close-on-content-click="false"
+                    :return-value.sync="startDate"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="290px"
+                >
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                            v-model="startDate"
+                            label="Picker in menu"
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                        ></v-text-field>
+                    </template>
+                    <v-date-picker v-model="startDate" no-title scrollable>
+                        <v-spacer></v-spacer>
+                        <v-btn text color="primary" @click="menu = false">
+                            Cancel
+                        </v-btn>
+                        <v-btn
+                            text
+                            color="primary"
+                            @click="$refs.menu.save(startDate)"
+                        >
+                            OK
+                        </v-btn>
+                    </v-date-picker>
+                </v-menu>
+            </v-col>
+            <v-spacer></v-spacer>
+            <v-col cols="11" sm="5">
+                <v-menu
+                    ref="menu"
+                    v-model="menu2"
+                    :close-on-content-click="false"
+                    :nudge-right="40"
+                    :return-value.sync="startTime"
+                    transition="scale-transition"
+                    offset-y
+                    max-width="290px"
+                    min-width="290px"
+                >
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                            v-model="startTime"
+                            label="Picker in menu"
+                            prepend-icon="mdi-clock-time-four-outline"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                        ></v-text-field>
+                    </template>
+                    <v-time-picker
+                        v-if="menu2"
+                        v-model="startTime"
+                        full-width
+                        format="24hr"
+                        @click:minute="$refs.menu.save(startTime)"
+                    ></v-time-picker>
+                </v-menu>
+            </v-col>
+            <v-spacer></v-spacer>
+        </v-row>
+        <h3>DATE</h3>
+        <p>{{ startDate }}</p>
+        <h3>TIME</h3>
+        <p>{{ startTime }}</p>
+        <p style="background-color: pink">{{ submittableDateTime }}</p>
     </v-app> -->
     <div>
         <Calendar />
@@ -52,12 +128,18 @@ export default {
     data() {
         return {
             startDate: new Date().toISOString().substr(0, 10),
-            startTime: new Date()
+            startTime: new Date(),
+            menu: false,
+            menu2: false,
+            modal: false
+
+            // startDate: new Date().toISOString().substr(0, 10),
+            // startTime: new Date()
         };
     },
     computed: {
-        count() {
-            return this.$store.state.count;
+        dateObj() {
+            console.log(`playground.vue - 140 - 🏝`, this);
         },
         submittableDateTime() {
             //REVIEW new date() returns date one day behind

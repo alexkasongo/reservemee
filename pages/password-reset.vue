@@ -15,10 +15,14 @@
                     placeholder="Confirm your email address"
                     v-model="emailConfirm"
                 />
-                <button @click="resetPassword" class="btn btn-info mt-2" type="button">Reset</button>
-                <p
-                    class="small text-muted mt-2"
-                >A password reset email will be sent to your email address. Follow the steps to reset your password.</p>
+                <small class="form-text text-muted">{{ errors.message }}</small>
+                <button
+                    @click="resetPassword"
+                    class="btn btn-info mt-2"
+                    type="button"
+                >
+                    Send me reset password instructions
+                </button>
             </div>
         </form>
     </div>
@@ -59,6 +63,14 @@ export default {
                             error
                         );
                         this.errors = error;
+                        this.$swal({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'error',
+                            title: `${error.message}`,
+                            showConfirmButton: true,
+                            timer: 60000
+                        });
                     });
             }
         }
@@ -66,5 +78,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

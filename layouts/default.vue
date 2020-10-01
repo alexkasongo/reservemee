@@ -121,7 +121,8 @@ export default {
                 .then(() => {
                     console.log('🏝 🚧');
                     this.user = '';
-                    localStorage.clear('email');
+                    window.localStorage.removeItem('vuex');
+                    window.localStorage.removeItem('email');
                 });
             this.$router.push('/');
             this.loading = false;
