@@ -46,7 +46,7 @@
                             </div>
 
                             <v-btn type="submit" color="secondary" elevation="2"
-                                >Signin</v-btn
+                                >Sign in</v-btn
                             >
                         </form>
                     </div>

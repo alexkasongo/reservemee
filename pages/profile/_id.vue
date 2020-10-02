@@ -351,15 +351,12 @@
                                     <input
                                         type="text"
                                         class="form-control"
-                                        id="fullName"
                                         aria-describedby="fullNameHelp"
                                         placeholder="Enter your fullname"
                                         v-model="profileInfo.name"
                                     />
                                     <!-- <pre>{{ user.name }}</pre> -->
-                                    <small
-                                        id="fullNameHelp"
-                                        class="form-text text-muted"
+                                    <small class="form-text text-muted"
                                         >Your name may appear around here where
                                         you are mentioned. You can change or
                                         remove it at any time.</small
@@ -369,7 +366,6 @@
                                     <label for="bio">Your Bio</label>
                                     <textarea
                                         class="form-control autosize"
-                                        id="bio"
                                         placeholder="Write something about you"
                                         style="
                                             overflow: hidden;
@@ -386,7 +382,6 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                     <input
                                         type="text"
                                         class="form-control"
-                                        id="location"
                                         placeholder="Enter your location"
                                         value="Bay Area, San Francisco, CA"
                                     />
@@ -422,7 +417,6 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                         class="form-control"
                                         name="imageUrl"
                                         label="Image URL"
-                                        id="image-url"
                                         v-model="form.storeLogo"
                                     />
                                 </div>
@@ -439,14 +433,11 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                     <input
                                         type="text"
                                         class="form-control"
-                                        id="fullName"
                                         aria-describedby="storeNameHelp"
                                         placeholder="Enter your store name"
                                         v-model="form.storeName"
                                     />
-                                    <small
-                                        id="fullNameHelp"
-                                        class="form-text text-muted"
+                                    <small class="form-text text-muted"
                                         >Your name may appear around here where
                                         you are mentioned. You can change or
                                         remove it at any time.</small
@@ -456,7 +447,6 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                     <label for="bio">Your Store Bio</label>
                                     <textarea
                                         class="form-control autosize"
-                                        id="bio"
                                         placeholder="Write a description of your store"
                                         v-model="form.storeBio"
                                         style="
@@ -476,7 +466,6 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                         class="form-control"
                                         name="imageUrl"
                                         label="Image URL"
-                                        id="image-url"
                                         v-model="form.storeBanner"
                                     />
                                 </div>
@@ -493,7 +482,6 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                     <input
                                         type="text"
                                         class="form-control"
-                                        id="location"
                                         placeholder="Enter your location"
                                         v-model="form.storeLocation"
                                     />

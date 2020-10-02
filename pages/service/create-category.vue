@@ -76,7 +76,7 @@
                         </li>
                     </ul>
                 </div>
-                <small id="fullNameHelp" class="form-text text-muted mt-2"
+                <small class="form-text text-muted mt-2"
                     >Note that deleting a category deletes all serivices in that
                     category.</small
                 >

@@ -1,15 +1,4 @@
 <template>
-    <!-- <v-app-bar dark color="pink">
-            <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-            <v-toolbar-title>My Services</v-toolbar-title>
-
-            <v-spacer></v-spacer>
-
-            <v-btn icon>
-                <v-icon>mdi-magnify</v-icon>
-            </v-btn>
-        </v-app-bar> -->
     <div class="mt-5">
         <v-row dense>
             <v-col v-for="(item, i) in items" :key="i" cols="12">

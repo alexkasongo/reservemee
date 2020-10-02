@@ -1,61 +1,123 @@
 <template>
-    <v-app class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <nuxt-link class="navbar-brand" to="/">Bookme</nuxt-link>
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            >
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <v-app>
+        <v-card
+            class="rounded-0 mx-auto overflow-hidden"
+            height="100%"
+            width="100%"
+        >
+            <v-app-bar color="teal darken-1" dark fixed>
+                <v-app-bar-nav-icon
+                    @click.stop="drawer = !drawer"
+                ></v-app-bar-nav-icon>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"></li>
-                    <li class="nav-item active">
-                        <nuxt-link v-if="user" to="/dashboard" class="nav-link"
-                            >Dashboard</nuxt-link
-                        >
-                    </li>
-                    <li class="nav-item active">
-                        <a v-if="user" @click="signout" class="nav-link"
-                            >Sign out</a
-                        >
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <a
-                        v-if="user"
-                        @click="viewProfile(user.uid)"
-                        class="navbar-brand"
-                        >Profile</a
+                <v-toolbar-title @click="goHome(user)">
+                    Bookme {{ this.$route.params.id }}
+                </v-toolbar-title>
+
+                <v-spacer></v-spacer>
+
+                <v-btn v-if="user" icon>
+                    <v-icon>mdi-magnify</v-icon>
+                </v-btn>
+
+                <v-btn v-if="user" icon>
+                    <v-icon>mdi-filter</v-icon>
+                </v-btn>
+
+                <v-menu v-if="user" bottom left>
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn dark icon v-bind="attrs" v-on="on">
+                            <v-icon>mdi-dots-vertical</v-icon>
+                        </v-btn>
+                    </template>
+
+                    <v-list width="250px">
+                        <v-list-item @click="viewProfile(user.uid)" link>
+                            <v-list-item-icon>
+                                <v-icon>mdi-cog-outline </v-icon>
+                            </v-list-item-icon>
+
+                            <v-list-item-content>
+                                <v-list-item-title>Settings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
+                <!-- if router name is not Sign in then show, else do not show -->
+                <div v-if="this.$route.name !== 'signin'">
+                    <v-btn v-if="!user" @click="signin">Sign In</v-btn>
+                </div>
+            </v-app-bar>
+
+            <v-navigation-drawer v-model="drawer" absolute temporary>
+                <v-list nav dense>
+                    <v-list-item-group
+                        v-model="group"
+                        active-class="deep-purple--text text--accent-4"
                     >
-                </form>
-                <form class="form-inline my-2 my-lg-0">
-                    <!-- <div v-if="loading"> -->
-                    <nuxt-link
-                        v-if="!user"
-                        to="/signup"
-                        class="nav-link text-dark"
-                        >Sign Up</nuxt-link
-                    >
-                    <nuxt-link
-                        v-if="!user"
-                        class="btn btn-dark"
-                        style="background-color: transparent; color: black"
-                        to="/signin"
-                        >Sign In</nuxt-link
-                    >
-                    <!-- </div> -->
-                </form>
+                        <div v-if="user">
+                            <v-list-item @click="goToDashboard">
+                                <v-list-item-icon>
+                                    <v-icon>mdi-view-dashboard-outline</v-icon>
+                                </v-list-item-icon>
+
+                                <v-list-item-content>
+                                    <v-list-item-title
+                                        >Dashboard</v-list-item-title
+                                    >
+                                </v-list-item-content>
+                            </v-list-item>
+                        </div>
+
+                        <div v-if="!user">
+                            <v-list-item @click="signin">
+                                <v-list-item-icon>
+                                    <v-icon>mdi-login</v-icon>
+                                </v-list-item-icon>
+
+                                <v-list-item-title
+                                    ><a>Sign In</a></v-list-item-title
+                                >
+                            </v-list-item>
+                        </div>
+
+                        <div v-if="!user">
+                            <v-list-item @click="signup">
+                                <v-list-item-icon>
+                                    <v-icon>mdi-account-plus-outline</v-icon>
+                                </v-list-item-icon>
+
+                                <v-list-item-title
+                                    ><a>Sign Up</a></v-list-item-title
+                                >
+                            </v-list-item>
+                        </div>
+
+                        <div v-if="user">
+                            <v-list-item @click="signout">
+                                <v-list-item-icon>
+                                    <v-icon>mdi-logout</v-icon>
+                                </v-list-item-icon>
+
+                                <v-list-item-title
+                                    ><a>Sign out</a></v-list-item-title
+                                >
+                            </v-list-item>
+                        </div>
+                    </v-list-item-group>
+                </v-list>
+
+                <template v-if="user" v-slot:append>
+                    <div @click="signout" class="pa-2">
+                        <v-btn block> Logout </v-btn>
+                    </div>
+                </template>
+            </v-navigation-drawer>
+
+            <div class="container margin">
+                <Nuxt />
             </div>
-        </nav>
-        <Nuxt />
+        </v-card>
     </v-app>
 </template>
 
@@ -90,7 +152,15 @@ export default {
     data() {
         return {
             user: '',
-            loading: false
+            loading: false,
+            drawer: false,
+            group: null,
+            items: [
+                { title: 'Click Me' },
+                { title: 'Click Me' },
+                { title: 'Click Me' },
+                { title: 'Click Me 2' }
+            ]
         };
     },
     computed: {
@@ -102,6 +172,10 @@ export default {
         $route() {
             $('.navbar-collapse').collapse('hide');
             this.loadServices(this.userId);
+            // great spot for debuggin
+        },
+        group() {
+            this.drawer = false;
         }
     },
     methods: {
@@ -126,6 +200,22 @@ export default {
                 });
             this.$router.push('/');
             this.loading = false;
+        },
+        goHome(user) {
+            if (user) {
+                this.$router.push('/dashboard');
+            } else {
+                this.$router.push('/');
+            }
+        },
+        signin() {
+            this.$router.push('/signin');
+        },
+        signup() {
+            this.$router.push('/signup');
+        },
+        goToDashboard() {
+            this.$router.push('/dashboard');
         },
         viewProfile(id) {
             this.$router.push({
@@ -164,61 +254,13 @@ export default {
             } else {
                 // No user is signed in.
             }
-
-            // if (user !== null) {
-
-            // }
         });
     }
 };
 </script>
 
 <style>
-html {
-    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-        'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    word-spacing: 1px;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    box-sizing: border-box;
-}
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-}
-
-.button--green {
-    display: inline-block;
-    border-radius: 4px;
-    border: 1px solid #3b8070;
-    color: #3b8070;
-    text-decoration: none;
-    padding: 10px 30px;
-}
-
-.button--green:hover {
-    color: #fff;
-    background-color: #3b8070;
-}
-
-.button--grey {
-    display: inline-block;
-    border-radius: 4px;
-    border: 1px solid #35495e;
-    color: #35495e;
-    text-decoration: none;
-    padding: 10px 30px;
-    margin-left: 15px;
-}
-
-.button--grey:hover {
-    color: #fff;
-    background-color: #35495e;
+.margin {
+    margin: 64px auto 0 auto;
 }
 </style>
