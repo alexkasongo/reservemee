@@ -17,7 +17,7 @@
                             <h4 class="mt-1 mb-1 font-18">
                                 {{ user.displayName }}
                             </h4>
-                            <p class="font-13 text-light">Hair Braider</p>
+                            <p class="font-13 text-light">Admin</p>
                             <p class="text-light mb-0">
                                 Lynnwood, United States
                             </p>

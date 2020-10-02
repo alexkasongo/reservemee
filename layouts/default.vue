@@ -5,6 +5,7 @@
             height="100%"
             width="100%"
         >
+            <!-- NAVBAR -->
             <v-app-bar color="teal darken-1" dark fixed>
                 <v-app-bar-nav-icon
                     @click.stop="drawer = !drawer"
@@ -21,10 +22,16 @@
                 </v-btn>
 
                 <v-btn v-if="user" icon>
-                    <v-icon>mdi-filter</v-icon>
+                    <v-icon>mdi-bell</v-icon>
                 </v-btn>
 
-                <v-menu v-if="user" bottom left>
+                <v-menu
+                    v-if="user"
+                    bottom
+                    left
+                    transition="scale-transition"
+                    origin="top right 0"
+                >
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn dark icon v-bind="attrs" v-on="on">
                             <v-icon>mdi-dots-vertical</v-icon>
@@ -48,16 +55,22 @@
                     <v-btn v-if="!user" @click="signin">Sign In</v-btn>
                 </div>
             </v-app-bar>
+            <!-- NAVBAR END -->
 
             <!-- DRAWER -->
-            <v-navigation-drawer v-model="drawer" absolute temporary>
-                <v-list nav dense>
+            <v-navigation-drawer
+                v-model="drawer"
+                absolute
+                temporary
+                height="100vh"
+            >
+                <v-list nav>
                     <v-list-item-group
                         v-model="group"
                         active-class="teal--text text--accent-4"
                     >
                         <div v-if="user">
-                            <v-list-item @click="goToDashboard">
+                            <v-list-item @click="goToDashboard" link>
                                 <v-list-item-icon>
                                     <v-icon>mdi-view-dashboard-outline</v-icon>
                                 </v-list-item-icon>

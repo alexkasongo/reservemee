@@ -3,23 +3,37 @@
         <div v-if="!user" class="mt-2">
             <p>loading...</p>
         </div>
-        <!-- Breadcrumb -->
-        <!-- <nav aria-label="breadcrumb" class="main-breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="index.html">Home</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="javascript:void(0)">User</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">Profile Settings</li>
-            </ol>
-        </nav>-->
-        <!-- /Breadcrumb -->
 
         <div v-if="user" class="row gutters-sm">
             <!-- TITLES -->
             <div class="col-md-4 d-none d-md-block">
+                <!-- <v-card class="mx-auto" max-width="400">
+                    <v-list>
+                        <v-list-item-group
+                            v-model="model"
+                            mandatory
+                            color="indigo"
+                        >
+                            <v-list-item v-for="(item, i) in items" :key="i">
+                                <a
+                                    style="display: flex; text-decoration: none"
+                                    :href="item.href"
+                                    data-toggle="tab"
+                                >
+                                    <v-list-item-icon>
+                                        <v-icon v-text="item.icon"></v-icon>
+                                    </v-list-item-icon>
+
+                                    <v-list-item-content>
+                                        <v-list-item-title
+                                            v-text="item.text"
+                                        ></v-list-item-title>
+                                    </v-list-item-content>
+                                </a>
+                            </v-list-item>
+                        </v-list-item-group>
+                    </v-list>
+                </v-card> -->
                 <div class="card">
                     <div class="card-body">
                         <nav class="nav flex-column nav-pills nav-gap-y-1">
@@ -347,6 +361,24 @@
                             <hr />
                             <form @submit.prevent="onUpdProfileInfo">
                                 <div class="form-group">
+                                    <label for="exampleFormControlFile1"
+                                        >Picture</label
+                                    >
+                                    <input
+                                        class="form-control"
+                                        name="imageUrl"
+                                        label="Image URL"
+                                        v-model="profileInfo.photoUrl"
+                                    />
+                                </div>
+                                <div
+                                    class="form-group imgPreview"
+                                    v-bind:style="{
+                                        'background-image':
+                                            'url(' + profileInfo.photoUrl + ')'
+                                    }"
+                                ></div>
+                                <div class="form-group">
                                     <label for="fullName">Full Name</label>
                                     <input
                                         type="text"
@@ -355,36 +387,11 @@
                                         placeholder="Enter your fullname"
                                         v-model="profileInfo.name"
                                     />
-                                    <!-- <pre>{{ user.name }}</pre> -->
                                     <small class="form-text text-muted"
                                         >Your name may appear around here where
                                         you are mentioned. You can change or
                                         remove it at any time.</small
                                     >
-                                </div>
-                                <div class="form-group">
-                                    <label for="bio">Your Bio</label>
-                                    <textarea
-                                        class="form-control autosize"
-                                        placeholder="Write something about you"
-                                        style="
-                                            overflow: hidden;
-                                            overflow-wrap: break-word;
-                                            resize: none;
-                                            height: 62px;
-                                        "
-                                    >
-Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae earum consectetur minus dolor amet iusto? Dolores cupiditate nam distinctio fugiat consequuntur a quod laborum labore magni sapiente. Culpa, recusandae.</textarea
-                                    >
-                                </div>
-                                <div class="form-group">
-                                    <label for="location">Location</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Enter your location"
-                                        value="Bay Area, San Francisco, CA"
-                                    />
                                 </div>
                                 <div class="form-group small text-muted">
                                     All of the fields on this page are optional
@@ -719,7 +726,11 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                     <div class="small text-muted mb-3">
                                         You have not added a payment method
                                     </div>
-                                    <v-btn color="primary" type="button">
+                                    <v-btn
+                                        dark
+                                        class="cyan darken-1"
+                                        type="button"
+                                    >
                                         Add Payment Method
                                     </v-btn>
                                 </div>
@@ -798,12 +809,43 @@ export default {
                 storeBio: '',
                 storeBanner: '', // https://via.placeholder.com/500
                 storeLocation: ''
-            }
+            },
+            items: [
+                {
+                    icon: 'mdi-wifi',
+                    text: 'Profile Information',
+                    href: '#profile'
+                },
+                {
+                    icon: 'mdi-bluetooth',
+                    text: 'Store Settings',
+                    href: '#store'
+                },
+                {
+                    icon: 'mdi-chart-donut',
+                    text: 'Security',
+                    href: '#security'
+                },
+                {
+                    icon: 'mdi-chart-donut',
+                    text: 'Notification',
+                    href: '#notification'
+                },
+                {
+                    icon: 'mdi-chart-donut',
+                    text: 'Billing',
+                    href: '#billing'
+                },
+                {
+                    icon: 'mdi-chart-donut',
+                    text: 'Account Settings',
+                    href: '#account'
+                }
+            ]
         };
     },
     computed: {
         ...mapGetters({
-            // user: 'user',
             categories: 'categories',
             storeProfile: 'storeProfile',
             storeAlert: 'alert',
@@ -960,6 +1002,7 @@ export default {
             if (user !== null) {
                 this.user = user;
                 this.profileInfo.name = user.displayName;
+                this.profileInfo.photoUrl = user.photoURL;
             }
         });
         /*
