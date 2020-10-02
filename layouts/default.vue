@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <v-app class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <nuxt-link class="navbar-brand" to="/">Bookme</nuxt-link>
             <button
@@ -56,7 +56,7 @@
             </div>
         </nav>
         <Nuxt />
-    </div>
+    </v-app>
 </template>
 
 <script>

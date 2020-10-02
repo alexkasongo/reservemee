@@ -20,9 +20,7 @@
                     hours for your customers.
                 </p>
 
-                <nuxt-link
-                    to="/playground/playground"
-                    class="btn btn-dark btn-block"
+                <nuxt-link to="/calendar" class="btn btn-dark btn-block"
                     >View Calendar</nuxt-link
                 >
             </div>

@@ -1,5 +1,5 @@
 <template>
-    <v-app id="app" data-app>
+    <div>
         <div v-if="loading" class="col-md-6 mt-2">
             <p>loading...</p>
         </div>
@@ -264,7 +264,7 @@
                 </div>
             </footer>
         </div>
-    </v-app>
+    </div>
 </template>
 
 <script>

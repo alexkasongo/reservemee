@@ -1,5 +1,5 @@
 <template>
-    <v-app id="app" data-app>
+    <div>
         <v-row class="fill-height">
             <v-col>
                 <v-sheet height="64">
@@ -596,7 +596,7 @@
                 <!-- Pop up end -->
             </v-col>
         </v-row>
-    </v-app>
+    </div>
 </template>
 
 <script>

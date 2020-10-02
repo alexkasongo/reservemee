@@ -1,18 +1,14 @@
 <template>
     <div>
-        <!-- <Calendar /> -->
-        <HorizontalCard />
+        <Calendar />
     </div>
 </template>
 
 <script>
 import Calendar from '@/components/Calendar.vue';
-import HorizontalCard from '@/components/client/HorizontalCard';
-
 export default {
     components: {
-        Calendar,
-        HorizontalCard
+        Calendar
     }
 };
 </script>

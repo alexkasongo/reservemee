@@ -1,5 +1,5 @@
 <template>
-    <v-app id="app" data-app>
+    <div>
         <form>
             <div class="form-group mt-4">
                 <label class="d-block">Forgot your password?</label>
@@ -23,7 +23,7 @@
                 </v-btn>
             </div>
         </form>
-    </v-app>
+    </div>
 </template>
 
 <script>

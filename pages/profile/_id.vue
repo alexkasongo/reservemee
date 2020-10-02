@@ -1,5 +1,5 @@
 <template>
-    <v-app class="mt-3">
+    <div class="mt-3">
         <div v-if="!user" class="mt-2">
             <p>loading...</p>
         </div>
@@ -777,7 +777,7 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                 </div>
             </div>
         </div>
-    </v-app>
+    </div>
 </template>
 
 <script>

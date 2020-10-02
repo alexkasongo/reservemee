@@ -8,10 +8,9 @@
             <div class="form-group">
                 <label for="exampleInputEmail1">Select Category</label>
                 <select class="form-control" required v-model="category">
-                    <option
-                        v-for="category in categories"
-                        :key="category.id"
-                    >{{ category.name | capitalize }}</option>
+                    <option v-for="category in categories" :key="category.id">
+                        {{ category.name | capitalize }}
+                    </option>
                 </select>
             </div>
             <div class="form-group">
@@ -63,7 +62,9 @@
                     v-model="price"
                 />
             </div>
-            <button type="submit" :disabled="loading" class="btn btn-primary mt-2">Create</button>
+            <v-btn color="secondary" type="submit" :disabled="loading"
+                >Create</v-btn
+            >
         </form>
     </div>
 </template>
