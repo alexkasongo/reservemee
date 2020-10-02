@@ -393,7 +393,7 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                     to share this data wherever your user
                                     profile appears.
                                 </div>
-                                <v-btn type="submit" color="secondary">
+                                <v-btn type="submit" class="teal darken-1" dark>
                                     Update Profile
                                 </v-btn>
                                 <button type="reset" class="btn btn-light">
@@ -493,7 +493,7 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos beatae ear
                                     to share this data wherever your user
                                     profile appears.
                                 </div>
-                                <v-btn type="submit" color="secondary">
+                                <v-btn type="submit" class="teal darken-1" dark>
                                     Save Settings
                                 </v-btn>
                                 <button type="reset" class="btn btn-light">

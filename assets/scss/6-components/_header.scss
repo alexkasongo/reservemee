@@ -10,7 +10,7 @@
     border-radius: 5px;
 }
 .bg-custom {
-    background-color: #82b5a5 !important;
+    background-color: #00897b !important;
 }
 .profile-user-box {
     position: relative;
@@ -23,6 +23,19 @@
     margin-bottom: 30px;
     background-color: #fff;
 }
+.inbox-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.inbox-item__left {
+    display: flex;
+}
+.inbox-item__right {
+    width: 20%;
+}
+
 .inbox-widget .inbox-item img {
     width: 40px;
 }
@@ -100,7 +113,7 @@
 }
 
 .ribbon-box .ribbon-primary {
-    background: #82b5a5;
+    background: #00897b;
 }
 
 .ribbon-box .ribbon {

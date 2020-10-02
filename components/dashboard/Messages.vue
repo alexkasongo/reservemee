@@ -3,140 +3,32 @@
     <div class="ribbon-box">
         <div class="ribbon ribbon-primary">Messages</div>
         <div class="clearfix"></div>
-        <div class="inbox-widget">
-            <a href="#">
-                <div class="inbox-item">
+        <div
+            class="inbox-widget"
+            v-for="customer in customerInfo"
+            :key="customer.id"
+        >
+            <div class="inbox-item">
+                <div class="inbox-item__left">
                     <div class="inbox-item-img">
                         <img
-                            src="https://bootdey.com/img/Content/avatar/avatar2.png"
+                            src="https://via.placeholder.com/150"
                             class="rounded-circle"
                             alt
                         />
                     </div>
-                    <p class="inbox-item-author">Tomaslau</p>
-                    <p class="inbox-item-text">I've finished it! See you so...</p>
-                    <p class="inbox-item-date">
-                        <button
-                            type="button"
-                            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
-                        >Reply</button>
-                    </p>
-                </div>
-            </a>
-            <a href="#">
-                <div class="inbox-item">
-                    <div class="inbox-item-img">
-                        <img
-                            src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                            class="rounded-circle"
-                            alt
-                        />
+                    <div>
+                        <p class="inbox-item-author">{{ customer.name }}</p>
+                        <p class="inbox-item-text">
+                            {{ customer.message }}
+                        </p>
                     </div>
-                    <p class="inbox-item-author">Stillnotdavid</p>
-                    <p class="inbox-item-text">This theme is awesome!</p>
-                    <p class="inbox-item-date">
-                        <button
-                            type="button"
-                            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
-                        >Reply</button>
-                    </p>
                 </div>
-            </a>
-            <a href="#">
-                <div class="inbox-item">
-                    <div class="inbox-item-img">
-                        <img
-                            src="https://bootdey.com/img/Content/avatar/avatar4.png"
-                            class="rounded-circle"
-                            alt
-                        />
-                    </div>
-                    <p class="inbox-item-author">Kurafire</p>
-                    <p class="inbox-item-text">Nice to meet you</p>
-                    <p class="inbox-item-date">
-                        <button
-                            type="button"
-                            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
-                        >Reply</button>
-                    </p>
+
+                <div class="inbox-item__left">
+                    <v-btn class="teal darken-1" dark> Reply </v-btn>
                 </div>
-            </a>
-            <a href="#">
-                <div class="inbox-item">
-                    <div class="inbox-item-img">
-                        <img
-                            src="https://bootdey.com/img/Content/avatar/avatar5.png"
-                            class="rounded-circle"
-                            alt
-                        />
-                    </div>
-                    <p class="inbox-item-author">Shahedk</p>
-                    <p class="inbox-item-text">Hey! there I'm available...</p>
-                    <p class="inbox-item-date">
-                        <button
-                            type="button"
-                            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
-                        >Reply</button>
-                    </p>
-                </div>
-            </a>
-            <a href="#">
-                <div class="inbox-item">
-                    <div class="inbox-item-img">
-                        <img
-                            src="https://bootdey.com/img/Content/avatar/avatar6.png"
-                            class="rounded-circle"
-                            alt
-                        />
-                    </div>
-                    <p class="inbox-item-author">Adhamdannaway</p>
-                    <p class="inbox-item-text">This theme is awesome!</p>
-                    <p class="inbox-item-date">
-                        <button
-                            type="button"
-                            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
-                        >Reply</button>
-                    </p>
-                </div>
-            </a>
-            <a href="#">
-                <div class="inbox-item">
-                    <div class="inbox-item-img">
-                        <img
-                            src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                            class="rounded-circle"
-                            alt
-                        />
-                    </div>
-                    <p class="inbox-item-author">Tomaslau</p>
-                    <p class="inbox-item-text">I've finished it! See you so...</p>
-                    <p class="inbox-item-date">
-                        <button
-                            type="button"
-                            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
-                        >Reply</button>
-                    </p>
-                </div>
-            </a>
-            <a href="#">
-                <div class="inbox-item">
-                    <div class="inbox-item-img">
-                        <img
-                            src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                            class="rounded-circle"
-                            alt
-                        />
-                    </div>
-                    <p class="inbox-item-author">Stillnotdavid</p>
-                    <p class="inbox-item-text">This theme is awesome!</p>
-                    <p class="inbox-item-date">
-                        <button
-                            type="button"
-                            class="btn btn-icon btn-sm waves-effect waves-light btn-success"
-                        >Reply</button>
-                    </p>
-                </div>
-            </a>
+            </div>
         </div>
     </div>
     <!-- Messages -->
@@ -147,6 +39,40 @@ import { mapGetters } from 'vuex';
 
 export default {
     name: 'Messages',
+    data: () => ({
+        customerInfo: [
+            {
+                id: '1',
+                name: 'Aleko',
+                message: 'Thank you so much for the...'
+            },
+            {
+                id: 2,
+                name: 'Kay Love',
+                message: 'Amazing, I love you...'
+            },
+            {
+                id: 3,
+                name: 'Tine Wangu',
+                message: 'Well done, you have out done...'
+            },
+            {
+                id: 4,
+                name: 'Aleko',
+                message: 'I did not receive my order...'
+            },
+            {
+                id: 5,
+                name: 'Andrea',
+                message: 'I would like to make multiple...'
+            },
+            {
+                id: 6,
+                name: 'Michelle',
+                message: 'I will pay anything for your...'
+            }
+        ]
+    }),
     computed: {
         ...mapGetters({
             user: 'user'
@@ -155,5 +81,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

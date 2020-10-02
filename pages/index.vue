@@ -335,7 +335,7 @@ export default {
         height: 150px;
         width: 150px;
         border-radius: 50%;
-        background-color: #82b5a5;
+        background-color: #00897b;
     }
 }
 
@@ -344,7 +344,7 @@ export default {
 */
 .masthead {
     position: relative;
-    background-color: #82b5a5;
+    background-color: #00897b;
     @include background;
     background-position: center;
     padding-top: 8rem;

@@ -21,36 +21,55 @@
                                             Sunny Apartment
                                             <span
                                                 class="badge badge-primary mx-3"
-                                            >Pending</span>
-                                            <span class="badge badge-danger">Unpaid</span>
+                                                >Pending</span
+                                            >
+                                            <span class="badge badge-danger"
+                                                >Unpaid</span
+                                            >
                                         </h5>
                                         <div class="mb-3">
                                             <span
                                                 class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0"
-                                            >Booking Date:</span>
-                                            <span class="bg-light-blue">02.03.2020 - 04.03.2020</span>
+                                                >Booking Date:</span
+                                            >
+                                            <span class="bg-light-blue"
+                                                >02.03.2020 - 04.03.2020</span
+                                            >
                                         </div>
                                         <div class="mb-3">
                                             <span
                                                 class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0"
-                                            >Booking Details:</span>
-                                            <span class="bg-light-blue">2 Adults</span>
+                                                >Booking Details:</span
+                                            >
+                                            <span class="bg-light-blue"
+                                                >2 Adults</span
+                                            >
                                         </div>
                                         <div class="mb-3">
                                             <span
                                                 class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0"
-                                            >Price:</span>
-                                            <span class="bg-light-blue">$147</span>
+                                                >Price:</span
+                                            >
+                                            <span class="bg-light-blue"
+                                                >$147</span
+                                            >
                                         </div>
                                         <div class="mb-5">
                                             <span
                                                 class="mr-2 d-block d-sm-inline-block mb-1 mb-sm-0"
-                                            >Clients:</span>
-                                            <span class="border-right pr-2 mr-2">John Inoue</span>
-                                            <span class="border-right pr-2 mr-2">john@example.com</span>
+                                                >Clients:</span
+                                            >
+                                            <span class="border-right pr-2 mr-2"
+                                                >John Inoue</span
+                                            >
+                                            <span class="border-right pr-2 mr-2"
+                                                >john@example.com</span
+                                            >
                                             <span>123-563-789</span>
                                         </div>
-                                        <a href="#" class="btn-gray">Send Message</a>
+                                        <a href="#" class="btn-gray"
+                                            >Send Message</a
+                                        >
                                     </div>
                                 </div>
                                 <div class="buttons-to-right">
@@ -72,30 +91,44 @@
                                             Burger House
                                             <span
                                                 class="badge badge-success ml-3"
-                                            >Approved</span>
+                                                >Approved</span
+                                            >
                                         </h5>
                                         <div class="mb-3">
                                             <span
                                                 class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0"
-                                            >Booking Date:</span>
-                                            <span class="bg-light-green">06.03.2020 - 07.03.2020</span>
+                                                >Booking Date:</span
+                                            >
+                                            <span class="bg-light-green"
+                                                >06.03.2020 - 07.03.2020</span
+                                            >
                                         </div>
                                         <div class="mb-3">
                                             <span
                                                 class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0"
-                                            >Booking Details:</span>
-                                            <span class="bg-light-green">2 Adults, 2 Children</span>
+                                                >Booking Details:</span
+                                            >
+                                            <span class="bg-light-green"
+                                                >2 Adults, 2 Children</span
+                                            >
                                         </div>
 
                                         <div class="mb-5">
                                             <span
                                                 class="mr-2 d-block d-sm-inline-block mb-1 mb-sm-0"
-                                            >Clients:</span>
-                                            <span class="border-right pr-2 mr-2">Jaime Cressey</span>
-                                            <span class="border-right pr-2 mr-2">jaime@example.com</span>
+                                                >Clients:</span
+                                            >
+                                            <span class="border-right pr-2 mr-2"
+                                                >Jaime Cressey</span
+                                            >
+                                            <span class="border-right pr-2 mr-2"
+                                                >jaime@example.com</span
+                                            >
                                             <span>355-456-789</span>
                                         </div>
-                                        <a href="#" class="btn-gray">Send Message</a>
+                                        <a href="#" class="btn-gray"
+                                            >Send Message</a
+                                        >
                                     </div>
                                 </div>
                                 <div class="buttons-to-right">
@@ -116,26 +149,38 @@
                                             Modern Hotel
                                             <span
                                                 class="badge badge-danger ml-3"
-                                            >Cancled</span>
+                                                >Cancled</span
+                                            >
                                         </h5>
                                         <div class="mb-3">
                                             <span
                                                 class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0"
-                                            >Booking Date:</span>
-                                            <span class="btn-gray">20.03.2020 - 24.03.2020</span>
+                                                >Booking Date:</span
+                                            >
+                                            <span class="btn-gray"
+                                                >20.03.2020 - 24.03.2020</span
+                                            >
                                         </div>
                                         <div class="mb-3">
                                             <span
                                                 class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0"
-                                            >Booking Details:</span>
-                                            <span class="btn-gray">2 Adults</span>
+                                                >Booking Details:</span
+                                            >
+                                            <span class="btn-gray"
+                                                >2 Adults</span
+                                            >
                                         </div>
                                         <div>
                                             <span
                                                 class="mr-2 d-block d-sm-inline-block mb-1 mb-sm-0"
-                                            >Clients:</span>
-                                            <span class="border-right pr-2 mr-2">Tesha Stovall</span>
-                                            <span class="border-right pr-2 mr-2">tesha@example.com</span>
+                                                >Clients:</span
+                                            >
+                                            <span class="border-right pr-2 mr-2"
+                                                >Tesha Stovall</span
+                                            >
+                                            <span class="border-right pr-2 mr-2"
+                                                >tesha@example.com</span
+                                            >
                                             <span>123-456-684</span>
                                         </div>
                                     </div>
@@ -171,7 +216,7 @@ body {
     background-color: rgba(40, 167, 69, 0.2) !important;
     padding: 7px 18px;
     border-radius: 4px;
-    color: #28a745 !important;
+    color: #00897b !important;
 }
 
 .buttons-to-right {

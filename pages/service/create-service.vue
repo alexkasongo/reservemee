@@ -62,7 +62,7 @@
                     v-model="price"
                 />
             </div>
-            <v-btn color="secondary" type="submit" :disabled="loading"
+            <v-btn class="teal darken-1" dark type="submit" :disabled="loading"
                 >Create</v-btn
             >
         </form>

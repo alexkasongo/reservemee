@@ -45,7 +45,11 @@
                                 >
                             </div>
 
-                            <v-btn type="submit" color="secondary" elevation="2"
+                            <v-btn
+                                type="submit"
+                                class="teal darken-1"
+                                dark
+                                elevation="2"
                                 >Sign in</v-btn
                             >
                         </form>

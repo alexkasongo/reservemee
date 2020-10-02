@@ -59,7 +59,7 @@
                                 </div>
                             </div>
 
-                            <v-btn type="submit" color="secondary"
+                            <v-btn type="submit" class="teal darken-1" dark
                                 >Submit</v-btn
                             >
                         </form>

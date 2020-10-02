@@ -6,8 +6,8 @@
                 <p class="card-text">
                     View all bookings. Confirm, edit and update.
                 </p>
-                <nuxt-link to="/service/bookings" class="btn btn-dark btn-block"
-                    >View Bookings</nuxt-link
+                <v-btn @click="goToBookings" block color="#00897B" dark
+                    >View Bookings</v-btn
                 >
             </div>
         </div>
@@ -20,8 +20,8 @@
                     hours for your customers.
                 </p>
 
-                <nuxt-link to="/calendar" class="btn btn-dark btn-block"
-                    >View Calendar</nuxt-link
+                <v-btn @click="goToCalendar" block color="#00897B" dark
+                    >View Calendar</v-btn
                 >
             </div>
         </div>
@@ -30,7 +30,15 @@
 
 <script>
 export default {
-    name: 'Bookings'
+    name: 'Bookings',
+    methods: {
+        goToBookings() {
+            this.$router.push('/service/bookings');
+        },
+        goToCalendar() {
+            this.$router.push('/calendar');
+        }
+    }
 };
 </script>
 

@@ -8,7 +8,7 @@
                     <div class="col-sm-6">
                         <span class="float-left mr-3">
                             <img
-                                src="https://robohash.org/EWW.png?set=set5&size=150x150"
+                                src="https://via.placeholder.com/150"
                                 alt
                                 class="thumb-lg rounded-circle"
                             />
@@ -23,13 +23,6 @@
                             </p>
                         </div>
                     </div>
-                    <!-- <div class="col-sm-6">
-                        <div class="text-right">
-                            <button type="button" class="btn btn-light waves-effect">
-                                <i class="mdi mdi-account-settings-variant mr-1"></i> Edit Profile
-                            </button>
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <!--/ meta -->

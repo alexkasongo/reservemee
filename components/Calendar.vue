@@ -570,7 +570,8 @@
                             <v-card-actions>
                                 <v-btn
                                     text
-                                    color="secondary"
+                                    class="teal darken-1"
+                                    dark
                                     @click="selectedOpen = false"
                                 >
                                     Close
