@@ -6,23 +6,30 @@
             width="100%"
         >
             <!-- NAVBAR -->
-            <v-app-bar color="teal darken-1" dark fixed>
+            <v-app-bar color="white" dark fixed flat>
                 <v-app-bar-nav-icon
+                    color="teal darken-1"
                     @click.stop="drawer = !drawer"
                 ></v-app-bar-nav-icon>
 
-                <v-toolbar-title @click="goHome(user)">
+                <v-btn
+                    color="teal darken-1"
+                    @click="goHome(user)"
+                    elevation="0"
+                    text
+                    x-large
+                >
                     Bookme
-                </v-toolbar-title>
+                </v-btn>
 
                 <v-spacer></v-spacer>
 
                 <v-btn v-if="user" icon>
-                    <v-icon>mdi-magnify</v-icon>
+                    <v-icon color="teal darken-1">mdi-magnify</v-icon>
                 </v-btn>
 
                 <v-btn v-if="user" icon>
-                    <v-icon>mdi-bell</v-icon>
+                    <v-icon color="teal darken-1">mdi-bell</v-icon>
                 </v-btn>
 
                 <v-menu
@@ -34,7 +41,9 @@
                 >
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn dark icon v-bind="attrs" v-on="on">
-                            <v-icon>mdi-dots-vertical</v-icon>
+                            <v-icon color="teal darken-1"
+                                >mdi-dots-vertical</v-icon
+                            >
                         </v-btn>
                     </template>
 
@@ -169,13 +178,7 @@ export default {
             user: '',
             loading: false,
             drawer: false,
-            group: null,
-            items: [
-                { title: 'Click Me' },
-                { title: 'Click Me' },
-                { title: 'Click Me' },
-                { title: 'Click Me 2' }
-            ]
+            group: null
         };
     },
     computed: {

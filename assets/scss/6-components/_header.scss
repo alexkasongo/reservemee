@@ -10,7 +10,17 @@
     border-radius: 5px;
 }
 .bg-custom {
-    background-color: #00897b !important;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 150px;
+    position: relative;
+}
+.bg-center {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
 }
 .profile-user-box {
     position: relative;
@@ -20,7 +30,6 @@
 .card-box {
     padding: 20px;
     border-radius: 3px;
-    margin-bottom: 30px;
     background-color: #fff;
 }
 .inbox-item {

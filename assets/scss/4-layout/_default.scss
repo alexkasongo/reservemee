@@ -1,5 +1,9 @@
+.v-application a {
+    color: #00897b !important;
+}
+
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-    color: #fff;
+    color: #fff !important;
     background-color: #00897b !important;
 }
