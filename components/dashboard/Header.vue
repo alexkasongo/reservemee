@@ -1,5 +1,6 @@
 <template>
     <!-- Header -->
+    <!-- FIXME only display banner when it is fully loaded -->
     <div class="row">
         <div v-if="storeProfile !== null" class="col-sm-12">
             <!-- meta -->

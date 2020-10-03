@@ -79,10 +79,6 @@
             </ul>
         </div>
         <div v-else>
-            <!-- <v-btn class="text-lowercase" elevation="0" color="transparent"
-                >settings</v-btn
-            > -->
-
             <p>
                 Please update your store information in
                 <a @click="goToSettings">settings</a>
