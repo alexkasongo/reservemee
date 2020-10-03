@@ -426,6 +426,32 @@
                                     >
                                 </div>
                                 <div class="form-group">
+                                    <label for="fullName">Store Email</label>
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        aria-describedby="storeEmailHelp"
+                                        placeholder="Enter your store email"
+                                        v-model="form.storeEmail"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="fullName"
+                                        >Store phone number</label
+                                    >
+                                    <input
+                                        type="tel"
+                                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                        class="form-control"
+                                        aria-describedby="storeEmailHelp"
+                                        placeholder="Enter your store phone number"
+                                        v-model="form.storePhoneNumber"
+                                    />
+                                    <small class="form-text text-muted"
+                                        >Format: 123-456-7890</small
+                                    >
+                                </div>
+                                <div class="form-group">
                                     <label for="bio">Your Store Bio</label>
                                     <textarea
                                         class="form-control autosize"
@@ -960,6 +986,8 @@ export default {
                 userId: this.user.uid,
                 storeLogo: this.form.storeLogo,
                 storeName: storeName,
+                storeEmail: this.form.storeEmail,
+                storePhoneNumber: this.form.storePhoneNumber,
                 storeBio: this.form.storeBio,
                 storeBanner: this.form.storeBanner,
                 storeLocation: this.form.storeLocation
@@ -991,6 +1019,8 @@ export default {
         } else {
             this.form.storeLogo = this.userInfo[0].storeProfile.storeLogo;
             this.form.storeName = this.userInfo[0].storeProfile.storeName;
+            this.form.storeEmail = this.userInfo[0].storeProfile.storeEmail;
+            this.form.storePhoneNumber = this.userInfo[0].storeProfile.storePhoneNumber;
             this.form.storeBio = this.userInfo[0].storeProfile.storeBio;
             this.form.storeBanner = this.userInfo[0].storeProfile.storeBanner;
             this.form.storeLocation = this.userInfo[0].storeProfile.storeLocation;

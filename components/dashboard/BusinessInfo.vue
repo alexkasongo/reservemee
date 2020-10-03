@@ -3,44 +3,39 @@
     <div class="mb-5">
         <h4 class="header-title mt-0">Store Bio</h4>
         <div class="panel-body">
-            <p
-                class="text-muted font-13"
-            >Hello, quis Aristidem non mortuum diligit? Quid sequatur, quid repugnet, vident. Avaritiamne minuis? Iam id ipsum absurdum, maximum malum neglegi. Sed quod proximum fuit non vidit. Nunc agendum est subtilius.</p>
+            <p class="text-muted font-13">{{ storeProfile.storeBio }}</p>
             <hr />
             <div class="text-left">
                 <p class="text-muted font-13">
                     <strong>Store Name :</strong>
-                    <span class="m-l-15">Sista Joy Braids</span>
+                    <span class="m-l-15">{{
+                        storeProfile.storeName | capitalize
+                    }}</span>
                 </p>
                 <p class="text-muted font-13">
                     <strong>Mobile :</strong>
-                    <span class="m-l-15">(+12) 123 1234 567</span>
+                    <span class="m-l-15">{{
+                        storeProfile.storePhoneNumber
+                    }}</span>
                 </p>
                 <p class="text-muted font-13">
                     <strong>Email :</strong>
-                    <span class="m-l-15">sistajoybraids@gmail.com</span>
+                    <span class="m-l-15">{{ storeProfile.storeEmail }}</span>
                 </p>
                 <p class="text-muted font-13">
                     <strong>Location :</strong>
-                    <span class="m-l-15">USA</span>
+                    <span class="m-l-15">{{ storeProfile.storeLocation }}</span>
                 </p>
                 <p class="text-muted font-13">
                     <strong>Services :</strong>
-                    <span class="m-l-5">
-                        <span class="flag-icon flag-icon-us m-r-5 m-t-0" title="us"></span>
-                        <span>Box Braids</span>
-                    </span>
-                    <span class="m-l-5">
-                        <span class="flag-icon flag-icon-de m-r-5" title="de"></span>
-                        <span>Cornrows</span>
-                    </span>
-                    <span class="m-l-5">
-                        <span class="flag-icon flag-icon-es m-r-5" title="es"></span>
-                        <span>Braids</span>
-                    </span>
-                    <span class="m-l-5">
-                        <span class="flag-icon flag-icon-fr m-r-5" title="fr"></span>
-                        <span>Dreadlocks</span>
+                    <span v-for="(service, id) in services" :key="id">
+                        <span class="m-l-5">
+                            <span
+                                class="flag-icon flag-icon-us m-r-5 m-t-0"
+                                title="us"
+                            ></span>
+                            <span>{{ service.name }}</span>
+                        </span>
                     </span>
                 </p>
             </div>
@@ -92,13 +87,34 @@ import { mapGetters } from 'vuex';
 
 export default {
     name: 'BusinessInfo',
+    data() {
+        return {
+            services: [
+                {
+                    name: 'Service1'
+                },
+                {
+                    name: 'Service2'
+                },
+                {
+                    name: 'Service3'
+                },
+                {
+                    name: 'Service4'
+                }
+            ]
+        };
+    },
     computed: {
         ...mapGetters({
             user: 'user'
-        })
+        }),
+        storeProfile() {
+            const data = this.$store.state.userData[0].storeProfile;
+            return data;
+        }
     }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

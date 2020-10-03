@@ -16,7 +16,7 @@
                             <span class="float-left mr-3">
                                 <img
                                     @click="viewProfile(user.uid)"
-                                    :src="user.photoURL"
+                                    :src="storeProfile.storeLogo"
                                     alt
                                     class="thumb-lg rounded-circle"
                                     v-bind="attrs"
@@ -28,7 +28,7 @@
                     </v-tooltip>
 
                     <div class="media-body text-white">
-                        <h4 v-bind="attrs" v-on="on" class="mt-1 mb-1 font-18">
+                        <h4 class="mt-1 mb-1 font-18">
                             {{ storeProfile.storeName | capitalize }}
                         </h4>
                         <p>

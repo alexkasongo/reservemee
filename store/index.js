@@ -379,6 +379,8 @@ export const actions = {
             .set({
                 storeLogo: payload.storeLogo,
                 storeName: payload.storeName,
+                storeEmail: payload.storeEmail,
+                storePhoneNumber: payload.storePhoneNumber,
                 storeBio: payload.storeBio,
                 storeBanner: payload.storeBanner,
                 storeLocation: payload.storeLocation
