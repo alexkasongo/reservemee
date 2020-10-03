@@ -45,7 +45,7 @@
             <div
                 class="profile-user-box card-box bg-custom"
                 style="
-                    background-image: url('https://via.placeholder.com/1200/00897b');
+                    background-image: url('https://via.placeholder.com/1200');
                 "
             ></div>
             <div class="bg-center">
@@ -55,7 +55,7 @@
                             <span class="float-left mr-3">
                                 <img
                                     @click="viewProfile(user.uid)"
-                                    src="https://via.placeholder.com/1200"
+                                    src="https://via.placeholder.com/1200/00897b"
                                     alt
                                     class="thumb-lg rounded-circle"
                                     v-bind="attrs"
@@ -67,9 +67,6 @@
                     </v-tooltip>
 
                     <div class="media-body text-white">
-                        <!-- <h4 class="mt-1 mb-1 font-18">
-                            {{ storeProfile.storeName | capitalize }}
-                        </h4> -->
                         <p>
                             {{ user.displayName }}
                         </p>
@@ -95,7 +92,10 @@ export default {
     },
     computed: {
         storeProfile() {
-            if (this.$store.state.userData[0].storeProfile === undefined) {
+            if (
+                this.$store.state.userData.length <= 0 ||
+                !this.$store.state.userData[0].storeProfile
+            ) {
                 return null;
             } else {
                 const data = this.$store.state.userData[0].storeProfile;

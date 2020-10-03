@@ -2,16 +2,21 @@
     <!-- CategoryCheck -->
     <div class="w-100">
         <div class="card">
-            <div class="card-header">Dashboard</div>
             <div class="card-body">
                 <h3 v-if="user">Welcome {{ user.name }}</h3>
-                <p>You currently have no services. Start by creating a category.</p>
+                <p>
+                    You currently have no services. Start by creating a
+                    category.
+                </p>
 
-                <button
+                <v-btn
                     @click="onCreateInitCat"
                     type="button"
-                    class="btn btn-block btn-success"
-                >Create Category</button>
+                    block
+                    color="teal darken-1"
+                    dark
+                    >Create Category</v-btn
+                >
             </div>
         </div>
     </div>
@@ -38,5 +43,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

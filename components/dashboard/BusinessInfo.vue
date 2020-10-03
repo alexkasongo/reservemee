@@ -135,7 +135,11 @@ export default {
             user: 'user'
         }),
         storeProfile() {
-            if (this.$store.state.userData[0].storeProfile === undefined) {
+            if (
+                // if the state is undfined or the object does not exist, return null
+                this.$store.state.userData.length <= 0 ||
+                !this.$store.state.userData[0].storeProfile
+            ) {
                 return null;
             } else {
                 const data = this.$store.state.userData[0].storeProfile;
