@@ -2,7 +2,7 @@
     <!-- BusinessInfo -->
     <div class="mb-5">
         <h4 class="header-title mt-0">Store Bio</h4>
-        <div class="panel-body">
+        <div v-if="storeProfile !== null" class="panel-body">
             <p class="text-muted font-13">{{ storeProfile.storeBio }}</p>
             <hr />
             <div class="text-left">
@@ -78,6 +78,16 @@
                 </li>
             </ul>
         </div>
+        <div v-else>
+            <!-- <v-btn class="text-lowercase" elevation="0" color="transparent"
+                >settings</v-btn
+            > -->
+
+            <p>
+                Please update your store information in
+                <a @click="goToSettings">settings</a>
+            </p>
+        </div>
     </div>
     <!-- BusinessInfo -->
 </template>
@@ -110,8 +120,17 @@ export default {
             user: 'user'
         }),
         storeProfile() {
-            const data = this.$store.state.userData[0].storeProfile;
-            return data;
+            if (this.$store.state.userData[0].storeProfile === undefined) {
+                return null;
+            } else {
+                const data = this.$store.state.userData[0].storeProfile;
+                return data;
+            }
+        }
+    },
+    methods: {
+        goToSettings() {
+            this.$router.push(`/profile/${this.user.uid}`);
         }
     }
 };
