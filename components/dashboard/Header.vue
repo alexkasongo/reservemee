@@ -25,7 +25,7 @@
                                 />
                             </span>
                         </template>
-                        <span>Go to settings</span>
+                        <span>Settings</span>
                     </v-tooltip>
 
                     <div class="media-body text-white">
@@ -63,7 +63,7 @@
                                 />
                             </span>
                         </template>
-                        <span>Go to settings</span>
+                        <span>Settings </span>
                     </v-tooltip>
 
                     <div class="media-body text-white">

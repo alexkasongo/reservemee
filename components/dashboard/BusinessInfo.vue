@@ -79,10 +79,29 @@
             </ul>
         </div>
         <div v-else>
-            <p>
-                Please update your store information in
-                <a @click="goToSettings">settings</a>
-            </p>
+            <v-alert
+                style="cursor: pointer"
+                @click="goToSettings"
+                icon="mdi-alert-circle-outline"
+                text
+                type="warning"
+                >Update Store Information</v-alert
+            >
+            <div class="card">
+                <div class="card-body">
+                    <h3 v-if="user">You have not created a store profile.</h3>
+                    <p>Please update your store information in settings</p>
+                    <v-btn
+                        @click="goToSettings"
+                        type="button"
+                        color="teal darken-1"
+                        dark
+                        block
+                    >
+                        Update Store Information
+                    </v-btn>
+                </div>
+            </div>
         </div>
     </div>
     <!-- BusinessInfo -->

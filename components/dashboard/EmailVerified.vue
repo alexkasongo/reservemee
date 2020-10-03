@@ -2,13 +2,19 @@
     <!-- EmailVerified -->
     <div class="card">
         <div class="card-body">
-            <h3 v-if="user">Your email address is not verified.</h3>
-            <p>Verified: {{ user.emailVerified }}</p>
-            <button
+            <h3 v-if="user">
+                Your email address is not verified {{ user.name }}.
+            </h3>
+            <p>Please verify your email.</p>
+            <v-btn
                 @click="verifyEmail"
                 type="button"
-                class="btn btn-block btn-success"
-            >Verify Email</button>
+                color="teal darken-1"
+                dark
+                block
+            >
+                Verify Email
+            </v-btn>
         </div>
     </div>
     <!-- EmailVerified -->
@@ -32,5 +38,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
