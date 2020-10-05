@@ -12,7 +12,9 @@
                         @click="goToDashboard"
                         type="button"
                         class="btn btn-block btn-primary"
-                    >Go to Dashboard</button>
+                    >
+                        Go to Dashboard
+                    </button>
                 </div>
             </div>
         </div>
@@ -21,7 +23,13 @@
                 <div class="card-body">
                     <h3>A verification email has been sent to your mailbox</h3>
                     <p>Verify your email address before signing in.</p>
-                    <button @click="signout" type="button" class="btn btn-block btn-primary">Signin</button>
+                    <button
+                        @click="signout"
+                        type="button"
+                        class="btn btn-block btn-primary"
+                    >
+                        Signin
+                    </button>
                 </div>
             </div>
         </div>
@@ -41,8 +49,10 @@
                                     required
                                 />
                             </div>
-                            <div v-if="errors" class="form-group text-muted">{{ errors.message }}</div>
-                            <button class="btn btn-primary">Submit</button>
+                            <div v-if="errors" class="form-group text-muted">
+                                {{ errors.message }}
+                            </div>
+                            <v-btn color="teal darker-1" dark>Submit</v-btn>
                         </form>
                     </div>
                 </div>
@@ -110,5 +120,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -1,5 +1,6 @@
 <template>
     <!-- EmailVerified -->
+    <!-- FIXME move email verificaiton logic here -->
     <div class="card">
         <div class="card-body">
             <h3 v-if="user">

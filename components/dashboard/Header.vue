@@ -93,6 +93,7 @@ export default {
     computed: {
         storeProfile() {
             if (
+                // if the state is undfined or the object does not exist, return null
                 this.$store.state.userData.length <= 0 ||
                 !this.$store.state.userData[0].storeProfile
             ) {

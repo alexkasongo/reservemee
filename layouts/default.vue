@@ -28,10 +28,58 @@
                     <v-icon color="teal darken-1">mdi-magnify</v-icon>
                 </v-btn>
 
-                <v-btn v-if="user" icon>
-                    <v-icon color="teal darken-1">mdi-bell</v-icon>
-                </v-btn>
+                <div v-if="user" class="text-center">
+                    <v-menu
+                        open-on-hover
+                        transition="scale-transition"
+                        origin="top center 0"
+                        bottom
+                        left
+                    >
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-btn v-bind="attrs" v-on="on" icon>
+                                <v-icon color="teal darken-1">mdi-bell</v-icon>
+                            </v-btn>
+                        </template>
 
+                        <!-- NOTIFICATIONS -->
+                        <v-card max-width="600" class="mx-auto">
+                            <v-toolbar dense flat>
+                                <v-toolbar-title>Notifications</v-toolbar-title>
+                            </v-toolbar>
+
+                            <v-divider></v-divider>
+
+                            <v-list subheader two-line>
+                                <v-list-item-content link>
+                                    <v-list-item-content
+                                        v-if="user.emailVerified === false"
+                                    >
+                                        <v-list-item-title
+                                            >Your email address is not verified
+                                            {{ user.name }}.</v-list-item-title
+                                        >
+
+                                        <v-list-item-subtitle
+                                            >Jan 14, 2020</v-list-item-subtitle
+                                        >
+                                    </v-list-item-content>
+
+                                    <v-list-item-action>
+                                        <v-btn icon>
+                                            <v-icon color="grey lighten-1"
+                                                >mdi-information</v-icon
+                                            >
+                                        </v-btn>
+                                    </v-list-item-action>
+                                </v-list-item-content>
+                            </v-list>
+                        </v-card>
+                        <!-- NOTIFICATIONS END -->
+                    </v-menu>
+                </div>
+
+                <!-- THREE DOTS -->
                 <v-menu
                     v-if="user"
                     bottom
@@ -59,6 +107,8 @@
                         </v-list-item>
                     </v-list>
                 </v-menu>
+                <!-- THREE DOTS END -->
+
                 <!-- if router name is not Sign in then show, else do not show -->
                 <div v-if="this.$route.name !== 'signin'">
                     <v-btn v-if="!user" @click="signin">Sign In</v-btn>
@@ -184,7 +234,19 @@ export default {
     computed: {
         ...mapGetters({
             userId: 'userId'
-        })
+        }),
+        storeProfile() {
+            if (
+                // if the state is undfined or the object does not exist, return null
+                this.$store.state.userData.length <= 0 ||
+                !this.$store.state.userData[0].storeProfile
+            ) {
+                return null;
+            } else {
+                const data = this.$store.state.userData[0].storeProfile;
+                return data;
+            }
+        }
     },
     watch: {
         $route() {
