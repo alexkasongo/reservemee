@@ -51,10 +51,11 @@
                             <v-divider></v-divider>
 
                             <v-list subheader two-line>
-                                <v-list-item link>
-                                    <v-list-item-content
-                                        v-if="user.emailVerified === false"
-                                    >
+                                <v-list-item
+                                    link
+                                    v-if="user.emailVerified === false"
+                                >
+                                    <v-list-item-content>
                                         <v-list-item-title
                                             >Your email address is not verified
                                             {{
@@ -75,6 +76,26 @@
                                         </v-btn>
                                     </v-list-item-action>
                                 </v-list-item>
+                                <v-list-item-content link v-else>
+                                    <v-list-item-content>
+                                        <v-list-item-title
+                                            >You have no new
+                                            notifications.</v-list-item-title
+                                        >
+
+                                        <v-list-item-subtitle
+                                            >Jan 14, 2020</v-list-item-subtitle
+                                        >
+                                    </v-list-item-content>
+
+                                    <v-list-item-action>
+                                        <v-btn icon>
+                                            <v-icon color="grey lighten-1"
+                                                >mdi-information</v-icon
+                                            >
+                                        </v-btn>
+                                    </v-list-item-action>
+                                </v-list-item-content>
                             </v-list>
                         </v-card>
                         <!-- NOTIFICATIONS END -->

@@ -23,13 +23,14 @@
                 <div class="card-body">
                     <h3>A verification email has been sent to your mailbox</h3>
                     <p>Verify your email address before signing in.</p>
-                    <button
+                    <v-btn
                         @click="signout"
                         type="button"
-                        class="btn btn-block btn-primary"
+                        color="teal darker-1"
+                        dark
                     >
                         Signin
-                    </button>
+                    </v-btn>
                 </div>
             </div>
         </div>
@@ -52,7 +53,9 @@
                             <div v-if="errors" class="form-group text-muted">
                                 {{ errors.message }}
                             </div>
-                            <v-btn color="teal darker-1" dark>Submit</v-btn>
+                            <v-btn type="submit" color="teal darker-1" dark
+                                >Submit</v-btn
+                            >
                         </form>
                     </div>
                 </div>
