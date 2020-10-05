@@ -875,7 +875,8 @@ export default {
                 .then(() => {
                     console.log('🏝 🚧');
                     this.user = '';
-                    localStorage.clear('email');
+                    window.localStorage.removeItem('email');
+                    window.localStorage.removeItem('vuex');
                 });
             this.$router.push('/signin');
         },
@@ -957,14 +958,34 @@ export default {
                     this.errors = error;
                     console.log('🧩', error);
                 });
-            this.signout;
+            this.signout();
         },
         async deleteAccount() {
-            const categoryDelete = await firebase
+            var user = await firebase.auth().currentUser;
+            const userData = firebase
                 .database()
-                .ref('categories')
-                .child(`${this.categories[0].id}`);
-            categoryDelete.remove();
+                .ref('users')
+                .child(`${this.user.uid}`);
+            userData.remove();
+
+            this.$swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    user.delete()
+                        .then(function () {})
+                        .catch(function (error) {
+                            console.log(`_id.vue - 989 - 🥶`, error);
+                        });
+                    this.signout;
+                }
+            });
         },
         onUpdProfileInfo() {
             const payload = {

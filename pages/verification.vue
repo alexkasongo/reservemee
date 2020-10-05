@@ -110,6 +110,8 @@ export default {
                 .then((result) => {
                     // console.log(result);
                     this.user = '';
+                    window.localStorage.removeItem('email');
+                    window.localStorage.removeItem('vuex');
                 });
             this.$router.push('/signin');
         },

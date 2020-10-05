@@ -136,6 +136,9 @@
                 <div v-if="this.$route.name !== 'signin'">
                     <v-btn v-if="!user" @click="signin">Sign In</v-btn>
                 </div>
+                <div v-else>
+                    <v-btn v-if="!user" @click="signup">Sign Up</v-btn>
+                </div>
             </v-app-bar>
             <!-- NAVBAR END -->
 
@@ -298,8 +301,8 @@ export default {
                 .then(() => {
                     console.log('🏝 🚧');
                     this.user = '';
-                    window.localStorage.removeItem('vuex');
                     window.localStorage.removeItem('email');
+                    window.localStorage.removeItem('vuex');
                 });
             this.$router.push('/');
             this.loading = false;
@@ -356,6 +359,7 @@ export default {
                 this.loading = false;
             } else {
                 // No user is signed in.
+                window.localStorage.removeItem('vuex');
             }
         });
     }

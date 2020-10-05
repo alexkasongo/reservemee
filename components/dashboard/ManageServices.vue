@@ -136,15 +136,152 @@
     <!-- ManageServices -->
 
     <div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card-manage services-card">
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase mb-0">
+                            Manage Services
+                        </h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table no-wrap user-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th
+                                        scope="col"
+                                        class="border-0 text-uppercase font-medium pl-4"
+                                    >
+                                        #
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        class="border-0 text-uppercase font-medium"
+                                    >
+                                        Category
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        class="border-0 text-uppercase font-medium"
+                                    >
+                                        Description
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        class="border-0 text-uppercase font-medium"
+                                    >
+                                        Services
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        class="border-0 text-uppercase font-medium"
+                                    >
+                                        Manage
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody
+                                v-for="(category, categoryKey) in categories"
+                                :key="category.id"
+                            >
+                                <tr>
+                                    <td
+                                        style="vertical-align: middle"
+                                        class="pl-4"
+                                    >
+                                        {{ categoryKey + 1 }}
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <p class="m-0">
+                                            {{ category.name | capitalize }}
+                                        </p>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span class="text-muted">{{
+                                            category.description
+                                        }}</span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <v-btn
+                                            outlined
+                                            small
+                                            dark
+                                            elevation="0"
+                                            @click="goToService(category.name)"
+                                            color="teal darken-1"
+                                        >
+                                            View Services
+                                        </v-btn>
+                                    </td>
+                                    <td>
+                                        <v-btn
+                                            @click="updCategory(category.id)"
+                                            type="button"
+                                            icon
+                                        >
+                                            <i class="fa fa-pencil"></i>
+                                        </v-btn>
+                                        <v-btn
+                                            @click="removeCategory(category.id)"
+                                            type="button"
+                                            icon
+                                        >
+                                            <i class="fa fa-trash"></i>
+                                        </v-btn>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div
+                    v-if="categories.length > 0"
+                    class="d-flex justify-content-start mt-3"
+                >
+                    <div class="w-100">
+                        <div
+                            class="btn-group btn-group-toggle w-100"
+                            data-toggle="buttons"
+                        >
+                            <label
+                                class="btn btn-success"
+                                @click="onCreateCategory"
+                            >
+                                <input
+                                    type="radio"
+                                    name="options"
+                                    id="option2"
+                                    autocomplete="off"
+                                />
+                                Create Category
+                            </label>
+                            <label
+                                class="btn btn-secondary"
+                                @click="onCreateService"
+                            >
+                                <input
+                                    type="radio"
+                                    name="options"
+                                    id="option3"
+                                    autocomplete="off"
+                                />
+                                Create Service
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <v-data-table
             :headers="headers"
-            :items="desserts"
+            :items="categories"
             sort-by="calories"
             class="elevation-1"
         >
             <template v-slot:top>
                 <v-toolbar flat>
-                    <v-toolbar-title>My CRUD</v-toolbar-title>
+                    <v-toolbar-title>My Categories</v-toolbar-title>
                     <v-divider class="mx-4" inset vertical></v-divider>
                     <v-spacer></v-spacer>
                     <v-dialog v-model="dialog" max-width="500px">
@@ -155,9 +292,11 @@
                                 v-bind="attrs"
                                 v-on="on"
                             >
-                                New Item
+                                New Category
                             </v-btn>
                         </template>
+
+                        <!-- NEW CATEGORY -->
                         <v-card>
                             <v-card-title>
                                 <span class="headline">{{ formTitle }}</span>
@@ -169,31 +308,13 @@
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field
                                                 v-model="editedItem.name"
-                                                label="Dessert name"
+                                                label="Category name"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field
-                                                v-model="editedItem.calories"
-                                                label="Calories"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field
-                                                v-model="editedItem.fat"
-                                                label="Fat (g)"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field
-                                                v-model="editedItem.carbs"
-                                                label="Carbs (g)"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field
-                                                v-model="editedItem.protein"
-                                                label="Protein (g)"
+                                                v-model="editedItem.description"
+                                                label="Description"
                                             ></v-text-field>
                                         </v-col>
                                     </v-row>
@@ -214,7 +335,10 @@
                                 </v-btn>
                             </v-card-actions>
                         </v-card>
+                        <!-- NEW CATEGORY END -->
                     </v-dialog>
+
+                    <!-- DELETE DIALOG -->
                     <v-dialog v-model="dialogDelete" max-width="500px">
                         <v-card>
                             <v-card-title class="headline"
@@ -239,9 +363,10 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
+                    <!-- DELETE DIALOG -->
                 </v-toolbar>
             </template>
-            <template v-slot:item.actions="{ item }">
+            <template v-slot:[`item.actions`]="{ item }">
                 <v-icon small class="mr-2" @click="editItem(item)">
                     mdi-pencil
                 </v-icon>
@@ -264,32 +389,23 @@ export default {
         dialogDelete: false,
         headers: [
             {
-                text: 'Dessert (100g serving)',
+                text: 'Categories',
                 align: 'start',
                 sortable: false,
                 value: 'name'
             },
-            { text: 'Calories', value: 'calories' },
-            { text: 'Fat (g)', value: 'fat' },
-            { text: 'Carbs (g)', value: 'carbs' },
-            { text: 'Protein (g)', value: 'protein' },
+            { text: 'Description', value: 'description' },
+            { text: 'Services', value: 'fat', sortable: false },
             { text: 'Actions', value: 'actions', sortable: false }
         ],
-        desserts: [],
         editedIndex: -1,
         editedItem: {
             name: '',
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0
+            description: ''
         },
         defaultItem: {
             name: '',
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0
+            description: ''
         }
     }),
     computed: {
@@ -302,7 +418,7 @@ export default {
             return this.$store.getters.loading;
         },
         formTitle() {
-            return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
+            return this.editedIndex === -1 ? 'New Category' : 'Edit Category';
         }
     },
     methods: {
@@ -354,89 +470,15 @@ export default {
                 }
             });
         },
-        initialize() {
-            this.desserts = [
-                {
-                    name: 'Frozen Yogurt',
-                    calories: 159,
-                    fat: 6.0,
-                    carbs: 24,
-                    protein: 4.0
-                },
-                {
-                    name: 'Ice cream sandwich',
-                    calories: 237,
-                    fat: 9.0,
-                    carbs: 37,
-                    protein: 4.3
-                },
-                {
-                    name: 'Eclair',
-                    calories: 262,
-                    fat: 16.0,
-                    carbs: 23,
-                    protein: 6.0
-                },
-                {
-                    name: 'Cupcake',
-                    calories: 305,
-                    fat: 3.7,
-                    carbs: 67,
-                    protein: 4.3
-                },
-                {
-                    name: 'Gingerbread',
-                    calories: 356,
-                    fat: 16.0,
-                    carbs: 49,
-                    protein: 3.9
-                },
-                {
-                    name: 'Jelly bean',
-                    calories: 375,
-                    fat: 0.0,
-                    carbs: 94,
-                    protein: 0.0
-                },
-                {
-                    name: 'Lollipop',
-                    calories: 392,
-                    fat: 0.2,
-                    carbs: 98,
-                    protein: 0
-                },
-                {
-                    name: 'Honeycomb',
-                    calories: 408,
-                    fat: 3.2,
-                    carbs: 87,
-                    protein: 6.5
-                },
-                {
-                    name: 'Donut',
-                    calories: 452,
-                    fat: 25.0,
-                    carbs: 51,
-                    protein: 4.9
-                },
-                {
-                    name: 'KitKat',
-                    calories: 518,
-                    fat: 26.0,
-                    carbs: 65,
-                    protein: 7
-                }
-            ];
-        },
 
         editItem(item) {
-            this.editedIndex = this.desserts.indexOf(item);
+            this.editedIndex = item.id;
             this.editedItem = Object.assign({}, item);
             this.dialog = true;
         },
 
         deleteItem(item) {
-            this.editedIndex = this.desserts.indexOf(item);
+            this.editedIndex = item.id;
             this.editedItem = Object.assign({}, item);
             this.dialogDelete = true;
         },
@@ -478,10 +520,6 @@ export default {
         dialogDelete(val) {
             val || this.closeDelete();
         }
-    },
-
-    created() {
-        this.initialize();
     },
 
     mounted() {

@@ -299,7 +299,10 @@ export default {
             this.loading = false;
             if (user !== null) {
                 this.loading = false;
-                console.log(`index.vue - 306 - user is null`);
+                // No user is signed in.
+                console.log(`index.vue - 303 - 🏓 No user logged in`);
+                window.localStorage.removeItem('email');
+                window.localStorage.removeItem('vuex');
             }
         });
     },
