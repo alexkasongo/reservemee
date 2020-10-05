@@ -51,13 +51,15 @@
                             <v-divider></v-divider>
 
                             <v-list subheader two-line>
-                                <v-list-item-content link>
+                                <v-list-item link>
                                     <v-list-item-content
                                         v-if="user.emailVerified === false"
                                     >
                                         <v-list-item-title
                                             >Your email address is not verified
-                                            {{ user.name }}.</v-list-item-title
+                                            {{
+                                                user.displayName
+                                            }}.</v-list-item-title
                                         >
 
                                         <v-list-item-subtitle
@@ -72,7 +74,7 @@
                                             >
                                         </v-btn>
                                     </v-list-item-action>
-                                </v-list-item-content>
+                                </v-list-item>
                             </v-list>
                         </v-card>
                         <!-- NOTIFICATIONS END -->

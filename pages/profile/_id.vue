@@ -1008,14 +1008,12 @@ export default {
                 this.profileInfo.photoUrl = user.photoURL;
             }
         });
-        /*
-         ** Prepopulate form.
-         ** Page reload on a dynamic route empties Vuex store therefore I installed
-         ** vue persistedstate plugin which Persists and rehydrates the Vuex state between page reloads.
-         */
-        // REVIEW has been fixed using persistedstate and needs review
-        if (this.userInfo[0].storeProfile === undefined) {
-            return;
+        // if the state is undfined or the object does not exist, return null
+        if (
+            this.$store.state.userData.length <= 0 ||
+            !this.$store.state.userData[0].storeProfile
+        ) {
+            return null;
         } else {
             this.form.storeLogo = this.userInfo[0].storeProfile.storeLogo;
             this.form.storeName = this.userInfo[0].storeProfile.storeName;
