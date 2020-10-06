@@ -330,8 +330,11 @@
                                 >
                                     Cancel
                                 </v-btn>
-                                <v-btn color="blue darken-1" text @click="save">
-                                    Save
+                                <v-btn v-if="formTitle === 'New Category'" color="blue darken-1" text @click="save">
+                                    Create
+                                </v-btn>
+                                <v-btn v-else color="blue darken-1" text @click="update">
+                                    Update
                                 </v-btn>
                             </v-card-actions>
                         </v-card>
@@ -390,6 +393,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
     name: 'ManageServices',
     data: () => ({
+        item: '',
         dialog: false,
         dialogDelete: false,
         headers: [
@@ -427,7 +431,13 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['createCategory', 'loadCategories', 'deleteCategory']),
+        ...mapActions([
+            'createCategory',
+            'loadCategories',
+            'deleteCategory',
+            'updateCategory',
+            'loadServices'
+        ]),
         onCreateService() {
             this.$router.push('/service/create-service');
         },
@@ -480,16 +490,36 @@ export default {
             this.editedIndex = item.id;
             this.editedItem = Object.assign({}, item);
             this.dialog = true;
+            this.item = item;
+
+            console.log(`ManageServices.vue - 485 - you just clicked`);
         },
 
         deleteItem(item) {
-            this.editedIndex = item.id;
-            this.editedItem = Object.assign({}, item);
+            // this.editedIndex = item.id;
+            // this.editedItem = Object.assign({}, item);
+            this.item = item;
             this.dialogDelete = true;
         },
 
         deleteItemConfirm() {
-            this.desserts.splice(this.editedIndex, 1);
+            console.log(`ManageServices.vue - 493 - 🇿🇦`, this.item);
+            const payload = {
+                userId: this.user.uid,
+                id: this.item.id
+            };
+
+            this.deleteCategory(payload);
+            this.loadCategories(this.user.uid);
+            this.$swal({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Deleted',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
             this.closeDelete();
         },
 
@@ -509,12 +539,41 @@ export default {
             });
         },
 
-        save() {
-            if (this.editedIndex > -1) {
-                Object.assign(this.desserts[this.editedIndex], this.editedItem);
-            } else {
-                this.desserts.push(this.editedItem);
-            }
+        async save() {
+            // if (this.editedIndex > -1) {
+            //     Object.assign(this.desserts[this.editedIndex], this.editedItem);
+            // } else {
+            //     this.desserts.push(this.editedItem);
+            // }
+
+            // category with dashes
+            let res = this.editedItem.name.replace(/\s+/g, '-').toLowerCase();
+
+            let data = {
+                category: res,
+                description: this.editedItem.description,
+                userId: this.user.uid
+            };
+            await this.createCategory(data);
+            // this.loadCategories();
+            this.close();
+        },
+        async update() {
+            let categoryName = this.editedItem.name
+                .replace(/\s+/g, '-')
+                .toLowerCase();
+
+            let data = {
+                userId: this.user.uid,
+                id: this.item.id,
+                name: categoryName,
+                description: this.editedItem.description
+            };
+
+            await this.updateCategory(data).then(() => {
+                this.loadCategories(this.user.uid);
+            });
+
             this.close();
         }
     },

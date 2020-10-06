@@ -329,7 +329,7 @@ export const actions = {
     async updateCategory({ commit }, payload) {
         commit('SET_LOADING', true);
 
-        firebase
+        await firebase
             .database()
             .ref('users/' + payload.userId)
             .child('categories/' + payload.id)
