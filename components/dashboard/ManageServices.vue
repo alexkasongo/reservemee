@@ -238,7 +238,7 @@
                 <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
             </template>
             <template v-slot:[`item.services`]="{ item }">
-                <v-btn small class="mr-2" @click="goToService(item.name)">
+                <v-btn elevation="0" small class="mr-2" @click="goToService(item.name)">
                     View Services
                 </v-btn>
             </template>

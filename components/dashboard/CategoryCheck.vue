@@ -1,9 +1,9 @@
 <template>
     <!-- CategoryCheck -->
-    <div class="w-100">
-        <div class="card">
+    <div class="w-100 mb-5">
+        <v-card class="light-blue lighten-5" elevation="0">
             <div class="card-body">
-                <h3 v-if="user">Welcome {{ user.name }}</h3>
+                <h5 v-if="user">Welcome {{ user.name }}</h5>
                 <p>
                     You currently have no services. Start by creating a
                     category.
@@ -13,12 +13,13 @@
                     @click="onCreateInitCat"
                     type="button"
                     block
-                    color="teal darken-1"
+                    color="blue-grey darken-3
+"
                     dark
                     >Create Category</v-btn
                 >
             </div>
-        </div>
+        </v-card>
     </div>
     <!-- CategoryCheck -->
 </template>

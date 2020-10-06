@@ -87,21 +87,21 @@
                 type="warning"
                 >Update Store Information</v-alert
             >
-            <div class="card">
+            <v-card class="light-blue lighten-5" elevation="0">
                 <div class="card-body">
-                    <h3 v-if="user">You have not created a store profile.</h3>
+                    <h5 v-if="user">You have not created a store profile.</h5>
                     <p>Please update your store information in settings</p>
                     <v-btn
                         @click="goToSettings"
                         type="button"
-                        color="teal darken-1"
+                        color="blue-grey darken-3"
                         dark
                         block
                     >
                         Update Store Information
                     </v-btn>
                 </div>
-            </div>
+            </v-card>
         </div>
     </div>
     <!-- BusinessInfo -->

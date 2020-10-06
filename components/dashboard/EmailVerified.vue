@@ -1,22 +1,25 @@
 <template>
     <!-- EmailVerified -->
     <!-- FIXME move email verificaiton logic here -->
-    <div class="card">
-        <div class="card-body">
-            <h3 v-if="user">
-                Your email address is not verified {{ user.name }}.
-            </h3>
-            <p>Please verify your email.</p>
-            <v-btn
-                @click="verifyEmail"
-                type="button"
-                color="teal darken-1"
-                dark
-                block
-            >
-                Verify Email
-            </v-btn>
-        </div>
+    <div class="w-100 mb-5">
+        <v-card class="light-blue lighten-5" elevation="0">
+            <div class="card-body">
+                <h5 v-if="user">
+                    Your email address is not verified {{ user.name }}.
+                </h5>
+                <p>Please verify your email.</p>
+                <v-btn
+                    @click="verifyEmail"
+                    type="button"
+                    color="blue-grey darken-3
+"
+                    dark
+                    block
+                >
+                    Verify Email
+                </v-btn>
+            </div>
+        </v-card>
     </div>
     <!-- EmailVerified -->
 </template>

@@ -1,306 +1,293 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card card-white mb-5">
-                    <div class="card-heading clearfix border-bottom mb-4">
-                        <h4 class="card-title">Booking Requests</h4>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-                            <li class="position-relative booking">
-                                <div class="media">
-                                    <div class="msg-img">
-                                        <img
-                                            src="https://bootdey.com/img/Content/avatar/avatar6.png"
-                                            alt
-                                        />
-                                    </div>
-                                    <div class="media-body">
-                                        <h5 class="mb-4">
-                                            Sunny Apartment
-                                            <span
-                                                class="badge badge-primary mx-3"
-                                                >Pending</span
-                                            >
-                                            <span class="badge badge-danger"
-                                                >Unpaid</span
-                                            >
-                                        </h5>
-                                        <div class="mb-3">
-                                            <span
-                                                class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0"
-                                                >Booking Date:</span
-                                            >
-                                            <span class="bg-light-blue"
-                                                >02.03.2020 - 04.03.2020</span
-                                            >
-                                        </div>
-                                        <div class="mb-3">
-                                            <span
-                                                class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0"
-                                                >Booking Details:</span
-                                            >
-                                            <span class="bg-light-blue"
-                                                >2 Adults</span
-                                            >
-                                        </div>
-                                        <div class="mb-3">
-                                            <span
-                                                class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0"
-                                                >Price:</span
-                                            >
-                                            <span class="bg-light-blue"
-                                                >$147</span
-                                            >
-                                        </div>
-                                        <div class="mb-5">
-                                            <span
-                                                class="mr-2 d-block d-sm-inline-block mb-1 mb-sm-0"
-                                                >Clients:</span
-                                            >
-                                            <span class="border-right pr-2 mr-2"
-                                                >John Inoue</span
-                                            >
-                                            <span class="border-right pr-2 mr-2"
-                                                >john@example.com</span
-                                            >
-                                            <span>123-563-789</span>
-                                        </div>
-                                        <a href="#" class="btn-gray"
-                                            >Send Message</a
-                                        >
-                                    </div>
-                                </div>
-                                <div class="buttons-to-right">
-                                    <a href="#" class="btn-gray mr-2">Reject</a>
-                                    <a href="#" class="btn-gray">Approve</a>
-                                </div>
-                            </li>
+    <v-data-table
+        :headers="headers"
+        :items="desserts"
+        sort-by="calories"
+        class="elevation-1"
+    >
+        <template v-slot:top>
+            <v-toolbar flat>
+                <v-toolbar-title>My Bookings</v-toolbar-title>
+                <v-divider class="mx-4" inset vertical></v-divider>
+                <v-spacer></v-spacer>
+                <v-dialog v-model="dialog" max-width="500px">
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            color="primary"
+                            dark
+                            class="mb-2"
+                            v-bind="attrs"
+                            v-on="on"
+                        >
+                            New Booking
+                        </v-btn>
+                    </template>
+                    <v-card>
+                        <v-card-title>
+                            <span class="headline">{{ formTitle }}</span>
+                        </v-card-title>
 
-                            <li class="position-relative booking">
-                                <div class="media">
-                                    <div class="msg-img">
-                                        <img
-                                            src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                            alt
-                                        />
-                                    </div>
-                                    <div class="media-body">
-                                        <h5 class="mb-4">
-                                            Burger House
-                                            <span
-                                                class="badge badge-success ml-3"
-                                                >Approved</span
-                                            >
-                                        </h5>
-                                        <div class="mb-3">
-                                            <span
-                                                class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0"
-                                                >Booking Date:</span
-                                            >
-                                            <span class="bg-light-green"
-                                                >06.03.2020 - 07.03.2020</span
-                                            >
-                                        </div>
-                                        <div class="mb-3">
-                                            <span
-                                                class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0"
-                                                >Booking Details:</span
-                                            >
-                                            <span class="bg-light-green"
-                                                >2 Adults, 2 Children</span
-                                            >
-                                        </div>
+                        <v-card-text>
+                            <v-container>
+                                <v-row>
+                                    <v-col cols="12" sm="6" md="4">
+                                        <v-text-field
+                                            v-model="editedItem.name"
+                                            label="Dessert name"
+                                        ></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="4">
+                                        <v-text-field
+                                            v-model="editedItem.calories"
+                                            label="Calories"
+                                        ></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="4">
+                                        <v-text-field
+                                            v-model="editedItem.fat"
+                                            label="Fat (g)"
+                                        ></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="4">
+                                        <v-text-field
+                                            v-model="editedItem.carbs"
+                                            label="Carbs (g)"
+                                        ></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="4">
+                                        <v-text-field
+                                            v-model="editedItem.protein"
+                                            label="Protein (g)"
+                                        ></v-text-field>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-card-text>
 
-                                        <div class="mb-5">
-                                            <span
-                                                class="mr-2 d-block d-sm-inline-block mb-1 mb-sm-0"
-                                                >Clients:</span
-                                            >
-                                            <span class="border-right pr-2 mr-2"
-                                                >Jaime Cressey</span
-                                            >
-                                            <span class="border-right pr-2 mr-2"
-                                                >jaime@example.com</span
-                                            >
-                                            <span>355-456-789</span>
-                                        </div>
-                                        <a href="#" class="btn-gray"
-                                            >Send Message</a
-                                        >
-                                    </div>
-                                </div>
-                                <div class="buttons-to-right">
-                                    <a href="#" class="btn-gray mr-2">Cancle</a>
-                                </div>
-                            </li>
-
-                            <li class="position-relative booking">
-                                <div class="media">
-                                    <div class="msg-img">
-                                        <img
-                                            src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                                            alt
-                                        />
-                                    </div>
-                                    <div class="media-body">
-                                        <h5 class="mb-4">
-                                            Modern Hotel
-                                            <span
-                                                class="badge badge-danger ml-3"
-                                                >Cancled</span
-                                            >
-                                        </h5>
-                                        <div class="mb-3">
-                                            <span
-                                                class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0"
-                                                >Booking Date:</span
-                                            >
-                                            <span class="btn-gray"
-                                                >20.03.2020 - 24.03.2020</span
-                                            >
-                                        </div>
-                                        <div class="mb-3">
-                                            <span
-                                                class="mr-2 d-block d-sm-inline-block mb-2 mb-sm-0"
-                                                >Booking Details:</span
-                                            >
-                                            <span class="btn-gray"
-                                                >2 Adults</span
-                                            >
-                                        </div>
-                                        <div>
-                                            <span
-                                                class="mr-2 d-block d-sm-inline-block mb-1 mb-sm-0"
-                                                >Clients:</span
-                                            >
-                                            <span class="border-right pr-2 mr-2"
-                                                >Tesha Stovall</span
-                                            >
-                                            <span class="border-right pr-2 mr-2"
-                                                >tesha@example.com</span
-                                            >
-                                            <span>123-456-684</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue darken-1" text @click="close">
+                                Cancel
+                            </v-btn>
+                            <v-btn color="blue darken-1" text @click="save">
+                                Save
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+                <v-dialog v-model="dialogDelete" max-width="500px">
+                    <v-card>
+                        <v-card-title class="headline"
+                            >Are you sure you want to delete this
+                            item?</v-card-title
+                        >
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                                color="blue darken-1"
+                                text
+                                @click="closeDelete"
+                                >Cancel</v-btn
+                            >
+                            <v-btn
+                                color="blue darken-1"
+                                text
+                                @click="deleteItemConfirm"
+                                >OK</v-btn
+                            >
+                            <v-spacer></v-spacer>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+            </v-toolbar>
+        </template>
+        <template v-slot:[`item.actions`]="{ item }">
+            <v-icon small class="mr-2" @click="editItem(item)">
+                mdi-pencil
+            </v-icon>
+            <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+        </template>
+        <template v-slot:no-data>
+            <v-btn color="primary" @click="initialize"> Reset </v-btn>
+        </template>
+    </v-data-table>
 </template>
 
 <script>
-export default {};
+export default {
+    data: () => ({
+        dialog: false,
+        dialogDelete: false,
+        headers: [
+            {
+                text: 'Client',
+                align: 'start',
+                sortable: false,
+                value: 'name'
+            },
+            { text: 'Service', value: 'calories' },
+            { text: 'Booking Date', value: 'fat' },
+            { text: 'Booking Time', value: 'carbs' },
+            { text: 'Price', value: 'protein' },
+            { text: 'Actions', value: 'actions', sortable: false }
+        ],
+        desserts: [],
+        editedIndex: -1,
+        editedItem: {
+            name: '',
+            calories: 0,
+            fat: 0,
+            carbs: 0,
+            protein: 0
+        },
+        defaultItem: {
+            name: '',
+            calories: 0,
+            fat: 0,
+            carbs: 0,
+            protein: 0
+        }
+    }),
+
+    computed: {
+        formTitle() {
+            return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
+        }
+    },
+
+    watch: {
+        dialog(val) {
+            val || this.close();
+        },
+        dialogDelete(val) {
+            val || this.closeDelete();
+        }
+    },
+
+    created() {
+        this.initialize();
+    },
+
+    methods: {
+        initialize() {
+            this.desserts = [
+                {
+                    name: 'Frozen Yogurt',
+                    calories: 159,
+                    fat: 6.0,
+                    carbs: 24,
+                    protein: 4.0
+                },
+                {
+                    name: 'Ice cream sandwich',
+                    calories: 237,
+                    fat: 9.0,
+                    carbs: 37,
+                    protein: 4.3
+                },
+                {
+                    name: 'Eclair',
+                    calories: 262,
+                    fat: 16.0,
+                    carbs: 23,
+                    protein: 6.0
+                },
+                {
+                    name: 'Cupcake',
+                    calories: 305,
+                    fat: 3.7,
+                    carbs: 67,
+                    protein: 4.3
+                },
+                {
+                    name: 'Gingerbread',
+                    calories: 356,
+                    fat: 16.0,
+                    carbs: 49,
+                    protein: 3.9
+                },
+                {
+                    name: 'Jelly bean',
+                    calories: 375,
+                    fat: 0.0,
+                    carbs: 94,
+                    protein: 0.0
+                },
+                {
+                    name: 'Lollipop',
+                    calories: 392,
+                    fat: 0.2,
+                    carbs: 98,
+                    protein: 0
+                },
+                {
+                    name: 'Honeycomb',
+                    calories: 408,
+                    fat: 3.2,
+                    carbs: 87,
+                    protein: 6.5
+                },
+                {
+                    name: 'Donut',
+                    calories: 452,
+                    fat: 25.0,
+                    carbs: 51,
+                    protein: 4.9
+                },
+                {
+                    name: 'KitKat',
+                    calories: 518,
+                    fat: 26.0,
+                    carbs: 65,
+                    protein: 7
+                }
+            ];
+        },
+
+        editItem(item) {
+            this.editedIndex = this.desserts.indexOf(item);
+            this.editedItem = Object.assign({}, item);
+            this.dialog = true;
+        },
+
+        deleteItem(item) {
+            this.editedIndex = this.desserts.indexOf(item);
+            this.editedItem = Object.assign({}, item);
+            this.dialogDelete = true;
+        },
+
+        deleteItemConfirm() {
+            this.desserts.splice(this.editedIndex, 1);
+            this.closeDelete();
+        },
+
+        close() {
+            this.dialog = false;
+            this.$nextTick(() => {
+                this.editedItem = Object.assign({}, this.defaultItem);
+                this.editedIndex = -1;
+            });
+        },
+
+        closeDelete() {
+            this.dialogDelete = false;
+            this.$nextTick(() => {
+                this.editedItem = Object.assign({}, this.defaultItem);
+                this.editedIndex = -1;
+            });
+        },
+
+        save() {
+            if (this.editedIndex > -1) {
+                Object.assign(this.desserts[this.editedIndex], this.editedItem);
+            } else {
+                this.desserts.push(this.editedItem);
+            }
+            this.close();
+        }
+    }
+};
 </script>
 
 <style scoped>
-body {
-    background: #f6f9fc;
-    margin-top: 20px;
-}
-/* booking */
-
-.bg-light-blue {
-    background-color: #e9f7fe !important;
-    color: #3184ae;
-    padding: 7px 18px;
-    border-radius: 4px;
-}
-
-.bg-light-green {
-    background-color: rgba(40, 167, 69, 0.2) !important;
-    padding: 7px 18px;
-    border-radius: 4px;
-    color: #00897b !important;
-}
-
-.buttons-to-right {
-    position: absolute;
-    right: 0;
-    top: 40%;
-}
-
-.btn-gray {
-    color: #666;
-    background-color: #eee;
-    padding: 7px 18px;
-    border-radius: 4px;
-}
-
-.booking:hover .buttons-to-right .btn-gray {
-    opacity: 1;
-    transition: 0.3s;
-}
-
-.buttons-to-right .btn-gray {
-    opacity: 0;
-    transition: 0.3s;
-}
-
-.btn-gray:hover {
-    background-color: #36a3f5;
-    color: #fff;
-}
-
-.booking {
-    margin-bottom: 30px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 30px;
-}
-
-.booking:last-child {
-    margin-bottom: 0px;
-    border-bottom: none;
-    padding-bottom: 0px;
-}
-
-@media screen and (max-width: 575px) {
-    .buttons-to-right {
-        top: 10%;
-    }
-    .buttons-to-right a {
-        display: block;
-        margin-bottom: 20px;
-    }
-    .buttons-to-right a:last-child {
-        margin-bottom: 0px;
-    }
-    .bg-light-blue,
-    .bg-light-green,
-    .btn-gray {
-        padding: 7px;
-    }
-}
-
-.card {
-    margin-bottom: 20px;
-    background-color: #fff;
-    border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-    border-radius: 4px;
-    box-shadow: none;
-    border: none;
-    padding: 25px;
-}
-.mb-5,
-.my-5 {
-    margin-bottom: 3rem !important;
-}
-.msg-img {
-    margin-right: 20px;
-}
-.msg-img img {
-    width: 60px;
-    border-radius: 50%;
-}
-img {
-    max-width: 100%;
-    height: auto;
-}
 </style>

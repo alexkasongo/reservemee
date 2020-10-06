@@ -44,11 +44,15 @@
                         <ManageServices v-if="categories.length !== 0" />
                         <!-- ManageServices -->
 
-                        <div class="row mb-5" v-if="!loading">
+                        <div class="row" v-if="!loading">
                             <div class="col-xl-12">
                                 <Bookings class="services" />
                             </div>
                         </div>
+
+                        <v-card elevation="2">
+                            <UpcomingEvents />
+                        </v-card>
                     </div>
 
                     <!-- end col -->
@@ -68,6 +72,7 @@ import Messages from '~/components/dashboard/Messages';
 import StoreSummary from '~/components/dashboard/StoreSummary';
 import ManageServices from '~/components/dashboard/ManageServices';
 import Bookings from '~/components/dashboard/Bookings';
+import UpcomingEvents from '~/components/dashboard/UpcomingEvents';
 
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -82,7 +87,8 @@ export default {
         Messages,
         StoreSummary,
         ManageServices,
-        Bookings
+        Bookings,
+        UpcomingEvents
     },
     data() {
         return {
