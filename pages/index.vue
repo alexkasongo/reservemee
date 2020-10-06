@@ -30,7 +30,7 @@
                                             type="submit"
                                             class="btn btn-block btn-lg btn-dark"
                                         >
-                                            Sign up!
+                                            Get started!
                                         </button>
                                     </div>
                                 </div>
@@ -190,7 +190,7 @@
                                             type="submit"
                                             class="btn btn-block btn-lg btn-dark"
                                         >
-                                            Sign up!
+                                            Get started!
                                         </button>
                                     </div>
                                 </div>

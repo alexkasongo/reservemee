@@ -7,33 +7,6 @@
         <div v-if="user" class="row gutters-sm">
             <!-- TITLES -->
             <div class="col-md-4 d-none d-md-block">
-                <!-- <v-card class="mx-auto" max-width="400">
-                    <v-list>
-                        <v-list-item-group
-                            v-model="model"
-                            mandatory
-                            color="indigo"
-                        >
-                            <v-list-item v-for="(item, i) in items" :key="i">
-                                <a
-                                    style="display: flex; text-decoration: none"
-                                    :href="item.href"
-                                    data-toggle="tab"
-                                >
-                                    <v-list-item-icon>
-                                        <v-icon v-text="item.icon"></v-icon>
-                                    </v-list-item-icon>
-
-                                    <v-list-item-content>
-                                        <v-list-item-title
-                                            v-text="item.text"
-                                        ></v-list-item-title>
-                                    </v-list-item-content>
-                                </a>
-                            </v-list-item>
-                        </v-list-item-group>
-                    </v-list>
-                </v-card> -->
                 <div class="card">
                     <div class="card-body">
                         <nav class="nav flex-column nav-pills nav-gap-y-1">
@@ -335,6 +308,25 @@
                             <h6>YOUR PROFILE INFORMATION</h6>
                             <hr />
                             <form @submit.prevent="onUpdProfileInfo">
+                                <div class="form-group">
+                                    <v-file-input
+                                        type="file"
+                                        @change="onFilePicked"
+                                        label="Upload profile image"
+                                        outlined
+                                        prepend-icon="mdi-camera"
+                                        dense
+                                        accept="image/*"
+                                        ref="fileInput"
+                                    ></v-file-input>
+                                </div>
+                                <!-- <v-btn
+                                    @click="onPickFile"
+                                    class="teal darken-1"
+                                    dark
+                                >
+                                    Upload
+                                </v-btn> -->
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1"
                                         >Picture</label
@@ -802,7 +794,8 @@ export default {
             },
             profileInfo: {
                 name: '',
-                photoUrl: ''
+                photoUrl: '',
+                rawImage: null
             },
             form: {
                 storeLogo: '', // https://via.placeholder.com/500
@@ -1016,6 +1009,39 @@ export default {
 
             this.updateStoreProfile(data);
             // this.alert = 'Saved...';
+        },
+        // onPickFile() {
+        //     this.$refs.fileInput.click();
+        // },
+        onFilePicked(event) {
+            console.log(`_id.vue - 1005 - variable`, event);
+            const files = event;
+            let filename = files.name;
+            // check if the file doesn't have an extension
+            if (filename.lastIndexOf('.') <= 0) {
+                return alert('Please add a valid file!');
+            }
+            // turn file into base64 string which can be used to upload
+            const fileReader = new FileReader();
+            fileReader.addEventListener('load', () => {
+                this.profileInfo.photoUrl = fileReader.result;
+            });
+            fileReader.readAsDataURL(files);
+            this.profileInfo.rawImage = files;
+
+            // const files = event.target.files;
+            // let fileName = files[0].name;
+            // check if the file doesn't have an extension
+            // if (filename.lastIndexOf('.') <= 0) {
+            //     return alert('Please add a valid file!');
+            // }
+            // turn file into base64 string which can be used to upload
+            // const fileReader = new FileReader();
+            // fileReader.addEventListener('load', () => {
+            //     this.profileInfo.photoUrl = fileReader.result;
+            // });
+            // fileReader.readAsDataURL(files[0]);
+            // this.profileInfo.rawImage = files[0];
         }
     },
     mounted() {
