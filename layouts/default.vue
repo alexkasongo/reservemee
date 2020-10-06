@@ -191,18 +191,6 @@
                                 >
                             </v-list-item>
                         </div>
-
-                        <div v-if="user">
-                            <v-list-item @click="signout">
-                                <v-list-item-icon>
-                                    <v-icon>mdi-logout</v-icon>
-                                </v-list-item-icon>
-
-                                <v-list-item-title
-                                    ><a>Sign out</a></v-list-item-title
-                                >
-                            </v-list-item>
-                        </div>
                     </v-list-item-group>
                 </v-list>
 

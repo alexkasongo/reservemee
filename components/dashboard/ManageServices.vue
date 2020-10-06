@@ -135,7 +135,7 @@
     </div> -->
     <!-- ManageServices -->
 
-    <div>
+    <!-- <div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card-manage services-card">
@@ -271,7 +271,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <v-data-table
             :headers="headers"
@@ -305,17 +305,17 @@
                             <v-card-text>
                                 <v-container>
                                     <v-row>
-                                        <v-col cols="12" sm="6" md="4">
+                                        <v-col cols="12">
                                             <v-text-field
                                                 v-model="editedItem.name"
                                                 label="Category name"
                                             ></v-text-field>
                                         </v-col>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field
+                                        <v-col cols="12">
+                                            <v-textarea
                                                 v-model="editedItem.description"
                                                 label="Description"
-                                            ></v-text-field>
+                                            ></v-textarea>
                                         </v-col>
                                     </v-row>
                                 </v-container>
@@ -372,6 +372,11 @@
                 </v-icon>
                 <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
             </template>
+            <template v-slot:[`item.services`]="{ item }">
+                <v-btn small class="mr-2" @click="goToService(item.name)">
+                    View Services
+                </v-btn>
+            </template>
             <template v-slot:no-data>
                 <v-btn color="primary" @click="initialize"> Reset </v-btn>
             </template>
@@ -395,7 +400,7 @@ export default {
                 value: 'name'
             },
             { text: 'Description', value: 'description' },
-            { text: 'Services', value: 'fat', sortable: false },
+            { text: 'Services', value: 'services', sortable: false },
             { text: 'Actions', value: 'actions', sortable: false }
         ],
         editedIndex: -1,

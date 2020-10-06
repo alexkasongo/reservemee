@@ -112,13 +112,9 @@
         </div>
 
         <div class="col-md-6">
-            <button
-                @click="onCreate"
-                type="button"
-                class="btn btn-primary btn-block"
-            >
+            <v-btn @click="onCreate" type="button" color="teal darken-1" dark>
                 Create New Service
-            </button>
+            </v-btn>
         </div>
     </div>
 </template>
