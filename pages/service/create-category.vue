@@ -114,7 +114,7 @@ export default {
                 icon: 'success',
                 title: 'Successful',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 2500
             });
         },
         async onSubmit(event) {

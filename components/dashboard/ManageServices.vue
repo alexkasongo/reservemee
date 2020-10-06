@@ -134,148 +134,10 @@
         </div>
     </div> -->
     <!-- ManageServices -->
-
-    <!-- <div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card-manage services-card">
-                    <div class="card-body">
-                        <h5 class="card-title text-uppercase mb-0">
-                            Manage Services
-                        </h5>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table no-wrap user-table mb-0">
-                            <thead>
-                                <tr>
-                                    <th
-                                        scope="col"
-                                        class="border-0 text-uppercase font-medium pl-4"
-                                    >
-                                        #
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        class="border-0 text-uppercase font-medium"
-                                    >
-                                        Category
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        class="border-0 text-uppercase font-medium"
-                                    >
-                                        Description
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        class="border-0 text-uppercase font-medium"
-                                    >
-                                        Services
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        class="border-0 text-uppercase font-medium"
-                                    >
-                                        Manage
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody
-                                v-for="(category, categoryKey) in categories"
-                                :key="category.id"
-                            >
-                                <tr>
-                                    <td
-                                        style="vertical-align: middle"
-                                        class="pl-4"
-                                    >
-                                        {{ categoryKey + 1 }}
-                                    </td>
-                                    <td style="vertical-align: middle">
-                                        <p class="m-0">
-                                            {{ category.name | capitalize }}
-                                        </p>
-                                    </td>
-                                    <td style="vertical-align: middle">
-                                        <span class="text-muted">{{
-                                            category.description
-                                        }}</span>
-                                    </td>
-                                    <td style="vertical-align: middle">
-                                        <v-btn
-                                            outlined
-                                            small
-                                            dark
-                                            elevation="0"
-                                            @click="goToService(category.name)"
-                                            color="teal darken-1"
-                                        >
-                                            View Services
-                                        </v-btn>
-                                    </td>
-                                    <td>
-                                        <v-btn
-                                            @click="updCategory(category.id)"
-                                            type="button"
-                                            icon
-                                        >
-                                            <i class="fa fa-pencil"></i>
-                                        </v-btn>
-                                        <v-btn
-                                            @click="removeCategory(category.id)"
-                                            type="button"
-                                            icon
-                                        >
-                                            <i class="fa fa-trash"></i>
-                                        </v-btn>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div
-                    v-if="categories.length > 0"
-                    class="d-flex justify-content-start mt-3"
-                >
-                    <div class="w-100">
-                        <div
-                            class="btn-group btn-group-toggle w-100"
-                            data-toggle="buttons"
-                        >
-                            <label
-                                class="btn btn-success"
-                                @click="onCreateCategory"
-                            >
-                                <input
-                                    type="radio"
-                                    name="options"
-                                    id="option2"
-                                    autocomplete="off"
-                                />
-                                Create Category
-                            </label>
-                            <label
-                                class="btn btn-secondary"
-                                @click="onCreateService"
-                            >
-                                <input
-                                    type="radio"
-                                    name="options"
-                                    id="option3"
-                                    autocomplete="off"
-                                />
-                                Create Service
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
         <v-data-table
             :headers="headers"
             :items="categories"
+            :items-per-page="5"
             sort-by="calories"
             class="elevation-1"
         >
@@ -517,7 +379,7 @@ export default {
                 icon: 'success',
                 title: 'Deleted',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 2500
             });
 
             this.closeDelete();
@@ -540,12 +402,6 @@ export default {
         },
 
         async save() {
-            // if (this.editedIndex > -1) {
-            //     Object.assign(this.desserts[this.editedIndex], this.editedItem);
-            // } else {
-            //     this.desserts.push(this.editedItem);
-            // }
-
             // category with dashes
             let res = this.editedItem.name.replace(/\s+/g, '-').toLowerCase();
 

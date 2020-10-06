@@ -244,7 +244,7 @@ export const actions = {
                     icon: 'success',
                     title: 'Created',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 2500
                 });
                 commit('SET_LOADING', false);
             })
@@ -257,7 +257,7 @@ export const actions = {
                     icon: 'error',
                     title: 'Failed',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 2500
                 });
                 commit('SET_LOADING', false);
             });
@@ -345,7 +345,7 @@ export const actions = {
                     icon: 'success',
                     title: 'Updated',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 2500
                 });
                 commit('SET_LOADING', false);
             })
@@ -393,7 +393,7 @@ export const actions = {
                     icon: 'success',
                     title: 'Saved',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 2500
                 });
                 dispatch('loadUserIdData', payload.userId);
                 commit('SET_LOADING', false);
@@ -425,7 +425,7 @@ export const actions = {
                     icon: 'success',
                     title: 'Saved',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 2500
                 });
                 commit('SET_ALERT', true);
                 commit('SET_LOADING', false);
