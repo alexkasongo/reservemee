@@ -308,7 +308,7 @@
                             <h6>YOUR PROFILE INFORMATION</h6>
                             <hr />
                             <form @submit.prevent="onUpdProfileInfo">
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <v-file-input
                                         type="file"
                                         @change="onFilePicked"
@@ -319,14 +319,7 @@
                                         accept="image/*"
                                         ref="fileInput"
                                     ></v-file-input>
-                                </div>
-                                <!-- <v-btn
-                                    @click="onPickFile"
-                                    class="teal darken-1"
-                                    dark
-                                >
-                                    Upload
-                                </v-btn> -->
+                                </div> -->
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1"
                                         >Picture</label
@@ -383,11 +376,22 @@
                             <hr />
                             <form @submit.prevent="onUpdStoreInfo">
                                 <div class="form-group">
+                                    <v-file-input
+                                        type="file"
+                                        @change="onFilePicked"
+                                        label="Upload profile image"
+                                        outlined
+                                        prepend-icon="mdi-camera"
+                                        dense
+                                        accept="image/*"
+                                        ref="fileInput"
+                                    ></v-file-input>
+                                </div>
+                                <div class="form-group">
                                     <label for="exampleFormControlFile1"
                                         >Logo</label
                                     >
                                     <input
-                                        required
                                         class="form-control"
                                         name="imageUrl"
                                         label="Image URL"
@@ -395,7 +399,6 @@
                                     />
                                 </div>
                                 <div
-                                    required
                                     class="form-group imgPreview"
                                     v-bind:style="{
                                         'background-image':
@@ -462,7 +465,6 @@
                                         >Store Banner</label
                                     >
                                     <input
-                                        required
                                         class="form-control"
                                         name="imageUrl"
                                         label="Image URL"
@@ -470,7 +472,6 @@
                                     />
                                 </div>
                                 <div
-                                    required
                                     class="form-group imgPreview"
                                     v-bind:style="{
                                         'background-image':
@@ -795,14 +796,15 @@ export default {
             profileInfo: {
                 name: '',
                 photoUrl: '',
-                rawImage: null
+                rawProfileImage: null
             },
             form: {
                 storeLogo: '', // https://via.placeholder.com/500
                 storeName: '',
                 storeBio: '',
                 storeBanner: '', // https://via.placeholder.com/500
-                storeLocation: ''
+                storeLocation: '',
+                rawStoreLogo: null
             },
             items: [
                 {
@@ -981,10 +983,16 @@ export default {
             });
         },
         onUpdProfileInfo() {
+            if (!this.profileInfo.rawImage) {
+                return;
+            }
             const payload = {
                 name: this.profileInfo.name,
-                photoUrl: this.profileInfo.photoUrl
+                // photoUrl: this.profileInfo.photoUrl
+
+                rawImage: this.profileInfo.rawImage
             };
+            // store image as binary in database
             this.updateUserProfile(payload);
         },
         closeAlert() {
@@ -998,7 +1006,8 @@ export default {
 
             const data = {
                 userId: this.user.uid,
-                storeLogo: this.form.storeLogo,
+                // storeLogo: this.form.storeLogo,
+                rawStoreLogo: this.form.rawStoreLogo,
                 storeName: storeName,
                 storeEmail: this.form.storeEmail,
                 storePhoneNumber: this.form.storePhoneNumber,
@@ -1024,24 +1033,11 @@ export default {
             // turn file into base64 string which can be used to upload
             const fileReader = new FileReader();
             fileReader.addEventListener('load', () => {
-                this.profileInfo.photoUrl = fileReader.result;
+                this.form.storeLogo = fileReader.result;
             });
             fileReader.readAsDataURL(files);
-            this.profileInfo.rawImage = files;
-
-            // const files = event.target.files;
-            // let fileName = files[0].name;
-            // check if the file doesn't have an extension
-            // if (filename.lastIndexOf('.') <= 0) {
-            //     return alert('Please add a valid file!');
-            // }
-            // turn file into base64 string which can be used to upload
-            // const fileReader = new FileReader();
-            // fileReader.addEventListener('load', () => {
-            //     this.profileInfo.photoUrl = fileReader.result;
-            // });
-            // fileReader.readAsDataURL(files[0]);
-            // this.profileInfo.rawImage = files[0];
+            // raw file to be used on form submit
+            this.form.rawStoreLogo = files;
         }
     },
     mounted() {

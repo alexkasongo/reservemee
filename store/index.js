@@ -1,6 +1,7 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/storage';
 
 export const state = () => ({
     count: 0, // persistedstate test counter
@@ -372,20 +373,52 @@ export const actions = {
     async updateStoreProfile({ commit, dispatch }, payload) {
         commit('SET_LOADING', true);
 
-        firebase
-            .database()
-            .ref('users/' + payload.userId)
-            .child('storeProfile/')
-            .set({
-                storeLogo: payload.storeLogo,
-                storeName: payload.storeName,
-                storeEmail: payload.storeEmail,
-                storePhoneNumber: payload.storePhoneNumber,
-                storeBio: payload.storeBio,
-                storeBanner: payload.storeBanner,
-                storeLocation: payload.storeLocation
+        let imageUrl = ''
+
+        // firebase
+        //     .database()
+        //     .ref('users/' + payload.userId)
+        //     .child('storeProfile/')
+        //     .set({
+        //         // storeLogo: payload.storeLogo,
+        //         storeName: payload.storeName,
+        //         storeEmail: payload.storeEmail,
+        //         storePhoneNumber: payload.storePhoneNumber,
+        //         storeBio: payload.storeBio,
+        //         storeBanner: payload.storeBanner,
+        //         storeLocation: payload.storeLocation
+        //     })
+
+        // REVIEW 
+        // NOTE should be able to upload both images. fire two firebase functions 
+        // simultaneously upload images then return single object with paths
+        const filename = payload.rawStoreLogo.name
+        const ext = filename.slice(filename.lastIndexOf('.'))
+        firebase.storage().ref('storeLogo/' + payload.userId + ext).put(payload.rawStoreLogo)
+            .then(fileData => {
+                let fullPath = fileData.metadata.fullPath
+                return firebase.storage().ref(fullPath).getDownloadURL()
             })
-            .then(() => {
+            .then((URL) => {
+                imageUrl = URL
+                console.log(`index.js - 389 - ImageURL should be here 🍎`, URL);
+                return imageUrl
+            })
+            .then((res) => {
+                firebase
+                    .database()
+                    .ref('users/' + payload.userId)
+                    .child('storeProfile/')
+                    .set({
+                        storeLogo: res,
+                        storeName: payload.storeName,
+                        storeEmail: payload.storeEmail,
+                        storePhoneNumber: payload.storePhoneNumber,
+                        storeBio: payload.storeBio,
+                        storeBanner: payload.storeBanner,
+                        storeLocation: payload.storeLocation
+                    })
+
                 // update successful
                 this.$swal({
                     toast: true,
