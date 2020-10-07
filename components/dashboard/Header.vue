@@ -2,6 +2,7 @@
     <!-- Header -->
     <!-- FIXME only display banner when it is fully loaded -->
     <div class="row">
+        <!-- UPLOADED IMAGES -->
         <div v-if="storeProfile !== null" class="col-sm-12">
             <!-- meta -->
             <div
@@ -40,6 +41,9 @@
             </div>
             <!--/ meta -->
         </div>
+        <!-- UPLOADED IMAGES -->
+
+        <!-- DEFAULT IMAGES -->
         <div v-else class="col-sm-12">
             <!-- meta -->
             <div
@@ -75,6 +79,7 @@
             </div>
             <!--/ meta -->
         </div>
+        <!-- DEFAULT IMAGES -->
     </div>
     <!-- Header End-->
 </template>

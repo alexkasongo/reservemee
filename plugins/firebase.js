@@ -26,3 +26,13 @@ export const db = firebase.firestore();
 
 // will be used to connect to realtime database and all the others
 export default firebase;
+
+/*
+**NOTE Realtime database full access rule
+{
+  "rules": {
+    ".read": "now < 1602226800000",  // 2020-10-9
+    ".write": "now < 1602226800000",  // 2020-10-9
+  }
+}
+*/

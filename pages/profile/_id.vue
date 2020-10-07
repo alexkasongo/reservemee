@@ -308,18 +308,6 @@
                             <h6>YOUR PROFILE INFORMATION</h6>
                             <hr />
                             <form @submit.prevent="onUpdProfileInfo">
-                                <!-- <div class="form-group">
-                                    <v-file-input
-                                        type="file"
-                                        @change="onFilePicked"
-                                        label="Upload profile image"
-                                        outlined
-                                        prepend-icon="mdi-camera"
-                                        dense
-                                        accept="image/*"
-                                        ref="fileInput"
-                                    ></v-file-input>
-                                </div> -->
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1"
                                         >Picture</label
@@ -376,27 +364,19 @@
                             <hr />
                             <form @submit.prevent="onUpdStoreInfo">
                                 <div class="form-group">
+                                    <label for="exampleFormControlFile1"
+                                        >Logo</label
+                                    >
                                     <v-file-input
                                         type="file"
-                                        @change="onFilePicked"
-                                        label="Upload profile image"
+                                        @change="onUploadLogo"
+                                        label="Upload store logo"
                                         outlined
                                         prepend-icon="mdi-camera"
                                         dense
                                         accept="image/*"
                                         ref="fileInput"
                                     ></v-file-input>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleFormControlFile1"
-                                        >Logo</label
-                                    >
-                                    <input
-                                        class="form-control"
-                                        name="imageUrl"
-                                        label="Image URL"
-                                        v-model="form.storeLogo"
-                                    />
                                 </div>
                                 <div
                                     class="form-group imgPreview"
@@ -448,28 +428,26 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="bio">Your Store Bio</label>
-                                    <textarea
-                                        class="form-control autosize"
+                                    <v-textarea
+                                        outlined
                                         placeholder="Write a description of your store"
                                         v-model="form.storeBio"
-                                        style="
-                                            overflow: hidden;
-                                            overflow-wrap: break-word;
-                                            resize: none;
-                                            height: 62px;
-                                        "
-                                    ></textarea>
+                                    ></v-textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1"
-                                        >Store Banner</label
+                                        >Store banner</label
                                     >
-                                    <input
-                                        class="form-control"
-                                        name="imageUrl"
-                                        label="Image URL"
-                                        v-model="form.storeBanner"
-                                    />
+                                    <v-file-input
+                                        type="file"
+                                        @change="onUploadBanner"
+                                        label="Upload store banner"
+                                        outlined
+                                        prepend-icon="mdi-camera"
+                                        dense
+                                        accept="image/*"
+                                        ref="fileInput"
+                                    ></v-file-input>
                                 </div>
                                 <div
                                     class="form-group imgPreview"
@@ -804,7 +782,8 @@ export default {
                 storeBio: '',
                 storeBanner: '', // https://via.placeholder.com/500
                 storeLocation: '',
-                rawStoreLogo: null
+                rawStoreLogo: null,
+                rawStoreBanner: null
             },
             items: [
                 {
@@ -990,7 +969,7 @@ export default {
                 name: this.profileInfo.name,
                 // photoUrl: this.profileInfo.photoUrl
 
-                rawImage: this.profileInfo.rawImage
+                rawLogoImage: this.profileInfo.rawImage
             };
             // store image as binary in database
             this.updateUserProfile(payload);
@@ -1006,8 +985,8 @@ export default {
 
             const data = {
                 userId: this.user.uid,
-                // storeLogo: this.form.storeLogo,
                 rawStoreLogo: this.form.rawStoreLogo,
+                rawStoreBanner: this.form.rawStoreBanner,
                 storeName: storeName,
                 storeEmail: this.form.storeEmail,
                 storePhoneNumber: this.form.storePhoneNumber,
@@ -1019,10 +998,7 @@ export default {
             this.updateStoreProfile(data);
             // this.alert = 'Saved...';
         },
-        // onPickFile() {
-        //     this.$refs.fileInput.click();
-        // },
-        onFilePicked(event) {
+        onUploadLogo(event) {
             console.log(`_id.vue - 1005 - variable`, event);
             const files = event;
             let filename = files.name;
@@ -1038,6 +1014,23 @@ export default {
             fileReader.readAsDataURL(files);
             // raw file to be used on form submit
             this.form.rawStoreLogo = files;
+        },
+        onUploadBanner(event) {
+            console.log(`_id.vue - 1005 - variable`, event);
+            const files = event;
+            let filename = files.name;
+            // check if the file doesn't have an extension
+            if (filename.lastIndexOf('.') <= 0) {
+                return alert('Please add a valid file!');
+            }
+            // turn file into base64 string which can be used to upload
+            const fileReader = new FileReader();
+            fileReader.addEventListener('load', () => {
+                this.form.storeBanner = fileReader.result;
+            });
+            fileReader.readAsDataURL(files);
+            // raw file to be used on form submit
+            this.form.rawStoreBanner = files;
         }
     },
     mounted() {

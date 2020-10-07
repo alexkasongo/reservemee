@@ -373,69 +373,214 @@ export const actions = {
     async updateStoreProfile({ commit, dispatch }, payload) {
         commit('SET_LOADING', true);
 
-        let imageUrl = ''
+        // if both logo and banner have been added run the code below
+        let logoImageUrl = ''
+        let bannerImageUrl = ''
 
-        // firebase
-        //     .database()
-        //     .ref('users/' + payload.userId)
-        //     .child('storeProfile/')
-        //     .set({
-        //         // storeLogo: payload.storeLogo,
-        //         storeName: payload.storeName,
-        //         storeEmail: payload.storeEmail,
-        //         storePhoneNumber: payload.storePhoneNumber,
-        //         storeBio: payload.storeBio,
-        //         storeBanner: payload.storeBanner,
-        //         storeLocation: payload.storeLocation
-        //     })
+        // if no new logo or banner added, only update the rest of the information
+        if (payload.rawStoreLogo === null && payload.rawStoreBanner === null) {
+            console.log(`index.js - 377 - 🍎 NO STORE LOGO or BANNER PRESENT`);
+            firebase
+                .database()
+                .ref('users/' + payload.userId)
+                .child('storeProfile/')
+                .set({
+                    storeLogo: payload.storeLogo,
+                    storeName: payload.storeName,
+                    storeEmail: payload.storeEmail,
+                    storePhoneNumber: payload.storePhoneNumber,
+                    storeBio: payload.storeBio,
+                    storeBanner: payload.storeBanner,
+                    storeLocation: payload.storeLocation
+                })
 
-        // REVIEW 
-        // NOTE should be able to upload both images. fire two firebase functions 
-        // simultaneously upload images then return single object with paths
-        const filename = payload.rawStoreLogo.name
-        const ext = filename.slice(filename.lastIndexOf('.'))
-        firebase.storage().ref('storeLogo/' + payload.userId + ext).put(payload.rawStoreLogo)
+            // update successful
+            this.$swal({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Saved',
+                showConfirmButton: false,
+                timer: 2500
+            });
+            dispatch('loadUserIdData', payload.userId);
+            commit('SET_LOADING', false);
+            return
+        }
+
+        // NO BANNER
+        if (payload.rawStoreBanner === null) {
+            console.log(`index.js - 411 - 🍎  no banner only logo`);
+            let logoImageUrl = ''
+
+            const logoFilename = payload.rawStoreLogo.name
+            const logoFileExt = logoFilename.slice(logoFilename.lastIndexOf('.'))
+            firebase.storage().ref('storeLogo/' + payload.userId + logoFileExt).put(payload.rawStoreLogo)
+                .then(fileData => {
+                    let fullPath = fileData.metadata.fullPath
+                    return firebase.storage().ref(fullPath).getDownloadURL()
+                })
+                .then((URL) => {
+                    logoImageUrl = URL
+                    console.log(`index.js - 403 - logoImageUrl should be here 🚑`, URL);
+                    return logoImageUrl
+                })
+                .then((logo) => {
+                    // successful
+                    console.log(`index.js - 408 - 🎯`, logo);
+                    firebase
+                        .database()
+                        .ref('users/' + payload.userId)
+                        .child('storeProfile/')
+                        .set({
+                            storeLogo: logo,
+                            storeName: payload.storeName,
+                            storeEmail: payload.storeEmail,
+                            storePhoneNumber: payload.storePhoneNumber,
+                            storeBio: payload.storeBio,
+                            storeBanner: payload.storeBanner,
+                            storeLocation: payload.storeLocation
+                        })
+
+                    // update successful
+                    this.$swal({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Saved',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                    dispatch('loadUserIdData', payload.userId);
+                    commit('SET_LOADING', false);
+                })
+                .catch((error) => {
+                    commit('ERRORS', error);
+                    console.log(`index.js - 66 - 🚧`, error);
+                    commit('SET_LOADING', false);
+                });
+            return
+        }
+
+        // NO LOGO
+        if (payload.rawStoreLogo === null) {
+            console.log(`index.js - 465 - 🍎 no logo only`);
+            let bannerImageUrl = ''
+
+            // upload store banner
+            const bannerFilename = payload.rawStoreBanner.name
+            const bannerFileExt = bannerFilename.slice(bannerFilename.lastIndexOf('.'))
+            firebase.storage().ref('storeBanner/' + payload.userId + bannerFileExt).put(payload.rawStoreBanner)
+                .then(fileData => {
+                    let fullPath = fileData.metadata.fullPath
+                    return firebase.storage().ref(fullPath).getDownloadURL()
+                })
+                .then((URL) => {
+                    bannerImageUrl = URL
+                    console.log(`index.js - 473 - bannerImageUrl should be here 🍎`, URL);
+                    return bannerImageUrl
+                })
+                .then((banner) => {
+                    // successful
+                    console.log(`index.js - 479 - 🎯`, banner);
+                    firebase
+                        .database()
+                        .ref('users/' + payload.userId)
+                        .child('storeProfile/')
+                        .set({
+                            storeLogo: payload.storeLogo,
+                            storeName: payload.storeName,
+                            storeEmail: payload.storeEmail,
+                            storePhoneNumber: payload.storePhoneNumber,
+                            storeBio: payload.storeBio,
+                            storeBanner: banner,
+                            storeLocation: payload.storeLocation
+                        })
+
+                    // update successful
+                    this.$swal({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Saved',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                    dispatch('loadUserIdData', payload.userId);
+                    commit('SET_LOADING', false);
+                })
+                .catch((error) => {
+                    commit('ERRORS', error);
+                    console.log(`index.js - 66 - 🚧`, error);
+                    commit('SET_LOADING', false);
+                });
+            return
+        }
+
+        // upload store banner and logo
+        const bannerFilename = payload.rawStoreBanner.name
+        const bannerFileExt = bannerFilename.slice(bannerFilename.lastIndexOf('.'))
+        firebase.storage().ref('storeBanner/' + payload.userId + bannerFileExt).put(payload.rawStoreBanner)
             .then(fileData => {
                 let fullPath = fileData.metadata.fullPath
                 return firebase.storage().ref(fullPath).getDownloadURL()
             })
             .then((URL) => {
-                imageUrl = URL
-                console.log(`index.js - 389 - ImageURL should be here 🍎`, URL);
-                return imageUrl
-            })
-            .then((res) => {
-                firebase
-                    .database()
-                    .ref('users/' + payload.userId)
-                    .child('storeProfile/')
-                    .set({
-                        storeLogo: res,
-                        storeName: payload.storeName,
-                        storeEmail: payload.storeEmail,
-                        storePhoneNumber: payload.storePhoneNumber,
-                        storeBio: payload.storeBio,
-                        storeBanner: payload.storeBanner,
-                        storeLocation: payload.storeLocation
+                bannerImageUrl = URL
+                console.log(`index.js - 389 - bannerImageUrl should be here 🍎`, URL);
+                return bannerImageUrl
+            }).then((banner) => {
+                // upload store logo
+                const logoFilename = payload.rawStoreLogo.name
+                const logoFileExt = logoFilename.slice(logoFilename.lastIndexOf('.'))
+                firebase.storage().ref('storeLogo/' + payload.userId + logoFileExt).put(payload.rawStoreLogo)
+                    .then(fileData => {
+                        let fullPath = fileData.metadata.fullPath
+                        return firebase.storage().ref(fullPath).getDownloadURL()
                     })
+                    .then((URL) => {
+                        logoImageUrl = URL
+                        console.log(`index.js - 403 - logoImageUrl should be here 🚑`, URL);
+                        return logoImageUrl
+                    })
+                    .then((logo) => {
+                        // successful
+                        console.log(`index.js - 407 - 🎯`, banner);
+                        console.log(`index.js - 408 - 🎯`, logo);
+                        firebase
+                            .database()
+                            .ref('users/' + payload.userId)
+                            .child('storeProfile/')
+                            .set({
+                                storeLogo: logo,
+                                storeName: payload.storeName,
+                                storeEmail: payload.storeEmail,
+                                storePhoneNumber: payload.storePhoneNumber,
+                                storeBio: payload.storeBio,
+                                storeBanner: banner,
+                                storeLocation: payload.storeLocation
+                            })
 
-                // update successful
-                this.$swal({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Saved',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
-                dispatch('loadUserIdData', payload.userId);
-                commit('SET_LOADING', false);
+                        // update successful
+                        this.$swal({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Saved',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                        dispatch('loadUserIdData', payload.userId);
+                        commit('SET_LOADING', false);
+                    })
+                    .catch((error) => {
+                        commit('ERRORS', error);
+                        console.log(`index.js - 66 - 🚧`, error);
+                        commit('SET_LOADING', false);
+                    });
             })
-            .catch((error) => {
-                commit('ERRORS', error);
-                console.log(`index.js - 66 - 🚧`, error);
-                commit('SET_LOADING', false);
-            });
+
+
     },
     /*
      ** update logged in user profile info
