@@ -48,13 +48,10 @@ export const actions = {
     },
     async verifyEmail({ commit }, payload) {
         commit('SET_LOADING', true);
-        console.log(`index.js - 55 - 🏝`, payload);
         let user = await firebase.auth().currentUser;
 
         user.sendEmailVerification()
-            .then((res) => {
-                // Email sent.
-                console.log(`index.js - 60 - EMAIL SENT 💌`, res);
+            .then(() => {
                 commit('NOTIFICATION', true);
                 commit('SET_LOADING', false);
             })
@@ -92,7 +89,6 @@ export const actions = {
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                console.log(`index.js - 89 - 🚧`, error);
                 commit('SET_LOADING', false);
             });
     },
@@ -117,7 +113,6 @@ export const actions = {
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                console.log(`index.js - 120 - 🚧`, error);
                 commit('SET_LOADING', false);
             });
     },
@@ -145,7 +140,6 @@ export const actions = {
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                console.log(`index.js - 80 - 🚧`, error);
                 commit('SET_LOADING', false);
             });
     },
@@ -160,15 +154,13 @@ export const actions = {
                         .updateProfile({
                             displayName: user.name
                         })
-                        .then((s) => {
-                            console.log(`index.js - 31 - variable`, s);
+                        .then(() => {
                             commit('SET_LOADING', false);
                             this.$router.push('/dashboard');
                         });
                 }
             })
             .catch((error) => {
-                console.log(`index.js - 31 - variable`, error);
                 // Handle Errors here.
                 commit('ERRORS', error);
                 commit('SET_LOADING', false);
@@ -196,7 +188,6 @@ export const actions = {
      */
     async createUserTable({ commit }, payload) {
         commit('SET_LOADING', true);
-        console.log(`index.js - 151 - 🎨`, payload);
 
         await firebase
             .database()
@@ -211,7 +202,6 @@ export const actions = {
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                console.log(`index.js - 66 - 🚧`, error);
                 commit('SET_LOADING', false);
             });
     }, // Not being used
@@ -220,7 +210,6 @@ export const actions = {
      */
     async createCategory({ commit }, payload) {
         commit('SET_LOADING', true);
-        // console.log(`index.js - 151 - 🎨`, payload);
 
         const category = {
             name: payload.category,
@@ -251,7 +240,6 @@ export const actions = {
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                console.log(`index.js - 66 - 🚧`, error);
                 this.$swal({
                     toast: true,
                     position: 'top-end',
@@ -264,7 +252,6 @@ export const actions = {
             });
     },
     async createService({ commit }, payload) {
-        console.log(`index.js - 249 - 🎨`, payload);
         commit('SET_LOADING', true);
         const service = {
             userId: payload.userId,
@@ -290,7 +277,6 @@ export const actions = {
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                console.log(`index.js - 66 - 🚧`, error);
                 commit('SET_LOADING', false);
             });
     },
@@ -313,12 +299,10 @@ export const actions = {
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                console.log(`index.js - 66 - 🚧`, error);
                 commit('SET_LOADING', false);
             });
     },
     async deleteService({ commit }, payload) {
-        console.log(`index.js - 289 - 🎨`, payload);
         commit('SET_LOADING', true);
         await firebase
             .database()
@@ -352,12 +336,10 @@ export const actions = {
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                console.log(`index.js - 66 - 🚧`, error);
                 commit('SET_LOADING', false);
             });
     },
     async deleteCategory({ commit }, payload) {
-        console.log(`index.js - 289 - 🎨`, payload);
         commit('SET_LOADING', true);
         await firebase
             .database()
@@ -379,7 +361,6 @@ export const actions = {
 
         // if no new logo or banner added, only update the rest of the information
         if (payload.rawStoreLogo === null && payload.rawStoreBanner === null) {
-            console.log(`index.js - 377 - 🍎 NO STORE LOGO or BANNER PRESENT`, payload);
             firebase
                 .database()
                 .ref('users/' + payload.userId)
@@ -410,7 +391,6 @@ export const actions = {
 
         // NO BANNER
         if (payload.rawStoreBanner === null) {
-            console.log(`index.js - 411 - 🍎  no banner only logo`);
             let logoImageUrl = ''
 
             const logoFilename = payload.rawStoreLogo.name
@@ -422,12 +402,10 @@ export const actions = {
                 })
                 .then((URL) => {
                     logoImageUrl = URL
-                    console.log(`index.js - 403 - logoImageUrl should be here 🚑`, URL);
                     return logoImageUrl
                 })
                 .then((logo) => {
                     // successful
-                    console.log(`index.js - 408 - 🎯`, logo);
                     firebase
                         .database()
                         .ref('users/' + payload.userId)
@@ -456,7 +434,6 @@ export const actions = {
                 })
                 .catch((error) => {
                     commit('ERRORS', error);
-                    console.log(`index.js - 66 - 🚧`, error);
                     commit('SET_LOADING', false);
                 });
             return
@@ -464,7 +441,6 @@ export const actions = {
 
         // NO LOGO
         if (payload.rawStoreLogo === null) {
-            console.log(`index.js - 465 - 🍎 no logo only`);
             let bannerImageUrl = ''
 
             // upload store banner
@@ -477,12 +453,10 @@ export const actions = {
                 })
                 .then((URL) => {
                     bannerImageUrl = URL
-                    console.log(`index.js - 473 - bannerImageUrl should be here 🍎`, URL);
                     return bannerImageUrl
                 })
                 .then((banner) => {
                     // successful
-                    console.log(`index.js - 479 - 🎯`, banner);
                     firebase
                         .database()
                         .ref('users/' + payload.userId)
@@ -511,7 +485,6 @@ export const actions = {
                 })
                 .catch((error) => {
                     commit('ERRORS', error);
-                    console.log(`index.js - 66 - 🚧`, error);
                     commit('SET_LOADING', false);
                 });
             return
@@ -527,7 +500,6 @@ export const actions = {
             })
             .then((URL) => {
                 bannerImageUrl = URL
-                console.log(`index.js - 389 - bannerImageUrl should be here 🍎`, URL);
                 return bannerImageUrl
             }).then((banner) => {
                 // upload store logo
@@ -540,13 +512,10 @@ export const actions = {
                     })
                     .then((URL) => {
                         logoImageUrl = URL
-                        console.log(`index.js - 403 - logoImageUrl should be here 🚑`, URL);
                         return logoImageUrl
                     })
                     .then((logo) => {
                         // successful
-                        console.log(`index.js - 407 - 🎯`, banner);
-                        console.log(`index.js - 408 - 🎯`, logo);
                         firebase
                             .database()
                             .ref('users/' + payload.userId)
@@ -575,7 +544,6 @@ export const actions = {
                     })
                     .catch((error) => {
                         commit('ERRORS', error);
-                        console.log(`index.js - 66 - 🚧`, error);
                         commit('SET_LOADING', false);
                     });
             })
@@ -611,7 +579,6 @@ export const actions = {
             .catch((error) => {
                 // An error happened.
                 commit('ERRORS', error);
-                console.log(`index.js - 66 - 🚧`, error);
                 commit('SET_LOADING', false);
             });
     },

@@ -95,11 +95,6 @@ export default {
                 email: this.userLoaded.email
             };
             this.verifyEmail(emailAddress).then((res) => {
-                // this.$router.push('/signin');
-                console.log(`verification.vue - 75 - we here fam🙏🏾`, res);
-                // this.loadUserId(this.userId);
-
-                // update state
                 this.user();
             });
         },
@@ -108,7 +103,6 @@ export default {
                 .auth()
                 .signOut()
                 .then((result) => {
-                    // console.log(result);
                     this.user = '';
                     window.localStorage.removeItem('email');
                     window.localStorage.removeItem('vuex');

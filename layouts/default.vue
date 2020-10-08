@@ -240,7 +240,6 @@ export default {
     data() {
         return {
             user: '',
-            // loading: false,
             drawer: false,
             group: null
         };
@@ -290,13 +289,11 @@ export default {
                 .auth()
                 .signOut()
                 .then(() => {
-                    console.log('🏝 🚧');
                     this.user = '';
                     window.localStorage.removeItem('email');
                     window.localStorage.removeItem('vuex');
                 });
             this.$router.push('/');
-            this.loading = false;
         },
         goHome(user) {
             if (user) {
@@ -327,8 +324,6 @@ export default {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 // User is signed in.
-                // show loading when mounted
-                this.loading = true;
                 this.user = user;
 
                 const userDetails = {
@@ -345,9 +340,6 @@ export default {
                 this.loadUserIdData(user.uid);
                 this.loadCategories(user.uid);
                 this.loadServices(user.uid);
-
-                // stop loading when all content is loaded
-                this.loading = false;
             } else {
                 // No user is signed in.
                 window.localStorage.removeItem('vuex');

@@ -1,7 +1,7 @@
 <template>
     <!-- Header -->
     <!-- FIXME only display banner when it is fully loaded -->
-    <div v-if="!localLoading" class="row">
+    <div class="row">
         <!-- UPLOADED IMAGES -->
         <div v-if="storeProfile !== null" class="col-sm-12">
             <!-- meta -->
@@ -21,7 +21,7 @@
                     backgroundImage: 'url(' + defaultStoreBanner + ')'
                 }"
             ></div>
-            <div v-if="!loading" class="bg-center">
+            <div class="bg-center">
                 <div class="col-sm-6">
                     <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
@@ -113,14 +113,12 @@ export default {
     data() {
         return {
             user: '',
-            localLoading: false,
             defaultStoreBanner: 'https://via.placeholder.com/1200',
             defaultStoreLogo: 'https://via.placeholder.com/1200/00897B'
         };
     },
     computed: {
         storeProfile() {
-            this.localLoading = true;
             if (
                 // if the state is undfined or the object does not exist, return null
                 this.$store.state.userData.length <= 0 ||
@@ -129,17 +127,12 @@ export default {
                 return null;
             } else {
                 const data = this.$store.state.userData[0].storeProfile;
-                this.localLoading = false;
                 return data;
             }
-        },
-        loading() {
-            return this.$store.getters.loading;
         }
     },
     mounted() {
         firebase.auth().onAuthStateChanged((user) => {
-            console.log(`Header.vue - 54 - 🍎`, user);
             if (user !== null) {
                 this.user = user;
             }

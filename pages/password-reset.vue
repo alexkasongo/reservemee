@@ -68,10 +68,6 @@ export default {
                     })
                     .catch((error) => {
                         // An error happened.
-                        console.log(
-                            `password-reset.vue - 56 - variable`,
-                            error
-                        );
                         this.errors = error;
                         this.$swal({
                             toast: true,

@@ -433,7 +433,6 @@
                                 <div class="form-group">
                                     <label for="bio">Your Store Bio</label>
                                     <v-textarea
-                                        required
                                         outlined
                                         placeholder="Write a description of your store"
                                         v-model="form.storeBio"
@@ -861,7 +860,6 @@ export default {
                 .auth()
                 .signOut()
                 .then(() => {
-                    console.log('🏝 🚧');
                     this.user = '';
                     window.localStorage.removeItem('email');
                     window.localStorage.removeItem('vuex');
@@ -926,7 +924,6 @@ export default {
                     var user = firebase.auth().currentUser;
                     user.updatePassword(newPassword)
                         .then(() => {
-                            console.log('Password updated! 🙈 🙏🏾 🏆 ');
                             this.$swal({
                                 toast: true,
                                 position: 'top-end',
@@ -939,12 +936,10 @@ export default {
                         })
                         .catch((error) => {
                             this.errors = error;
-                            console.log('🇿🇦', error);
                         });
                 })
                 .catch((error) => {
                     this.errors = error;
-                    console.log('🧩', error);
                 });
             this.signout();
         },
@@ -1020,7 +1015,6 @@ export default {
             }
             // if user removes file, clear local state and revert back to uploaded image
             if (event === undefined) {
-                console.log(`_id.vue - 1012 - variable`, event);
                 // this.logoDisplay = 'none';
                 if (this.userInfo[0] === undefined) {
                     return;
@@ -1059,7 +1053,6 @@ export default {
                 this.form.rawStoreBanner = null;
                 return;
             }
-            console.log(`_id.vue - 1005 - variable`, event);
             const files = event;
             let filename = files.name;
             // check if the file doesn't have an extension

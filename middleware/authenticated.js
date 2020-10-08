@@ -20,6 +20,4 @@ export default function ({ app, store, route, redirect }) {
     // ) {
     //     redirect('/');
     // }
-
-    // console.log(`authenticated.js - 26 - variable`, user);
 }

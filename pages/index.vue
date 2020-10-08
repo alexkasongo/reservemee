@@ -300,7 +300,6 @@ export default {
             if (user !== null) {
                 this.loading = false;
                 // No user is signed in.
-                console.log(`index.vue - 303 - 🏓 No user logged in`);
                 window.localStorage.removeItem('email');
                 window.localStorage.removeItem('vuex');
             }
