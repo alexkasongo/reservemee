@@ -4,7 +4,7 @@
             <p>loading...</p>
         </div>
 
-        <div v-if="user" class="row gutters-sm">
+        <div v-if="user || loading" class="row gutters-sm">
             <!-- TITLES -->
             <div class="col-md-4 d-none d-md-block">
                 <div class="card">
@@ -479,7 +479,12 @@
                                     to share this data wherever your user
                                     profile appears.
                                 </div>
-                                <v-btn type="submit" class="teal darken-1" dark>
+                                <v-btn
+                                    :loading="loading"
+                                    type="submit"
+                                    class="teal darken-1"
+                                    dark
+                                >
                                     Save Settings
                                 </v-btn>
                                 <button type="reset" class="btn btn-light">
@@ -1016,7 +1021,7 @@ export default {
             // if user removes file, clear local state and revert back to uploaded image
             if (event === undefined) {
                 console.log(`_id.vue - 1012 - variable`, event);
-                this.logoDisplay = 'none';
+                // this.logoDisplay = 'none';
                 if (this.userInfo[0] === undefined) {
                     return;
                 }
@@ -1083,12 +1088,16 @@ export default {
             }
         });
         // if logo does not exist do not disply their containers
-        if (!this.form.storeLogo) {
+        if ((this.form.storeLogo = '' || this.userData === undefined)) {
             this.logoDisplay = 'none';
+        } else {
+            this.logoDisplay = 'block';
         }
         // if banner does not exist do not disply their containers
-        if (!this.form.storeBanner) {
+        if ((this.form.storeBanner = '' || this.userData === undefined)) {
             this.bannerDisplay = 'none';
+        } else {
+            this.bannerDisplay = 'block';
         }
 
         // if the state is undfined or the object does not exist, return null
@@ -1115,6 +1124,6 @@ export default {
     height: 200px;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
 }
 </style>

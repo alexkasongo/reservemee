@@ -240,7 +240,7 @@ export default {
     data() {
         return {
             user: '',
-            loading: false,
+            // loading: false,
             drawer: false,
             group: null
         };
@@ -260,6 +260,9 @@ export default {
                 const data = this.$store.state.userData[0].storeProfile;
                 return data;
             }
+        },
+        loading() {
+            return this.$store.getters.loading;
         }
     },
     watch: {

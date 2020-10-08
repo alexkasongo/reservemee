@@ -1,17 +1,19 @@
 <template>
     <!-- Header -->
     <!-- FIXME only display banner when it is fully loaded -->
-    <div class="row">
+    <div v-if="!localLoading" class="row">
         <!-- UPLOADED IMAGES -->
         <div v-if="storeProfile !== null" class="col-sm-12">
             <!-- meta -->
+            <!-- if the store banner exists in state than show it -->
             <div
-                v-if="!storeProfile"
+                v-if="storeProfile.storeBanner !== ''"
                 class="profile-user-box card-box bg-custom"
                 :style="{
                     backgroundImage: 'url(' + storeProfile.storeBanner + ')'
                 }"
             ></div>
+            <!-- else show the default banner and logo -->
             <div
                 v-else
                 class="profile-user-box card-box bg-custom"
@@ -19,13 +21,13 @@
                     backgroundImage: 'url(' + defaultStoreBanner + ')'
                 }"
             ></div>
-            <div class="bg-center">
+            <div v-if="!loading" class="bg-center">
                 <div class="col-sm-6">
                     <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
                             <span class="float-left mr-3">
                                 <img
-                                    v-if="!storeProfile"
+                                    v-if="storeProfile.storeLogo !== ''"
                                     @click="viewProfile(user.uid)"
                                     :src="storeProfile.storeLogo"
                                     alt
@@ -111,12 +113,14 @@ export default {
     data() {
         return {
             user: '',
+            localLoading: false,
             defaultStoreBanner: 'https://via.placeholder.com/1200',
             defaultStoreLogo: 'https://via.placeholder.com/1200/00897B'
         };
     },
     computed: {
         storeProfile() {
+            this.localLoading = true;
             if (
                 // if the state is undfined or the object does not exist, return null
                 this.$store.state.userData.length <= 0 ||
@@ -125,8 +129,12 @@ export default {
                 return null;
             } else {
                 const data = this.$store.state.userData[0].storeProfile;
+                this.localLoading = false;
                 return data;
             }
+        },
+        loading() {
+            return this.$store.getters.loading;
         }
     },
     mounted() {

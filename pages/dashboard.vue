@@ -1,5 +1,6 @@
 <template>
     <div class="mt-3">
+        <v-btn> {{ loading }} </v-btn>
         <div v-if="!user" class="mt-2">
             <p>loading...</p>
         </div>
@@ -8,10 +9,12 @@
                 <!-- START HERE -->
 
                 <!-- Header -->
-                <Header />
+                <div v-if="!loading">
+                    <Header />
+                </div>
                 <!-- Header End-->
 
-                <div class="row">
+                <div v-if="!loading" class="row">
                     <div class="col-xl-4">
                         <div v-if="user">
                             <div v-if="!loading">
