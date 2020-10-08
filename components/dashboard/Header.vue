@@ -6,9 +6,17 @@
         <div v-if="storeProfile !== null" class="col-sm-12">
             <!-- meta -->
             <div
+                v-if="!storeProfile"
                 class="profile-user-box card-box bg-custom"
                 :style="{
                     backgroundImage: 'url(' + storeProfile.storeBanner + ')'
+                }"
+            ></div>
+            <div
+                v-else
+                class="profile-user-box card-box bg-custom"
+                :style="{
+                    backgroundImage: 'url(' + defaultStoreBanner + ')'
                 }"
             ></div>
             <div class="bg-center">
@@ -17,8 +25,18 @@
                         <template v-slot:activator="{ on, attrs }">
                             <span class="float-left mr-3">
                                 <img
+                                    v-if="!storeProfile"
                                     @click="viewProfile(user.uid)"
                                     :src="storeProfile.storeLogo"
+                                    alt
+                                    class="thumb-lg rounded-circle"
+                                    v-bind="attrs"
+                                    v-on="on"
+                                />
+                                <img
+                                    v-else
+                                    @click="viewProfile(user.uid)"
+                                    :src="defaultStoreLogo"
                                     alt
                                     class="thumb-lg rounded-circle"
                                     v-bind="attrs"
@@ -92,7 +110,9 @@ export default {
     name: 'Header',
     data() {
         return {
-            user: ''
+            user: '',
+            defaultStoreBanner: 'https://via.placeholder.com/1200',
+            defaultStoreLogo: 'https://via.placeholder.com/1200/00897B'
         };
     },
     computed: {
