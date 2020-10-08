@@ -1,17 +1,22 @@
 <template>
     <div>
-        <div class="card mt-3">
+        <v-card class="mt-5 mb-5">
             <div class="card-body">
                 <h5 class="card-title">Bookings</h5>
                 <p class="card-text">
                     View all bookings. Confirm, edit and update.
                 </p>
-                <v-btn @click="goToBookings" block color="#00897B" dark
+                <v-btn
+                    class="teal darker-1"
+                    dark
+                    @click="goToBookings"
+                    block
+                    elevation="0"
                     >View Bookings</v-btn
                 >
             </div>
-        </div>
-        <div class="card mt-3">
+        </v-card>
+        <v-card class="mb-5">
             <div class="card-body">
                 <h5 class="card-title">Calendar</h5>
                 <p class="card-text">
@@ -20,11 +25,16 @@
                     hours for your customers.
                 </p>
 
-                <v-btn @click="goToCalendar" block color="#00897B" dark
+                <v-btn
+                    class="teal darker-1"
+                    dark
+                    @click="goToCalendar"
+                    block
+                    elevation="0"
                     >View Calendar</v-btn
                 >
             </div>
-        </div>
+        </v-card>
     </div>
 </template>
 

@@ -1,118 +1,93 @@
 <template>
-    <v-container style="max-width: 600px">
-        <v-timeline dense clipped>
-            <v-timeline-item
-                fill-dot
-                class="white--text mb-12"
-                color="orange"
-                large
+    <v-card elevation="2" class="mx-auto mt-3" width="100%">
+        <!-- <v-card dark flat>
+            <v-img
+                src="https://cdn.vuetifyjs.com/images/cards/forest.jpg"
+                gradient="to top, rgba(0,0,0,.44), rgba(0,0,0,.44)"
             >
-                <template v-slot:icon>
-                    <span>JL</span>
-                </template>
-                <v-text-field
-                    v-model="input"
-                    hide-details
-                    flat
-                    label="Leave a comment..."
-                    solo
-                    @keydown.enter="comment"
-                >
-                    <template v-slot:append>
-                        <v-btn class="mx-0" depressed @click="comment">
-                            Post
-                        </v-btn>
-                    </template>
-                </v-text-field>
-            </v-timeline-item>
-
-            <v-slide-x-transition group>
-                <v-timeline-item
-                    v-for="event in timeline"
-                    :key="event.id"
-                    class="mb-4"
-                    color="pink"
-                    small
-                >
-                    <v-row justify="space-between">
-                        <v-col cols="7" v-text="event.text"></v-col>
-                        <v-col
-                            class="text-right"
-                            cols="5"
-                            v-text="event.time"
-                        ></v-col>
+                <v-container class="fill-height">
+                    <v-row align="center">
+                        <strong class="display-4 font-weight-regular mr-6"
+                            >8</strong
+                        >
+                        <v-row justify="end">
+                            <div class="headline font-weight-light">Monday</div>
+                            <div class="text-uppercase font-weight-light">
+                                February 2015
+                            </div>
+                        </v-row>
+                    </v-row>
+                </v-container>
+            </v-img>
+        </v-card> -->
+        <v-card-text class="py-0">
+            <v-timeline align-top dense>
+                <v-timeline-item color="pink" small>
+                    <v-row class="pt-1">
+                        <v-col cols="3">
+                            <strong>3-4pm</strong>
+                        </v-col>
+                        <v-col>
+                            <strong>New Order</strong>
+                            <div class="caption">Service Name</div>
+                        </v-col>
                     </v-row>
                 </v-timeline-item>
-            </v-slide-x-transition>
 
-            <v-timeline-item class="mb-6" hide-dot>
-                <span>TODAY</span>
-            </v-timeline-item>
+                <v-timeline-item color="teal lighten-3" small>
+                    <v-row class="pt-1">
+                        <v-col cols="3">
+                            <strong>1-2pm</strong>
+                        </v-col>
+                        <v-col>
+                            <strong>Appointment</strong>
+                            <div class="caption mb-2">
+                                Customer + Service Name
+                            </div>
+                            <v-avatar>
+                                <v-img
+                                    src="https://via.placeholder.com/150"
+                                ></v-img>
+                            </v-avatar>
+                            <v-avatar>
+                                <v-img
+                                    src="https://via.placeholder.com/150/00796B"
+                                ></v-img>
+                            </v-avatar>
+                            <v-avatar>
+                                <v-img
+                                    src="https://via.placeholder.com/150/80D8FF"
+                                ></v-img>
+                            </v-avatar>
+                        </v-col>
+                    </v-row>
+                </v-timeline-item>
 
-            <v-timeline-item
-                class="mb-4"
-                color="grey"
-                icon-color="grey lighten-2"
-                small
-            >
-                <v-row justify="space-between">
-                    <v-col cols="7"> This order was archived. </v-col>
-                    <v-col class="text-right" cols="5"> 15:26 EDT </v-col>
-                </v-row>
-            </v-timeline-item>
+                <v-timeline-item color="pink" small>
+                    <v-row class="pt-1">
+                        <v-col cols="3">
+                            <strong>12pm</strong>
+                        </v-col>
+                        <v-col>
+                            <strong>Lunch break</strong>
+                        </v-col>
+                    </v-row>
+                </v-timeline-item>
 
-            <v-timeline-item class="mb-4" small>
-                <v-row justify="space-between">
-                    <v-col cols="7">
-                        <v-chip
-                            class="white--text ml-0"
-                            color="purple"
-                            label
-                            small
-                        >
-                            APP
-                        </v-chip>
-                        Digital Downloads fulfilled 1 item.
-                    </v-col>
-                    <v-col class="text-right" cols="5"> 15:25 EDT </v-col>
-                </v-row>
-            </v-timeline-item>
-
-            <v-timeline-item class="mb-4" color="grey" small>
-                <v-row justify="space-between">
-                    <v-col cols="7">
-                        Order confirmation email was sent to John Leider
-                        (john@vuetifyjs.com).
-                    </v-col>
-                    <v-col class="text-right" cols="5"> 15:25 EDT </v-col>
-                </v-row>
-            </v-timeline-item>
-
-            <v-timeline-item class="mb-4" hide-dot>
-                <v-btn class="mx-0"> Resend Email </v-btn>
-            </v-timeline-item>
-
-            <v-timeline-item class="mb-4" color="grey" small>
-                <v-row justify="space-between">
-                    <v-col cols="7">
-                        A $15.00 USD payment was processed on PayPal Express
-                        Checkout
-                    </v-col>
-                    <v-col class="text-right" cols="5"> 15:25 EDT </v-col>
-                </v-row>
-            </v-timeline-item>
-
-            <v-timeline-item color="grey" small>
-                <v-row justify="space-between">
-                    <v-col cols="7">
-                        John Leider placed this order on Online Store (checkout
-                        #1937432132572).
-                    </v-col>
-                    <v-col class="text-right" cols="5"> 15:25 EDT </v-col>
-                </v-row>
-            </v-timeline-item>
-        </v-timeline>
-    </v-container>
+                <v-timeline-item color="teal lighten-3" small>
+                    <v-row class="pt-1">
+                        <v-col cols="3">
+                            <strong>9-11am</strong>
+                        </v-col>
+                        <v-col>
+                            <strong>Appointment</strong>
+                            <div class="caption">Customer + Service Name</div>
+                        </v-col>
+                    </v-row>
+                </v-timeline-item>
+            </v-timeline>
+        </v-card-text>
+    </v-card>
 </template>
 
 <script>

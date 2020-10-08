@@ -52,15 +52,14 @@
                             <!-- ManageServices -->
                         </div>
 
-                        <div class="row" v-if="!loading">
-                            <div class="col-xl-12">
-                                <Bookings class="services" />
-                            </div>
+                        <div v-if="!loading">
+                            <Bookings class="services" />
+                            <UpcomingEvents />
                         </div>
 
-                        <v-card elevation="2">
+                        <!-- <v-card elevation="2">
                             <UpcomingEvents />
-                        </v-card>
+                        </v-card> -->
                     </div>
 
                     <!-- end col -->
