@@ -379,7 +379,7 @@ export const actions = {
 
         // if no new logo or banner added, only update the rest of the information
         if (payload.rawStoreLogo === null && payload.rawStoreBanner === null) {
-            console.log(`index.js - 377 - 🍎 NO STORE LOGO or BANNER PRESENT`);
+            console.log(`index.js - 377 - 🍎 NO STORE LOGO or BANNER PRESENT`, payload);
             firebase
                 .database()
                 .ref('users/' + payload.userId)

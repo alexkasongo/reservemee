@@ -382,12 +382,14 @@
                                     class="form-group imgPreview"
                                     v-bind:style="{
                                         'background-image':
-                                            'url(' + form.storeLogo + ')'
+                                            'url(' + form.storeLogo + ')',
+                                        display: logoDisplay
                                     }"
                                 ></div>
                                 <div class="form-group">
                                     <label for="fullName">Store Name</label>
                                     <input
+                                        required
                                         type="text"
                                         class="form-control"
                                         aria-describedby="storeNameHelp"
@@ -403,6 +405,7 @@
                                 <div class="form-group">
                                     <label for="fullName">Store Email</label>
                                     <input
+                                        required
                                         type="email"
                                         class="form-control"
                                         aria-describedby="storeEmailHelp"
@@ -415,6 +418,7 @@
                                         >Store phone number</label
                                     >
                                     <input
+                                        required
                                         type="tel"
                                         pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                         class="form-control"
@@ -429,6 +433,7 @@
                                 <div class="form-group">
                                     <label for="bio">Your Store Bio</label>
                                     <v-textarea
+                                        required
                                         outlined
                                         placeholder="Write a description of your store"
                                         v-model="form.storeBio"
@@ -453,12 +458,14 @@
                                     class="form-group imgPreview"
                                     v-bind:style="{
                                         'background-image':
-                                            'url(' + form.storeBanner + ')'
+                                            'url(' + form.storeBanner + ')',
+                                        display: bannerDisplay
                                     }"
                                 ></div>
                                 <div class="form-group">
                                     <label for="location">Location</label>
                                     <input
+                                        required
                                         type="text"
                                         class="form-control"
                                         placeholder="Enter your location"
@@ -762,6 +769,8 @@ export default {
         return {
             user: '',
             test: '',
+            logoDisplay: '',
+            bannerDisplay: '',
             loggedInUser: '',
             alert: '',
             currentPassword: '',
@@ -991,6 +1000,7 @@ export default {
                 storeEmail: this.form.storeEmail,
                 storePhoneNumber: this.form.storePhoneNumber,
                 storeBio: this.form.storeBio,
+                storeLogo: this.form.storeLogo,
                 storeBanner: this.form.storeBanner,
                 storeLocation: this.form.storeLocation
             };
@@ -999,7 +1009,21 @@ export default {
             // this.alert = 'Saved...';
         },
         onUploadLogo(event) {
-            console.log(`_id.vue - 1005 - variable`, event);
+            // if a file is inserted or a logo exists then show it
+            if (event || this.form.storeLogo) {
+                this.logoDisplay = 'block';
+            }
+            // if user removes file, clear local state and revert back to uploaded image
+            if (event === undefined) {
+                console.log(`_id.vue - 1012 - variable`, event);
+                this.logoDisplay = 'none';
+                if (this.userInfo[0] === undefined) {
+                    return;
+                }
+                this.form.storeLogo = this.userInfo[0].storeProfile.storeLogo;
+                this.form.rawStoreLogo = null;
+                return;
+            }
             const files = event;
             let filename = files.name;
             // check if the file doesn't have an extension
@@ -1016,6 +1040,20 @@ export default {
             this.form.rawStoreLogo = files;
         },
         onUploadBanner(event) {
+            // if a file is inserted or a logo exists then show it
+            if (event || this.form.storeLogo) {
+                this.bannerDisplay = 'block';
+            }
+            // if user removes file, clear local state and revert back to uploaded image
+            if (event === undefined) {
+                this.bannerDisplay = 'none';
+                if (this.userInfo[0] === undefined) {
+                    return;
+                }
+                this.form.storeBanner = this.userInfo[0].storeProfile.storeBanner;
+                this.form.rawStoreBanner = null;
+                return;
+            }
             console.log(`_id.vue - 1005 - variable`, event);
             const files = event;
             let filename = files.name;
@@ -1044,6 +1082,15 @@ export default {
                 this.profileInfo.photoUrl = user.photoURL;
             }
         });
+        // if logo does not exist do not disply their containers
+        if (!this.form.storeLogo) {
+            this.logoDisplay = 'none';
+        }
+        // if banner does not exist do not disply their containers
+        if (!this.form.storeBanner) {
+            this.bannerDisplay = 'none';
+        }
+
         // if the state is undfined or the object does not exist, return null
         if (
             this.$store.state.userData.length <= 0 ||
