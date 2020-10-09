@@ -11,6 +11,7 @@ export const state = () => ({
     userId: '',
     signupError: '',
     loading: false,
+    snackbar: false,
     alert: false,
     services: [],
     categories: [],
@@ -29,6 +30,7 @@ export const getters = {
     categories: (state) => state.categories,
     storeProfile: (state) => state.storeProfile[0],
     loading: (state) => state.loading,
+    snackbar: (state) => state.snackbar,
     alert: (state) => state.alert,
     filteredService: (state) => {
         const data = state.services.filter((res) => {
@@ -228,14 +230,15 @@ export const actions = {
                     ...category,
                     id: key
                 });
-                this.$swal({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Created',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
+                // this.$swal({
+                //     toast: true,
+                //     position: 'top-end',
+                //     icon: 'success',
+                //     title: 'Created',
+                //     showConfirmButton: false,
+                //     timer: 2500
+                // });
+                commit('SET_SNACKBAR', true)
                 commit('SET_LOADING', false);
             })
             .catch((error) => {
@@ -612,6 +615,9 @@ export const mutations = {
     },
     SET_LOADING(state, payload) {
         state.loading = payload;
+    },
+    SET_SNACKBAR(state, payload) {
+        state.snackbar = payload;
     },
     SET_ALERT(state, payload) {
         state.alert = payload;

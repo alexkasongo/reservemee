@@ -113,7 +113,7 @@ export default {
     data() {
         return {
             user: '',
-            defaultStoreBanner: 'https://via.placeholder.com/1200',
+            defaultStoreBanner: 'https://via.placeholder.com/1200x300',
             defaultStoreLogo: 'https://via.placeholder.com/1200/00897B'
         };
     },

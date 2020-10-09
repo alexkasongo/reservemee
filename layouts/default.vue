@@ -1,5 +1,24 @@
 <template>
     <v-app>
+        <v-snackbar
+            top
+            v-model="snackbar"
+            :timeout="timeout"
+            :multi-line="multiLine"
+        >
+            {{ text }}
+
+            <template v-slot:action="{ attrs }">
+                <v-btn
+                    color="teal darker-1"
+                    text
+                    v-bind="attrs"
+                    @click="snackbar = false"
+                >
+                    Close
+                </v-btn>
+            </template>
+        </v-snackbar>
         <v-card
             class="rounded-0 mx-auto overflow-hidden"
             height="100%"
@@ -241,7 +260,10 @@ export default {
         return {
             user: '',
             drawer: false,
-            group: null
+            group: null,
+            multiLine: true,
+            text: 'New category created.',
+            timeout: 3000
         };
     },
     computed: {
@@ -262,6 +284,14 @@ export default {
         },
         loading() {
             return this.$store.getters.loading;
+        },
+        snackbar: {
+            get() {
+                return this.$store.state.snackbar;
+            },
+            set() {
+                return this.$store.commit('SET_SNACKBAR', false);
+            }
         }
     },
     watch: {
