@@ -6,8 +6,9 @@
                     <v-toolbar flat>
                         <v-btn
                             class="mr-4"
-                            color="primary dark"
+                            color="teal darker-1"
                             @click.stop="dialog = true"
+                            dark
                         >
                             New Event
                         </v-btn>
@@ -121,15 +122,17 @@
                                             >
                                                 <v-spacer></v-spacer>
                                                 <v-btn
+                                                    dark
                                                     text
-                                                    color="primary"
+                                                    color="teal darker-1"
                                                     @click="menu = false"
                                                 >
                                                     Cancel
                                                 </v-btn>
                                                 <v-btn
+                                                    dark
                                                     text
-                                                    color="primary"
+                                                    color="teal darker-1"
                                                     @click="
                                                         $refs.date.save(
                                                             startDate
@@ -215,14 +218,14 @@
                                                 <v-spacer></v-spacer>
                                                 <v-btn
                                                     text
-                                                    color="primary"
+                                                    color="teal darker-1"
                                                     @click="menu = false"
                                                 >
                                                     Cancel
                                                 </v-btn>
                                                 <v-btn
                                                     text
-                                                    color="primary"
+                                                    color="teal darker-1"
                                                     @click="
                                                         $refs.end.save(endDate)
                                                     "
@@ -277,8 +280,9 @@
                                     label="color (click to open color menu)"
                                 ></v-text-field>
                                 <v-btn
+                                    dark
                                     type="submit"
-                                    color="primary"
+                                    color="teal darker-1"
                                     class="mr-4"
                                     @click.stop="dialog = false"
                                 >
@@ -295,7 +299,7 @@
                     <v-calendar
                         ref="calendar"
                         v-model="focus"
-                        color="primary"
+                        color="teal darker-1"
                         :events="events"
                         :event-color="getEventColor"
                         :type="type"
@@ -382,8 +386,9 @@
                                                     >
                                                         <v-spacer></v-spacer>
                                                         <v-btn
+                                                            dark
                                                             text
-                                                            color="primary"
+                                                            color="teal darker-1"
                                                             @click="
                                                                 menu5 = false
                                                             "
@@ -391,8 +396,9 @@
                                                             Cancel
                                                         </v-btn>
                                                         <v-btn
+                                                            dark
                                                             text
-                                                            color="primary"
+                                                            color="teal darker-1"
                                                             @click="
                                                                 $refs.dateEdit.save(
                                                                     startDate
@@ -489,8 +495,9 @@
                                                     >
                                                         <v-spacer></v-spacer>
                                                         <v-btn
+                                                            dark
                                                             text
-                                                            color="primary"
+                                                            color="teal darker-1"
                                                             @click="
                                                                 menu7 = false
                                                             "
@@ -498,8 +505,9 @@
                                                             Cancel
                                                         </v-btn>
                                                         <v-btn
+                                                            dark
                                                             text
-                                                            color="primary"
+                                                            color="teal darker-1"
                                                             @click="
                                                                 $refs.end.save(
                                                                     endDate

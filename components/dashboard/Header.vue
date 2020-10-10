@@ -2,104 +2,126 @@
     <!-- Header -->
     <!-- FIXME only display banner when it is fully loaded -->
     <div class="row">
-        <!-- UPLOADED IMAGES -->
+        <!-- IF PROFILE EXISTS -->
         <div v-if="storeProfile !== null" class="col-sm-12">
-            <!-- meta -->
-            <!-- if the store banner exists in state than show it -->
-            <div
+            <v-parallax
+                height="300"
                 v-if="storeProfile.storeBanner !== ''"
-                class="profile-user-box card-box bg-custom"
-                :style="{
-                    backgroundImage: 'url(' + storeProfile.storeBanner + ')'
-                }"
-            ></div>
-            <!-- else show the default banner and logo -->
-            <div
-                v-else
-                class="profile-user-box card-box bg-custom"
-                :style="{
-                    backgroundImage: 'url(' + defaultStoreBanner + ')'
-                }"
-            ></div>
-            <div class="bg-center">
-                <div class="col-sm-6">
-                    <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                            <span class="float-left mr-3">
-                                <img
-                                    v-if="storeProfile.storeLogo !== ''"
-                                    @click="viewProfile(user.uid)"
-                                    :src="storeProfile.storeLogo"
-                                    alt
-                                    class="thumb-lg rounded-circle"
-                                    v-bind="attrs"
-                                    v-on="on"
-                                />
-                                <img
-                                    v-else
-                                    @click="viewProfile(user.uid)"
-                                    :src="defaultStoreLogo"
-                                    alt
-                                    class="thumb-lg rounded-circle"
-                                    v-bind="attrs"
-                                    v-on="on"
-                                />
-                            </span>
-                        </template>
-                        <span>Settings</span>
-                    </v-tooltip>
+                :src="storeProfile.storeBanner"
+            >
+                <div class="bg-center">
+                    <div class="col-sm-6">
+                        <v-tooltip bottom>
+                            <template v-slot:activator="{ on, attrs }">
+                                <span class="float-left mr-3">
+                                    <img
+                                        v-if="storeProfile.storeLogo !== ''"
+                                        @click="viewProfile(user.uid)"
+                                        :src="storeProfile.storeLogo"
+                                        alt
+                                        class="thumb-lg rounded-circle"
+                                        v-bind="attrs"
+                                        v-on="on"
+                                    />
+                                    <img
+                                        v-else
+                                        @click="viewProfile(user.uid)"
+                                        :src="defaultStoreLogo"
+                                        alt
+                                        class="thumb-lg rounded-circle"
+                                        v-bind="attrs"
+                                        v-on="on"
+                                    />
+                                </span>
+                            </template>
+                            <span>Settings</span>
+                        </v-tooltip>
 
-                    <div class="media-body text-white">
-                        <h4 class="mt-1 mb-1 font-18">
-                            {{ storeProfile.storeName | capitalize }}
-                        </h4>
-                        <p>
-                            {{ user.displayName }}
-                        </p>
+                        <div class="media-body text-white">
+                            <h4 class="mt-1 mb-1 font-18">
+                                {{ storeProfile.storeName | capitalize }}
+                            </h4>
+                            <p>
+                                {{ user.displayName }}
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!--/ meta -->
-        </div>
-        <!-- UPLOADED IMAGES -->
+            </v-parallax>
+            <v-parallax height="300" v-else :src="defaultStoreBanner">
+                <div class="bg-center">
+                    <div class="col-sm-6">
+                        <v-tooltip bottom>
+                            <template v-slot:activator="{ on, attrs }">
+                                <span class="float-left mr-3">
+                                    <img
+                                        v-if="storeProfile.storeLogo !== ''"
+                                        @click="viewProfile(user.uid)"
+                                        :src="storeProfile.storeLogo"
+                                        alt
+                                        class="thumb-lg rounded-circle"
+                                        v-bind="attrs"
+                                        v-on="on"
+                                    />
+                                    <img
+                                        v-else
+                                        @click="viewProfile(user.uid)"
+                                        :src="defaultStoreLogo"
+                                        alt
+                                        class="thumb-lg rounded-circle"
+                                        v-bind="attrs"
+                                        v-on="on"
+                                    />
+                                </span>
+                            </template>
+                            <span>Settings</span>
+                        </v-tooltip>
 
-        <!-- DEFAULT IMAGES -->
+                        <div class="media-body text-white">
+                            <h4 class="mt-1 mb-1 font-18">
+                                {{ storeProfile.storeName | capitalize }}
+                            </h4>
+                            <p>
+                                {{ user.displayName }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </v-parallax>
+        </div>
+        <!-- IF PROFILE EXISTS -->
+
+        <!-- IF PROFILE DOESN'T EXISTS -->
         <div v-else class="col-sm-12">
-            <!-- meta -->
-            <div
-                class="profile-user-box card-box bg-custom"
-                style="
-                    background-image: url('https://via.placeholder.com/1200');
-                "
-            ></div>
-            <div class="bg-center">
-                <div class="col-sm-6">
-                    <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                            <span class="float-left mr-3">
-                                <img
-                                    @click="viewProfile(user.uid)"
-                                    src="https://via.placeholder.com/1200/00897b"
-                                    alt
-                                    class="thumb-lg rounded-circle"
-                                    v-bind="attrs"
-                                    v-on="on"
-                                />
-                            </span>
-                        </template>
-                        <span>Settings </span>
-                    </v-tooltip>
+            <v-parallax src="https://via.placeholder.com/1200">
+                <div class="bg-center">
+                    <div class="col-sm-6">
+                        <v-tooltip bottom>
+                            <template v-slot:activator="{ on, attrs }">
+                                <span class="float-left mr-3">
+                                    <img
+                                        @click="viewProfile(user.uid)"
+                                        src="https://via.placeholder.com/1200/00897b"
+                                        alt
+                                        class="thumb-lg rounded-circle"
+                                        v-bind="attrs"
+                                        v-on="on"
+                                    />
+                                </span>
+                            </template>
+                            <span>Settings</span>
+                        </v-tooltip>
 
-                    <div class="media-body text-white">
-                        <p>
-                            {{ user.displayName }}
-                        </p>
+                        <div class="media-body text-white">
+                            <p>
+                                {{ user.displayName }}
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!--/ meta -->
+            </v-parallax>
         </div>
-        <!-- DEFAULT IMAGES -->
+        <!-- IF PROFILE DOESN'T EXISTS -->
     </div>
     <!-- Header End-->
 </template>
