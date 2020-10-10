@@ -1014,9 +1014,22 @@ export default {
                 this.logoDisplay = 'block';
             }
             // if user removes file, clear local state and revert back to uploaded image
+            let logoState = null;
+            this.userInfo.forEach((res) => {
+                if (res.storeProfile === undefined) {
+                    logoState = null;
+                    return;
+                }
+
+                if (res.storeProfile.storeLogo) {
+                    logoState = true;
+                } else {
+                    logoState = null;
+                }
+            });
             if (event === undefined) {
-                // this.logoDisplay = 'none';
-                if (this.userInfo[0] === undefined) {
+                this.logoDisplay = 'none';
+                if (this.userInfo[0] === undefined || logoState === null) {
                     return;
                 }
                 this.form.storeLogo = this.userInfo[0].storeProfile.storeLogo;
@@ -1044,9 +1057,22 @@ export default {
                 this.bannerDisplay = 'block';
             }
             // if user removes file, clear local state and revert back to uploaded image
+            let bannerState = null;
+            this.userInfo.forEach((res) => {
+                if (res.storeProfile === undefined) {
+                    bannerState = null;
+                    return;
+                }
+
+                if (res.storeProfile.storeBanner) {
+                    bannerState = true;
+                } else {
+                    bannerState = null;
+                }
+            });
             if (event === undefined) {
                 this.bannerDisplay = 'none';
-                if (this.userInfo[0] === undefined) {
+                if (this.userInfo[0] === undefined || bannerState === null) {
                     return;
                 }
                 this.form.storeBanner = this.userInfo[0].storeProfile.storeBanner;
@@ -1081,13 +1107,47 @@ export default {
             }
         });
         // if logo does not exist do not disply their containers
-        if ((this.form.storeLogo = '' || this.userData === undefined)) {
+        let logoState = null;
+        this.userInfo.forEach((res) => {
+            if (res.storeProfile === undefined) {
+                logoState = null;
+                return;
+            }
+
+            if (res.storeProfile.storeLogo) {
+                logoState = true;
+            } else {
+                logoState = null;
+            }
+        });
+
+        let bannerState = null;
+        this.userInfo.forEach((res) => {
+            if (res.storeProfile === undefined) {
+                bannerState = null;
+                return;
+            }
+
+            if (res.storeProfile.storeBanner) {
+                bannerState = true;
+            } else {
+                bannerState = null;
+            }
+        });
+
+        if (
+            (this.form.storeLogo =
+                '' || this.userData === undefined || logoState === null)
+        ) {
             this.logoDisplay = 'none';
         } else {
             this.logoDisplay = 'block';
         }
         // if banner does not exist do not disply their containers
-        if ((this.form.storeBanner = '' || this.userData === undefined)) {
+        if (
+            (this.form.storeBanner =
+                '' || this.userData === undefined || bannerState === null)
+        ) {
             this.bannerDisplay = 'none';
         } else {
             this.bannerDisplay = 'block';
