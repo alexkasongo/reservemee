@@ -856,7 +856,6 @@ export default {
         editEvent(ev) {
             this.currentlyEditing = ev.id;
         },
-
         showEvent({ nativeEvent, event }) {
             // parse date object and get date out
             let startDate = new Date(event.start);
