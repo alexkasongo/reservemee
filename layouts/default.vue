@@ -185,6 +185,28 @@
                                     >
                                 </v-list-item-content>
                             </v-list-item>
+                            <v-list-item @click="goToBookings" link>
+                                <v-list-item-icon>
+                                    <v-icon>mdi-cart-arrow-down</v-icon>
+                                </v-list-item-icon>
+
+                                <v-list-item-content>
+                                    <v-list-item-title
+                                        >Bookings</v-list-item-title
+                                    >
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item @click="goToCalendar" link>
+                                <v-list-item-icon>
+                                    <v-icon>mdi-calendar-blank</v-icon>
+                                </v-list-item-icon>
+
+                                <v-list-item-content>
+                                    <v-list-item-title
+                                        >Calendar</v-list-item-title
+                                    >
+                                </v-list-item-content>
+                            </v-list-item>
                         </div>
 
                         <div v-if="!user">
@@ -340,6 +362,12 @@ export default {
         },
         goToDashboard() {
             this.$router.push('/dashboard');
+        },
+        goToBookings() {
+            this.$router.push('/service/bookings');
+        },
+        goToCalendar() {
+            this.$router.push('/calendar');
         },
         viewProfile(id) {
             this.$router.push({
