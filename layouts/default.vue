@@ -355,7 +355,12 @@ export default {
         },
         goHome(user) {
             if (user) {
-                this.$router.push('/dashboard');
+                if (this.role.admin) {
+                    this.$router.push('/dashboard');
+                }
+                if (this.role.customer) {
+                    this.$router.push('/store');
+                }
             } else {
                 this.$router.push('/');
             }
@@ -380,6 +385,15 @@ export default {
     },
     mounted() {
         firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                firebase
+                    .auth()
+                    .currentUser.getIdTokenResult()
+                    .then((tokenResult) => {
+                        this.role = tokenResult.claims;
+                        console.log('🍎 ', tokenResult.claims);
+                    });
+            }
             if (user) {
                 // User is signed in.
                 this.user = user;

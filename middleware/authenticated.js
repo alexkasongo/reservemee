@@ -20,10 +20,6 @@ export default function ({ app, store, route, redirect }) {
 
     app.router.beforeEach((to, from, next) => {
 
-        console.log(`authenticated.js - 23 TO - 🥶`, to);
-        // console.log(`authenticated.js - 24 FROM - ⛈`, from);
-        // console.log(`authenticated.js - 25 NEXT - 🌎`, next);
-
         firebase.auth().onAuthStateChanged(user => {
 
             if (user) {
