@@ -122,6 +122,16 @@ export default {
         firebase.auth().onAuthStateChanged((user) => {
             this.user = user;
 
+            // if user exists, console.log user details
+            if (user) {
+                firebase
+                    .auth()
+                    .currentUser.getIdTokenResult()
+                    .then((tokenResult) => {
+                        console.log('🍎 ', tokenResult.claims);
+                    });
+            }
+
             if (!this.user) {
                 this.$router.push('/');
             }
