@@ -2,6 +2,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/storage';
+import 'firebase/functions';
 
 export const state = () => ({
     count: 0, // persistedstate test counter
@@ -168,6 +169,37 @@ export const actions = {
                 commit('SET_LOADING', false);
             });
     },
+    async signupAdmin({ commit }, user) {
+        commit('SET_LOADING', true);
+        await firebase
+            .auth()
+            .createUserWithEmailAndPassword(user.email, user.password)
+            .then((response) => {
+                if (response) {
+                    const setAdmin = firebase.functions().httpsCallable("setAdmin");
+                    const data = { uid: response.user.uid, role: user.role };
+                    setAdmin(data)
+                        .then((result) => {
+                            console.log(`index.js - 183 - "🎉"`, result);
+                        })
+
+                    response.user
+                        .updateProfile({
+                            displayName: user.name
+
+                        })
+                        .then(() => {
+                            commit('SET_LOADING', false);
+                            this.$router.push('/dashboard');
+                        });
+                }
+            })
+            .catch((error) => {
+                // Handle Errors here.
+                commit('ERRORS', error);
+                commit('SET_LOADING', false);
+            });
+    },
     async login({ commit }, user) {
         commit('SET_LOADING', true);
         await firebase
@@ -230,14 +262,6 @@ export const actions = {
                     ...category,
                     id: key
                 });
-                // this.$swal({
-                //     toast: true,
-                //     position: 'top-end',
-                //     icon: 'success',
-                //     title: 'Created',
-                //     showConfirmButton: false,
-                //     timer: 2500
-                // });
                 commit('SET_SNACKBAR', true)
                 commit('SET_LOADING', false);
             })

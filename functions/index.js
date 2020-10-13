@@ -5,6 +5,7 @@ admin.initializeApp()
 
 const db = admin.firestore()
 
+// automatically assign customer role on signup
 // trigger function on new user creation.
 // when a new user is created this fucntion is triggered. When triggered a defualt 
 // data object is pushed to the roles collection, this object contains the user's role status
@@ -12,7 +13,7 @@ exports.AddUserRole = functions.auth.user().onCreate(async (authUser) => {
 
     if (authUser.email) {
         const customClaims = {
-            admin: true,
+            customer: true,
         };
         try {
             var _ = await admin.auth().setCustomUserClaims(authUser.uid, customClaims)
@@ -28,6 +29,25 @@ exports.AddUserRole = functions.auth.user().onCreate(async (authUser) => {
 
 
     }
+});
+
+// create admin user on signup
+exports.setAdmin = functions.https.onCall(async (data, context) => {
+
+    // if (!context.auth.token.admin) return
+    if (!context.auth.token) return
+
+    try {
+        var _ = await admin.auth().setCustomUserClaims(data.uid, data.role)
+
+        return db.collection("roles").doc(data.uid).update({
+            role: data.role
+        })
+
+    } catch (error) {
+        console.log('🤡', error)
+    }
+
 });
 
 // this function can only be triggered by the admin. This function allows the admin to 
