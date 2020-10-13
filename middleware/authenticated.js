@@ -7,17 +7,11 @@ export default function ({ app, store, route, redirect }) {
     const blockedPlayground = /\/playground\/*/g;
     const homeRoute = '/';
 
-    //NOTE if there is no user in the store and the route is one that
-    // we're blocking then redirect
-    // if (!user) {
-    //     redirect('/');
-    // }
-    //NOTE if there is no user in the store and the route is one that
-    // we're blocking then redirect
-    // if (
-    //     route.path.match(blockedProfile) ||
-    //     route.path.match(blockedPlayground)
-    // ) {
-    //     redirect('/');
-    // }
+    //TODO
+    // Users can register as admin or customer
+    // admins can view admin page and crud 
+
+    //TODO
+    // customers can only view store
+
 }

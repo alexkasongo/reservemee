@@ -13,7 +13,7 @@
                     <div class="col-sm-6">
                         <v-tooltip bottom>
                             <template v-slot:activator="{ on, attrs }">
-                                <span class="float-left mr-3">
+                                <div class="float-left mr-3">
                                     <img
                                         v-if="storeProfile.storeLogo !== ''"
                                         @click="viewProfile(user.uid)"
@@ -32,7 +32,7 @@
                                         v-bind="attrs"
                                         v-on="on"
                                     />
-                                </span>
+                                </div>
                             </template>
                             <span>Settings</span>
                         </v-tooltip>
