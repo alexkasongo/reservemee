@@ -153,10 +153,10 @@
 
                 <!-- if router name is not Sign in then show, else do not show -->
                 <div v-if="this.$route.name !== 'signin'">
-                    <v-btn v-if="!user" href="/signin">Sign In</v-btn>
+                    <v-btn v-if="!user" @click="signin">Sign In</v-btn>
                 </div>
                 <div v-else>
-                    <v-btn v-if="!user" href="/signup">Sign Up</v-btn>
+                    <v-btn v-if="!user" @click="signup">Sign Up</v-btn>
                 </div>
             </v-app-bar>
             <!-- NAVBAR END -->

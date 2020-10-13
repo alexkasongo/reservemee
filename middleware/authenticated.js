@@ -1,6 +1,10 @@
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+
 export default function ({ app, store, route, redirect }) {
     const user = store.state.user;
-    // const userEmail = store.state.user.uid;
+
+
 
     //NOTE anything that matches the route name admin gets blocked
     const blockedProfile = /\/profile\/*/g;
@@ -13,5 +17,47 @@ export default function ({ app, store, route, redirect }) {
 
     //TODO
     // customers can only view store
+
+    app.router.beforeEach((to, from, next) => {
+
+        console.log(`authenticated.js - 23 TO - 🥶`, to);
+        // console.log(`authenticated.js - 24 FROM - ⛈`, from);
+        // console.log(`authenticated.js - 25 NEXT - 🌎`, next);
+
+        firebase.auth().onAuthStateChanged(user => {
+
+            if (user) {
+                firebase.auth().currentUser.getIdTokenResult()
+                    .then(function ({
+                        claims
+                    }) {
+
+                        if (claims.customer) {
+                            if (to.path !== '/store')
+                                return next({
+                                    path: '/store',
+                                })
+                        }
+
+                    })
+            } else {
+                if (to.matched.some(record => record.meta.auth)) {
+                    next({
+                        path: '/store',
+                        query: {
+                            redirect: to.fullPath
+                        }
+                    })
+                } else {
+                    next()
+                }
+            }
+
+        })
+
+        next()
+
+    })
+
 
 }
