@@ -201,7 +201,7 @@
             </section>
 
             <!-- Footer -->
-            <hr />
+            <!-- <hr /> -->
             <!-- <footer class="footer bg-light">
                 <div class="container">
                     <div class="row">
@@ -296,7 +296,7 @@
 
                     <v-card-text class="white--text">
                         {{ new Date().getFullYear() }} —
-                        <strong>Vuetify</strong>
+                        <strong>Aleko</strong>
                     </v-card-text>
                 </v-card>
             </v-footer>
