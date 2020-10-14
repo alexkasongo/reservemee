@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-3">
+    <div class="container margin mt-3">
         <div v-if="!user" class="mt-2">
             <p>loading...</p>
         </div>
@@ -130,4 +130,5 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

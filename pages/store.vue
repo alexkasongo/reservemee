@@ -1,13 +1,17 @@
 <template>
     <div>
         <v-card class="mx-auto" max-width="400" rounded="0">
-            <v-img
-                class="white--text align-end"
-                height="440px"
-                src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            >
-                <v-card-title>Top 10 Australian beaches</v-card-title>
-            </v-img>
+            <div class="store__card">
+                <v-img
+                    class="white--text align-end"
+                    height="440px"
+                    src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+                >
+                    <div class="store__card-title">
+                        <v-btn>Click Me</v-btn>
+                    </div>
+                </v-img>
+            </div>
 
             <v-card-subtitle class="pb-0"> Number 10 </v-card-subtitle>
 
@@ -31,4 +35,16 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+.store {
+    &__card {
+        margin-top: 56px;
+        position: relative;
+    }
+    &__card-title {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
 </style>
