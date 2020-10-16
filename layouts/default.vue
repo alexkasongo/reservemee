@@ -174,7 +174,11 @@
                         active-class="teal--text text--accent-4"
                     >
                         <div v-if="user">
-                            <v-list-item @click="goToDashboard" link>
+                            <v-list-item
+                                v-if="role.admin"
+                                @click="goToDashboard"
+                                link
+                            >
                                 <v-list-item-icon>
                                     <v-icon>mdi-view-dashboard-outline</v-icon>
                                 </v-list-item-icon>
@@ -185,7 +189,11 @@
                                     >
                                 </v-list-item-content>
                             </v-list-item>
-                            <v-list-item @click="goToBookings" link>
+                            <v-list-item
+                                v-if="role.admin"
+                                @click="goToBookings"
+                                link
+                            >
                                 <v-list-item-icon>
                                     <v-icon>mdi-cart-arrow-down</v-icon>
                                 </v-list-item-icon>
@@ -196,7 +204,11 @@
                                     >
                                 </v-list-item-content>
                             </v-list-item>
-                            <v-list-item @click="goToCalendar" link>
+                            <v-list-item
+                                v-if="role.admin"
+                                @click="goToCalendar"
+                                link
+                            >
                                 <v-list-item-icon>
                                     <v-icon>mdi-calendar-blank</v-icon>
                                 </v-list-item-icon>
@@ -391,7 +403,6 @@ export default {
                     .currentUser.getIdTokenResult()
                     .then((tokenResult) => {
                         this.role = tokenResult.claims;
-                        console.log('🍎 ', tokenResult.claims);
                     });
             }
             if (user) {
