@@ -206,8 +206,24 @@ export const actions = {
             .auth()
             .signInWithEmailAndPassword(user.email, user.password)
             .then((response) => {
+                console.log(`index.js - 209 - 🍉`, response);
                 commit('LOGGEDIN_USER', response.user);
-                this.$router.push('/dashboard');
+
+                if (response) {
+                    firebase
+                        .auth()
+                        .currentUser.getIdTokenResult()
+                        .then((tokenResult) => {
+                            this.role = tokenResult.claims;
+                            console.log('🍎 ', tokenResult.claims);
+                            if (tokenResult.claims.admin) {
+                                this.$router.push('/dashboard');
+                            }
+                            if (tokenResult.claims.customer) {
+                                this.$router.push('/store');
+                            }
+                        });
+                }
                 commit('SET_LOADING', false);
             })
             .catch((error) => {
