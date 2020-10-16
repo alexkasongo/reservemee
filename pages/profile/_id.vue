@@ -971,15 +971,18 @@ export default {
             });
         },
         onUpdProfileInfo() {
-            if (!this.profileInfo.rawImage) {
-                return;
-            }
+            // TODO should be able to upload image
+            // if (!this.profileInfo.rawImage) {
+            //     return;
+            // }
             const payload = {
                 name: this.profileInfo.name,
-                // photoUrl: this.profileInfo.photoUrl
+                photoUrl: this.profileInfo.photoUrl
 
-                rawLogoImage: this.profileInfo.rawImage
+                // TODO upload image
+                // rawLogoImage: this.profileInfo.rawImage
             };
+            console.log(`_id.vue - 983 - variable`, payload);
             // store image as binary in database
             this.updateUserProfile(payload);
         },

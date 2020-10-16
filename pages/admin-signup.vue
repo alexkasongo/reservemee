@@ -89,19 +89,6 @@ export default {
             this.signupAdmin(signupDetails);
         }
     },
-    created() {
-        firebase.auth().onAuthStateChanged((userAuth) => {
-            if (userAuth) {
-                firebase
-                    .auth()
-                    .currentUser.getIdTokenResult()
-                    .then((tokenResult) => {
-                        console.log('🍎 ', tokenResult.claims);
-                        this.role = tokenResult.claims;
-                    });
-            }
-        });
-    },
     mounted() {
         this.email = localStorage.getItem('email');
     }
