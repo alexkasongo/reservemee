@@ -293,6 +293,7 @@ export default {
     data() {
         return {
             user: '',
+            role: '',
             drawer: false,
             group: null,
             multiLine: true,
