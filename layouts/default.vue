@@ -357,11 +357,11 @@ export default {
                 .auth()
                 .signOut()
                 .then(() => {
-                    this.user = '';
                     window.localStorage.removeItem('email');
                     window.localStorage.removeItem('vuex');
+                    this.user = '';
+                    this.$router.push('/');
                 });
-            this.$router.push('/');
         },
         signup() {
             this.$router.push('/signup');
@@ -399,15 +399,15 @@ export default {
     mounted() {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
+                // User is signed in.
+                // check user status
                 firebase
                     .auth()
                     .currentUser.getIdTokenResult()
                     .then((tokenResult) => {
                         this.role = tokenResult.claims;
                     });
-            }
-            if (user) {
-                // User is signed in.
+
                 this.user = user;
 
                 const userDetails = {
@@ -419,7 +419,6 @@ export default {
                 };
 
                 this.loadUser(userDetails);
-
                 this.loadUserId(user.uid);
                 this.loadUserIdData(user.uid);
                 this.loadCategories(user.uid);
@@ -435,6 +434,6 @@ export default {
 
 <style>
 .margin {
-    margin: 64px auto 0 auto;
+    margin: 52px auto 0 auto;
 }
 </style>

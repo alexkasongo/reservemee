@@ -1,4 +1,5 @@
 import * as firebase from 'firebase/app';
+import { db } from '@/plugins/firebase';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/storage';
@@ -206,7 +207,6 @@ export const actions = {
             .auth()
             .signInWithEmailAndPassword(user.email, user.password)
             .then((response) => {
-                console.log(`index.js - 209 - 🍉`, response);
                 commit('LOGGEDIN_USER', response.user);
 
                 if (response) {
@@ -215,7 +215,6 @@ export const actions = {
                         .currentUser.getIdTokenResult()
                         .then((tokenResult) => {
                             this.role = tokenResult.claims;
-                            console.log('🍎 ', tokenResult.claims);
                             if (tokenResult.claims.admin) {
                                 this.$router.push('/dashboard');
                             }
@@ -227,6 +226,7 @@ export const actions = {
                 commit('SET_LOADING', false);
             })
             .catch((error) => {
+                console.log(`index.js - 229 - 🍎`, error);
                 // Handle Errors here.
                 commit('ERRORS', error);
                 commit('SET_LOADING', false);
