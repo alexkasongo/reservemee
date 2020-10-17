@@ -66,10 +66,10 @@
 
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" text @click="close">
+                            <v-btn color="teal darken-1" text @click="close">
                                 Cancel
                             </v-btn>
-                            <v-btn color="blue darken-1" text @click="save">
+                            <v-btn color="teal darken-1" text @click="save">
                                 Save
                             </v-btn>
                         </v-card-actions>
@@ -84,13 +84,13 @@
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn
-                                color="blue darken-1"
+                                color="teal darken-1"
                                 text
                                 @click="closeDelete"
                                 >Cancel</v-btn
                             >
                             <v-btn
-                                color="blue darken-1"
+                                color="teal darken-1"
                                 text
                                 @click="deleteItemConfirm"
                                 >OK</v-btn

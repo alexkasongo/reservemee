@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="!loading">
         <v-card class="mx-auto" max-width="400" rounded="0">
             <div class="store__card">
                 <v-img
@@ -31,7 +31,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+    computed: {
+        loading() {
+            return this.$store.getters.loading;
+        }
+    }
+};
 </script>
 
 <style lang="scss" scoped>
