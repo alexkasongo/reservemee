@@ -297,7 +297,7 @@ export default {
             drawer: false,
             group: null,
             multiLine: true,
-            text: 'New category created.',
+            text: 'Success.',
             timeout: 3000
         };
     },

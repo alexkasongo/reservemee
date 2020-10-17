@@ -39,14 +39,49 @@ import { db } from '@/plugins/firebase';
 import { mapState, mapGetters } from 'vuex';
 
 export default {
-    data() {
-        return {
-            profile: null,
-            newComment: null,
-            feedback: null,
-            uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3',
-            messages: null
-        };
+    data: () => ({
+        profile: null,
+        newComment: null,
+        feedback: null,
+        uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3',
+        messages: null,
+        customerInfo: [
+            {
+                id: '1',
+                name: 'Aleko',
+                message: 'Thank you so much for the...'
+            },
+            {
+                id: 2,
+                name: 'Kay Love',
+                message: 'Amazing, I love you...'
+            },
+            {
+                id: 3,
+                name: 'Tine Wangu',
+                message: 'Well done, you have out done...'
+            },
+            {
+                id: 4,
+                name: 'Aleko',
+                message: 'I did not receive my order...'
+            },
+            {
+                id: 5,
+                name: 'Andrea',
+                message: 'I would like to make multiple...'
+            },
+            {
+                id: 6,
+                name: 'Michelle',
+                message: 'I will pay anything for your...'
+            }
+        ]
+    }),
+    computed: {
+        ...mapGetters({
+            user: 'user'
+        })
     },
     computed: {
         currentUserMessages() {

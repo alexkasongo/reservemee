@@ -1,51 +1,47 @@
 <template>
     <div class="chat">
-        <div class="card container">
-            <div class="card-content">
-                <div class="">
-                    <h2 class="center teal-text">All Messages</h2>
-                </div>
-                <ul class="messages">
-                    <li
-                        class="wrap"
-                        v-for="message in $store.getters.messages"
-                        :key="message.id"
-                    >
-                        <a @click="viewProfile(message)">
-                            <span class="teal-text name">{{
-                                message.name
-                            }}</span>
-                        </a>
-
-                        <span class="grey-text text-darken-3">{{
-                            message.message
-                        }}</span>
-                        <span class="grey-text time">{{
-                            message.timestamp
-                        }}</span>
-                        <i
-                            v-if="$store.getters.user.name == message.name"
-                            class="material-icons btn-delete"
-                            @click="removeMessage(message)"
-                            >delete</i
-                        >
-                        <div>
-                            <button
-                                v-if="$store.getters.user.name == message.name"
-                                type="button"
-                                class="btn"
-                                @click="showModal(message)"
-                            >
-                                Edit
-                            </button>
+        <!-- Messages -->
+        <v-card>
+            <div class="container">
+                <div
+                    class="inbox-widget"
+                    v-for="message in $store.getters.messages"
+                    :key="message.id"
+                >
+                    <div class="inbox-item">
+                        <div class="inbox-item__left">
+                            <div class="inbox-item-img">
+                                <img
+                                    src="https://via.placeholder.com/150"
+                                    alt
+                                />
+                            </div>
+                            <div>
+                                <p class="inbox-item-author">
+                                    {{ message.name }}
+                                </p>
+                                <p class="inbox-item-text">
+                                    {{ message.message }}
+                                </p>
+                            </div>
                         </div>
-                    </li>
-                </ul>
+
+                        <div class="inbox-item__left">
+                            <v-btn
+                                @click="viewProfile(message)"
+                                class="teal darken-1"
+                                dark
+                                >Reply</v-btn
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <NewMessage />
+                </div>
             </div>
-            <div class="card-action">
-                <NewMessage />
-            </div>
-        </div>
+        </v-card>
+        <!-- Messages -->
     </div>
 </template>
 
@@ -59,12 +55,10 @@ export default {
     components: {
         NewMessage
     },
-    data() {
-        return {
-            isModalVisible: false,
-            uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3'
-        };
-    },
+    data: () => ({
+        isModalVisible: false,
+        uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3'
+    }),
     computed: {
         ...mapState(['user'])
     },
@@ -90,58 +84,3 @@ export default {
     }
 };
 </script>
-
-<style>
-.chat h2 {
-    font-size: 2.6em;
-    margin-bottom: 40px;
-}
-.chat span {
-    font-size: 1.4em;
-}
-.chat .name {
-    margin-right: 5px;
-}
-.chat .time {
-    display: block;
-    font-size: 0.8em;
-}
-.messages {
-    max-height: 300px;
-    overflow: auto;
-}
-.chat .wrap {
-    position: relative;
-}
-.chat .material-icons {
-    position: absolute;
-    top: 10px;
-    right: 4px;
-}
-.chat .btn-delete {
-    cursor: pointer;
-}
-
-.chat .container {
-    margin: 10px auto;
-}
-
-.messages::-webkit-scrollbar {
-    width: 3px;
-}
-
-.messages::-webkit-scrollbar-track {
-    background: #ddd;
-}
-
-.messages::-webkit-scrollbar-thumb {
-    background: #aaa;
-}
-
-.chat .btn {
-    position: absolute;
-    top: 4px;
-    right: 40px;
-    font-size: 0.7em;
-}
-</style>
