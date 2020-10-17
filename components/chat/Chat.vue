@@ -3,7 +3,7 @@
         <div class="card container">
             <div class="card-content">
                 <div class="">
-                    <h2 class="center teal-text">General Board</h2>
+                    <h2 class="center teal-text">All Messages</h2>
                 </div>
                 <ul class="messages">
                     <li
@@ -11,7 +11,7 @@
                         v-for="message in $store.getters.messages"
                         :key="message.id"
                     >
-                        <a @click="viewProfile(message.userId)">
+                        <a @click="viewProfile(message)">
                             <span class="teal-text name">{{
                                 message.name
                             }}</span>
@@ -30,7 +30,6 @@
                             >delete</i
                         >
                         <div>
-                            <!-- v-if="message.name == this.$store.getters.user.displayName" -->
                             <button
                                 v-if="$store.getters.user.name == message.name"
                                 type="button"
@@ -39,17 +38,12 @@
                             >
                                 Edit
                             </button>
-                            <!-- <modal
-                                v-show="isModalVisible"
-                                @close="closeModal"
-                            /> -->
                         </div>
                     </li>
                 </ul>
             </div>
             <div class="card-action">
                 <NewMessage />
-                <!-- <NewMessage :name="name"/> -->
             </div>
         </div>
     </div>
@@ -57,17 +51,13 @@
 
 <script>
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
-// import Navbar from '@/components/chat/';
 import NewMessage from '@/components/chat/NewMessage';
 import Modal from '@/components/chat/Modal.vue';
 
 export default {
     name: 'Chat',
-    // props: ['name'],
     components: {
-        // Navbar,
-        NewMessage,
-        Modal
+        NewMessage
     },
     data() {
         return {
@@ -85,11 +75,12 @@ export default {
         closeModal() {
             this.isModalVisible = false;
         },
-        viewProfile(id) {
+        viewProfile(message) {
             this.$router.push({
                 name: 'customer-id',
                 params: {
-                    id: id
+                    id: message.userId,
+                    name: message.name
                 }
             });
         }

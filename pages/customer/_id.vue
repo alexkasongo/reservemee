@@ -1,17 +1,14 @@
 <template>
     <div class="view-profile container">
-        <h1>Welcome it works lol</h1>
-        <p>{{ currentUserMessages }}</p>
+        <h1>Messages</h1>
+        <!-- <p>{{ test }}</p> -->
         <div class="card">
             <!-- <div class="card" v-if="currentUserMessages"> -->
             <h2 class="deep-purple-text center">
-                <!-- {{ currentUserMessages.name }}'s Wall -->
+                {{ this.$route.params.name }}
             </h2>
             <ul class="comments collection">
-                <li
-                    v-for="(comment, index) in currentUserComments"
-                    :key="index"
-                >
+                <li v-for="(comment, index) in comments" :key="index">
                     <div class="deep-purple-text">{{ comment.from }}</div>
                     <div class="grey-text text-darken-2">
                         {{ comment.message }}
@@ -20,7 +17,7 @@
             </ul>
             <form @submit.prevent="onSubmit">
                 <div class="field">
-                    <label for="comment">Add a comment</label>
+                    <label for="comment">Write Message</label>
                     <v-text-field
                         type="text"
                         name="comment"
@@ -48,8 +45,7 @@ export default {
             newComment: null,
             feedback: null,
             uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3',
-            messages: null,
-            comments: ''
+            messages: null
         };
     },
     computed: {
@@ -59,6 +55,20 @@ export default {
             });
             return messages[0];
         },
+        comments() {
+            const clonedComments = [];
+            const comments = this.$store.getters.comments;
+            comments.forEach((comment) => {
+                clonedComments.push({
+                    ...comment
+                });
+            });
+            let filtered = clonedComments.filter(
+                (res) => res.userId === this.$route.params.id
+                // res.storeId === this.uid
+            );
+            return filtered;
+        },
         currentUserComments() {
             const data = this.comments;
             const filteredData = data.filter((res) => {
@@ -66,13 +76,10 @@ export default {
             });
             return filteredData;
         },
-        ...mapState(['user']),
-        ...mapGetters({
-            comments: 'comments'
-        })
+        ...mapState(['user'])
     },
     created() {
-        this.comments = this.$store.state.comments;
+        // this.comments = filteredComments;
         // this.messages = this.$store.state.messages;
         // db.collection('comments')
         //     .where('to', '==', this.$route.params.id)
@@ -92,15 +99,16 @@ export default {
         onSubmit() {
             if (this.newComment) {
                 const createdMessage = {
-                    to: this.currentUserMessages.name,
+                    to: this.$route.params.name,
                     from: this.user.name,
                     userId: this.$route.params.id,
                     storeId: this.uid,
                     message: this.newComment
                 };
-                // console.log(`_id.vue - 96 - 🏝`, createdMessage);
+                // console.log(`_id.vue - 101 - 🍉`, this.$route.params.name);
+                // console.log(`_id.vue - 102 - 🏝`, createdMessage);
 
-                this.$store.dispatch('addComment', createdMessage);
+                this.$store.dispatch('sendPrivateMessage', createdMessage);
                 this.newComment = null;
                 this.feedback = null;
             } else {

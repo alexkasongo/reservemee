@@ -725,7 +725,7 @@ export const actions = {
     userName: function (context, payload) {
         this.commit('USER_NAME', payload)
     },
-    async addComment({ commit, dispatch }, payload) {
+    async sendPrivateMessage({ commit, dispatch }, payload) {
 
         const comment = {
             to: payload.to,
@@ -747,7 +747,7 @@ export const actions = {
                     ...comment,
                     id: key
                 });
-                dispatch('loadComments', payload.storeId);
+                dispatch('loadPrivateMessages', payload.storeId);
                 commit('SET_SNACKBAR', true)
                 commit('SET_LOADING', false);
             })
@@ -795,8 +795,7 @@ export const actions = {
                 commit('SET_LOADING', false);
             });
     },
-    async loadComments({ commit }, payload) {
-        console.log(`index.js - 798 - 🥊`, payload);
+    async loadPrivateMessages({ commit }, payload) {
         commit('SET_LOADING', true);
         //to make it realtime use on() instead of once()
         await firebase
