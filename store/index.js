@@ -637,6 +637,7 @@ export const actions = {
     },
     /*
     ** CHAT
+    ** TODO research ways to search firebase realtime database
     */
     // getDatabase: function (context) {
     //     let ref = database.collection('messages').orderBy('timestamp')
