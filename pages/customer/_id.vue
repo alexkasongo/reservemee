@@ -2,11 +2,10 @@
     <div class="view-profile container">
         <h1>Welcome it works lol</h1>
         <p>{{ currentUserMessages }}</p>
-        <div class="card" v-if="currentUserMessages">
-            <!-- <div class="card" v-if="profile"> -->
-            <!-- <div class="card"> -->
+        <div class="card">
+            <!-- <div class="card" v-if="currentUserMessages"> -->
             <h2 class="deep-purple-text center">
-                {{ currentUserMessages.name }}'s Wall
+                <!-- {{ currentUserMessages.name }}'s Wall -->
             </h2>
             <ul class="comments collection">
                 <li
@@ -40,7 +39,7 @@
 <script>
 import * as firebase from 'firebase/app';
 import { db } from '@/plugins/firebase';
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
     data() {
@@ -48,44 +47,45 @@ export default {
             profile: null,
             newComment: null,
             feedback: null,
-            comments: [],
             uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3',
-            messages: null
+            messages: null,
+            comments: ''
         };
     },
     computed: {
         currentUserMessages() {
-            if (this.messages !== null) {
-                const data = this.messages;
-                const messages = data.filter((res) => {
-                    return res.userId === this.$route.params.id;
-                });
-                return messages[0];
-            }
+            const messages = this.comments.filter((res) => {
+                return res.userId === this.$route.params.id;
+            });
+            return messages[0];
         },
         currentUserComments() {
-            return this.$store.getters.comments;
+            const data = this.comments;
+            const filteredData = data.filter((res) => {
+                return (res.userId = this.$route.params.id);
+            });
+            return filteredData;
         },
-        ...mapState(['user'])
+        ...mapState(['user']),
+        ...mapGetters({
+            comments: 'comments'
+        })
     },
     created() {
-        this.messages = this.$store.getters.messages;
-
-        //NOTE Comments
-        db.collection('comments')
-            .where('to', '==', this.$route.params.id)
-            //now make it realtime using OnSnapshot. This fires whenever something happens in the db
-            .onSnapshot((snapshot) => {
-                snapshot.docChanges().forEach((change) => {
-                    if (change.type == 'added') {
-                        //unshift puts comment to the start of the array
-                        this.comments.unshift({
-                            from: change.doc.data().from,
-                            content: change.doc.data().content
-                        });
-                    }
-                });
-            });
+        this.comments = this.$store.state.comments;
+        // this.messages = this.$store.state.messages;
+        // db.collection('comments')
+        //     .where('to', '==', this.$route.params.id)
+        //     .onSnapshot((snapshot) => {
+        //         snapshot.docChanges().forEach((change) => {
+        //             if (change.type == 'added') {
+        //                 this.comments.unshift({
+        //                     from: change.doc.data().from,
+        //                     content: change.doc.data().content
+        //                 });
+        //             }
+        //         });
+        //     });
     },
     methods: {
         //NOTE  this is adding new comment
