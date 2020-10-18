@@ -174,6 +174,15 @@
                         active-class="teal--text text--accent-4"
                     >
                         <div v-if="user">
+                            <v-list-item @click="goToStore" link>
+                                <v-list-item-icon>
+                                    <v-icon>mdi-view-dashboard-outline</v-icon>
+                                </v-list-item-icon>
+
+                                <v-list-item-content>
+                                    <v-list-item-title>Store</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
                             <v-list-item
                                 v-if="role.admin"
                                 @click="goToDashboard"
@@ -377,6 +386,9 @@ export default {
             } else {
                 this.$router.push('/');
             }
+        },
+        goToStore() {
+            this.$router.push('/store');
         },
         goToDashboard() {
             this.$router.push('/dashboard');

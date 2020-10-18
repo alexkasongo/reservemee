@@ -1,56 +1,115 @@
 <template>
-    <div v-if="!loading">
-        <v-card class="mx-auto" max-width="400" rounded="0">
-            <div class="store__card">
-                <v-img
-                    class="white--text align-end"
-                    height="440px"
-                    src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-                >
-                    <div class="store__card-title">
-                        <v-btn>Click Me</v-btn>
+    <div class="store margin">
+        <h1>Bookme Store</h1>
+
+        <div class="store__grid">
+            <div style="width: 100%" v-for="(store, id) in stores" :key="id">
+                <v-card class="mb-3" style="max-width: 540px">
+                    <div class="row no-gutters">
+                        <div
+                            class="store__banner col-md-4"
+                            v-bind:style="{
+                                'background-image':
+                                    'url(' +
+                                    store.storeProfile.storeBanner +
+                                    ')'
+                            }"
+                        ></div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    {{
+                                        store.storeProfile.storeName
+                                            | capitalize
+                                    }}
+                                </h5>
+                                <p class="card-text">
+                                    This is a wider card with supporting text
+                                    below as a natural lead-in to additional
+                                    content. This content is a little bit
+                                    longer.
+                                </p>
+
+                                <v-btn elevation="0">Visit Store</v-btn>
+                            </div>
+                        </div>
                     </div>
-                </v-img>
+                </v-card>
             </div>
-
-            <v-card-subtitle class="pb-0"> Number 10 </v-card-subtitle>
-
-            <v-card-text class="text--primary">
-                <div>Whitehaven Beach</div>
-
-                <div>Whitsunday Island, Whitsunday Islands</div>
-            </v-card-text>
-
-            <v-card-actions>
-                <v-btn color="orange" text> Share </v-btn>
-
-                <v-btn color="orange" text> Explore </v-btn>
-            </v-card-actions>
-        </v-card>
+        </div>
     </div>
 </template>
 
 <script>
+import * as firebase from 'firebase/app';
+import 'firebase/database';
+
 export default {
+    data: () => ({
+        stores: [],
+        comments: null,
+        uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3'
+    }),
     computed: {
-        loading() {
-            return this.$store.getters.loading;
+        user() {
+            return this.$store.getters.user;
+        },
+        test() {
+            return this.stores.filter((res) => {
+                res.storeProfile;
+            });
         }
+    },
+    created() {
+        /*
+         ** Load all stores
+         */
+        // const data = firebase.database().ref('users');
+        // data.on('value', (snapshot) => {
+        //     console.log(`landing.vue - 59 - 🍎`, snapshot.val());
+        //     this.stores = snapshot.val();
+        // });
+
+        // loadComments({ commit }, payload) {
+        // commit('SET_LOADING', true);
+        //to make it realtime use on() instead of once()
+        firebase
+            .database()
+            .ref('users')
+            .once('value')
+            .then((data) => {
+                // console.log(`landing.vue - 115 - 🥶`, data.val());
+                const stores = [];
+                const obj = data.val();
+                for (let key in obj) {
+                    stores.push({
+                        storeProfile: obj[key].storeProfile
+                    });
+                }
+                console.log(`landing.vue - 130 - 🙈`, stores);
+                this.stores = stores;
+            })
+            .catch((error) => {
+                console.log(`landing.vue - 134 - variable`, error);
+            });
+        // },
     }
 };
 </script>
 
 <style lang="scss" scoped>
 .store {
-    &__card {
-        margin-top: 56px;
-        position: relative;
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
-    &__card-title {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    &__list {
+        list-style-type: none;
+    }
+    &__banner {
+        background-image: url('https://via.placeholder.com/250');
+        background-position: center;
+        background-size: cover;
     }
 }
 </style>
