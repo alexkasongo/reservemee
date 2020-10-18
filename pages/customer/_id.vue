@@ -35,7 +35,6 @@
 
 <script>
 import * as firebase from 'firebase/app';
-import { db } from '@/plugins/firebase';
 import { mapState, mapGetters } from 'vuex';
 
 export default {
@@ -44,39 +43,8 @@ export default {
         newComment: null,
         feedback: null,
         uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3',
-        messages: null,
-        customerInfo: [
-            {
-                id: '1',
-                name: 'Aleko',
-                message: 'Thank you so much for the...'
-            },
-            {
-                id: 2,
-                name: 'Kay Love',
-                message: 'Amazing, I love you...'
-            },
-            {
-                id: 3,
-                name: 'Tine Wangu',
-                message: 'Well done, you have out done...'
-            },
-            {
-                id: 4,
-                name: 'Aleko',
-                message: 'I did not receive my order...'
-            },
-            {
-                id: 5,
-                name: 'Andrea',
-                message: 'I would like to make multiple...'
-            },
-            {
-                id: 6,
-                name: 'Michelle',
-                message: 'I will pay anything for your...'
-            }
-        ]
+        messages: null
+        // commnents: []
     }),
     computed: {
         ...mapGetters({
@@ -104,30 +72,10 @@ export default {
             );
             return filtered;
         },
-        currentUserComments() {
-            const data = this.comments;
-            const filteredData = data.filter((res) => {
-                return (res.userId = this.$route.params.id);
-            });
-            return filteredData;
-        },
         ...mapState(['user'])
     },
     created() {
-        // this.comments = filteredComments;
-        // this.messages = this.$store.state.messages;
-        // db.collection('comments')
-        //     .where('to', '==', this.$route.params.id)
-        //     .onSnapshot((snapshot) => {
-        //         snapshot.docChanges().forEach((change) => {
-        //             if (change.type == 'added') {
-        //                 this.comments.unshift({
-        //                     from: change.doc.data().from,
-        //                     content: change.doc.data().content
-        //                 });
-        //             }
-        //         });
-        //     });
+        this.$store.dispatch('loadComments', this.uid);
     },
     methods: {
         //NOTE  this is adding new comment

@@ -1,5 +1,4 @@
 import * as firebase from 'firebase/app';
-import { db } from '@/plugins/firebase';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/storage';
@@ -22,7 +21,7 @@ export const state = () => ({
     verificationSent: false,
 
     messages: '',
-    comments: ''
+    comments: []
 });
 
 export const getters = {
@@ -748,7 +747,7 @@ export const actions = {
                     ...comment,
                     id: key
                 });
-                dispatch('loadPrivateMessages', payload.storeId);
+                dispatch('loadComments', payload.storeId);
                 commit('SET_SNACKBAR', true)
                 commit('SET_LOADING', false);
             })
@@ -796,7 +795,7 @@ export const actions = {
                 commit('SET_LOADING', false);
             });
     },
-    async loadPrivateMessages({ commit }, payload) {
+    async loadComments({ commit }, payload) {
         commit('SET_LOADING', true);
         //to make it realtime use on() instead of once()
         await firebase

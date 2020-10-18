@@ -3,48 +3,52 @@
         <form @submit.prevent="addMessage()">
             <label for="new-message">New Message (enter to add):</label>
             <p class="red-text" v-if="feedback">{{ feedback }}</p>
-            <input type="text" name="new-message" placeholder="type in a message" v-model="newMessage">
+            <input
+                type="text"
+                name="new-message"
+                placeholder="type in a message"
+                v-model="newMessage"
+            />
         </form>
     </div>
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex'
-import database from '@/firebase/init'
+import { mapState, mapMutations, mapActions } from 'vuex';
+import database from '@/firebase/init';
 
 export default {
     name: 'NewMessage',
     // props: ['name'],
-    data(){
-        return{
+    data() {
+        return {
             newMessage: null,
             feedback: null
-        }
+        };
     },
     computed: {
-    ...mapState([
-      'name'
-    ])
+        ...mapState(['name'])
     },
     methods: {
-        addMessage(){
+        addMessage() {
             // console.log('working')
-            if(this.newMessage){
-                const createdMessage = { name: this.name , content: this.newMessage};
+            if (this.newMessage) {
+                const createdMessage = {
+                    name: this.name,
+                    content: this.newMessage
+                };
                 // console.log(createdMessage);
                 // this.feedback = null
-
-                this.$store.dispatch('addProfileMsg', createdMessage)
-                this.newMessage = null
-                this.feedback = null
+                this.$store.dispatch('addProfileMsg', createdMessage);
+                this.newMessage = null;
+                this.feedback = null;
             } else {
-                this.feedback = 'You must enter a message in order to send one'
+                this.feedback = 'You must enter a message in order to send one';
             }
         }
     }
-}
+};
 </script>
 
 <style>
-
 </style>

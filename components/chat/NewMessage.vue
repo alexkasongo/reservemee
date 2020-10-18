@@ -34,7 +34,7 @@ export default {
     },
     created() {
         this.$store.dispatch('loadMessages', this.uid);
-        this.$store.dispatch('loadPrivateMessages', this.uid);
+        this.$store.dispatch('loadComments', this.uid);
     },
     methods: {
         addMessage() {

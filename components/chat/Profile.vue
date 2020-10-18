@@ -25,11 +25,6 @@
                             @click="removeMessage(message)"
                             >delete</i
                         >
-
-                        <!-- <div>
-                            <button v-if="message.name == $store.getters.name" type="button" class="btn" @click="showModal(message)">Edit</button>
-                            <modal v-show="isModalVisible" @close="closeModal"/>
-                        </div> -->
                     </li>
                 </ul>
             </div>
