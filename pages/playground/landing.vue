@@ -2,32 +2,24 @@
     <div class="store margin">
         <!-- <Chat /> -->
         <h1>Hey lol</h1>
-        <div
-            class="card"
-            style="width: 18rem"
-            v-for="(store, id) in stores"
-            :key="id"
-        >
-            <div class="card-body">
-                <div v-for="store_profile in store" :key="store_profile.id">
-                    <h5 class="card-title">{{ store_profile.storeName }}</h5>
-                    <p class="card-text">{{ store_profile.storeBio }}</p>
-                </div>
-                <v-btn class="teal darker-1" dark>Visit Store</v-btn>
-            </div>
-        </div>
-        <!-- <ul v-for="(store, id) in stores" :key="id">
-            <li class="card" style="width: 18rem">
+        <div class="store__grid">
+            <div
+                class="card"
+                style="width: 18rem"
+                v-for="(store, id) in stores"
+                :key="id"
+            >
                 <div class="card-body">
-                    <h5 class="card-title">
-                        {{ store.storeProfile }}
-                    </h5>
-                    <p class="card-text">
-                    </p>
+                    <div v-for="store_profile in store" :key="store_profile.id">
+                        <h5 class="card-title">
+                            {{ store_profile.storeName }}
+                        </h5>
+                        <p class="card-text">{{ store_profile.storeBio }}</p>
+                    </div>
                     <v-btn class="teal darker-1" dark>Visit Store</v-btn>
                 </div>
-            </li>
-        </ul> -->
+            </div>
+        </div>
     </div>
 </template>
 
