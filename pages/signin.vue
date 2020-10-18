@@ -103,14 +103,14 @@ export default {
     height: 100vh;
     &__left {
         width: 35%;
-        background-color: pink;
+        background-color: white;
     }
     &__right {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 65%;
-        background-color: powderblue;
+        background-color: #00897b;
     }
 }
 </style>
