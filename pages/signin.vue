@@ -1,10 +1,11 @@
 <template>
-    <div>
+    <div class="signin">
         <div v-if="loading" class="col-md-6 mt-2">
             <p>loading...</p>
         </div>
-        <div v-if="!loading" class="d-flex flex-row justify-content-center">
-            <div class="col-md-8 mt-5">
+        <div class="signin__left"></div>
+        <div class="signin__right">
+            <div v-if="!loading" class="d-flex flex-row justify-content-center">
                 <div class="card">
                     <div class="card-header">Sign In</div>
 
@@ -96,4 +97,20 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.signin {
+    display: flex;
+    height: 100vh;
+    &__left {
+        width: 35%;
+        background-color: pink;
+    }
+    &__right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 65%;
+        background-color: powderblue;
+    }
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="loading" class="col-md-6 mt-2">
+        <div v-if="loading" class="col-md-6">
             <p>loading...</p>
         </div>
         <!-- Masthead -->

@@ -19,20 +19,21 @@
                 </v-btn>
             </template>
         </v-snackbar>
+
         <v-card
             class="rounded-0 mx-auto overflow-hidden"
             height="100%"
             width="100%"
         >
             <!-- NAVBAR -->
-            <v-app-bar color="white" dark fixed flat>
+            <v-app-bar color="transparent" fixed flat>
                 <v-app-bar-nav-icon
-                    color="teal darken-1"
+                    color="black"
                     @click.stop="drawer = !drawer"
                 ></v-app-bar-nav-icon>
 
                 <v-btn
-                    color="teal darken-1"
+                    color="black"
                     @click="goHome(user)"
                     elevation="0"
                     text
@@ -44,7 +45,7 @@
                 <v-spacer></v-spacer>
 
                 <v-btn v-if="user" icon>
-                    <v-icon color="teal darken-1">mdi-magnify</v-icon>
+                    <v-icon color="black">mdi-magnify</v-icon>
                 </v-btn>
 
                 <div v-if="user" class="text-center">
@@ -57,7 +58,7 @@
                     >
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn v-bind="attrs" v-on="on" icon>
-                                <v-icon color="teal darken-1">mdi-bell</v-icon>
+                                <v-icon color="black">mdi-bell</v-icon>
                             </v-btn>
                         </template>
 
@@ -131,9 +132,7 @@
                 >
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn dark icon v-bind="attrs" v-on="on">
-                            <v-icon color="teal darken-1"
-                                >mdi-dots-vertical</v-icon
-                            >
+                            <v-icon color="black">mdi-dots-vertical</v-icon>
                         </v-btn>
                     </template>
 
@@ -264,7 +263,8 @@
             </v-navigation-drawer>
             <!-- DRAWER END -->
 
-            <div class="container margin">
+            <!-- <div class="container margin"> -->
+            <div>
                 <Nuxt />
             </div>
         </v-card>

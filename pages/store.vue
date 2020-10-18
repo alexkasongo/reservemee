@@ -1,5 +1,5 @@
 <template>
-    <div class="store margin">
+    <div class="container store margin">
         <h1>Bookme Store</h1>
 
         <div class="store__grid">
@@ -86,7 +86,6 @@ export default {
                         storeProfile: obj[key].storeProfile
                     });
                 }
-                console.log(`landing.vue - 130 - 🙈`, stores);
                 this.stores = stores;
             })
             .catch((error) => {
