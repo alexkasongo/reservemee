@@ -43,7 +43,7 @@
                             >
                                 <div class="row no-gutters">
                                     <div
-                                        class="rounded-tl-xl rounded-bl-xl store__banner col-md-4"
+                                        class="store__card col-md-4"
                                         v-bind:style="{
                                             'background-image':
                                                 'url(' +
