@@ -479,7 +479,9 @@ export default {
                     .auth()
                     .currentUser.getIdTokenResult()
                     .then((tokenResult) => {
-                        this.role = tokenResult.claims;
+                        if (tokenResult) {
+                            this.role = tokenResult.claims;
+                        }
                     });
 
                 this.user = user;

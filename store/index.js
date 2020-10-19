@@ -216,11 +216,32 @@ export const actions = {
                             displayName: user.name
 
                         })
-                        .then(() => {
-                            commit('SET_LOADING', false);
-                            this.$router.push('/dashboard');
-                        });
                 }
+            })
+            .then(() => {
+                this.$swal({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Account created. Go ahead and signin.',
+                    showConfirmButton: true,
+                    timer: 60000
+                });
+            })
+            .then(() => {
+                // REVIEW 
+                // FIXME Cannot read property 'getIdTokenResult' of null
+                // but rest of the code works great
+                firebase
+                    .auth()
+                    .signOut()
+                    .then(() => {
+                        this.user = '';
+                        window.localStorage.removeItem('email');
+                        window.localStorage.removeItem('vuex');
+                        this.$router.push('/signin');
+                    });
+                commit('SET_LOADING', false);
             })
             .catch((error) => {
                 // Handle Errors here.
@@ -241,12 +262,14 @@ export const actions = {
                         .auth()
                         .currentUser.getIdTokenResult()
                         .then((tokenResult) => {
-                            this.role = tokenResult.claims;
-                            if (tokenResult.claims.admin) {
-                                this.$router.push('/dashboard');
-                            }
-                            if (tokenResult.claims.customer) {
-                                this.$router.push('/store');
+                            if (tokenResult) {
+                                this.role = tokenResult.claims;
+                                if (tokenResult.claims.admin) {
+                                    this.$router.push('/dashboard');
+                                }
+                                if (tokenResult.claims.customer) {
+                                    this.$router.push('/store');
+                                }
                             }
                         });
                 }
