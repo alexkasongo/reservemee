@@ -1,5 +1,5 @@
 <template>
-    <div class="margin">
+    <div class="container margin">
         <!-- <div v-if="!user" class="mt-2">
             <p>loading...</p>
         </div> -->

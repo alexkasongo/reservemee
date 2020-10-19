@@ -92,10 +92,10 @@
         <!-- IF PROFILE EXISTS -->
 
         <!-- IF PROFILE DOESN'T EXISTS -->
-        <div v-else class="col-sm-12">
+        <div v-else class="parallax">
             <v-parallax src="https://via.placeholder.com/1200">
                 <div class="bg-center">
-                    <div class="col-sm-6">
+                    <div class="container">
                         <v-tooltip bottom>
                             <template v-slot:activator="{ on, attrs }">
                                 <span class="float-left mr-3">

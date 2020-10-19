@@ -9,8 +9,8 @@
         ></v-img>
 
         <div style="width: 100%">
-            <div class="store-layout">
-                <div class="store-layout__left">
+            <div class="store__layout">
+                <div class="store__left">
                     <div
                         class="store__left-cat rounded-lg"
                         v-for="(category, id) in categories"
@@ -19,7 +19,7 @@
                         <div class="">{{ category.text }}</div>
                     </div>
                 </div>
-                <div class="store-layout__right">
+                <div class="store__right">
                     <h2>Stores</h2>
 
                     <div class="store__sort-card">
@@ -36,9 +36,10 @@
                     <div class="store-grid">
                         <div v-for="(store, id) in stores" :key="id">
                             <v-card
+                                outlined
                                 elevation="0"
                                 class="rounded-xl mb-3"
-                                style="max-width: 600px"
+                                style="width: 100%"
                             >
                                 <div class="row no-gutters">
                                     <div
@@ -59,11 +60,10 @@
                                                 }}
                                             </h5>
                                             <p class="card-text">
-                                                This is a wider card with
-                                                supporting text below as a
-                                                natural lead-in to additional
-                                                content. This content is a
-                                                little bit longer.
+                                                {{
+                                                    store.storeProfile.storeBio
+                                                        | truncate(50, '...')
+                                                }}
                                             </p>
 
                                             <v-btn elevation="0"
@@ -124,21 +124,11 @@ export default {
         /*
          ** Load all stores
          */
-        // const data = firebase.database().ref('users');
-        // data.on('value', (snapshot) => {
-        //     console.log(`landing.vue - 59 - 🍎`, snapshot.val());
-        //     this.stores = snapshot.val();
-        // });
-
-        // loadComments({ commit }, payload) {
-        // commit('SET_LOADING', true);
-        //to make it realtime use on() instead of once()
         firebase
             .database()
             .ref('users')
             .once('value')
             .then((data) => {
-                // console.log(`landing.vue - 115 - 🥶`, data.val());
                 const stores = [];
                 const obj = data.val();
                 for (let key in obj) {
@@ -157,50 +147,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.store {
-    &__left-cat {
-        background-color: #cccccc;
-        height: 70px;
-        margin: 0 0 20px 0;
-        padding: 0 0 0 20px;
-        display: flex;
-        justify-content: left;
-        align-items: center;
-    }
-    &__sort {
-        background-color: #cccccc;
-        height: 40px;
-        min-width: 130px;
-        margin: 0 0px 10px 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    &__sort-card {
-        display: flex;
-        justify-content: space-between;
-        margin: 40px 0;
-    }
-}
-
-.store-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
-}
-.store-landing {
-    border-radius: 30px;
-}
-
-.store-layout {
-    display: flex;
-    margin: 50px 0 0 0;
-    &__left {
-        width: 20%;
-        margin: 0 50px 0 0;
-    }
-    &__right {
-        width: 80%;
-    }
-}
 </style>

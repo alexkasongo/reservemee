@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-3">
+    <div class="container margin">
         <div class="row justify-content-md-center">
             <!-- Create Category + description here -->
             <div class="col col-lg-6">
