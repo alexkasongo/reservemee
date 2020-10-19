@@ -59,10 +59,22 @@
             flex-direction: row;
         }
     }
-    &__banner {
+    &__card {
         height: 180px;
         background-size: cover;
         background-position: center;
+        border-top-left-radius: 24px;
+        border-top-right-radius: 24px;
+        @media (min-width: $tablet) {
+            border-top-left-radius: 24px;
+            border-bottom-left-radius: 24px;
+            border-top-right-radius: 0;
+        }
+        @media (min-width: $small-desktop) {
+            border-top-left-radius: 24px;
+            border-bottom-left-radius: 24px;
+            border-top-right-radius: 0;
+        }
     }
 }
 
