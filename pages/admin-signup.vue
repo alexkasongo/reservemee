@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div v-if="loading" class="col-md-6 mt-2">
+        <!-- <div v-if="loading" class="col-md-6 mt-2">
             <p>loading...</p>
-        </div>
+        </div> -->
         <div v-if="!loading" class="d-flex flex-row justify-content-center">
             <div class="col-md-8 mt-5">
                 <div class="card">

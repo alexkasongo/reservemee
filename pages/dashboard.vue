@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div v-if="!user">
+        <!-- <div v-if="!user" class="container">
             <p>loading...</p>
-        </div>
+        </div> -->
         <div v-if="user" class="content">
             <div>
                 <!-- START HERE -->

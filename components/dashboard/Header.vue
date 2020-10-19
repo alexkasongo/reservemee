@@ -10,7 +10,7 @@
                 :src="storeProfile.storeBanner"
             >
                 <div class="bg-center">
-                    <div class="col-sm-6">
+                    <div class="container">
                         <v-tooltip bottom>
                             <template v-slot:activator="{ on, attrs }">
                                 <div class="float-left mr-3">

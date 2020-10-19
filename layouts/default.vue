@@ -25,14 +25,20 @@
             height="100%"
             width="100%"
         >
+            <div v-if="loading" class="loading">
+                <p>loading...</p>
+            </div>
             <!-- NAVBAR -->
             <v-app-bar color="transparent" fixed flat>
+                <!-- open drawer -->
                 <v-app-bar-nav-icon
                     color="black"
                     @click.stop="drawer = !drawer"
                 ></v-app-bar-nav-icon>
+                <!-- open drawer end -->
 
                 <v-btn
+                    v-if="user"
                     color="black"
                     @click="goHome(user)"
                     elevation="0"
@@ -47,6 +53,16 @@
                 <v-btn v-if="user" icon>
                     <v-icon color="black">mdi-magnify</v-icon>
                 </v-btn>
+                <v-btn v-if="user" icon>
+                    <v-icon color="black">mdi-heart-outline</v-icon>
+                </v-btn>
+                <v-btn v-if="user" icon>
+                    <v-icon
+                        @click.stop="drawerRight = !drawerRight"
+                        color="black"
+                        >mdi-cart</v-icon
+                    >
+                </v-btn>
 
                 <div v-if="user" class="text-center">
                     <v-menu
@@ -58,7 +74,7 @@
                     >
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn v-bind="attrs" v-on="on" icon>
-                                <v-icon color="black">mdi-bell</v-icon>
+                                <v-icon color="black">mdi-bell-outline</v-icon>
                             </v-btn>
                         </template>
 
@@ -174,7 +190,7 @@
             </v-app-bar>
             <!-- NAVBAR END -->
 
-            <!-- DRAWER -->
+            <!-- DRAWER LEFT-->
             <v-navigation-drawer
                 v-model="drawer"
                 absolute
@@ -189,11 +205,14 @@
                         <div v-if="user">
                             <v-list-item @click="goToStore" link>
                                 <v-list-item-icon>
-                                    <v-icon>mdi-view-dashboard-outline</v-icon>
+                                    <v-icon>mdi-cart</v-icon>
                                 </v-list-item-icon>
 
                                 <v-list-item-content>
-                                    <v-list-item-title>Store</v-list-item-title>
+                                    <v-list-item-title
+                                        class="teal--text darker-1"
+                                        >Store</v-list-item-title
+                                    >
                                 </v-list-item-content>
                             </v-list-item>
                             <v-list-item
@@ -271,11 +290,35 @@
 
                 <template v-if="user" v-slot:append>
                     <div @click="signout" class="pa-2">
-                        <v-btn block> Logout </v-btn>
+                        <v-btn class="teal darker-1" block dark> Logout </v-btn>
                     </div>
                 </template>
             </v-navigation-drawer>
-            <!-- DRAWER END -->
+            <!-- DRAWER LEFT END -->
+
+            <!-- DRAWER RIGHT-->
+            <v-navigation-drawer
+                v-model="drawerRight"
+                absolute
+                temporary
+                height="100vh"
+                right
+            >
+                <v-list nav>
+                    <v-list-item-group
+                        v-model="drawerRight"
+                        active-class="teal--text text--accent-4"
+                    >
+                    </v-list-item-group>
+                </v-list>
+
+                <template v-if="user" v-slot:append>
+                    <div @click="signout" class="pa-2">
+                        <v-btn class="teal darker-1" block dark> Bottom </v-btn>
+                    </div>
+                </template>
+            </v-navigation-drawer>
+            <!-- DRAWER RIGHT END -->
 
             <!-- <div class="container margin"> -->
             <div>
@@ -318,7 +361,9 @@ export default {
             user: '',
             role: '',
             drawer: false,
+            drawerRight: false,
             group: null,
+            groupRight: null,
             multiLine: true,
             text: 'Success.',
             timeout: 3000
@@ -360,6 +405,9 @@ export default {
         },
         group() {
             this.drawer = false;
+        },
+        groupRight() {
+            this.drawerRight = false;
         }
     },
     methods: {
@@ -458,8 +506,18 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .margin {
     margin: 52px auto 0 auto;
+}
+
+.app {
+    position: relative;
+}
+
+.loading {
+    position: absolute;
+    top: 22px;
+    left: 50%;
 }
 </style>

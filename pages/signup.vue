@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div v-if="loading" class="col-md-6 mt-2">
+        <!-- <div v-if="loading" class="col-md-6 mt-2">
             <p>loading...</p>
-        </div>
+        </div> -->
         <div class="signup">
             <div class="signup__left"></div>
             <div class="signup__right">

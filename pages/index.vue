@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div v-if="loading" class="col-md-6">
+        <!-- <div v-if="loading" class="col-md-6">
             <p>loading...</p>
-        </div>
+        </div> -->
         <!-- Masthead -->
         <div v-if="!loading">
             <header v-if="!user" class="masthead text-white text-center">

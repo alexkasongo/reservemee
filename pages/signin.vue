@@ -1,8 +1,8 @@
 <template>
     <div class="signin">
-        <div v-if="loading" class="col-md-6 mt-2">
+        <!-- <div v-if="loading" class="col-md-6 mt-2">
             <p>loading...</p>
-        </div>
+        </div> -->
         <div class="signin__left"></div>
         <div class="signin__right">
             <div v-if="!loading" class="d-flex flex-row justify-content-center">
