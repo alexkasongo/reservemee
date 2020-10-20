@@ -1,0 +1,11 @@
+.side-bar {
+    &__categories {
+            background-color: #cccccc;
+            height: 70px;
+            margin: 0 0 20px 0;
+            padding: 0 0 0 20px;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+        }
+}
