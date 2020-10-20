@@ -50,7 +50,11 @@
                                     }}
                                 </p>
 
-                                <v-btn elevation="0">Visit Store</v-btn>
+                                <v-btn
+                                    @click="viewStore(store.storeProfile)"
+                                    elevation="0"
+                                    >Visit Store</v-btn
+                                >
                             </div>
                         </div>
                     </div>
@@ -133,6 +137,17 @@ export default {
         test() {
             return this.stores.filter((res) => {
                 res.storeProfile;
+            });
+        }
+    },
+    methods: {
+        viewStore(store) {
+            this.$router.push({
+                name: 'store-front-id',
+                params: {
+                    id: store.storeId,
+                    name: store.storeName
+                }
             });
         }
     },
