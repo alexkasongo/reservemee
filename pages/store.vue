@@ -66,6 +66,9 @@ import SideBar from '@/components/client/SideBar';
 import StoreCategories from '@/components/client/StoreCategories';
 
 export default {
+    data: () => ({
+        icons: ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram']
+    }),
     components: {
         StoreBanner,
         SideBar,
