@@ -1,7 +1,8 @@
 <template>
     <div class="categories">
-        <h2>Top Stores</h2>
+        <h2>Popular Stores</h2>
 
+        <!-- SORT -->
         <div class="categories__sort-card">
             <div
                 class="categories__sort rounded-lg"
@@ -13,8 +14,11 @@
                 </div>
             </div>
         </div>
-        <div class="categories-grid">
-            <div v-for="(store, id) in stores" :key="id">
+        <!-- SORT END -->
+
+        <!-- POPULAR STORES -->
+        <div class="categories__popular">
+            <div v-for="(store, id) in stores.slice(0, 4)" :key="id">
                 <v-card
                     outlined
                     elevation="0"
@@ -53,6 +57,47 @@
                 </v-card>
             </div>
         </div>
+        <!-- POPULAR STORES END -->
+
+        <!-- NEW STORES -->
+        <div class="categories__new">
+            <h2>Popular Stores</h2>
+            <div class="categories__new-stores">
+                <div
+                    class="categories__new-store-card"
+                    v-for="(store, id) in newStores"
+                    :key="id"
+                >
+                    <div
+                        class="categories__new-store"
+                        v-bind:style="{
+                            'background-image': 'url(' + store.image + ')'
+                        }"
+                    ></div>
+                </div>
+            </div>
+        </div>
+        <!-- NEW STORES -->
+
+        <!-- RECOMMENDED STORES -->
+        <div class="categories__new">
+            <h2>Recommended Stores</h2>
+            <div class="categories__new-stores">
+                <div
+                    class="categories__new-store-card"
+                    v-for="(store, id) in newStores"
+                    :key="id"
+                >
+                    <div
+                        class="categories__new-store"
+                        v-bind:style="{
+                            'background-image': 'url(' + store.image + ')'
+                        }"
+                    ></div>
+                </div>
+            </div>
+        </div>
+        <!-- RECOMMENDED STORES -->
     </div>
 </template>
 
@@ -73,6 +118,12 @@ export default {
             { text: 'Price Range', image: 'https://via.placeholder.com/150' },
             { text: 'Mobile', image: 'https://via.placeholder.com/150' },
             { text: 'Specials', image: 'https://via.placeholder.com/150' }
+        ],
+        newStores: [
+            { text: 'Store 1', image: 'https://via.placeholder.com/150' },
+            { text: 'Store 2', image: 'https://via.placeholder.com/150' },
+            { text: 'Store 3', image: 'https://via.placeholder.com/150' },
+            { text: 'Store 4', image: 'https://via.placeholder.com/150' }
         ]
     }),
     computed: {

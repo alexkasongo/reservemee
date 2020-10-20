@@ -45,7 +45,7 @@
             border-top-right-radius: 0;
         }
     }
-    &__grid {
+    &__popular {
         display: grid;
         grid-template-columns: 1fr;
         grid-gap: 10px;
@@ -53,5 +53,32 @@
             grid-template-columns: 1fr 1fr;
         }
     
+    }
+    &__new-stores {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+        @media (min-width: $tablet) {
+            grid-template-columns: 1fr 1fr ;
+        }
+        @media (min-width: $large-desktop) {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+    
+    }
+    &__new-store {
+        height: 180px;
+        background-color: lightcoral;
+        background-size: cover;
+        background-position: center;
+        border-radius: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__new {
+        margin-top: 40px;
     }
 }
