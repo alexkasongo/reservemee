@@ -6,13 +6,7 @@
 </template>
 
 <script>
-export default {
-    watch: {
-        $route() {
-            // this.loadServices(this.userId);
-        }
-    }
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>
