@@ -1,8 +1,5 @@
 <template>
     <div class="container">
-        <!-- <div v-if="loading" class="col-md-6 mt-2">
-            <p>loading...</p>
-        </div> -->
         <div v-if="userLoaded.emailVerified" class="w-100 mt-2">
             <div class="card">
                 <div class="card-body">
