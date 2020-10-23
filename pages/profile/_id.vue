@@ -1,9 +1,5 @@
 <template>
     <div class="container margin">
-        <!-- <div v-if="!user" class="mt-2">
-            <p>loading...</p>
-        </div> -->
-
         <div v-if="user || loading" class="row gutters-sm">
             <!-- TITLES -->
             <div class="col-md-4 d-none d-md-block">
