@@ -15,9 +15,9 @@
                     placeholder="Confirm your email address"
                     v-model="emailConfirm"
                 />
-                <!-- <small class="form-text text-muted mb-4">{{
+                <small class="form-text text-muted mb-4">{{
                     errors.message
-                }}</small> -->
+                }}</small>
                 <v-btn
                     @click="resetPassword"
                     class="teal darken-1"
