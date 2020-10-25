@@ -1,25 +1,5 @@
 <template>
     <v-card elevation="2" class="mx-auto mt-3" width="100%">
-        <!-- <v-card dark flat>
-            <v-img
-                src="https://cdn.vuetifyjs.com/images/cards/forest.jpg"
-                gradient="to top, rgba(0,0,0,.44), rgba(0,0,0,.44)"
-            >
-                <v-container class="fill-height">
-                    <v-row align="center">
-                        <strong class="display-4 font-weight-regular mr-6"
-                            >8</strong
-                        >
-                        <v-row justify="end">
-                            <div class="headline font-weight-light">Monday</div>
-                            <div class="text-uppercase font-weight-light">
-                                February 2015
-                            </div>
-                        </v-row>
-                    </v-row>
-                </v-container>
-            </v-img>
-        </v-card> -->
         <v-card-text class="py-0">
             <v-timeline align-top dense>
                 <v-timeline-item color="pink" small>
