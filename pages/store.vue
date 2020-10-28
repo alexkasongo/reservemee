@@ -45,8 +45,7 @@
                     vitae velit et faucibus. Morbi vehicula lacinia malesuada.
                     Nulla placerat augue vel ipsum ultrices, cursus iaculis dui
                     sollicitudin. Vestibulum eu ipsum vel diam elementum tempor
-                    vel ut orci. Orci varius natoque penatibus et magnis dis
-                    parturient montes, nascetur ridiculus mus.
+                    vel ut orci. parturient montes, nascetur ridiculus mus.
                 </v-card-text>
 
                 <v-divider></v-divider>
