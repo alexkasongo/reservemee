@@ -65,7 +65,7 @@
 
         <!-- NEW STORES -->
         <div class="categories__new">
-            <h2>Popular Stores</h2>
+            <h2>New Stores</h2>
             <div class="categories__new-stores">
                 <div
                     class="categories__new-store-card"
