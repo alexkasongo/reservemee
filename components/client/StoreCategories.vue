@@ -19,46 +19,45 @@
         <!-- POPULAR STORES -->
         <div class="categories__popular">
             <div v-for="(store, id) in stores.slice(0, 4)" :key="id">
-                <v-card
-                    outlined
-                    elevation="0"
-                    class="rounded-xl mb-3"
-                    style="width: 100%"
-                >
-                    <div class="row no-gutters">
-                        <div
-                            class="categories__store-card col-md-4"
-                            v-bind:style="{
-                                'background-image':
-                                    'url(' +
-                                    store.storeProfile.storeBanner +
-                                    ')'
-                            }"
-                        ></div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    {{
-                                        store.storeProfile.storeName
-                                            | capitalize
-                                    }}
-                                </h5>
-                                <p class="card-text">
-                                    {{
-                                        store.storeProfile.storeBio
-                                            | truncate(50, '...')
-                                    }}
-                                </p>
+                <div v-for="(storeProfile, id) in store" :key="id">
+                    <v-card
+                        outlined
+                        elevation="0"
+                        class="rounded-xl mb-3"
+                        style="width: 100%"
+                    >
+                        <div class="row no-gutters">
+                            <div
+                                class="categories__store-card col-md-4"
+                                v-bind:style="{
+                                    'background-image':
+                                        'url(' + storeProfile.storeBanner + ')'
+                                }"
+                            ></div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        {{
+                                            storeProfile.storeName | capitalize
+                                        }}
+                                    </h5>
+                                    <p class="card-text">
+                                        {{
+                                            storeProfile.storeBio
+                                                | truncate(50, '...')
+                                        }}
+                                    </p>
 
-                                <v-btn
-                                    @click="viewStore(store.storeProfile)"
-                                    elevation="0"
-                                    >Visit Store</v-btn
-                                >
+                                    <v-btn
+                                        @click="viewStore(storeProfile)"
+                                        elevation="0"
+                                        >Visit Store</v-btn
+                                    >
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </v-card>
+                    </v-card>
+                </div>
             </div>
         </div>
         <!-- POPULAR STORES END -->
@@ -168,6 +167,7 @@ export default {
                     });
                 }
                 this.stores = stores;
+                // console.log(`StoreCategories.vue - 171 - 🍎`, stores);
             })
             .catch((error) => {
                 console.log(`landing.vue - 134 - variable`, error);
