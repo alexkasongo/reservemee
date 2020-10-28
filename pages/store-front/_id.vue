@@ -4,7 +4,6 @@
         <p>id: {{ this.$route.params.id }}</p> -->
         <div class="store-front__container">
             <div class="store-front__left">
-                <p>{{ storeProfile }}</p>
                 <div class="store-front__left-banner">
                     <v-card :loading="loading" class="mx-auto rounded-xl">
                         <template slot="progress">
@@ -20,7 +19,9 @@
                             src="https://via.placeholder.com/1200"
                         ></v-img>
 
-                        <v-card-title>Store Name</v-card-title>
+                        <v-card-title>{{
+                            storeProfile.storeName | capitalize
+                        }}</v-card-title>
 
                         <v-card-text>
                             <v-row align="center" class="mx-0">
@@ -36,17 +37,13 @@
                                 <div class="grey--text ml-4">4.5 (413)</div>
                             </v-row>
 
-                            <div class="my-4 subtitle-1">$ • Italian, Cafe</div>
+                            <div class="my-4 subtitle-1">
+                                $ • Type of service •
+                                {{ storeProfile.storeLocation }}
+                            </div>
 
                             <div>
-                                Curabitur arcu erat, accumsan id imperdiet et,
-                                porttitor at sem. Vivamus magna justo, lacinia
-                                eget consectetur sed, convallis at tellus.
-                                Mauris blandit aliquet elit, eget tincidunt nibh
-                                pulvinar a. Quisque velit nisi, pretium ut
-                                lacinia in, elementum id enim. Vestibulum ac
-                                diam sit amet quam vehicula elementum sed sit
-                                amet dui.
+                                {{ storeProfile.storeBio }}
                             </div>
                         </v-card-text>
                     </v-card>
@@ -170,10 +167,11 @@ export default {
             .database()
             .ref('users/' + this.$route.params.id)
             .once('value')
-            .then((data) => {
-                console.log(`_id.vue - 21 - 🥶`, data.val());
+            .then((res) => {
+                const data = res.val();
                 if (data.storeProfile) {
                     this.storeProfile = data.storeProfile;
+                    console.log(`_id.vue - 21 - 🥶`, data);
                 }
                 if (data.services) {
                     this.services = data.services;
