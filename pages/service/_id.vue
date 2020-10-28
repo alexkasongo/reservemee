@@ -1,8 +1,5 @@
 <template>
     <div class="container margin">
-        <!-- <div v-if="loading" class="col-md-6 mt-2">
-            <p>loading...</p>
-        </div> -->
         <!-- <div v-if="this.$route.params.id === 'classic-nail-polish'">{{ this.$route.params }}</div> -->
         <div class="px-lg-0 mt-3">
             <div class="pb-5">
