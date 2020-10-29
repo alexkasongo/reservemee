@@ -21,7 +21,10 @@ export const state = () => ({
     verificationSent: false,
 
     messages: '',
-    comments: []
+    comments: [],
+
+    loadedStoreProfile: [],
+    loadedStoreServices: []
 });
 
 export const getters = {
@@ -45,7 +48,10 @@ export const getters = {
     },
 
     messages: (state) => state.messages,
-    comments: (state) => state.comments
+    comments: (state) => state.comments,
+
+    loadedStoreProfile: (state) => state.loadedStoreProfile,
+    loadedStoreServices: (state) => state.loadedStoreServices
 };
 
 export const actions = {
@@ -682,23 +688,6 @@ export const actions = {
     ** CHAT
     ** TODO research ways to search firebase realtime database
     */
-    // getDatabase: function (context) {
-    //     let ref = database.collection('messages').orderBy('timestamp')
-    //     ref.onSnapshot(snapshot => {
-    //         snapshot.docChanges().forEach(change => {
-    //             if (change.type == 'added') {
-    //                 let doc = change.doc
-    //                 // console.log()
-    //                 this.commit('GET_MESSAGE', {
-    //                     id: doc.id,
-    //                     name: doc.data().name,
-    //                     content: doc.data().content,
-    //                     timestamp: moment(doc.data().timestamp).format('lll')
-    //                 })
-    //             }
-    //         })
-    //     })
-    // },
     deleteMessage: function (context, payload) {
         // console.log(payload)
         database.collection('messages').doc(payload.id).delete()
@@ -870,6 +859,46 @@ export const actions = {
             });
     },
 
+    /*
+    * STORE
+    */
+    loadStoreServices({ commit }, payload) {
+        commit('SET_LOADING', true);
+        firebase
+            .database()
+            .ref('users/' + payload)
+            .once('value')
+            .then((res) => {
+                const data = res.val();
+                if (data.storeProfile) {
+                    commit('SET_LOADED_STORE_PROFILE', data.storeProfile);
+                }
+
+                if (data.services) {
+                    const storeServices = [];
+                    const servicesObj = data;
+
+                    for (let key in servicesObj.services) {
+                        storeServices.push({
+                            id: key,
+                            category: servicesObj.services[key].category,
+                            description: servicesObj.services[key].description,
+                            imageUrl: servicesObj.services[key].imageUrl,
+                            name: servicesObj.services[key].name,
+                            price: servicesObj.services[key].price,
+                            userId: servicesObj.services[key].userId
+                        });
+                    }
+                    commit('SET_LOADED_STORE_SERVICES', storeServices);
+                }
+                commit('SET_LOADING', false);
+            })
+            .catch((error) => {
+                console.log(`_id.vue - 34 -  🙈`, error);
+                commit('ERRORS', error);
+                commit('SET_LOADING', false);
+            });
+    }
 
 };
 
@@ -921,4 +950,15 @@ export const mutations = {
     SET_LOADED_COMMENTS: (state, payload) => {
         state.comments = payload
     },
+    /*
+    ** CHAT
+    */
+    SET_LOADED_STORE_PROFILE: (state, payload) => {
+        state.loadedStoreProfile = payload
+    },
+    SET_LOADED_STORE_SERVICES: (state, payload) => {
+        state.loadedStoreServices = payload
+    }
+
+
 };
