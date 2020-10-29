@@ -195,7 +195,7 @@
                     </v-row>
                 </div>
             </div>
-            <div class="store-front__right">right</div>
+            <div class="store-front__right"></div>
         </div>
     </div>
 </template>
@@ -228,14 +228,11 @@ export default {
         },
         // filter services using category name
         onChange(e) {
-            const services = Object.values(this.services).filter((res) => {
-                res;
-            });
-            // const filtered = services.filter((res) => {
-            //     res.category === e;
-            // });
-            console.log(`_id.vue - 238 - 🍎`, services);
-            // return filtered;
+            const services = this.services;
+
+            // function which we can filter object
+
+            console.log('🌻', services);
         }
     },
     created() {
@@ -247,16 +244,24 @@ export default {
             .then((res) => {
                 const data = res.val();
                 if (data.storeProfile) {
-                    this.storeProfile = data.storeProfile;
-                    // console.log(`_id.vue - 21 - 🥶`, data);
+                    const storeData = [];
+                    const obj = data;
+
+                    if (obj) {
+                        storeData.push(obj.storeProfile);
+                    }
+                    this.storeProfile = storeData;
                 }
                 if (data.categories) {
-                    // const categories = Object.keys(
-                    //     data.categories
-                    // ).map((key) => [data.categories[key]]);
-                    // this.categories = categories;
+                    // const storeCategories = [];
+                    // const categoriesObj = data;
+
+                    // if (categoriesObj) {
+                    //     storeCategories.push(categoriesObj.categories);
+                    // }
+                    console.log(`_id.vue - 21 - 🏝`, storeCategories);
+                    // this.categories = storeCategories;
                     this.categories = data.categories;
-                    console.log(`_id.vue - 21 - 🥶`, data.categories);
                 }
                 if (data.services) {
                     this.services = data.services;
