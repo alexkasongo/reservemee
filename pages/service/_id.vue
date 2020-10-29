@@ -1,5 +1,8 @@
 <template>
-    <div class="container margin">
+    <div class="container">
+        <!-- <div v-if="loading" class="col-md-6 mt-2">
+            <p>loading...</p>
+        </div> -->
         <!-- <div v-if="this.$route.params.id === 'classic-nail-polish'">{{ this.$route.params }}</div> -->
         <div class="px-lg-0 mt-3">
             <div class="pb-5">
@@ -31,6 +34,16 @@
                                                     Price
                                                 </div>
                                             </th>
+                                            <th
+                                                scope="col"
+                                                class="border-0 bg-light"
+                                            >
+                                                <div
+                                                    class="py-2 text-uppercase text-right"
+                                                >
+                                                    Actions
+                                                </div>
+                                            </th>
                                         </tr>
                                     </thead>
 
@@ -40,7 +53,7 @@
                                         class="tbody"
                                     >
                                         <tr>
-                                            <th scope="row" class="border-0">
+                                            <td scope="row" class="border-0">
                                                 <div class="p-2">
                                                     <img
                                                         :src="service.imageUrl"
@@ -68,36 +81,50 @@
                                                         >
                                                     </div>
                                                 </div>
-                                            </th>
-                                            <td class="border-0 align-middle">
+                                            </td>
+                                            <td
+                                                class="border-0 align-middle text-right"
+                                            >
                                                 <strong
                                                     >${{
                                                         service.price
                                                     }}.00</strong
                                                 >
                                             </td>
+                                            <td
+                                                class="border-0 align-middle text-right"
+                                            >
+                                                <div class="mb-2">
+                                                    <a
+                                                        href="#"
+                                                        @click="
+                                                            updService(
+                                                                service.id
+                                                            )
+                                                        "
+                                                        class="text-dark"
+                                                    >
+                                                        <i
+                                                            class="fa fa-pencil"
+                                                            aria-hidden="true"
+                                                        ></i>
+                                                    </a>
+                                                    <a
+                                                        href="#"
+                                                        @click="
+                                                            removeService(
+                                                                service.id
+                                                            )
+                                                        "
+                                                        class="text-dark"
+                                                    >
+                                                        <i
+                                                            class="fa fa-trash"
+                                                        ></i>
+                                                    </a>
+                                                </div>
+                                            </td>
                                         </tr>
-                                        <div class="editBtns mb-2">
-                                            <a
-                                                href="#"
-                                                @click="updService(service.id)"
-                                                class="text-dark"
-                                            >
-                                                <i
-                                                    class="fa fa-pencil"
-                                                    aria-hidden="true"
-                                                ></i>
-                                            </a>
-                                            <a
-                                                href="#"
-                                                @click="
-                                                    removeService(service.id)
-                                                "
-                                                class="text-dark"
-                                            >
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </div>
                                     </tbody>
                                 </table>
                             </div>
@@ -175,12 +202,7 @@ export default {
 .tbody {
     position: relative;
 }
-.editBtns {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 60px;
-    display: flex;
-    justify-content: space-between;
+.fa-pencil {
+    margin: 0 10px 0 0;
 }
 </style>

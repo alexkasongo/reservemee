@@ -61,13 +61,14 @@
                         v-model="price"
                     />
                 </div>
-                <button
+                <v-btn
                     type="submit"
                     :disabled="loading"
-                    class="btn btn-primary mt-2"
+                    class="teal darker-1 mt-2"
+                    dark
                 >
                     Update
-                </button>
+                </v-btn>
             </div>
         </form>
     </div>
