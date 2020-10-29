@@ -7,6 +7,7 @@
                 <div class="store-front__left-banner">
                     <v-card
                         elevation="0"
+                        outlined
                         :loading="loading"
                         class="mx-auto rounded-xl"
                     >
@@ -42,10 +43,20 @@
                             </v-row>
 
                             <div class="my-4 subtitle-1">
-                                $ • Type of service •
+                                <strong>Mobile</strong>: Type of service
+                            </div>
+                            <div class="my-4 subtitle-1">
+                                <strong>Mobile</strong>:
+                                {{ storeProfile.storePhoneNumber }}
+                            </div>
+                            <div class="my-4 subtitle-1">
+                                <strong>Email</strong>:
+                                {{ storeProfile.storeEmail }}
+                            </div>
+                            <div class="my-4 subtitle-1">
+                                <strong>Location</strong>:
                                 {{ storeProfile.storeLocation }}
                             </div>
-
                             <div>
                                 {{ storeProfile.storeBio }}
                             </div>
@@ -53,7 +64,7 @@
                     </v-card>
                 </div>
 
-                <v-divider class="mx-4"></v-divider>
+                <!-- <v-divider class="mx-4"></v-divider> -->
 
                 <div class="store-front__left-title">
                     <v-card
@@ -74,10 +85,10 @@
                         <v-card-text>
                             <div class="my-4 subtitle-1">$ • Italian, Cafe</div>
 
-                            <div>
+                            <!-- <div>
                                 Small plates, salads & sandwiches - an intimate
                                 setting with 12 indoor seats plus patio seating.
-                            </div>
+                            </div> -->
                         </v-card-text>
                     </v-card>
                 </div>
@@ -105,20 +116,22 @@
 
                                         <v-card-text>
                                             <!-- <div>Word of the Day</div> -->
-                                            <p class="display-1 text--primary">
+                                            <div
+                                                class="display-1 text--primary"
+                                            >
                                                 ${{ service.price }}
-                                                <v-btn
+                                                <!-- <v-btn
                                                     class="ml-2"
                                                     outlined
                                                     rounded
                                                     small
                                                 >
                                                     Book Service
-                                                </v-btn>
-                                            </p>
+                                                </v-btn> -->
+                                            </div>
                                         </v-card-text>
 
-                                        <!-- <v-card-actions>
+                                        <v-card-actions>
                                             <v-btn
                                                 class="ml-2"
                                                 outlined
@@ -127,7 +140,7 @@
                                             >
                                                 Book Service
                                             </v-btn>
-                                        </v-card-actions> -->
+                                        </v-card-actions>
                                     </div>
 
                                     <!-- <v-avatar width="200" tile>
@@ -159,6 +172,7 @@ export default {
     data: () => ({
         storeProfile: '',
         services: '',
+        categories: '',
         loading: false,
         selection: 1,
         items: [
@@ -195,6 +209,9 @@ export default {
                 if (data.storeProfile) {
                     this.storeProfile = data.storeProfile;
                     console.log(`_id.vue - 21 - 🥶`, data);
+                }
+                if (data.categories) {
+                    this.categories = data.categories;
                 }
                 if (data.services) {
                     this.services = data.services;
