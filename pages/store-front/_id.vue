@@ -114,10 +114,12 @@
                                         @change="onChange($event)"
                                         class="form-control"
                                         required
-                                        v-model="select"
                                     >
+                                        <option value="all" selected>
+                                            All
+                                        </option>
                                         <option
-                                            v-for="category in categories"
+                                            v-for="category in categories[0]"
                                             :key="category.id"
                                         >
                                             {{ category.name | capitalize }}
@@ -208,7 +210,7 @@ export default {
     data: () => ({
         storeProfile: '',
         services: '',
-        categories: '',
+        categories: [],
         loading: false,
         selection: 1,
         select: { state: 'Florida', abbr: 'FL' },
@@ -218,7 +220,8 @@ export default {
             { state: 'Nebraska', abbr: 'NE' },
             { state: 'California', abbr: 'CA' },
             { state: 'New York', abbr: 'NY' }
-        ]
+        ],
+        testData: []
     }),
     methods: {
         reserve() {
@@ -229,10 +232,52 @@ export default {
         // filter services using category name
         onChange(e) {
             const services = this.services;
+            const value = e.target.value.toLowerCase();
 
-            // function which we can filter object
+            // if all is selected show all
+            if (value === 'all') {
+                this.getServices();
+            }
 
-            console.log('🌻', services);
+            // function which we can use filter object
+            const filteredServices = this.services.filter((res) => {
+                // if (res[0].includes('jeans')) return true;
+                console.log(`_id.vue - 238 - variable`, value);
+                return res.category === value;
+            });
+            this.services = filteredServices;
+            console.log(`_id.vue - 240 - 💈`, filteredServices);
+        },
+        // REVIEW
+        // instead of calling the api here, store state in vuex and call getter on filter
+        getServices() {
+            firebase
+                .database()
+                .ref('users/' + this.$route.params.id)
+                .once('value')
+                .then((res) => {
+                    const data = res.val();
+                    if (data.services) {
+                        const storeServices = [];
+                        const servicesObj = data;
+                        for (let key in servicesObj.services) {
+                            storeServices.push({
+                                id: key,
+                                category: servicesObj.services[key].category,
+                                description:
+                                    servicesObj.services[key].description,
+                                imageUrl: servicesObj.services[key].imageUrl,
+                                name: servicesObj.services[key].name,
+                                price: servicesObj.services[key].price,
+                                userId: servicesObj.services[key].userId
+                            });
+                        }
+                        this.services = storeServices;
+                    }
+                })
+                .catch((error) => {
+                    console.log(`_id.vue - 34 -  🙈`, error);
+                });
         }
     },
     created() {
@@ -247,18 +292,37 @@ export default {
                     this.storeProfile = data.storeProfile;
                 }
                 if (data.categories) {
-                    // const storeCategories = [];
-                    // const categoriesObj = data;
+                    const storeCategories = [];
+                    const categoriesObj = data;
 
-                    // if (categoriesObj) {
-                    //     storeCategories.push(categoriesObj.categories);
-                    // }
-                    console.log(`_id.vue - 21 - 🏝`);
-                    // this.categories = storeCategories;
-                    this.categories = data.categories;
+                    if (categoriesObj) {
+                        storeCategories.push(categoriesObj.categories);
+                    }
+                    this.categories = storeCategories;
                 }
                 if (data.services) {
-                    this.services = data.services;
+                    const storeServices = [];
+                    const servicesObj = data;
+
+                    // if (servicesObj) {
+                    //     storeServices.push(servicesObj.services);
+                    // }
+
+                    for (let key in servicesObj.services) {
+                        storeServices.push({
+                            id: key,
+                            category: servicesObj.services[key].category,
+                            description: servicesObj.services[key].description,
+                            imageUrl: servicesObj.services[key].imageUrl,
+                            name: servicesObj.services[key].name,
+                            price: servicesObj.services[key].price,
+                            userId: servicesObj.services[key].userId
+                        });
+                    }
+                    this.testData = storeServices;
+                    // console.log(`_id.vue - 266 - 🌎`, storeServices);
+
+                    this.services = storeServices;
                 }
             })
             .catch((error) => {
