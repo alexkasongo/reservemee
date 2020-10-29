@@ -244,13 +244,7 @@ export default {
             .then((res) => {
                 const data = res.val();
                 if (data.storeProfile) {
-                    const storeData = [];
-                    const obj = data;
-
-                    if (obj) {
-                        storeData.push(obj.storeProfile);
-                    }
-                    this.storeProfile = storeData;
+                    this.storeProfile = data.storeProfile;
                 }
                 if (data.categories) {
                     // const storeCategories = [];
@@ -259,7 +253,7 @@ export default {
                     // if (categoriesObj) {
                     //     storeCategories.push(categoriesObj.categories);
                     // }
-                    console.log(`_id.vue - 21 - 🏝`, storeCategories);
+                    console.log(`_id.vue - 21 - 🏝`);
                     // this.categories = storeCategories;
                     this.categories = data.categories;
                 }
