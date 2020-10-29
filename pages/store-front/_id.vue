@@ -107,14 +107,18 @@
                                             <!-- <div>Word of the Day</div> -->
                                             <p class="display-1 text--primary">
                                                 ${{ service.price }}
+                                                <v-btn
+                                                    class="ml-2"
+                                                    outlined
+                                                    rounded
+                                                    small
+                                                >
+                                                    Book Service
+                                                </v-btn>
                                             </p>
-                                            <!-- <p>adjective</p> -->
-                                            <!-- <div class="my-4 subtitle-1">
-                                                $58
-                                            </div> -->
                                         </v-card-text>
 
-                                        <v-card-actions>
+                                        <!-- <v-card-actions>
                                             <v-btn
                                                 class="ml-2"
                                                 outlined
@@ -123,12 +127,19 @@
                                             >
                                                 Book Service
                                             </v-btn>
-                                        </v-card-actions>
+                                        </v-card-actions> -->
                                     </div>
 
-                                    <v-avatar class="ma-3" size="200" tile>
+                                    <!-- <v-avatar width="200" tile>
                                         <v-img :src="service.imageUrl"></v-img>
-                                    </v-avatar>
+                                    </v-avatar> -->
+                                    <div
+                                        class="store-front__left-service-img"
+                                        v-bind:style="{
+                                            'background-image':
+                                                'url(' + service.imageUrl + ')'
+                                        }"
+                                    ></div>
                                 </div>
                             </v-card>
                         </v-col>
