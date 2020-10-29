@@ -98,10 +98,10 @@ export default {
             const data = this.$store.state.services;
 
             const filter = data.filter((res) => {
-                return res.id === this.$store.state.filteredServiceId;
+                return res.id === this.$route.params.id;
             });
 
-            return data[0];
+            return filter[0];
         },
         loading() {
             return this.$store.getters.loading;
@@ -148,22 +148,14 @@ export default {
         }
     },
     mounted() {
-        //FIXME without the if() we get error on update page reload
-        //NOTE issue seems to be coming from store filteredService getter. Possible fix
-        // could be creating a filtered getter that filters through services using
-        // uid.
-        // if (this.filteredService === undefined) {
-        //     this.$router.back();
-        // } else {
-        // this.loadfilteredService();
-        // this.loadServices();
-        //FIXME HERE
+        /*
+         ** Pre-populate form
+         */
         this.category = this.titleCase;
         this.name = this.serviceUpdateInfo.name;
         this.description = this.serviceUpdateInfo.description;
         this.price = this.serviceUpdateInfo.price;
         this.imageUrl = this.serviceUpdateInfo.imageUrl;
-        // }
     }
 };
 </script>
