@@ -1,8 +1,5 @@
 <template>
-    <div class="container">
-        <!-- <div v-if="loading" class="col-md-6 mt-2">
-            <p>loading...</p>
-        </div> -->
+    <div class="container margin">
         <h3>Update Service</h3>
         <form @submit.prevent="onSubmit">
             <div class="form-group">

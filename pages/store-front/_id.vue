@@ -83,7 +83,11 @@
                 </div>
                 <div class="store-front__left-services">
                     <v-row dense>
-                        <v-col v-for="(item, i) in items" :key="i" cols="12">
+                        <v-col
+                            v-for="(service, id) in services"
+                            :key="id"
+                            cols="12"
+                        >
                             <!-- <v-card :color="item.color" dark class="rounded-xl"> -->
                             <v-card class="rounded-xl">
                                 <div
@@ -92,17 +96,17 @@
                                     <div>
                                         <v-card-title
                                             class="headline"
-                                            v-text="item.title"
+                                            v-text="service.name"
                                         ></v-card-title>
 
                                         <v-card-subtitle
-                                            v-text="item.artist"
+                                            v-text="service.description"
                                         ></v-card-subtitle>
 
                                         <v-card-text>
                                             <!-- <div>Word of the Day</div> -->
                                             <p class="display-1 text--primary">
-                                                $58
+                                                ${{ service.price }}
                                             </p>
                                             <!-- <p>adjective</p> -->
                                             <!-- <div class="my-4 subtitle-1">
@@ -123,7 +127,7 @@
                                     </div>
 
                                     <v-avatar class="ma-3" size="200" tile>
-                                        <v-img :src="item.src"></v-img>
+                                        <v-img :src="service.imageUrl"></v-img>
                                     </v-avatar>
                                 </div>
                             </v-card>
