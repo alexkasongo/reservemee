@@ -5,7 +5,11 @@
         <div class="store-front__container">
             <div class="store-front__left">
                 <div class="store-front__left-banner">
-                    <v-card :loading="loading" class="mx-auto rounded-xl">
+                    <v-card
+                        elevation="0"
+                        :loading="loading"
+                        class="mx-auto rounded-xl"
+                    >
                         <template slot="progress">
                             <v-progress-linear
                                 color="deep-purple"
@@ -16,7 +20,7 @@
 
                         <v-img
                             height="250"
-                            src="https://via.placeholder.com/1200"
+                            :src="storeProfile.storeBanner"
                         ></v-img>
 
                         <v-card-title>{{
@@ -48,6 +52,9 @@
                         </v-card-text>
                     </v-card>
                 </div>
+
+                <v-divider class="mx-4"></v-divider>
+
                 <div class="store-front__left-title">
                     <v-card
                         :loading="loading"
@@ -77,6 +84,7 @@
                 <div class="store-front__left-services">
                     <v-row dense>
                         <v-col v-for="(item, i) in items" :key="i" cols="12">
+                            <!-- <v-card :color="item.color" dark class="rounded-xl"> -->
                             <v-card class="rounded-xl">
                                 <div
                                     class="d-flex flex-no-wrap justify-space-between"
