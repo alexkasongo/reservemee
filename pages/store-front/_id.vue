@@ -226,20 +226,8 @@ export default {
     computed: {
         ...mapGetters({
             storeProfile: 'loadedStoreProfile',
-            // storeServices: 'loadedStoreServices',
             storeCategories: 'loadedStoreCategories'
         })
-        // storeServices: {
-        //     get() {
-        //         return this.$store.getters.loadedStoreServices;
-        //     },
-        //     set() {
-        //         return this.$store.commit(
-        //             'SET_LOADED_STORE_SERVICES',
-        //             this.testData
-        //         );
-        //     }
-        // }
     },
     methods: {
         ...mapActions(['loadStoreServices']),
