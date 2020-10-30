@@ -81,29 +81,7 @@
                         <v-card-title>Services</v-card-title>
 
                         <v-card-text>
-                            <!-- <div class="my-4 subtitle-1">$ • Italian, Cafe</div> -->
                             <div class="my-4 subtitle-1">
-                                <!-- <v-container fluid>
-                                    <v-row align="center">
-                                        <v-col cols="6">
-                                            <v-subheader> Sort </v-subheader>
-                                        </v-col>
-
-                                        <v-col cols="6">
-                                            <v-select
-                                                v-model="select"
-                                                :hint="`${select.state}`"
-                                                :items="categories.name"
-                                                item-text="name"
-                                                item-value="name"
-                                                label="Select"
-                                                persistent-hint
-                                                return-object
-                                                single-line
-                                            ></v-select>
-                                        </v-col>
-                                    </v-row>
-                                </v-container> -->
                                 <div class="form-group">
                                     <label for="exampleInputEmail1"
                                         >Select Category</label
@@ -191,7 +169,9 @@
                     </v-row>
                 </div>
             </div>
-            <div class="store-front__right"></div>
+            <div class="store-front__right">
+                <Ratings />
+            </div>
         </div>
     </div>
 </template>
@@ -200,8 +180,12 @@
 import * as firebase from 'firebase/app';
 import 'firebase/database';
 import { mapActions, mapGetters } from 'vuex';
+import Ratings from '@/components/client/Ratings';
 
 export default {
+    components: {
+        Ratings
+    },
     data: () => ({
         storeServices: [],
         categories: [],
