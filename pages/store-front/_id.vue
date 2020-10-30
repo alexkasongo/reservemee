@@ -266,6 +266,7 @@ export default {
                 this.storeServices = filteredServices;
             }
 
+            //  if service length is less than zero, repopulate and then filter accordingly
             if (this.storeServices.length <= 0) {
                 this.storeServices = this.$store.getters.loadedStoreServices;
 
@@ -274,46 +275,18 @@ export default {
                 });
                 this.storeServices = filteredServices;
             }
-        },
-        // REVIEW
-        // instead of calling the api here, store state in vuex and call getter on filter
-        getServices() {
-            firebase
-                .database()
-                .ref('users/' + this.$route.params.id)
-                .once('value')
-                .then((res) => {
-                    const data = res.val();
-                    if (data.services) {
-                        const storeServices = [];
-                        const servicesObj = data;
-                        for (let key in servicesObj.services) {
-                            storeServices.push({
-                                id: key,
-                                category: servicesObj.services[key].category,
-                                description:
-                                    servicesObj.services[key].description,
-                                imageUrl: servicesObj.services[key].imageUrl,
-                                name: servicesObj.services[key].name,
-                                price: servicesObj.services[key].price,
-                                userId: servicesObj.services[key].userId
-                            });
-                        }
-                        this.services = storeServices;
-                    }
-                })
-                .catch((error) => {
-                    console.log(`_id.vue - 34 -  🙈`, error);
-                });
         }
     },
     created() {
         // query database and only retrieve store with matching storeID
-        this.loadStoreServices(this.$route.params.id);
-    },
-    mounted() {
-        this.storeServices = this.$store.getters.loadedStoreServices;
+        this.loadStoreServices(this.$route.params.id).then(() => {
+            // only perform this once async function is complete
+            this.storeServices = this.$store.getters.loadedStoreServices;
+        });
     }
+    // mounted() {
+    //     this.storeServices = this.$store.getters.loadedStoreServices;
+    // }
 };
 </script>
 

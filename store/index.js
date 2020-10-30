@@ -864,9 +864,9 @@ export const actions = {
     /*
     * STORE
     */
-    loadStoreServices({ commit }, payload) {
+    async loadStoreServices({ commit }, payload) {
         commit('SET_LOADING', true);
-        firebase
+        await firebase
             .database()
             .ref('users/' + payload)
             .once('value')
@@ -892,10 +892,12 @@ export const actions = {
                                 userId: categoriesObj.categories[key].id
                             });
                         }
+                        commit('SET_LOADED_STORE_CATEGORIES', storeCategories);
                     }
-                    commit('SET_LOADED_STORE_CATEGORIES', storeCategories);
-                }
 
+                } else {
+                    commit('SET_LOADED_STORE_CATEGORIES', []);
+                }
                 // Store Services
                 if (data.services) {
                     const storeServices = [];
@@ -913,6 +915,8 @@ export const actions = {
                         });
                     }
                     commit('SET_LOADED_STORE_SERVICES', storeServices);
+                } else {
+                    commit('SET_LOADED_STORE_SERVICES', []);
                 }
                 commit('SET_LOADING', false);
             })
