@@ -1,5 +1,5 @@
 <template>
-    <div class="container margin store-front">
+    <div v-if="!loading" class="container margin store-front">
         <div class="store-front__container">
             <div class="store-front__left">
                 <div class="store-front__left-banner">
@@ -205,8 +205,6 @@ export default {
     data: () => ({
         storeServices: [],
         categories: [],
-        loading: false,
-        selection: 1,
         select: { state: 'Florida', abbr: 'FL' },
         items: [
             { state: 'Florida', abbr: 'FL' },
@@ -221,7 +219,10 @@ export default {
         ...mapGetters({
             storeProfile: 'loadedStoreProfile',
             storeCategories: 'loadedStoreCategories'
-        })
+        }),
+        loading() {
+            return this.$store.getters.loading;
+        }
     },
     methods: {
         ...mapActions(['loadStoreServices']),
