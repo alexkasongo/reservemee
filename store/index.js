@@ -24,7 +24,8 @@ export const state = () => ({
     comments: [],
 
     loadedStoreProfile: [],
-    loadedStoreServices: []
+    loadedStoreServices: [],
+    loadedStoreCategories: []
 });
 
 export const getters = {
@@ -51,7 +52,8 @@ export const getters = {
     comments: (state) => state.comments,
 
     loadedStoreProfile: (state) => state.loadedStoreProfile,
-    loadedStoreServices: (state) => state.loadedStoreServices
+    loadedStoreServices: (state) => state.loadedStoreServices,
+    loadedStoreCategories: (state) => state.loadedStoreCategories
 };
 
 export const actions = {
@@ -870,10 +872,31 @@ export const actions = {
             .once('value')
             .then((res) => {
                 const data = res.val();
+                // Store Profile
                 if (data.storeProfile) {
                     commit('SET_LOADED_STORE_PROFILE', data.storeProfile);
                 }
 
+                //  Store Categories
+                if (data.categories) {
+                    const storeCategories = [];
+                    const categoriesObj = data;
+
+                    if (categoriesObj) {
+                        // storeCategories.push(categoriesObj.categories);
+                        for (let key in categoriesObj.categories) {
+                            storeCategories.push({
+                                id: key,
+                                description: categoriesObj.categories[key].description,
+                                name: categoriesObj.categories[key].name,
+                                userId: categoriesObj.categories[key].id
+                            });
+                        }
+                    }
+                    commit('SET_LOADED_STORE_CATEGORIES', storeCategories);
+                }
+
+                // Store Services
                 if (data.services) {
                     const storeServices = [];
                     const servicesObj = data;
@@ -958,6 +981,9 @@ export const mutations = {
     },
     SET_LOADED_STORE_SERVICES: (state, payload) => {
         state.loadedStoreServices = payload
+    },
+    SET_LOADED_STORE_CATEGORIES: (state, payload) => {
+        state.loadedStoreCategories = payload
     }
 
 

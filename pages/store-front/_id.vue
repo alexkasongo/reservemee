@@ -119,7 +119,7 @@
                                             All
                                         </option>
                                         <option
-                                            v-for="category in categories[0]"
+                                            v-for="category in storeCategories"
                                             :key="category.id"
                                         >
                                             {{ category.name | capitalize }}
@@ -133,7 +133,7 @@
                 <div class="store-front__left-services">
                     <v-row dense>
                         <v-col
-                            v-for="(service, id) in services"
+                            v-for="(service, id) in storeServices"
                             :key="id"
                             cols="12"
                         >
@@ -205,11 +205,11 @@
 <script>
 import * as firebase from 'firebase/app';
 import 'firebase/database';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     data: () => ({
-        storeProfile: '',
-        services: '',
+        storeServices: [],
         categories: [],
         loading: false,
         selection: 1,
@@ -223,7 +223,26 @@ export default {
         ],
         testData: []
     }),
+    computed: {
+        ...mapGetters({
+            storeProfile: 'loadedStoreProfile',
+            // storeServices: 'loadedStoreServices',
+            storeCategories: 'loadedStoreCategories'
+        })
+        // storeServices: {
+        //     get() {
+        //         return this.$store.getters.loadedStoreServices;
+        //     },
+        //     set() {
+        //         return this.$store.commit(
+        //             'SET_LOADED_STORE_SERVICES',
+        //             this.testData
+        //         );
+        //     }
+        // }
+    },
     methods: {
+        ...mapActions(['loadStoreServices']),
         reserve() {
             this.loading = true;
 
@@ -236,17 +255,25 @@ export default {
 
             // if all is selected show all
             if (value === 'all') {
-                this.getServices();
+                this.storeServices = this.$store.getters.loadedStoreServices;
             }
 
             // function which we can use filter object
-            const filteredServices = this.services.filter((res) => {
-                // if (res[0].includes('jeans')) return true;
-                console.log(`_id.vue - 238 - variable`, value);
-                return res.category === value;
-            });
-            this.services = filteredServices;
-            console.log(`_id.vue - 240 - 💈`, filteredServices);
+            if (value !== 'all') {
+                const filteredServices = this.storeServices.filter((res) => {
+                    return res.category === value;
+                });
+                this.storeServices = filteredServices;
+            }
+
+            if (this.storeServices.length <= 0) {
+                this.storeServices = this.$store.getters.loadedStoreServices;
+
+                const filteredServices = this.storeServices.filter((res) => {
+                    return res.category === value;
+                });
+                this.storeServices = filteredServices;
+            }
         },
         // REVIEW
         // instead of calling the api here, store state in vuex and call getter on filter
@@ -282,52 +309,10 @@ export default {
     },
     created() {
         // query database and only retrieve store with matching storeID
-        firebase
-            .database()
-            .ref('users/' + this.$route.params.id)
-            .once('value')
-            .then((res) => {
-                const data = res.val();
-                if (data.storeProfile) {
-                    this.storeProfile = data.storeProfile;
-                }
-                if (data.categories) {
-                    const storeCategories = [];
-                    const categoriesObj = data;
-
-                    if (categoriesObj) {
-                        storeCategories.push(categoriesObj.categories);
-                    }
-                    this.categories = storeCategories;
-                }
-                if (data.services) {
-                    const storeServices = [];
-                    const servicesObj = data;
-
-                    // if (servicesObj) {
-                    //     storeServices.push(servicesObj.services);
-                    // }
-
-                    for (let key in servicesObj.services) {
-                        storeServices.push({
-                            id: key,
-                            category: servicesObj.services[key].category,
-                            description: servicesObj.services[key].description,
-                            imageUrl: servicesObj.services[key].imageUrl,
-                            name: servicesObj.services[key].name,
-                            price: servicesObj.services[key].price,
-                            userId: servicesObj.services[key].userId
-                        });
-                    }
-                    this.testData = storeServices;
-                    // console.log(`_id.vue - 266 - 🌎`, storeServices);
-
-                    this.services = storeServices;
-                }
-            })
-            .catch((error) => {
-                console.log(`_id.vue - 34 -  🙈`, error);
-            });
+        this.loadStoreServices(this.$route.params.id);
+    },
+    mounted() {
+        this.storeServices = this.$store.getters.loadedStoreServices;
     }
 };
 </script>
