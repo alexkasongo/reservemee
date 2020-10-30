@@ -1,7 +1,5 @@
 <template>
     <div class="container margin store-front">
-        <!-- <h1>Welcome to your store: {{ this.$route.params.name }}</h1>
-        <p>id: {{ this.$route.params.id }}</p> -->
         <div class="store-front__container">
             <div class="store-front__left">
                 <div class="store-front__left-banner">
@@ -180,10 +178,6 @@
                                             </v-btn>
                                         </v-card-actions>
                                     </div>
-
-                                    <!-- <v-avatar width="200" tile>
-                                        <v-img :src="service.imageUrl"></v-img>
-                                    </v-avatar> -->
                                     <div
                                         class="store-front__left-service-img"
                                         v-bind:style="{
@@ -239,7 +233,10 @@ export default {
         // filter services using category name
         onChange(e) {
             const services = this.services;
-            const value = e.target.value.toLowerCase();
+            // replace empty space with dash and transform to lowercase as value Array.filter()
+            // is case sensitive
+            const value = e.target.value.replace(/\s+/g, '-').toLowerCase();
+            console.log(`_id.vue - 241 - 🔫`, value);
 
             // if all is selected show all
             if (value === 'all') {
@@ -272,9 +269,6 @@ export default {
             this.storeServices = this.$store.getters.loadedStoreServices;
         });
     }
-    // mounted() {
-    //     this.storeServices = this.$store.getters.loadedStoreServices;
-    // }
 };
 </script>
 
