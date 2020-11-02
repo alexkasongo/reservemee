@@ -43,9 +43,7 @@
                     eget metus luctus accumsan id ultrices nunc. Sed at orci sed
                     massa consectetur dignissim a sit amet dui. Duis commodo
                     vitae velit et faucibus. Morbi vehicula lacinia malesuada.
-                    Nulla placerat augue vel ipsum ultrices, cursus iaculis dui
-                    sollicitudin. Vestibulum eu ipsum vel diam elementum tempor
-                    vel ut orci. parturient montes, nascetur ridiculus mus.
+                    Nulla placerat augue vel ipsum ultrices, cursus iaculis dui.
                 </v-card-text>
 
                 <v-divider></v-divider>
