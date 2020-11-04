@@ -302,6 +302,7 @@
                 fixed
                 temporary
                 height="100vh"
+                width="600px"
                 right
             >
                 <v-list nav>

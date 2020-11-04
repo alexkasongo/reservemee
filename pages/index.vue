@@ -1,5 +1,5 @@
 <template>
-    <div class="margin">
+    <div>
         <!-- <div v-if="loading" class="col-md-6">
             <p>loading...</p>
         </div> -->
@@ -41,7 +41,7 @@
             </header>
 
             <!-- Image Showcases -->
-            <section class="showcase">
+            <section class="showcase margin">
                 <div class="container-fluid p-0">
                     <div class="row no-gutters">
                         <div

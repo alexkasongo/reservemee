@@ -129,19 +129,10 @@
                                         ></v-card-subtitle>
 
                                         <v-card-text>
-                                            <!-- <div>Word of the Day</div> -->
                                             <div
                                                 class="display-1 text--primary"
                                             >
                                                 ${{ service.price }}
-                                                <!-- <v-btn
-                                                    class="ml-2"
-                                                    outlined
-                                                    rounded
-                                                    small
-                                                >
-                                                    Book Service
-                                                </v-btn> -->
                                             </div>
                                         </v-card-text>
 
