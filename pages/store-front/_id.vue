@@ -1,6 +1,7 @@
 <template>
     <div v-if="!loading" class="container margin store-front">
         <div class="store-front__container">
+            <!-- LEFT -->
             <div class="store-front__left">
                 <div class="store-front__left-banner">
                     <v-card
@@ -104,62 +105,107 @@
                         </v-card-text>
                     </v-card>
                 </div>
+
+                <!-- DIALOG -->
                 <div class="store-front__left-services">
-                    <v-row dense>
-                        <v-col
-                            v-for="(service, id) in storeServices"
-                            :key="id"
-                            cols="12"
-                        >
-                            <v-card class="rounded-xl">
-                                <div
-                                    class="d-flex flex-no-wrap justify-space-between"
+                    <v-dialog v-model="dialog" persistent max-width="500">
+                        <template v-slot:activator="{ on, attrs }">
+                            <!-- SERVICE CARD -->
+                            <v-row dense>
+                                <v-col
+                                    v-for="(service, id) in storeServices"
+                                    :key="id"
+                                    cols="12"
                                 >
-                                    <div>
-                                        <v-card-title
-                                            class="headline"
-                                            v-text="service.name"
-                                        ></v-card-title>
+                                    <v-card class="rounded-xl">
+                                        <div
+                                            class="d-flex flex-no-wrap justify-space-between"
+                                        >
+                                            <div>
+                                                <v-card-title
+                                                    class="headline"
+                                                    v-text="service.name"
+                                                ></v-card-title>
 
-                                        <v-card-subtitle
-                                            v-text="service.description"
-                                        ></v-card-subtitle>
+                                                <v-card-subtitle
+                                                    v-text="service.description"
+                                                ></v-card-subtitle>
 
-                                        <v-card-text>
-                                            <div
-                                                class="display-1 text--primary"
-                                            >
-                                                ${{ service.price }}
+                                                <v-card-text>
+                                                    <div
+                                                        class="display-1 text--primary"
+                                                    >
+                                                        ${{ service.price }}
+                                                    </div>
+                                                </v-card-text>
+                                                <!-- OPEN DIALOG -->
+                                                <v-card-actions>
+                                                    <v-btn
+                                                        class="ml-2"
+                                                        outlined
+                                                        rounded
+                                                        small
+                                                        v-bind="attrs"
+                                                        v-on="on"
+                                                    >
+                                                        Book Service
+                                                    </v-btn>
+                                                    <!-- CLOSE DIALOG -->
+                                                </v-card-actions>
                                             </div>
-                                        </v-card-text>
-
-                                        <v-card-actions>
-                                            <v-btn
-                                                class="ml-2"
-                                                outlined
-                                                rounded
-                                                small
-                                            >
-                                                Book Service
-                                            </v-btn>
-                                        </v-card-actions>
-                                    </div>
-                                    <div
-                                        class="store-front__left-service-img"
-                                        v-bind:style="{
-                                            'background-image':
-                                                'url(' + service.imageUrl + ')'
-                                        }"
-                                    ></div>
-                                </div>
-                            </v-card>
-                        </v-col>
-                    </v-row>
+                                            <div
+                                                class="store-front__left-service-img"
+                                                v-bind:style="{
+                                                    'background-image':
+                                                        'url(' +
+                                                        service.imageUrl +
+                                                        ')'
+                                                }"
+                                            ></div>
+                                        </div>
+                                    </v-card>
+                                </v-col>
+                            </v-row>
+                            <!-- SERVICE CARD END-->
+                        </template>
+                        <v-card>
+                            <v-card-title class="headline">
+                                Book Service
+                            </v-card-title>
+                            <v-card-text
+                                >Let Google help apps determine location. This
+                                means sending anonymous location data to Google,
+                                even when no apps are running.</v-card-text
+                            >
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn
+                                    color="teal darken-1"
+                                    text
+                                    @click="dialog = false"
+                                >
+                                    Disagree
+                                </v-btn>
+                                <v-btn
+                                    color="teal darken-1"
+                                    text
+                                    @click="dialog = false"
+                                >
+                                    Agree
+                                </v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
                 </div>
+                <!-- DIALOG END -->
             </div>
+            <!-- LEFT END -->
+
+            <!-- RIGHT -->
             <div class="store-front__right">
                 <Ratings />
             </div>
+            <!-- RIGHT END -->
         </div>
     </div>
 </template>
@@ -177,8 +223,22 @@ export default {
     data: () => ({
         storeServices: [],
         categories: [],
-        testData: []
+        testData: [],
+        dialog: false
     }),
+    watch: {
+        // call function when dialog/modal opens
+        dialog(visible) {
+            if (visible) {
+                // Do this when dialog opens up
+                console.log('Dialog was opened! 🐣');
+                this.quickBooking();
+            } else {
+                // Do this when dialog closes
+                console.log('Dialog was closed! 🥚');
+            }
+        }
+    },
     computed: {
         ...mapGetters({
             storeProfile: 'loadedStoreProfile',
@@ -225,6 +285,11 @@ export default {
                 });
                 this.storeServices = filteredServices;
             }
+        },
+        quickBooking() {
+            // load store calendar events
+            // add to cart or cancel
+            console.log(`_id.vue - 291 - we made it mama 🍎`);
         }
     },
     created() {
