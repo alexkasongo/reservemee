@@ -193,7 +193,7 @@
             <!-- DRAWER LEFT-->
             <v-navigation-drawer
                 v-model="drawer"
-                absolute
+                fixed
                 temporary
                 height="100vh"
             >
@@ -299,7 +299,7 @@
             <!-- DRAWER RIGHT-->
             <v-navigation-drawer
                 v-model="drawerRight"
-                absolute
+                fixed
                 temporary
                 height="100vh"
                 right
