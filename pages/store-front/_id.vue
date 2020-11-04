@@ -62,8 +62,6 @@
                     </v-card>
                 </div>
 
-                <!-- <v-divider class="mx-4"></v-divider> -->
-
                 <div class="store-front__left-title">
                     <v-card
                         :loading="loading"
@@ -113,7 +111,6 @@
                             :key="id"
                             cols="12"
                         >
-                            <!-- <v-card :color="item.color" dark class="rounded-xl"> -->
                             <v-card class="rounded-xl">
                                 <div
                                     class="d-flex flex-no-wrap justify-space-between"
