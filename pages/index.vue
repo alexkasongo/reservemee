@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="margin">
         <!-- <div v-if="loading" class="col-md-6">
             <p>loading...</p>
         </div> -->
