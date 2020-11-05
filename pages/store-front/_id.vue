@@ -213,6 +213,7 @@
 <script>
 import * as firebase from 'firebase/app';
 import 'firebase/database';
+import { db } from '@/plugins/firebase';
 import { mapActions, mapGetters } from 'vuex';
 import Ratings from '@/components/client/Ratings';
 
@@ -224,7 +225,8 @@ export default {
         storeServices: [],
         categories: [],
         testData: [],
-        dialog: false
+        dialog: false,
+        events: []
     }),
     watch: {
         // call function when dialog/modal opens
@@ -286,10 +288,26 @@ export default {
                 this.storeServices = filteredServices;
             }
         },
-        quickBooking() {
-            // load store calendar events
+        async quickBooking() {
+            // get firebase calendar events
+            let snapshot = await db.collection(this.$route.params.id).get();
+            let events = [];
+            // loop through and push events on each itteration
+            snapshot.forEach((doc) => {
+                let appData = [];
+                appData.id = doc.id;
+                appData.color = doc.data().color;
+                appData.details = doc.data().details;
+                appData.end = doc.data().end.toDate();
+                appData.name = doc.data().name;
+                appData.start = doc.data().start.toDate();
+                // Must include timed:boolean else timed events will not be displayed accordingly
+                appData.timed = doc.data().timed;
+                events.push(appData);
+            });
+            this.events = events;
+            console.log(`_id.vue - 309 - 🌹`, events);
             // add to cart or cancel
-            console.log(`_id.vue - 291 - we made it mama 🍎`);
         }
     },
     created() {
