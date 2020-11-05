@@ -117,7 +117,11 @@
                                     :key="id"
                                     cols="12"
                                 >
-                                    <v-card class="rounded-xl">
+                                    <v-card
+                                        @click="goToServiceInfo(service.id)"
+                                        class="rounded-xl"
+                                        :ripple="false"
+                                    >
                                         <div
                                             class="d-flex flex-no-wrap justify-space-between"
                                         >
@@ -308,6 +312,15 @@ export default {
             this.events = events;
             console.log(`_id.vue - 309 - 🌹`, events);
             // add to cart or cancel
+        },
+        goToServiceInfo(id) {
+            console.log(`_id.vue - 316 - 🐏`, id);
+            this.$router.push({
+                name: 'appointment-id',
+                params: {
+                    id: id
+                }
+            });
         }
     },
     created() {

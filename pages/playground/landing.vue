@@ -49,7 +49,7 @@ export default {
                 type: 'loop',
                 // width: 800,
                 pagination: false,
-                // arrows: false
+                arrows: false,
                 fixedHeight: 185
             },
             secondaryOptions: {
