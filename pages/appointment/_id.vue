@@ -1,8 +1,8 @@
 <template>
     <div class="container margin">
         <!-- <h1>Welcome: {{ this.$route.params.id }}</h1> -->
-        <div class="row">
-            <div class="col-md-3 w-b-sidebar">
+        <div class="appointment">
+            <div class="appointment__left">
                 <div class="shop-inf">
                     <!--                    <div class="avatar">-->
                     <!--                        -->
@@ -110,11 +110,12 @@
                 </div>
             </div>
             <!-- END: SIDEBAR-->
+
             <!-- RIGHT -->
-            <div class="col-md-9 w-b-content">
-                <div class="appointment__calendar">
+            <div class="appointment__right">
+                <v-card>
                     <Calendar />
-                </div>
+                </v-card>
             </div>
             <!-- RIGHT END -->
         </div>
