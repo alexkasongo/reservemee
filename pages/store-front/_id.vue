@@ -152,7 +152,7 @@
                                                         v-bind="attrs"
                                                         v-on="on"
                                                     >
-                                                        Book Service
+                                                        Quick Booking
                                                     </v-btn>
                                                     <!-- CLOSE DIALOG -->
                                                 </v-card-actions>
@@ -174,7 +174,7 @@
                         </template>
                         <v-card>
                             <v-card-title class="headline">
-                                Book Service
+                                Quick Service Booking
                             </v-card-title>
                             <v-card-text
                                 >Let Google help apps determine location. This
@@ -321,6 +321,9 @@ export default {
                     id: id
                 }
             });
+        },
+        loadCalendar() {
+            // load calendar using store ID
         }
     },
     created() {

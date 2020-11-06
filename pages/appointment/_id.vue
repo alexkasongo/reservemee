@@ -91,8 +91,40 @@
 
             <!-- RIGHT -->
             <div class="appointment__right">
-                <v-card>
+                <div class="mx-auto appointment__calendar" elevation="0">
                     <Calendar />
+                </div>
+                <v-card class="appointment__cart-container">
+                    <v-card-title> Cart </v-card-title>
+                    <v-card-subtitle> 1,000 miles of wonder </v-card-subtitle>
+
+                    <v-card-actions>
+                        <v-btn color="orange lighten-2" text> Explore </v-btn>
+
+                        <v-spacer></v-spacer>
+
+                        <v-btn icon @click="show = !show">
+                            <v-icon>{{
+                                show ? 'mdi-chevron-up' : 'mdi-chevron-down'
+                            }}</v-icon>
+                        </v-btn>
+                    </v-card-actions>
+
+                    <v-expand-transition>
+                        <div v-show="show">
+                            <v-divider></v-divider>
+
+                            <v-card-text>
+                                I'm a thing. But, like most politicians, he
+                                promised more than he could deliver. You won't
+                                have time for sleeping, soldier, not with all
+                                the bed making you'll be doing. Then we'll go
+                                with that data file! Hey, you add a one and two
+                                zeros to that or we walk! You're going to do his
+                                laundry? I've got to find a way to escape.
+                            </v-card-text>
+                        </div>
+                    </v-expand-transition>
                 </v-card>
             </div>
             <!-- RIGHT END -->
@@ -138,7 +170,8 @@ export default {
                 day: 'Sun:',
                 time: '10:00 AM - 5:00 PM'
             }
-        ]
+        ],
+        show: false
     }),
     computed: {
         ...mapGetters({

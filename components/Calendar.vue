@@ -1,5 +1,5 @@
 <template>
-    <v-col>
+    <div>
         <v-sheet height="64">
             <v-toolbar flat>
                 <v-btn
@@ -546,7 +546,7 @@
             </v-menu>
         </v-sheet>
         <!-- Pop up end -->
-    </v-col>
+    </div>
 </template>
 
 <script>
