@@ -4,10 +4,6 @@
         <div class="appointment">
             <div class="appointment__left">
                 <div class="shop-inf">
-                    <!--                    <div class="avatar">-->
-                    <!--                        -->
-                    <!--                        -->
-                    <!--                    </div>-->
                     <div class="shop-name">
                         <b
                             ><a href="#" class="text-capitalize"
@@ -22,39 +18,21 @@
                         >
                     </div>
                 </div>
-                <div class="shop-w-hour">
-                    <p>
-                        <span class="ttl">Mon:</span
-                        ><span class="w-hour">9:30 AM - 7:00 PM </span>
-                    </p>
-                    <p>
-                        <span class="ttl">Tue:</span
-                        ><span class="w-hour">9:30 AM - 7:00 PM</span>
-                    </p>
-                    <p>
-                        <span class="ttl">Wed:</span
-                        ><span class="w-hour">9:30 AM - 7:00 PM</span>
-                    </p>
-                    <p>
-                        <span class="ttl">Thu:</span
-                        ><span class="w-hour">9:30 AM - 7:00 PM</span>
-                    </p>
-                    <p>
-                        <span class="ttl">Fri:</span
-                        ><span class="w-hour">9:30 AM - 7:00 PM</span>
-                    </p>
-                    <p>
-                        <span class="ttl">Sat:</span
-                        ><span class="w-hour">9:00 AM - 6:00 PM</span>
-                    </p>
-                    <p>
-                        <span class="ttl">Sun:</span
-                        ><span class="w-hour">10:00 AM - 5:00 PM</span>
-                    </p>
+                <v-divider></v-divider>
+                <div class="appointment__shop-w-hour">
+                    <div v-for="(opening, id) in workingHours" :key="id">
+                        <p class="appointment__working-hours">
+                            <span class="appointment__ttl">{{
+                                opening.day
+                            }}</span
+                            ><span class="appointment__w-hour"
+                                >{{ opening.time }}
+                            </span>
+                        </p>
+                    </div>
                     <strong style="padding-top: 20px"
                         >Booking available until 7:00 PM today</strong
                     >
-                    <!--                    <a href="/appointment/make" class="text-uppercase appoint-btn">Booking an appointment</a>-->
                 </div>
                 <!-- END: SHOP WORK HOURS-->
                 <div class="side-menu">
@@ -128,7 +106,39 @@ import Calendar from '@/components/Calendar';
 export default {
     components: {
         Calendar
-    }
+    },
+    data: () => ({
+        workingHours: [
+            {
+                day: 'Mon:',
+                time: '9:30 AM - 7:00 PM'
+            },
+            {
+                day: 'Tue:',
+                time: '9:30 AM - 7:00 PM'
+            },
+            {
+                day: 'Wed:',
+                time: '9:30 AM - 7:00 PM'
+            },
+            {
+                day: 'Thu:',
+                time: '9:30 AM - 7:00 PM'
+            },
+            {
+                day: 'Fri:',
+                time: '9:30 AM - 7:00 PM'
+            },
+            {
+                day: 'Sat:',
+                time: '9:00 AM - 6:00 PM'
+            },
+            {
+                day: 'Sun:',
+                time: '10:00 AM - 5:00 PM'
+            }
+        ]
+    })
 };
 </script>
 
