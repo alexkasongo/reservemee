@@ -102,6 +102,7 @@
 
 <script>
 import Calendar from '@/components/Calendar';
+import { mapGetters } from 'vuex';
 
 export default {
     components: {
@@ -138,7 +139,15 @@ export default {
                 time: '10:00 AM - 5:00 PM'
             }
         ]
-    })
+    }),
+    computed: {
+        ...mapGetters({
+            storeProfile: 'loadedStoreProfile'
+        })
+    },
+    mounted() {
+        console.log(`_id.vue - 143 - 🐠`, this.$route.params);
+    }
 };
 </script>
 
