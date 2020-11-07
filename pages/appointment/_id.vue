@@ -94,7 +94,7 @@
                 <div class="mx-auto appointment__calendar" elevation="0">
                     <Calendar />
                 </div>
-                <v-card class="appointment__cart-container">
+                <v-card elevation="0" class="appointment__cart-container">
                     <v-card-title> Your Order </v-card-title>
                     <v-card-subtitle> 1,000 miles of wonder </v-card-subtitle>
 
@@ -110,20 +110,70 @@
                         </v-btn> -->
                     </v-card-actions>
 
-                    <div>
-                        <v-divider></v-divider>
+                    <!-- <v-divider></v-divider>
 
-                        <v-card-text>
-                            I'm a thing. But, like most politicians, he promised
-                            more than he could deliver. You won't have time for
-                            sleeping, soldier, not with all the bed making
-                            you'll be doing. Then we'll go with that data file!
-                            Hey, you add a one and two zeros to that or we walk!
-                            You're going to do his laundry? I've got to find a
-                            way to escape.
-                        </v-card-text>
-                    </div>
+                    <div class="appointment__order-card"></div> -->
                 </v-card>
+                <!-- SERVICE CARD -->
+                <v-row dense>
+                    <v-col cols="12 mb-5">
+                        <v-card class="rounded-xl" :ripple="false">
+                            <div
+                                class="d-flex flex-no-wrap justify-space-between"
+                            >
+                                <div>
+                                    <v-card-title class="headline"
+                                        >v-text="service.name"</v-card-title
+                                    >
+
+                                    <v-card-subtitle
+                                        >v-text="service.description"</v-card-subtitle
+                                    >
+
+                                    <v-card-text>
+                                        <div class="display-1 text--primary">
+                                            $55
+                                        </div>
+                                    </v-card-text>
+                                    <!-- OPEN DIALOG -->
+                                </div>
+                                <div
+                                    class="store-front__left-service-img"
+                                    v-bind:style="{
+                                        'background-image':
+                                            'url(' + imageUrl + ')'
+                                    }"
+                                ></div>
+                            </div>
+                        </v-card>
+                    </v-col>
+                </v-row>
+                <!-- SERVICE CARD END-->
+
+                <v-list-item class="grow">
+                    <!-- <v-list-item-avatar color="grey darken-3">
+                        <v-img
+                            class="elevation-6"
+                            alt=""
+                            src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+                        ></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                        <v-list-item-title>Evan You</v-list-item-title>
+                    </v-list-item-content> -->
+                    <v-row align="center" justify="end">
+                        <v-btn
+                            rounded
+                            elevation="0"
+                            outlined
+                            dark
+                            large
+                            class="teal darker-1"
+                            >Add to Cart</v-btn
+                        >
+                    </v-row>
+                </v-list-item>
             </div>
             <!-- RIGHT END -->
         </div>
@@ -168,12 +218,19 @@ export default {
                 day: 'Sun:',
                 time: '10:00 AM - 5:00 PM'
             }
-        ]
+        ],
+        imageUrl: 'https://via.placeholder.com/600'
     }),
     computed: {
         ...mapGetters({
             storeProfile: 'loadedStoreProfile'
         })
+    },
+    methods: {
+        addToCart() {
+            // push service data to persisted local storage state
+            // create order entry in database
+        }
     },
     mounted() {
         console.log(`_id.vue - 143 - 🐠`, this.$route.params);
