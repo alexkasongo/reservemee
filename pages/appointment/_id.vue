@@ -96,23 +96,12 @@
                 </div>
                 <v-card elevation="0" class="appointment__cart-container">
                     <v-card-title> Your Order </v-card-title>
-                    <v-card-subtitle> 1,000 miles of wonder </v-card-subtitle>
+                    <v-card-subtitle>
+                        Below is a summary of your order. When ready, push add
+                        to cart.
+                    </v-card-subtitle>
 
-                    <v-card-actions>
-                        <!-- <v-btn color="orange lighten-2" text> Explore </v-btn> -->
-
-                        <v-spacer></v-spacer>
-
-                        <!-- <v-btn icon @click="show = !show">
-                            <v-icon>{{
-                                show ? 'mdi-chevron-up' : 'mdi-chevron-down'
-                            }}</v-icon>
-                        </v-btn> -->
-                    </v-card-actions>
-
-                    <!-- <v-divider></v-divider>
-
-                    <div class="appointment__order-card"></div> -->
+                    <v-spacer></v-spacer>
                 </v-card>
                 <!-- SERVICE CARD -->
                 <v-row dense>
@@ -122,17 +111,18 @@
                                 class="d-flex flex-no-wrap justify-space-between"
                             >
                                 <div>
-                                    <v-card-title class="headline"
-                                        >v-text="service.name"</v-card-title
-                                    >
+                                    <v-card-title
+                                        class="headline"
+                                        v-text="service.name"
+                                    ></v-card-title>
 
                                     <v-card-subtitle
-                                        >v-text="service.description"</v-card-subtitle
-                                    >
+                                        v-text="service.description"
+                                    ></v-card-subtitle>
 
                                     <v-card-text>
                                         <div class="display-1 text--primary">
-                                            $55
+                                            ${{ service.price }}
                                         </div>
                                     </v-card-text>
                                     <!-- OPEN DIALOG -->
@@ -141,7 +131,7 @@
                                     class="store-front__left-service-img"
                                     v-bind:style="{
                                         'background-image':
-                                            'url(' + imageUrl + ')'
+                                            'url(' + service.imageUrl + ')'
                                     }"
                                 ></div>
                             </div>
@@ -149,6 +139,18 @@
                     </v-col>
                 </v-row>
                 <!-- SERVICE CARD END-->
+
+                <v-row>
+                    <v-col cols="12" md="12">
+                        <v-textarea
+                            class="rounded-xl"
+                            filled
+                            outlined
+                            name="input-7-4"
+                            label="Leave a note"
+                        ></v-textarea>
+                    </v-col>
+                </v-row>
 
                 <v-list-item class="grow">
                     <v-row align="center" justify="end">
@@ -212,8 +214,15 @@ export default {
     }),
     computed: {
         ...mapGetters({
-            storeProfile: 'loadedStoreProfile'
-        })
+            storeProfile: 'loadedStoreProfile',
+            services: 'loadedStoreServices'
+        }),
+        service() {
+            const filtered = this.services.filter((res) => {
+                return res.id === this.$route.params.id;
+            });
+            return filtered[0];
+        }
     },
     methods: {
         addToCart() {
