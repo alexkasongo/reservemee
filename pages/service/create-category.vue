@@ -77,7 +77,7 @@ export default {
             });
         },
         async onSubmit(event) {
-            // category with dashes
+            // Add dashed to category names
             let res = this.category.replace(/\s+/g, '-').toLowerCase();
 
             let data = {
