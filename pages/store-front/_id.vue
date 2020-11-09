@@ -106,7 +106,7 @@
                     </v-card>
                 </div>
 
-                <!-- DIALOG -->
+                <!-- DIALOG BOX -->
                 <div class="store-front__left-services">
                     <v-dialog v-model="dialog" persistent max-width="500">
                         <template v-slot:activator="{ on, attrs }">
