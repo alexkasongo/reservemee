@@ -176,11 +176,7 @@
                             <v-card-title class="headline">
                                 Quick Service Booking
                             </v-card-title>
-                            <v-card-text
-                                >Let Google help apps determine location. This
-                                means sending anonymous location data to Google,
-                                even when no apps are running.</v-card-text
-                            >
+                            <v-card-text>Data</v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn
@@ -188,14 +184,14 @@
                                     text
                                     @click="dialog = false"
                                 >
-                                    Disagree
+                                    Cancel
                                 </v-btn>
                                 <v-btn
                                     color="teal darken-1"
                                     text
                                     @click="dialog = false"
                                 >
-                                    Agree
+                                    Book Service
                                 </v-btn>
                             </v-card-actions>
                         </v-card>
