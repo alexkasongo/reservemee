@@ -3,7 +3,7 @@
     <!-- FIXME only display banner when it is fully loaded -->
     <div class="row">
         <!-- IF PROFILE EXISTS -->
-        <div v-if="storeProfile !== null" class="parallax">
+        <div v-if="storeProfile !== null" class="container parallax">
             <v-parallax
                 height="300"
                 v-if="storeProfile.storeBanner !== ''"

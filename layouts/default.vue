@@ -29,7 +29,7 @@
                 <p>loading...</p>
             </div>
             <!-- NAVBAR -->
-            <v-app-bar color="transparent" fixed flat>
+            <v-app-bar color="white" fixed flat dark>
                 <!-- open drawer -->
                 <v-app-bar-nav-icon
                     color="black"
@@ -322,7 +322,7 @@
             <!-- DRAWER RIGHT END -->
 
             <!-- <div class="container margin"> -->
-            <div>
+            <div class="margin">
                 <Nuxt />
             </div>
         </v-card>
@@ -511,7 +511,7 @@ export default {
 
 <style lang="scss" scoped>
 .margin {
-    margin: 52px auto 0 auto;
+    margin: 56px auto 0 auto;
 }
 
 .app {
