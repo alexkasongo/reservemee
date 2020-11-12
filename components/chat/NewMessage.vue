@@ -48,7 +48,7 @@ export default {
                     name: this.user.name,
                     message: this.newMessage
                 };
-                this.$store.dispatch('addMsg', createdMessage);
+                this.$store.dispatch('chat/addMsg', createdMessage);
                 this.newMessage = null;
                 this.feedback = null;
             } else {
