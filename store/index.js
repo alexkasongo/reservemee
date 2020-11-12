@@ -20,9 +20,6 @@ export const state = () => ({
     filteredServiceId: '',
     verificationSent: false,
 
-    messages: '',
-    comments: [],
-
     loadedStoreProfile: [],
     loadedStoreServices: [],
     loadedStoreCategories: []
@@ -686,180 +683,7 @@ export const actions = {
     updateServiceId({ commit }, payload) {
         commit('UPDATE_SERVICE_ID', payload);
     },
-    /*
-    ** CHAT
-    ** TODO research ways to search firebase realtime database
-    */
-    deleteMessage: function (context, payload) {
-        // console.log(payload)
-        database.collection('messages').doc(payload.id).delete()
-            .then(() => {
-                this.commit('DELETE_MESSAGE', payload)
-                // console.log(payload)
-            })
-    },
-    currentMessage: function (context, payload) {
-        this.commit('CURRENT_MESSAGE', payload)
-        console.log(payload)
-    },
-    async addMsg({ commit }, payload) {
 
-        const message = {
-            name: payload.name,
-            message: payload.message,
-            userId: payload.userId,
-            storeId: payload.storeId,
-            timestamp: Date.now()
-        };
-
-        await firebase
-            .database()
-            .ref('users/' + payload.storeId)
-            .child('messages')
-            .push(message)
-            .then((data) => {
-                const key = data.key;
-                commit('NEW_MESSAGE', {
-                    ...message,
-                    id: key
-                });
-                commit('SET_SNACKBAR', true)
-                commit('SET_LOADING', false);
-            })
-            .catch((error) => {
-                console.log(`index.js - 696 - 😳`, error);
-                commit('ERRORS', error);
-                this.$swal({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'error',
-                    title: 'Failed',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
-                commit('SET_LOADING', false);
-            });
-    },
-    editMsg: function (context, payload) {
-        // console.log(payload)
-        database.collection('messages').doc(payload.id).update({
-            content: payload.content,
-            name: payload.name,
-            timestamp: Date.now()
-        }).then(() => {
-            this.commit('EDIT_MESSAGE', payload)
-            // this.close
-            // this.$router.push({ name: 'Chat' })
-
-        }).catch(err => {
-            console.log(err)
-        })
-        // this.content = null
-        // this.feedback = null
-    },
-    userName: function (context, payload) {
-        this.commit('USER_NAME', payload)
-    },
-    async sendPrivateMessage({ commit, dispatch }, payload) {
-
-        const comment = {
-            to: payload.to,
-            from: payload.from,
-            userId: payload.userId,
-            storeId: payload.storeId,
-            message: payload.message,
-            timestamp: Date.now()
-        };
-
-        await firebase
-            .database()
-            .ref('users/' + payload.storeId)
-            .child('comments')
-            .push(comment)
-            .then((data) => {
-                const key = data.key;
-                commit('NEW_COMMENT', {
-                    ...comment,
-                    id: key
-                });
-                dispatch('loadComments', payload.storeId);
-                commit('SET_SNACKBAR', true)
-                commit('SET_LOADING', false);
-            })
-            .catch((error) => {
-                console.log(`index.js - 696 - 😳`, error);
-                commit('ERRORS', error);
-                this.$swal({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'error',
-                    title: 'Failed',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
-                commit('SET_LOADING', false);
-            });
-    },
-
-    async loadMessages({ commit }, payload) {
-        commit('SET_LOADING', true);
-        //to make it realtime use on() instead of once()
-        await firebase
-            .database()
-            .ref('users/' + payload)
-            .child('messages')
-            .once('value')
-            .then((data) => {
-                const messages = [];
-                const obj = data.val();
-                for (let key in obj) {
-                    messages.push({
-                        id: key,
-                        userId: obj[key].userId,
-                        storeId: obj[key].storeId,
-                        name: obj[key].name,
-                        message: obj[key].message,
-                        timestamp: obj[key].timestamp,
-                    });
-                }
-                commit('SET_LOADED_MESSAGES', messages);
-                commit('SET_LOADING', false);
-            })
-            .catch((error) => {
-                commit('ERRORS', error);
-                commit('SET_LOADING', false);
-            });
-    },
-    async loadComments({ commit }, payload) {
-        commit('SET_LOADING', true);
-        //to make it realtime use on() instead of once()
-        await firebase
-            .database()
-            .ref('users/' + payload)
-            .child('comments')
-            .once('value')
-            .then((data) => {
-                const comments = [];
-                const obj = data.val();
-                for (let key in obj) {
-                    comments.push({
-                        id: key,
-                        to: obj[key].to,
-                        from: obj[key].from,
-                        userId: obj[key].userId,
-                        storeId: obj[key].storeId,
-                        message: obj[key].message,
-                        timestamp: obj[key].timestamp,
-                    });
-                }
-                commit('SET_LOADED_COMMENTS', comments);
-                commit('SET_LOADING', false);
-            })
-            .catch((error) => {
-                commit('ERRORS', error);
-                commit('SET_LOADING', false);
-            });
-    },
 
     /*
     * STORE
@@ -930,8 +754,6 @@ export const actions = {
 };
 
 export const mutations = {
-    increment: (state) => state.count++, // persistedstate test mutation
-    decrement: (state) => state.count--, // persistedstate test mutation
 
     LOADED_USER: (state, payload) => (state.user = payload),
     NOTIFICATION: (state, payload) => (state.verificationSent = payload),
@@ -966,19 +788,9 @@ export const mutations = {
     },
     LOADED_USER_ID: (state, payload) => (state.userId = payload),
 
+
     /*
-    ** CHAT
-    */
-    NEW_MESSAGE: (state, payload) => state.messages.push(payload),
-    SET_LOADED_MESSAGES: (state, payload) => {
-        state.messages = payload
-    },
-    NEW_COMMENT: (state, payload) => state.comments.push(payload),
-    SET_LOADED_COMMENTS: (state, payload) => {
-        state.comments = payload
-    },
-    /*
-    ** CHAT
+    ** STORE
     */
     SET_LOADED_STORE_PROFILE: (state, payload) => {
         state.loadedStoreProfile = payload

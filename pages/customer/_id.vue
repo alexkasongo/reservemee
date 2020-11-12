@@ -75,7 +75,7 @@ export default {
         ...mapState(['user'])
     },
     created() {
-        this.$store.dispatch('loadComments', this.uid);
+        this.$store.dispatch('chat/loadComments', this.uid);
     },
     methods: {
         //NOTE  this is adding new comment

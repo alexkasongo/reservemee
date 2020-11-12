@@ -80,7 +80,7 @@ export default {
         }
     },
     created() {
-        this.$store.dispatch('loadMessages', this.uid);
+        this.$store.dispatch('chat/loadMessages', this.uid);
     }
 };
 </script>

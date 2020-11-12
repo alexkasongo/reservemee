@@ -33,8 +33,8 @@ export default {
         ...mapState(['user'])
     },
     created() {
-        this.$store.dispatch('loadMessages', this.uid);
-        this.$store.dispatch('loadComments', this.uid);
+        this.$store.dispatch('chat/loadMessages', this.uid);
+        this.$store.dispatch('chat/loadComments', this.uid);
     },
     methods: {
         addMessage() {
