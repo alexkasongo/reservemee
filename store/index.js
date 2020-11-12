@@ -22,7 +22,10 @@ export const state = () => ({
 
     loadedStoreProfile: [],
     loadedStoreServices: [],
-    loadedStoreCategories: []
+    loadedStoreCategories: [],
+
+    // messages: '',
+    // comments: [],
 });
 
 export const getters = {
@@ -45,8 +48,8 @@ export const getters = {
         return data[0];
     },
 
-    messages: (state) => state.messages,
-    comments: (state) => state.comments,
+    // messages: (state) => state.messages,
+    // comments: (state) => state.comments,
 
     loadedStoreProfile: (state) => state.loadedStoreProfile,
     loadedStoreServices: (state) => state.loadedStoreServices,

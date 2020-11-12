@@ -3,9 +3,10 @@
         <!-- Messages -->
         <v-card>
             <div class="container">
+                <p>test</p>
                 <div
                     class="inbox-widget"
-                    v-for="message in $store.getters.messages"
+                    v-for="message in messages"
                     :key="message.id"
                 >
                     <div class="inbox-item">
@@ -60,11 +61,14 @@ export default {
         uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3'
     }),
     computed: {
+        ...mapGetters({
+            messages: 'chat/messages'
+        }),
         ...mapState(['user'])
     },
     methods: {
         removeMessage(message) {
-            this.$store.dispatch('deleteMessage', message);
+            this.$store.dispatch('chat/deleteMessage', message);
         },
         closeModal() {
             this.isModalVisible = false;

@@ -139,6 +139,7 @@ export const actions = {
     },
 
     async loadMessages({ commit }, payload) {
+
         commit('SET_LOADING', true);
         //to make it realtime use on() instead of once()
         await firebase
@@ -160,6 +161,7 @@ export const actions = {
                     });
                 }
                 commit('SET_LOADED_MESSAGES', messages);
+                console.log(`chat.js - 142 - we got here fam 🍎`, messages);
                 commit('SET_LOADING', false);
             })
             .catch((error) => {
