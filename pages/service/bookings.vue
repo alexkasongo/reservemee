@@ -218,6 +218,13 @@ export default {
                     date: '12-07-20',
                     time: '11:00',
                     price: '$20'
+                },
+                {
+                    name: 'Service six',
+                    calories: 375,
+                    date: '12-07-20',
+                    time: '08:00',
+                    price: '$25'
                 }
             ];
         },
