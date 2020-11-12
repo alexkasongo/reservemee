@@ -8,13 +8,13 @@
         >
             <template v-slot:top>
                 <v-toolbar flat>
-                    <v-toolbar-title>My Bookings</v-toolbar-title>
+                    <v-toolbar-title>Bookings</v-toolbar-title>
                     <v-divider class="mx-4" inset vertical></v-divider>
                     <v-spacer></v-spacer>
                     <v-dialog v-model="dialog" max-width="500px">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn
-                                color="primary"
+                                color="teal darker-1"
                                 dark
                                 class="mb-2"
                                 v-bind="attrs"
@@ -45,20 +45,20 @@
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field
-                                                v-model="editedItem.fat"
-                                                label="Fat (g)"
+                                                v-model="editedItem.date"
+                                                label="date (g)"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field
-                                                v-model="editedItem.carbs"
-                                                label="Carbs (g)"
+                                                v-model="editedItem.time"
+                                                label="time (g)"
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field
-                                                v-model="editedItem.protein"
-                                                label="Protein (g)"
+                                                v-model="editedItem.price"
+                                                label="price (g)"
                                             ></v-text-field>
                                         </v-col>
                                     </v-row>
@@ -126,15 +126,15 @@ export default {
         dialogDelete: false,
         headers: [
             {
-                text: 'Client',
+                text: 'Service',
                 align: 'start',
                 sortable: false,
                 value: 'name'
             },
-            { text: 'Service', value: 'calories' },
-            { text: 'Booking Date', value: 'fat' },
-            { text: 'Booking Time', value: 'carbs' },
-            { text: 'Price', value: 'protein' },
+            // { text: 'Service', value: 'calories' },
+            { text: 'Booking Date', value: 'date' },
+            { text: 'Booking Time', value: 'time' },
+            { text: 'Price', value: 'price' },
             { text: 'Actions', value: 'actions', sortable: false }
         ],
         desserts: [],
@@ -142,16 +142,16 @@ export default {
         editedItem: {
             name: '',
             calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0
+            date: 0,
+            time: 0,
+            price: 0
         },
         defaultItem: {
             name: '',
             calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0
+            date: 0,
+            time: 0,
+            price: 0
         }
     }),
 
@@ -178,74 +178,46 @@ export default {
         initialize() {
             this.desserts = [
                 {
-                    name: 'Frozen Yogurt',
+                    name: 'Service one',
                     calories: 159,
-                    fat: 6.0,
-                    carbs: 24,
-                    protein: 4.0
+                    date: '12-07-20',
+                    time: '07:00',
+                    price: '$15'
                 },
                 {
-                    name: 'Ice cream sandwich',
+                    name: 'Service two',
                     calories: 237,
-                    fat: 9.0,
-                    carbs: 37,
-                    protein: 4.3
+                    date: '12-07-20',
+                    time: '09:00',
+                    price: '$25'
                 },
                 {
-                    name: 'Eclair',
+                    name: 'Service three',
                     calories: 262,
-                    fat: 16.0,
-                    carbs: 23,
-                    protein: 6.0
+                    date: '12-07-20',
+                    time: '13:00',
+                    price: '$45'
                 },
                 {
-                    name: 'Cupcake',
+                    name: 'Service four',
                     calories: 305,
-                    fat: 3.7,
-                    carbs: 67,
-                    protein: 4.3
+                    date: '12-07-20',
+                    time: '15:00',
+                    price: '$15'
                 },
                 {
-                    name: 'Gingerbread',
+                    name: 'Service five',
                     calories: 356,
-                    fat: 16.0,
-                    carbs: 49,
-                    protein: 3.9
+                    date: '12-07-20',
+                    time: '09:00',
+                    price: '$15'
                 },
                 {
-                    name: 'Jelly bean',
+                    name: 'Service six',
                     calories: 375,
-                    fat: 0.0,
-                    carbs: 94,
-                    protein: 0.0
-                },
-                {
-                    name: 'Lollipop',
-                    calories: 392,
-                    fat: 0.2,
-                    carbs: 98,
-                    protein: 0
-                },
-                {
-                    name: 'Honeycomb',
-                    calories: 408,
-                    fat: 3.2,
-                    carbs: 87,
-                    protein: 6.5
-                },
-                {
-                    name: 'Donut',
-                    calories: 452,
-                    fat: 25.0,
-                    carbs: 51,
-                    protein: 4.9
-                },
-                {
-                    name: 'KitKat',
-                    calories: 518,
-                    fat: 26.0,
-                    carbs: 65,
-                    protein: 7
+                    date: '12-07-20',
+                    time: '11:00',
+                    price: '$20'
                 }
             ];
         },
