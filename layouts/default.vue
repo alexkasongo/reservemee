@@ -29,7 +29,7 @@
                 <p>loading...</p>
             </div>
             <!-- NAVBAR -->
-            <v-app-bar color="white" fixed flat dark>
+            <v-app-bar color="teal darker-1" fixed flat>
                 <!-- open drawer -->
                 <v-app-bar-nav-icon
                     color="black"

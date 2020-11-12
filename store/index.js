@@ -25,10 +25,7 @@ export const state = () => ({
 
     loadedStoreProfile: [],
     loadedStoreServices: [],
-    loadedStoreCategories: [],
-
-    // Module testing
-    counter: 0
+    loadedStoreCategories: []
 });
 
 export const getters = {
@@ -991,13 +988,7 @@ export const mutations = {
     },
     SET_LOADED_STORE_CATEGORIES: (state, payload) => {
         state.loadedStoreCategories = payload
-    },
-
-    /*
-    ** Module testing 
-    */
-    increment(state) {
-        state.counter++
     }
+
 
 };
