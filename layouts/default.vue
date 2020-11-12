@@ -78,7 +78,7 @@
                             </v-btn>
                         </template>
 
-                        <!-- NOTIFICATIONS -->
+                        <!-- NOTIFICATIONS START -->
                         <v-card max-width="600" class="mx-auto">
                             <v-toolbar dense flat>
                                 <v-toolbar-title>Notifications</v-toolbar-title>
