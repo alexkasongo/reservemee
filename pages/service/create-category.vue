@@ -56,7 +56,7 @@ export default {
     },
     computed: {
         ...mapGetters({
-            categories: 'categories',
+            categories: 'dashboard/categories',
             user: 'user'
         }),
         loading() {
@@ -64,7 +64,11 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['createCategory', 'loadCategories', 'deleteCategory']),
+        ...mapActions({
+            createCategory: 'dashboard/createCategory',
+            loadCategories: 'dashboard/loadCategories',
+            deleteCategory: 'dashboard/deleteCategory'
+        }),
         showAlert() {
             // Use sweetalert2
             this.$swal({
