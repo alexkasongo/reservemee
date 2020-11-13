@@ -144,7 +144,6 @@
                     <v-col cols="12" md="12">
                         <v-textarea
                             class="rounded-xl"
-                            filled
                             outlined
                             name="input-7-4"
                             label="Leave a note"
