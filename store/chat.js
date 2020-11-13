@@ -159,7 +159,6 @@ export const actions = {
                     });
                 }
                 commit('SET_LOADED_MESSAGES', messages);
-                console.log(`chat.js - 142 - we got here fam 🍎`, messages);
                 commit('SET_LOADING', false);
             })
             .catch((error) => {
