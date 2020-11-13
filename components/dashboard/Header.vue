@@ -143,12 +143,13 @@ export default {
         storeProfile() {
             if (
                 // if the state is undfined or the object does not exist, return null
-                this.$store.state.userData.length <= 0 ||
-                !this.$store.state.userData[0].storeProfile
+                this.$store.state.dashboard.userData.length <= 0 ||
+                !this.$store.state.dashboard.userData[0].storeProfile
             ) {
                 return null;
             } else {
-                const data = this.$store.state.userData[0].storeProfile;
+                const data = this.$store.state.dashboard.userData[0]
+                    .storeProfile;
                 return data;
             }
         }

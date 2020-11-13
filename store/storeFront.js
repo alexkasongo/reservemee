@@ -3,14 +3,13 @@ import 'firebase/database';
 
 
 export const state = () => ({
-    // storeProfile: '',
+
     loadedStoreProfile: [],
     loadedStoreServices: [],
     loadedStoreCategories: [],
 });
 
 export const getters = {
-    // storeProfile: (state) => state.storeProfile[0],
     loadedStoreProfile: (state) => state.loadedStoreProfile,
     loadedStoreServices: (state) => state.loadedStoreServices,
     loadedStoreCategories: (state) => state.loadedStoreCategories
@@ -21,6 +20,7 @@ export const actions = {
     * STORE
     */
     async loadStoreServices({ commit }, payload) {
+        console.log(`storeFront.js - 23 - 🌈`, payload);
         commit('SET_LOADING', true);
         await firebase
             .database()
@@ -96,9 +96,7 @@ export const mutations = {
     /*
     ** STORE
     */
-    // SET_LOADED_STORE: (state, payload) => {
-    //     state.storeProfile = payload;
-    // },
+    ERRORS: (state, error) => (state.signupError = error),
     SET_LOADED_STORE_PROFILE: (state, payload) => {
         state.loadedStoreProfile = payload
     },

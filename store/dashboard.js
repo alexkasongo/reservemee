@@ -10,6 +10,7 @@ export const state = () => ({
     services: [],
     categories: [],
     filteredServiceId: '',
+    storeProfile: '',
     // DASHBOARD END
 });
 
@@ -25,6 +26,7 @@ export const getters = {
 
         return data[0];
     },
+    storeProfile: (state) => state.storeProfile[0],
     // DASHBOARD END
 };
 
@@ -503,6 +505,9 @@ export const mutations = {
     },
     UPDATE_SERVICE_ID(state, payload) {
         state.filteredServiceId = payload;
+    },
+    SET_LOADED_STORE: (state, payload) => {
+        state.storeProfile = payload;
     },
     // DASHBOARD END
 

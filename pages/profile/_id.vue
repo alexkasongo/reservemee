@@ -830,10 +830,10 @@ export default {
     },
     computed: {
         ...mapGetters({
-            categories: 'categories',
-            storeProfile: 'storeProfile',
+            categories: 'dashboard/categories',
+            storeProfile: 'dashboard/storeProfile',
             storeAlert: 'alert',
-            userData: 'userData'
+            userData: 'dashboard/userData'
         }),
         loading() {
             return this.$store.getters.loading;
@@ -843,14 +843,14 @@ export default {
         }
     },
     methods: {
-        ...mapActions([
-            'updateStoreProfile',
-            'loadStoreProfile',
-            'loadUserIdData',
-            'updateUserProfile',
-            'loadUser',
-            'closeAlert'
-        ]),
+        ...mapActions({
+            updateStoreProfile: 'dashboard/updateStoreProfile',
+            loadStoreProfile: 'dashboard/loadStoreProfile',
+            loadUserIdData: 'dashboard/loadUserIdData',
+            updateUserProfile: 'dashboard/updateUserProfile',
+            loadUser: 'loadUser',
+            closeAlert: 'closeAlert'
+        }),
         async signout() {
             await firebase
                 .auth()
