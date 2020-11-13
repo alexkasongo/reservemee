@@ -243,15 +243,18 @@ export default {
     },
     computed: {
         ...mapGetters({
-            storeProfile: 'loadedStoreProfile',
-            storeCategories: 'loadedStoreCategories'
+            storeProfile: 'storeFront/loadedStoreProfile',
+            storeCategories: 'storeFront/loadedStoreCategories',
+            loadedStoreServices: 'storeFront/loadedStoreServices'
         }),
         loading() {
             return this.$store.getters.loading;
         }
     },
     methods: {
-        ...mapActions(['loadStoreServices']),
+        ...mapActions({
+            loadStoreServices: 'storeFront/loadStoreServices'
+        }),
         reserve() {
             this.loading = true;
 
@@ -326,7 +329,7 @@ export default {
         // query database and only retrieve store with matching storeID
         this.loadStoreServices(this.$route.params.id).then(() => {
             // only perform this once async function is complete
-            this.storeServices = this.$store.getters.loadedStoreServices;
+            this.storeServices = this.loadedStoreServices;
         });
     }
 };

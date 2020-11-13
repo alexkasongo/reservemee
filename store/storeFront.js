@@ -84,6 +84,13 @@ export const actions = {
 };
 
 export const mutations = {
+    // FIXME 
+    SET_LOADING(state, payload) {
+        state.loading = payload;
+    },
+    SET_SNACKBAR(state, payload) {
+        state.snackbar = payload;
+    },
     /*
     ** STORE
     */

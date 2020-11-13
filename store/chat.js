@@ -5,10 +5,6 @@ import 'firebase/database';
 export const state = () => ({
     messages: '',
     comments: [],
-
-    loadedStoreProfile: [],
-    loadedStoreServices: [],
-    loadedStoreCategories: []
 });
 
 export const getters = {
@@ -200,6 +196,7 @@ export const actions = {
 };
 
 export const mutations = {
+    // FIXME 
     SET_LOADING(state, payload) {
         state.loading = payload;
     },
