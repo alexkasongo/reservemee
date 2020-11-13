@@ -762,7 +762,7 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapState } from 'vuex';
 
 export default {
     data() {
@@ -838,8 +838,11 @@ export default {
         loading() {
             return this.$store.getters.loading;
         },
+        ...mapState({
+            dashboardStore: 'dashboard'
+        }),
         userInfo() {
-            return this.$store.state.userData;
+            return this.dashboardStore.userData;
         }
     },
     methods: {
@@ -1153,10 +1156,7 @@ export default {
         }
 
         // if the state is undfined or the object does not exist, return null
-        if (
-            this.$store.state.userData.length <= 0 ||
-            !this.$store.state.userData[0].storeProfile
-        ) {
+        if (this.userInfo.length <= 0 || !this.userInfo[0].storeProfile) {
             return null;
         } else {
             this.form.storeLogo = this.userInfo[0].storeProfile.storeLogo;

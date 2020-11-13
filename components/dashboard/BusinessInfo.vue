@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
     name: 'BusinessInfo',
@@ -134,15 +134,21 @@ export default {
         ...mapGetters({
             user: 'user'
         }),
+        ...mapState({
+            dashboardStore: 'dashboard'
+        }),
+        userData() {
+            return this.dashboardStore.userData;
+        },
         storeProfile() {
             if (
                 // if the state is undfined or the object does not exist, return null
-                this.$store.state.userData.length <= 0 ||
-                !this.$store.state.userData[0].storeProfile
+                this.userData.length <= 0 ||
+                !this.userData[0].storeProfile
             ) {
                 return null;
             } else {
-                const data = this.$store.state.userData[0].storeProfile;
+                const data = this.userData[0].storeProfile;
                 return data;
             }
         }

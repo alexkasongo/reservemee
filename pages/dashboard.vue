@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                             <!-- Personal-Information -->
-                            <!-- <BusinessInfo /> -->
+                            <BusinessInfo />
                             <!-- Personal-Information -->
 
                             <!-- Messages -->
