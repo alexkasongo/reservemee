@@ -44,14 +44,12 @@ export default {
         feedback: null,
         uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3',
         messages: null
-        // commnents: []
     }),
     computed: {
         ...mapGetters({
-            user: 'user'
-        })
-    },
-    computed: {
+            user: 'user',
+            loadedComments: 'chat/comments'
+        }),
         currentUserMessages() {
             const messages = this.comments.filter((res) => {
                 return res.userId === this.$route.params.id;
@@ -60,7 +58,7 @@ export default {
         },
         comments() {
             const clonedComments = [];
-            const comments = this.$store.getters.comments;
+            const comments = this.loadedComments;
             comments.forEach((comment) => {
                 clonedComments.push({
                     ...comment
@@ -68,7 +66,6 @@ export default {
             });
             let filtered = clonedComments.filter(
                 (res) => res.userId === this.$route.params.id
-                // res.storeId === this.uid
             );
             return filtered;
         },
