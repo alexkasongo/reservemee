@@ -107,10 +107,10 @@ export default {
     },
     computed: {
         ...mapGetters({
-            services: 'services',
-            categories: 'categories',
+            services: 'dashboard/services',
+            categories: 'dashboard/categories',
             userId: 'userId',
-            userData: 'userData'
+            userData: 'dashboard/userData'
         }),
         loading() {
             return this.$store.getters.loading;
