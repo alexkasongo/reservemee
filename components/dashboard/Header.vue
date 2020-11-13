@@ -129,6 +129,7 @@
 <script>
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import { mapState } from 'vuex';
 
 export default {
     name: 'Header',
@@ -140,16 +141,31 @@ export default {
         };
     },
     computed: {
+        ...mapState({
+            dashboardStore: 'dashboard'
+        }),
+        userData() {
+            return this.dashboardStore.userData;
+        },
         storeProfile() {
+            // if (
+            //     // if the state is undfined or the object does not exist, return null
+            //     this.$store.state.userData.length <= 0 ||
+            //     !this.$store.state.userData[0].storeProfile
+            // ) {
+            //     return null;
+            // } else {
+            //     const data = this.$store.state.userData[0].storeProfile;
+            //     return data;
+            // }
             if (
                 // if the state is undfined or the object does not exist, return null
-                this.$store.state.dashboard.userData.length <= 0 ||
-                !this.$store.state.dashboard.userData[0].storeProfile
+                this.userData.length <= 0 ||
+                !this.userData[0].storeProfile
             ) {
                 return null;
             } else {
-                const data = this.$store.state.dashboard.userData[0]
-                    .storeProfile;
+                const data = this.userData[0].storeProfile;
                 return data;
             }
         }
@@ -160,6 +176,7 @@ export default {
                 this.user = user;
             }
         });
+        console.log(`Header.vue - 166 - 🍎`, this.userData);
     },
     methods: {
         viewProfile(id) {
