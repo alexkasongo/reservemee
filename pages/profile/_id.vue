@@ -745,6 +745,7 @@
                                     @click="deleteAccount"
                                     color="red darken-1"
                                     type="button"
+                                    dark
                                 >
                                     Delete Account
                                 </v-btn>
