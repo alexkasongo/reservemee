@@ -3,12 +3,14 @@ import 'firebase/database';
 
 
 export const state = () => ({
+    // storeProfile: '',
     loadedStoreProfile: [],
     loadedStoreServices: [],
     loadedStoreCategories: [],
 });
 
 export const getters = {
+    // storeProfile: (state) => state.storeProfile[0],
     loadedStoreProfile: (state) => state.loadedStoreProfile,
     loadedStoreServices: (state) => state.loadedStoreServices,
     loadedStoreCategories: (state) => state.loadedStoreCategories
@@ -94,6 +96,9 @@ export const mutations = {
     /*
     ** STORE
     */
+    // SET_LOADED_STORE: (state, payload) => {
+    //     state.storeProfile = payload;
+    // },
     SET_LOADED_STORE_PROFILE: (state, payload) => {
         state.loadedStoreProfile = payload
     },
@@ -102,5 +107,5 @@ export const mutations = {
     },
     SET_LOADED_STORE_CATEGORIES: (state, payload) => {
         state.loadedStoreCategories = payload
-    }
+    },
 };

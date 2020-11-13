@@ -16,7 +16,7 @@ export const state = () => ({
     alert: false,
     services: [],
     categories: [],
-    storeProfile: '',
+    // storeProfile: '',
     filteredServiceId: '',
     verificationSent: false,
 });
@@ -29,7 +29,7 @@ export const getters = {
     signupError: (state) => state.signupError,
     services: (state) => state.services,
     categories: (state) => state.categories,
-    storeProfile: (state) => state.storeProfile[0],
+    // storeProfile: (state) => state.storeProfile[0],
     loading: (state) => state.loading,
     snackbar: (state) => state.snackbar,
     alert: (state) => state.alert,
@@ -39,11 +39,7 @@ export const getters = {
         });
 
         return data[0];
-    },
-
-    loadedStoreProfile: (state) => state.loadedStoreProfile,
-    loadedStoreServices: (state) => state.loadedStoreServices,
-    loadedStoreCategories: (state) => state.loadedStoreCategories
+    }
 };
 
 export const actions = {
@@ -679,7 +675,6 @@ export const actions = {
 };
 
 export const mutations = {
-
     LOADED_USER: (state, payload) => (state.user = payload),
     NOTIFICATION: (state, payload) => (state.verificationSent = payload),
     LOGGEDIN_USER: (state, user) =>
@@ -699,6 +694,14 @@ export const mutations = {
     SET_LOADED_STORE: (state, payload) => {
         state.storeProfile = payload;
     },
+    UPDATE_SERVICE_ID(state, payload) {
+        state.filteredServiceId = payload;
+    },
+    LOADED_USER_ID: (state, payload) => (state.userId = payload),
+
+    /*
+    ** Loading 
+    */
     SET_LOADING(state, payload) {
         state.loading = payload;
     },
@@ -708,8 +711,4 @@ export const mutations = {
     SET_ALERT(state, payload) {
         state.alert = payload;
     },
-    UPDATE_SERVICE_ID(state, payload) {
-        state.filteredServiceId = payload;
-    },
-    LOADED_USER_ID: (state, payload) => (state.userId = payload),
 };
