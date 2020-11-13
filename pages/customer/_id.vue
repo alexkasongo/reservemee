@@ -85,9 +85,6 @@ export default {
                     storeId: this.uid,
                     message: this.newComment
                 };
-                // console.log(`_id.vue - 101 - 🍉`, this.$route.params.name);
-                // console.log(`_id.vue - 102 - 🏝`, createdMessage);
-
                 this.$store.dispatch('sendPrivateMessage', createdMessage);
                 this.newComment = null;
                 this.feedback = null;
