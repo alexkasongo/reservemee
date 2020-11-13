@@ -5,8 +5,6 @@ import 'firebase/storage';
 import 'firebase/functions';
 
 export const state = () => ({
-    count: 0, // persistedstate test counter
-
     user: '',
     userData: '',
     userId: '',
@@ -16,7 +14,6 @@ export const state = () => ({
     alert: false,
     services: [],
     categories: [],
-    // storeProfile: '',
     filteredServiceId: '',
     verificationSent: false,
 });
@@ -29,7 +26,6 @@ export const getters = {
     signupError: (state) => state.signupError,
     services: (state) => state.services,
     categories: (state) => state.categories,
-    // storeProfile: (state) => state.storeProfile[0],
     loading: (state) => state.loading,
     snackbar: (state) => state.snackbar,
     alert: (state) => state.alert,
@@ -690,9 +686,6 @@ export const mutations = {
     },
     SET_LOADED_CATEGORIES: (state, payload) => {
         state.categories = payload;
-    },
-    SET_LOADED_STORE: (state, payload) => {
-        state.storeProfile = payload;
     },
     UPDATE_SERVICE_ID(state, payload) {
         state.filteredServiceId = payload;
