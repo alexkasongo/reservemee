@@ -214,8 +214,8 @@ export default {
     }),
     computed: {
         ...mapGetters({
-            storeProfile: 'loadedStoreProfile',
-            services: 'loadedStoreServices'
+            storeProfile: 'storeFront/loadedStoreProfile',
+            services: 'storeFront/loadedStoreServices'
         }),
         service() {
             const filtered = this.services.filter((res) => {
