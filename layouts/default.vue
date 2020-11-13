@@ -32,14 +32,14 @@
             <v-app-bar color="teal darker-1" fixed flat>
                 <!-- open drawer -->
                 <v-app-bar-nav-icon
-                    color="black"
+                    color="white"
                     @click.stop="drawer = !drawer"
                 ></v-app-bar-nav-icon>
                 <!-- open drawer end -->
 
                 <v-btn
                     v-if="user"
-                    color="black"
+                    color="white"
                     @click="goHome(user)"
                     elevation="0"
                     text
@@ -51,15 +51,15 @@
                 <v-spacer></v-spacer>
 
                 <v-btn v-if="user" icon>
-                    <v-icon color="black">mdi-magnify</v-icon>
+                    <v-icon color="white">mdi-magnify</v-icon>
                 </v-btn>
                 <v-btn v-if="user" icon>
-                    <v-icon color="black">mdi-heart-outline</v-icon>
+                    <v-icon color="white">mdi-heart-outline</v-icon>
                 </v-btn>
                 <v-btn v-if="user" icon>
                     <v-icon
                         @click.stop="drawerRight = !drawerRight"
-                        color="black"
+                        color="white"
                         >mdi-cart</v-icon
                     >
                 </v-btn>
@@ -74,7 +74,7 @@
                     >
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn v-bind="attrs" v-on="on" icon>
-                                <v-icon color="black">mdi-bell-outline</v-icon>
+                                <v-icon color="white">mdi-bell-outline</v-icon>
                             </v-btn>
                         </template>
 
@@ -148,7 +148,7 @@
                 >
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn dark icon v-bind="attrs" v-on="on">
-                            <v-icon color="black">mdi-dots-vertical</v-icon>
+                            <v-icon color="white">mdi-dots-vertical</v-icon>
                         </v-btn>
                     </template>
 
