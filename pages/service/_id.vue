@@ -148,7 +148,7 @@ export default {
     },
     computed: {
         ...mapGetters({
-            services: 'services',
+            services: 'dashboard/services',
             userId: 'userId'
         }),
         filteredServices() {
@@ -170,7 +170,11 @@ export default {
         onCreate() {
             this.$router.push('/service/create-service');
         },
-        ...mapActions(['deleteService', 'updateServiceId', 'loadServices']),
+        ...mapActions({
+            deleteService: 'dashboard/deleteService',
+            updateServiceId: 'dashboard/updateServiceId',
+            loadServices: 'dashboard/loadServices'
+        }),
         removeService(id) {
             const data = {
                 userId: this.userId,

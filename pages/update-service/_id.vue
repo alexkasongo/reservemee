@@ -89,9 +89,9 @@ export default {
     },
     computed: {
         ...mapGetters({
-            categories: 'categories',
-            services: 'services',
-            filteredService: 'filteredService',
+            categories: 'dashboard/categories',
+            services: 'dashboard/services',
+            filteredService: 'dashboard/filteredService',
             user: 'user'
         }),
         serviceUpdateInfo() {
@@ -120,12 +120,12 @@ export default {
         }
     },
     methods: {
-        ...mapActions([
-            'createService',
-            'updateService',
-            'loadServices',
-            'loadUserId'
-        ]),
+        ...mapActions({
+            createService: 'dashboard/createService',
+            updateService: 'dashboard/updateService',
+            loadServices: 'dashboard/loadServices',
+            loadUserId: 'dashboard/loadUserId'
+        }),
         onSubmit() {
             let res = this.category.replace(/\s+/g, '-').toLowerCase();
 

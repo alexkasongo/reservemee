@@ -156,8 +156,8 @@ export default {
     }),
     computed: {
         ...mapGetters({
-            services: 'services',
-            categories: 'categories',
+            services: 'dashboard/services',
+            categories: 'dashboard/categories',
             user: 'user'
         }),
         loading() {
@@ -168,13 +168,13 @@ export default {
         }
     },
     methods: {
-        ...mapActions([
-            'createCategory',
-            'loadCategories',
-            'deleteCategory',
-            'updateCategory',
-            'loadServices'
-        ]),
+        ...mapActions({
+            createCategory: 'dashboard/createCategory',
+            loadCategories: 'dashboard/loadCategories',
+            deleteCategory: 'dashboard/deleteCategory',
+            updateCategory: 'dashboard/updateCategory',
+            loadServices: 'dashboard/loadServices'
+        }),
         onCreateService() {
             this.$router.push('/service/create-service');
         },

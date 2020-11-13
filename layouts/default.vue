@@ -412,15 +412,15 @@ export default {
         }
     },
     methods: {
-        ...mapActions([
-            'loadUser',
-            'loadUserId',
-            'userEmail',
-            'loadUserIdProfile',
-            'loadUserIdData',
-            'loadCategories',
-            'loadServices'
-        ]),
+        ...mapActions({
+            loadUser: 'loadUser',
+            loadUserId: 'loadUserId',
+            userEmail: 'userEmail',
+            loadUserIdProfile: 'loadUserIdProfile',
+            loadUserIdData: 'dashboard/loadUserIdData',
+            loadCategories: 'dashboard/loadCategories',
+            loadServices: 'dashboard/loadServices'
+        }),
         signin() {
             this.$router.replace('/signin');
         },
