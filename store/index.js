@@ -182,7 +182,6 @@ export const actions = {
                 commit('SET_LOADING', false);
             })
             .catch((error) => {
-                console.log(`index.js - 229 - 🍎`, error);
                 // Handle Errors here.
                 commit('ERRORS', error);
                 commit('SET_LOADING', false);

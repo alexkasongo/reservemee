@@ -167,7 +167,6 @@ export default {
                     });
                 }
                 this.stores = stores;
-                // console.log(`StoreCategories.vue - 171 - 🍎`, stores);
             })
             .catch((error) => {
                 console.log(`landing.vue - 134 - variable`, error);

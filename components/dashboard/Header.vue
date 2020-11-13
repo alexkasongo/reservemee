@@ -176,7 +176,6 @@ export default {
                 this.user = user;
             }
         });
-        console.log(`Header.vue - 166 - 🍎`, this.userData);
     },
     methods: {
         viewProfile(id) {
