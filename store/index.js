@@ -45,103 +45,6 @@ export const actions = {
     async loadUserId({ commit }, payload) {
         commit('LOADED_USER_ID', payload);
     },
-    async verifyEmail({ commit }, payload) {
-        commit('SET_LOADING', true);
-        let user = await firebase.auth().currentUser;
-
-        user.sendEmailVerification()
-            .then(() => {
-                commit('NOTIFICATION', true);
-                commit('SET_LOADING', false);
-            })
-            .catch((error) => {
-                // An error happened.
-                commit('ERRORS', error);
-                commit('SET_LOADING', false);
-            });
-    },
-    // called in main
-    async loadServices({ commit }, payload) {
-        commit('SET_LOADING', true);
-        //to make it realtime use on() instead of once()
-        await firebase
-            .database()
-            .ref('users/' + payload)
-            .child('services')
-            .once('value')
-            .then((data) => {
-                const services = [];
-                const obj = data.val();
-                for (let key in obj) {
-                    services.push({
-                        id: key,
-                        userId: obj[key].userId,
-                        category: obj[key].category,
-                        name: obj[key].name,
-                        description: obj[key].description,
-                        imageUrl: obj[key].imageUrl,
-                        price: obj[key].price
-                    });
-                }
-                commit('SET_LOADED_SEVICES', services);
-                commit('SET_LOADING', false);
-            })
-            .catch((error) => {
-                commit('ERRORS', error);
-                commit('SET_LOADING', false);
-            });
-    },
-    //REVIEW error on page reload has been resolved using persistedstate plugin
-    async loadUserIdData({ commit }, payload) {
-        commit('SET_LOADING', true);
-        //to make it realtime use on() instead of once()
-        await firebase
-            .database()
-            .ref('users/' + payload)
-            .once('value')
-            .then((data) => {
-                const userData = [];
-                const obj = data.val();
-
-                if (obj) {
-                    userData.push(obj);
-                }
-
-                commit('USER_DATA', userData);
-                commit('SET_LOADING', false);
-            })
-            .catch((error) => {
-                commit('ERRORS', error);
-                commit('SET_LOADING', false);
-            });
-    },
-    async loadCategories({ commit }, payload) {
-        commit('SET_LOADING', true);
-
-        //to make it realtime use on() instead of once()
-        await firebase
-            .database()
-            .ref('users/' + payload)
-            .child('categories')
-            .once('value')
-            .then((data) => {
-                const categories = [];
-                const obj = data.val();
-                for (let key in obj) {
-                    categories.push({
-                        id: key,
-                        name: obj[key].name,
-                        description: obj[key].description
-                    });
-                }
-                commit('SET_LOADED_CATEGORIES', categories);
-                commit('SET_LOADING', false);
-            })
-            .catch((error) => {
-                commit('ERRORS', error);
-                commit('SET_LOADING', false);
-            });
-    },
     async signup({ commit }, user) {
         commit('SET_LOADING', true);
         await firebase
@@ -239,6 +142,21 @@ export const actions = {
                 commit('SET_LOADING', false);
             });
     },
+    async verifyEmail({ commit }, payload) {
+        commit('SET_LOADING', true);
+        let user = await firebase.auth().currentUser;
+
+        user.sendEmailVerification()
+            .then(() => {
+                commit('NOTIFICATION', true);
+                commit('SET_LOADING', false);
+            })
+            .catch((error) => {
+                // An error happened.
+                commit('ERRORS', error);
+                commit('SET_LOADING', false);
+            });
+    },
     async login({ commit }, user) {
         commit('SET_LOADING', true);
         await firebase
@@ -272,29 +190,89 @@ export const actions = {
                 commit('SET_LOADING', false);
             });
     },
-    /*
-     ** Not necessery. Firebase dynamically handles this
-     ** just use firebase set() function
-     */
-    async createUserTable({ commit }, payload) {
-        commit('SET_LOADING', true);
 
+
+    //REVIEW Page reload resolved using persistedstate plugin
+    async loadUserIdData({ commit }, payload) {
+        commit('SET_LOADING', true);
+        //to make it realtime use on() instead of once()
         await firebase
             .database()
             .ref('users/' + payload)
-            .set({
-                categories: '',
-                services: ''
-                //some more user data can go here
-            })
-            .then(() => {
+            .once('value')
+            .then((data) => {
+                const userData = [];
+                const obj = data.val();
+
+                if (obj) {
+                    userData.push(obj);
+                }
+
+                commit('USER_DATA', userData);
                 commit('SET_LOADING', false);
             })
             .catch((error) => {
                 commit('ERRORS', error);
                 commit('SET_LOADING', false);
             });
-    }, // Not being used
+    },
+    async loadServices({ commit }, payload) {
+        commit('SET_LOADING', true);
+        //to make it realtime use on() instead of once()
+        await firebase
+            .database()
+            .ref('users/' + payload)
+            .child('services')
+            .once('value')
+            .then((data) => {
+                const services = [];
+                const obj = data.val();
+                for (let key in obj) {
+                    services.push({
+                        id: key,
+                        userId: obj[key].userId,
+                        category: obj[key].category,
+                        name: obj[key].name,
+                        description: obj[key].description,
+                        imageUrl: obj[key].imageUrl,
+                        price: obj[key].price
+                    });
+                }
+                commit('SET_LOADED_SEVICES', services);
+                commit('SET_LOADING', false);
+            })
+            .catch((error) => {
+                commit('ERRORS', error);
+                commit('SET_LOADING', false);
+            });
+    },
+    async loadCategories({ commit }, payload) {
+        commit('SET_LOADING', true);
+
+        //to make it realtime use on() instead of once()
+        await firebase
+            .database()
+            .ref('users/' + payload)
+            .child('categories')
+            .once('value')
+            .then((data) => {
+                const categories = [];
+                const obj = data.val();
+                for (let key in obj) {
+                    categories.push({
+                        id: key,
+                        name: obj[key].name,
+                        description: obj[key].description
+                    });
+                }
+                commit('SET_LOADED_CATEGORIES', categories);
+                commit('SET_LOADING', false);
+            })
+            .catch((error) => {
+                commit('ERRORS', error);
+                commit('SET_LOADING', false);
+            });
+    },
     /*
      ** Using uid we can we create categories unique to the user
      */

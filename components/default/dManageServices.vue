@@ -165,7 +165,6 @@ export default {
 
     methods: {
         onCreateInitCat() {
-            // this.createUserTable(this.user.uid);
             this.$router.push('/service/create-category');
         },
         initialize() {
