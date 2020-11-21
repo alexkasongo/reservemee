@@ -262,6 +262,7 @@ export default {
         },
         // filter services using category name
         onChange(e) {
+            console.log(`_id.vue - 331 - 😂`, this.storeServices);
             const services = this.services;
             // replace empty space with dash and transform to lowercase as value Array.filter()
             // is case sensitive
@@ -270,7 +271,7 @@ export default {
 
             // if all is selected show all
             if (value === 'all') {
-                this.storeServices = this.$store.getters.loadedStoreServices;
+                this.storeServices = this.loadedStoreServices;
             }
 
             // function which we can use filter object
@@ -283,7 +284,7 @@ export default {
 
             //  if service length is less than zero, repopulate and then filter accordingly
             if (this.storeServices.length <= 0) {
-                this.storeServices = this.$store.getters.loadedStoreServices;
+                this.storeServices = this.loadedStoreServices;
 
                 const filteredServices = this.storeServices.filter((res) => {
                     return res.category === value;
@@ -329,7 +330,9 @@ export default {
         // query database and only retrieve store with matching storeID
         this.loadStoreServices(this.$route.params.id).then(() => {
             // only perform this once async function is complete
+
             this.storeServices = this.loadedStoreServices;
+            console.log(`_id.vue - 335 - 🏝`, this.storeServices);
         });
     }
 };

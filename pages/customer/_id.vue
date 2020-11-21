@@ -85,7 +85,7 @@ export default {
                     storeId: this.uid,
                     message: this.newComment
                 };
-                this.$store.dispatch('sendPrivateMessage', createdMessage);
+                this.$store.dispatch('chat/sendPrivateMessage', createdMessage);
                 this.newComment = null;
                 this.feedback = null;
             } else {

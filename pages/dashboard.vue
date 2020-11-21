@@ -117,7 +117,7 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch('getServices');
+        // this.$store.dispatch('getServices');
         /*
          ** fires each time the page loads, it loads the logged in user object
          */
