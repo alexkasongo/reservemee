@@ -20,7 +20,6 @@ export const actions = {
     * STORE
     */
     async loadStoreServices({ commit }, payload) {
-        console.log(`storeFront.js - 23 - 🌈`, payload);
         commit('SET_LOADING', true);
         await firebase
             .database()

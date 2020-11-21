@@ -74,9 +74,9 @@ export default {
         moved(splide, newIndex) {
             // console.log('moved', newIndex);
         },
-        selectedDate(data) {
-            console.log(`landing.vue - 73 - you clicked me 🌈`);
-        },
+        // selectedDate(data) {
+        //     console.log(`landing.vue - 73 - you clicked me 🌈`);
+        // },
 
         async getEvents() {
             let snapshot = await db
