@@ -63,3 +63,16 @@ $large-desktop: 1280px;
 $header-zindex: 1000;
 $header-open-zindex: 2000;
 $header-close-zindex: 2100;
+
+/*
+* Global page transition animations
+*/
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.35s;
+}
+
+.page-enter,
+.page-leave-active {
+  opacity: 0;
+}
