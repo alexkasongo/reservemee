@@ -82,7 +82,7 @@ export default {
     },
     computed: {
         ...mapGetters({
-            categories: 'categories',
+            categories: 'dashboard/categories',
             userId: 'userId'
         }),
         loading() {
@@ -90,7 +90,9 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['createService']),
+        ...mapActions({
+            createService: 'dashboard/createService'
+        }),
         onSubmit() {
             // category with dashes
             let res = this.category.replace(/\s+/g, '-').toLowerCase();
