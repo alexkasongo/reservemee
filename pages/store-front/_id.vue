@@ -262,7 +262,6 @@ export default {
         },
         // filter services using category name
         onChange(e) {
-            console.log(`_id.vue - 331 - 😂`, this.storeServices);
             const services = this.services;
             // replace empty space with dash and transform to lowercase as value Array.filter()
             // is case sensitive
@@ -310,11 +309,10 @@ export default {
                 events.push(appData);
             });
             this.events = events;
-            console.log(`_id.vue - 309 - 🌹`, events);
+            // console.log(`_id.vue - 309 - 🌹`, events);
             // add to cart or cancel
         },
         goToServiceInfo(id) {
-            console.log(`_id.vue - 316 - 🐏`, id);
             this.$router.push({
                 name: 'appointment-id',
                 params: {
