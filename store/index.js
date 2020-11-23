@@ -53,34 +53,30 @@ export const actions = {
                     response.user
                         .updateProfile({
                             displayName: user.name
+                        }).then(() => {
+                            firebase
+                                .auth()
+                                .signOut()
+                                .then(() => {
+                                    this.user = '';
+                                    window.localStorage.removeItem('email');
+                                    window.localStorage.removeItem('vuex');
+                                    this.$router.push('/signin');
+                                });
+                            commit('SET_LOADING', false);
+                        })
+                        .then(() => {
+                            this.$swal({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Account created. Go ahead and signin.',
+                                showConfirmButton: true,
+                                timer: 60000
+                            });
                         })
 
                 }
-            })
-            .then(() => {
-                this.$swal({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Account created. Go ahead and signin.',
-                    showConfirmButton: true,
-                    timer: 60000
-                });
-            })
-            .then(() => {
-                // REVIEW 
-                // FIXME Cannot read property 'getIdTokenResult' of null
-                // but rest of the code works great
-                firebase
-                    .auth()
-                    .signOut()
-                    .then(() => {
-                        this.user = '';
-                        window.localStorage.removeItem('email');
-                        window.localStorage.removeItem('vuex');
-                        this.$router.push('/signin');
-                    });
-                commit('SET_LOADING', false);
             })
             .catch((error) => {
                 // Handle Errors here.
