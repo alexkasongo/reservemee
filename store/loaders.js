@@ -1,6 +1,7 @@
 export const state = () => ({
     // USER ACCOUNTS START
     snackbar: false,
+    loading: false,
     // LOADING & ERRORS END
 
 });
@@ -8,6 +9,7 @@ export const state = () => ({
 export const getters = {
     // USER ACCOUNTS START
     snackbar: (state) => state.snackbar,
+    loading: (state) => state.loading,
     // LOADING & ERRORS END
 };
 
@@ -24,8 +26,8 @@ export const mutations = {
     SET_SNACKBAR(state, payload) {
         state.snackbar = payload;
     },
-    // SET_LOADING(state, payload) {
-    //     state.loading = payload;
-    // },
+    SET_LOADING(state, payload) {
+        state.loading = payload;
+    },
     // END
 };

@@ -34,7 +34,7 @@ export const actions = {
     // DASHBOARD START
     //REVIEW Page reload resolved using persistedstate plugin
     async loadUserIdData({ commit }, payload) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
         //to make it realtime use on() instead of once()
         await firebase
             .database()
@@ -49,15 +49,15 @@ export const actions = {
                 }
 
                 commit('USER_DATA', userData);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
     async loadServices({ commit }, payload) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
         //to make it realtime use on() instead of once()
         await firebase
             .database()
@@ -79,15 +79,15 @@ export const actions = {
                     });
                 }
                 commit('SET_LOADED_SEVICES', services);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
     async loadCategories({ commit }, payload) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
 
         //to make it realtime use on() instead of once()
         await firebase
@@ -106,18 +106,18 @@ export const actions = {
                     });
                 }
                 commit('SET_LOADED_CATEGORIES', categories);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
     /*
      ** Using uid we can we create categories unique to the user
      */
     async createCategory({ commit }, payload) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
 
         const category = {
             name: payload.category,
@@ -137,7 +137,7 @@ export const actions = {
                     id: key
                 });
                 commit('loaders/SET_SNACKBAR', true, { root: true })
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 commit('ERRORS', error);
@@ -149,11 +149,11 @@ export const actions = {
                     showConfirmButton: false,
                     timer: 2500
                 });
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
     async createService({ commit }, payload) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
         const service = {
             userId: payload.userId,
             category: payload.category,
@@ -174,15 +174,15 @@ export const actions = {
                     ...service,
                     id: key
                 });
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
     async updateService({ commit }, payload) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
 
         firebase
             .database()
@@ -196,24 +196,24 @@ export const actions = {
                 price: payload.price
             })
             .then(() => {
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
     async deleteService({ commit }, payload) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
         await firebase
             .database()
             .ref('users/' + payload.userId)
             .child('services/' + payload.serviceId)
             .remove();
-        commit('SET_LOADING', false);
+        commit('loaders/SET_LOADING', false, { root: true });
     },
     async updateCategory({ commit }, payload) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
 
         await firebase
             .database()
@@ -233,28 +233,28 @@ export const actions = {
                     showConfirmButton: false,
                     timer: 2500
                 });
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
     async deleteCategory({ commit }, payload) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
         await firebase
             .database()
             .ref('users/' + payload.userId)
             .child('categories/' + payload.id)
             .remove();
-        commit('SET_LOADING', false);
+        commit('loaders/SET_LOADING', false, { root: true });
     },
     /*
      ** update store profile information, no need to create
      ** profile during created on signup
      */
     async updateStoreProfile({ commit, dispatch }, payload) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
 
         // if both logo and banner have been added run the code below
         let logoImageUrl = ''
@@ -287,7 +287,7 @@ export const actions = {
                 timer: 2500
             });
             dispatch('loadUserIdData', payload.userId);
-            commit('SET_LOADING', false);
+            commit('loaders/SET_LOADING', false, { root: true });
             return
         }
 
@@ -332,11 +332,11 @@ export const actions = {
                         timer: 2500
                     });
                     dispatch('loadUserIdData', payload.userId);
-                    commit('SET_LOADING', false);
+                    commit('loaders/SET_LOADING', false, { root: true });
                 })
                 .catch((error) => {
                     commit('ERRORS', error);
-                    commit('SET_LOADING', false);
+                    commit('loaders/SET_LOADING', false, { root: true });
                 });
             return
         }
@@ -383,11 +383,11 @@ export const actions = {
                         timer: 2500
                     });
                     dispatch('loadUserIdData', payload.userId);
-                    commit('SET_LOADING', false);
+                    commit('loaders/SET_LOADING', false, { root: true });
                 })
                 .catch((error) => {
                     commit('ERRORS', error);
-                    commit('SET_LOADING', false);
+                    commit('loaders/SET_LOADING', false, { root: true });
                 });
             return
         }
@@ -442,11 +442,11 @@ export const actions = {
                             timer: 2500
                         });
                         dispatch('loadUserIdData', payload.userId);
-                        commit('SET_LOADING', false);
+                        commit('loaders/SET_LOADING', false, { root: true });
                     })
                     .catch((error) => {
                         commit('ERRORS', error);
-                        commit('SET_LOADING', false);
+                        commit('loaders/SET_LOADING', false, { root: true });
                     });
             })
 
@@ -457,7 +457,7 @@ export const actions = {
      */
     // we receive service id as payload to use for filtering
     async updateUserProfile({ commit }, payload) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
 
         const user = await firebase.auth().currentUser;
 
@@ -476,12 +476,12 @@ export const actions = {
                     timer: 2500
                 });
                 commit('SET_ALERT', true);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 // An error happened.
                 commit('ERRORS', error);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
     updateServiceId({ commit }, payload) {
@@ -515,9 +515,9 @@ export const mutations = {
 
     // LOADING START
     ERRORS: (state, error) => (state.signupError = error),
-    SET_LOADING(state, payload) {
-        state.loading = payload;
-    },
+    // loaders/ SET_LOADING(state, payload) {
+    //     state.loading = payload;
+    // },
     SET_ALERT(state, payload) {
         state.alert = payload;
     },

@@ -55,7 +55,7 @@ export const actions = {
                     id: key
                 });
                 // commit('SET_SNACKBAR', true)
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 console.log(`index.js - 696 - 😳`, error);
@@ -68,7 +68,7 @@ export const actions = {
                     showConfirmButton: false,
                     timer: 2500
                 });
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
     editMsg: function (context, payload) {
@@ -115,7 +115,7 @@ export const actions = {
                 });
                 dispatch('loadComments', payload.storeId);
                 // commit('SET_SNACKBAR', true)
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 console.log(`index.js - 696 - 😳`, error);
@@ -128,13 +128,13 @@ export const actions = {
                     showConfirmButton: false,
                     timer: 2500
                 });
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
 
     async loadMessages({ commit }, payload) {
 
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
         //to make it realtime use on() instead of once()
         await firebase
             .database()
@@ -155,15 +155,15 @@ export const actions = {
                     });
                 }
                 commit('SET_LOADED_MESSAGES', messages);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
     async loadComments({ commit }, payload) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
         //to make it realtime use on() instead of once()
         await firebase
             .database()
@@ -185,21 +185,21 @@ export const actions = {
                     });
                 }
                 commit('SET_LOADED_COMMENTS', comments);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 commit('ERRORS', error);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
     // CHAT END
 };
 
 export const mutations = {
-    // FIXME 
-    SET_LOADING(state, payload) {
-        state.loading = payload;
-    },
+    // // FIXME 
+    // loaders/ SET_LOADING(state, payload) {
+    //     state.loading = payload;
+    // },
     // SET_SNACKBAR(state, payload) {
     //     state.snackbar = payload;
     // },

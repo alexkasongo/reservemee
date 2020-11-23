@@ -20,7 +20,7 @@ export const actions = {
     * STORE
     */
     async loadStoreServices({ commit }, payload) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
         await firebase
             .database()
             .ref('users/' + payload)
@@ -73,12 +73,12 @@ export const actions = {
                 } else {
                     commit('SET_LOADED_STORE_SERVICES', []);
                 }
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 console.log(`_id.vue - 34 -  🙈`, error);
                 commit('ERRORS', error);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     }
 
@@ -86,9 +86,9 @@ export const actions = {
 
 export const mutations = {
     // FIXME 
-    SET_LOADING(state, payload) {
-        state.loading = payload;
-    },
+    // loaders/ SET_LOADING(state, payload) {
+    //     state.loading = payload;
+    // },
     /*
     ** STORE
     */

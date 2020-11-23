@@ -13,7 +13,7 @@ export const state = () => ({
 
     // LOADING & ERRORS
     signupError: '',
-    loading: false,
+    // loading: false,
     alert: false,
     // LOADING & ERRORS END
 
@@ -28,7 +28,7 @@ export const getters = {
 
     // LOADING & ERRORS
     signupError: (state) => state.signupError,
-    loading: (state) => state.loading,
+    // loading: (state) => state.loading,
     alert: (state) => state.alert,
     // LOADING & ERRORS END
 };
@@ -42,7 +42,7 @@ export const actions = {
         commit('LOADED_USER_ID', payload);
     },
     async signup({ commit }, user) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
         await firebase
             .auth()
             .createUserWithEmailAndPassword(user.email, user.password)
@@ -61,7 +61,7 @@ export const actions = {
                                     window.localStorage.removeItem('vuex');
                                     this.$router.push('/signin');
                                 });
-                            commit('SET_LOADING', false);
+                            commit('loaders/SET_LOADING', false, { root: true });
                         })
                         .then(() => {
                             this.$swal({
@@ -79,11 +79,11 @@ export const actions = {
             .catch((error) => {
                 // Handle Errors here.
                 commit('ERRORS', error);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
     async signupAdmin({ commit }, user) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
         await firebase
             .auth()
             .createUserWithEmailAndPassword(user.email, user.password)
@@ -106,7 +106,7 @@ export const actions = {
                                     showConfirmButton: true,
                                     timer: 60000
                                 });
-                                commit('SET_LOADING', false);
+                                commit('loaders/SET_LOADING', false, { root: true });
                             } else {
                                 this.$swal({
                                     toast: true,
@@ -116,7 +116,7 @@ export const actions = {
                                     showConfirmButton: true,
                                     timer: 60000
                                 });
-                                commit('SET_LOADING', false);
+                                commit('loaders/SET_LOADING', false, { root: true });
                             }
                         })
                         .then(() => {
@@ -136,26 +136,26 @@ export const actions = {
                 // Handle Errors here.
                 console.log(`index.js - 148 - 🙈`, error);
                 // commit('ERRORS', error);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
     async verifyEmail({ commit }, payload) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
         let user = await firebase.auth().currentUser;
 
         user.sendEmailVerification()
             .then(() => {
                 commit('NOTIFICATION', true);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 // An error happened.
                 commit('ERRORS', error);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
     async login({ commit }, user) {
-        commit('SET_LOADING', true);
+        commit('loaders/SET_LOADING', true, { root: true });
         await firebase
             .auth()
             .signInWithEmailAndPassword(user.email, user.password)
@@ -178,12 +178,12 @@ export const actions = {
                             }
                         });
                 }
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 // Handle Errors here.
                 commit('ERRORS', error);
-                commit('SET_LOADING', false);
+                commit('loaders/SET_LOADING', false, { root: true });
             });
     },
     // USER ACCOUNTS END
@@ -202,9 +202,9 @@ export const mutations = {
     // USER ACCOUNTS END
 
     // LOADING START
-    SET_LOADING(state, payload) {
-        state.loading = payload;
-    },
+    // loaders/ SET_LOADING(state, payload) {
+    //     state.loading = payload;
+    // },
     SET_ALERT(state, payload) {
         state.alert = payload;
     },
