@@ -48,8 +48,6 @@
                     Bookme
                 </v-btn>
 
-                <p>{{ snackbarState }}</p>
-
                 <v-spacer></v-spacer>
 
                 <v-btn v-if="user" icon>
@@ -388,7 +386,7 @@ export default {
             userId: 'userId'
         }),
         ...mapState({
-            snackbarState: 'loading'
+            snackbarState: 'loaders'
         }),
         storeProfile() {
             if (
@@ -436,7 +434,7 @@ export default {
             loadUserIdData: 'dashboard/loadUserIdData',
             loadCategories: 'dashboard/loadCategories',
             loadServices: 'dashboard/loadServices',
-            setSnackbar: 'loading/setSnackbar'
+            setSnackbar: 'loaders/setSnackbar'
         }),
         signin() {
             this.$router.replace('/signin');
