@@ -524,11 +524,7 @@ export default {
 
 <style lang="scss" scoped>
 .margin {
-    margin: 90px auto 0 auto;
-}
-
-.margin-bt {
-    margin: 0 0 300px 0;
+    margin: 90px auto 300px auto;
 }
 
 .app {

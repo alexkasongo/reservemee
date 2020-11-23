@@ -1,8 +1,8 @@
 <template>
     <div>
-        <!-- <div v-if="loading" class="col-md-6">
+        <div v-if="loading">
             <p>loading...</p>
-        </div> -->
+        </div>
         <!-- Masthead -->
         <div v-if="!loading">
             <header v-if="!user" class="masthead text-white text-center">
@@ -162,11 +162,12 @@
             </section>
 
             <!-- Call to Action -->
-            <section
+            <!-- <section
                 v-if="!user"
                 class="call-to-action text-white text-center"
                 :style="{ backgroundImage: `url(${image})` }"
-            >
+            > -->
+            <section v-if="!user" class="call-to-action text-white text-center">
                 <div class="overlay"></div>
                 <div class="container">
                     <div class="row">
@@ -389,7 +390,7 @@ export default {
 */
 .masthead {
     position: relative;
-    background-color: #00897b;
+    // background-color: #00897b;
     @include background;
     background-position: center;
     padding-top: 8rem;
