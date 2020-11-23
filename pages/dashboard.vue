@@ -1,74 +1,64 @@
 <template>
-    <div>
-        <div v-if="user" class="content">
-            <div>
-                <!-- START HERE -->
+    <div v-if="user" class="content">
+        <!-- Header -->
+        <header>
+            <Header />
+        </header>
+        <!-- Header End-->
 
-                <!-- Header -->
-                <div>
-                    <Header />
-                </div>
-                <!-- Header End-->
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-4">
-                            <div v-if="user">
-                                <div>
-                                    <div v-if="categories.length <= 0">
-                                        <!-- CategoryCheck -->
-                                        <CategoryCheck />
-                                        <!-- CategoryCheck -->
-                                    </div>
-                                </div>
-                                <div v-if="!user.emailVerified" class="w-100">
-                                    <!-- EmailVerified -->
-                                    <EmailVerified />
-                                    <!-- EmailVerified -->
-                                </div>
+        <section class="container">
+            <div class="row">
+                <div class="col-xl-4">
+                    <div v-if="user">
+                        <div>
+                            <div v-if="categories.length <= 0">
+                                <!-- CategoryCheck -->
+                                <CategoryCheck />
+                                <!-- CategoryCheck -->
                             </div>
-                            <!-- Personal-Information -->
-                            <BusinessInfo />
-                            <!-- Personal-Information -->
-
-                            <!-- Messages -->
-                            <Messages />
-                            <!-- Messages -->
                         </div>
-                        <div class="col-xl-8">
-                            <!-- StoreSummary -->
-                            <StoreSummary />
-                            <!-- StoreSummary -->
+                        <div v-if="!user.emailVerified" class="w-100">
+                            <!-- EmailVerified -->
+                            <EmailVerified />
+                            <!-- EmailVerified -->
+                        </div>
+                    </div>
+                    <!-- Personal-Information -->
+                    <BusinessInfo />
+                    <!-- Personal-Information -->
 
-                            <div>
-                                <!-- ManageServices -->
-                                <ManageServices
-                                    v-if="categories.length !== 0"
-                                />
-                                <!-- ManageServices -->
+                    <!-- Messages -->
+                    <Messages />
+                    <!-- Messages -->
+                </div>
+                <div class="col-xl-8">
+                    <!-- StoreSummary -->
+                    <StoreSummary />
+                    <!-- StoreSummary -->
 
-                                <!-- ManageServices -->
-                                <dManageServices v-else />
-                                <!-- ManageServices -->
-                            </div>
+                    <div>
+                        <!-- ManageServices -->
+                        <ManageServices v-if="categories.length !== 0" />
+                        <!-- ManageServices -->
 
-                            <div v-if="!loading">
-                                <Bookings class="services" />
-                                <UpcomingEvents />
-                            </div>
+                        <!-- ManageServices -->
+                        <dManageServices v-else />
+                        <!-- ManageServices -->
+                    </div>
 
-                            <!-- <v-card elevation="2">
+                    <div v-if="!loading">
+                        <Bookings class="services" />
+                        <UpcomingEvents />
+                    </div>
+
+                    <!-- <v-card elevation="2">
                             <UpcomingEvents />
                         </v-card> -->
-                        </div>
-
-                        <!-- end col -->
-                    </div>
                 </div>
-                <!-- end row -->
+
+                <!-- end col -->
             </div>
-            <!-- container -->
-        </div>
+        </section>
     </div>
 </template>
 
