@@ -29,7 +29,7 @@
                 <p>loading...</p>
             </div>
             <!-- NAVBAR -->
-            <v-app-bar color="teal darker-1" fixed flat>
+            <v-app-bar color="teal darken-1" fixed flat>
                 <!-- open drawer -->
                 <v-app-bar-nav-icon
                     color="white"
@@ -169,9 +169,10 @@
                 <!-- if router name is not Sign in then show, else do not show -->
                 <div v-if="this.$route.name !== 'signin'">
                     <v-btn
+                        outlined
                         elevation="0"
                         text
-                        class="text-lowercase white--text"
+                        class="text-lowercase white"
                         v-if="!user"
                         @click="signin"
                         >Sign In</v-btn
@@ -179,12 +180,22 @@
                 </div>
                 <div v-else>
                     <v-btn
+                        outlined
                         elevation="0"
                         text
-                        class="text-lowercase white--text"
+                        class="text-lowercase white"
                         v-if="!user"
                         @click="signup"
                         >Sign Up</v-btn
+                    >
+                    <v-btn
+                        outlined
+                        elevation="0"
+                        text
+                        class="text-lowercase white"
+                        v-if="!user"
+                        @click="$router.push('/signup-admin')"
+                        >Admin</v-btn
                     >
                 </div>
             </v-app-bar>
