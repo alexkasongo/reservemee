@@ -95,48 +95,53 @@ export const actions = {
             .createUserWithEmailAndPassword(user.email, user.password)
             .then((response) => {
                 if (response) {
-                    const setAdmin = firebase.functions().httpsCallable("setAdmin");
                     const data = { uid: response.user.uid, role: user.role };
+                    const setAdmin = firebase.functions().httpsCallable("setAdmin");
                     setAdmin(data)
                         .then((result) => {
-                            console.log(`index.js - 183 - "🎉"`, result);
+                            if (result) {
+                                response.user
+                                    .updateProfile({
+                                        displayName: user.name
+                                    })
+                                this.$swal({
+                                    toast: true,
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Account created. Go ahead and signin.',
+                                    showConfirmButton: true,
+                                    timer: 60000
+                                });
+                                commit('SET_LOADING', false);
+                            } else {
+                                this.$swal({
+                                    toast: true,
+                                    position: 'top-end',
+                                    icon: 'fail',
+                                    title: 'Account failed to create. Try again.',
+                                    showConfirmButton: true,
+                                    timer: 60000
+                                });
+                                commit('SET_LOADING', false);
+                            }
                         })
-
-                    response.user
-                        .updateProfile({
-                            displayName: user.name
-
+                        .then(() => {
+                            firebase
+                                .auth()
+                                .signOut()
+                                .then(() => {
+                                    this.user = '';
+                                    window.localStorage.removeItem('email');
+                                    window.localStorage.removeItem('vuex');
+                                    this.$router.push('/signin');
+                                });
                         })
                 }
             })
-            .then(() => {
-                this.$swal({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Account created. Go ahead and signin.',
-                    showConfirmButton: true,
-                    timer: 60000
-                });
-            })
-            .then(() => {
-                // REVIEW 
-                // FIXME Cannot read property 'getIdTokenResult' of null
-                // but rest of the code works great
-                firebase
-                    .auth()
-                    .signOut()
-                    .then(() => {
-                        this.user = '';
-                        window.localStorage.removeItem('email');
-                        window.localStorage.removeItem('vuex');
-                        this.$router.push('/signin');
-                    });
-                commit('SET_LOADING', false);
-            })
             .catch((error) => {
                 // Handle Errors here.
-                commit('ERRORS', error);
+                console.log(`index.js - 148 - 🙈`, error);
+                // commit('ERRORS', error);
                 commit('SET_LOADING', false);
             });
     },

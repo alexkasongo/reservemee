@@ -4,14 +4,14 @@ import 'firebase/firestore';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: 'AIzaSyDcqcGiVLA7aFauv-N-CqLL8L8h8OiyRAs',
-  authDomain: 'nail-salon-b7ffc.firebaseapp.com',
-  databaseURL: 'https://nail-salon-b7ffc.firebaseio.com',
-  projectId: 'nail-salon-b7ffc',
-  storageBucket: 'nail-salon-b7ffc.appspot.com',
-  messagingSenderId: '761754596652',
-  appId: '1:761754596652:web:03706192a12a1ffaaa2889',
-  measurementId: 'G-6XK3MP51YN'
+  apiKey: "AIzaSyAjtsjs0bT6R9BxvypR1hq1dB1Gq7314GY",
+  authDomain: "bookme-7de5a.firebaseapp.com",
+  databaseURL: "https://bookme-7de5a.firebaseio.com",
+  projectId: "bookme-7de5a",
+  storageBucket: "bookme-7de5a.appspot.com",
+  messagingSenderId: "712900995493",
+  appId: "1:712900995493:web:dec7f1a097c48a8709a04c",
+  measurementId: "G-WT6J1JBQ2B"
 };
 // Initialize Firebase
 

@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div v-if="loading">
+            <p>Loading...</p>
+        </div>
         <div v-if="!loading" class="d-flex flex-row justify-content-center">
             <div class="col-md-8 mt-5">
                 <div class="card">
@@ -92,4 +95,3 @@ export default {
 };
 </script>
 
-<style></style>
