@@ -57,11 +57,9 @@ export default {
     computed: {
         ...mapGetters({
             categories: 'dashboard/categories',
+            loading: 'loaders/loading',
             user: 'user'
-        }),
-        loading() {
-            return this.$store.getters.loading;
-        }
+        })
     },
     methods: {
         ...mapActions({

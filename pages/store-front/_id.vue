@@ -243,13 +243,11 @@ export default {
     },
     computed: {
         ...mapGetters({
-            storeProfile: 'storeFront/loadedStoreProfile',
+            loadedStoreServices: 'storeFront/loadedStoreServices',
             storeCategories: 'storeFront/loadedStoreCategories',
-            loadedStoreServices: 'storeFront/loadedStoreServices'
-        }),
-        loading() {
-            return this.$store.getters.loading;
-        }
+            storeProfile: 'storeFront/loadedStoreProfile',
+            loading: 'loaders/loading'
+        })
     },
     methods: {
         ...mapActions({

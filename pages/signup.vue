@@ -120,11 +120,9 @@ export default {
     }),
     computed: {
         ...mapGetters({
+            loading: 'loaders/loading',
             errors: 'signupError'
-        }),
-        loading() {
-            return this.$store.getters.loading;
-        }
+        })
     },
     methods: {
         ...mapActions(['signup']),

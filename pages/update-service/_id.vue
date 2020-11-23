@@ -89,9 +89,10 @@ export default {
     },
     computed: {
         ...mapGetters({
+            filteredService: 'dashboard/filteredService',
             categories: 'dashboard/categories',
             services: 'dashboard/services',
-            filteredService: 'dashboard/filteredService',
+            loading: 'loaders/loading',
             user: 'user'
         }),
         serviceUpdateInfo() {
@@ -102,9 +103,6 @@ export default {
             });
 
             return filter[0];
-        },
-        loading() {
-            return this.$store.getters.loading;
         },
         titleCase() {
             let formatted = this.serviceUpdateInfo.category;

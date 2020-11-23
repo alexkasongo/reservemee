@@ -107,14 +107,12 @@ export default {
     },
     computed: {
         ...mapGetters({
-            services: 'dashboard/services',
             categories: 'dashboard/categories',
-            userId: 'userId',
-            userData: 'dashboard/userData'
-        }),
-        loading() {
-            return this.$store.getters.loading;
-        }
+            services: 'dashboard/services',
+            userData: 'dashboard/userData',
+            loading: 'loaders/loading',
+            userId: 'userId'
+        })
     },
     mounted() {
         // this.$store.dispatch('getServices');

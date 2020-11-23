@@ -76,14 +76,12 @@ export default {
     },
     computed: {
         ...mapGetters({
+            verification: 'verificationSent',
+            loading: 'loaders/loading',
             errors: 'signupError',
             userLoaded: 'user',
-            verification: 'verificationSent',
             userId: 'user'
-        }),
-        loading() {
-            return this.$store.getters.loading;
-        }
+        })
     },
     methods: {
         ...mapActions(['verifyEmail', 'loadUserId', 'user']),

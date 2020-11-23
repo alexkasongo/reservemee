@@ -136,13 +136,13 @@ export default {
         headers: [
             {
                 text: 'Categories',
-                align: 'start',
                 sortable: false,
+                align: 'start',
                 value: 'name'
             },
-            { text: 'Description', value: 'description' },
             { text: 'Services', value: 'services', sortable: false },
-            { text: 'Actions', value: 'actions', sortable: false }
+            { text: 'Actions', value: 'actions', sortable: false },
+            { text: 'Description', value: 'description' }
         ],
         editedIndex: -1,
         editedItem: {
@@ -156,13 +156,11 @@ export default {
     }),
     computed: {
         ...mapGetters({
-            services: 'dashboard/services',
             categories: 'dashboard/categories',
+            services: 'dashboard/services',
+            loading: 'loaders/loading',
             user: 'user'
         }),
-        loading() {
-            return this.$store.getters.loading;
-        },
         formTitle() {
             return this.editedIndex === -1 ? 'New Category' : 'Edit Category';
         }
@@ -224,8 +222,8 @@ export default {
         },
 
         editItem(item) {
-            this.editedIndex = item.id;
             this.editedItem = Object.assign({}, item);
+            this.editedIndex = item.id;
             this.dialog = true;
             this.item = item;
         },
@@ -243,8 +241,8 @@ export default {
                 id: this.item.id
             };
 
-            this.deleteCategory(payload);
             this.loadCategories(this.user.uid);
+            this.deleteCategory(payload);
             this.$swal({
                 toast: true,
                 position: 'top-end',
@@ -292,10 +290,10 @@ export default {
                 .toLowerCase();
 
             let data = {
+                description: this.editedItem.description,
                 userId: this.user.uid,
-                id: this.item.id,
                 name: categoryName,
-                description: this.editedItem.description
+                id: this.item.id
             };
 
             await this.updateCategory(data).then(() => {

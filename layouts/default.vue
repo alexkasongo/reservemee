@@ -383,6 +383,7 @@ export default {
     },
     computed: {
         ...mapGetters({
+            loading: 'loaders/loading',
             userId: 'userId'
         }),
         ...mapState({
@@ -399,9 +400,6 @@ export default {
                 const data = this.$store.state.userData[0].storeProfile;
                 return data;
             }
-        },
-        loading() {
-            return this.$store.getters.loading;
         },
         snackbar: {
             get() {

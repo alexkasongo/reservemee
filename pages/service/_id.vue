@@ -149,6 +149,7 @@ export default {
     computed: {
         ...mapGetters({
             services: 'dashboard/services',
+            loading: 'loaders/loading',
             userId: 'userId'
         }),
         filteredServices() {
@@ -160,9 +161,6 @@ export default {
             let category = this.$route.params.id;
             let formattedCategory = category.replace(/-/g, ' ');
             return formattedCategory;
-        },
-        loading() {
-            return this.$store.getters.loading;
         }
     },
     methods: {

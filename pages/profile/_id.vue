@@ -831,14 +831,12 @@ export default {
     },
     computed: {
         ...mapGetters({
-            categories: 'dashboard/categories',
             storeProfile: 'dashboard/storeProfile',
-            storeAlert: 'alert',
-            userData: 'dashboard/userData'
+            categories: 'dashboard/categories',
+            userData: 'dashboard/userData',
+            loading: 'loaders/loading',
+            storeAlert: 'alert'
         }),
-        loading() {
-            return this.$store.getters.loading;
-        },
         ...mapState({
             dashboardStore: 'dashboard'
         }),

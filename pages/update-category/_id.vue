@@ -47,12 +47,10 @@ export default {
     },
     computed: {
         ...mapGetters({
+            loading: 'loaders/loading',
             categories: 'categories',
             user: 'user'
         }),
-        loading() {
-            return this.$store.getters.loading;
-        },
         filteredCategories() {
             const data = this.categories.filter((res) => {
                 return res.id === this.$route.params.id;
