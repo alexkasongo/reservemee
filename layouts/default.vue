@@ -333,7 +333,7 @@
             <!-- DRAWER RIGHT END -->
 
             <!-- <div class="container margin"> -->
-            <div class="margin">
+            <div class="margin margin-bt">
                 <Nuxt />
             </div>
         </v-card>
@@ -525,6 +525,10 @@ export default {
 <style lang="scss" scoped>
 .margin {
     margin: 90px auto 0 auto;
+}
+
+.margin-bt {
+    margin: 0 0 300px 0;
 }
 
 .app {

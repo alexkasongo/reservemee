@@ -264,7 +264,7 @@
                 </div>
             </footer> -->
 
-            <v-footer dark padless>
+            <!-- <v-footer dark padless>
                 <v-card flat tile class="teal darker-1 white--text text-center">
                     <v-card-text>
                         <v-btn
@@ -299,7 +299,7 @@
                         <strong>Aleko</strong>
                     </v-card-text>
                 </v-card>
-            </v-footer>
+            </v-footer> -->
         </div>
     </div>
 </template>
