@@ -136,7 +136,7 @@ export const actions = {
                     ...category,
                     id: key
                 });
-                commit('loading/SET_SNACKBAR', true, { root: true })
+                commit('loaders/SET_SNACKBAR', true, { root: true })
                 commit('SET_LOADING', false);
             })
             .catch((error) => {
