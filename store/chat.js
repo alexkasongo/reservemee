@@ -9,7 +9,7 @@ export const state = () => ({
 
 export const getters = {
     loading: (state) => state.loading,
-    snackbar: (state) => state.snackbar,
+    // snackbar: (state) => state.snackbar,
     alert: (state) => state.alert,
 
     messages: (state) => state.messages,
@@ -54,7 +54,7 @@ export const actions = {
                     ...message,
                     id: key
                 });
-                commit('SET_SNACKBAR', true)
+                // commit('SET_SNACKBAR', true)
                 commit('SET_LOADING', false);
             })
             .catch((error) => {
@@ -114,7 +114,7 @@ export const actions = {
                     id: key
                 });
                 dispatch('loadComments', payload.storeId);
-                commit('SET_SNACKBAR', true)
+                // commit('SET_SNACKBAR', true)
                 commit('SET_LOADING', false);
             })
             .catch((error) => {
@@ -200,9 +200,9 @@ export const mutations = {
     SET_LOADING(state, payload) {
         state.loading = payload;
     },
-    SET_SNACKBAR(state, payload) {
-        state.snackbar = payload;
-    },
+    // SET_SNACKBAR(state, payload) {
+    //     state.snackbar = payload;
+    // },
     /*
     ** CHAT
     */

@@ -48,6 +48,8 @@
                     Bookme
                 </v-btn>
 
+                <p>{{ snackbarState }}</p>
+
                 <v-spacer></v-spacer>
 
                 <v-btn v-if="user" icon>
@@ -385,6 +387,9 @@ export default {
         ...mapGetters({
             userId: 'userId'
         }),
+        ...mapState({
+            snackbarState: 'loading'
+        }),
         storeProfile() {
             if (
                 // if the state is undfined or the object does not exist, return null
@@ -402,10 +407,10 @@ export default {
         },
         snackbar: {
             get() {
-                return this.$store.state.snackbar;
+                return this.snackbarState.snackbar;
             },
             set() {
-                return this.$store.commit('SET_SNACKBAR', false);
+                return this.setSnackbar(false);
             }
         }
     },
@@ -430,7 +435,8 @@ export default {
             loadUserIdProfile: 'loadUserIdProfile',
             loadUserIdData: 'dashboard/loadUserIdData',
             loadCategories: 'dashboard/loadCategories',
-            loadServices: 'dashboard/loadServices'
+            loadServices: 'dashboard/loadServices',
+            setSnackbar: 'loading/setSnackbar'
         }),
         signin() {
             this.$router.replace('/signin');

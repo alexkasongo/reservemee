@@ -136,7 +136,7 @@ export const actions = {
                     ...category,
                     id: key
                 });
-                commit('SET_SNACKBAR', true)
+                commit('loading/SET_SNACKBAR', true, { root: true })
                 commit('SET_LOADING', false);
             })
             .catch((error) => {
@@ -517,9 +517,6 @@ export const mutations = {
     ERRORS: (state, error) => (state.signupError = error),
     SET_LOADING(state, payload) {
         state.loading = payload;
-    },
-    SET_SNACKBAR(state, payload) {
-        state.snackbar = payload;
     },
     SET_ALERT(state, payload) {
         state.alert = payload;

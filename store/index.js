@@ -14,7 +14,6 @@ export const state = () => ({
     // LOADING & ERRORS
     signupError: '',
     loading: false,
-    snackbar: false,
     alert: false,
     // LOADING & ERRORS END
 
@@ -30,7 +29,6 @@ export const getters = {
     // LOADING & ERRORS
     signupError: (state) => state.signupError,
     loading: (state) => state.loading,
-    snackbar: (state) => state.snackbar,
     alert: (state) => state.alert,
     // LOADING & ERRORS END
 };
@@ -206,9 +204,6 @@ export const mutations = {
     // LOADING START
     SET_LOADING(state, payload) {
         state.loading = payload;
-    },
-    SET_SNACKBAR(state, payload) {
-        state.snackbar = payload;
     },
     SET_ALERT(state, payload) {
         state.alert = payload;
