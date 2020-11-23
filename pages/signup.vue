@@ -7,71 +7,6 @@
             <div class="signup__left"></div>
             <div class="signup__right">
                 <div v-if="!loading" class="col-6">
-                    <!-- <div class="card">
-                        <div class="card-header">Sign Up</div>
-
-                        <div class="card-body">
-                            <form @submit.prevent="onSubmit">
-                                <div class="form-group">
-                                    <input
-                                        type="text"
-                                        placeholder="Name"
-                                        v-model="name"
-                                        class="form-control"
-                                        required
-                                    />
-                                </div>
-
-                                <div class="form-group">
-                                    <input
-                                        type="text"
-                                        placeholder="Email"
-                                        v-model="email"
-                                        class="form-control"
-                                        required
-                                    />
-                                </div>
-
-                                <div class="form-group">
-                                    <input
-                                        type="password"
-                                        placeholder="Password"
-                                        v-model="password"
-                                        class="form-control"
-                                        required
-                                    />
-                                </div>
-
-                                <div
-                                    v-if="errors"
-                                    class="form-group text-muted"
-                                >
-                                    {{ errors.message }}
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value
-                                            id="invalidCheck2"
-                                            required
-                                        />
-                                        <label class="form-check-label"
-                                            >Agree to terms and
-                                            conditions</label
-                                        >
-                                    </div>
-                                </div>
-
-                                <v-btn type="submit" class="teal darken-1" dark
-                                    >Submit</v-btn
-                                >
-                            </form>
-                        </div>
-                    </div> -->
-
                     <validation-observer ref="observer" v-slot="{ invalid }">
                         <form @submit.prevent="onSubmit">
                             <!-- Name -->
@@ -119,6 +54,11 @@
                                 ></v-text-field>
                             </validation-provider>
                             <!-- Password End -->
+                            <!-- ERRORS -->
+                            <div v-if="errors" class="form-group text-muted">
+                                {{ errors.message }}
+                            </div>
+                            <!-- ERRORS END -->
                             <!-- Submit Button -->
                             <v-btn
                                 class="mr-4"
@@ -146,6 +86,9 @@ import {
     setInteractionMode
 } from 'vee-validate';
 
+/*
+ ** Vee Validate
+ */
 setInteractionMode('eager');
 
 extend('required', {
@@ -162,6 +105,7 @@ extend('email', {
     ...email,
     message: 'Email must be valid'
 });
+// Vee Validate End
 
 export default {
     components: {
@@ -172,10 +116,7 @@ export default {
         name: '',
         phone: '',
         email: '',
-        password: '',
-        name: '',
-        email: '',
-        checkbox: null
+        password: ''
     }),
     computed: {
         ...mapGetters({
@@ -206,6 +147,7 @@ export default {
             this.checkbox = null;
             this.$refs.observer.reset();
         }
+        // Vee Validate End
     },
     mounted() {
         this.email = localStorage.getItem('email');

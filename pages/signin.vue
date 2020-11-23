@@ -2,57 +2,51 @@
     <div class="signin">
         <div class="signin__left"></div>
         <div class="signin__right">
-            <div v-if="!loading" class="d-flex flex-row justify-content-center">
-                <div class="card">
-                    <div class="card-header">Sign In</div>
-
-                    <div class="card-body">
-                        <form @submit.prevent="onSubmit">
-                            <div class="form-group">
-                                <input
-                                    type="text"
-                                    placeholder="Email"
-                                    v-model="email"
-                                    class="form-control"
-                                    required
-                                />
-                            </div>
-
-                            <div class="form-group">
-                                <input
-                                    type="password"
-                                    placeholder="Password"
-                                    v-model="password"
-                                    class="form-control"
-                                    required
-                                />
-                            </div>
-
-                            <div v-if="errors" class="form-group text-muted">
-                                {{ errors.message }}
-                            </div>
-
-                            <div v-if="errors" class="form-group text-muted">
-                                Don't have an account?
-                                <nuxt-link to="/signup">Signup</nuxt-link>
-                            </div>
-                            <div class="form-group text-muted">
-                                Forgot your password?
-                                <nuxt-link to="/password-reset"
-                                    >Reset password</nuxt-link
-                                >
-                            </div>
-
-                            <v-btn
-                                type="submit"
-                                class="teal darken-1"
-                                dark
-                                elevation="2"
-                                >Sign in</v-btn
-                            >
-                        </form>
-                    </div>
-                </div>
+            <div v-if="!loading" class="col-6">
+                <validation-observer ref="observer" v-slot="{ invalid }">
+                    <form @submit.prevent="onSubmit">
+                        <!-- Email -->
+                        <validation-provider
+                            v-slot="{ errors }"
+                            name="email"
+                            rules="required|email"
+                        >
+                            <v-text-field
+                                v-model="email"
+                                :error-messages="errors"
+                                label="E-mail"
+                                required
+                            ></v-text-field>
+                        </validation-provider>
+                        <!-- Email End -->
+                        <!-- Password -->
+                        <validation-provider
+                            v-slot="{ errors }"
+                            name="Password"
+                            rules="required|max:10"
+                        >
+                            <v-text-field
+                                type="password"
+                                v-model="password"
+                                :counter="10"
+                                :error-messages="errors"
+                                label="Password"
+                                required
+                            ></v-text-field>
+                        </validation-provider>
+                        <!-- Password End -->
+                        <!-- ERRORS -->
+                        <div v-if="errors" class="form-group text-muted mt-3">
+                            {{ errors.message }}
+                        </div>
+                        <!-- ERRORS END -->
+                        <!-- Submit Button -->
+                        <v-btn class="mr-4" type="submit" :disabled="invalid">
+                            signin
+                        </v-btn>
+                        <v-btn @click="clear"> clear </v-btn>
+                    </form>
+                </validation-observer>
             </div>
         </div>
     </div>
@@ -63,7 +57,40 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { mapGetters, mapActions } from 'vuex';
 
+import { required, email, max } from 'vee-validate/dist/rules';
+import {
+    extend,
+    ValidationObserver,
+    ValidationProvider,
+    setInteractionMode
+} from 'vee-validate';
+
+/*
+ ** Vee Validate
+ */
+setInteractionMode('eager');
+
+extend('required', {
+    ...required,
+    message: '{_field_} can not be empty'
+});
+
+extend('max', {
+    ...max,
+    message: '{_field_} may not be greater than {length} characters'
+});
+
+extend('email', {
+    ...email,
+    message: 'Email must be valid'
+});
+// Vee Validate End
+
 export default {
+    components: {
+        ValidationProvider,
+        ValidationObserver
+    },
     data() {
         return {
             email: '',
@@ -86,7 +113,19 @@ export default {
                 password: this.password
             };
             this.login(loginDetails);
+        },
+        // Vee Validate
+        submit() {
+            this.$refs.observer.validate();
+        },
+        clear() {
+            this.name = '';
+            this.email = '';
+            this.select = null;
+            this.checkbox = null;
+            this.$refs.observer.reset();
         }
+        // Vee Validate End
     },
     mounted() {
         this.email = localStorage.getItem('email');
@@ -107,7 +146,7 @@ export default {
         justify-content: center;
         align-items: center;
         width: 65%;
-        background-color: #00897b;
+        // background-color: #00897b;
     }
 }
 </style>
