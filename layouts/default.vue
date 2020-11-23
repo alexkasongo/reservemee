@@ -522,7 +522,7 @@ export default {
 
 <style lang="scss" scoped>
 .margin {
-    margin: 56px auto 0 auto;
+    margin: 52px auto 0 auto;
 }
 
 .app {
