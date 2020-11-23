@@ -202,9 +202,6 @@ export const mutations = {
     // USER ACCOUNTS END
 
     // LOADING START
-    // loaders/ SET_LOADING(state, payload) {
-    //     state.loading = payload;
-    // },
     SET_ALERT(state, payload) {
         state.alert = payload;
     },

@@ -140,9 +140,9 @@ export default {
                 align: 'start',
                 value: 'name'
             },
+            { text: 'Description', value: 'description' },
             { text: 'Services', value: 'services', sortable: false },
-            { text: 'Actions', value: 'actions', sortable: false },
-            { text: 'Description', value: 'description' }
+            { text: 'Actions', value: 'actions', sortable: false }
         ],
         editedIndex: -1,
         editedItem: {

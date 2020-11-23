@@ -1,9 +1,9 @@
 <template>
     <div v-if="user" class="content">
         <!-- Header -->
-        <header>
+        <div>
             <Header />
-        </header>
+        </div>
         <!-- Header End-->
 
         <section class="container">

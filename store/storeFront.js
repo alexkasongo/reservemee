@@ -85,10 +85,6 @@ export const actions = {
 };
 
 export const mutations = {
-    // FIXME 
-    // loaders/ SET_LOADING(state, payload) {
-    //     state.loading = payload;
-    // },
     /*
     ** STORE
     */
