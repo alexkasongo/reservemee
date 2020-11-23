@@ -1,6 +1,6 @@
 <template>
     <div v-if="!loading" class="container margin store-front">
-        <div class="store-front__container">
+        <div class="store-front__container mt-5">
             <!-- LEFT -->
             <div class="store-front__left">
                 <div class="store-front__left-banner">
@@ -325,6 +325,7 @@ export default {
         }
     },
     created() {
+        console.log(`_id.vue - 328 - 🍎`, this.$route.params.id);
         // query database and only retrieve store with matching storeID
         this.loadStoreServices(this.$route.params.id).then(() => {
             // only perform this once async function is complete

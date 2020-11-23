@@ -267,6 +267,7 @@ export const actions = {
                 .ref('users/' + payload.userId)
                 .child('storeProfile/')
                 .set({
+                    storeId: payload.userId,
                     storeLogo: payload.storeLogo,
                     storeName: payload.storeName,
                     storeEmail: payload.storeEmail,
