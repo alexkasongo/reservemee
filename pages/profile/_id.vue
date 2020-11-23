@@ -299,7 +299,7 @@
                     <!-- CARD HEADER END -->
 
                     <div class="card-body tab-content">
-                        <!-- PROFILE -->
+                        <!-- USER PROFILE -->
                         <div class="tab-pane active" id="profile">
                             <h6>YOUR PROFILE INFORMATION</h6>
                             <hr />
@@ -352,7 +352,7 @@
                                 </button>
                             </form>
                         </div>
-                        <!-- PROFILE END -->
+                        <!-- USER PROFILE END -->
 
                         <!-- STORE INFORMATION -->
                         <div class="tab-pane" id="store">
