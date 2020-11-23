@@ -4,6 +4,7 @@
         <!-- IF PROFILE EXISTS -->
         <div v-if="storeProfile !== null" class="parallax">
             <v-parallax
+                class="rounded-xl"
                 height="300"
                 v-if="storeProfile.storeBanner !== ''"
                 :src="storeProfile.storeBanner"
@@ -45,7 +46,12 @@
                     </div>
                 </div>
             </v-parallax>
-            <v-parallax height="300" v-else :src="defaultStoreBanner">
+            <v-parallax
+                class="rounded-xl"
+                height="300"
+                v-else
+                :src="defaultStoreBanner"
+            >
                 <div class="bg-center">
                     <div class="col-sm-6">
                         <v-tooltip bottom>
@@ -90,7 +96,11 @@
 
         <!-- IF PROFILE DOESN'T EXISTS -->
         <div v-else class="parallax">
-            <v-parallax height="300" src="https://via.placeholder.com/1200">
+            <v-parallax
+                class="rounded-xl"
+                height="300"
+                src="https://via.placeholder.com/1200"
+            >
                 <div class="bg-center">
                     <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">

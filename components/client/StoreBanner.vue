@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-img
-            class="rounded-xl mt-5"
+            class="rounded-xl"
             lazy-src="https://picsum.photos/id/11/10/6"
             max-height="300"
             max-width="100%"
