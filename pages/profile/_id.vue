@@ -743,7 +743,7 @@
                                     </div>
                                     <v-btn
                                         dark
-                                        class="cyan darken-1"
+                                        class="teal darken-1"
                                         type="button"
                                     >
                                         Add Payment Method
@@ -1152,7 +1152,7 @@ export default {
         },
         onUploadBanner(event) {
             // if a file is inserted or a logo exists then show it
-            if (event || this.form.storeLogo) {
+            if (event || this.storeForm.storeLogo) {
                 this.bannerDisplay = 'block';
             }
             // if user removes file, clear local state and revert back to uploaded image
