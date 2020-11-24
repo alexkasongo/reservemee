@@ -309,16 +309,32 @@
                                     <label for="exampleFormControlFile1"
                                         >Picture</label
                                     >
+                                    <!-- <v-btn @click="profileImagePickFile"
+                                        >Upload</v-btn
+                                    > -->
                                     <v-file-input
                                         type="file"
+                                        color="teal accent-4"
                                         @change="onUploadProfileImage"
+                                        @click="profileImagePickFile"
                                         label="Upload profile image"
                                         outlined
+                                        truncate-length="50"
                                         prepend-icon="mdi-camera"
                                         dense
                                         accept="image/*"
-                                        ref="fileInput"
-                                    ></v-file-input>
+                                        ref="fileInputOne"
+                                    >
+                                        <template v-slot:selection="{ text }">
+                                            <v-chip
+                                                small
+                                                label
+                                                color="teal darken-1"
+                                            >
+                                                {{ text }}
+                                            </v-chip>
+                                        </template>
+                                    </v-file-input>
                                 </div>
                                 <div
                                     class="form-group imgPreview"
@@ -383,10 +399,11 @@
                                         @change="onUploadLogo"
                                         label="Upload store logo"
                                         outlined
+                                        truncate-length="50"
                                         prepend-icon="mdi-camera"
                                         dense
                                         accept="image/*"
-                                        ref="fileInput"
+                                        ref="fileInputTwo"
                                     ></v-file-input>
                                 </div>
                                 <div
@@ -459,10 +476,11 @@
                                         @change="onUploadBanner"
                                         label="Upload store banner"
                                         outlined
+                                        truncate-length="50"
                                         prepend-icon="mdi-camera"
                                         dense
                                         accept="image/*"
-                                        ref="fileInput"
+                                        ref="fileInputThree"
                                     ></v-file-input>
                                 </div>
                                 <div
@@ -787,7 +805,6 @@ export default {
     data() {
         return {
             user: '',
-            test: '',
             logoDisplay: '',
             bannerDisplay: '',
             storeOwnerImageDisplay: '',
@@ -1035,6 +1052,10 @@ export default {
 
             this.updateStoreProfile(data);
             // this.alert = 'Saved...';
+        },
+        profileImagePickFile() {
+            console.log(`_id.vue - 1045 - You clicked me 🤗`);
+            this.$refs.fileInputOne.$refs.input.click();
         },
         onUploadProfileImage(event) {
             // if a file is inserted or a logo exists then show it
