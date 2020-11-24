@@ -326,7 +326,8 @@
                                         'background-image':
                                             'url(' +
                                             storeForm.storeOwnerImage +
-                                            ')'
+                                            ')',
+                                        display: storeOwnerImageDisplay
                                     }"
                                 ></div>
                                 <!-- Profile image upload end -->
@@ -355,9 +356,9 @@
                                 <v-btn type="submit" class="teal darken-1" dark>
                                     Update Profile
                                 </v-btn>
-                                <button type="reset" class="btn btn-light">
+                                <!-- <button type="reset" class="btn btn-light">
                                     Reset Changes
-                                </button>
+                                </button> -->
                             </form>
                         </div>
                         <!-- USER PROFILE END -->
@@ -494,9 +495,9 @@
                                 >
                                     Save Settings
                                 </v-btn>
-                                <button type="reset" class="btn btn-light">
+                                <!-- <button type="reset" class="btn btn-light">
                                     Reset Changes
-                                </button>
+                                </button> -->
                             </form>
                         </div>
                         <!-- STORE INFORMATION END -->
@@ -990,12 +991,12 @@ export default {
             // }
             const payload = {
                 name: this.profileForm.name,
-                photoUrl: this.profileForm.photoUrl
+                storeOwnerImage: this.storeForm.storeOwnerImage,
+                rawStoreOwnerImage: this.storeForm.rawStoreOwnerImage
 
                 // TODO upload image
                 // rawLogoImage: this.profileForm.rawImage
             };
-            console.log(`_id.vue - 983 - variable`, payload);
             // store image as binary in database
             this.updateUserProfile(payload);
         },
@@ -1019,10 +1020,10 @@ export default {
                 storeBio: this.storeForm.storeBio,
                 storeLogo: this.storeForm.storeLogo,
                 storeBanner: this.storeForm.storeBanner,
-                storeOwnerImage: this.storeForm.storeOwnerImage,
+                // storeOwnerImage: this.storeForm.storeOwnerImage,
                 rawStoreLogo: this.storeForm.rawStoreLogo,
                 rawStoreBanner: this.storeForm.rawStoreBanner,
-                rawStoreOwnerImage: this.storeForm.rawStoreOwnerImage,
+                // rawStoreOwnerImage: this.storeForm.rawStoreOwnerImage,
                 storeLocation: this.storeForm.storeLocation
             };
 
@@ -1048,8 +1049,10 @@ export default {
                     profileImageState = null;
                 }
             });
+            // if no image then do this
             if (event === undefined) {
                 this.storeOwnerImageDisplay = 'none';
+                this.storeForm.storeOwnerImage = '';
                 if (
                     this.userInfo[0] === undefined ||
                     profileImageState === null
@@ -1094,8 +1097,10 @@ export default {
                     logoState = null;
                 }
             });
+            // if no image then do this
             if (event === undefined) {
                 this.logoDisplay = 'none';
+                this.storeForm.storeLogo = '';
                 if (this.userInfo[0] === undefined || logoState === null) {
                     return;
                 }
@@ -1137,8 +1142,10 @@ export default {
                     bannerState = null;
                 }
             });
+            //  if no image then do this
             if (event === undefined) {
                 this.bannerDisplay = 'none';
+                this.storeForm.storeBanner = '';
                 if (this.userInfo[0] === undefined || bannerState === null) {
                     return;
                 }
