@@ -310,6 +310,8 @@ export const actions = {
                         .update({
                             // image: image URL from firebase storage
                             storeOwnerImage: image,
+                            // if only the image is added we add the storeId too so that we can access the store in store-front
+                            storeId: payload.userId,
                         })
                         .then(() => {
                             // 2. Update user profile

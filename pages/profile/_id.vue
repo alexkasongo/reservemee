@@ -1016,9 +1016,6 @@ export default {
                 storeOwnerImage: this.storeForm.storeOwnerImage,
                 name: this.profileForm.name,
                 userId: this.user.uid
-
-                // TODO upload image
-                // rawLogoImage: this.profileForm.rawImage
             };
             // store image as binary in database
             this.updateUserProfile(payload);
