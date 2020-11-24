@@ -266,7 +266,7 @@ export const actions = {
                 .database()
                 .ref('users/' + payload.userId)
                 .child('storeProfile/')
-                .set({
+                .update({
                     storeId: payload.userId,
                     storeLogo: payload.storeLogo,
                     storeName: payload.storeName,
@@ -312,7 +312,7 @@ export const actions = {
                         .database()
                         .ref('users/' + payload.userId)
                         .child('storeProfile/')
-                        .set({
+                        .update({
                             storeLogo: logo,
                             storeName: payload.storeName,
                             storeEmail: payload.storeEmail,
@@ -363,7 +363,7 @@ export const actions = {
                         .database()
                         .ref('users/' + payload.userId)
                         .child('storeProfile/')
-                        .set({
+                        .update({
                             storeLogo: payload.storeLogo,
                             storeName: payload.storeName,
                             storeEmail: payload.storeEmail,
@@ -422,7 +422,7 @@ export const actions = {
                             .database()
                             .ref('users/' + payload.userId)
                             .child('storeProfile/')
-                            .set({
+                            .update({
                                 storeLogo: logo,
                                 storeName: payload.storeName,
                                 storeEmail: payload.storeEmail,
@@ -459,128 +459,102 @@ export const actions = {
     async updateUserProfile({ commit }, payload) {
         commit('loaders/SET_LOADING', true, { root: true });
 
-        // if both logo and banner have been added run the code below
-        let storeOwnerImage = ''
-
-        // 2. Update user profile
-        // const user = await firebase.auth().currentUser;
-
-        // user.updateProfile({
-        //     displayName: payload.name,
-        //     photoURL: payload.photoUrl
-        // })
-        //     .then((res) => {
-        //         // Update successful.
-        //         this.$swal({
-        //             toast: true,
-        //             position: 'top-end',
-        //             icon: 'success',
-        //             title: 'Saved',
-        //             showConfirmButton: false,
-        //             timer: 2500
-        //         });
-        //         commit('SET_ALERT', true);
-        //         commit('loaders/SET_LOADING', false, { root: true });
-        //     })
-        //     .catch((error) => {
-        //         // An error happened.
-        //         commit('ERRORS', error);
-        //         commit('loaders/SET_LOADING', false, { root: true });
-        //     });
-        // Update user profile end
-
         // 1. IF NO PROFILE IMAGE
         if (payload.rawStoreOwnerImage === null) {
             console.log(`dashboard.js - 561 - we here 😂`, payload);
-            // const user = await firebase.auth().currentUser;
+            const user = await firebase.auth().currentUser;
 
-            // user.updateProfile({
-            //     displayName: payload.name,
-            // })
-            //     .then(() => {
-            //         // Update successful.
-            //         this.$swal({
-            //             toast: true,
-            //             position: 'top-end',
-            //             icon: 'success',
-            //             title: 'Saved',
-            //             showConfirmButton: false,
-            //             timer: 2500
-            //         });
-            //         commit('SET_ALERT', true);
-            //         commit('loaders/SET_LOADING', false, { root: true });
-            //     })
-            //     .catch((error) => {
-            //         // An error happened.
-            //         commit('ERRORS', error);
-            //         commit('loaders/SET_LOADING', false, { root: true });
-            //     });
+            user.updateProfile({
+                displayName: payload.name,
+            })
+                .then(() => {
+                    // Update successful.
+                    this.$swal({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Saved',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                    commit('loaders/SET_SNACKBAR', true, { root: true })
+                    commit('loaders/SET_LOADING', false, { root: true });
+                })
+                .catch((error) => {
+                    // An error happened.
+                    commit('ERRORS', error);
+                    commit('loaders/SET_LOADING', false, { root: true });
+                });
         }
 
         // 1. IF NO PROFILE IMAGE
         if (payload.rawStoreOwnerImage !== null) {
             console.log(`dashboard.js - 522 - not null 🌈`, payload);
-            // let storeOwnerImage = ''
+            let storeOwnerImage = ''
 
-            // // upload store banner
-            // const ownerImageFilename = payload.rawStoreBanner.name
-            // const ownerImageFileExt = ownerImageFilename.slice(ownerImageFilename.lastIndexOf('.'))
-            // firebase.storage().ref('storeOwnerImages/' + payload.userId + ownerImageFileExt).put(payload.rawStoreBanner)
-            //     .then(fileData => {
-            //         let fullPath = fileData.metadata.fullPath
-            //         return firebase.storage().ref(fullPath).getDownloadURL()
-            //     })
-            //     .then((URL) => {
-            //         storeOwnerImage = URL
-            //         return storeOwnerImage
-            //     })
-            //     .then((image) => {
-            //         // successful
-            //         firebase
-            //             .database()
-            //             .ref('users/' + payload.userId)
-            //             .child('storeProfile/')
-            //             .update({
-            //                 // image: image URL from firebase storage
-            //                 storeOwnerImage: image,
-            //             })
-            //             .then(() => {
-            //                 // 2. Update user profile
-            //                 const user = firebase.auth().currentUser;
+            // upload store banner
+            const ownerImageFilename = payload.rawStoreOwnerImage.name
+            const ownerImageFileExt = ownerImageFilename.slice(ownerImageFilename.lastIndexOf('.'))
+            firebase.storage().ref('storeOwnerImages/' + payload.userId + ownerImageFileExt).put(payload.rawStoreOwnerImage)
+                .then(fileData => {
+                    let fullPath = fileData.metadata.fullPath
+                    return firebase.storage().ref(fullPath).getDownloadURL()
+                })
+                .then((URL) => {
+                    storeOwnerImage = URL
+                    return storeOwnerImage
+                })
+                .then((image) => {
+                    // successful
+                    firebase
+                        .database()
+                        .ref('users/' + payload.userId)
+                        .child('storeProfile/')
+                        .update({
+                            // image: image URL from firebase storage
+                            storeOwnerImage: image,
+                        })
+                        .then(() => {
+                            // 2. Update user profile
+                            const user = firebase.auth().currentUser;
 
-            //                 user.updateProfile({
-            //                     displayName: payload.name,
-            //                     // image: image URL from firebase storage
-            //                     photoURL: image
-            //                 })
-            //                     .then((res) => {
-            //                         // Update successful.
-            //                         this.$swal({
-            //                             toast: true,
-            //                             position: 'top-end',
-            //                             icon: 'success',
-            //                             title: 'Saved',
-            //                             showConfirmButton: false,
-            //                             timer: 2500
-            //                         });
-            //                         commit('SET_ALERT', true);
-            //                         commit('loaders/SET_LOADING', false, { root: true });
-            //                     })
-            //                     .catch((error) => {
-            //                         // An error happened.
-            //                         commit('ERRORS', error);
-            //                         commit('loaders/SET_LOADING', false, { root: true });
-            //                     });
-            //                 // Update user profile end
-            //             })
-            //         dispatch('loadUserIdData', payload.userId);
-            //         commit('loaders/SET_LOADING', false, { root: true });
-            //     })
-            //     .catch((error) => {
-            //         commit('ERRORS', error);
-            //         commit('loaders/SET_LOADING', false, { root: true });
-            //     });
-            // return
+                            user.updateProfile({
+                                displayName: payload.name,
+                                // we are updating the image attached to the storeProfile, this is easier to maintain
+                                // photoURL: image
+                            })
+                                .then((res) => {
+                                    // Update successful.
+                                    this.$swal({
+                                        toast: true,
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Saved',
+                                        showConfirmButton: false,
+                                        timer: 2500
+                                    });
+
+                                    commit('loaders/SET_SNACKBAR', true, { root: true })
+                                    commit('loaders/SET_LOADING', false, { root: true });
+                                })
+                                .catch((error) => {
+                                    // An error happened.
+                                    commit('ERRORS', error);
+                                    commit('loaders/SET_LOADING', false, { root: true });
+                                });
+                            // Update user profile end
+                        })
+
+                    // commit('loaders/SET_LOADING', false, { root: true });
+                })
+                .then(() => {
+                    dispatch('loadUserIdData', payload.userId);
+                })
+                .catch((error) => {
+                    commit('ERRORS', error);
+                    commit('loaders/SET_LOADING', false, { root: true });
+                });
+            return
         }
         // 1. IF NO PROFILE IMAGE END
 

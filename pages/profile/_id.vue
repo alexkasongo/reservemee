@@ -353,7 +353,12 @@
                                     to share this data wherever your user
                                     profile appears.
                                 </div>
-                                <v-btn type="submit" class="teal darken-1" dark>
+                                <v-btn
+                                    :loading="loading"
+                                    type="submit"
+                                    class="teal darken-1"
+                                    dark
+                                >
                                     Update Profile
                                 </v-btn>
                                 <!-- <button type="reset" class="btn btn-light">
@@ -990,9 +995,10 @@ export default {
             //     return;
             // }
             const payload = {
-                name: this.profileForm.name,
+                rawStoreOwnerImage: this.storeForm.rawStoreOwnerImage,
                 storeOwnerImage: this.storeForm.storeOwnerImage,
-                rawStoreOwnerImage: this.storeForm.rawStoreOwnerImage
+                name: this.profileForm.name,
+                userId: this.user.uid
 
                 // TODO upload image
                 // rawLogoImage: this.profileForm.rawImage
@@ -1149,8 +1155,8 @@ export default {
                 if (this.userInfo[0] === undefined || bannerState === null) {
                     return;
                 }
-                this.form.storeBanner = this.userInfo[0].storeProfile.storeBanner;
-                this.form.rawStoreBanner = null;
+                this.storeForm.storeBanner = this.userInfo[0].storeProfile.storeBanner;
+                this.storeForm.rawStoreBanner = null;
                 return;
             }
             const files = event;
@@ -1162,16 +1168,15 @@ export default {
             // turn file into base64 string which can be used to upload
             const fileReader = new FileReader();
             fileReader.addEventListener('load', () => {
-                this.form.storeBanner = fileReader.result;
+                this.storeForm.storeBanner = fileReader.result;
             });
             fileReader.readAsDataURL(files);
-            // raw file to be used on form submit
-            this.form.rawStoreBanner = files;
+            // raw file to be used on storeForm submit
+            this.storeForm.rawStoreBanner = files;
         }
         // Store Info End
     },
     mounted() {
-        console.log(`_id.vue - 1161 - 🍎`, this.userInfo);
         // observer to keep track of the user's sign-in status.
         // on onUpdprofileForm user details are updated in firebase triggering observer
         // allowing for reactive user update experience
@@ -1179,7 +1184,8 @@ export default {
             if (user !== null) {
                 this.user = user;
                 this.profileForm.name = user.displayName;
-                this.profileForm.photoUrl = user.photoURL;
+                // using the image store in the storeProfile database makes it easier to catch profile image error
+                this.loadUserIdData(user.uid);
             }
         });
         // if logo does not exist do not disply it's containers
@@ -1218,7 +1224,7 @@ export default {
                 return;
             }
 
-            if (res.storeProfile.storeBanner) {
+            if (res.storeProfile.storeOwnerImage) {
                 profileImageState = true;
             } else {
                 profileImageState = null;
