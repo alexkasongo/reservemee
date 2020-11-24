@@ -104,6 +104,11 @@ export default {
             userId: 'userId'
         })
     },
+    methods: {
+        ...mapActions({
+            loadUserIdData: 'dashboard/loadUserIdData'
+        })
+    },
     mounted() {
         /*
          ** fires each time the page loads, it loads the logged in user object
@@ -115,6 +120,17 @@ export default {
                 this.$router.push('/');
             }
         });
+
+        const loadedUserData = this.userData;
+        if (
+            !loadedUserData ||
+            Object.keys(loadedUserData).length <= 0 ||
+            loadedUserData === undefined
+        ) {
+            this.loadUserIdData(this.user.uid);
+        }
+
+        console.log(`dashboard.vue - 129 - 🍎`, loadedUserData);
     }
 };
 </script>

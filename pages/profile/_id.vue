@@ -1185,9 +1185,20 @@ export default {
                 this.user = user;
                 this.profileForm.name = user.displayName;
                 // using the image store in the storeProfile database makes it easier to catch profile image error
-                this.loadUserIdData(user.uid);
             }
         });
+
+        const loadedUserData = this.userData;
+        if (
+            !loadedUserData ||
+            Object.keys(loadedUserData).length <= 0 ||
+            loadedUserData === undefined
+        ) {
+            this.loadUserIdData(this.user.uid);
+        }
+
+        console.log(`dashboard.vue - 129 - 🥶`, loadedUserData);
+
         // if logo does not exist do not disply it's containers
         let logoState = null;
         this.userInfo.forEach((res) => {
@@ -1219,7 +1230,7 @@ export default {
         // if storeOwnerImage does not exist do not disply it's containers
         let profileImageState = null;
         this.userInfo.forEach((res) => {
-            if (res.storeProfile === undefined) {
+            if (res === undefined || res.storeProfile === undefined) {
                 profileImageState = null;
                 return;
             }
