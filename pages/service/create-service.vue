@@ -32,21 +32,35 @@
                 ></textarea>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlFile1">Image</label>
-                <input
-                    required
-                    class="form-control"
-                    name="imageUrl"
-                    label="Image URL"
-                    id="image-url"
-                    v-model="imageUrl"
-                />
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Picture</label>
+                    <v-file-input
+                        type="file"
+                        color="teal accent-4"
+                        @change="onUploadBanner"
+                        label="Upload profile image"
+                        outlined
+                        truncate-length="50"
+                        prepend-icon="mdi-camera"
+                        dense
+                        accept="image/*"
+                        ref="fileInputOne"
+                    >
+                        <template v-slot:selection="{ text }">
+                            <v-chip small label dark color="teal darken-1">
+                                {{ text }}
+                            </v-chip>
+                        </template>
+                    </v-file-input>
+                </div>
+                <div
+                    class="form-group imgPreview"
+                    v-bind:style="{
+                        'background-image': 'url(' + serviceImage + ')',
+                        display: serviceImageDisplay
+                    }"
+                ></div>
             </div>
-            <div
-                required
-                class="form-group imgPreview"
-                v-bind:style="{ 'background-image': 'url(' + imageUrl + ')' }"
-            ></div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Price</label>
                 <input
@@ -72,12 +86,14 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
     data() {
         return {
-            category: '',
             name: '',
-            description: '',
             image: '',
             price: '',
-            imageUrl: ''
+            category: '',
+            description: '',
+            serviceImage: '',
+            serviceImageDisplay: '',
+            rawServiceImage: null
         };
     },
     computed: {
@@ -100,12 +116,67 @@ export default {
                 category: res,
                 name: this.name,
                 description: this.description,
-                imageUrl: this.imageUrl,
+                serviceImage: this.serviceImage,
+                rawServiceImage: this.rawServiceImage,
                 price: this.price
             };
+            console.log(`create-service.vue - 123 - 🥶`, data);
             this.createService(data);
-            this.$router.push(`/service/${res}`);
+            // this.$router.push(`/service/${res}`);
+        },
+        // UPLOAD IMAGE
+        onUploadBanner(event) {
+            // if a file is inserted or a logo exists then show it
+            if (event || this.storeLogo) {
+                this.serviceImageDisplay = 'block';
+            }
+            // if user removes file, clear local state and revert back to uploaded image
+            // let bannerState = null;
+            // this.userInfo.forEach((res) => {
+            //     if (res.storeProfile === undefined) {
+            //         bannerState = null;
+            //         return;
+            //     }
+
+            //     if (res.storeProfile.serviceImage) {
+            //         bannerState = true;
+            //     } else {
+            //         bannerState = null;
+            //     }
+            // });
+
+            //  if no image then do this
+            if (event === undefined) {
+                this.serviceImageDisplay = 'none';
+                // this.serviceImage = '';
+                // if (this.userInfo[0] === undefined || bannerState === null) {
+                //     return;
+                // }
+                // this.serviceImage = this.userInfo[0].storeProfile.serviceImage;
+                // this.rawServiceImage = null;
+                return;
+            }
+            const files = event;
+            let filename = files.name;
+            // check if the file doesn't have an extension
+            if (filename.lastIndexOf('.') <= 0) {
+                return alert('Please add a valid file!');
+            }
+            // turn file into base64 string which can be used to upload
+            const fileReader = new FileReader();
+            fileReader.addEventListener('load', () => {
+                this.serviceImage = fileReader.result;
+            });
+            fileReader.readAsDataURL(files);
+            // raw file to be used on form submit
+            this.rawServiceImage = files;
         }
+        // UPLOAD IMAGE END
+    },
+    mounted() {
+        console.log(`create-service.vue - 176 - 🎸`, this.serviceImageDisplay);
+        // If serviceImageDisplay state is empty, run this
+        this.serviceImageDisplay = 'none';
     }
 };
 </script>
@@ -115,6 +186,6 @@ export default {
     height: 200px;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
 }
 </style>

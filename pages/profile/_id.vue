@@ -309,9 +309,6 @@
                                     <label for="exampleFormControlFile1"
                                         >Picture</label
                                     >
-                                    <!-- <v-btn @click="profileImagePickFile"
-                                        >Upload</v-btn
-                                    > -->
                                     <v-file-input
                                         type="file"
                                         color="teal accent-4"
