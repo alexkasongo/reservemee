@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapState } from 'vuex';
 
 export default {
     data() {
@@ -96,7 +96,7 @@ export default {
             user: 'user'
         }),
         serviceUpdateInfo() {
-            const data = this.$store.state.services;
+            const data = this.services;
 
             const filter = data.filter((res) => {
                 return res.id === this.$route.params.id;
