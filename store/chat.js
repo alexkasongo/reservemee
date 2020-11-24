@@ -22,16 +22,13 @@ export const actions = {
     ** TODO research ways to search firebase realtime database
     */
     deleteMessage: function (context, payload) {
-        // console.log(payload)
         database.collection('messages').doc(payload.id).delete()
             .then(() => {
                 this.commit('DELETE_MESSAGE', payload)
-                // console.log(payload)
             })
     },
     currentMessage: function (context, payload) {
         this.commit('CURRENT_MESSAGE', payload)
-        console.log(payload)
     },
     async addMsg({ commit }, payload) {
 
@@ -58,7 +55,6 @@ export const actions = {
                 commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
-                console.log(`index.js - 696 - 😳`, error);
                 commit('ERRORS', error);
                 this.$swal({
                     toast: true,
@@ -71,24 +67,18 @@ export const actions = {
                 commit('loaders/SET_LOADING', false, { root: true });
             });
     },
-    editMsg: function (context, payload) {
-        // console.log(payload)
+    editMsg: function (payload) {
         database.collection('messages').doc(payload.id).update({
             content: payload.content,
             name: payload.name,
             timestamp: Date.now()
         }).then(() => {
             this.commit('EDIT_MESSAGE', payload)
-            // this.close
-            // this.$router.push({ name: 'Chat' })
-
-        }).catch(err => {
-            console.log(err)
+        }).catch(error => {
+            commit('ERRORS', error);
         })
-        // this.content = null
-        // this.feedback = null
     },
-    userName: function (context, payload) {
+    userName: function (payload) {
         this.commit('USER_NAME', payload)
     },
     async sendPrivateMessage({ commit, dispatch }, payload) {
@@ -118,7 +108,6 @@ export const actions = {
                 commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
-                console.log(`index.js - 696 - 😳`, error);
                 commit('ERRORS', error);
                 this.$swal({
                     toast: true,

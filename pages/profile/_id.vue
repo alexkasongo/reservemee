@@ -902,6 +902,7 @@ export default {
         },
         changePassword() {
             if (this.newPassword !== this.confirmNewPassword) {
+                // TODO manage error
                 console.log('Passwords do not match');
                 this.$swal({
                     toast: true,
@@ -923,14 +924,6 @@ export default {
                 }).then((result) => {
                     if (result.isConfirmed) {
                         if (this.newPassword === this.confirmNewPassword) {
-                            console.log('Passwords match');
-                            console.log(
-                                `current:`,
-                                this.currentPassword,
-                                `new:`,
-                                this.confirmNewPassword
-                            );
-
                             const currentPassword = this.currentPassword;
                             const newPassword = this.confirmNewPassword;
 
@@ -1051,7 +1044,6 @@ export default {
             // this.alert = 'Saved...';
         },
         profileImagePickFile() {
-            console.log(`_id.vue - 1045 - You clicked me 🤗`);
             this.$refs.fileInputOne.$refs.input.click();
         },
         onUploadProfileImage(event) {

@@ -264,7 +264,6 @@ export default {
             // replace empty space with dash and transform to lowercase as value Array.filter()
             // is case sensitive
             const value = e.target.value.replace(/\s+/g, '-').toLowerCase();
-            console.log(`_id.vue - 241 - 🔫`, value);
 
             // if all is selected show all
             if (value === 'all') {
@@ -307,7 +306,6 @@ export default {
                 events.push(appData);
             });
             this.events = events;
-            // console.log(`_id.vue - 309 - 🌹`, events);
             // add to cart or cancel
         },
         goToServiceInfo(id) {
@@ -323,7 +321,6 @@ export default {
         }
     },
     created() {
-        console.log(`_id.vue - 328 - 🍎`, this.$route.params.id);
         // query database and only retrieve store with matching storeID
         this.loadStoreServices(this.$route.params.id).then(() => {
             // only perform this once async function is complete

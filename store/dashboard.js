@@ -258,7 +258,6 @@ export const actions = {
 
         // 1. IF NO PROFILE IMAGE
         if (payload.rawStoreOwnerImage === null) {
-            console.log(`dashboard.js - 561 - we here 😂`, payload);
             const user = await firebase.auth().currentUser;
 
             user.updateProfile({
@@ -286,7 +285,6 @@ export const actions = {
 
         // 1. IF NO PROFILE IMAGE
         if (payload.rawStoreOwnerImage !== null) {
-            console.log(`dashboard.js - 522 - not null 🌈`, payload);
             let storeOwnerImage = ''
 
             // upload store banner
@@ -332,7 +330,6 @@ export const actions = {
                                         showConfirmButton: false,
                                         timer: 2500
                                     });
-                                    console.log(`dashboard.js - 333 - 😇`, payload.userId);
                                     dispatch('loadUserIdData', payload.userId);
                                     commit('loaders/SET_SNACKBAR', true, { root: true })
                                     commit('loaders/SET_LOADING', false, { root: true });

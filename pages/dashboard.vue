@@ -129,8 +129,6 @@ export default {
         ) {
             this.loadUserIdData(this.user.uid);
         }
-
-        console.log(`dashboard.vue - 129 - 🍎`, loadedUserData);
     }
 };
 </script>

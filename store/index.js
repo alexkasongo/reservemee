@@ -133,9 +133,7 @@ export const actions = {
                 }
             })
             .catch((error) => {
-                // Handle Errors here.
-                console.log(`index.js - 148 - 🙈`, error);
-                // commit('ERRORS', error);
+                commit('ERRORS', error);
                 commit('loaders/SET_LOADING', false, { root: true });
             });
     },
