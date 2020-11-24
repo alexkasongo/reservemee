@@ -71,13 +71,7 @@ export default {
         this.$refs.primary.sync(this.$refs.secondary.splide);
     },
     methods: {
-        moved(splide, newIndex) {
-            // console.log('moved', newIndex);
-        },
-        // selectedDate(data) {
-        //     console.log(`landing.vue - 73 - you clicked me 🌈`);
-        // },
-
+        moved(splide, newIndex) {},
         async getEvents() {
             let snapshot = await db
                 .collection('jKWLSv7dhUfUIDXWalNfnDZKX2I2')
