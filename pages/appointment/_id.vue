@@ -228,9 +228,6 @@ export default {
             // push service data to persisted local storage state
             // create order entry in database
         }
-    },
-    mounted() {
-        console.log(`_id.vue - 143 - 🐠`, this.$route.params);
     }
 };
 </script>

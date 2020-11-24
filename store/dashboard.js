@@ -6,11 +6,11 @@ import 'firebase/functions';
 
 export const state = () => ({
     // DASHBOARD START
-    userData: '',
+    userData: [],
     services: [],
     categories: [],
-    filteredServiceId: '',
-    storeProfile: '',
+    filteredServiceId: [],
+    storeProfile: [],
     // DASHBOARD END
 });
 
@@ -250,6 +250,110 @@ export const actions = {
         commit('loaders/SET_LOADING', false, { root: true });
     },
     /*
+     ** update logged in user profile info
+     */
+    // we receive service id as payload to use for filtering
+    async updateUserProfile({ commit, dispatch }, payload) {
+        commit('loaders/SET_LOADING', true, { root: true });
+
+        // 1. IF NO PROFILE IMAGE
+        if (payload.rawStoreOwnerImage === null) {
+            const user = await firebase.auth().currentUser;
+
+            user.updateProfile({
+                displayName: payload.name,
+            })
+                .then(() => {
+                    // Update successful.
+                    this.$swal({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Saved',
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                    commit('loaders/SET_SNACKBAR', true, { root: true })
+                    commit('loaders/SET_LOADING', false, { root: true });
+                })
+                .catch((error) => {
+                    // An error happened.
+                    commit('ERRORS', error);
+                    commit('loaders/SET_LOADING', false, { root: true });
+                });
+        }
+
+        // 1. IF NO PROFILE IMAGE
+        if (payload.rawStoreOwnerImage !== null) {
+            let storeOwnerImage = ''
+
+            // upload store banner
+            const ownerImageFilename = payload.rawStoreOwnerImage.name
+            const ownerImageFileExt = ownerImageFilename.slice(ownerImageFilename.lastIndexOf('.'))
+            firebase.storage().ref('storeOwnerImages/' + payload.userId + ownerImageFileExt).put(payload.rawStoreOwnerImage)
+                .then(fileData => {
+                    let fullPath = fileData.metadata.fullPath
+                    return firebase.storage().ref(fullPath).getDownloadURL()
+                })
+                .then((URL) => {
+                    storeOwnerImage = URL
+                    return storeOwnerImage
+                })
+                .then((image) => {
+                    // successful
+                    firebase
+                        .database()
+                        .ref('users/' + payload.userId)
+                        .child('storeProfile/')
+                        .update({
+                            // image: image URL from firebase storage
+                            storeOwnerImage: image,
+                            // if only the image is added we add the storeId too so that we can access the store in store-front
+                            storeId: payload.userId,
+                        })
+                        .then(() => {
+                            // 2. Update user profile
+                            const user = firebase.auth().currentUser;
+
+                            user.updateProfile({
+                                displayName: payload.name,
+                                // we are updating the image attached to the storeProfile, this is easier to maintain
+                                // photoURL: image
+                            })
+                                .then(() => {
+                                    // Update successful.
+                                    this.$swal({
+                                        toast: true,
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Saved',
+                                        showConfirmButton: false,
+                                        timer: 2500
+                                    });
+                                    dispatch('loadUserIdData', payload.userId);
+                                    commit('loaders/SET_SNACKBAR', true, { root: true })
+                                    commit('loaders/SET_LOADING', false, { root: true });
+                                })
+                                .catch((error) => {
+                                    // An error happened.
+                                    commit('ERRORS', error);
+                                    commit('loaders/SET_LOADING', false, { root: true });
+                                });
+                        })
+
+                    // commit('loaders/SET_LOADING', false, { root: true });
+                })
+                .catch((error) => {
+                    commit('ERRORS', error);
+                    commit('loaders/SET_LOADING', false, { root: true });
+                });
+            return
+        }
+        // 1. IF NO PROFILE IMAGE END
+
+
+    },
+    /*
      ** update store profile information, no need to create
      ** profile during created on signup
      */
@@ -266,7 +370,7 @@ export const actions = {
                 .database()
                 .ref('users/' + payload.userId)
                 .child('storeProfile/')
-                .set({
+                .update({
                     storeId: payload.userId,
                     storeLogo: payload.storeLogo,
                     storeName: payload.storeName,
@@ -312,7 +416,7 @@ export const actions = {
                         .database()
                         .ref('users/' + payload.userId)
                         .child('storeProfile/')
-                        .set({
+                        .update({
                             storeLogo: logo,
                             storeName: payload.storeName,
                             storeEmail: payload.storeEmail,
@@ -363,7 +467,7 @@ export const actions = {
                         .database()
                         .ref('users/' + payload.userId)
                         .child('storeProfile/')
-                        .set({
+                        .update({
                             storeLogo: payload.storeLogo,
                             storeName: payload.storeName,
                             storeEmail: payload.storeEmail,
@@ -422,7 +526,7 @@ export const actions = {
                             .database()
                             .ref('users/' + payload.userId)
                             .child('storeProfile/')
-                            .set({
+                            .update({
                                 storeLogo: logo,
                                 storeName: payload.storeName,
                                 storeEmail: payload.storeEmail,
@@ -451,38 +555,6 @@ export const actions = {
             })
 
 
-    },
-    /*
-     ** update logged in user profile info
-     */
-    // we receive service id as payload to use for filtering
-    async updateUserProfile({ commit }, payload) {
-        commit('loaders/SET_LOADING', true, { root: true });
-
-        const user = await firebase.auth().currentUser;
-
-        user.updateProfile({
-            displayName: payload.name,
-            photoURL: payload.photoUrl
-        })
-            .then((res) => {
-                // Update successful.
-                this.$swal({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Saved',
-                    showConfirmButton: false,
-                    timer: 2500
-                });
-                commit('SET_ALERT', true);
-                commit('loaders/SET_LOADING', false, { root: true });
-            })
-            .catch((error) => {
-                // An error happened.
-                commit('ERRORS', error);
-                commit('loaders/SET_LOADING', false, { root: true });
-            });
     },
     updateServiceId({ commit }, payload) {
         commit('UPDATE_SERVICE_ID', payload);

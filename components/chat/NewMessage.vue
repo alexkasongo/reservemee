@@ -38,10 +38,7 @@ export default {
     },
     methods: {
         addMessage() {
-            // console.log('working')
             if (this.newMessage) {
-                console.log('this.user 🥶', this.user);
-
                 const createdMessage = {
                     storeId: this.uid,
                     userId: this.user.uid,

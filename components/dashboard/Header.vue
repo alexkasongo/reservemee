@@ -2,7 +2,10 @@
     <!-- Header -->
     <div class="container">
         <!-- IF PROFILE EXISTS -->
-        <div v-if="storeProfile !== null" class="parallax">
+        <div
+            v-if="storeProfile !== null && Object.keys(storeProfile).length > 1"
+            class="parallax"
+        >
             <v-parallax
                 class="rounded-xl"
                 height="300"
@@ -170,8 +173,16 @@ export default {
             ) {
                 return null;
             } else {
-                const data = this.userData[0].storeProfile;
-                return data;
+                // Run this if storeOwnerImage exists but the rest of the storeProfile data doesn't exist yet
+                const initialData = this.userData[0].storeProfile;
+                // Remove storeOwnerImage from object so that the header evaluation logic can pass
+                let blackListKeys = ['storeOwnerImage'];
+                let filteredData = {};
+                for (let k in initialData) {
+                    if (blackListKeys.indexOf(k) === -1)
+                        filteredData[k] = initialData[k];
+                }
+                return filteredData;
             }
         }
     },

@@ -60,15 +60,12 @@ export default {
             this.$emit('close');
         },
         editedMessage() {
-            // console.log('working')
             if (this.$store.getters.currentMessage.content) {
                 const editedMsg = {
                     name: this.$store.getters.currentMessage.name,
                     content: this.$store.getters.currentMessage.content,
                     id: this.$store.getters.currentMessage.id
                 };
-
-                // console.log(ed itedMsg);
                 this.$store.dispatch('editMsg', editedMsg);
                 // this.content = null
                 // this.feedback = null

@@ -299,29 +299,54 @@
                     <!-- CARD HEADER END -->
 
                     <div class="card-body tab-content">
-                        <!-- PROFILE -->
+                        <!-- USER PROFILE -->
                         <div class="tab-pane active" id="profile">
                             <h6>YOUR PROFILE INFORMATION</h6>
                             <hr />
-                            <form @submit.prevent="onUpdProfileInfo">
+                            <form @submit.prevent="onUpdprofileForm">
+                                <!-- Profile image upload -->
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1"
                                         >Picture</label
                                     >
-                                    <input
-                                        class="form-control"
-                                        name="imageUrl"
-                                        label="Image URL"
-                                        v-model="profileInfo.photoUrl"
-                                    />
+                                    <!-- <v-btn @click="profileImagePickFile"
+                                        >Upload</v-btn
+                                    > -->
+                                    <v-file-input
+                                        type="file"
+                                        color="teal accent-4"
+                                        @change="onUploadProfileImage"
+                                        @click="profileImagePickFile"
+                                        label="Upload profile image"
+                                        outlined
+                                        truncate-length="50"
+                                        prepend-icon="mdi-camera"
+                                        dense
+                                        accept="image/*"
+                                        ref="fileInputOne"
+                                    >
+                                        <template v-slot:selection="{ text }">
+                                            <v-chip
+                                                small
+                                                label
+                                                color="teal darken-1"
+                                            >
+                                                {{ text }}
+                                            </v-chip>
+                                        </template>
+                                    </v-file-input>
                                 </div>
                                 <div
                                     class="form-group imgPreview"
                                     v-bind:style="{
                                         'background-image':
-                                            'url(' + profileInfo.photoUrl + ')'
+                                            'url(' +
+                                            storeForm.storeOwnerImage +
+                                            ')',
+                                        display: storeOwnerImageDisplay
                                     }"
                                 ></div>
+                                <!-- Profile image upload end -->
                                 <div class="form-group">
                                     <label for="fullName">Full Name</label>
                                     <input
@@ -329,7 +354,7 @@
                                         class="form-control"
                                         aria-describedby="fullNameHelp"
                                         placeholder="Enter your fullname"
-                                        v-model="profileInfo.name"
+                                        v-model="profileForm.name"
                                     />
                                     <small class="form-text text-muted"
                                         >Your name may appear around here where
@@ -344,21 +369,27 @@
                                     to share this data wherever your user
                                     profile appears.
                                 </div>
-                                <v-btn type="submit" class="teal darken-1" dark>
+                                <v-btn
+                                    :loading="loading"
+                                    type="submit"
+                                    class="teal darken-1"
+                                    dark
+                                >
                                     Update Profile
                                 </v-btn>
-                                <button type="reset" class="btn btn-light">
+                                <!-- <button type="reset" class="btn btn-light">
                                     Reset Changes
-                                </button>
+                                </button> -->
                             </form>
                         </div>
-                        <!-- PROFILE END -->
+                        <!-- USER PROFILE END -->
 
                         <!-- STORE INFORMATION -->
                         <div class="tab-pane" id="store">
                             <h6>YOUR STORE INFORMATION</h6>
                             <hr />
                             <form @submit.prevent="onUpdStoreInfo">
+                                <!-- Logo image upload -->
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1"
                                         >Logo</label
@@ -368,20 +399,22 @@
                                         @change="onUploadLogo"
                                         label="Upload store logo"
                                         outlined
+                                        truncate-length="50"
                                         prepend-icon="mdi-camera"
                                         dense
                                         accept="image/*"
-                                        ref="fileInput"
+                                        ref="fileInputTwo"
                                     ></v-file-input>
                                 </div>
                                 <div
                                     class="form-group imgPreview"
                                     v-bind:style="{
                                         'background-image':
-                                            'url(' + form.storeLogo + ')',
+                                            'url(' + storeForm.storeLogo + ')',
                                         display: logoDisplay
                                     }"
                                 ></div>
+                                <!-- Logo image upload End-->
                                 <div class="form-group">
                                     <label for="fullName">Store Name</label>
                                     <input
@@ -390,7 +423,7 @@
                                         class="form-control"
                                         aria-describedby="storeNameHelp"
                                         placeholder="Enter your store name"
-                                        v-model="form.storeName"
+                                        v-model="storeForm.storeName"
                                     />
                                     <small class="form-text text-muted"
                                         >Your name may appear around here where
@@ -406,7 +439,7 @@
                                         class="form-control"
                                         aria-describedby="storeEmailHelp"
                                         placeholder="Enter your store email"
-                                        v-model="form.storeEmail"
+                                        v-model="storeForm.storeEmail"
                                     />
                                 </div>
                                 <div class="form-group">
@@ -420,7 +453,7 @@
                                         class="form-control"
                                         aria-describedby="storeEmailHelp"
                                         placeholder="Enter your store phone number"
-                                        v-model="form.storePhoneNumber"
+                                        v-model="storeForm.storePhoneNumber"
                                     />
                                     <small class="form-text text-muted"
                                         >Format: 123-456-7890</small
@@ -431,7 +464,7 @@
                                     <v-textarea
                                         outlined
                                         placeholder="Write a description of your store"
-                                        v-model="form.storeBio"
+                                        v-model="storeForm.storeBio"
                                     ></v-textarea>
                                 </div>
                                 <div class="form-group">
@@ -443,17 +476,20 @@
                                         @change="onUploadBanner"
                                         label="Upload store banner"
                                         outlined
+                                        truncate-length="50"
                                         prepend-icon="mdi-camera"
                                         dense
                                         accept="image/*"
-                                        ref="fileInput"
+                                        ref="fileInputThree"
                                     ></v-file-input>
                                 </div>
                                 <div
                                     class="form-group imgPreview"
                                     v-bind:style="{
                                         'background-image':
-                                            'url(' + form.storeBanner + ')',
+                                            'url(' +
+                                            storeForm.storeBanner +
+                                            ')',
                                         display: bannerDisplay
                                     }"
                                 ></div>
@@ -464,7 +500,7 @@
                                         type="text"
                                         class="form-control"
                                         placeholder="Enter your location"
-                                        v-model="form.storeLocation"
+                                        v-model="storeForm.storeLocation"
                                     />
                                 </div>
                                 <div class="form-group small text-muted">
@@ -482,9 +518,9 @@
                                 >
                                     Save Settings
                                 </v-btn>
-                                <button type="reset" class="btn btn-light">
+                                <!-- <button type="reset" class="btn btn-light">
                                     Reset Changes
-                                </button>
+                                </button> -->
                             </form>
                         </div>
                         <!-- STORE INFORMATION END -->
@@ -707,7 +743,7 @@
                                     </div>
                                     <v-btn
                                         dark
-                                        class="cyan darken-1"
+                                        class="teal darken-1"
                                         type="button"
                                     >
                                         Add Payment Method
@@ -769,9 +805,9 @@ export default {
     data() {
         return {
             user: '',
-            test: '',
             logoDisplay: '',
             bannerDisplay: '',
+            storeOwnerImageDisplay: '',
             loggedInUser: '',
             alert: '',
             currentPassword: '',
@@ -781,19 +817,19 @@ export default {
             currentUser: {
                 name: ''
             },
-            profileInfo: {
-                name: '',
-                photoUrl: '',
-                rawProfileImage: null
+            profileForm: {
+                name: ''
             },
-            form: {
+            storeForm: {
                 storeLogo: '', // https://via.placeholder.com/500
                 storeName: '',
                 storeBio: '',
                 storeBanner: '', // https://via.placeholder.com/500
                 storeLocation: '',
+                storeOwnerImage: '',
                 rawStoreLogo: null,
-                rawStoreBanner: null
+                rawStoreBanner: null,
+                rawStoreOwnerImage: null
             },
             items: [
                 {
@@ -866,6 +902,7 @@ export default {
         },
         changePassword() {
             if (this.newPassword !== this.confirmNewPassword) {
+                // TODO manage error
                 console.log('Passwords do not match');
                 this.$swal({
                     toast: true,
@@ -887,14 +924,6 @@ export default {
                 }).then((result) => {
                     if (result.isConfirmed) {
                         if (this.newPassword === this.confirmNewPassword) {
-                            console.log('Passwords match');
-                            console.log(
-                                `current:`,
-                                this.currentPassword,
-                                `new:`,
-                                this.confirmNewPassword
-                            );
-
                             const currentPassword = this.currentPassword;
                             const newPassword = this.confirmNewPassword;
 
@@ -968,50 +997,106 @@ export default {
                 }
             });
         },
-        onUpdProfileInfo() {
+
+        // Profile Form start
+        onUpdprofileForm() {
             // TODO should be able to upload image
-            // if (!this.profileInfo.rawImage) {
+            // if (!this.profileForm.rawImage) {
             //     return;
             // }
             const payload = {
-                name: this.profileInfo.name,
-                photoUrl: this.profileInfo.photoUrl
-
-                // TODO upload image
-                // rawLogoImage: this.profileInfo.rawImage
+                rawStoreOwnerImage: this.storeForm.rawStoreOwnerImage,
+                storeOwnerImage: this.storeForm.storeOwnerImage,
+                name: this.profileForm.name,
+                userId: this.user.uid
             };
-            console.log(`_id.vue - 983 - variable`, payload);
             // store image as binary in database
             this.updateUserProfile(payload);
         },
         closeAlert() {
             this.closeAlert();
         },
+        // Profile Form End
+
+        // Store Info start
         onUpdStoreInfo() {
             //NOTE replace empty space with a dash and lowercase all uppercases
-            let storeName = this.form.storeName
+            let storeName = this.storeForm.storeName
                 .replace(/\s+/g, '-')
                 .toLowerCase();
 
             const data = {
                 userId: this.user.uid,
-                rawStoreLogo: this.form.rawStoreLogo,
-                rawStoreBanner: this.form.rawStoreBanner,
                 storeName: storeName,
-                storeEmail: this.form.storeEmail,
-                storePhoneNumber: this.form.storePhoneNumber,
-                storeBio: this.form.storeBio,
-                storeLogo: this.form.storeLogo,
-                storeBanner: this.form.storeBanner,
-                storeLocation: this.form.storeLocation
+                storeEmail: this.storeForm.storeEmail,
+                storePhoneNumber: this.storeForm.storePhoneNumber,
+                storeBio: this.storeForm.storeBio,
+                storeLogo: this.storeForm.storeLogo,
+                storeBanner: this.storeForm.storeBanner,
+                // storeOwnerImage: this.storeForm.storeOwnerImage,
+                rawStoreLogo: this.storeForm.rawStoreLogo,
+                rawStoreBanner: this.storeForm.rawStoreBanner,
+                // rawStoreOwnerImage: this.storeForm.rawStoreOwnerImage,
+                storeLocation: this.storeForm.storeLocation
             };
 
             this.updateStoreProfile(data);
             // this.alert = 'Saved...';
         },
+        profileImagePickFile() {
+            this.$refs.fileInputOne.$refs.input.click();
+        },
+        onUploadProfileImage(event) {
+            // if a file is inserted or a logo exists then show it
+            if (event || this.storeForm.profileImage) {
+                this.storeOwnerImageDisplay = 'block';
+            }
+            // if user removes file, clear local state and revert back to uploaded image
+            let profileImageState = null;
+            this.userInfo.forEach((res) => {
+                if (res.storeProfile === undefined) {
+                    profileImageState = null;
+                    return;
+                }
+
+                if (res.storeProfile.storeOwnerImage) {
+                    profileImageState = true;
+                } else {
+                    profileImageState = null;
+                }
+            });
+            // if no image then do this
+            if (event === undefined) {
+                this.storeOwnerImageDisplay = 'none';
+                this.storeForm.storeOwnerImage = '';
+                if (
+                    this.userInfo[0] === undefined ||
+                    profileImageState === null
+                ) {
+                    return;
+                }
+                this.storeForm.storeOwnerImage = this.userInfo[0].storeProfile.storeOwnerImage;
+                this.storeForm.rawStoreOwnerImage = null;
+                return;
+            }
+            const files = event;
+            let filename = files.name;
+            // check if the file doesn't have an extension
+            if (filename.lastIndexOf('.') <= 0) {
+                return alert('Please add a valid file!');
+            }
+            // turn file into base64 string which can be used to upload
+            const fileReader = new FileReader();
+            fileReader.addEventListener('load', () => {
+                this.storeForm.storeOwnerImage = fileReader.result;
+            });
+            fileReader.readAsDataURL(files);
+            // raw file to be used on storeForm submit
+            this.storeForm.rawStoreOwnerImage = files;
+        },
         onUploadLogo(event) {
             // if a file is inserted or a logo exists then show it
-            if (event || this.form.storeLogo) {
+            if (event || this.storeForm.storeLogo) {
                 this.logoDisplay = 'block';
             }
             // if user removes file, clear local state and revert back to uploaded image
@@ -1028,13 +1113,15 @@ export default {
                     logoState = null;
                 }
             });
+            // if no image then do this
             if (event === undefined) {
                 this.logoDisplay = 'none';
+                this.storeForm.storeLogo = '';
                 if (this.userInfo[0] === undefined || logoState === null) {
                     return;
                 }
-                this.form.storeLogo = this.userInfo[0].storeProfile.storeLogo;
-                this.form.rawStoreLogo = null;
+                this.storeForm.storeLogo = this.userInfo[0].storeProfile.storeLogo;
+                this.storeForm.rawStoreLogo = null;
                 return;
             }
             const files = event;
@@ -1046,15 +1133,15 @@ export default {
             // turn file into base64 string which can be used to upload
             const fileReader = new FileReader();
             fileReader.addEventListener('load', () => {
-                this.form.storeLogo = fileReader.result;
+                this.storeForm.storeLogo = fileReader.result;
             });
             fileReader.readAsDataURL(files);
-            // raw file to be used on form submit
-            this.form.rawStoreLogo = files;
+            // raw file to be used on storeForm submit
+            this.storeForm.rawStoreLogo = files;
         },
         onUploadBanner(event) {
             // if a file is inserted or a logo exists then show it
-            if (event || this.form.storeLogo) {
+            if (event || this.storeForm.storeLogo) {
                 this.bannerDisplay = 'block';
             }
             // if user removes file, clear local state and revert back to uploaded image
@@ -1071,13 +1158,15 @@ export default {
                     bannerState = null;
                 }
             });
+            //  if no image then do this
             if (event === undefined) {
                 this.bannerDisplay = 'none';
+                this.storeForm.storeBanner = '';
                 if (this.userInfo[0] === undefined || bannerState === null) {
                     return;
                 }
-                this.form.storeBanner = this.userInfo[0].storeProfile.storeBanner;
-                this.form.rawStoreBanner = null;
+                this.storeForm.storeBanner = this.userInfo[0].storeProfile.storeBanner;
+                this.storeForm.rawStoreBanner = null;
                 return;
             }
             const files = event;
@@ -1089,25 +1178,38 @@ export default {
             // turn file into base64 string which can be used to upload
             const fileReader = new FileReader();
             fileReader.addEventListener('load', () => {
-                this.form.storeBanner = fileReader.result;
+                this.storeForm.storeBanner = fileReader.result;
             });
             fileReader.readAsDataURL(files);
-            // raw file to be used on form submit
-            this.form.rawStoreBanner = files;
+            // raw file to be used on storeForm submit
+            this.storeForm.rawStoreBanner = files;
         }
+        // Store Info End
     },
     mounted() {
         // observer to keep track of the user's sign-in status.
-        // on onUpdProfileInfo user details are updated in firebase triggering observer
+        // on onUpdprofileForm user details are updated in firebase triggering observer
         // allowing for reactive user update experience
         firebase.auth().onAuthStateChanged((user) => {
             if (user !== null) {
                 this.user = user;
-                this.profileInfo.name = user.displayName;
-                this.profileInfo.photoUrl = user.photoURL;
+                this.profileForm.name = user.displayName;
+                // using the image store in the storeProfile database makes it easier to catch profile image error
             }
         });
-        // if logo does not exist do not disply their containers
+
+        const loadedUserData = this.userData;
+        if (
+            !loadedUserData ||
+            Object.keys(loadedUserData).length <= 0 ||
+            loadedUserData === undefined
+        ) {
+            this.loadUserIdData(this.user.uid);
+        }
+
+        console.log(`dashboard.vue - 129 - 🥶`, loadedUserData);
+
+        // if logo does not exist do not disply it's containers
         let logoState = null;
         this.userInfo.forEach((res) => {
             if (res.storeProfile === undefined) {
@@ -1121,7 +1223,7 @@ export default {
                 logoState = null;
             }
         });
-
+        // if banner does not exist do not disply it's containers
         let bannerState = null;
         this.userInfo.forEach((res) => {
             if (res.storeProfile === undefined) {
@@ -1135,9 +1237,23 @@ export default {
                 bannerState = null;
             }
         });
+        // if storeOwnerImage does not exist do not disply it's containers
+        let profileImageState = null;
+        this.userInfo.forEach((res) => {
+            if (res === undefined || res.storeProfile === undefined) {
+                profileImageState = null;
+                return;
+            }
+
+            if (res.storeProfile.storeOwnerImage) {
+                profileImageState = true;
+            } else {
+                profileImageState = null;
+            }
+        });
 
         if (
-            (this.form.storeLogo =
+            (this.storeForm.storeLogo =
                 '' || this.userData === undefined || logoState === null)
         ) {
             this.logoDisplay = 'none';
@@ -1146,25 +1262,35 @@ export default {
         }
         // if banner does not exist do not disply their containers
         if (
-            (this.form.storeBanner =
+            (this.storeForm.storeBanner =
                 '' || this.userData === undefined || bannerState === null)
         ) {
             this.bannerDisplay = 'none';
         } else {
             this.bannerDisplay = 'block';
         }
+        // if storeOwnerImage does not exist do not disply their containers
+        if (
+            (this.storeForm.storeOwnerImage =
+                '' || this.userData === undefined || profileImageState === null)
+        ) {
+            this.storeOwnerImageDisplay = 'none';
+        } else {
+            this.storeOwnerImageDisplay = 'block';
+        }
 
         // if the state is undfined or the object does not exist, return null
         if (this.userInfo.length <= 0 || !this.userInfo[0].storeProfile) {
             return null;
         } else {
-            this.form.storeLogo = this.userInfo[0].storeProfile.storeLogo;
-            this.form.storeName = this.userInfo[0].storeProfile.storeName;
-            this.form.storeEmail = this.userInfo[0].storeProfile.storeEmail;
-            this.form.storePhoneNumber = this.userInfo[0].storeProfile.storePhoneNumber;
-            this.form.storeBio = this.userInfo[0].storeProfile.storeBio;
-            this.form.storeBanner = this.userInfo[0].storeProfile.storeBanner;
-            this.form.storeLocation = this.userInfo[0].storeProfile.storeLocation;
+            this.storeForm.storeLogo = this.userInfo[0].storeProfile.storeLogo;
+            this.storeForm.storeBanner = this.userInfo[0].storeProfile.storeBanner;
+            this.storeForm.storeOwnerImage = this.userInfo[0].storeProfile.storeOwnerImage;
+            this.storeForm.storeName = this.userInfo[0].storeProfile.storeName;
+            this.storeForm.storeEmail = this.userInfo[0].storeProfile.storeEmail;
+            this.storeForm.storePhoneNumber = this.userInfo[0].storeProfile.storePhoneNumber;
+            this.storeForm.storeBio = this.userInfo[0].storeProfile.storeBio;
+            this.storeForm.storeLocation = this.userInfo[0].storeProfile.storeLocation;
         }
     }
 };

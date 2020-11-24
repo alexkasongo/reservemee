@@ -31,14 +31,11 @@ export default {
     },
     methods: {
         addMessage() {
-            // console.log('working')
             if (this.newMessage) {
                 const createdMessage = {
                     name: this.name,
                     content: this.newMessage
                 };
-                // console.log(createdMessage);
-                // this.feedback = null
                 this.$store.dispatch('addProfileMsg', createdMessage);
                 this.newMessage = null;
                 this.feedback = null;
