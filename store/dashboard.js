@@ -257,7 +257,6 @@ export const actions = {
 
         // IF NO IMAGE 
         if (payload.rawServiceImage === null) {
-            console.log(`dashboard.js - 250 - 🥶 we here`, payload);
             commit('loaders/SET_LOADING', true, { root: true });
             await firebase
                 .database()
@@ -286,7 +285,6 @@ export const actions = {
 
         // 1. IF IMAGE EXISTS PROFILE IMAGE
         if (payload.rawServiceImage !== null) {
-            console.log(`dashboard.js - 281 - 🍎`, payload);
             commit('loaders/SET_LOADING', true, { root: true });
             // upload service Image
             let serviceImage = ''

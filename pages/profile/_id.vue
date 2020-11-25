@@ -1197,7 +1197,6 @@ export default {
                     .then((tokenResult) => {
                         if (tokenResult) {
                             this.role = tokenResult.claims;
-                            console.log(`_id.vue - 1198 - 🏝`, this.role.admin);
                         }
                     });
 

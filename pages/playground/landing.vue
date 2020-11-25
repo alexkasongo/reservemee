@@ -91,7 +91,6 @@ export default {
                 events.push(appData);
             });
             this.slides = events;
-            console.log(`landing.vue - 91 - 🌕`, events);
         }
     }
 };

@@ -122,7 +122,6 @@ export default {
                 rawServiceImage: this.rawServiceImage,
                 price: this.price
             };
-            console.log(`create-service.vue - 123 - 🥶`, data);
             this.createService(data);
             // this.$router.push(`/service/${res}`);
         },
@@ -156,7 +155,6 @@ export default {
         // UPLOAD IMAGE END
     },
     mounted() {
-        console.log(`create-service.vue - 176 - 🎸`, this.serviceImageDisplay);
         // If serviceImageDisplay state is empty, run this
         this.serviceImageDisplay = 'none';
     }

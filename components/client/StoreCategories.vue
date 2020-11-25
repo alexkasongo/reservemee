@@ -183,6 +183,7 @@ export default {
                 this.storesLoading = false;
             })
             .catch((error) => {
+                // TODO handle this error
                 console.log(`🙈`, error);
             });
     }

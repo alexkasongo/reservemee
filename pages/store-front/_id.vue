@@ -325,7 +325,6 @@ export default {
             // only perform this once async function is complete
 
             this.storeServices = this.loadedStoreServices;
-            console.log(`_id.vue - 324 - 🍎`, this.loadedStoreServices);
         });
     }
 };
