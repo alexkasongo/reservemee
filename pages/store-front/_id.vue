@@ -200,9 +200,9 @@
             <!-- LEFT END -->
 
             <!-- RIGHT -->
-            <div class="store-front__right">
+            <!-- <div class="store-front__right">
                 <Ratings />
-            </div>
+            </div> -->
             <!-- RIGHT END -->
         </div>
     </div>
@@ -213,11 +213,11 @@ import * as firebase from 'firebase/app';
 import 'firebase/database';
 import { db } from '@/plugins/firebase';
 import { mapActions, mapGetters } from 'vuex';
-import Ratings from '@/components/client/Ratings';
+// import Ratings from '@/components/client/Ratings';
 
 export default {
     components: {
-        Ratings
+        // Ratings
     },
     data: () => ({
         storeServices: [],

@@ -1,6 +1,9 @@
 <template>
     <div class="container margin">
-        <div class="px-lg-0 mt-3">
+        <div v-if="loading">
+            <p>loading...</p>
+        </div>
+        <div v-if="!loading" class="px-lg-0 mt-3">
             <div class="pb-5">
                 <div class="container">
                     <div class="row">
