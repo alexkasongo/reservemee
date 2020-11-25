@@ -74,7 +74,7 @@ export const actions = {
                         category: obj[key].category,
                         name: obj[key].name,
                         description: obj[key].description,
-                        imageUrl: obj[key].imageUrl,
+                        serviceImage: obj[key].serviceImage,
                         price: obj[key].price
                     });
                 }
@@ -152,56 +152,192 @@ export const actions = {
                 commit('loaders/SET_LOADING', false, { root: true });
             });
     },
-    async createService({ commit }, payload) {
-        commit('loaders/SET_LOADING', true, { root: true });
-        const service = {
-            userId: payload.userId,
-            category: payload.category,
-            name: payload.name,
-            description: payload.description,
-            imageUrl: payload.imageUrl,
-            price: payload.price
-        };
+    async createService({ commit, dispatch }, payload) {
 
-        await firebase
-            .database()
-            .ref('users/' + payload.userId)
-            .child('services')
-            .push(service)
-            .then((data) => {
-                const key = data.key;
-                commit('NEW_SERVICE', {
-                    ...service,
-                    id: key
-                });
-                commit('loaders/SET_LOADING', false, { root: true });
-            })
-            .catch((error) => {
-                commit('ERRORS', error);
-                commit('loaders/SET_LOADING', false, { root: true });
-            });
-    },
-    async updateService({ commit }, payload) {
-        commit('loaders/SET_LOADING', true, { root: true });
-
-        firebase
-            .database()
-            .ref('users/' + payload.userId)
-            .child('services/' + payload.id)
-            .set({
-                category: payload.category,
+        // IF NO IMAGE 
+        if (payload.rawServiceImage === null) {
+            commit('loaders/SET_LOADING', true, { root: true });
+            const service = {
                 name: payload.name,
+                price: payload.price,
+                userId: payload.userId,
+                category: payload.category,
                 description: payload.description,
-                imageUrl: payload.imageUrl,
-                price: payload.price
-            })
-            .then(() => {
-                commit('loaders/SET_LOADING', false, { root: true });
-            })
-            .catch((error) => {
-                commit('ERRORS', error);
-                commit('loaders/SET_LOADING', false, { root: true });
-            });
+            };
+            await firebase
+                .database()
+                .ref('users/' + payload.userId)
+                .child('services')
+                .push(service)
+                .then((data) => {
+                    const key = data.key;
+                    commit('NEW_SERVICE', {
+                        ...service,
+                        id: key
+                    });
+                })
+                .then(() => {
+                    commit('loaders/SET_SNACKBAR', true, { root: true });
+                    dispatch('loadServices', payload.userId);
+                    commit('loaders/SET_LOADING', false, { root: true });
+                })
+                .then(() => {
+                    this.$router.push(`/service/${payload.category}`);
+                })
+                .catch((error) => {
+                    commit('ERRORS', error);
+                    commit('loaders/SET_LOADING', false, { root: true });
+                });
+        }
+        // IF NO IMAGE END
+
+        // 1. IF IMAGE EXISTS PROFILE IMAGE
+        if (payload.rawServiceImage !== null) {
+            commit('loaders/SET_LOADING', true, { root: true });
+            // upload service Image
+            let serviceImage = ''
+
+            const serviceImageFilename = payload.rawServiceImage.name
+            const serviceImageFileExt = serviceImageFilename.slice(serviceImageFilename.lastIndexOf('.'))
+            firebase.storage().ref('serviceImages/')
+                .child(`${payload.userId}/` + payload.serviceImageName + serviceImageFileExt)
+                .put(payload.rawServiceImage)
+                .then(fileData => {
+                    let fullPath = fileData.metadata.fullPath
+                    return firebase.storage().ref(fullPath).getDownloadURL()
+                })
+                .then((URL) => {
+                    serviceImage = URL
+                    return serviceImage
+                })
+                .then((image) => {
+                    const service = {
+                        name: payload.name,
+                        price: payload.price,
+                        userId: payload.userId,
+                        category: payload.category,
+                        description: payload.description,
+                        serviceImage: image
+                    };
+                    // successful
+                    firebase
+                        .database()
+                        .ref('users/' + payload.userId)
+                        .child('services')
+                        .push(service)
+                        .then((data) => {
+                            const key = data.key;
+                            commit('NEW_SERVICE', {
+                                ...service,
+                                id: key
+                            });
+                        })
+                        .then(() => {
+                            commit('loaders/SET_SNACKBAR', true, { root: true })
+                            dispatch('loadServices', payload.userId)
+                            commit('loaders/SET_LOADING', false, { root: true });
+                        })
+                        .then(() => {
+                            this.$router.push(`/service/${payload.category}`);
+                        })
+                        .catch((error) => {
+                            commit('ERRORS', error);
+                            commit('loaders/SET_LOADING', false, { root: true });
+                        });
+                })
+                .catch((error) => {
+                    commit('ERRORS', error);
+                    commit('loaders/SET_LOADING', false, { root: true });
+                });
+            return
+        }
+        // 1. IF IMAGE EXISTS END
+    },
+    async updateService({ commit, dispatch }, payload) {
+
+        // IF NO IMAGE 
+        if (payload.rawServiceImage === null) {
+            console.log(`dashboard.js - 250 - 🥶 we here`, payload);
+            commit('loaders/SET_LOADING', true, { root: true });
+            await firebase
+                .database()
+                .ref('users/' + payload.userId)
+                .child('services/' + payload.serviceId)
+                .update({
+                    category: payload.category,
+                    name: payload.name,
+                    description: payload.description,
+                    price: payload.price
+                })
+                .then(() => {
+                    commit('loaders/SET_SNACKBAR', true, { root: true })
+                    dispatch('loadServices', payload.userId)
+                    commit('loaders/SET_LOADING', false, { root: true });
+                })
+                .then(() => {
+                    this.$router.push(`/service/${payload.category}`);
+                })
+                .catch((error) => {
+                    commit('ERRORS', error);
+                    commit('loaders/SET_LOADING', false, { root: true });
+                });
+        }
+        // IF NO IMAGE END
+
+        // 1. IF IMAGE EXISTS PROFILE IMAGE
+        if (payload.rawServiceImage !== null) {
+            console.log(`dashboard.js - 281 - 🍎`, payload);
+            commit('loaders/SET_LOADING', true, { root: true });
+            // upload service Image
+            let serviceImage = ''
+
+            const serviceImageFilename = payload.rawServiceImage.name
+            const serviceImageFileExt = serviceImageFilename.slice(serviceImageFilename.lastIndexOf('.'))
+            firebase.storage().ref('serviceImages/')
+                .child(`${payload.userId}/` + payload.serviceImageName + serviceImageFileExt)
+                .put(payload.rawServiceImage)
+                .then(fileData => {
+                    let fullPath = fileData.metadata.fullPath
+                    return firebase.storage().ref(fullPath).getDownloadURL()
+                })
+                .then((URL) => {
+                    serviceImage = URL
+                    return serviceImage
+                })
+                .then((image) => {
+                    // successful
+                    firebase
+                        .database()
+                        .ref('users/' + payload.userId)
+                        .child('services/' + payload.serviceId)
+                        .update({
+                            category: payload.category,
+                            name: payload.name,
+                            description: payload.description,
+                            price: payload.price,
+                            serviceImage: image,
+                            userId: payload.userId
+                        })
+                        .then(() => {
+                            commit('loaders/SET_SNACKBAR', true, { root: true })
+                            dispatch('loadServices', payload.userId)
+                            commit('loaders/SET_LOADING', false, { root: true });
+                        })
+                        .then(() => {
+                            this.$router.push(`/service/${payload.category}`);
+                        })
+                        .catch((error) => {
+                            commit('ERRORS', error);
+                            commit('loaders/SET_LOADING', false, { root: true });
+                        });
+                })
+                .catch((error) => {
+                    commit('ERRORS', error);
+                    commit('loaders/SET_LOADING', false, { root: true });
+                });
+            return
+        }
+        // 1. IF IMAGE EXISTS PROFILE IMAGE END
     },
     async deleteService({ commit }, payload) {
         commit('loaders/SET_LOADING', true, { root: true });
@@ -282,8 +418,9 @@ export const actions = {
                     commit('loaders/SET_LOADING', false, { root: true });
                 });
         }
-
         // 1. IF NO PROFILE IMAGE
+
+        // 1. IF IMAGE EXISTS PROFILE IMAGE
         if (payload.rawStoreOwnerImage !== null) {
             let storeOwnerImage = ''
 
@@ -349,7 +486,7 @@ export const actions = {
                 });
             return
         }
-        // 1. IF NO PROFILE IMAGE END
+        // 1. IF IMAGE EXISTS END
 
 
     },

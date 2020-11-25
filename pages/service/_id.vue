@@ -1,6 +1,9 @@
 <template>
     <div class="container margin">
-        <div class="px-lg-0 mt-3">
+        <div v-if="loading">
+            <p>loading...</p>
+        </div>
+        <div v-if="!loading" class="px-lg-0 mt-3">
             <div class="pb-5">
                 <div class="container">
                     <div class="row">
@@ -52,7 +55,9 @@
                                             <td scope="row" class="border-0">
                                                 <div class="p-2">
                                                     <img
-                                                        :src="service.imageUrl"
+                                                        :src="
+                                                            service.serviceImage
+                                                        "
                                                         alt
                                                         width="70"
                                                         class="img-fluid rounded shadow-sm"

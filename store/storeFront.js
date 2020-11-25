@@ -63,7 +63,7 @@ export const actions = {
                             id: key,
                             category: servicesObj.services[key].category,
                             description: servicesObj.services[key].description,
-                            imageUrl: servicesObj.services[key].imageUrl,
+                            serviceImage: servicesObj.services[key].serviceImage,
                             name: servicesObj.services[key].name,
                             price: servicesObj.services[key].price,
                             userId: servicesObj.services[key].userId

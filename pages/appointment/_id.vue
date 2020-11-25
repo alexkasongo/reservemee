@@ -127,13 +127,13 @@
                                     </v-card-text>
                                     <!-- OPEN DIALOG -->
                                 </div>
-                                <div
-                                    class="store-front__left-service-img"
-                                    v-bind:style="{
-                                        'background-image':
-                                            'url(' + service.imageUrl + ')'
-                                    }"
-                                ></div>
+                                <div>
+                                    <img
+                                        class="store-front__left-service-img"
+                                        :src="service.serviceImage"
+                                        alt=""
+                                    />
+                                </div>
                             </div>
                         </v-card>
                     </v-col>
