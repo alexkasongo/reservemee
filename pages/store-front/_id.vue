@@ -123,7 +123,7 @@
                                         :ripple="false"
                                     >
                                         <div
-                                            class="d-flex flex-no-wrap justify-space-between"
+                                            class="store-front__left-card d-flex flex-no-wrap justify-space-between"
                                         >
                                             <div>
                                                 <v-card-title
@@ -157,15 +157,13 @@
                                                     <!-- CLOSE DIALOG -->
                                                 </v-card-actions>
                                             </div>
-                                            <div
-                                                class="store-front__left-service-img"
-                                                v-bind:style="{
-                                                    'background-image':
-                                                        'url(' +
-                                                        service.imageUrl +
-                                                        ')'
-                                                }"
-                                            ></div>
+                                            <div>
+                                                <img
+                                                    class="store-front__left-service-img"
+                                                    :src="service.serviceImage"
+                                                    alt=""
+                                                />
+                                            </div>
                                         </div>
                                     </v-card>
                                 </v-col>
@@ -326,6 +324,7 @@ export default {
             // only perform this once async function is complete
 
             this.storeServices = this.loadedStoreServices;
+            console.log(`_id.vue - 324 - 🍎`, this.loadedStoreServices);
         });
     }
 };

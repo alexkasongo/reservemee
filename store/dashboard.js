@@ -200,7 +200,7 @@ export const actions = {
             const serviceImageFilename = payload.rawServiceImage.name
             const serviceImageFileExt = serviceImageFilename.slice(serviceImageFilename.lastIndexOf('.'))
             firebase.storage().ref('serviceImages/')
-                .child(`${payload.userId}/` + payload.userId + payload.serviceImageName + serviceImageFileExt)
+                .child(`${payload.userId}/` + payload.serviceImageName + serviceImageFileExt)
                 .put(payload.rawServiceImage)
                 .then(fileData => {
                     let fullPath = fileData.metadata.fullPath
@@ -294,7 +294,7 @@ export const actions = {
             const serviceImageFilename = payload.rawServiceImage.name
             const serviceImageFileExt = serviceImageFilename.slice(serviceImageFilename.lastIndexOf('.'))
             firebase.storage().ref('serviceImages/')
-                .child(`${payload.userId}/` + payload.userId + payload.serviceImageName + serviceImageFileExt)
+                .child(`${payload.userId}/` + payload.serviceImageName + serviceImageFileExt)
                 .put(payload.rawServiceImage)
                 .then(fileData => {
                     let fullPath = fileData.metadata.fullPath

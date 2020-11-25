@@ -13,11 +13,11 @@
     &__left-banner {
         margin: 0 0 30px 0;
     }
+    &__left-card {}
     &__left-service-img {
-        background-color: #ccc;
-        background-position: center;
-        background-size: cover;
-        width: 50%;
+        height: 250px;
+        width: 500px;
+        object-fit: cover;
         border-top-right-radius: 24px;
         border-bottom-right-radius: 24px;
     }
