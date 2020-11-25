@@ -74,7 +74,7 @@ export const actions = {
                         category: obj[key].category,
                         name: obj[key].name,
                         description: obj[key].description,
-                        imageUrl: obj[key].imageUrl,
+                        serviceImage: obj[key].serviceImage,
                         price: obj[key].price
                     });
                 }
@@ -153,6 +153,7 @@ export const actions = {
             });
     },
     async createService({ commit }, payload) {
+
         // IF NO IMAGE 
         if (payload.rawServiceImage === null) {
             commit('loaders/SET_LOADING', true, { root: true });
@@ -163,7 +164,6 @@ export const actions = {
                 category: payload.category,
                 description: payload.description,
             };
-
             await firebase
                 .database()
                 .ref('users/' + payload.userId)
@@ -177,6 +177,7 @@ export const actions = {
                     });
                 })
                 .then(() => {
+                    commit('loaders/SET_SNACKBAR', true, { root: true })
                     commit('loaders/SET_LOADING', false, { root: true });
                 })
                 .catch((error) => {
@@ -188,7 +189,7 @@ export const actions = {
 
         // 1. IF IMAGE EXISTS PROFILE IMAGE
         if (payload.rawServiceImage !== null) {
-
+            commit('loaders/SET_LOADING', true, { root: true });
             // upload service Image
             let serviceImage = ''
 
@@ -204,6 +205,14 @@ export const actions = {
                     return serviceImage
                 })
                 .then((image) => {
+                    const service = {
+                        name: payload.name,
+                        price: payload.price,
+                        userId: payload.userId,
+                        category: payload.category,
+                        description: payload.description,
+                        serviceImage: image
+                    };
                     // successful
                     firebase
                         .database()
