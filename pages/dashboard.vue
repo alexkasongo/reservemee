@@ -42,13 +42,13 @@
                         <!-- ManageServices -->
 
                         <!-- ManageServices -->
-                        <dManageServices v-else />
+                        <ManageServices v-else />
                         <!-- ManageServices -->
                     </div>
 
                     <div v-if="!loading">
-                        <Bookings class="services" />
-                        <UpcomingEvents />
+                        <Scheduling class="services" />
+                        <!-- <UpcomingEvents /> -->
                     </div>
 
                     <!-- <v-card elevation="2">
@@ -63,33 +63,12 @@
 </template>
 
 <script>
-import Header from '~/components/dashboard/Header';
-import CategoryCheck from '~/components/dashboard/CategoryCheck';
-import EmailVerified from '~/components/dashboard/EmailVerified';
-import Messages from '~/components/dashboard/Messages';
-import StoreSummary from '~/components/dashboard/StoreSummary';
-import ManageServices from '~/components/dashboard/ManageServices';
-import dManageServices from '~/components/default/dManageServices';
-import Bookings from '~/components/dashboard/Bookings';
-import UpcomingEvents from '~/components/dashboard/UpcomingEvents';
-
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-    components: {
-        Header,
-        CategoryCheck,
-        EmailVerified,
-        Messages,
-        StoreSummary,
-        ManageServices,
-        dManageServices,
-        Bookings,
-        UpcomingEvents
-    },
     data() {
         return {
             user: ''
