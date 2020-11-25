@@ -172,20 +172,6 @@ export default {
             if (event || this.storeLogo) {
                 this.serviceImageDisplay = 'block';
             }
-            // if user removes file, clear local state and revert back to uploaded image
-            // let bannerState = null;
-            // this.userInfo.forEach((res) => {
-            //     if (res.storeProfile === undefined) {
-            //         bannerState = null;
-            //         return;
-            //     }
-
-            //     if (res.storeProfile.serviceImage) {
-            //         bannerState = true;
-            //     } else {
-            //         bannerState = null;
-            //     }
-            // });
 
             //  if no image then do this
             if (event === undefined) {
@@ -221,45 +207,6 @@ export default {
         this.description = this.serviceUpdateInfo.description;
         this.price = this.serviceUpdateInfo.price;
         this.serviceImage = this.serviceUpdateInfo.serviceImage;
-
-        // if banner does not exist do not disply it's containers
-        // let bannerState = null;
-        // this.userInfo.forEach((res) => {
-        //     if (res.storeProfile === undefined) {
-        //         bannerState = null;
-        //         return;
-        //     }
-
-        //     if (res.storeProfile.storeBanner) {
-        //         bannerState = true;
-        //     } else {
-        //         bannerState = null;
-        //     }
-        // });
-
-        // // if banner does not exist do not disply their containers
-        // if (
-        //     (this.storeForm.storeBanner =
-        //         '' || this.userData === undefined || bannerState === null)
-        // ) {
-        //     this.bannerDisplay = 'none';
-        // } else {
-        //     this.bannerDisplay = 'block';
-        // }
-
-        // // if the state is undfined or the object does not exist, return null
-        // if (this.userInfo.length <= 0 || !this.userInfo[0].storeProfile) {
-        //     return null;
-        // } else {
-        //     this.storeForm.storeLogo = this.userInfo[0].storeProfile.storeLogo;
-        //     this.storeForm.storeBanner = this.userInfo[0].storeProfile.storeBanner;
-        //     this.storeForm.storeOwnerImage = this.userInfo[0].storeProfile.storeOwnerImage;
-        //     this.storeForm.storeName = this.userInfo[0].storeProfile.storeName;
-        //     this.storeForm.storeEmail = this.userInfo[0].storeProfile.storeEmail;
-        //     this.storeForm.storePhoneNumber = this.userInfo[0].storeProfile.storePhoneNumber;
-        //     this.storeForm.storeBio = this.userInfo[0].storeProfile.storeBio;
-        //     this.storeForm.storeLocation = this.userInfo[0].storeProfile.storeLocation;
-        // }
     }
 };
 </script>

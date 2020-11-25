@@ -132,30 +132,10 @@ export default {
             if (event || this.storeLogo) {
                 this.serviceImageDisplay = 'block';
             }
-            // if user removes file, clear local state and revert back to uploaded image
-            // let bannerState = null;
-            // this.userInfo.forEach((res) => {
-            //     if (res.storeProfile === undefined) {
-            //         bannerState = null;
-            //         return;
-            //     }
-
-            //     if (res.storeProfile.serviceImage) {
-            //         bannerState = true;
-            //     } else {
-            //         bannerState = null;
-            //     }
-            // });
 
             //  if no image then do this
             if (event === undefined) {
                 this.serviceImageDisplay = 'none';
-                // this.serviceImage = '';
-                // if (this.userInfo[0] === undefined || bannerState === null) {
-                //     return;
-                // }
-                // this.serviceImage = this.userInfo[0].storeProfile.serviceImage;
-                // this.rawServiceImage = null;
                 return;
             }
             const files = event;
