@@ -52,7 +52,9 @@
                                             <td scope="row" class="border-0">
                                                 <div class="p-2">
                                                     <img
-                                                        :src="service.imageUrl"
+                                                        :src="
+                                                            service.serviceImage
+                                                        "
                                                         alt
                                                         width="70"
                                                         class="img-fluid rounded shadow-sm"

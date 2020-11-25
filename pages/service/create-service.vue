@@ -37,7 +37,7 @@
                     <v-file-input
                         type="file"
                         color="teal accent-4"
-                        @change="onUploadBanner"
+                        @change="onUploadServiceImage"
                         label="Upload profile image"
                         outlined
                         truncate-length="50"
@@ -109,12 +109,14 @@ export default {
         }),
         onSubmit() {
             // category with dashes
-            let res = this.category.replace(/\s+/g, '-').toLowerCase();
+            let routeName = this.category.replace(/\s+/g, '-').toLowerCase();
+            let imageName = this.name.replace(/\s+/g, '').toLowerCase();
 
             let data = {
                 userId: this.userId,
-                category: res,
+                category: routeName,
                 name: this.name,
+                serviceImageName: imageName,
                 description: this.description,
                 serviceImage: this.serviceImage,
                 rawServiceImage: this.rawServiceImage,
@@ -125,7 +127,7 @@ export default {
             // this.$router.push(`/service/${res}`);
         },
         // UPLOAD IMAGE
-        onUploadBanner(event) {
+        onUploadServiceImage(event) {
             // if a file is inserted or a logo exists then show it
             if (event || this.storeLogo) {
                 this.serviceImageDisplay = 'block';
