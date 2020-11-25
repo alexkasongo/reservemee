@@ -224,7 +224,8 @@ export default {
         categories: [],
         testData: [],
         dialog: false,
-        events: []
+        events: [],
+        role: []
     }),
     watch: {
         // call function when dialog/modal opens
@@ -318,13 +319,12 @@ export default {
             // load calendar using store ID
         }
     },
-    created() {
+    mounted() {
         // query database and only retrieve store with matching storeID
         this.loadStoreServices(this.$route.params.id).then(() => {
             // only perform this once async function is complete
 
             this.storeServices = this.loadedStoreServices;
-            console.log(`_id.vue - 324 - 🍎`, this.loadedStoreServices);
         });
     }
 };

@@ -156,7 +156,6 @@ export default {
                 rawServiceImage: this.rawServiceImage,
                 price: this.price
             };
-            console.log(`_id.vue - 158 - 🤷🏾‍♂️`, data);
 
             this.updateService(data);
             // this.$router.push(`/service/${res}`);
@@ -167,7 +166,6 @@ export default {
         },
         // UPLOAD IMAGE
         updateServiceImage(event) {
-            console.log(`_id.vue - 167 - 🌙`, event);
             // if a file is inserted or a logo exists then show it
             if (event || this.storeLogo) {
                 this.serviceImageDisplay = 'block';
