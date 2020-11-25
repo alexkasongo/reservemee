@@ -17,44 +17,41 @@
         <!-- SORT END -->
 
         <!-- POPULAR STORES -->
-        <div class="categories__popular">
+        <div v-if="storesLoading">
+            <p>Loading...</p>
+        </div>
+        <div v-if="!storesLoading" class="categories__popular">
             <div v-for="(store, id) in stores.slice(0, 4)" :key="id">
-                <div v-for="(storeProfile, id) in store" :key="id">
-                    <v-card
-                        outlined
-                        elevation="0"
-                        class="rounded-xl mb-3"
-                        style="width: 100%"
-                    >
-                        <div class="row no-gutters">
-                            <div
-                                class="categories__store-card col-md-4"
-                                v-bind:style="{
-                                    'background-image':
-                                        'url(' + storeProfile.storeBanner + ')'
-                                }"
-                            ></div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{
-                                            storeProfile.storeName | capitalize
-                                        }}
-                                    </h5>
-                                    <p class="card-text">
-                                        {{ storeProfile.storeBio }}
-                                    </p>
+                <v-card
+                    outlined
+                    elevation="0"
+                    class="rounded-xl mb-3"
+                    style="width: 100%"
+                >
+                    <div class="row no-gutters">
+                        <div
+                            class="categories__store-card col-md-4"
+                            v-bind:style="{
+                                'background-image':
+                                    'url(' + store.storeBanner + ')'
+                            }"
+                        ></div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    {{ store.storeName | capitalize }}
+                                </h5>
+                                <p class="card-text">
+                                    {{ store.storeBio | truncate(50, '...') }}
+                                </p>
 
-                                    <v-btn
-                                        @click="viewStore(storeProfile)"
-                                        elevation="0"
-                                        >Visit Store</v-btn
-                                    >
-                                </div>
+                                <v-btn @click="viewStore(store)" elevation="0"
+                                    >Visit Store</v-btn
+                                >
                             </div>
                         </div>
-                    </v-card>
-                </div>
+                    </div>
+                </v-card>
             </div>
         </div>
         <!-- POPULAR STORES END -->
@@ -110,6 +107,7 @@ export default {
     data: () => ({
         stores: [],
         comments: null,
+        storesLoading: false,
         uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3',
         sorting: [
             { text: 'Sort', image: 'https://via.placeholder.com/150' },
@@ -156,14 +154,33 @@ export default {
             .ref('users')
             .once('value')
             .then((data) => {
+                this.storesLoading = true;
+                const filtered = [];
                 const stores = [];
-                const obj = data.val();
-                for (let key in obj) {
+                const arrayObj = data.val();
+                for (let key in arrayObj) {
                     stores.push({
-                        storeProfile: obj[key].storeProfile
+                        storeBanner: arrayObj[key].storeProfile.storeBanner,
+                        storeBio: arrayObj[key].storeProfile.storeBio,
+                        storeEmail: arrayObj[key].storeProfile.storeEmail,
+                        storeId: arrayObj[key].storeProfile.storeId,
+                        storeLocation: arrayObj[key].storeProfile.storeLocation,
+                        storeLogo: arrayObj[key].storeProfile.storeLogo,
+                        storeName: arrayObj[key].storeProfile.storeName,
+                        storeOwnerImage:
+                            arrayObj[key].storeProfile.storeOwnerImage,
+                        storePhoneNumber:
+                            arrayObj[key].storeProfile.storePhoneNumber
                     });
                 }
-                this.stores = stores;
+
+                // remove all stores that do not meet minimum store requirements
+                const filteredStores = stores.filter((res) => {
+                    return res.storeBanner !== undefined;
+                });
+
+                this.stores = filteredStores;
+                this.storesLoading = false;
             })
             .catch((error) => {
                 console.log(`🙈`, error);
