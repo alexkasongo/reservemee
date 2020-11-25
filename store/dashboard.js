@@ -459,14 +459,6 @@ export const actions = {
                             })
                                 .then(() => {
                                     // Update successful.
-                                    this.$swal({
-                                        toast: true,
-                                        position: 'top-end',
-                                        icon: 'success',
-                                        title: 'Saved',
-                                        showConfirmButton: false,
-                                        timer: 2500
-                                    });
                                     dispatch('loadUserIdData', payload.userId);
                                     commit('loaders/SET_SNACKBAR', true, { root: true })
                                     commit('loaders/SET_LOADING', false, { root: true });

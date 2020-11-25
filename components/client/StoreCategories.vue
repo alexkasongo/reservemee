@@ -42,10 +42,7 @@
                                         }}
                                     </h5>
                                     <p class="card-text">
-                                        {{
-                                            storeProfile.storeBio
-                                                | truncate(50, '...')
-                                        }}
+                                        {{ storeProfile.storeBio }}
                                     </p>
 
                                     <v-btn

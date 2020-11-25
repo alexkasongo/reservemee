@@ -30,6 +30,7 @@
                                 >Profile Information
                             </a>
                             <a
+                                v-if="role.admin"
                                 href="#store"
                                 data-toggle="tab"
                                 class="nav-item nav-link has-icon nav-link-faded"
@@ -190,7 +191,7 @@
                                     </svg>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li v-if="role.admin" class="nav-item">
                                 <a
                                     href="#store"
                                     data-toggle="tab"
@@ -382,7 +383,7 @@
                         <!-- USER PROFILE END -->
 
                         <!-- STORE INFORMATION -->
-                        <div class="tab-pane" id="store">
+                        <div v-if="role.admin" class="tab-pane" id="store">
                             <h6>YOUR STORE INFORMATION</h6>
                             <hr />
                             <form @submit.prevent="onUpdStoreInfo">
@@ -801,16 +802,17 @@ import { mapGetters, mapActions, mapState } from 'vuex';
 export default {
     data() {
         return {
+            role: [],
             user: '',
-            logoDisplay: '',
-            bannerDisplay: '',
-            storeOwnerImageDisplay: '',
-            loggedInUser: '',
             alert: '',
-            currentPassword: '',
-            newPassword: '',
-            confirmNewPassword: '',
             errors: '',
+            logoDisplay: '',
+            newPassword: '',
+            loggedInUser: '',
+            bannerDisplay: '',
+            currentPassword: '',
+            confirmNewPassword: '',
+            storeOwnerImageDisplay: '',
             currentUser: {
                 name: ''
             },
@@ -1189,6 +1191,16 @@ export default {
         // allowing for reactive user update experience
         firebase.auth().onAuthStateChanged((user) => {
             if (user !== null) {
+                firebase
+                    .auth()
+                    .currentUser.getIdTokenResult()
+                    .then((tokenResult) => {
+                        if (tokenResult) {
+                            this.role = tokenResult.claims;
+                            console.log(`_id.vue - 1198 - 🏝`, this.role.admin);
+                        }
+                    });
+
                 this.user = user;
                 this.profileForm.name = user.displayName;
                 // using the image store in the storeProfile database makes it easier to catch profile image error
