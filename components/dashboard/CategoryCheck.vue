@@ -1,7 +1,7 @@
 <template>
     <!-- CategoryCheck -->
     <div class="w-100 mb-5">
-        <v-card class="light-blue lighten-5" elevation="0">
+        <!-- <v-card class="light-blue lighten-5" elevation="0">
             <div class="card-body">
                 <h5 v-if="user">Welcome {{ user.name }}</h5>
                 <p>
@@ -19,7 +19,16 @@
                     >Create Category</v-btn
                 >
             </div>
-        </v-card>
+        </v-card> -->
+        <v-alert
+            style="cursor: pointer"
+            @click="onCreateInitCat"
+            icon="mdi-alert-circle-outline"
+            text
+            type="info"
+            >You currently have no services. Start by creating a
+            category.</v-alert
+        >
     </div>
     <!-- CategoryCheck -->
 </template>

@@ -84,10 +84,10 @@
                 @click="goToSettings"
                 icon="mdi-alert-circle-outline"
                 text
-                type="warning"
+                type="info"
                 >Update Store Information</v-alert
             >
-            <v-card class="light-blue lighten-5" elevation="0">
+            <!-- <v-card class="light-blue lighten-5" elevation="0">
                 <div class="card-body">
                     <h5 v-if="user">You have not created a store profile.</h5>
                     <p>Please update your store information in settings</p>
@@ -101,7 +101,7 @@
                         Update Store Information
                     </v-btn>
                 </div>
-            </v-card>
+            </v-card> -->
         </div>
     </div>
     <!-- BusinessInfo -->

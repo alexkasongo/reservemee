@@ -2,13 +2,16 @@
     <div v-if="user" class="content">
         <!-- Header -->
         <div>
-            <Header />
+            <Header class="mb-5" />
         </div>
         <!-- Header End-->
 
         <section class="global">
             <div class="row">
                 <div class="col-xl-4">
+                    <!-- Personal-Information -->
+                    <BusinessInfo />
+                    <!-- Personal-Information -->
                     <div v-if="user">
                         <div>
                             <div v-if="categories.length <= 0">
@@ -23,12 +26,9 @@
                             <!-- EmailVerified -->
                         </div>
                     </div>
-                    <!-- Personal-Information -->
-                    <BusinessInfo />
-                    <!-- Personal-Information -->
 
                     <!-- Messages -->
-                    <Messages class="mb-5" />
+                    <!-- <Messages class="mb-5" /> -->
                     <!-- Messages -->
 
                     <div>
