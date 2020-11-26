@@ -121,7 +121,9 @@ export default {
             { text: 'Store 1', image: 'https://via.placeholder.com/150' },
             { text: 'Store 2', image: 'https://via.placeholder.com/150' },
             { text: 'Store 3', image: 'https://via.placeholder.com/150' },
-            { text: 'Store 4', image: 'https://via.placeholder.com/150' }
+            { text: 'Store 4', image: 'https://via.placeholder.com/150' },
+            { text: 'Store 5', image: 'https://via.placeholder.com/150' },
+            { text: 'Store 6', image: 'https://via.placeholder.com/150' }
         ]
     }),
     computed: {

@@ -1,6 +1,6 @@
 <template>
     <div class="store margin">
-        <div class="container">
+        <div class="global">
             <!-- BANNER -->
             <StoreBanner />
             <!-- BANNER END -->

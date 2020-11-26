@@ -1,7 +1,6 @@
 <template>
-    <v-container>
-        <v-row>
-            <!-- <v-col cols="12" sm="6">
+    <div>
+        <!-- <v-col cols="12" sm="6">
                 <v-card class="mt-5 mb-5">
                     <div class="card-body">
                         <h5 class="card-title">Bookings</h5>
@@ -40,45 +39,39 @@
                     </div>
                 </v-card>
             </v-col> -->
-            <v-col cols="12" sm="6">
-                <div>
-                    <div v-for="(store, id) in stores" :key="id">
-                        <v-card
-                            outlined
-                            elevation="0"
-                            class="rounded-xl mb-3"
-                            style="width: 100%"
-                        >
-                            <div class="row no-gutters">
-                                <div
-                                    class="categories__store-card col-md-4"
-                                    v-bind:style="{
-                                        'background-image':
-                                            'url(' + store.storeBanner + ')'
-                                    }"
-                                ></div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            {{ store.storeName | capitalize }}
-                                        </h5>
-                                        <p class="card-text">
-                                            {{
-                                                store.storeBio
-                                                    | truncate(50, '...')
-                                            }}
-                                        </p>
+        <v-row cols="12" sm="6">
+            <v-col v-for="(store, id) in stores" :key="id">
+                <v-card
+                    outlined
+                    elevation="0"
+                    class="rounded-xl mb-3"
+                    style="width: 100%"
+                >
+                    <div class="row no-gutters">
+                        <div
+                            class="categories__store-card col-md-4"
+                            v-bind:style="{
+                                'background-image':
+                                    'url(' + store.storeBanner + ')'
+                            }"
+                        ></div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    {{ store.storeName | capitalize }}
+                                </h5>
+                                <p class="card-text">
+                                    {{ store.storeBio | truncate(50, '...') }}
+                                </p>
 
-                                        <v-btn elevation="0">Visit Store</v-btn>
-                                    </div>
-                                </div>
+                                <v-btn elevation="0">Visit Store</v-btn>
                             </div>
-                        </v-card>
+                        </div>
                     </div>
-                </div>
+                </v-card>
             </v-col>
         </v-row>
-    </v-container>
+    </div>
 </template>
 
 <script>

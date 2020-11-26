@@ -6,7 +6,7 @@
         </div>
         <!-- Header End-->
 
-        <section class="container">
+        <section class="global">
             <div class="row">
                 <div class="col-xl-4">
                     <div v-if="user">

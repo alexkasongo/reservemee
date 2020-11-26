@@ -63,8 +63,11 @@
         @media (min-width: $tablet) {
             grid-template-columns: 1fr 1fr ;
         }
+        @media (min-width: $small-desktop) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
         @media (min-width: $large-desktop) {
-            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
         }
     
     }
