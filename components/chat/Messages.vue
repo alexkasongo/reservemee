@@ -1,9 +1,7 @@
 <template>
     <div>
         <!-- If Messages -->
-        <div class="mx-auto mb-5">
-            <!-- <div class="ribbon ribbon-primary">Messages</div> -->
-            <!-- <div class="clearfix"></div> -->
+        <div class="mx-auto">
             <div
                 class="inbox-widget"
                 v-for="message in messages"
@@ -34,9 +32,22 @@
                     </div>
                 </div>
             </div>
-            <div class="card-action">
-                <NewMessage />
+
+            <!-- NEW MESSAGE -->
+            <div class="new-message">
+                <form @submit.prevent="addMessage()">
+                    <label for="new-message">New Message (enter to add):</label>
+                    <p class="red-text" v-if="feedback">{{ feedback }}</p>
+                    <v-text-field
+                        type="text"
+                        name="new-message"
+                        placeholder="type in a message and press enter"
+                        v-model="newMessage"
+                    ></v-text-field>
+                    <v-btn type="submit">Send</v-btn>
+                </form>
             </div>
+            <!-- NEW MESSAGE END -->
         </div>
         <!--If Messages end-->
 
@@ -68,18 +79,18 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
-import NewMessage from '@/components/chat/NewMessage';
-import Modal from '@/components/chat/Modal.vue';
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
+import { db } from '@/plugins/firebase';
+import 'firebase/database';
 
 export default {
-    name: 'Chat',
-    components: {
-        NewMessage
-    },
     data: () => ({
         isModalVisible: false,
-        uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3'
+        // uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3',
+        // NEW MESSAGE
+        newMessage: null,
+        feedback: null,
+        uid: ''
     }),
     computed: {
         ...mapGetters({
@@ -102,13 +113,34 @@ export default {
                     name: message.name
                 }
             });
+        },
+
+        // NEW MESSAGE
+        addMessage() {
+            if (this.newMessage) {
+                const createdMessage = {
+                    storeId: this.uid,
+                    userId: this.user.uid,
+                    name: this.user.name,
+                    message: this.newMessage
+                };
+                this.$store.dispatch('chat/addMsg', createdMessage);
+                this.newMessage = null;
+                this.feedback = null;
+            } else {
+                this.feedback = 'You must enter a message in order to send one';
+            }
         }
+        // NEW MESSAGE
     },
     created() {
-        this.$store.dispatch('chat/loadMessages', this.uid);
-        console.log(`Messages.vue - 84 - 🍎`, this.messages);
+        this.$store.dispatch('chat/loadMessages', this.user.uid);
+
+        // NEW MESSAGE
+        this.uis = this.currentUserId;
+        this.$store.dispatch('chat/loadMessages', this.user.uid);
+        this.$store.dispatch('chat/loadComments', this.user.uid);
+        // NEW MESSAGE
     }
 };
 </script>
-
-<style lang="scss" scoped></style>

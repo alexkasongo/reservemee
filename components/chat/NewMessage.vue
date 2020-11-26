@@ -26,15 +26,20 @@ export default {
         return {
             newMessage: null,
             feedback: null,
-            uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3'
+            uid: ''
         };
     },
     computed: {
         ...mapState(['user'])
+        // currentUserId() {
+        //     return this.user.uid;
+        // }
     },
     created() {
-        this.$store.dispatch('chat/loadMessages', this.uid);
-        this.$store.dispatch('chat/loadComments', this.uid);
+        console.log(`NewMessage.vue - 36 - 🍎`, this.currentUserId);
+        this.uis = this.currentUserId;
+        this.$store.dispatch('chat/loadMessages', this.user.uid);
+        this.$store.dispatch('chat/loadComments', this.user.uid);
     },
     methods: {
         addMessage() {

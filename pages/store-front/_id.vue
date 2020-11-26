@@ -201,7 +201,7 @@
 
             <!-- RIGHT -->
             <!-- <div class="store-front__right">
-                <Ratings />
+                <Messages />
             </div> -->
             <!-- RIGHT END -->
         </div>
@@ -213,11 +213,11 @@ import * as firebase from 'firebase/app';
 import 'firebase/database';
 import { db } from '@/plugins/firebase';
 import { mapActions, mapGetters } from 'vuex';
-// import Ratings from '@/components/client/Ratings';
+import Messages from '@/components/chat/Messages';
 
 export default {
     components: {
-        // Ratings
+        Messages
     },
     data: () => ({
         storeServices: [],
@@ -252,11 +252,11 @@ export default {
         ...mapActions({
             loadStoreServices: 'storeFront/loadStoreServices'
         }),
-        reserve() {
-            this.loading = true;
+        // reserve() {
+        //     this.loading = true;
 
-            setTimeout(() => (this.loading = false), 2000);
-        },
+        //     setTimeout(() => (this.loading = false), 2000);
+        // },
         // filter services using category name
         onChange(e) {
             const services = this.services;

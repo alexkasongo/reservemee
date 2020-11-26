@@ -141,8 +141,8 @@ export default {
             this.$router.push({
                 name: 'store-front-id',
                 params: {
-                    id: store.storeId,
-                    name: store.storeName
+                    id: store.storeId
+                    // name: store.storeName
                 }
             });
         }
