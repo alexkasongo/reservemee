@@ -1,9 +1,9 @@
 <template>
     <div>
-        <!-- Messages -->
-        <div class="ribbon-box">
-            <div class="ribbon ribbon-primary">Messages</div>
-            <div class="clearfix"></div>
+        <!-- If Messages -->
+        <div class="mx-auto mb-5">
+            <!-- <div class="ribbon ribbon-primary">Messages</div> -->
+            <!-- <div class="clearfix"></div> -->
             <div
                 class="inbox-widget"
                 v-for="message in messages"
@@ -38,7 +38,32 @@
                 <NewMessage />
             </div>
         </div>
-        <!-- Messages -->
+        <!--If Messages end-->
+
+        <!-- If No Messages -->
+        <!-- <v-card class="mx-auto">
+            <v-list-item three-line>
+                <v-list-item-content>
+                    <v-alert
+                        style="cursor: pointer"
+                        icon="mdi-alert-circle-outline"
+                        text
+                        type="info"
+                        ><span> You have no messages. </span></v-alert
+                    >
+                </v-list-item-content>
+            </v-list-item>
+        </v-card> -->
+        <v-list-item-content v-if="!messages">
+            <v-alert
+                style="cursor: pointer"
+                icon="mdi-alert-circle-outline"
+                text
+                type="info"
+                ><span> You have no messages. </span></v-alert
+            >
+        </v-list-item-content>
+        <!--If No Messages end-->
     </div>
 </template>
 
@@ -81,6 +106,7 @@ export default {
     },
     created() {
         this.$store.dispatch('chat/loadMessages', this.uid);
+        console.log(`Messages.vue - 84 - 🍎`, this.messages);
     }
 };
 </script>

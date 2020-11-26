@@ -157,31 +157,48 @@ export default {
             .once('value')
             .then((data) => {
                 this.storesLoading = true;
-                const filtered = [];
+
+                const validStores = [];
                 const stores = [];
                 const arrayObj = data.val();
+
                 for (let key in arrayObj) {
                     stores.push({
-                        storeBanner: arrayObj[key].storeProfile.storeBanner,
-                        storeBio: arrayObj[key].storeProfile.storeBio,
-                        storeEmail: arrayObj[key].storeProfile.storeEmail,
-                        storeId: arrayObj[key].storeProfile.storeId,
-                        storeLocation: arrayObj[key].storeProfile.storeLocation,
-                        storeLogo: arrayObj[key].storeProfile.storeLogo,
-                        storeName: arrayObj[key].storeProfile.storeName,
-                        storeOwnerImage:
-                            arrayObj[key].storeProfile.storeOwnerImage,
-                        storePhoneNumber:
-                            arrayObj[key].storeProfile.storePhoneNumber
+                        data: arrayObj[key]
                     });
                 }
 
-                // remove all stores that do not meet minimum store requirements
-                const filteredStores = stores.filter((res) => {
-                    return res.storeBanner !== undefined;
+                // remove any key that is not
+                const filtered = stores.filter((res) => {
+                    return res.data.storeProfile;
                 });
 
-                this.stores = filteredStores;
+                // remove all stores that do not meet minimum store requirements
+                const valid = filtered.filter((res) => {
+                    return res.data.storeProfile.storeBanner !== undefined;
+                });
+
+                // loop through the filtered data and push valid data to validstore array
+                for (let key in valid) {
+                    validStores.push({
+                        storeBanner: valid[key].data.storeProfile.storeBanner,
+                        storeBio: valid[key].data.storeProfile.storeBio,
+                        storeEmail: valid[key].data.storeProfile.storeEmail,
+                        storeId: valid[key].data.storeProfile.storeId,
+                        storeLocation:
+                            valid[key].data.storeProfile.storeLocation,
+                        storeLogo: valid[key].data.storeProfile.storeLogo,
+                        storeName: valid[key].data.storeProfile.storeName,
+                        storeOwnerImage:
+                            valid[key].data.storeProfile.storeOwnerImage,
+                        storePhoneNumber:
+                            valid[key].data.storeProfile.storePhoneNumber
+                    });
+                }
+
+                console.log(`StoreCategories.vue - 179 - 😊`, filtered);
+
+                this.stores = validStores;
                 this.storesLoading = false;
             })
             .catch((error) => {

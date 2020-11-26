@@ -263,7 +263,7 @@
         <!-- Add event dialog end -->
 
         <!-- Pop up -->
-        <v-sheet height="600">
+        <v-sheet height="900px">
             <v-calendar
                 ref="calendar"
                 v-model="focus"

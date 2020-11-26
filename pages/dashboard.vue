@@ -30,10 +30,6 @@
                         </div>
                     </div>
 
-                    <!-- Messages -->
-                    <!-- <Messages class="mb-5" /> -->
-                    <!-- Messages -->
-
                     <div>
                         <h2 class="header-title mt-0 mb-5">Services</h2>
                         <!-- ManageServices -->
@@ -43,6 +39,13 @@
                         <!-- ManageServices -->
                         <ManageServices v-else />
                         <!-- ManageServices -->
+                    </div>
+
+                    <div>
+                        <h2 class="header-title mt-5 mb-5">Messages</h2>
+                        <!-- Messages -->
+                        <Messages class="mb-5" />
+                        <!-- Messages -->
                     </div>
                 </div>
                 <div class="col-xl-8">
