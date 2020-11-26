@@ -28,13 +28,8 @@
                     <!-- Personal-Information -->
 
                     <!-- Messages -->
-                    <Messages />
+                    <Messages class="mb-5" />
                     <!-- Messages -->
-                </div>
-                <div class="col-xl-8">
-                    <!-- StoreSummary -->
-                    <StoreSummary />
-                    <!-- StoreSummary -->
 
                     <div>
                         <!-- ManageServices -->
@@ -45,12 +40,24 @@
                         <ManageServices v-else />
                         <!-- ManageServices -->
                     </div>
+                </div>
+                <div class="col-xl-8">
+                    <!-- StoreSummary -->
+                    <StoreSummary />
+                    <!-- StoreSummary -->
 
-                    <div v-if="!loading">
+                    <!-- <div v-if="!loading">
                         <Scheduling class="services" />
-                        <!-- <UpcomingEvents /> -->
-                    </div>
+                        <UpcomingEvents />
+                    </div> -->
 
+                    <v-card elevation="2">
+                        <Calendar class="mb-5" />
+                    </v-card>
+
+                    <v-card elevation="2">
+                        <Bookings />
+                    </v-card>
                     <!-- <v-card elevation="2">
                             <UpcomingEvents />
                         </v-card> -->

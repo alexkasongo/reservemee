@@ -1,5 +1,5 @@
 <template>
-    <div class="container margin">
+    <div>
         <v-data-table
             :headers="headers"
             :items="desserts"
