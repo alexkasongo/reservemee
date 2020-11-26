@@ -1,29 +1,32 @@
 <template>
     <div v-if="user" class="content">
         <!-- Header -->
-        <div>
+        <div class="container">
             <Header class="mb-5" />
         </div>
         <!-- Header End-->
 
-        <section class="global">
+        <section class="container">
             <div class="row">
                 <div class="col-xl-4">
-                    <!-- Personal-Information -->
-                    <BusinessInfo />
-                    <!-- Personal-Information -->
-                    <div v-if="user">
-                        <div>
-                            <div v-if="categories.length <= 0">
-                                <!-- CategoryCheck -->
-                                <CategoryCheck />
-                                <!-- CategoryCheck -->
+                    <div>
+                        <h2 class="header-title mt-0 mb-5">Todos</h2>
+                        <!-- Personal-Information -->
+                        <BusinessInfo />
+                        <!-- Personal-Information -->
+                        <div v-if="user">
+                            <div>
+                                <div v-if="categories.length <= 0">
+                                    <!-- CategoryCheck -->
+                                    <CategoryCheck />
+                                    <!-- CategoryCheck -->
+                                </div>
                             </div>
-                        </div>
-                        <div v-if="!user.emailVerified" class="w-100">
-                            <!-- EmailVerified -->
-                            <EmailVerified />
-                            <!-- EmailVerified -->
+                            <div v-if="!user.emailVerified" class="w-100">
+                                <!-- EmailVerified -->
+                                <EmailVerified />
+                                <!-- EmailVerified -->
+                            </div>
                         </div>
                     </div>
 
@@ -32,6 +35,7 @@
                     <!-- Messages -->
 
                     <div>
+                        <h2 class="header-title mt-0 mb-5">Services</h2>
                         <!-- ManageServices -->
                         <ManageServices v-if="categories.length !== 0" />
                         <!-- ManageServices -->
@@ -55,9 +59,10 @@
                         <Calendar class="mb-5" />
                     </v-card>
 
-                    <v-card elevation="2">
+                    <!-- <v-card elevation="2">
                         <Bookings />
-                    </v-card>
+                    </v-card> -->
+
                     <!-- <v-card elevation="2">
                             <UpcomingEvents />
                         </v-card> -->

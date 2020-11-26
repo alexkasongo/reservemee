@@ -1,7 +1,7 @@
 <template>
     <!-- BusinessInfo -->
     <div class="mb-5">
-        <h4 class="header-title mt-0">Store Bio</h4>
+        <!-- <h4 class="header-title mt-0">Store Bio</h4> -->
         <div v-if="storeProfile !== null" class="panel-body">
             <p class="text-muted font-13">{{ storeProfile.storeBio }}</p>
             <hr />
