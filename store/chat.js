@@ -30,6 +30,10 @@ export const actions = {
     currentMessage: function (context, payload) {
         this.commit('CURRENT_MESSAGE', payload)
     },
+    /*
+    ** CHAT
+    ** FIXME new messages should get added to the users collections
+    */
     async addMsg({ commit }, payload) {
 
         const message = {
