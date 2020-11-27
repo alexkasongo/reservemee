@@ -150,6 +150,7 @@ export default {
     created() {
         /*
          ** Load all stores
+         ** REVIEW There should be a better way to consume the data below.
          */
         firebase
             .database()
