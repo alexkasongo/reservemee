@@ -47,7 +47,8 @@ exports.setAdmin = functions.https.onCall(async (data, context) => {
     try {
         var _ = await admin.auth().setCustomUserClaims(data.uid, data.role)
 
-        return db.collection("roles").doc(data.uid).update({
+        return db.collection("roles").doc(data.uid).set({
+            email: data.email,
             role: data.role
         })
 

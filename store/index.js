@@ -89,10 +89,11 @@ export const actions = {
             .createUserWithEmailAndPassword(user.email, user.password)
             .then((response) => {
                 if (response) {
-                    const data = { uid: response.user.uid, role: user.role };
+                    const data = { uid: response.user.uid, role: user.role, email: user.email };
                     const setAdmin = firebase.functions().httpsCallable("setAdmin");
                     setAdmin(data)
                         .then((result) => {
+                            commit('loaders/SET_LOADING', true, { root: true });
                             if (result) {
                                 response.user
                                     .updateProfile({
@@ -106,7 +107,7 @@ export const actions = {
                                     showConfirmButton: true,
                                     timer: 60000
                                 });
-                                commit('loaders/SET_LOADING', false, { root: true });
+                                // commit('loaders/SET_LOADING', false, { root: true });
                             } else {
                                 this.$swal({
                                     toast: true,
@@ -116,7 +117,6 @@ export const actions = {
                                     showConfirmButton: true,
                                     timer: 60000
                                 });
-                                commit('loaders/SET_LOADING', false, { root: true });
                             }
                         })
                         .then(() => {
@@ -130,6 +130,7 @@ export const actions = {
                                     this.$router.push('/signin');
                                 });
                         })
+                    commit('loaders/SET_LOADING', false, { root: true });
                 }
             })
             .catch((error) => {
