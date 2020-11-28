@@ -41,7 +41,8 @@ export default {
         '~/plugins/firebase.js',
         '~plugins/filters.js',
         { src: '~/plugins/localStorage.js', ssr: false },
-        { src: '~/plugins/vueSplide.js', ssr: false }
+        { src: '~/plugins/vueSplide.js', ssr: false },
+        { src: '~/plugins/vee-validate.js', ssr: true },
     ],
     /*
      ** Router Settings
@@ -80,5 +81,7 @@ export default {
      ** Build configuration
      ** See https://nuxtjs.org/api/configuration-build/
      */
-    build: {}
+    build: {
+        transpile: ["vee-validate/dist/rules"],
+    }
 };
