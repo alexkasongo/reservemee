@@ -197,8 +197,6 @@ export default {
                     });
                 }
 
-                console.log(`StoreCategories.vue - 179 - 😊`, filtered);
-
                 this.stores = validStores;
                 this.storesLoading = false;
             })

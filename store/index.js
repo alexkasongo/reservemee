@@ -42,7 +42,7 @@ export const actions = {
         commit('LOADED_USER_ID', payload);
     },
     async signup({ commit }, user) {
-        commit('loaders/SET_LOADING', true, { root: true });
+        // commit('loaders/SET_LOADING', true, { root: true });
         await firebase
             .auth()
             .createUserWithEmailAndPassword(user.email, user.password)
@@ -52,6 +52,7 @@ export const actions = {
                         .updateProfile({
                             displayName: user.name
                         }).then(() => {
+                            commit('loaders/SET_LOADING', true, { root: true });
                             firebase
                                 .auth()
                                 .signOut()
@@ -59,11 +60,13 @@ export const actions = {
                                     this.user = '';
                                     window.localStorage.removeItem('email');
                                     window.localStorage.removeItem('vuex');
+                                })
+                                .then(() => {
                                     this.$router.push('/signin');
-                                });
-                            commit('loaders/SET_LOADING', false, { root: true });
+                                })
                         })
                         .then(() => {
+                            // commit('loaders/SET_LOADING', false, { root: true });
                             this.$swal({
                                 toast: true,
                                 position: 'top-end',
@@ -84,16 +87,20 @@ export const actions = {
     },
     async signupAdmin({ commit }, user) {
         commit('loaders/SET_LOADING', true, { root: true });
-        await firebase
+        console.log(`index.js - 87 - variable`, user);
+        firebase
             .auth()
             .createUserWithEmailAndPassword(user.email, user.password)
             .then((response) => {
+                console.log(`index.js - 92 - Response >>>`, response);
                 if (response) {
-                    const data = { uid: response.user.uid, role: user.role, email: user.email };
+                    const data = {
+                        uid: response.user.uid,
+                        role: user.role, email: user.email
+                    };
                     const setAdmin = firebase.functions().httpsCallable("setAdmin");
                     setAdmin(data)
                         .then((result) => {
-                            commit('loaders/SET_LOADING', true, { root: true });
                             if (result) {
                                 response.user
                                     .updateProfile({
@@ -118,6 +125,7 @@ export const actions = {
                                     timer: 60000
                                 });
                             }
+                            // console.log(`index.js - 125 - WHO WOULD HAVE THOUGHT`);
                         })
                         .then(() => {
                             firebase
@@ -128,11 +136,19 @@ export const actions = {
                                     window.localStorage.removeItem('email');
                                     window.localStorage.removeItem('vuex');
                                     this.$router.push('/signin');
+                                    // console.log(`index.js - 144 - OUTLIER`);
+                                    commit('loaders/SET_LOADING', false, { root: true });
                                 });
                         })
-                    commit('loaders/SET_LOADING', false, { root: true });
+                    // .then(() => {
+                    //     console.log(`index.js - 144 - EGG`);
+                    // })
+
                 }
             })
+            // .then(() => {
+            //     console.log(`index.js - 144 - CHICKEN`);
+            // })
             .catch((error) => {
                 commit('ERRORS', error);
                 commit('loaders/SET_LOADING', false, { root: true });

@@ -40,6 +40,7 @@ exports.addUserRole = functions.auth.user().onCreate(async (authUser) => {
 
 // create admin user on signup
 exports.setAdmin = functions.https.onCall(async (data, context) => {
+    console.log(`index.js - 43 - ❤️`, data);
 
     // if (!context.auth.token.admin) return
     if (!context.auth.token) return
@@ -48,7 +49,6 @@ exports.setAdmin = functions.https.onCall(async (data, context) => {
         var _ = await admin.auth().setCustomUserClaims(data.uid, data.role)
 
         return db.collection("roles").doc(data.uid).set({
-            email: data.email,
             role: data.role
         })
 

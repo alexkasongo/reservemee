@@ -38,9 +38,6 @@ export default {
         StoreBanner,
         SideBar,
         StoreCategories
-    },
-    mounted() {
-        console.log(`store.vue - 43 - 🍎 `);
     }
 };
 </script>
