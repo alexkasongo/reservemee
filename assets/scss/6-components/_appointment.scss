@@ -6,8 +6,11 @@
     }
     // LEFT
     &__left {
-        width: 30%;
+        width: 100%;
         padding: 0 50px 0 0;
+        @media (min-width: $large-desktop) {
+            width: 30%;
+        }
     }
     &__working-hours {
         display: flex;
@@ -17,8 +20,12 @@
 
     // RIGHT
     &__right {
-        width: 70%;
+        width: 100%;
         margin: 0 0 100px 0;
+        @media (min-width: $large-desktop) {
+            width: 70%;
+        }
+        
     }
     &__calendar {
         margin: 0 0 50px 0;
