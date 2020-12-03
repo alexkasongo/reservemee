@@ -263,7 +263,7 @@
         <!-- Add event dialog end -->
 
         <!-- Pop up -->
-        <v-sheet height="900px">
+        <v-sheet height="500px">
             <v-calendar
                 ref="calendar"
                 v-model="focus"
@@ -324,10 +324,7 @@
                                             min-width="290px"
                                         >
                                             <template
-                                                v-slot:activator="{
-                                                    on,
-                                                    attrs
-                                                }"
+                                                v-slot:activator="{ on, attrs }"
                                             >
                                                 <v-text-field
                                                     v-model="startDate"
@@ -381,10 +378,7 @@
                                             min-width="290px"
                                         >
                                             <template
-                                                v-slot:activator="{
-                                                    on,
-                                                    attrs
-                                                }"
+                                                v-slot:activator="{ on, attrs }"
                                             >
                                                 <v-text-field
                                                     v-model="startTime"
@@ -425,10 +419,7 @@
                                             min-width="290px"
                                         >
                                             <template
-                                                v-slot:activator="{
-                                                    on,
-                                                    attrs
-                                                }"
+                                                v-slot:activator="{ on, attrs }"
                                             >
                                                 <v-text-field
                                                     v-model="endDate"
@@ -480,10 +471,7 @@
                                             min-width="290px"
                                         >
                                             <template
-                                                v-slot:activator="{
-                                                    on,
-                                                    attrs
-                                                }"
+                                                v-slot:activator="{ on, attrs }"
                                             >
                                                 <v-text-field
                                                     v-model="endTime"
