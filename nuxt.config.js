@@ -70,13 +70,19 @@ export default {
         // Doc: https://axios.nuxtjs.org/usage
         '@nuxtjs/axios',
         // sweet water notifications
-        'vue-sweetalert2/nuxt'
+        'vue-sweetalert2/nuxt',
+        // expose localhost to the internet
+        '@nuxtjs/ngrok',
     ],
     /*
      ** Axios module configuration
      ** See https://axios.nuxtjs.org/options
      */
     axios: {},
+    ngrok: {
+        // module options
+        ngrokauth: process.env.NGROK_AUTH
+    },
     /*
      ** Build configuration
      ** See https://nuxtjs.org/api/configuration-build/
