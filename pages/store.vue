@@ -26,7 +26,7 @@
 </template>
 
 <script>
-// import StoreBanner from '@/components/client/StoreBanner';
+import StoreBanner from '@/components/client/StoreBanner';
 import SideBar from '@/components/client/SideBar';
 import StoreCategories from '@/components/client/StoreCategories';
 
@@ -35,7 +35,7 @@ export default {
         icons: ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram']
     }),
     components: {
-        // StoreBanner,
+        StoreBanner,
         SideBar,
         StoreCategories
     }
