@@ -10,7 +10,18 @@
             <div class="row">
                 <div class="col-xl-4">
                     <div>
-                        <h2 class="header-title mt-0 mb-5">Todos</h2>
+                        <div v-if="user">
+                            <h2
+                                v-if="
+                                    categories.length <= 0 ||
+                                    !user.emailVerified ||
+                                    categories.length !== 0
+                                "
+                                class="header-title mt-0 mb-5"
+                            >
+                                Todos
+                            </h2>
+                        </div>
                         <!-- Personal-Information -->
                         <BusinessInfo />
                         <!-- Personal-Information -->
