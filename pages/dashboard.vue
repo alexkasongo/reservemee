@@ -42,17 +42,6 @@
                     </div>
 
                     <div>
-                        <h2 class="header-title mt-0 mb-5">Services</h2>
-                        <!-- ManageServices -->
-                        <ManageServices v-if="categories.length !== 0" />
-                        <!-- ManageServices -->
-
-                        <!-- ManageServices -->
-                        <ManageServices v-else />
-                        <!-- ManageServices -->
-                    </div>
-
-                    <div>
                         <h2 class="header-title mt-5 mb-5">Messages</h2>
                         <!-- Messages -->
                         <Messages class="mb-5" />
@@ -68,14 +57,21 @@
                         <Scheduling class="services" />
                         <UpcomingEvents />
                     </div> -->
-
+                    <h2 class="header-title mt-0 mb-5">Calendar</h2>
                     <v-card elevation="2">
                         <Calendar class="mb-5" />
                     </v-card>
 
-                    <!-- <v-card elevation="2">
-                        <Bookings />
-                    </v-card> -->
+                    <div>
+                        <h2 class="header-title mt-0 mb-5">Services</h2>
+                        <!-- ManageServices -->
+                        <ManageServices v-if="categories.length !== 0" />
+                        <!-- ManageServices -->
+
+                        <!-- ManageServices -->
+                        <ManageServices v-else />
+                        <!-- ManageServices -->
+                    </div>
 
                     <!-- <v-card elevation="2">
                             <UpcomingEvents />
