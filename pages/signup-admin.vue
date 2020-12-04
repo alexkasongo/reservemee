@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div v-if="loading">
+        <!-- <div v-if="loading">
             <p>Loading...</p>
-        </div>
+        </div> -->
         <div class="signup">
             <div class="signup__left"></div>
             <div class="signup__right">
                 <div v-if="!loading" class="col-6">
-                    <div class="caption">Test</div>
+                    <div class="h1">Admin Signup</div>
                     <validation-observer ref="observer" v-slot="{ invalid }">
                         <form @submit.prevent="onSubmit">
                             <!-- Name -->
@@ -64,6 +64,7 @@
                             <v-btn
                                 class="mr-4"
                                 type="submit"
+                                :loading="loading"
                                 :disabled="invalid"
                             >
                                 submit

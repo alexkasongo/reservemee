@@ -41,66 +41,70 @@ export const actions = {
     async loadUserId({ commit }, payload) {
         commit('LOADED_USER_ID', payload);
     },
-    async signup({ commit }, user) {
+    signup({ commit }, user) {
         commit('loaders/SET_LOADING', true, { root: true });
-        await firebase
-            .auth()
-            .createUserWithEmailAndPassword(user.email, user.password)
-            .then((response) => {
-                console.log(`index.js - 92 - Response >>>`, response);
-                if (response) {
-                    const data = {
-                        uid: response.user.uid,
-                        role: user.role, email: user.email
-                    };
-                    const setAdmin = firebase.functions().httpsCallable("addUserRole");
-                    setAdmin(data)
-                        .then((result) => {
-                            if (result) {
-                                response.user
-                                    .updateProfile({
-                                        displayName: user.name
-                                    })
-                                this.$swal({
-                                    toast: true,
-                                    position: 'top-end',
-                                    icon: 'success',
-                                    title: 'Account created. Go ahead and signin.',
-                                    showConfirmButton: true,
-                                    timer: 60000
-                                });
-                            } else {
-                                this.$swal({
-                                    toast: true,
-                                    position: 'top-end',
-                                    icon: 'fail',
-                                    title: 'Account failed to create. Try again.',
-                                    showConfirmButton: true,
-                                    timer: 60000
-                                });
-                            }
-                        })
-                        .then(() => {
-                            firebase
-                                .auth()
-                                .signOut()
-                                .then(() => {
-                                    commit('LOADED_USER', '')
-                                    commit('loaders/SET_LOADING', false, { root: true });
-                                })
-                                .then(() => {
-                                    this.$router.push('/signin');
-                                    window.localStorage.removeItem('email');
-                                    window.localStorage.removeItem('vuex');
-                                })
-                        })
+        // firebase
+        //     .auth()
+        //     .createUserWithEmailAndPassword(user.email, user.password)
+        //     .then((response) => {
+        //         console.log(`index.js - 92 - 💜 1`, response);
+        //         if (response) {
+        //             const data = {
+        //                 uid: response.user.uid,
+        //                 role: user.role, email: user.email
+        //             };
+        //             const setAdmin = firebase.functions().httpsCallable("addUserRole");
+        //             setAdmin(data)
+        //                 .then((result) => {
+        //                     commit('loaders/SET_LOADING', true, { root: true });
+        //                     console.log(`index.js - 92 - 🐣 2`, result);
+        //                     if (result) {
+        //                         response.user
+        //                             .updateProfile({
+        //                                 displayName: user.name
+        //                             })
+        //                         this.$swal({
+        //                             toast: true,
+        //                             position: 'top-end',
+        //                             icon: 'success',
+        //                             title: 'Account created. Go ahead and signin.',
+        //                             showConfirmButton: true,
+        //                             timer: 60000
+        //                         });
+        //                         this.$router.push('/signin');
+        //                         commit('loaders/SET_LOADING', false, { root: true });
+        //                     } else {
+        //                         this.$swal({
+        //                             toast: true,
+        //                             position: 'top-end',
+        //                             icon: 'fail',
+        //                             title: 'Account failed to create. Try again.',
+        //                             showConfirmButton: true,
+        //                             timer: 60000
+        //                         });
+        //                     }
+        //                 })
+        //                 .then(() => {
+        //                     firebase
+        //                         .auth()
+        //                         .signOut()
+        //                         .then(() => {
+        //                             console.log(`index.js - 92 - 🥚 3`);
+        //                             commit('LOADED_USER', '')
+        //                         })
+        //                         .then(() => {
+        //                             console.log(`index.js - 92 - 🐏 4`);
+        //                             window.localStorage.removeItem('email');
+        //                             window.localStorage.removeItem('vuex');
+        //                         })
+        //                 })
 
-                }
-            })
-            .catch((error) => {
-                commit('ERRORS', error);
-                commit('loaders/SET_LOADING', false, { root: true });
-            });
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         commit('ERRORS', error);
+        //         commit('loaders/SET_LOADING', false, { root: true });
+        //     });
 
 
     },
@@ -133,6 +137,8 @@ export const actions = {
                                     showConfirmButton: true,
                                     timer: 60000
                                 });
+                                this.$router.push('/signin');
+                                commit('loaders/SET_LOADING', false, { root: true });
                             } else {
                                 this.$swal({
                                     toast: true,
@@ -150,7 +156,6 @@ export const actions = {
                                 .signOut()
                                 .then(() => {
                                     commit('LOADED_USER', '')
-                                    commit('loaders/SET_LOADING', false, { root: true });
                                 })
                                 .then(() => {
                                     this.$router.push('/signin');

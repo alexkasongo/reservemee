@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div v-if="loading">
+        <!-- <div v-if="loading">
             <p>Loading...</p>
-        </div>
+        </div> -->
         <div class="signup">
             <div class="signup__left"></div>
             <div class="signup__right">
@@ -63,6 +63,7 @@
                             <v-btn
                                 class="mr-4"
                                 type="submit"
+                                :loading="loading"
                                 :disabled="invalid"
                             >
                                 submit
