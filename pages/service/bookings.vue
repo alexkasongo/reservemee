@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <v-data-table
             :headers="headers"
             :items="desserts"

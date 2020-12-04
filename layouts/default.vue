@@ -256,7 +256,7 @@
                                     >
                                 </v-list-item-content>
                             </v-list-item>
-                            <v-list-item
+                            <!-- <v-list-item
                                 v-if="role.admin"
                                 @click="goToCalendar"
                                 link
@@ -270,7 +270,7 @@
                                         >Calendar</v-list-item-title
                                     >
                                 </v-list-item-content>
-                            </v-list-item>
+                            </v-list-item> -->
                         </div>
 
                         <div v-if="!user">
