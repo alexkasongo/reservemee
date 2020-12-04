@@ -71,6 +71,7 @@ export const actions = {
                                     showConfirmButton: true,
                                     timer: 60000
                                 });
+                                commit('loaders/SET_LOADING', false, { root: true });
                                 this.$router.push('/store');
                             } else {
                                 this.$swal({
@@ -108,6 +109,7 @@ export const actions = {
                     const setAdmin = firebase.functions().httpsCallable("setAdmin");
                     setAdmin(data)
                         .then((result) => {
+
                             if (result) {
                                 response.user
                                     .updateProfile({
@@ -121,7 +123,6 @@ export const actions = {
                                     showConfirmButton: true,
                                     timer: 60000
                                 });
-                                this.$router.push('/signin');
                                 commit('loaders/SET_LOADING', false, { root: true });
                             } else {
                                 this.$swal({
@@ -142,6 +143,7 @@ export const actions = {
                                     commit('LOADED_USER', '')
                                 })
                                 .then(() => {
+                                    this.$router.push('/signin');
                                     window.localStorage.removeItem('email');
                                     window.localStorage.removeItem('vuex');
                                 })
