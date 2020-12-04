@@ -71,8 +71,7 @@ export const actions = {
                                     showConfirmButton: true,
                                     timer: 60000
                                 });
-                                this.$router.push('/signin');
-                                commit('loaders/SET_LOADING', false, { root: true });
+                                this.$router.push('/store');
                             } else {
                                 this.$swal({
                                     toast: true,
@@ -84,21 +83,6 @@ export const actions = {
                                 });
                             }
                         })
-                        .then(() => {
-                            firebase
-                                .auth()
-                                .signOut()
-                                .then(() => {
-                                    console.log(`index.js - 92 - 🥚 3`);
-                                    commit('LOADED_USER', '')
-                                })
-                                .then(() => {
-                                    console.log(`index.js - 92 - 🐏 4`);
-                                    window.localStorage.removeItem('email');
-                                    window.localStorage.removeItem('vuex');
-                                })
-                        })
-
                 }
             })
             .catch((error) => {
@@ -158,7 +142,6 @@ export const actions = {
                                     commit('LOADED_USER', '')
                                 })
                                 .then(() => {
-                                    this.$router.push('/signin');
                                     window.localStorage.removeItem('email');
                                     window.localStorage.removeItem('vuex');
                                 })
