@@ -398,15 +398,25 @@ export const actions = {
                 displayName: payload.name,
             })
                 .then(() => {
+                    firebase
+                        .database()
+                        .ref('users/' + payload.userId)
+                        .child('storeProfile/')
+                        .update({
+                            // this allows the store to display properly on the store page!
+                            storeId: payload.userId,
+                        })
+                })
+                .then(() => {
                     // Update successful.
-                    this.$swal({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Saved',
-                        showConfirmButton: false,
-                        timer: 2500
-                    });
+                    // this.$swal({
+                    //     toast: true,
+                    //     position: 'top-end',
+                    //     icon: 'success',
+                    //     title: 'Saved',
+                    //     showConfirmButton: false,
+                    //     timer: 2500
+                    // });
                     commit('loaders/SET_SNACKBAR', true, { root: true })
                     commit('loaders/SET_LOADING', false, { root: true });
                 })

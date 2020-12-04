@@ -142,7 +142,6 @@ export default {
                 name: 'store-front-id',
                 params: {
                     id: store.storeId
-                    // name: store.storeName
                 }
             });
         }
