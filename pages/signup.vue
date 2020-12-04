@@ -6,7 +6,8 @@
         <div class="signup">
             <div class="signup__left"></div>
             <div class="signup__right">
-                <div v-if="!loading" class="col-6">
+                <div class="col-6">
+                    <div class="h1">Customer Signup</div>
                     <validation-observer ref="observer" v-slot="{ invalid }">
                         <form @submit.prevent="onSubmit">
                             <!-- Name -->
@@ -136,7 +137,9 @@ export default {
                     customer: true
                 }
             };
+            console.log(`signup.vue - 131 - 🥶`, signupDetails);
             this.signup(signupDetails);
+            this.clear;
         },
         // Vee Validate
         submit() {

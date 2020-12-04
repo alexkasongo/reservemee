@@ -2,7 +2,8 @@
     <div class="signin">
         <div class="signin__left"></div>
         <div class="signin__right">
-            <div v-if="!loading" class="col-6">
+            <div class="col-6">
+                <div class="h1">Signin</div>
                 <validation-observer ref="observer" v-slot="{ invalid }">
                     <form @submit.prevent="onSubmit">
                         <!-- Email -->
@@ -41,7 +42,12 @@
                         </div>
                         <!-- ERRORS END -->
                         <!-- Submit Button -->
-                        <v-btn class="mr-4" type="submit" :disabled="invalid">
+                        <v-btn
+                            class="mr-4"
+                            type="submit"
+                            :loading="loading"
+                            :disabled="invalid"
+                        >
                             signin
                         </v-btn>
                         <v-btn @click="clear"> clear </v-btn>
