@@ -7,19 +7,28 @@
     */
     &__left {
         // height: 100vh;
-        width: 65%;
+        width: 100%;
         margin: 0 50px 0 0;
+        @media (min-width: $large-desktop) {
+            width: 65%;
+        }
     }
     &__left-banner {
         margin: 0 0 30px 0;
     }
-    &__left-card {}
     &__left-service-img {
         height: 200px;
-        width: 500px;
+        width: 100px;
         object-fit: cover;
         border-top-right-radius: 24px;
         border-bottom-right-radius: 24px;
+        @media (min-width: $tablet) {
+            height: 200px;
+            width: 500px;
+            object-fit: cover;
+            border-top-right-radius: 24px;
+            border-bottom-right-radius: 24px;
+        }
     }
     // LEFT END
 

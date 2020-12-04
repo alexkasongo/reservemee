@@ -63,13 +63,22 @@
         @media (min-width: $tablet) {
             grid-template-columns: 1fr 1fr ;
         }
+        @media (min-width: $small-desktop) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
         @media (min-width: $large-desktop) {
             grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+        @media (min-width: $x-large-desktop) {
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        }
+        @media (min-width: $xx-large-desktop) {
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
         }
     
     }
     &__new-store {
-        height: 180px;
+        height: 390px;
         background-color: lightcoral;
         background-size: cover;
         background-position: center;

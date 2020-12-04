@@ -130,7 +130,10 @@ export default {
             let signupDetails = {
                 name: this.name,
                 email: this.email,
-                password: this.password
+                password: this.password,
+                role: {
+                    customer: true
+                }
             };
             this.signup(signupDetails);
         },

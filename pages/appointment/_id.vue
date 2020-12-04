@@ -85,6 +85,12 @@
                     <div class="side-menu-itm">
                         <p class="your-inf">Your info</p>
                     </div>
+                    <div>
+                        <h2 class="header-title">Messages</h2>
+                        <!-- Messages -->
+                        <Messages />
+                        <!-- Messages -->
+                    </div>
                 </div>
             </div>
             <!-- END: SIDEBAR-->
@@ -172,10 +178,12 @@
 
 <script>
 import Calendar from '@/components/Calendar';
+import Messages from '@/components/chat/Messages';
 import { mapGetters } from 'vuex';
 
 export default {
     components: {
+        Messages,
         Calendar
     },
     data: () => ({

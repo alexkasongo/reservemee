@@ -1,6 +1,6 @@
 <template>
     <!-- Header -->
-    <div class="container">
+    <div>
         <!-- IF PROFILE EXISTS -->
         <div
             v-if="storeProfile !== null && Object.keys(storeProfile).length > 1"

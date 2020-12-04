@@ -1215,8 +1215,6 @@ export default {
             this.loadUserIdData(this.user.uid);
         }
 
-        console.log(`dashboard.vue - 129 - 🥶`, loadedUserData);
-
         // if logo does not exist do not disply it's containers
         let logoState = null;
         this.userInfo.forEach((res) => {

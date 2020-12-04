@@ -442,8 +442,11 @@ export default {
                 .auth()
                 .signOut()
                 .then(() => {
-                    window.localStorage.removeItem('email');
-                    window.localStorage.removeItem('vuex');
+                    // window.localStorage.removeItem('email');
+                    // window.localStorage.removeItem('vuex');
+                    // localStorage.clear('vuex');
+                })
+                .then(() => {
                     this.user = '';
                     this.$router.push('/');
                 });
@@ -516,6 +519,7 @@ export default {
             } else {
                 // No user is signed in.
                 window.localStorage.removeItem('vuex');
+                localStorage.clear();
             }
         });
     }

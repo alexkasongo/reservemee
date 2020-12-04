@@ -16,38 +16,59 @@ const db = admin.firestore()
 // trigger function on new user creation.
 // when a new user is created this fucntion is triggered. When triggered a defualt 
 // data object is pushed to the roles collection, this object contains the user's role status
-exports.addUserRole = functions.auth.user().onCreate(async (authUser) => {
+// exports.addUserRole = functions.auth.user().onCreate(async (authUser) => {
 
-    if (authUser.email) {
-        const customClaims = {
-            customer: true,
-        };
-        try {
-            var _ = await admin.auth().setCustomUserClaims(authUser.uid, customClaims)
+//     if (authUser.email) {
+//         const customClaims = {
+//             customer: true,
+//         };
+//         try {
+//             var _ = await admin.auth().setCustomUserClaims(authUser.uid, customClaims)
 
-            return db.collection("roles").doc(authUser.uid).set({
-                email: authUser.email,
-                role: customClaims
-            })
+//             return db.collection("roles").doc(authUser.uid).set({
+//                 email: authUser.email,
+//                 role: customClaims
+//             })
 
-        } catch (error) {
-            console.log('🤡', error)
-        }
+//         } catch (error) {
+//             console.log('🤡', error)
+//         }
 
 
-    }
-});
+//     }
+// });
 
 // create admin user on signup
-exports.setAdmin = functions.https.onCall(async (data, context) => {
+exports.addUserRole = functions.https.onCall(async (data, context) => {
 
     // if (!context.auth.token.admin) return
-    if (!context.auth.token) return
+    if (!context.auth) return
 
     try {
         var _ = await admin.auth().setCustomUserClaims(data.uid, data.role)
 
-        return db.collection("roles").doc(data.uid).update({
+        return db.collection("roles").doc(data.uid).set({
+            email: data.email,
+            role: data.role
+        })
+
+    } catch (error) {
+        console.log('🤡', error)
+    }
+
+});
+// create admin user on signup
+exports.setAdmin = functions.https.onCall(async (data, context) => {
+    console.log(`index.js - 43 - ❤️`, data);
+
+    // if (!context.auth.token.admin) return
+    if (!context.auth) return
+
+    try {
+        var _ = await admin.auth().setCustomUserClaims(data.uid, data.role)
+
+        return db.collection("roles").doc(data.uid).set({
+            email: data.email,
             role: data.role
         })
 

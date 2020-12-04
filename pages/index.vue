@@ -32,6 +32,12 @@
                                         >
                                             Get started!
                                         </button>
+                                        <button
+                                            @click="clearStorage"
+                                            class="btn btn-block btn-lg btn-dark"
+                                        >
+                                            Clear Storage!
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -353,6 +359,10 @@ export default {
         onSubmit() {
             localStorage.setItem('email', this.email);
             this.$router.push('/signup');
+        },
+        clearStorage() {
+            localStorage.clear();
+            console.log(`index.vue - 364 - 🥶`);
         }
     }
 };

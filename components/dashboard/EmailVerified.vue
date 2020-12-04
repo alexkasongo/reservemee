@@ -2,7 +2,7 @@
     <!-- EmailVerified -->
     <!-- FIXME move email verificaiton logic here -->
     <div class="w-100 mb-5">
-        <v-card class="light-blue lighten-5" elevation="0">
+        <!-- <v-card class="light-blue lighten-5" elevation="0">
             <div class="card-body">
                 <h5 v-if="user">
                     Your email address is not verified {{ user.name }}.
@@ -19,7 +19,17 @@
                     Verify Email
                 </v-btn>
             </div>
-        </v-card>
+        </v-card> -->
+        <v-alert
+            style="cursor: pointer"
+            @click="verifyEmail"
+            icon="mdi-alert-circle-outline"
+            text
+            type="info"
+            ><span v-if="user">
+                Your email address is not verified {{ user.name }}.
+            </span></v-alert
+        >
     </div>
     <!-- EmailVerified -->
 </template>

@@ -7,6 +7,7 @@
             <div class="signup__left"></div>
             <div class="signup__right">
                 <div v-if="!loading" class="col-6">
+                    <div class="caption">Test</div>
                     <validation-observer ref="observer" v-slot="{ invalid }">
                         <form @submit.prevent="onSubmit">
                             <!-- Name -->
