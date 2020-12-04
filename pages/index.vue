@@ -32,12 +32,6 @@
                                         >
                                             Get started!
                                         </button>
-                                        <button
-                                            @click="clearStorage"
-                                            class="btn btn-block btn-lg btn-dark"
-                                        >
-                                            Clear Storage!
-                                        </button>
                                     </div>
                                 </div>
                             </form>

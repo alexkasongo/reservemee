@@ -172,7 +172,6 @@ export default {
         justify-content: center;
         align-items: center;
         width: 65%;
-        // background-color: #00897b;
     }
 }
 </style>
