@@ -5,9 +5,9 @@
         <div class="card">
             <!-- <div class="card" v-if="currentUserMessages"> -->
             <h2 class="deep-purple-text center">
-                {{ this.$route.params.name }}
+                {{ this.sender }}
             </h2>
-            <ul class="comments collection">
+            <!-- <ul class="comments collection">
                 <li v-for="(comment, index) in comments" :key="index">
                     <div class="deep-purple-text">{{ comment.from }}</div>
                     <div class="grey-text text-darken-2">
@@ -28,7 +28,7 @@
                     </p>
                 </div>
                 <v-btn type="submit">Send</v-btn>
-            </form>
+            </form> -->
         </div>
     </div>
 </template>
@@ -42,14 +42,17 @@ export default {
         profile: null,
         newComment: null,
         feedback: null,
-        uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3',
+        // uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3',
         messages: null
     }),
     computed: {
         ...mapGetters({
-            user: 'user',
-            loadedComments: 'chat/comments'
+            user: 'user'
+            // loadedComments: 'chat/comments'
         }),
+        sender() {
+            return this.loadedMessages.messages;
+        },
         currentUserMessages() {
             const messages = this.comments.filter((res) => {
                 return res.userId === this.$route.params.id;
@@ -69,10 +72,14 @@ export default {
             );
             return filtered;
         },
-        ...mapState(['user'])
+        ...mapState({
+            user: 'user',
+            loadedMessages: 'chat'
+        })
     },
     created() {
-        this.$store.dispatch('chat/loadComments', this.uid);
+        this.$store.dispatch('chat/loadComments', this.user.uid);
+        console.log(`_id.vue - 82 - 🌈`, this.loadedMessages);
     },
     methods: {
         //NOTE  this is adding new comment

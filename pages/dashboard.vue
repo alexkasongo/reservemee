@@ -45,7 +45,7 @@
                     <div>
                         <h2 class="header-title mt-5 mb-5">Messages</h2>
                         <!-- Messages -->
-                        <Messages class="mb-5" />
+                        <StoreMessages class="mb-5" />
                         <!-- Messages -->
                     </div>
                 </div>

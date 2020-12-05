@@ -32,39 +32,10 @@
                     </div>
                 </div>
             </div>
-
-            <!-- NEW MESSAGE -->
-            <div class="new-message">
-                <form @submit.prevent="addMessage()">
-                    <label for="new-message">New Message (enter to add):</label>
-                    <p class="red-text" v-if="feedback">{{ feedback }}</p>
-                    <v-text-field
-                        type="text"
-                        name="new-message"
-                        placeholder="type in a message and press enter"
-                        v-model="newMessage"
-                    ></v-text-field>
-                    <v-btn type="submit">Send</v-btn>
-                </form>
-            </div>
-            <!-- NEW MESSAGE END -->
         </div>
         <!--If Messages end-->
 
         <!-- If No Messages -->
-        <!-- <v-card class="mx-auto">
-            <v-list-item three-line>
-                <v-list-item-content>
-                    <v-alert
-                        style="cursor: pointer"
-                        icon="mdi-alert-circle-outline"
-                        text
-                        type="info"
-                        ><span> You have no messages. </span></v-alert
-                    >
-                </v-list-item-content>
-            </v-list-item>
-        </v-card> -->
         <v-list-item-content v-if="!messages">
             <v-alert
                 style="cursor: pointer"
@@ -114,24 +85,24 @@ export default {
                     name: message.name
                 }
             });
-        },
+        }
 
         // NEW MESSAGE
-        addMessage() {
-            if (this.newMessage) {
-                const createdMessage = {
-                    storeId: this.storeProfile.storeId,
-                    userId: this.user.uid,
-                    name: this.user.displayName,
-                    message: this.newMessage
-                };
-                this.$store.dispatch('chat/addMsg', createdMessage);
-                this.newMessage = null;
-                this.feedback = null;
-            } else {
-                this.feedback = 'You must enter a message in order to send one';
-            }
-        }
+        // addMessage() {
+        //     if (this.newMessage) {
+        //         const createdMessage = {
+        //             storeId: this.storeProfile.storeId,
+        //             userId: this.user.uid,
+        //             name: this.user.displayName,
+        //             message: this.newMessage
+        //         };
+        //         this.$store.dispatch('chat/addMsg', createdMessage);
+        //         this.newMessage = null;
+        //         this.feedback = null;
+        //     } else {
+        //         this.feedback = 'You must enter a message in order to send one';
+        //     }
+        // }
         // NEW MESSAGE
     },
     created() {
