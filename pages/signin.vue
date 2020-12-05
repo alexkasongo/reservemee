@@ -2,7 +2,7 @@
     <div class="signin">
         <div class="signin__left"></div>
         <div class="signin__right">
-            <div class="col-6">
+            <div class="signin__right-card">
                 <div class="h1">Signin</div>
                 <validation-observer ref="observer" v-slot="{ invalid }">
                     <form @submit.prevent="onSubmit">
@@ -138,19 +138,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.signin {
-    display: flex;
-    height: 100vh;
-    &__left {
-        width: 35%;
-        background-color: white;
-    }
-    &__right {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 65%;
-        // background-color: #00897b;
-    }
-}
 </style>

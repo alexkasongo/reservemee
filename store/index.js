@@ -93,7 +93,7 @@ export const actions = {
 
 
     },
-    async signupAdmin({ commit }, user) {
+    async signupAdmin({ commit, dispatch }, user) {
         commit('loaders/SET_LOADING', true, { root: true });
         console.log(`index.js - 87 🌦 - variable`, user);
         await firebase
@@ -140,7 +140,7 @@ export const actions = {
                                 .auth()
                                 .signOut()
                                 .then(() => {
-                                    commit('LOADED_USER', '')
+                                    dispatch('removeUserData')
                                 })
                                 .then(() => {
                                     this.$router.push('/signin');
