@@ -22,14 +22,14 @@
                         </div>
                     </div>
 
-                    <div class="inbox-item__left">
+                    <!-- <div class="inbox-item__left">
                         <v-btn
                             @click="viewProfile(message)"
                             class="teal darken-1"
                             dark
                             >Reply</v-btn
                         >
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -121,10 +121,15 @@ export default {
             if (this.newMessage) {
                 const createdMessage = {
                     storeId: this.storeProfile.storeId,
+                    storeEmail: this.storeProfile.storeEmail,
+                    storeName: this.storeProfile.storeName,
+                    storeOwnerImage: this.storeProfile.storeOwnerImage,
+                    storePhoneNumber: this.storeProfile.storePhoneNumber,
                     userId: this.user.uid,
-                    name: this.user.displayName,
+                    name: this.user.name,
                     message: this.newMessage
                 };
+                console.log(`Messages.vue - 132 - 💜`, createdMessage);
                 this.$store.dispatch('chat/addMsg', createdMessage);
                 this.newMessage = null;
                 this.feedback = null;
@@ -135,6 +140,7 @@ export default {
         // NEW MESSAGE
     },
     created() {
+        console.log(`Messages.vue - 138 - 🌙`, this.storeProfile);
         this.$store.dispatch('chat/loadMessages', this.user.uid);
 
         // NEW MESSAGE

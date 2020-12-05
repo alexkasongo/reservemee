@@ -3,7 +3,7 @@ import 'firebase/database';
 
 
 export const state = () => ({
-    messages: '',
+    messages: [],
     comments: [],
 });
 
@@ -41,6 +41,10 @@ export const actions = {
             message: payload.message,
             userId: payload.userId,
             storeId: payload.storeId,
+            storeEmail: payload.storeEmail,
+            storeName: payload.storeName,
+            storeOwnerImage: payload.storeOwnerImage,
+            storePhoneNumber: payload.storePhoneNumber,
             timestamp: Date.now()
         };
 
@@ -55,7 +59,7 @@ export const actions = {
                     ...message,
                     id: key
                 });
-                // commit('SET_SNACKBAR', true)
+                commit('loaders/SET_SNACKBAR', true, { root: true });
                 commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
@@ -92,9 +96,14 @@ export const actions = {
             from: payload.from,
             userId: payload.userId,
             storeId: payload.storeId,
+            storeName: payload.storeName,
+            storePhoneNumber: payload.storePhoneNumber,
+            storeEmail: payload.storeEmail,
+            storeOwnerImage: payload.storeOwnerImage,
             message: payload.message,
             timestamp: Date.now()
         };
+        console.log(`chat.js - 106 - 😇`, comment);
 
         await firebase
             .database()
@@ -102,13 +111,23 @@ export const actions = {
             .child('comments')
             .push(comment)
             .then((data) => {
+                firebase
+                    .database()
+                    .ref('users/' + payload.userId)
+                    .child('comments')
+                    .push(comment)
+                    .then(() => {
+                        commit('loaders/SET_SNACKBAR', true, { root: true });
+                        commit('loaders/SET_LOADING', false, { root: true });
+                    })
+
+
                 const key = data.key;
                 commit('NEW_COMMENT', {
                     ...comment,
                     id: key
                 });
                 dispatch('loadComments', payload.storeId);
-                // commit('SET_SNACKBAR', true)
                 commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
@@ -141,10 +160,14 @@ export const actions = {
                     messages.push({
                         id: key,
                         userId: obj[key].userId,
-                        storeId: obj[key].storeId,
                         name: obj[key].name,
                         message: obj[key].message,
                         timestamp: obj[key].timestamp,
+                        storeId: obj[key].storeId,
+                        storeEmail: obj[key].storeEmail,
+                        storeName: obj[key].storeName,
+                        storeOwnerImage: obj[key].storeOwnerImage,
+                        storePhoneNumber: obj[key].storePhoneNumber,
                     });
                 }
                 commit('SET_LOADED_MESSAGES', messages);
@@ -173,6 +196,10 @@ export const actions = {
                         from: obj[key].from,
                         userId: obj[key].userId,
                         storeId: obj[key].storeId,
+                        storeName: obj[key].storeName,
+                        storePhoneNumber: obj[key].storePhoneNumber,
+                        storeEmail: obj[key].storeEmail,
+                        storeOwnerImage: obj[key].storeOwnerImage,
                         message: obj[key].message,
                         timestamp: obj[key].timestamp,
                     });

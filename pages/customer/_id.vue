@@ -3,7 +3,7 @@
         <h1>Messages</h1>
         <!-- <p>{{ test }}</p> -->
         <div class="card">
-            <h2 class="deep-purple-text center">
+            <!-- <h2 class="deep-purple-text center">
                 {{ sender.name }}
             </h2>
             <ul class="comments collection">
@@ -13,7 +13,7 @@
                         {{ sender.message }}
                     </div>
                 </li>
-            </ul>
+            </ul> -->
             <div class="card" v-if="currentUserMessages">
                 <ul class="comments collection">
                     <li v-for="(comment, index) in comments" :key="index">
@@ -66,11 +66,11 @@ export default {
             return this.loadedChats.messages[0];
         },
         currentUserMessages() {
-            if (!this.comments === null) {
+            if (this.comments !== null) {
                 const messages = this.comments.filter((res) => {
-                    return res.userId === this.$route.params.id;
+                    return res;
                 });
-                return messages[0];
+                return messages;
             }
         },
         comments() {
@@ -97,8 +97,7 @@ export default {
     },
     created() {
         this.$store.dispatch('chat/loadComments', this.user.uid);
-        console.log(`_id.vue - 82 - 😳`, this.loadedChats.messages);
-        console.log(`_id.vue - 82 - 🌈`, this.user);
+        console.log(`_id.vue - 82 - 😳`, this.currentUserMessages);
     },
     methods: {
         //NOTE  this is adding new comment
@@ -109,12 +108,15 @@ export default {
                     from: this.user.name,
                     userId: this.$route.params.id,
                     storeId: this.user.uid,
+                    storeName: this.sender.storeName,
+                    storePhoneNumber: this.sender.storePhoneNumber,
+                    storeEmail: this.sender.storeEmail,
+                    storeOwnerImage: this.sender.storeOwnerImage,
                     message: this.newReply
                 };
-                console.log(`_id.vue - 113 - 🍎`, createdMessage);
-                // this.$store.dispatch('chat/sendPrivateMessage', createdMessage);
-                // this.newReply = null;
-                // this.feedback = null;
+                this.$store.dispatch('chat/sendPrivateMessage', createdMessage);
+                this.newReply = null;
+                this.feedback = null;
             } else {
                 this.feedback = 'You must enter a comment to add it';
             }
