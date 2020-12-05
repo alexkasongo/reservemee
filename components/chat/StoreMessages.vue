@@ -36,7 +36,7 @@
         <!--If Messages end-->
 
         <!-- If No Messages -->
-        <v-list-item-content v-if="!messages">
+        <v-list-item-content v-if="messages.length <= 0">
             <v-alert
                 style="cursor: pointer"
                 icon="mdi-alert-circle-outline"
@@ -106,6 +106,7 @@ export default {
         // NEW MESSAGE
     },
     created() {
+        console.log(`StoreMessages.vue - 109 - 🥶`, this.messages);
         this.$store.dispatch('chat/loadMessages', this.user.uid);
 
         // NEW MESSAGE

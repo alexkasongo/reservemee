@@ -18,8 +18,7 @@
                             <h2
                                 v-if="
                                     categories.length <= 0 ||
-                                    !user.emailVerified ||
-                                    categories.length !== 0
+                                    !user.emailVerified
                                 "
                                 class="header-title mt-0 mb-5"
                             >
