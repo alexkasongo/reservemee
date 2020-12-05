@@ -1,0 +1,27 @@
+.signup {
+    display: flex;
+    height: 100vh;
+    &__left {
+        display: none;
+        @media (min-width: $small-desktop) {
+            display: block;
+            width: 35%;
+            background-color: white;
+        }
+    }
+    &__right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        @media (min-width: $small-desktop) {
+            width: 55%;
+        }
+    }
+    &__right-card {
+        width: 90%;
+        @media (min-width: $small-desktop) {
+            width: 400px !important;
+        }
+    }
+}
