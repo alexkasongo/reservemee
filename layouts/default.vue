@@ -220,10 +220,7 @@
                                 </v-list-item-icon>
 
                                 <v-list-item-content>
-                                    <v-list-item-title
-                                        class="teal--text darker-1"
-                                        >Store</v-list-item-title
-                                    >
+                                    <v-list-item-title>Store</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
                             <v-list-item
@@ -256,21 +253,6 @@
                                     >
                                 </v-list-item-content>
                             </v-list-item>
-                            <!-- <v-list-item
-                                v-if="role.admin"
-                                @click="goToCalendar"
-                                link
-                            >
-                                <v-list-item-icon>
-                                    <v-icon>mdi-calendar-blank</v-icon>
-                                </v-list-item-icon>
-
-                                <v-list-item-content>
-                                    <v-list-item-title
-                                        >Calendar</v-list-item-title
-                                    >
-                                </v-list-item-content>
-                            </v-list-item> -->
                         </div>
 
                         <div v-if="!user">
@@ -415,6 +397,7 @@ export default {
             $('.navbar-collapse').collapse('hide');
             this.loadServices(this.userId);
             // great spot for debuggin
+            console.log(`default.vue - 415 - 🥶`, this.$route.name);
         },
         group() {
             this.drawer = false;
@@ -488,6 +471,7 @@ export default {
         }
     },
     mounted() {
+        console.log(`default.vue - 491 - 🏝`, this.$route.name);
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 // User is signed in.
