@@ -203,19 +203,17 @@ export const actions = {
                 commit('loaders/SET_LOADING', false, { root: true });
             });
     },
-    async signout({ commit }) {
-        await firebase
-            .auth()
-            .signOut()
-            .then(() => {
-                window.localStorage.removeItem('email');
-                window.localStorage.removeItem('vuex');
-                localStorage.clear('vuex');
-            })
-            .then(() => {
-                commit('LOADED_USER', '')
-                this.$router.push('/');
-            });
+    async removeUserData({ commit }) {
+        commit('LOADED_USER', '')
+        commit('LOADED_USER_ID', '')
+        commit('LOGGEDIN_USER', '')
+        // in other modules
+        commit('dashboard/SET_LOADED_SEVICES', [], { root: true })
+        commit('dashboard/USER_DATA', [], { root: true })
+        commit('dashboard/SET_LOADED_CATEGORIES', [], { root: true })
+        commit('dashboard/UPDATE_SERVICE_ID', [], { root: true })
+        commit('dashboard/SET_LOADED_STORE', [], { root: true })
+
     },
     // USER ACCOUNTS END
 };

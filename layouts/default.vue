@@ -415,7 +415,8 @@ export default {
             loadUserIdData: 'dashboard/loadUserIdData',
             loadCategories: 'dashboard/loadCategories',
             loadServices: 'dashboard/loadServices',
-            setSnackbar: 'loaders/setSnackbar'
+            setSnackbar: 'loaders/setSnackbar',
+            removeUserData: 'removeUserData'
         }),
         signin() {
             this.$router.replace('/signin');
@@ -425,9 +426,7 @@ export default {
                 .auth()
                 .signOut()
                 .then(() => {
-                    // window.localStorage.removeItem('email');
-                    // window.localStorage.removeItem('vuex');
-                    // localStorage.clear('vuex');
+                    this.removeUserData();
                 })
                 .then(() => {
                     this.user = '';
