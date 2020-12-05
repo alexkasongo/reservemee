@@ -10,6 +10,10 @@
             <div class="row">
                 <div class="col-xl-4">
                     <div>
+                        <h2 class="header-title mt-5 mb-5">Bio</h2>
+                        <!-- Personal-Information -->
+                        <BusinessInfo />
+                        <!-- Personal-Information -->
                         <div v-if="user">
                             <h2
                                 v-if="
@@ -22,9 +26,6 @@
                                 Todos
                             </h2>
                         </div>
-                        <!-- Personal-Information -->
-                        <BusinessInfo />
-                        <!-- Personal-Information -->
                         <div v-if="user">
                             <div>
                                 <div v-if="categories.length <= 0">
