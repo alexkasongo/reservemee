@@ -6,7 +6,7 @@
             <!-- <h2 class="deep-purple-text center">
                 {{ sender.name }}
             </h2>
-            <ul class="comments collection">
+            <ul class="replies collection">
                 <li>
                     <div class="deep-purple-text">{{ sender.name }}</div>
                     <div class="grey-text text-darken-2">
@@ -16,20 +16,20 @@
             </ul> -->
             <div class="card" v-if="currentUserMessages">
                 <ul class="comments collection">
-                    <li v-for="(comment, index) in comments" :key="index">
-                        <div class="deep-purple-text">{{ comment.from }}</div>
+                    <li v-for="(reply, index) in replies" :key="index">
+                        <div class="deep-purple-text">{{ reply.from }}</div>
                         <div class="grey-text text-darken-2">
-                            {{ comment.message }}
+                            {{ reply.message }}
                         </div>
                     </li>
                 </ul>
             </div>
             <form @submit.prevent="onReply">
                 <div class="field">
-                    <label for="comment">Write Message</label>
+                    <label for="reply">Write Message</label>
                     <v-text-field
                         type="text"
-                        name="comment"
+                        name="reply"
                         v-model="newReply"
                     ></v-text-field>
                     <p v-if="feedback" class="red-text center">
@@ -57,32 +57,32 @@ export default {
     computed: {
         ...mapGetters({
             user: 'user'
-            // loadedComments: 'chat/comments'
+            // loadedReplies: 'chat/replies'
         }),
-        loadedComments() {
-            return this.loadedChats.comments;
+        loadedReplies() {
+            return this.loadedChats.replies;
         },
         sender() {
             return this.loadedChats.messages[0];
         },
         currentUserMessages() {
-            if (this.comments !== null) {
-                const messages = this.comments.filter((res) => {
+            if (this.replies !== null) {
+                const messages = this.replies.filter((res) => {
                     return res;
                 });
                 return messages;
             }
         },
-        comments() {
-            const clonedComments = [];
-            if (!this.loadedComments.length <= 0) {
-                const comments = this.loadedComments;
-                comments.forEach((comment) => {
-                    clonedComments.push({
-                        ...comment
+        replies() {
+            const clonedReplies = [];
+            if (!this.loadedReplies.length <= 0) {
+                const replies = this.loadedReplies;
+                replies.forEach((reply) => {
+                    clonedReplies.push({
+                        ...reply
                     });
                 });
-                let filtered = clonedComments.filter(
+                let filtered = clonedReplies.filter(
                     (res) => res.userId === this.$route.params.id
                 );
                 return filtered;
@@ -96,11 +96,11 @@ export default {
         })
     },
     created() {
-        this.$store.dispatch('chat/loadComments', this.user.uid);
+        this.$store.dispatch('chat/loadReplies', this.$route.params.id);
         console.log(`_id.vue - 82 - 😳`, this.currentUserMessages);
     },
     methods: {
-        //NOTE  this is adding new comment
+        //NOTE  this is adding new reply
         onReply() {
             if (this.newReply) {
                 const createdMessage = {
@@ -114,11 +114,11 @@ export default {
                     storeOwnerImage: this.sender.storeOwnerImage,
                     message: this.newReply
                 };
-                this.$store.dispatch('chat/sendPrivateMessage', createdMessage);
+                this.$store.dispatch('chat/sendReply', createdMessage);
                 this.newReply = null;
                 this.feedback = null;
             } else {
-                this.feedback = 'You must enter a comment to add it';
+                this.feedback = 'You must enter a reply to add it';
             }
         }
     }

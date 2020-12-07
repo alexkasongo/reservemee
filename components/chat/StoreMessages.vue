@@ -112,7 +112,7 @@ export default {
         // NEW MESSAGE
         this.uis = this.currentUserId;
         this.$store.dispatch('chat/loadMessages', this.user.uid);
-        this.$store.dispatch('chat/loadComments', this.user.uid);
+        this.$store.dispatch('chat/loadReplies', this.user.uid);
         // NEW MESSAGE
     }
 };

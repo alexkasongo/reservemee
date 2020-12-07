@@ -4,7 +4,7 @@ import 'firebase/database';
 
 export const state = () => ({
     messages: [],
-    comments: [],
+    replies: [],
 });
 
 export const getters = {
@@ -13,7 +13,7 @@ export const getters = {
     alert: (state) => state.alert,
 
     messages: (state) => state.messages,
-    comments: (state) => state.comments,
+    replies: (state) => state.replies,
 };
 
 export const actions = {
@@ -89,7 +89,8 @@ export const actions = {
     userName: function (payload) {
         this.commit('USER_NAME', payload)
     },
-    async sendPrivateMessage({ commit, dispatch }, payload) {
+    async sendReply({ commit, dispatch }, payload) {
+        // console.log(`chat.js - 93 - 🌈`, payload);
 
         const comment = {
             to: payload.to,
@@ -103,31 +104,19 @@ export const actions = {
             message: payload.message,
             timestamp: Date.now()
         };
-        console.log(`chat.js - 106 - 😇`, comment);
 
         await firebase
             .database()
-            .ref('users/' + payload.storeId)
-            .child('comments')
+            .ref('users/' + payload.userId)
+            .child('replies')
             .push(comment)
             .then((data) => {
-                firebase
-                    .database()
-                    .ref('users/' + payload.userId)
-                    .child('comments')
-                    .push(comment)
-                    .then(() => {
-                        commit('loaders/SET_SNACKBAR', true, { root: true });
-                        commit('loaders/SET_LOADING', false, { root: true });
-                    })
-
-
                 const key = data.key;
-                commit('NEW_COMMENT', {
+                commit('NEW_REPLY', {
                     ...comment,
                     id: key
                 });
-                dispatch('loadComments', payload.storeId);
+                dispatch('loadReplies', payload.userId);
                 commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
@@ -178,19 +167,19 @@ export const actions = {
                 commit('loaders/SET_LOADING', false, { root: true });
             });
     },
-    async loadComments({ commit }, payload) {
+    async loadReplies({ commit }, payload) {
         commit('loaders/SET_LOADING', true, { root: true });
         //to make it realtime use on() instead of once()
         await firebase
             .database()
             .ref('users/' + payload)
-            .child('comments')
+            .child('replies')
             .once('value')
             .then((data) => {
-                const comments = [];
+                const replies = [];
                 const obj = data.val();
                 for (let key in obj) {
-                    comments.push({
+                    replies.push({
                         id: key,
                         to: obj[key].to,
                         from: obj[key].from,
@@ -204,7 +193,7 @@ export const actions = {
                         timestamp: obj[key].timestamp,
                     });
                 }
-                commit('SET_LOADED_COMMENTS', comments);
+                commit('SET_LOADED_REPLIES', replies);
                 commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
@@ -223,9 +212,9 @@ export const mutations = {
     SET_LOADED_MESSAGES: (state, payload) => {
         state.messages = payload
     },
-    NEW_COMMENT: (state, payload) => state.comments.push(payload),
-    SET_LOADED_COMMENTS: (state, payload) => {
-        state.comments = payload
+    NEW_REPLY: (state, payload) => state.replies.push(payload),
+    SET_LOADED_REPLIES: (state, payload) => {
+        state.replies = payload
     },
     /*
     ** CHAT END

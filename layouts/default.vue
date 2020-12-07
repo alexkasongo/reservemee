@@ -51,7 +51,12 @@
                 <v-spacer></v-spacer>
 
                 <v-btn v-if="user" icon>
-                    <v-icon color="white">mdi-magnify</v-icon>
+                    <v-icon
+                        v-if="role.customer"
+                        @click="$router.push(`/customer/${user.uid}`)"
+                        color="white"
+                        >mdi-message</v-icon
+                    >
                 </v-btn>
                 <v-btn v-if="user" icon>
                     <v-icon color="white">mdi-heart-outline</v-icon>
