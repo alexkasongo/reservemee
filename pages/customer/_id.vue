@@ -1,9 +1,7 @@
 <template>
-    <div class="view-profile container margin">
+    <v-card class="view-profile container margin">
         <h1>Messages</h1>
-        <!-- <p>{{ test }}</p> -->
-        <div class="card">
-            <!-- <h2 class="deep-purple-text center">
+        <!-- <h2 class="deep-purple-text center">
                 {{ sender.name }}
             </h2>
             <ul class="replies collection">
@@ -14,15 +12,32 @@
                     </div>
                 </li>
             </ul> -->
-            <div class="card" v-if="currentUserMessages">
-                <ul class="comments collection">
-                    <li v-for="(reply, index) in replies" :key="index">
-                        <div class="deep-purple-text">{{ reply.from }}</div>
-                        <div class="grey-text text-darken-2">
-                            {{ reply.message }}
-                        </div>
-                    </li>
-                </ul>
+        <div>
+            <div v-if="currentUserMessages">
+                <v-list-item>
+                    <v-list-item-content>
+                        <v-list-item
+                            v-for="(reply, index) in replies"
+                            :key="index"
+                        >
+                            <v-list-item-avatar>
+                                <v-img :src="reply.storeOwnerImage"></v-img>
+                            </v-list-item-avatar>
+                            <v-list-item-title class="deep-purple-text">{{
+                                reply.from
+                            }}</v-list-item-title>
+                            <v-alert
+                                v-bind:class="{
+                                    teal: reply.from === `${user.name}`,
+                                    grey: reply.from !== `${user.name}`
+                                }"
+                                dark
+                            >
+                                {{ reply.message }}
+                            </v-alert>
+                        </v-list-item>
+                    </v-list-item-content>
+                </v-list-item>
             </div>
             <form @submit.prevent="onReply">
                 <div class="field">
@@ -39,7 +54,7 @@
                 <v-btn type="submit">Send</v-btn>
             </form>
         </div>
-    </div>
+    </v-card>
 </template>
 
 <script>
@@ -51,13 +66,18 @@ export default {
         profile: null,
         newReply: null,
         feedback: null,
-        // uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3',
-        messages: null
+        messages: null,
+        from: {
+            color: 'red'
+        }
     }),
     computed: {
+        ...mapState({
+            user: 'user',
+            loadedChats: 'chat'
+        }),
         ...mapGetters({
             user: 'user'
-            // loadedReplies: 'chat/replies'
         }),
         loadedReplies() {
             return this.loadedChats.replies;
@@ -65,21 +85,15 @@ export default {
         sender() {
             return this.loadedChats.messages[0];
         },
-        currentUserMessages() {
-            if (this.replies !== null) {
-                const messages = this.replies.filter((res) => {
-                    return res;
-                });
-                return messages;
-            }
-        },
         replies() {
             const clonedReplies = [];
             if (!this.loadedReplies.length <= 0) {
                 const replies = this.loadedReplies;
                 replies.forEach((reply) => {
+                    // const key = reply.key;
                     clonedReplies.push({
                         ...reply
+                        // id: key
                     });
                 });
                 let filtered = clonedReplies.filter(
@@ -90,14 +104,21 @@ export default {
                 return null;
             }
         },
-        ...mapState({
-            user: 'user',
-            loadedChats: 'chat'
-        })
+        currentUserMessages() {
+            if (this.replies !== null) {
+                const messages = this.replies.filter((res) => {
+                    return res;
+                });
+                return messages;
+            }
+        }
     },
     created() {
-        this.$store.dispatch('chat/loadReplies', this.$route.params.id);
-        console.log(`_id.vue - 82 - 😳`, this.currentUserMessages);
+        this.$store
+            .dispatch('chat/loadReplies', this.$route.params.id)
+            .then(() => {
+                // console.log(`_id.vue - 82 - 😳`, this.currentUserMessages);
+            });
     },
     methods: {
         //NOTE  this is adding new reply
@@ -125,17 +146,17 @@ export default {
 };
 </script>
 
-<style>
-.view-profile .card {
-    padding: 20px;
-    margin-top: 60px;
-}
-.view-profile h2 {
-    font-size: 2em;
-    margin-top: 0;
-}
-.view-profile li {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-}
+<style lang="scss" scoped>
+// .view-profile .card {
+//     padding: 20px;
+//     margin-top: 60px;
+// }
+// .view-profile h2 {
+//     font-size: 2em;
+//     margin-top: 0;
+// }
+// .view-profile li {
+//     padding: 10px;
+//     border-bottom: 1px solid #eee;
+// }
 </style>
