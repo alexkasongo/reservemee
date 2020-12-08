@@ -81,7 +81,7 @@ export default {
             this.$router.push({
                 name: 'customer-id',
                 params: {
-                    id: message.userId,
+                    id: message.id,
                     name: message.name
                 }
             });

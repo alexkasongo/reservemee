@@ -1,28 +1,30 @@
 <template>
     <v-card class="container mx-auto">
         <v-list three-line>
-            <template v-for="(reply, index) in replies">
-                <v-list-item :key="index">
-                    <v-list-item-avatar>
-                        <v-img :src="reply.storeOwnerImage"></v-img>
-                    </v-list-item-avatar>
-                    <v-list-item-content>
-                        <v-list-item-title class="deep-purple-text">{{
-                            reply.from
-                        }}</v-list-item-title>
-                        <v-alert
-                            v-bind:class="{
-                                teal: reply.from === `${user.name}`,
-                                grey: reply.from !== `${user.name}`
-                            }"
-                            dark
-                        >
-                            {{ reply.message }}
-                        </v-alert>
-                    </v-list-item-content>
-                </v-list-item>
-                <!-- </div> -->
-            </template>
+            <div>
+                <template v-for="(reply, index) in filteredReplies">
+                    <v-list-item :key="index">
+                        <v-list-item-avatar>
+                            <v-img :src="reply.storeOwnerImage"></v-img>
+                        </v-list-item-avatar>
+                        <v-list-item-content>
+                            <v-list-item-title class="deep-purple-text">{{
+                                reply.from
+                            }}</v-list-item-title>
+                            <v-alert
+                                v-bind:class="{
+                                    teal: reply.from === `${user.name}`,
+                                    grey: reply.from !== `${user.name}`
+                                }"
+                                dark
+                            >
+                                {{ reply.message }}
+                            </v-alert>
+                        </v-list-item-content>
+                    </v-list-item>
+                </template>
+            </div>
+            <!-- <div v-else>Go ahead and respond...</div> -->
             <v-list>
                 <v-list-item>
                     <v-list-item-content>
@@ -57,7 +59,8 @@ export default {
         newReply: null,
         feedback: null,
         messages: null,
-        role: null
+        role: null,
+        filteredReplies: null
     }),
     computed: {
         ...mapState({
@@ -93,22 +96,29 @@ export default {
             } else {
                 return null;
             }
-        },
-        currentUserMessages() {
-            if (this.replies !== null) {
-                const messages = this.replies.filter((res) => {
-                    return res;
-                });
-                return messages;
-            }
         }
+        // second() {
+        //     const data = this.replies.filter((res) => {
+        //         return res.messageId === this.sender.id;
+        //     });
+        //     this.filteredReplies = data;
+        //     console.log(`_id.vue - 145 - 💜`, data);
+        // }
+        // currentUserMessages() {
+        //     if (this.replies !== null) {
+        //         const messages = this.replies.filter((res) => {
+        //             return res;
+        //         });
+        //         return messages;
+        //     }
+        // }
     },
     created() {
-        console.log(`_id.vue - 128 - 😇`, this.loadedChats);
         this.$store
-            .dispatch('chat/loadReplies', this.$route.params.id)
-            .then(() => {
-                // console.log(`_id.vue - 82 - 😳`, this.currentUserMessages);
+            .dispatch('chat/loadReplies', this.sender.userId)
+            .then((res) => {
+                // only filter once async call is complete
+                this.filterReplies();
             });
 
         firebase.auth().onAuthStateChanged((user) => {
@@ -121,23 +131,33 @@ export default {
                     .then((tokenResult) => {
                         if (tokenResult) {
                             this.role = tokenResult.claims;
-                            console.log(tokenResult.claims);
                         }
                     });
             }
         });
     },
     methods: {
+        filterReplies() {
+            // const data = this.allReplies.filter((res) => {
+            //     return res.messageId === this.sender.id;
+            // });
+            // this.filteredReplies = data;
+
+            const data = this.loadedReplies.filter((res) => {
+                return res.messageId === this.$route.params.id;
+            });
+            this.filteredReplies = data;
+        },
         //NOTE  this is adding new reply
         onReply() {
-            console.log(`_id.vue - 160 - 🙏🏾`, this.role.customer);
             if (this.role.customer) {
                 if (this.newReply) {
                     const createdMessage = {
                         to: this.sender.name,
                         from: this.user.name,
-                        userId: this.$route.params.id,
+                        userId: this.sender.userId,
                         storeId: this.user.uid,
+                        messageId: this.$route.params.id,
                         storeName: this.sender.storeName,
                         storePhoneNumber: this.sender.storePhoneNumber,
                         storeEmail: this.sender.storeEmail,
@@ -156,8 +176,9 @@ export default {
                     const createdMessage = {
                         to: this.sender.name,
                         from: this.user.name,
-                        userId: this.$route.params.id,
+                        userId: this.sender.userId,
                         storeId: this.user.uid,
+                        messageId: this.$route.params.id,
                         storeName: this.sender.storeName,
                         storePhoneNumber: this.sender.storePhoneNumber,
                         storeEmail: this.sender.storeEmail,
