@@ -1,32 +1,7 @@
 <template>
-    <v-card max-width="450" class="mx-auto">
+    <v-card class="container mx-auto">
         <v-list three-line>
             <template v-for="(reply, index) in replies">
-                <!-- <v-subheader
-                    v-if="reply.from"
-                    :key="reply.index"
-                    v-text="reply.from"
-                ></v-subheader>
-
-                <v-divider
-                    v-else-if="true"
-                    :key="index"
-                    :inset="true"
-                ></v-divider> -->
-
-                <!-- <h1>Messages</h1> -->
-                <!-- <h2 class="deep-purple-text center">
-                {{ sender.name }}
-            </h2>
-            <ul class="replies collection">
-                <li>
-                    <div class="deep-purple-text">{{ sender.name }}</div>
-                    <div class="grey-text text-darken-2">
-                        {{ sender.message }}
-                    </div>
-                </li>
-            </ul> -->
-                <!-- <div v-if="currentUserMessages"> -->
                 <v-list-item :key="index">
                     <v-list-item-avatar>
                         <v-img :src="reply.storeOwnerImage"></v-img>
@@ -35,9 +10,6 @@
                         <v-list-item-title class="deep-purple-text">{{
                             reply.from
                         }}</v-list-item-title>
-                        <!-- <v-list-item-subtitle
-                            v-html="reply.message"
-                        ></v-list-item-subtitle> -->
                         <v-alert
                             v-bind:class="{
                                 teal: reply.from === `${user.name}`,
@@ -51,20 +23,26 @@
                 </v-list-item>
                 <!-- </div> -->
             </template>
-            <form @submit.prevent="onReply">
-                <div class="field">
-                    <label for="reply">Write Message</label>
-                    <v-text-field
-                        type="text"
-                        name="reply"
-                        v-model="newReply"
-                    ></v-text-field>
-                    <p v-if="feedback" class="red-text center">
-                        {{ feedback }}
-                    </p>
-                </div>
-                <v-btn type="submit">Send</v-btn>
-            </form>
+            <v-list>
+                <v-list-item>
+                    <v-list-item-content>
+                        <form @submit.prevent="onReply">
+                            <div class="field">
+                                <label for="reply">Write Message</label>
+                                <v-text-field
+                                    type="text"
+                                    name="reply"
+                                    v-model="newReply"
+                                ></v-text-field>
+                                <p v-if="feedback" class="red-text center">
+                                    {{ feedback }}
+                                </p>
+                            </div>
+                            <v-btn color="teal" type="submit" dark>Send</v-btn>
+                        </form>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
         </v-list>
     </v-card>
 </template>
@@ -104,10 +82,8 @@ export default {
             if (!this.loadedReplies.length <= 0) {
                 const replies = this.loadedReplies;
                 replies.forEach((reply) => {
-                    // const key = reply.key;
                     clonedReplies.push({
                         ...reply
-                        // id: key
                     });
                 });
                 let filtered = clonedReplies.filter(
@@ -128,7 +104,7 @@ export default {
         }
     },
     created() {
-        console.log(`_id.vue - 128 - 😇`, this.filteredUserData);
+        console.log(`_id.vue - 128 - 😇`, this.loadedChats);
         this.$store
             .dispatch('chat/loadReplies', this.$route.params.id)
             .then(() => {

@@ -10,7 +10,7 @@
                 <div class="inbox-item">
                     <div class="inbox-item__left">
                         <div class="inbox-item-img">
-                            <img src="https://via.placeholder.com/150" alt />
+                            <img :src="message.storeOwnerImage" alt />
                         </div>
                         <div>
                             <p class="inbox-item-author">
