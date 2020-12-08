@@ -53,7 +53,7 @@
                 <v-btn v-if="user" icon>
                     <v-icon
                         v-if="role.customer"
-                        @click="$router.push(`/customer/${user.uid}`)"
+                        @click="$router.push(`/dm/${user.uid}`)"
                         color="white"
                         >mdi-message</v-icon
                     >

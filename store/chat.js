@@ -54,6 +54,12 @@ export const actions = {
             .child('messages')
             .push(message)
             .then((data) => {
+                firebase
+                    .database()
+                    .ref('users/' + payload.userId)
+                    .child('messages')
+                    .push(message)
+
                 const key = data.key;
                 commit('NEW_MESSAGE', {
                     ...message,
