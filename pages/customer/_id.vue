@@ -75,11 +75,16 @@ export default {
             return this.userData.userData[0].storeProfile;
         },
         loadedReplies() {
-            console.log(`_id.vue - 78 - variable`, this.loadedChats.replies);
             return this.loadedChats.replies;
         },
         sender() {
-            return this.loadedChats.messages[0];
+            return this.loadedChats.messages;
+        },
+        filteredSender() {
+            const data = this.sender.filter((res) => {
+                return res.id === this.$route.params.id;
+            });
+            return data[0];
         },
         replies() {
             const clonedReplies = [];
@@ -100,8 +105,9 @@ export default {
         }
     },
     created() {
+        console.log(`_id.vue - 102 - 💜`, this.filteredSender);
         this.$store
-            .dispatch('chat/loadReplies', this.sender.userId)
+            .dispatch('chat/loadReplies', this.filteredSender.userId)
             .then((res) => {
                 // only filter once async call is complete
                 this.filterReplies();
@@ -131,7 +137,7 @@ export default {
         },
         loadAllReplies() {
             this.$store
-                .dispatch('chat/loadReplies', this.sender.userId)
+                .dispatch('chat/loadReplies', this.filteredSender.userId)
                 .then((res) => {
                     // only filter once async call is complete
                     this.filterReplies();
@@ -142,14 +148,14 @@ export default {
             if (this.role.customer) {
                 if (this.newReply) {
                     const createdMessage = {
-                        to: this.sender.name,
+                        to: this.filteredSender.name,
                         from: this.user.name,
-                        userId: this.sender.userId,
+                        userId: this.filteredSender.userId,
                         storeId: this.user.uid,
                         messageId: this.$route.params.id,
-                        storeName: this.sender.storeName,
-                        storePhoneNumber: this.sender.storePhoneNumber,
-                        storeEmail: this.sender.storeEmail,
+                        storeName: this.filteredSender.storeName,
+                        storePhoneNumber: this.filteredSender.storePhoneNumber,
+                        storeEmail: this.filteredSender.storeEmail,
                         storeOwnerImage: this.filteredUserData.storeOwnerImage,
                         message: this.newReply
                     };
@@ -165,18 +171,19 @@ export default {
             if (this.role.admin) {
                 if (this.newReply) {
                     const createdMessage = {
-                        to: this.sender.name,
+                        to: this.filteredSender.name,
                         from: this.user.name,
-                        userId: this.sender.userId,
+                        userId: this.filteredSender.userId,
                         storeId: this.user.uid,
                         messageId: this.$route.params.id,
-                        storeName: this.sender.storeName,
-                        storePhoneNumber: this.sender.storePhoneNumber,
-                        storeEmail: this.sender.storeEmail,
-                        storeOwnerImage: this.sender.storeOwnerImage,
+                        storeName: this.filteredSender.storeName,
+                        storePhoneNumber: this.filteredSender.storePhoneNumber,
+                        storeEmail: this.filteredSender.storeEmail,
+                        storeOwnerImage: this.filteredUserData.storeOwnerImage,
                         message: this.newReply
                     };
                     this.$store.dispatch('chat/sendReply', createdMessage);
+                    // console.log(`_id.vue - 180 - 🥶`, createdMessage);
                     this.newReply = null;
                     this.feedback = null;
 
