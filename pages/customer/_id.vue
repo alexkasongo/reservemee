@@ -75,6 +75,7 @@ export default {
             return this.userData.userData[0].storeProfile;
         },
         loadedReplies() {
+            console.log(`_id.vue - 78 - variable`, this.loadedChats.replies);
             return this.loadedChats.replies;
         },
         sender() {
@@ -97,21 +98,6 @@ export default {
                 return null;
             }
         }
-        // second() {
-        //     const data = this.replies.filter((res) => {
-        //         return res.messageId === this.sender.id;
-        //     });
-        //     this.filteredReplies = data;
-        //     console.log(`_id.vue - 145 - 💜`, data);
-        // }
-        // currentUserMessages() {
-        //     if (this.replies !== null) {
-        //         const messages = this.replies.filter((res) => {
-        //             return res;
-        //         });
-        //         return messages;
-        //     }
-        // }
     },
     created() {
         this.$store
@@ -138,15 +124,18 @@ export default {
     },
     methods: {
         filterReplies() {
-            // const data = this.allReplies.filter((res) => {
-            //     return res.messageId === this.sender.id;
-            // });
-            // this.filteredReplies = data;
-
             const data = this.loadedReplies.filter((res) => {
                 return res.messageId === this.$route.params.id;
             });
             this.filteredReplies = data;
+        },
+        loadAllReplies() {
+            this.$store
+                .dispatch('chat/loadReplies', this.sender.userId)
+                .then((res) => {
+                    // only filter once async call is complete
+                    this.filterReplies();
+                });
         },
         //NOTE  this is adding new reply
         onReply() {
@@ -167,6 +156,8 @@ export default {
                     this.$store.dispatch('chat/sendReply', createdMessage);
                     this.newReply = null;
                     this.feedback = null;
+
+                    this.loadAllReplies();
                 } else {
                     this.feedback = 'You must enter a reply to add it';
                 }
@@ -188,6 +179,8 @@ export default {
                     this.$store.dispatch('chat/sendReply', createdMessage);
                     this.newReply = null;
                     this.feedback = null;
+
+                    this.loadAllReplies();
                 } else {
                     this.feedback = 'You must enter a reply to add it';
                 }

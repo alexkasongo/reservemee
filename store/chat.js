@@ -118,6 +118,7 @@ export const actions = {
                     id: key
                 });
                 dispatch('loadReplies', payload.userId);
+                commit('loaders/SET_SNACKBAR', true, { root: true });
                 commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
