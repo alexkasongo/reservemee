@@ -54,13 +54,19 @@ export const actions = {
             .child('messages')
             .push(message)
             .then((data) => {
+                const key = data.key;
+
+                const backupMessage = {
+                    ...message,
+                    messagePreviewId: key
+                };
+
                 firebase
                     .database()
                     .ref('users/' + payload.userId)
                     .child('messages')
-                    .push(message)
+                    .push(backupMessage)
 
-                const key = data.key;
                 commit('NEW_MESSAGE', {
                     ...message,
                     id: key
@@ -109,6 +115,7 @@ export const actions = {
             storeEmail: payload.storeEmail,
             storeOwnerImage: payload.storeOwnerImage,
             message: payload.message,
+            messagePreviewId: payload.messagePreviewId,
             timestamp: Date.now()
         };
 
@@ -165,6 +172,7 @@ export const actions = {
                         storeName: obj[key].storeName,
                         storeOwnerImage: obj[key].storeOwnerImage,
                         storePhoneNumber: obj[key].storePhoneNumber,
+                        messagePreviewId: obj[key].messagePreviewId,
                     });
                 }
                 commit('SET_LOADED_MESSAGES', messages);
@@ -199,6 +207,7 @@ export const actions = {
                         storeEmail: obj[key].storeEmail,
                         storeOwnerImage: obj[key].storeOwnerImage,
                         message: obj[key].message,
+                        messagePreviewId: obj[key].messagePreviewId,
                         timestamp: obj[key].timestamp,
                     });
                 }

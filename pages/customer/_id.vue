@@ -105,7 +105,7 @@ export default {
         }
     },
     created() {
-        console.log(`_id.vue - 102 - 💜`, this.filteredSender);
+        console.log(`_id.vue - 102 - 💜`, this.sender);
         this.$store
             .dispatch('chat/loadReplies', this.filteredSender.userId)
             .then((res) => {
@@ -157,7 +157,8 @@ export default {
                         storePhoneNumber: this.filteredSender.storePhoneNumber,
                         storeEmail: this.filteredSender.storeEmail,
                         storeOwnerImage: this.filteredUserData.storeOwnerImage,
-                        message: this.newReply
+                        message: this.newReply,
+                        messagePreviewId: this.filteredSender.id
                     };
                     this.$store.dispatch('chat/sendReply', createdMessage);
                     this.newReply = null;
@@ -180,7 +181,8 @@ export default {
                         storePhoneNumber: this.filteredSender.storePhoneNumber,
                         storeEmail: this.filteredSender.storeEmail,
                         storeOwnerImage: this.filteredUserData.storeOwnerImage,
-                        message: this.newReply
+                        message: this.newReply,
+                        messagePreviewId: this.filteredSender.id
                     };
                     this.$store.dispatch('chat/sendReply', createdMessage);
                     // console.log(`_id.vue - 180 - 🥶`, createdMessage);
