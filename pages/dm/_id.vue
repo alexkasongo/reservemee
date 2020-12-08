@@ -25,11 +25,13 @@ export default {
     },
     methods: {
         ...mapActions({
-            loadMesssages: 'chat/loadMessages'
+            loadMessages: 'chat/loadMessages',
+            loadReplies: 'chat/loadReplies'
         })
     },
     mounted() {
-        this.loadMesssages(this.$route.params.id).then(() => {
+        this.loadMessages(this.$route.params.id).then(() => {});
+        this.loadReplies(this.$route.params.id).then(() => {
             console.log(`_id.vue - 21 - 🐠`, this.allMessagesData);
         });
     }
