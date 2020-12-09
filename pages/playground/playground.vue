@@ -33,6 +33,9 @@
                                             <v-list-item-title class="title">
                                                 {{ user.name }}
                                             </v-list-item-title>
+                                            <v-list-item-subtitle>{{
+                                                user.email
+                                            }}</v-list-item-subtitle>
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-col>
@@ -76,11 +79,11 @@
         <!-- PREVIEW END -->
 
         <!-- MESSAGE -->
-        <!-- <div class="inbox__right">
-            <v-card height="90vh" class="container mx-auto">
-                <div v-if="messages.length <= 0">
+        <div class="inbox__right">
+            <v-card height="90vh" class="container inbox__right-card mx-auto">
+                <!-- <div v-if="messages.length <= 0">
                     Click on message to view...
-                </div>
+                </div> -->
                 <v-list three-line>
                     <div>
                         <template v-for="(message, index) in messages">
@@ -110,7 +113,8 @@
                             </v-list-item>
                         </template>
                     </div>
-                    <v-list v-if="messages.length > 0">
+                    <v-list>
+                        <!-- <v-list v-if="messages.length > 0"> -->
                         <v-list-item>
                             <v-list-item-content>
                                 <form @submit.prevent="onReply">
@@ -137,7 +141,7 @@
                     </v-list>
                 </v-list>
             </v-card>
-        </div> -->
+        </div>
         <!-- MESSAGE -->
     </div>
 </template>
@@ -153,7 +157,8 @@ export default {
         newReply: null,
         feedback: null,
         role: null,
-        filteredUserData: null
+        filteredUserData: null,
+        selectedMessage: null
     }),
     computed: {
         ...mapGetters({
@@ -196,30 +201,26 @@ export default {
         onChange(e) {
             const value = e.id;
             // in this case ID works as the messagePreviewId
-            console.log(`playground.vue - 191 - variable`, value);
 
-            // if all is selected show all
-            // if (this.messages.length <= 0) {
-            //     this.messages = this.replies;
-            // }
+            // if there are no replies then load all replies and filter according to ID which is
+            // the same as previewMessageId
+            if (this.messages.length <= 0) {
+                // this.messages = this.replies;
+                this.loadReplies(e.userId).then(() => {
+                    this.messages = this.replies.filter((res) => {
+                        return res.messagePreviewId === value;
+                    });
+                });
+            }
+            //  if service length is more than zero, repopulate and then filter accordingly
+            if (this.messages.length > 0) {
+                this.messages = this.replies;
 
-            // // function which we can use filter object
-            // if (value !== 'all') {
-            //     const filteredMessages = this.messages.filter((res) => {
-            //         return res.messagePreviewId === value;
-            //     });
-            //     this.messages = filteredMessages;
-            // }
-
-            // //  if service length is less than zero, repopulate and then filter accordingly
-            // if (this.messages.length <= 0) {
-            //     this.messages = this.replies;
-
-            //     const filteredMessages = this.messages.filter((res) => {
-            //         return res.messagePreviewId === value;
-            //     });
-            //     this.messages = filteredMessages;
-            // }
+                const filteredMessages = this.messages.filter((res) => {
+                    return res.messagePreviewId === value;
+                });
+                this.messages = filteredMessages;
+            }
         },
         //NOTE  this is adding new reply
         onReply() {
@@ -234,7 +235,7 @@ export default {
                         storeName: this.messages[0].storeName,
                         storePhoneNumber: this.messages[0].storePhoneNumber,
                         storeEmail: this.messages[0].storeEmail,
-                        // storeOwnerImage: this.filteredUserData.storeOwnerImage,
+                        storeOwnerImage: this.filteredUserData.storeOwnerImage,
                         message: this.newReply,
                         messagePreviewId: this.messages[0].messagePreviewId
                     };
@@ -250,19 +251,6 @@ export default {
         }
     },
     mounted() {
-        this.loadMessages(this.user.uid).then(() => {});
-        // this.loadReplies(this.user.uid).then(() => {
-        //     this.messages = this.replies;
-        // });
-
-        this.filteredUserData = this.userData.userData[0].storeProfile;
-        // this.filteredUserData = this.userData.userData[0].storeProfile;
-
-        // console.log(
-        //     `playground.vue - 246 - 🍎`,
-        //     this.filteredUserData.storeOwnerImage
-        // );
-        // check if signed in user is admin or customer
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 // User is signed in.
@@ -275,8 +263,21 @@ export default {
                             this.role = tokenResult.claims;
                         }
                     });
+
+                // this.filteredUserData = this.userData.userData[0].storeProfile;
             }
         });
+
+        this.loadMessages(this.user.uid).then(() => {});
+        this.loadReplies(this.selectedMessage).then(() => {
+            this.messages = [];
+        });
+
+        // this.filteredUserData = this.userData.userData[0].storeProfile;
+        // this.filteredUserData = this.userData.userData[0].storeProfile;
+
+        // console.log(`playground.vue - 246 - 🍎`, this.user);
+        // check if signed in user is admin or customer
     }
 };
 </script>
@@ -290,6 +291,9 @@ export default {
     }
     &__right {
         width: 60%;
+    }
+    &__right-card {
+        overflow: auto;
     }
 }
 </style>
