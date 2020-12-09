@@ -22,16 +22,23 @@
                         </div>
                     </div>
 
-                    <div class="inbox-item__left">
+                    <!-- <div class="inbox-item__left">
                         <v-btn
                             @click="viewProfile(message)"
                             class="teal darken-1"
                             dark
                             >Reply</v-btn
                         >
-                    </div>
+                    </div> -->
                 </div>
             </div>
+            <v-btn
+                @click="$router.push('/inbox/admin')"
+                class="teal darken-1"
+                block
+                dark
+                >View All</v-btn
+            >
         </div>
         <!--If Messages end-->
 
