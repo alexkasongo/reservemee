@@ -59,7 +59,7 @@
                     >
                     <v-icon
                         v-if="role.admin"
-                        @click="$router.push('inbox/playground')"
+                        @click="$router.push('/inbox/admin')"
                         color="white"
                         >mdi-message</v-icon
                     >
