@@ -113,6 +113,7 @@ export default {
                 this.filterReplies();
             });
 
+        // check if signin user is admin or customer
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 // User is signed in.

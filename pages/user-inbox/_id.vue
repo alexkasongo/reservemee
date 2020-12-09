@@ -3,7 +3,7 @@
         <!-- PREVIEW -->
 
         <div class="inbox__left">
-            <v-card class="mx-auto" width="100%" tile>
+            <v-card class="mx-auto" height="90vh" width="100%" tile>
                 <v-navigation-drawer width="100%" permanent>
                     <v-list>
                         <v-list-item>
@@ -45,8 +45,14 @@
                                     @click="onChange(messenger)"
                                 >
                                     <v-list-item-title
+                                        >To:
+                                        {{
+                                            messenger.storeName
+                                        }}</v-list-item-title
+                                    >
+                                    <v-list-item-subtitle
                                         v-text="messenger.message"
-                                    ></v-list-item-title>
+                                    ></v-list-item-subtitle>
                                 </v-list-item-content>
                             </v-list-item>
                         </v-list-item-group>
@@ -58,10 +64,63 @@
 
         <!-- MESSAGE -->
         <div class="inbox__right">
-            <v-card>
-                <div v-for="(message, index) in messages" :key="index">
-                    <p>{{ message }}</p>
-                </div>
+            <v-card height="90vh" class="container mx-auto">
+                <v-list three-line>
+                    <div>
+                        <template v-for="(message, index) in messages">
+                            <v-list-item :key="index">
+                                <v-list-item-avatar>
+                                    <v-img
+                                        :src="message.storeOwnerImage"
+                                    ></v-img>
+                                </v-list-item-avatar>
+                                <v-list-item-content>
+                                    <v-list-item-title
+                                        class="deep-purple-text"
+                                        >{{ message.from }}</v-list-item-title
+                                    >
+                                    <v-alert
+                                        v-bind:class="{
+                                            teal:
+                                                message.from === `${user.name}`,
+                                            grey:
+                                                message.from !== `${user.name}`
+                                        }"
+                                        dark
+                                    >
+                                        {{ message.message }}
+                                    </v-alert>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </template>
+                    </div>
+                    <!-- <div v-else>Go ahead and respond...</div> -->
+                    <v-list>
+                        <v-list-item>
+                            <v-list-item-content>
+                                <form @submit.prevent="onReply">
+                                    <div class="field">
+                                        <label for="reply">Write Message</label>
+                                        <v-text-field
+                                            type="text"
+                                            name="reply"
+                                            v-model="newReply"
+                                        ></v-text-field>
+                                        <p
+                                            v-if="feedback"
+                                            class="red-text center"
+                                        >
+                                            {{ feedback }}
+                                        </p>
+                                    </div>
+                                    <v-btn color="teal" type="submit" dark
+                                        >Send</v-btn
+                                    >
+                                </form>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list>
+                </v-list>
             </v-card>
         </div>
         <!-- MESSAGE -->
@@ -74,16 +133,9 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 export default {
     data: () => ({
         messages: [],
-        selectedItem: 0,
-        items: [
-            { text: 'My Files', icon: 'mdi-folder' },
-            { text: 'Shared with me', icon: 'mdi-account-multiple' },
-            { text: 'Starred', icon: 'mdi-star' },
-            { text: 'Recent', icon: 'mdi-history' },
-            { text: 'Offline', icon: 'mdi-check-circle' },
-            { text: 'Uploads', icon: 'mdi-upload' },
-            { text: 'Backups', icon: 'mdi-cloud-upload' }
-        ]
+        selectedItem: [],
+        newReply: null,
+        feedback: null
     }),
     computed: {
         ...mapGetters({
@@ -96,9 +148,6 @@ export default {
         allMessages() {
             return this.allMessagesData.messages;
         }
-        // allReplies() {
-        //     return this.allMessagesData.replies;
-        // }
     },
     methods: {
         ...mapActions({
@@ -132,13 +181,65 @@ export default {
                 });
                 this.messages = filteredMessages;
             }
+        },
+        //NOTE  this is adding new reply
+        onReply() {
+            if (this.role.customer) {
+                if (this.newReply) {
+                    const createdMessage = {
+                        to: this.filteredSender.name,
+                        from: this.user.name,
+                        userId: this.filteredSender.userId,
+                        storeId: this.user.uid,
+                        messageId: this.$route.params.id,
+                        storeName: this.filteredSender.storeName,
+                        storePhoneNumber: this.filteredSender.storePhoneNumber,
+                        storeEmail: this.filteredSender.storeEmail,
+                        storeOwnerImage: this.filteredUserData.storeOwnerImage,
+                        message: this.newReply,
+                        messagePreviewId: this.filteredSender.id
+                    };
+                    this.$store.dispatch('chat/sendReply', createdMessage);
+                    this.newReply = null;
+                    this.feedback = null;
+
+                    this.loadAllReplies();
+                } else {
+                    this.feedback = 'You must enter a reply to add it';
+                }
+            }
+            if (this.role.admin) {
+                if (this.newReply) {
+                    const createdMessage = {
+                        to: this.filteredSender.name,
+                        from: this.user.name,
+                        userId: this.filteredSender.userId,
+                        storeId: this.user.uid,
+                        messageId: this.$route.params.id,
+                        storeName: this.filteredSender.storeName,
+                        storePhoneNumber: this.filteredSender.storePhoneNumber,
+                        storeEmail: this.filteredSender.storeEmail,
+                        storeOwnerImage: this.filteredUserData.storeOwnerImage,
+                        message: this.newReply,
+                        messagePreviewId: this.filteredSender.id
+                    };
+                    this.$store.dispatch('chat/sendReply', createdMessage);
+                    // console.log(`_id.vue - 180 - 🥶`, createdMessage);
+                    this.newReply = null;
+                    this.feedback = null;
+
+                    this.loadAllReplies();
+                } else {
+                    this.feedback = 'You must enter a reply to add it';
+                }
+            }
         }
     },
     mounted() {
         this.loadMessages(this.$route.params.id).then(() => {});
         this.loadReplies(this.$route.params.id).then(() => {
             // this.messages = this.replies;
-            console.log(`_id.vue - 108 - variable`, this.messages);
+            console.log(`_id.vue - 108 - variable`, this.allMessages);
         });
     }
 };
