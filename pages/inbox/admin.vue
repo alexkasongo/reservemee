@@ -73,6 +73,23 @@
                             </v-list-item>
                         </v-list-item-group>
                     </v-list>
+                    <v-list v-if="messages.length <= 0" nav>
+                        <v-list-item-group color="teal darker-1">
+                            <v-list-item>
+                                <v-list-item-content>
+                                    <v-alert
+                                        class="m-0"
+                                        icon="mdi-alert-circle-outline"
+                                        text
+                                        type="info"
+                                        ><span>
+                                            You have no messages.
+                                        </span></v-alert
+                                    >
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-list-item-group>
+                    </v-list>
                 </v-navigation-drawer>
             </v-card>
         </div>
