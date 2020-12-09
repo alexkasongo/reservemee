@@ -5,13 +5,15 @@
         <div class="inbox__left">
             <v-card class="mx-auto" height="90vh" width="100%" tile>
                 <v-navigation-drawer width="100%" permanent>
-                    <v-list>
+                    <!-- HEADER -->
+                    <!-- <v-list>
                         <v-list-item>
-                            <v-list-item-avatar>
-                                <v-img
-                                    src="https://via.placeholder.com/120"
-                                ></v-img>
-                            </v-list-item-avatar>
+                            <v-avatar size="128">
+                                <img
+                                    :src="filteredUserData.storeOwnerImage"
+                                    :alt="user.name"
+                                />
+                            </v-avatar>
                         </v-list-item>
 
                         <v-list-item>
@@ -24,12 +26,50 @@
                                 }}</v-list-item-subtitle>
                             </v-list-item-content>
                         </v-list-item>
-                    </v-list>
+                    </v-list> -->
+                    <v-card elevation="0" class="mx-auto" max-width="434" tile>
+                        <v-img height="100%" class="teal darker-1">
+                            <v-row align="end" class="fill-height">
+                                <v-col
+                                    align-self="start"
+                                    class="pa-0"
+                                    cols="12"
+                                >
+                                    <v-avatar
+                                        class="profile"
+                                        color="grey"
+                                        size="164"
+                                        tile
+                                    >
+                                        <v-img
+                                            :src="
+                                                filteredUserData.storeOwnerImage
+                                            "
+                                        ></v-img>
+                                    </v-avatar>
+                                </v-col>
+                                <v-col class="py-0">
+                                    <v-list-item color="rgba(0, 0, 0, .4)" dark>
+                                        <v-list-item-content>
+                                            <v-list-item-title class="title">
+                                                {{ user.name }}
+                                            </v-list-item-title>
+                                            <!-- <v-list-item-subtitle
+                                                >Network
+                                                Engineer</v-list-item-subtitle
+                                            > -->
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-col>
+                            </v-row>
+                        </v-img>
+                    </v-card>
+                    <!-- HEADER -->
                     <v-divider></v-divider>
                     <v-list nav>
                         <v-list-item-group
                             v-model="selectedItem"
-                            color="primary"
+                            color="teal darker-1"
                         >
                             <v-list-item
                                 v-for="(messenger, i) in allMessages"
