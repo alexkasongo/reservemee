@@ -53,7 +53,13 @@
                 <v-btn v-if="user" icon>
                     <v-icon
                         v-if="role.customer"
-                        @click="$router.push(`/user-inbox/${user.uid}`)"
+                        @click="$router.push(`/inbox/${user.uid}`)"
+                        color="white"
+                        >mdi-message</v-icon
+                    >
+                    <v-icon
+                        v-if="role.admin"
+                        @click="$router.push('inbox/playground')"
                         color="white"
                         >mdi-message</v-icon
                     >
