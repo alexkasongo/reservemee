@@ -241,6 +241,22 @@ export default {
             // this.messages = this.replies;
             console.log(`_id.vue - 108 - variable`, this.allMessages);
         });
+
+        // check if signed in user is admin or customer
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in.
+                // check user status
+                firebase
+                    .auth()
+                    .currentUser.getIdTokenResult()
+                    .then((tokenResult) => {
+                        if (tokenResult) {
+                            this.role = tokenResult.claims;
+                        }
+                    });
+            }
+        });
     }
 };
 </script>
