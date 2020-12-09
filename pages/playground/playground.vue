@@ -81,9 +81,9 @@
         <!-- MESSAGE -->
         <div class="inbox__right">
             <v-card height="90vh" class="container inbox__right-card mx-auto">
-                <!-- <div v-if="messages.length <= 0">
+                <div v-if="messages.length <= 0">
                     Click on message to view...
-                </div> -->
+                </div>
                 <v-list three-line>
                     <div>
                         <template v-for="(message, index) in messages">
@@ -113,8 +113,8 @@
                             </v-list-item>
                         </template>
                     </div>
-                    <v-list>
-                        <!-- <v-list v-if="messages.length > 0"> -->
+
+                    <v-list v-if="messages.length > 0">
                         <v-list-item>
                             <v-list-item-content>
                                 <form @submit.prevent="onReply">
@@ -157,47 +157,46 @@ export default {
         newReply: null,
         feedback: null,
         role: null,
-        // filteredUserData: null,
-        selectedMessage: null
+        filteredUserData: []
     }),
     computed: {
         ...mapGetters({
             replies: 'chat/replies',
-            user: 'user',
-            userData: 'dashboard/userData'
+            user: 'user'
+            // userData: 'dashboard/userData'
         }),
         ...mapState({
-            allMessagesData: 'chat'
+            allMessagesData: 'chat',
+            userData: 'dashboard'
         }),
         allMessages() {
             return this.allMessagesData.messages;
-        },
-        filteredUserData() {
-            return this.userData.storeProfile;
         }
+        // filteredUserData() {
+        //     if (this.userData.storeProfile) {
+        //         return this.userData.storeProfile;
+        //     }
+        // }
     },
     methods: {
         ...mapActions({
             loadMessages: 'chat/loadMessages',
             loadReplies: 'chat/loadReplies'
         }),
-        loadAllReplies(messageId) {
+        loadAllReplies(messageData) {
             this.$store
-                .dispatch('chat/loadReplies', this.user.uid)
+                .dispatch('chat/loadReplies', messageData.userId)
                 .then((res) => {
                     // only filter once async call is complete
                     const filteredMessages = this.replies.filter((res) => {
-                        return res.messagePreviewId === messageId;
+                        return (
+                            res.messagePreviewId ===
+                            messageData.messagePreviewId
+                        );
                     });
                     this.messages = filteredMessages;
                 });
         },
-        // filterReplies() {
-        //     const data = this.messages.filter((res) => {
-        //         return res.messageId === this.$route.params.id;
-        //     });
-        //     this.filteredReplies = data;
-        // },
         onChange(e) {
             const value = e.id;
             // in this case ID works as the messagePreviewId
@@ -205,7 +204,6 @@ export default {
             // if there are no replies then load all replies and filter according to ID which is
             // the same as previewMessageId
             if (this.messages.length <= 0) {
-                // this.messages = this.replies;
                 this.loadReplies(e.userId).then(() => {
                     this.messages = this.replies.filter((res) => {
                         return res.messagePreviewId === value;
@@ -224,26 +222,28 @@ export default {
         },
         //NOTE  this is adding new reply
         onReply() {
-            if (this.role.customer) {
+            if (this.role.admin) {
                 if (this.newReply) {
                     const createdMessage = {
-                        to: this.messages[0].from,
+                        to: this.messages[0].to,
                         from: this.user.name,
-                        userId: this.user.uid,
+                        userId: this.messages[0].userId,
                         storeId: this.messages[0].storeId,
                         messageId: this.messages[0].messageId,
-                        storeName: this.messages[0].storeName,
-                        storePhoneNumber: this.messages[0].storePhoneNumber,
-                        storeEmail: this.messages[0].storeEmail,
+                        storeName: this.filteredUserData.storeName,
+                        storePhoneNumber: this.filteredUserData
+                            .storePhoneNumber,
+                        storeEmail: this.filteredUserData.storeEmail,
                         storeOwnerImage: this.filteredUserData.storeOwnerImage,
                         message: this.newReply,
                         messagePreviewId: this.messages[0].messagePreviewId
                     };
+                    console.log(`playground.vue - 243 - 🩳`, createdMessage);
                     this.$store.dispatch('chat/sendReply', createdMessage);
                     this.newReply = null;
                     this.feedback = null;
 
-                    this.loadAllReplies(this.messages[0].messagePreviewId);
+                    this.loadAllReplies(this.messages[0]);
                 } else {
                     this.feedback = 'You must enter a reply to add it';
                 }
@@ -263,22 +263,13 @@ export default {
                             this.role = tokenResult.claims;
                         }
                     });
-
-                // this.filteredUserData = this.userData.userData[0].storeProfile;
             }
         });
 
         this.loadMessages(this.user.uid).then(() => {});
-        this.loadReplies(this.selectedMessage).then(() => {
-            this.messages = [];
-        });
 
-        // this.filteredUserData = this.userData.userData[0].storeProfile;
-        // this.filteredUserData = this.userData.userData[0].storeProfile;
-
-        // check if signed in user is admin or customer
-
-        console.log(`playground.vue - 281 - 🏝`, this.filteredUserData);
+        // load store profile data here
+        this.filteredUserData = this.userData.userData[0].storeProfile;
     }
 };
 </script>
