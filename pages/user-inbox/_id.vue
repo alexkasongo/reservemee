@@ -65,6 +65,9 @@
         <!-- MESSAGE -->
         <div class="inbox__right">
             <v-card height="90vh" class="container mx-auto">
+                <div v-if="messages.length <= 0">
+                    Click on message to view...
+                </div>
                 <v-list three-line>
                     <div>
                         <template v-for="(message, index) in messages">
@@ -95,7 +98,7 @@
                         </template>
                     </div>
                     <!-- <div v-else>Go ahead and respond...</div> -->
-                    <v-list>
+                    <v-list v-if="messages.length > 0">
                         <v-list-item>
                             <v-list-item-content>
                                 <form @submit.prevent="onReply">
@@ -128,6 +131,7 @@
 </template>
 
 <script>
+import * as firebase from 'firebase/app';
 import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -135,7 +139,8 @@ export default {
         messages: [],
         selectedItem: [],
         newReply: null,
-        feedback: null
+        feedback: null,
+        role: null
     }),
     computed: {
         ...mapGetters({
@@ -143,10 +148,14 @@ export default {
             user: 'user'
         }),
         ...mapState({
-            allMessagesData: 'chat'
+            allMessagesData: 'chat',
+            userData: 'dashboard'
         }),
         allMessages() {
             return this.allMessagesData.messages;
+        },
+        filteredUserData() {
+            return this.userData.userData[0].storeProfile;
         }
     },
     methods: {
@@ -154,13 +163,22 @@ export default {
             loadMessages: 'chat/loadMessages',
             loadReplies: 'chat/loadReplies'
         }),
+        loadAllReplies(messageId) {
+            this.$store
+                .dispatch('chat/loadReplies', this.user.uid)
+                .then((res) => {
+                    // only filter once async call is complete
+                    const filteredMessages = this.replies.filter((res) => {
+                        return res.messagePreviewId === messageId;
+                    });
+                    this.messages = filteredMessages;
+                });
+        },
         onChange(e) {
-            // replace empty space with dash and transform to lowercase as value Array.filter()
-            // is case sensitive
             const value = e.messagePreviewId;
 
             // if all is selected show all
-            if (value === 'all') {
+            if (this.messages.length <= 0) {
                 this.messages = this.replies;
             }
 
@@ -187,48 +205,23 @@ export default {
             if (this.role.customer) {
                 if (this.newReply) {
                     const createdMessage = {
-                        to: this.filteredSender.name,
+                        to: this.messages[0].from,
                         from: this.user.name,
-                        userId: this.filteredSender.userId,
-                        storeId: this.user.uid,
-                        messageId: this.$route.params.id,
-                        storeName: this.filteredSender.storeName,
-                        storePhoneNumber: this.filteredSender.storePhoneNumber,
-                        storeEmail: this.filteredSender.storeEmail,
+                        userId: this.user.uid,
+                        storeId: this.messages[0].storeId,
+                        messageId: this.messages[0].messageId,
+                        storeName: this.messages[0].storeName,
+                        storePhoneNumber: this.messages[0].storePhoneNumber,
+                        storeEmail: this.messages[0].storeEmail,
                         storeOwnerImage: this.filteredUserData.storeOwnerImage,
                         message: this.newReply,
-                        messagePreviewId: this.filteredSender.id
+                        messagePreviewId: this.messages[0].messagePreviewId
                     };
                     this.$store.dispatch('chat/sendReply', createdMessage);
                     this.newReply = null;
                     this.feedback = null;
 
-                    this.loadAllReplies();
-                } else {
-                    this.feedback = 'You must enter a reply to add it';
-                }
-            }
-            if (this.role.admin) {
-                if (this.newReply) {
-                    const createdMessage = {
-                        to: this.filteredSender.name,
-                        from: this.user.name,
-                        userId: this.filteredSender.userId,
-                        storeId: this.user.uid,
-                        messageId: this.$route.params.id,
-                        storeName: this.filteredSender.storeName,
-                        storePhoneNumber: this.filteredSender.storePhoneNumber,
-                        storeEmail: this.filteredSender.storeEmail,
-                        storeOwnerImage: this.filteredUserData.storeOwnerImage,
-                        message: this.newReply,
-                        messagePreviewId: this.filteredSender.id
-                    };
-                    this.$store.dispatch('chat/sendReply', createdMessage);
-                    // console.log(`_id.vue - 180 - 🥶`, createdMessage);
-                    this.newReply = null;
-                    this.feedback = null;
-
-                    this.loadAllReplies();
+                    this.loadAllReplies(this.messages[0].messagePreviewId);
                 } else {
                     this.feedback = 'You must enter a reply to add it';
                 }
@@ -239,7 +232,6 @@ export default {
         this.loadMessages(this.$route.params.id).then(() => {});
         this.loadReplies(this.$route.params.id).then(() => {
             // this.messages = this.replies;
-            console.log(`_id.vue - 108 - variable`, this.allMessages);
         });
 
         // check if signed in user is admin or customer
