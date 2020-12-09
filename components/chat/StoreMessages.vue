@@ -21,18 +21,10 @@
                             </p>
                         </div>
                     </div>
-
-                    <!-- <div class="inbox-item__left">
-                        <v-btn
-                            @click="viewProfile(message)"
-                            class="teal darken-1"
-                            dark
-                            >Reply</v-btn
-                        >
-                    </div> -->
                 </div>
             </div>
             <v-btn
+                v-if="messages.length > 0"
                 @click="$router.push('/inbox/admin')"
                 class="teal darken-1"
                 block
@@ -44,11 +36,7 @@
 
         <!-- If No Messages -->
         <v-list-item-content v-if="messages.length <= 0">
-            <v-alert
-                style="cursor: pointer"
-                icon="mdi-alert-circle-outline"
-                text
-                type="info"
+            <v-alert icon="mdi-alert-circle-outline" text type="info"
                 ><span> You have no messages. </span></v-alert
             >
         </v-list-item-content>
@@ -64,8 +52,6 @@ import 'firebase/database';
 export default {
     data: () => ({
         isModalVisible: false,
-        // uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3',
-        // NEW MESSAGE
         newMessage: null,
         feedback: null,
         uid: ''
@@ -93,24 +79,6 @@ export default {
                 }
             });
         }
-
-        // NEW MESSAGE
-        // addMessage() {
-        //     if (this.newMessage) {
-        //         const createdMessage = {
-        //             storeId: this.storeProfile.storeId,
-        //             userId: this.user.uid,
-        //             name: this.user.displayName,
-        //             message: this.newMessage
-        //         };
-        //         this.$store.dispatch('chat/addMsg', createdMessage);
-        //         this.newMessage = null;
-        //         this.feedback = null;
-        //     } else {
-        //         this.feedback = 'You must enter a message in order to send one';
-        //     }
-        // }
-        // NEW MESSAGE
     },
     created() {
         console.log(`StoreMessages.vue - 109 - 🥶`, this.messages);
