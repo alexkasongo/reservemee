@@ -20,11 +20,11 @@
                                         size="164"
                                         tile
                                     >
-                                        <!-- <v-img
+                                        <v-img
                                             :src="
                                                 filteredUserData.storeOwnerImage
                                             "
-                                        ></v-img> -->
+                                        ></v-img>
                                     </v-avatar>
                                 </v-col>
                                 <v-col class="py-0">
@@ -157,24 +157,24 @@ export default {
         newReply: null,
         feedback: null,
         role: null,
-        filteredUserData: null,
+        // filteredUserData: null,
         selectedMessage: null
     }),
     computed: {
         ...mapGetters({
             replies: 'chat/replies',
-            user: 'user'
+            user: 'user',
+            userData: 'dashboard/userData'
         }),
         ...mapState({
-            allMessagesData: 'chat',
-            userData: 'dashboard'
+            allMessagesData: 'chat'
         }),
         allMessages() {
             return this.allMessagesData.messages;
+        },
+        filteredUserData() {
+            return this.userData.storeProfile;
         }
-        // filteredUserData() {
-        //     return this.userData.userData[0].storeProfile;
-        // }
     },
     methods: {
         ...mapActions({
@@ -276,8 +276,9 @@ export default {
         // this.filteredUserData = this.userData.userData[0].storeProfile;
         // this.filteredUserData = this.userData.userData[0].storeProfile;
 
-        // console.log(`playground.vue - 246 - 🍎`, this.user);
         // check if signed in user is admin or customer
+
+        console.log(`playground.vue - 281 - 🏝`, this.filteredUserData);
     }
 };
 </script>
