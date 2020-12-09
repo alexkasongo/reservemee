@@ -66,14 +66,12 @@
                                         >From:
                                         {{ messenger.name }}</v-list-item-title
                                     >
-                                    <v-list-item-subtitle
-                                        v-text="messenger.message"
-                                    ></v-list-item-subtitle>
+                                    <p v-text="messenger.message"></p>
                                 </v-list-item-content>
                             </v-list-item>
                         </v-list-item-group>
                     </v-list>
-                    <v-list v-if="messages.length <= 0" nav>
+                    <v-list v-if="allMessages.length <= 0" nav>
                         <v-list-item-group color="teal darker-1">
                             <v-list-item>
                                 <v-list-item-content>
@@ -98,9 +96,9 @@
         <!-- MESSAGE -->
         <div class="inbox__right">
             <v-card height="90vh" class="container inbox__right-card mx-auto">
-                <div v-if="messages.length <= 0">
+                <!-- <div v-if="messages.length <= 0">
                     Click on message to view...
-                </div>
+                </div> -->
                 <v-list three-line>
                     <div>
                         <template v-for="(message, index) in messages">
@@ -131,7 +129,7 @@
                         </template>
                     </div>
 
-                    <v-list v-if="messages.length > 0">
+                    <v-list v-if="allMessages.length > 0">
                         <v-list-item>
                             <v-list-item-content>
                                 <form @submit.prevent="onReply">
@@ -169,6 +167,7 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
     data: () => ({
+        firstMessage: null,
         messages: [],
         selectedItem: [],
         newReply: null,
@@ -216,31 +215,67 @@ export default {
         },
         onChange(e) {
             const value = e.id;
+            console.log(`admin.vue - 217 - 💋`, e);
             // in this case ID works as the messagePreviewId
+
+            if (e.messagePreviewId === undefined) {
+                console.log(`admin.vue - 222 - 🍑`, e.messagePreviewId);
+                this.firstMessage = Object.assign({}, e);
+            }
+            // this.firstMessage = JSON.parse(JSON.stringify(e));
 
             // if there are no replies then load all replies and filter according to ID which is
             // the same as previewMessageId
-            if (this.messages.length <= 0) {
+            if (e.messagePreviewId === undefined && this.messages.length <= 0) {
+                this.firstMessage = null;
                 this.loadReplies(e.userId).then(() => {
                     this.messages = this.replies.filter((res) => {
-                        return res.messagePreviewId === value;
+                        return res.messageId === value;
                     });
                 });
             }
             //  if service length is more than zero, repopulate and then filter accordingly
-            if (this.messages.length > 0) {
+            if (e.messagePreviewId === undefined && this.messages.length > 0) {
+                this.firstMessage = null;
                 this.messages = this.replies;
 
                 const filteredMessages = this.messages.filter((res) => {
-                    return res.messagePreviewId === value;
+                    return res.messageId === value;
                 });
                 this.messages = filteredMessages;
             }
+
+            console.log(`admin.vue - 239 - 💿`, this.firstMessage);
         },
         //NOTE  this is adding new reply
         onReply() {
+            console.log(`admin.vue - 250 - 💦`, this.firstMessage);
             if (this.role.admin) {
-                if (this.newReply) {
+                if (this.firstMessage !== null && this.newReply) {
+                    const createdMessage = {
+                        to: this.firstMessage.name,
+                        from: this.user.name,
+                        userId: this.firstMessage.userId,
+                        storeId: this.firstMessage.storeId,
+                        messageId: this.firstMessage.id,
+                        storeName: this.firstMessage.storeName,
+                        storePhoneNumber: this.firstMessage.storePhoneNumber,
+                        storeEmail: this.firstMessage.storeEmail,
+                        storeOwnerImage: this.firstMessage.storeOwnerImage,
+                        message: this.newReply,
+                        messagePreviewId: this.firstMessage.id
+                    };
+                    console.log(`FIRST MESSAGE.vue - 243 - 🩳`, createdMessage);
+                    // this.$store.dispatch('chat/sendReply', createdMessage);
+                    this.newReply = null;
+                    this.feedback = null;
+
+                    // this.loadAllReplies(this.messages[0]);
+                } else {
+                    this.feedback = 'You must enter a reply to add it';
+                }
+
+                if (this.firstMessage === null && this.newReply) {
                     const createdMessage = {
                         to: this.messages[0].to,
                         from: this.user.name,
@@ -253,14 +288,14 @@ export default {
                         storeEmail: this.filteredUserData.storeEmail,
                         storeOwnerImage: this.filteredUserData.storeOwnerImage,
                         message: this.newReply,
-                        messagePreviewId: this.messages[0].messagePreviewId
+                        messagePreviewId: this.messages[0].messageId
                     };
-                    console.log(`playground.vue - 243 - 🩳`, createdMessage);
-                    this.$store.dispatch('chat/sendReply', createdMessage);
+                    console.log(`MORE MESSAGES.vue - 243 - 🍇`, createdMessage);
+                    // this.$store.dispatch('chat/sendReply', createdMessage);
                     this.newReply = null;
                     this.feedback = null;
 
-                    this.loadAllReplies(this.messages[0]);
+                    // this.loadAllReplies(this.messages[0]);
                 } else {
                     this.feedback = 'You must enter a reply to add it';
                 }
