@@ -96,47 +96,68 @@
         <!-- MESSAGE -->
         <div class="inbox__right">
             <v-card height="90vh" class="container inbox__right-card mx-auto">
-                <v-card elevation="0" class="mx-auto">
-                    <v-card-text>
-                        <p class="display-1 text--primary">el·ee·mos·y·nar·y</p>
-                        <p>12 July 2020</p>
-                        <div class="text--primary">
-                            relating to or dependent on charity; charitable.<br />
-                            "an eleemosynary educational institution."
-                        </div>
-                    </v-card-text>
-                </v-card>
-                <v-divider></v-divider>
-                <v-list three-line>
-                    <div>
-                        <template v-for="(message, index) in messages">
-                            <v-list-item :key="index">
-                                <v-list-item-avatar>
-                                    <v-img
-                                        :src="message.storeOwnerImage"
-                                    ></v-img>
-                                </v-list-item-avatar>
-                                <v-list-item-content>
-                                    <v-list-item-title
-                                        class="deep-purple-text"
-                                        >{{ message.from }}</v-list-item-title
-                                    >
-                                    <v-alert
-                                        v-bind:class="{
-                                            teal:
-                                                message.from === `${user.name}`,
-                                            grey:
-                                                message.from !== `${user.name}`
-                                        }"
-                                        dark
-                                    >
-                                        {{ message.message }}
-                                    </v-alert>
-                                </v-list-item-content>
-                            </v-list-item>
-                        </template>
-                    </div>
+                <!-- Message -->
+                <div class="inbox__right-card-top">
+                    <v-card
+                        v-if="messagePreview.length > 0"
+                        elevation="0"
+                        class="mx-auto"
+                    >
+                        <v-card-text>
+                            <p class="display-1 text--primary">
+                                {{ messagePreview[0].name | capitalize }}
+                            </p>
+                            <p>{{ messagePreview[0].timestamp }}</p>
+                            <div class="text--primary">
+                                {{ messagePreview[0].message }}
+                            </div>
+                        </v-card-text>
+                    </v-card>
+                    <v-divider v-if="messagePreview.length > 0"></v-divider>
 
+                    <!-- Conversation End -->
+                    <div class="inbox__right-card-middle">
+                        <v-list three-line>
+                            <div>
+                                <template v-for="(message, index) in messages">
+                                    <v-list-item :key="index">
+                                        <v-list-item-avatar>
+                                            <v-img
+                                                :src="message.storeOwnerImage"
+                                            ></v-img>
+                                        </v-list-item-avatar>
+                                        <v-list-item-content>
+                                            <v-list-item-title
+                                                class="deep-purple-text"
+                                                >{{
+                                                    message.from
+                                                }}</v-list-item-title
+                                            >
+                                            <v-alert
+                                                v-bind:class="{
+                                                    teal:
+                                                        message.from ===
+                                                        `${user.name}`,
+                                                    grey:
+                                                        message.from !==
+                                                        `${user.name}`
+                                                }"
+                                                dark
+                                            >
+                                                {{ message.message }}
+                                            </v-alert>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </template>
+                            </div>
+                        </v-list>
+                    </div>
+                    <!-- Conversation End -->
+                </div>
+                <!-- Message End -->
+
+                <!-- Reply -->
+                <div class="inbox__right-card-btm">
                     <v-list v-if="allMessages.length > 0">
                         <v-list-item>
                             <v-list-item-content>
@@ -162,7 +183,8 @@
                             </v-list-item-content>
                         </v-list-item>
                     </v-list>
-                </v-list>
+                </div>
+                <!-- Reply End -->
             </v-card>
         </div>
         <!-- MESSAGE -->
@@ -175,8 +197,8 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
     data: () => ({
-        firstMessage: null,
         messages: [],
+        messagePreview: [],
         selectedItem: [],
         newReply: null,
         feedback: null,
@@ -196,11 +218,6 @@ export default {
         allMessages() {
             return this.allMessagesData.messages;
         }
-        // filteredUserData() {
-        //     if (this.userData.storeProfile) {
-        //         return this.userData.storeProfile;
-        //     }
-        // }
     },
     methods: {
         ...mapActions({
@@ -208,7 +225,6 @@ export default {
             loadReplies: 'chat/loadReplies'
         }),
         loadFirstReply(messageData) {
-            console.log(`admin.vue - 211 - 🐷`, messageData);
             this.$store
                 .dispatch('chat/loadReplies', messageData.userId)
                 .then((res) => {
@@ -216,7 +232,6 @@ export default {
                     const filteredMessages = this.replies.filter((res) => {
                         return res.messagePreviewId === messageData.id;
                     });
-                    console.log(`admin.vue - 235 - 🐣`, filteredMessages);
                     this.messages = filteredMessages;
                 });
         },
@@ -235,6 +250,9 @@ export default {
                 });
         },
         onChange(e) {
+            this.messagePreview = new Array(e);
+            console.log(`admin.vue - 234 - 🍣`, this.messagePreview);
+
             const value = e.id;
             this.loadReplies(e.userId).then(() => {
                 const data = this.replies.filter((res) => {
@@ -244,7 +262,6 @@ export default {
                     this.messages = new Array(e);
                 } else {
                     this.messages = data;
-                    console.log(`admin.vue - 223 - 🤡`, data);
                 }
             });
         },
@@ -266,7 +283,6 @@ export default {
                         message: this.newReply,
                         messagePreviewId: this.messages[0].id
                     };
-                    console.log(`MORE MESSAGES.vue - 243 - 🍇`, createdMessage);
                     this.$store.dispatch('chat/sendReply', createdMessage);
                     this.newReply = null;
                     this.feedback = null;
@@ -292,7 +308,6 @@ export default {
                         message: this.newReply,
                         messagePreviewId: this.messages[0].messageId
                     };
-                    console.log(`MORE MESSAGES.vue - 243 - 🎃`, createdMessage);
                     this.$store.dispatch('chat/sendReply', createdMessage);
                     this.newReply = null;
                     this.feedback = null;
@@ -339,7 +354,13 @@ export default {
         width: 60%;
     }
     &__right-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    &__right-card-middle {
         overflow: auto;
+        max-height: 50vh;
     }
 }
 </style>
