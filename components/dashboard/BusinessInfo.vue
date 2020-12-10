@@ -1,7 +1,6 @@
 <template>
     <!-- BusinessInfo -->
     <div class="mb-5">
-        <!-- <h4 class="header-title mt-0">Store Bio</h4> -->
         <div v-if="storeProfile !== null" class="panel-body">
             <p class="text-muted font-13">{{ storeProfile.storeBio }}</p>
             <hr />
@@ -168,8 +167,6 @@ export default {
         this.beauty = this.storeProfile.beauty;
         this.wellness = this.storeProfile.wellness;
         this.fitness = this.storeProfile.fitness;
-
-        console.log(`BusinessInfo.vue - 147 - 🧻`, this.wellness);
     }
 };
 </script>
