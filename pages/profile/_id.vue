@@ -458,6 +458,129 @@
                                     >
                                 </div>
                                 <div class="form-group">
+                                    <label for="fullName">Store Category</label>
+                                    <v-container fluid>
+                                        <v-row align="center">
+                                            <v-col cols="12" sm="6">
+                                                <v-select
+                                                    v-model="e5"
+                                                    :items="beauty"
+                                                    label="Select"
+                                                    multiple
+                                                    hint="Beauty"
+                                                    persistent-hint
+                                                    color="teal darker-1"
+                                                >
+                                                    <template
+                                                        v-slot:selection="{
+                                                            item,
+                                                            index
+                                                        }"
+                                                    >
+                                                        <v-chip
+                                                            v-if="index === 0"
+                                                            color="teal darker-1"
+                                                            dark
+                                                        >
+                                                            <span>{{
+                                                                item
+                                                            }}</span>
+                                                        </v-chip>
+                                                        <span
+                                                            v-if="index === 1"
+                                                            class="grey--text caption"
+                                                        >
+                                                            (+{{
+                                                                e5.length - 1
+                                                            }}
+                                                            others)
+                                                        </span>
+                                                    </template></v-select
+                                                >
+                                            </v-col>
+                                            <v-col cols="12" sm="6">
+                                                <v-select
+                                                    v-model="e6"
+                                                    :items="wellness"
+                                                    label="Select"
+                                                    multiple
+                                                    hint="Wellness"
+                                                    persistent-hint
+                                                    color="teal darker-1"
+                                                >
+                                                    <template
+                                                        v-slot:selection="{
+                                                            item,
+                                                            index
+                                                        }"
+                                                    >
+                                                        <v-chip
+                                                            v-if="index === 0"
+                                                            color="teal darker-1"
+                                                            dark
+                                                        >
+                                                            <span>{{
+                                                                item
+                                                            }}</span>
+                                                        </v-chip>
+                                                        <span
+                                                            v-if="index === 1"
+                                                            class="grey--text caption"
+                                                        >
+                                                            (+{{
+                                                                e6.length - 1
+                                                            }}
+                                                            others)
+                                                        </span>
+                                                    </template></v-select
+                                                >
+                                            </v-col>
+
+                                            <v-col cols="12" sm="6">
+                                                <v-select
+                                                    v-model="e7"
+                                                    :items="fitness"
+                                                    label="Select"
+                                                    multiple
+                                                    hint="Fitness"
+                                                    persistent-hint
+                                                    color="teal darker-1"
+                                                >
+                                                    <template
+                                                        v-slot:selection="{
+                                                            item,
+                                                            index
+                                                        }"
+                                                    >
+                                                        <v-chip
+                                                            v-if="index === 0"
+                                                            color="teal darker-1"
+                                                            dark
+                                                        >
+                                                            <span>{{
+                                                                item
+                                                            }}</span>
+                                                        </v-chip>
+                                                        <span
+                                                            v-if="index === 1"
+                                                            class="grey--text caption"
+                                                        >
+                                                            (+{{
+                                                                e7.length - 1
+                                                            }}
+                                                            others)
+                                                        </span>
+                                                    </template>
+                                                </v-select>
+                                            </v-col>
+                                        </v-row>
+                                    </v-container>
+                                    <small class="form-text text-muted"
+                                        >Select a category that best describes
+                                        your service.</small
+                                    >
+                                </div>
+                                <div class="form-group">
                                     <label for="bio">Your Store Bio</label>
                                     <v-textarea
                                         outlined
@@ -861,6 +984,37 @@ export default {
                     text: 'Account Settings',
                     href: '#account'
                 }
+            ],
+            e5: [],
+            e6: [],
+            e7: [],
+            beauty: [
+                'Salon',
+                'Massage',
+                'Nail',
+                'Spa',
+                'Barber',
+                'Tanning',
+                'Makeup',
+                'Hair Removal'
+            ],
+            wellness: [
+                'Coaching',
+                'Acupuncture',
+                'Physical Therapy',
+                'Nutritionist',
+                'Chiropractor',
+                'Med Spa'
+            ],
+            fitness: [
+                'Pilates',
+                'Yoga',
+                'Personal Trainer',
+                'Cross Training',
+                'Cycling',
+                'Dance',
+                'Gym',
+                'All Fitness'
             ]
         };
     },
