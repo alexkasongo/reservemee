@@ -458,12 +458,14 @@
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label for="fullName">Store Category</label>
+                                    <label for="fullName"
+                                        >Store Service Category</label
+                                    >
                                     <v-container fluid>
                                         <v-row align="center">
                                             <v-col cols="12" sm="6">
                                                 <v-select
-                                                    v-model="e5"
+                                                    v-model="storeForm.cat1"
                                                     :items="beauty"
                                                     label="Select"
                                                     multiple
@@ -491,7 +493,8 @@
                                                             class="grey--text caption"
                                                         >
                                                             (+{{
-                                                                e5.length - 1
+                                                                storeForm.cat1
+                                                                    .length - 1
                                                             }}
                                                             others)
                                                         </span>
@@ -500,7 +503,7 @@
                                             </v-col>
                                             <v-col cols="12" sm="6">
                                                 <v-select
-                                                    v-model="e6"
+                                                    v-model="storeForm.cat2"
                                                     :items="wellness"
                                                     label="Select"
                                                     multiple
@@ -528,7 +531,8 @@
                                                             class="grey--text caption"
                                                         >
                                                             (+{{
-                                                                e6.length - 1
+                                                                storeForm.cat2
+                                                                    .length - 1
                                                             }}
                                                             others)
                                                         </span>
@@ -538,7 +542,7 @@
 
                                             <v-col cols="12" sm="6">
                                                 <v-select
-                                                    v-model="e7"
+                                                    v-model="storeForm.cat3"
                                                     :items="fitness"
                                                     label="Select"
                                                     multiple
@@ -566,7 +570,8 @@
                                                             class="grey--text caption"
                                                         >
                                                             (+{{
-                                                                e7.length - 1
+                                                                storeForm.cat3
+                                                                    .length - 1
                                                             }}
                                                             others)
                                                         </span>
@@ -951,7 +956,10 @@ export default {
                 storeOwnerImage: '',
                 rawStoreLogo: null,
                 rawStoreBanner: null,
-                rawStoreOwnerImage: null
+                rawStoreOwnerImage: null,
+                cat1: [],
+                cat2: [],
+                cat3: []
             },
             items: [
                 {
@@ -985,9 +993,6 @@ export default {
                     href: '#account'
                 }
             ],
-            e5: [],
-            e6: [],
-            e7: [],
             beauty: [
                 'Salon',
                 'Massage',
@@ -1186,15 +1191,14 @@ export default {
                 storeBio: this.storeForm.storeBio,
                 storeLogo: this.storeForm.storeLogo,
                 storeBanner: this.storeForm.storeBanner,
-                // storeOwnerImage: this.storeForm.storeOwnerImage,
                 rawStoreLogo: this.storeForm.rawStoreLogo,
                 rawStoreBanner: this.storeForm.rawStoreBanner,
-                // rawStoreOwnerImage: this.storeForm.rawStoreOwnerImage,
-                storeLocation: this.storeForm.storeLocation
+                storeLocation: this.storeForm.storeLocation,
+                beauty: this.storeForm.cat1,
+                wellness: this.storeForm.cat2,
+                fitness: this.storeForm.cat3
             };
-
             this.updateStoreProfile(data);
-            // this.alert = 'Saved...';
         },
         profileImagePickFile() {
             this.$refs.fileInputOne.$refs.input.click();
@@ -1451,6 +1455,9 @@ export default {
             this.storeForm.storePhoneNumber = this.userInfo[0].storeProfile.storePhoneNumber;
             this.storeForm.storeBio = this.userInfo[0].storeProfile.storeBio;
             this.storeForm.storeLocation = this.userInfo[0].storeProfile.storeLocation;
+            this.storeForm.cat1 = this.userInfo[0].storeProfile.beauty;
+            this.storeForm.cat2 = this.userInfo[0].storeProfile.wellness;
+            this.storeForm.cat3 = this.userInfo[0].storeProfile.fitness;
         }
     }
 };
