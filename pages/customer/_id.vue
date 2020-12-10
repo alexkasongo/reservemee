@@ -1,36 +1,52 @@
 <template>
-    <div class="view-profile container margin">
-        <h1>Messages</h1>
-        <!-- <p>{{ test }}</p> -->
-        <div class="card">
-            <!-- <div class="card" v-if="currentUserMessages"> -->
-            <h2 class="deep-purple-text center">
-                {{ this.$route.params.name }}
-            </h2>
-            <ul class="comments collection">
-                <li v-for="(comment, index) in comments" :key="index">
-                    <div class="deep-purple-text">{{ comment.from }}</div>
-                    <div class="grey-text text-darken-2">
-                        {{ comment.message }}
-                    </div>
-                </li>
-            </ul>
-            <form @submit.prevent="onSubmit">
-                <div class="field">
-                    <label for="comment">Write Message</label>
-                    <v-text-field
-                        type="text"
-                        name="comment"
-                        v-model="newComment"
-                    ></v-text-field>
-                    <p v-if="feedback" class="red-text center">
-                        {{ feedback }}
-                    </p>
-                </div>
-                <v-btn type="submit">Send</v-btn>
-            </form>
-        </div>
-    </div>
+    <v-card class="container mx-auto">
+        <v-list three-line>
+            <div>
+                <template v-for="(reply, index) in filteredReplies">
+                    <v-list-item :key="index">
+                        <v-list-item-avatar>
+                            <v-img :src="reply.storeOwnerImage"></v-img>
+                        </v-list-item-avatar>
+                        <v-list-item-content>
+                            <v-list-item-title class="deep-purple-text">{{
+                                reply.from
+                            }}</v-list-item-title>
+                            <v-alert
+                                v-bind:class="{
+                                    teal: reply.from === `${user.name}`,
+                                    grey: reply.from !== `${user.name}`
+                                }"
+                                dark
+                            >
+                                {{ reply.message }}
+                            </v-alert>
+                        </v-list-item-content>
+                    </v-list-item>
+                </template>
+            </div>
+            <!-- <div v-else>Go ahead and respond...</div> -->
+            <v-list>
+                <v-list-item>
+                    <v-list-item-content>
+                        <form @submit.prevent="onReply">
+                            <div class="field">
+                                <label for="reply">Write Message</label>
+                                <v-text-field
+                                    type="text"
+                                    name="reply"
+                                    v-model="newReply"
+                                ></v-text-field>
+                                <p v-if="feedback" class="red-text center">
+                                    {{ feedback }}
+                                </p>
+                            </div>
+                            <v-btn color="teal" type="submit" dark>Send</v-btn>
+                        </form>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
+        </v-list>
+    </v-card>
 </template>
 
 <script>
@@ -40,76 +56,161 @@ import { mapState, mapGetters } from 'vuex';
 export default {
     data: () => ({
         profile: null,
-        newComment: null,
+        newReply: null,
         feedback: null,
-        uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3',
-        messages: null
+        messages: null,
+        role: null,
+        filteredReplies: null
     }),
     computed: {
-        ...mapGetters({
+        ...mapState({
             user: 'user',
-            loadedComments: 'chat/comments'
+            loadedChats: 'chat',
+            userData: 'dashboard'
         }),
-        currentUserMessages() {
-            const messages = this.comments.filter((res) => {
-                return res.userId === this.$route.params.id;
-            });
-            return messages[0];
+        ...mapGetters({
+            user: 'user'
+        }),
+        filteredUserData() {
+            return this.userData.userData[0].storeProfile;
         },
-        comments() {
-            const clonedComments = [];
-            const comments = this.loadedComments;
-            comments.forEach((comment) => {
-                clonedComments.push({
-                    ...comment
+        loadedReplies() {
+            return this.loadedChats.replies;
+        },
+        sender() {
+            return this.loadedChats.messages;
+        },
+        filteredSender() {
+            const data = this.sender.filter((res) => {
+                return res.id === this.$route.params.id;
+            });
+            return data[0];
+        },
+        replies() {
+            const clonedReplies = [];
+            if (!this.loadedReplies.length <= 0) {
+                const replies = this.loadedReplies;
+                replies.forEach((reply) => {
+                    clonedReplies.push({
+                        ...reply
+                    });
                 });
-            });
-            let filtered = clonedComments.filter(
-                (res) => res.userId === this.$route.params.id
-            );
-            return filtered;
-        },
-        ...mapState(['user'])
+                let filtered = clonedReplies.filter(
+                    (res) => res.userId === this.$route.params.id
+                );
+                return filtered;
+            } else {
+                return null;
+            }
+        }
     },
     created() {
-        this.$store.dispatch('chat/loadComments', this.uid);
+        console.log(`_id.vue - 102 - 💜`, this.sender);
+        this.$store
+            .dispatch('chat/loadReplies', this.filteredSender.userId)
+            .then((res) => {
+                // only filter once async call is complete
+                this.filterReplies();
+            });
+
+        // check if signin user is admin or customer
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in.
+                // check user status
+                firebase
+                    .auth()
+                    .currentUser.getIdTokenResult()
+                    .then((tokenResult) => {
+                        if (tokenResult) {
+                            this.role = tokenResult.claims;
+                        }
+                    });
+            }
+        });
     },
     methods: {
-        //NOTE  this is adding new comment
-        onSubmit() {
-            if (this.newComment) {
-                const createdMessage = {
-                    to: this.$route.params.name,
-                    from: this.user.name,
-                    userId: this.$route.params.id,
-                    storeId: this.uid,
-                    message: this.newComment
-                };
-                this.$store.dispatch('chat/sendPrivateMessage', createdMessage);
-                this.newComment = null;
-                this.feedback = null;
-            } else {
-                this.feedback = 'You must enter a comment to add it';
+        filterReplies() {
+            const data = this.loadedReplies.filter((res) => {
+                return res.messageId === this.$route.params.id;
+            });
+            this.filteredReplies = data;
+        },
+        loadAllReplies() {
+            this.$store
+                .dispatch('chat/loadReplies', this.filteredSender.userId)
+                .then((res) => {
+                    // only filter once async call is complete
+                    this.filterReplies();
+                });
+        },
+        //NOTE  this is adding new reply
+        onReply() {
+            if (this.role.customer) {
+                if (this.newReply) {
+                    const createdMessage = {
+                        to: this.filteredSender.name,
+                        from: this.user.name,
+                        userId: this.filteredSender.userId,
+                        storeId: this.user.uid,
+                        messageId: this.$route.params.id,
+                        storeName: this.filteredSender.storeName,
+                        storePhoneNumber: this.filteredSender.storePhoneNumber,
+                        storeEmail: this.filteredSender.storeEmail,
+                        storeOwnerImage: this.filteredUserData.storeOwnerImage,
+                        message: this.newReply,
+                        messagePreviewId: this.filteredSender.id
+                    };
+                    this.$store.dispatch('chat/sendReply', createdMessage);
+                    this.newReply = null;
+                    this.feedback = null;
+
+                    this.loadAllReplies();
+                } else {
+                    this.feedback = 'You must enter a reply to add it';
+                }
+            }
+            if (this.role.admin) {
+                if (this.newReply) {
+                    const createdMessage = {
+                        to: this.filteredSender.name,
+                        from: this.user.name,
+                        userId: this.filteredSender.userId,
+                        storeId: this.user.uid,
+                        messageId: this.$route.params.id,
+                        storeName: this.filteredSender.storeName,
+                        storePhoneNumber: this.filteredSender.storePhoneNumber,
+                        storeEmail: this.filteredSender.storeEmail,
+                        storeOwnerImage: this.filteredUserData.storeOwnerImage,
+                        message: this.newReply,
+                        messagePreviewId: this.filteredSender.id
+                    };
+                    this.$store.dispatch('chat/sendReply', createdMessage);
+                    // console.log(`_id.vue - 180 - 🥶`, createdMessage);
+                    this.newReply = null;
+                    this.feedback = null;
+
+                    this.loadAllReplies();
+                } else {
+                    this.feedback = 'You must enter a reply to add it';
+                }
             }
         }
     }
 };
 </script>
 
-<style>
-.view-profile .card {
-    padding: 20px;
-    margin-top: 60px;
-}
-.view-profile h2 {
-    font-size: 2em;
-    margin-top: 0;
-}
-.view-profile li {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-}
-body {
-    background: #ddd;
-}
+<style lang="scss" scoped>
+// .view-profile .card {
+//     padding: 20px;
+//     margin-top: 60px;
+// }
+// .view-profile h2 {
+//     font-size: 2em;
+//     margin-top: 0;
+// }
+// .view-profile li {
+//     padding: 10px;
+//     border-bottom: 1px solid #eee;
+// }
 </style>

@@ -18,8 +18,7 @@
                             <h2
                                 v-if="
                                     categories.length <= 0 ||
-                                    !user.emailVerified ||
-                                    categories.length !== 0
+                                    !user.emailVerified
                                 "
                                 class="header-title mt-0 mb-5"
                             >
@@ -45,7 +44,7 @@
                     <div>
                         <h2 class="header-title mt-5 mb-5">Messages</h2>
                         <!-- Messages -->
-                        <Messages class="mb-5" />
+                        <StoreMessages class="mb-5" />
                         <!-- Messages -->
                     </div>
                 </div>

@@ -57,7 +57,7 @@
         <!-- POPULAR STORES END -->
 
         <!-- NEW STORES -->
-        <div class="categories__new">
+        <!-- <div class="categories__new">
             <h2>New Stores</h2>
             <div class="categories__new-stores">
                 <div
@@ -73,11 +73,11 @@
                     ></div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- NEW STORES -->
 
         <!-- RECOMMENDED STORES -->
-        <div class="categories__new">
+        <!-- <div class="categories__new">
             <h2>Recommended Stores</h2>
             <div class="categories__new-stores">
                 <div
@@ -93,7 +93,7 @@
                     ></div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- RECOMMENDED STORES -->
     </div>
 </template>
