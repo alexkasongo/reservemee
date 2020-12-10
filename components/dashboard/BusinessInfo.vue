@@ -28,13 +28,31 @@
                 </p>
                 <p class="text-muted font-13">
                     <strong>Services :</strong>
-                    <span v-for="(service, id) in services" :key="id">
+                    <span v-for="service in beauty" :key="service.name">
+                        <span class="m-l-5">
+                            <span
+                                class="flag-icon flag-icon-us m-r-5"
+                                title="us"
+                            ></span>
+                            <v-chip class="mb-2">{{ service }}</v-chip>
+                        </span>
+                    </span>
+                    <span v-for="service in wellness" :key="service.name">
                         <span class="m-l-5">
                             <span
                                 class="flag-icon flag-icon-us m-r-5 m-t-0"
                                 title="us"
                             ></span>
-                            <span>{{ service.name }}</span>
+                            <v-chip class="mb-2">{{ service }}</v-chip>
+                        </span>
+                    </span>
+                    <span v-for="service in fitness" :key="service.name">
+                        <span class="m-l-5">
+                            <span
+                                class="flag-icon flag-icon-us m-r-5 m-t-0"
+                                title="us"
+                            ></span>
+                            <v-chip class="mb-2">{{ service }}</v-chip>
                         </span>
                     </span>
                 </p>
@@ -87,21 +105,6 @@
                 type="info"
                 >Update Store Information</v-alert
             >
-            <!-- <v-card class="light-blue lighten-5" elevation="0">
-                <div class="card-body">
-                    <h5 v-if="user">You have not created a store profile.</h5>
-                    <p>Please update your store information in settings</p>
-                    <v-btn
-                        @click="goToSettings"
-                        type="button"
-                        color="blue-grey darken-3"
-                        dark
-                        block
-                    >
-                        Update Store Information
-                    </v-btn>
-                </div>
-            </v-card> -->
         </div>
     </div>
     <!-- BusinessInfo -->
@@ -127,7 +130,10 @@ export default {
                 {
                     name: 'Service4'
                 }
-            ]
+            ],
+            beauty: [],
+            wellness: [],
+            fitness: []
         };
     },
     computed: {
@@ -157,6 +163,13 @@ export default {
         goToSettings() {
             this.$router.push(`/profile/${this.user.uid}`);
         }
+    },
+    mounted() {
+        this.beauty = this.storeProfile.beauty;
+        this.wellness = this.storeProfile.wellness;
+        this.fitness = this.storeProfile.fitness;
+
+        console.log(`BusinessInfo.vue - 147 - 🧻`, this.wellness);
     }
 };
 </script>
