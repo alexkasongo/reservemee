@@ -81,7 +81,6 @@ export default {
         }
     },
     created() {
-        console.log(`StoreMessages.vue - 109 - 🥶`, this.messages);
         this.$store.dispatch('chat/loadMessages', this.user.uid);
 
         // NEW MESSAGE
