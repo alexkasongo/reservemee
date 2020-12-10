@@ -111,7 +111,7 @@
                     <v-dialog v-model="dialog" persistent max-width="500">
                         <template v-slot:activator="{ on, attrs }">
                             <!-- SERVICE CARD -->
-                            <v-row dense>
+                            <v-row>
                                 <v-col
                                     v-for="(service, id) in storeServices"
                                     :key="id"

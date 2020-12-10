@@ -1,0 +1,60 @@
+.services {
+    &__container {
+        display: flex;
+    }
+    /*
+    ** LEFT
+    */
+    &__left {
+        display: flex;
+        flex-direction: column;
+        @media (min-width: $large-desktop) {
+            flex-direction: row;
+        }
+    }
+    &__left-banner {
+        margin: 0 0 30px 0;
+    }
+    &__left-card-img-container {
+        width: 35%;
+        max-height: 200px;
+        @media (min-width: $tablet) {
+            width: 50%;
+        }
+    }
+    &__left-service-img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-top-left-radius: 24px;
+        border-bottom-left-radius: 24px;
+        // @media (min-width: $small-desktop) {
+        //     height: 200px;
+        //     width: 300px;
+        // }
+        // @media (min-width: $large-desktop) {
+        //     height: 200px;
+        //     width: 50%;
+        // }
+    }
+    &__left-card-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    &__left-card-price {
+        text-align: right;
+    }
+    // LEFT END
+
+    /*
+    ** RIGHT
+    */
+    &__right {
+        // height: 100vh;
+        // background-color: #ccc;
+        width: 35%;
+        border-radius: 24px;
+    }
+    // RIGHT END
+}
