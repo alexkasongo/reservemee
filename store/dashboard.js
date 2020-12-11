@@ -618,7 +618,10 @@ export const actions = {
                             storePhoneNumber: payload.storePhoneNumber,
                             storeBio: payload.storeBio,
                             storeBanner: banner,
-                            storeLocation: payload.storeLocation
+                            storeLocation: payload.storeLocation,
+                            beauty: payload.beauty,
+                            wellness: payload.wellness,
+                            fitness: payload.fitness
                         })
 
                     // update successful
@@ -677,7 +680,10 @@ export const actions = {
                                 storePhoneNumber: payload.storePhoneNumber,
                                 storeBio: payload.storeBio,
                                 storeBanner: banner,
-                                storeLocation: payload.storeLocation
+                                storeLocation: payload.storeLocation,
+                                beauty: payload.beauty,
+                                wellness: payload.wellness,
+                                fitness: payload.fitness
                             })
 
                         // update successful

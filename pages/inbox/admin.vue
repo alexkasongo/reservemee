@@ -383,6 +383,7 @@ export default {
         // only do something when userdata is available
         if (this.userData.length > 0) {
             this.filteredUserData = this.userData.userData[0].storeProfile;
+            console.log(`admin.vue - 385 - 🙏🏾`, this.filteredUserData);
         }
     }
 };
