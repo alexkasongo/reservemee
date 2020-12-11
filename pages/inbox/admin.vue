@@ -22,7 +22,7 @@
 
         <div class="inbox__card-container">
             <div class="inbox__left">
-                <v-card class="mx-auto" height="90vh" width="100%" tile>
+                <v-card class="mx-auto" height="100%" width="100%" tile>
                     <v-navigation-drawer width="100%" permanent>
                         <!-- HEADER -->
                         <v-card
@@ -127,7 +127,7 @@
             <!-- MESSAGE -->
             <div class="inbox__right">
                 <v-card
-                    height="90vh"
+                    height="100%"
                     class="container inbox__right-card mx-auto"
                 >
                     <!-- Message -->

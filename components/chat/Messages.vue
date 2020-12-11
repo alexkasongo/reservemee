@@ -2,7 +2,7 @@
     <div>
         <!-- If Messages -->
         <div class="mx-auto">
-            <div
+            <!-- <div
                 class="inbox-widget"
                 v-for="message in messages"
                 :key="message.id"
@@ -21,50 +21,29 @@
                             </p>
                         </div>
                     </div>
-
-                    <!-- <div class="inbox-item__left">
-                        <v-btn
-                            @click="viewProfile(message)"
-                            class="teal darken-1"
-                            dark
-                            >Reply</v-btn
-                        >
-                    </div> -->
                 </div>
-            </div>
+            </div> -->
+            <!-- If Messages -->
 
             <!-- NEW MESSAGE -->
             <div class="new-message">
                 <form @submit.prevent="addMessage()">
-                    <label for="new-message">New Message (enter to add):</label>
+                    <!-- <label for="new-message">New Message (enter to add):</label> -->
                     <p class="red-text" v-if="feedback">{{ feedback }}</p>
-                    <v-text-field
+                    <v-textarea
                         type="text"
                         name="new-message"
                         placeholder="type in a message and press enter"
                         v-model="newMessage"
-                    ></v-text-field>
+                        class="mb-3"
+                    ></v-textarea>
                     <v-btn type="submit">Send Me</v-btn>
                 </form>
             </div>
             <!-- NEW MESSAGE END -->
         </div>
-        <!--If Messages end-->
 
-        <!-- If No Messages -->
-        <!-- <v-card class="mx-auto">
-            <v-list-item three-line>
-                <v-list-item-content>
-                    <v-alert
-                        style="cursor: pointer"
-                        icon="mdi-alert-circle-outline"
-                        text
-                        type="info"
-                        ><span> You have no messages. </span></v-alert
-                    >
-                </v-list-item-content>
-            </v-list-item>
-        </v-card> -->
+        <!--If Messages end-->
         <v-list-item-content v-if="!messages">
             <v-alert
                 style="cursor: pointer"
@@ -87,8 +66,6 @@ import 'firebase/database';
 export default {
     data: () => ({
         isModalVisible: false,
-        // uid: 'RGfjW6W4YMUgClckhJE5PccAtSF3',
-        // NEW MESSAGE
         newMessage: null,
         feedback: null,
         uid: '',
