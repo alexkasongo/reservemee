@@ -25,36 +25,38 @@
                     <strong>Location :</strong>
                     <span class="m-l-15">{{ storeProfile.storeLocation }}</span>
                 </p>
-                <p class="text-muted font-13">
-                    <strong>Services :</strong>
-                    <span v-for="service in beauty" :key="service.name">
-                        <span class="m-l-5">
-                            <span
-                                class="flag-icon flag-icon-us m-r-5"
-                                title="us"
-                            ></span>
-                            <v-chip class="mb-2">{{ service }}</v-chip>
+                <div v-if="this.storeProfile">
+                    <p v-if="beauty !== null" class="text-muted font-13">
+                        <strong>Services :</strong>
+                        <span v-for="service in beauty" :key="service.name">
+                            <span class="m-l-5">
+                                <span
+                                    class="flag-icon flag-icon-us m-r-5"
+                                    title="us"
+                                ></span>
+                                <v-chip class="mb-2">{{ service }}</v-chip>
+                            </span>
                         </span>
-                    </span>
-                    <span v-for="service in wellness" :key="service.name">
-                        <span class="m-l-5">
-                            <span
-                                class="flag-icon flag-icon-us m-r-5 m-t-0"
-                                title="us"
-                            ></span>
-                            <v-chip class="mb-2">{{ service }}</v-chip>
+                        <span v-for="service in wellness" :key="service.name">
+                            <span class="m-l-5">
+                                <span
+                                    class="flag-icon flag-icon-us m-r-5 m-t-0"
+                                    title="us"
+                                ></span>
+                                <v-chip class="mb-2">{{ service }}</v-chip>
+                            </span>
                         </span>
-                    </span>
-                    <span v-for="service in fitness" :key="service.name">
-                        <span class="m-l-5">
-                            <span
-                                class="flag-icon flag-icon-us m-r-5 m-t-0"
-                                title="us"
-                            ></span>
-                            <v-chip class="mb-2">{{ service }}</v-chip>
+                        <span v-for="service in fitness" :key="service.name">
+                            <span class="m-l-5">
+                                <span
+                                    class="flag-icon flag-icon-us m-r-5 m-t-0"
+                                    title="us"
+                                ></span>
+                                <v-chip class="mb-2">{{ service }}</v-chip>
+                            </span>
                         </span>
-                    </span>
-                </p>
+                    </p>
+                </div>
             </div>
             <ul class="social-links list-inline mt-4 mb-0">
                 <li class="list-inline-item">
@@ -164,9 +166,13 @@ export default {
         }
     },
     mounted() {
-        this.beauty = this.storeProfile.beauty;
-        this.wellness = this.storeProfile.wellness;
-        this.fitness = this.storeProfile.fitness;
+        // If storeProfile is null do something
+        if (this.storeProfile) {
+            console.log(`BusinessInfo.vue - 167 - 🐷`, this.storeProfile);
+            this.beauty = this.storeProfile.beauty;
+            this.wellness = this.storeProfile.wellness;
+            this.fitness = this.storeProfile.fitness;
+        }
     }
 };
 </script>

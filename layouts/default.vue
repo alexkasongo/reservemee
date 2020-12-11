@@ -408,7 +408,6 @@ export default {
             $('.navbar-collapse').collapse('hide');
             this.loadServices(this.userId);
             // great spot for debuggin
-            console.log(`default.vue - 415 - 🥶`, this.$route.name);
         },
         group() {
             this.drawer = false;

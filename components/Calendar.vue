@@ -728,7 +728,6 @@ export default {
     },
     mounted() {
         this.getEvents();
-        console.log(`Calendar.vue - 667 - 🛍`, this.defaultEvents);
     },
     methods: {
         /*
@@ -756,8 +755,6 @@ export default {
             if (events.length > 0) {
                 this.events = events;
             }
-
-            console.log(`Calendar.vue - 667 - 🍇`, events);
         },
         async addEvent() {
             const start = this.submittableStartDateTime;
