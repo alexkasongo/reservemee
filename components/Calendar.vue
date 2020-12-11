@@ -271,6 +271,7 @@
                 :events="events"
                 :event-color="getEventColor"
                 :type="type"
+                :first-interval="9"
                 @click:event="showEvent"
                 @click:more="viewDay"
                 @click:date="viewDay"
@@ -563,9 +564,9 @@ export default {
         // Date and time picker logic END
         timeStart: false,
         timeEnd: false,
-        today: new Date().toISOString().substr(0, 10),
-        focus: new Date().toISOString().substr(0, 10),
-        type: 'month',
+        today: new Date(),
+        focus: new Date(),
+        type: 'day',
         typeToLabel: {
             month: 'Month',
             week: 'Week',
@@ -582,7 +583,81 @@ export default {
         selectedElement: null,
         selectedOpen: false,
         events: [],
-        dialog: false
+        dialog: false,
+        defaultEvents: [
+            {
+                booked: false,
+                color: '#00897b',
+                details: 'Available for booking',
+                end: new Date().setHours(10, 0, 0),
+                name: 'Open',
+                start: new Date().setHours(9, 0, 0),
+                timed: true
+            },
+            {
+                booked: false,
+                color: '#00897b',
+                details: 'Available for booking',
+                end: new Date().setHours(11, 0, 0),
+                name: 'Open',
+                start: new Date().setHours(10, 0, 0),
+                timed: true
+            },
+            {
+                booked: false,
+                color: '#00897b',
+                details: 'Available for booking',
+                end: new Date().setHours(12, 0, 0),
+                name: 'Open',
+                start: new Date().setHours(11, 0, 0),
+                timed: true
+            },
+            {
+                booked: false,
+                color: '#dc3545',
+                details: 'Lunch break',
+                end: new Date().setHours(13, 0, 0),
+                name: 'Lunch',
+                start: new Date().setHours(12, 0, 0),
+                timed: true
+            },
+            {
+                booked: false,
+                color: '#00897b',
+                details: 'Available for booking',
+                end: new Date().setHours(14, 0, 0),
+                name: 'Open',
+                start: new Date().setHours(13, 0, 0),
+                timed: true
+            },
+            {
+                booked: false,
+                color: '#00897b',
+                details: 'Available for booking',
+                end: new Date().setHours(15, 0, 0),
+                name: 'Open',
+                start: new Date().setHours(14, 0, 0),
+                timed: true
+            },
+            {
+                booked: false,
+                color: '#9E9E9E',
+                details: 'Available for booking',
+                end: new Date().setHours(16, 0, 0),
+                name: 'Booked',
+                start: new Date().setHours(15, 0, 0),
+                timed: true
+            },
+            {
+                booked: false,
+                color: '#00897b',
+                details: 'Available for booking',
+                end: new Date().setHours(17, 0, 0),
+                name: 'Open',
+                start: new Date().setHours(16, 0, 0),
+                timed: true
+            }
+        ]
     }),
     computed: {
         user() {
@@ -653,6 +728,7 @@ export default {
     },
     mounted() {
         this.getEvents();
+        console.log(`Calendar.vue - 667 - 🛍`, this.defaultEvents);
     },
     methods: {
         /*
@@ -674,7 +750,14 @@ export default {
                 appData.timed = doc.data().timed;
                 events.push(appData);
             });
-            this.events = events;
+            if (events.length <= 0) {
+                this.events = this.defaultEvents;
+            }
+            if (events.length > 0) {
+                this.events = events;
+            }
+
+            console.log(`Calendar.vue - 667 - 🍇`, events);
         },
         async addEvent() {
             const start = this.submittableStartDateTime;
