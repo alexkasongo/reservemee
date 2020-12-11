@@ -1,7 +1,7 @@
 <template>
     <div class="inbox container">
         <!-- Alert -->
-        <div v-if="this.userData.length === 0">
+        <div v-if="!filteredUserData.storeOwnerImage">
             <v-alert
                 style="cursor: pointer"
                 @click="$router.push(`/profile/${user.uid}`)"
@@ -10,17 +10,17 @@
                 type="info"
                 >Go to setting and add profile picture to unlock inbox</v-alert
             >
-            <v-card elevation="2">
+            <!-- <v-card elevation="2">
                 <v-img
                     lazy-src="https://picsum.photos/id/11/10/6"
                     max-height="300"
                     src="https://picsum.photos/id/11/500/300"
                 ></v-img>
-            </v-card>
+            </v-card> -->
         </div>
         <!-- Alert End -->
 
-        <div v-if="this.userData.length > 0" class="inbox__card-container">
+        <div class="inbox__card-container">
             <div class="inbox__left">
                 <v-card class="mx-auto" height="90vh" width="100%" tile>
                     <v-navigation-drawer width="100%" permanent>
@@ -141,7 +141,9 @@
                                 <p class="display-1 text--primary">
                                     {{ messagePreview[0].name | capitalize }}
                                 </p>
-                                <p>{{ messagePreview[0].timestamp }}</p>
+                                <p>
+                                    {{ new Date(messagePreview[0].timestamp) }}
+                                </p>
                                 <div class="text--primary">
                                     {{ messagePreview[0].message }}
                                 </div>
@@ -197,6 +199,38 @@
                     <!-- Reply -->
                     <div class="inbox__right-card-btm">
                         <v-list v-if="allMessages.length > 0">
+                            <v-list-item>
+                                <v-list-item-content>
+                                    <form @submit.prevent="onReply">
+                                        <div class="field">
+                                            <label for="reply"
+                                                >Write Message</label
+                                            >
+                                            <v-text-field
+                                                type="text"
+                                                name="reply"
+                                                v-model="newReply"
+                                            ></v-text-field>
+                                            <p
+                                                v-if="feedback"
+                                                class="red-text center"
+                                            >
+                                                {{ feedback }}
+                                            </p>
+                                        </div>
+                                        <v-btn color="teal" type="submit" dark
+                                            >Send</v-btn
+                                        >
+                                    </form>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-list>
+                    </div>
+                    <div
+                        v-if="allMessages.length <= 0"
+                        class="inbox__right-card-btm"
+                    >
+                        <v-list>
                             <v-list-item>
                                 <v-list-item-content>
                                     <form @submit.prevent="onReply">
@@ -381,10 +415,14 @@ export default {
         // load store profile data here
 
         // only do something when userdata is available
-        if (this.userData.length > 0) {
+        if (this.userData.userData.length > 0) {
             this.filteredUserData = this.userData.userData[0].storeProfile;
-            console.log(`admin.vue - 385 - 🙏🏾`, this.filteredUserData);
         }
+
+        // this.filteredUserData = this.userData.userData[0].storeProfile;
+        console.log(`admin.vue - 385 - 🙏🏾`, this.filteredUserData);
+
+        console.log(`admin.vue - 385 - 🍫`, this.userData);
     }
 };
 </script>

@@ -44,7 +44,7 @@
                         placeholder="type in a message and press enter"
                         v-model="newMessage"
                     ></v-text-field>
-                    <v-btn type="submit">Send</v-btn>
+                    <v-btn type="submit">Send Me</v-btn>
                 </form>
             </div>
             <!-- NEW MESSAGE END -->
@@ -139,7 +139,7 @@ export default {
                         message: this.newMessage
                     };
                     console.log(`Messages.vue - 132 - 💜`, createdMessage);
-                    this.$store.dispatch('chat/addMsg', createdMessage);
+                    // this.$store.dispatch('chat/addMsg', createdMessage);
                     this.newMessage = null;
                     this.feedback = null;
                 } else {
@@ -153,13 +153,13 @@ export default {
                         storeId: this.storeProfile.storeId,
                         storeEmail: this.storeProfile.storeEmail,
                         storeName: this.storeProfile.storeName,
-                        storeOwnerImage: this.storeProfile.storeOwnerImage,
+                        storeOwnerImage: this.userProfile.storeOwnerImage,
                         storePhoneNumber: this.storeProfile.storePhoneNumber,
                         userId: this.user.uid,
                         name: this.user.name,
                         message: this.newMessage
                     };
-                    console.log(`Messages.vue - 132 - 💜`, createdMessage);
+                    console.log(`Messages.vue - 132 - 🍲`, createdMessage);
                     this.$store.dispatch('chat/addMsg', createdMessage);
                     this.newMessage = null;
                     this.feedback = null;
@@ -171,8 +171,8 @@ export default {
         }
         // NEW MESSAGE
     },
-    created() {
-        console.log(`Messages.vue - 138 - 🌙`, this.userProfile);
+    mounted() {
+        // console.log(`Messages.vue - 138 - 🥎`, this.userProfile);
         this.$store.dispatch('chat/loadMessages', this.user.uid);
 
         // NEW MESSAGE
