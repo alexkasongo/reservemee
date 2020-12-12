@@ -116,7 +116,7 @@ export default {
                         message: this.newMessage
                     };
                     console.log(`Messages.vue - 132 - 💜`, createdMessage);
-                    // this.$store.dispatch('chat/addMsg', createdMessage);
+                    this.$store.dispatch('chat/addMsg', createdMessage);
                     this.newMessage = null;
                     this.feedback = null;
                 } else {
