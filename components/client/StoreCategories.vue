@@ -21,7 +21,7 @@
             <p>Loading...</p>
         </div>
         <div v-if="!storesLoading" class="categories__popular">
-            <div v-for="(store, id) in stores.slice(0, 4)" :key="id">
+            <div v-for="(store, id) in stores" :key="id">
                 <v-card
                     outlined
                     elevation="0"
