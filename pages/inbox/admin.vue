@@ -435,6 +435,8 @@ export default {
     &__left {
         width: 40%;
         margin: 0 10px 0 0;
+        height: 85vh;
+        height: 85vh;
     }
     &__right {
         width: 60%;
@@ -446,7 +448,7 @@ export default {
     }
     &__right-card-middle {
         overflow: auto;
-        max-height: 50vh;
+        max-height: calc(85vh - 50vh);
     }
 }
 </style>
