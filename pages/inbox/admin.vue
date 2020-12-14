@@ -10,13 +10,6 @@
                 type="info"
                 >Go to setting and add profile picture to unlock inbox</v-alert
             >
-            <!-- <v-card elevation="2">
-                <v-img
-                    lazy-src="https://picsum.photos/id/11/10/6"
-                    max-height="300"
-                    src="https://picsum.photos/id/11/500/300"
-                ></v-img>
-            </v-card> -->
         </div>
         <!-- Alert End -->
 
@@ -27,12 +20,15 @@
                         <!-- HEADER -->
                         <v-card
                             elevation="0"
-                            class="mx-auto"
-                            max-width="434"
+                            class="mx-auto inbox__left-card"
+                            width="100%"
                             tile
                         >
                             <v-img height="100%" class="teal darker-1">
-                                <v-row align="end" class="fill-height">
+                                <v-row
+                                    align="end"
+                                    class="fill-height inbox__left-card-header"
+                                >
                                     <v-col
                                         align-self="start"
                                         class="pa-0"
@@ -72,36 +68,41 @@
                             </v-img>
                         </v-card>
                         <!-- HEADER -->
-                        <v-divider></v-divider>
-                        <v-list nav>
-                            <v-list-item-group
-                                v-model="selectedItem"
-                                color="teal darker-1"
-                            >
-                                <v-list-item
-                                    v-for="(messenger, i) in allMessages"
-                                    :key="i"
+                        <div class="inbox__left-messages">
+                            <!-- <v-divider></v-divider> -->
+                            <v-list nav>
+                                <v-list-item-group
+                                    v-model="selectedItem"
+                                    color="teal darker-1"
                                 >
-                                    <v-list-item-avatar>
-                                        <v-img
-                                            :src="messenger.storeOwnerImage"
-                                        ></v-img>
-                                    </v-list-item-avatar>
-
-                                    <v-list-item-content
-                                        @click="onChange(messenger)"
+                                    <v-list-item
+                                        v-for="(messenger, i) in allMessages"
+                                        :key="i"
                                     >
-                                        <v-list-item-title
-                                            >From:
-                                            {{
-                                                messenger.name
-                                            }}</v-list-item-title
+                                        <v-list-item-avatar
+                                            @click="onChange(messenger)"
                                         >
-                                        <p v-text="messenger.message"></p>
-                                    </v-list-item-content>
-                                </v-list-item>
-                            </v-list-item-group>
-                        </v-list>
+                                            <v-img
+                                                :src="messenger.storeOwnerImage"
+                                            ></v-img>
+                                        </v-list-item-avatar>
+
+                                        <v-list-item-content
+                                            class="inbox__left-content"
+                                            @click="onChange(messenger)"
+                                        >
+                                            <v-list-item-title
+                                                >From:
+                                                {{
+                                                    messenger.name
+                                                }}</v-list-item-title
+                                            >
+                                            <p v-text="messenger.message"></p>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-list-item-group>
+                            </v-list>
+                        </div>
                         <v-list v-if="allMessages.length <= 0" nav>
                             <v-list-item-group color="teal darker-1">
                                 <v-list-item>
@@ -159,7 +160,9 @@
                                         v-for="(message, index) in messages"
                                     >
                                         <v-list-item :key="index">
-                                            <v-list-item-avatar>
+                                            <v-list-item-avatar
+                                                class="inbox__right-avatar"
+                                            >
                                                 <v-img
                                                     :src="
                                                         message.storeOwnerImage
@@ -428,27 +431,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.inbox {
-    &__card-container {
-        display: flex;
-    }
-    &__left {
-        width: 40%;
-        margin: 0 10px 0 0;
-        height: 85vh;
-        height: 85vh;
-    }
-    &__right {
-        width: 60%;
-    }
-    &__right-card {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    &__right-card-middle {
-        overflow: auto;
-        max-height: calc(85vh - 50vh);
-    }
-}
 </style>
