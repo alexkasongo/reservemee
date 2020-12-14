@@ -98,7 +98,7 @@
             <!-- RIGHT -->
             <div class="appointment__right">
                 <div class="mx-auto appointment__calendar" elevation="0">
-                    <Calendar />
+                    <BookingCalendar />
                 </div>
                 <v-card elevation="0" class="appointment__cart-container">
                     <v-card-title> Your Order </v-card-title>
@@ -177,14 +177,14 @@
 </template>
 
 <script>
-import Calendar from '@/components/Calendar';
+import BookingCalendar from '@/components/cart/BookingCalendar';
 import Messages from '@/components/chat/Messages';
 import { mapGetters } from 'vuex';
 
 export default {
     components: {
         Messages,
-        Calendar
+        BookingCalendar
     },
     data: () => ({
         workingHours: [
