@@ -115,7 +115,6 @@ export default {
                         name: this.user.name,
                         message: this.newMessage
                     };
-                    console.log(`Messages.vue - 132 - 💜`, createdMessage);
                     this.$store.dispatch('chat/addMsg', createdMessage);
                     this.newMessage = null;
                     this.feedback = null;
@@ -136,7 +135,6 @@ export default {
                         name: this.user.name,
                         message: this.newMessage
                     };
-                    console.log(`Messages.vue - 132 - 🍲`, createdMessage);
                     this.$store.dispatch('chat/addMsg', createdMessage);
                     this.newMessage = null;
                     this.feedback = null;
@@ -149,7 +147,6 @@ export default {
         // NEW MESSAGE
     },
     mounted() {
-        // console.log(`Messages.vue - 138 - 🥎`, this.userProfile);
         this.$store.dispatch('chat/loadMessages', this.user.uid);
 
         // NEW MESSAGE
