@@ -309,19 +309,13 @@
                 width="600px"
                 right
             >
-                <v-list nav>
-                    <v-list-item-group
-                        v-model="drawerRight"
-                        active-class="teal--text text--accent-4"
-                    >
-                    </v-list-item-group>
-                </v-list>
+                <Cart />
 
-                <template v-if="user" v-slot:append>
+                <!-- <template v-if="user" v-slot:append>
                     <div @click="signout" class="pa-2">
                         <v-btn class="teal darker-1" block dark> Bottom </v-btn>
                     </div>
-                </template>
+                </template> -->
             </v-navigation-drawer>
             <!-- DRAWER RIGHT END -->
 
