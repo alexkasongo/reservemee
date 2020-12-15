@@ -518,10 +518,12 @@
                         </v-btn>
                         <v-btn
                             text
+                            class="teal darken-1"
+                            dark
                             v-if="currentlyEditing !== selectedEvent.id"
-                            @click.prevent="editEvent(selectedEvent)"
+                            @click.prevent="onBookTime(selectedEvent)"
                         >
-                            Edit
+                            Select Time
                         </v-btn>
                         <v-btn
                             text
@@ -540,7 +542,7 @@
 
 <script>
 import { db } from '@/plugins/firebase';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState, mapActions } from 'vuex';
 
 export default {
     name: 'Calendar',
@@ -586,8 +588,8 @@ export default {
         dialog: false,
         defaultEvents: [
             {
-                booked: false,
-                color: '#00897b',
+                booked: true,
+                color: '#9E9E9E',
                 details: 'Available for booking',
                 end: new Date().setHours(10, 0, 0),
                 name: 'Open',
@@ -640,7 +642,7 @@ export default {
                 timed: true
             },
             {
-                booked: false,
+                booked: true,
                 color: '#9E9E9E',
                 details: 'Available for booking',
                 end: new Date().setHours(16, 0, 0),
@@ -730,6 +732,12 @@ export default {
         this.getEvents();
     },
     methods: {
+        /*
+         ** Vuex
+         */
+        ...mapActions({
+            setBookingState: 'booking/setBookingState'
+        }),
         /*
          ** FIRESTORE LOGIC
          */
@@ -862,8 +870,12 @@ export default {
         next() {
             this.$refs.calendar.next();
         },
-        editEvent(ev) {
-            this.currentlyEditing = ev.id;
+        onBookTime(ev) {
+            // this.currentlyEditing = ev.id;
+            console.log(`BookingCalendar.vue - 869 - 🌎`, ev.id);
+
+            // onBookTime, take ev/event object and persist state to local storage
+            this.setBookingState(ev);
         },
         showEvent({ nativeEvent, event }) {
             // parse date object and get date out
