@@ -729,6 +729,7 @@ export default {
         }
     },
     mounted() {
+        this.setBookingState(null);
         this.getEvents();
     },
     methods: {

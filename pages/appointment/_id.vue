@@ -180,12 +180,15 @@
                     </v-col>
                 </v-row>
 
+                <v-alert v-if="alert" dense type="error">
+                    {{ alert }}
+                </v-alert>
+
                 <v-list-item class="grow">
                     <v-row align="center" justify="end">
                         <v-btn
                             rounded
                             elevation="0"
-                            outlined
                             dark
                             large
                             class="teal darker-1"
@@ -267,24 +270,30 @@ export default {
         ...mapActions({
             addToCartAction: 'cart/addToCart'
         }),
+        getRandomInt(max) {
+            return Math.floor(Math.random() * Math.floor(max));
+        },
         addToCart() {
             // validate
-            if (events !== null) {
+            if (this.bookingState !== null) {
                 // push service data to persisted local storage state
                 // create order entry in database
                 const event = this.bookingState;
                 const service = this.service;
                 const note = this.note;
+                const id = this.getRandomInt(100);
 
                 const order = {
+                    id,
                     event,
                     service,
                     note
                 };
                 this.addToCartAction(order);
                 this.alert = '';
+                this.note = '';
             } else {
-                this.alert = 'Please select date and time.';
+                this.alert = 'Please select a date and time.';
             }
         }
     }
