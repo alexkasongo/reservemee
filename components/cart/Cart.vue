@@ -146,6 +146,11 @@ export default {
         //     return this.ordersState.order;
         // }
     },
+    methods: {
+        deleteItem(ev) {
+            console.log(`Cart.vue - 151 - 🐣`, ev);
+        }
+    },
     mounted() {
         console.log(`playground.vue - 52 - 💦`, this.ordersState);
         this.orders = this.ordersState.order;

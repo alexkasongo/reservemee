@@ -36,7 +36,15 @@ export const actions = {
         // });
 
         commit("SET_CART", order)
-        commit('loaders/SET_SNACKBAR', true, { root: true });
+        // commit('loaders/SET_SNACKBAR', true, { root: true });
+        this.$swal({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Added to Cart',
+            showConfirmButton: false,
+            timer: 2500
+        });
     }
 };
 

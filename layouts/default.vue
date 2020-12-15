@@ -67,12 +67,19 @@
                 <v-btn v-if="user" icon>
                     <v-icon color="white">mdi-heart-outline</v-icon>
                 </v-btn>
-                <v-btn v-if="user" icon>
-                    <v-icon
-                        @click.stop="drawerRight = !drawerRight"
-                        color="white"
-                        >mdi-cart</v-icon
+                <v-btn
+                    v-if="user"
+                    icon
+                    @click.stop="drawerRight = !drawerRight"
+                >
+                    <v-badge
+                        :content="orders"
+                        :value="orders"
+                        color="red darker-1"
+                        overlap
                     >
+                        <v-icon color="white">mdi-cart</v-icon>
+                    </v-badge>
                 </v-btn>
 
                 <div v-if="user" class="text-center">
@@ -374,8 +381,18 @@ export default {
             userId: 'userId'
         }),
         ...mapState({
-            snackbarState: 'loaders'
+            snackbarState: 'loaders',
+            cart: 'cart'
         }),
+        orders: {
+            // return this.cart.order;
+            get() {
+                return this.cart.order.length;
+            },
+            set() {
+                return new Array();
+            }
+        },
         storeProfile() {
             if (
                 // if the state is undfined or the object does not exist, return null
@@ -420,7 +437,8 @@ export default {
             loadCategories: 'dashboard/loadCategories',
             loadServices: 'dashboard/loadServices',
             setSnackbar: 'loaders/setSnackbar',
-            removeUserData: 'removeUserData'
+            removeUserData: 'removeUserData',
+            orders: null
         }),
         signin() {
             this.$router.replace('/signin');
@@ -474,7 +492,7 @@ export default {
         }
     },
     mounted() {
-        console.log(`default.vue - 491 - 🏝`, this.$route.name);
+        console.log(`default.vue - 491 - 🏝`, this.orders);
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 // User is signed in.
