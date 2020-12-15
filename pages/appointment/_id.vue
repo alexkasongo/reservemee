@@ -126,7 +126,29 @@
                                         v-text="service.description"
                                     ></v-card-subtitle>
 
-                                    <v-card-text>
+                                    <v-card-text
+                                        v-if="bookingState !== null"
+                                        class="pb-0"
+                                    >
+                                        <div>
+                                            Start:
+                                            {{
+                                                new Date(
+                                                    this.bookingState.start
+                                                ).toLocaleString()
+                                            }}
+                                        </div>
+                                        <div>
+                                            End:
+                                            {{
+                                                new Date(
+                                                    this.bookingState.end
+                                                ).toLocaleString()
+                                            }}
+                                        </div>
+                                    </v-card-text>
+
+                                    <v-card-text class="pt-2">
                                         <div class="display-1 text--primary">
                                             ${{ service.price }}
                                         </div>
@@ -179,7 +201,7 @@
 <script>
 import BookingCalendar from '@/components/cart/BookingCalendar';
 import Messages from '@/components/chat/Messages';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
     components: {
@@ -224,6 +246,12 @@ export default {
             storeProfile: 'storeFront/loadedStoreProfile',
             services: 'storeFront/loadedStoreServices'
         }),
+        ...mapState({
+            booking: 'booking'
+        }),
+        bookingState() {
+            return this.booking.bookingState;
+        },
         service() {
             const filtered = this.services.filter((res) => {
                 return res.id === this.$route.params.id;

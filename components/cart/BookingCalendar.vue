@@ -872,7 +872,10 @@ export default {
         },
         onBookTime(ev) {
             // this.currentlyEditing = ev.id;
-            console.log(`BookingCalendar.vue - 869 - 🌎`, ev.id);
+            console.log(
+                `BookingCalendar.vue - 869 - Reminder: You need the ID 🌎`,
+                ev.id
+            );
 
             // onBookTime, take ev/event object and persist state to local storage
             this.setBookingState(ev);
