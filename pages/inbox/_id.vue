@@ -1,178 +1,271 @@
 <template>
     <div class="inbox container">
-        <!-- PREVIEW -->
-
-        <div class="inbox__left">
-            <v-card class="mx-auto" height="90vh" width="100%" tile>
-                <v-navigation-drawer width="100%" permanent>
-                    <!-- HEADER -->
-                    <v-card elevation="0" class="mx-auto" max-width="434" tile>
-                        <v-img height="100%" class="teal darker-1">
-                            <v-row align="end" class="fill-height">
-                                <v-col
-                                    align-self="start"
-                                    class="pa-0"
-                                    cols="12"
-                                >
-                                    <v-avatar
-                                        class="profile"
-                                        color="grey"
-                                        size="164"
-                                        tile
-                                    >
-                                        <v-img
-                                            :src="
-                                                filteredUserData.storeOwnerImage
-                                            "
-                                        ></v-img>
-                                    </v-avatar>
-                                </v-col>
-                                <v-col class="py-0">
-                                    <v-list-item color="rgba(0, 0, 0, .4)" dark>
-                                        <v-list-item-content>
-                                            <v-list-item-title class="title">
-                                                {{ user.name }}
-                                            </v-list-item-title>
-                                            <v-list-item-subtitle>{{
-                                                user.email
-                                            }}</v-list-item-subtitle>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                </v-col>
-                            </v-row>
-                        </v-img>
-                    </v-card>
-                    <!-- HEADER -->
-                    <v-divider></v-divider>
-                    <v-list nav>
-                        <v-list-item-group
-                            v-model="selectedItem"
-                            color="teal darker-1"
-                        >
-                            <v-list-item
-                                v-for="(messenger, i) in allMessages"
-                                :key="i"
-                            >
-                                <v-list-item-avatar>
-                                    <v-img
-                                        :src="messenger.storeOwnerImage"
-                                    ></v-img>
-                                </v-list-item-avatar>
-
-                                <v-list-item-content
-                                    @click="onChange(messenger)"
-                                >
-                                    <v-list-item-title
-                                        >To:
-                                        {{
-                                            messenger.storeName
-                                        }}</v-list-item-title
-                                    >
-                                    <v-list-item-subtitle
-                                        v-text="messenger.message"
-                                    ></v-list-item-subtitle>
-                                </v-list-item-content>
-                            </v-list-item>
-                        </v-list-item-group>
-                    </v-list>
-                </v-navigation-drawer>
-            </v-card>
+        <!-- Alert -->
+        <div v-if="!filteredUserData.storeOwnerImage">
+            <v-alert
+                style="cursor: pointer"
+                @click="$router.push(`/profile/${user.uid}`)"
+                icon="mdi-alert-circle-outline"
+                text
+                type="info"
+                >Go to setting and add profile picture to unlock inbox</v-alert
+            >
         </div>
-        <!-- PREVIEW END -->
+        <!-- Alert End -->
 
-        <!-- MESSAGE -->
-        <div class="inbox__right">
-            <v-card height="90vh" class="container inbox__right-card mx-auto">
-                <!-- Message -->
-                <div class="inbox__right-card-top">
-                    <v-card
-                        v-if="messagePreview.length > 0"
-                        elevation="0"
-                        class="mx-auto"
-                    >
-                        <v-card-text>
-                            <p class="display-1 text--primary">
-                                {{ messagePreview[0].name | capitalize }}
-                            </p>
-                            <p>{{ messagePreview[0].timestamp }}</p>
-                            <div class="text--primary">
-                                {{ messagePreview[0].message }}
-                            </div>
-                        </v-card-text>
-                    </v-card>
-                    <v-divider v-if="messagePreview.length > 0"></v-divider>
-                    <div class="inbox__right-card-middle">
-                        <v-list three-line>
-                            <div>
-                                <template v-for="(message, index) in messages">
-                                    <v-list-item :key="index">
-                                        <v-list-item-avatar>
+        <div class="inbox__card-container">
+            <div class="inbox__left">
+                <v-card class="mx-auto" height="100%" width="100%" tile>
+                    <v-navigation-drawer width="100%" permanent>
+                        <!-- HEADER -->
+                        <v-card
+                            elevation="0"
+                            class="mx-auto inbox__left-card"
+                            width="100%"
+                            tile
+                        >
+                            <v-img height="100%" class="teal darker-1">
+                                <v-row
+                                    align="end"
+                                    class="fill-height inbox__left-card-header"
+                                >
+                                    <v-col
+                                        align-self="start"
+                                        class="pa-0"
+                                        cols="12"
+                                    >
+                                        <v-avatar
+                                            class="profile"
+                                            color="grey"
+                                            size="164"
+                                            tile
+                                        >
                                             <v-img
-                                                :src="message.storeOwnerImage"
+                                                :src="
+                                                    filteredUserData.storeOwnerImage
+                                                "
+                                            ></v-img>
+                                        </v-avatar>
+                                    </v-col>
+                                    <v-col class="py-0">
+                                        <v-list-item
+                                            color="rgba(0, 0, 0, .4)"
+                                            dark
+                                        >
+                                            <v-list-item-content>
+                                                <v-list-item-title
+                                                    class="title"
+                                                >
+                                                    {{ user.name }}
+                                                </v-list-item-title>
+                                                <v-list-item-subtitle>{{
+                                                    user.email
+                                                }}</v-list-item-subtitle>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </v-col>
+                                </v-row>
+                            </v-img>
+                        </v-card>
+                        <!-- HEADER -->
+                        <div class="inbox__left-messages">
+                            <!-- <v-divider></v-divider> -->
+                            <v-list nav>
+                                <v-list-item-group
+                                    v-model="selectedItem"
+                                    color="teal darker-1"
+                                >
+                                    <v-list-item
+                                        v-for="(messenger, i) in allMessages"
+                                        :key="i"
+                                    >
+                                        <v-list-item-avatar
+                                            @click="onChange(messenger)"
+                                        >
+                                            <v-img
+                                                :src="messenger.storeOwnerImage"
                                             ></v-img>
                                         </v-list-item-avatar>
-                                        <v-list-item-content>
+
+                                        <v-list-item-content
+                                            class="inbox__left-content"
+                                            @click="onChange(messenger)"
+                                        >
                                             <v-list-item-title
-                                                class="deep-purple-text"
-                                                >{{
-                                                    message.from
+                                                >To:
+                                                {{
+                                                    messenger.storeName
                                                 }}</v-list-item-title
                                             >
-                                            <v-alert
-                                                v-bind:class="{
-                                                    teal:
-                                                        message.from ===
-                                                        `${user.name}`,
-                                                    grey:
-                                                        message.from !==
-                                                        `${user.name}`
-                                                }"
-                                                dark
-                                            >
-                                                {{ message.message }}
-                                            </v-alert>
+                                            <p v-text="messenger.message"></p>
                                         </v-list-item-content>
                                     </v-list-item>
-                                </template>
-                            </div>
+                                </v-list-item-group>
+                            </v-list>
+                        </div>
+                        <v-list v-if="allMessages.length <= 0" nav>
+                            <v-list-item-group color="teal darker-1">
+                                <v-list-item>
+                                    <v-list-item-content>
+                                        <v-alert
+                                            class="m-0"
+                                            icon="mdi-alert-circle-outline"
+                                            text
+                                            type="info"
+                                            ><span>
+                                                You have no messages.
+                                            </span></v-alert
+                                        >
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </v-list-item-group>
+                        </v-list>
+                    </v-navigation-drawer>
+                </v-card>
+            </div>
+            <!-- PREVIEW END -->
+
+            <!-- MESSAGE -->
+            <div class="inbox__right">
+                <v-card
+                    height="100%"
+                    class="container inbox__right-card mx-auto"
+                >
+                    <!-- Message -->
+                    <div class="inbox__right-card-top">
+                        <v-card
+                            v-if="messagePreview.length > 0"
+                            elevation="0"
+                            class="mx-auto"
+                        >
+                            <v-card-text>
+                                <p class="display-1 text--primary">
+                                    {{ messagePreview[0].name | capitalize }}
+                                </p>
+                                <p>
+                                    {{ new Date(messagePreview[0].timestamp) }}
+                                </p>
+                                <div class="text--primary">
+                                    {{ messagePreview[0].message }}
+                                </div>
+                            </v-card-text>
+                        </v-card>
+                        <v-divider v-if="messagePreview.length > 0"></v-divider>
+
+                        <!-- Conversation start -->
+                        <div class="inbox__right-card-middle">
+                            <v-list three-line>
+                                <div>
+                                    <template
+                                        v-for="(message, index) in messages"
+                                    >
+                                        <v-list-item :key="index">
+                                            <v-list-item-avatar
+                                                class="inbox__right-avatar"
+                                            >
+                                                <v-img
+                                                    :src="
+                                                        message.storeOwnerImage
+                                                    "
+                                                ></v-img>
+                                            </v-list-item-avatar>
+                                            <v-list-item-content>
+                                                <v-list-item-title
+                                                    class="deep-purple-text"
+                                                    >{{
+                                                        message.from
+                                                    }}</v-list-item-title
+                                                >
+                                                <v-alert
+                                                    v-bind:class="{
+                                                        teal:
+                                                            message.from ===
+                                                            `${user.name}`,
+                                                        grey:
+                                                            message.from !==
+                                                            `${user.name}`
+                                                    }"
+                                                    dark
+                                                >
+                                                    {{ message.message }}
+                                                </v-alert>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </template>
+                                </div>
+                            </v-list>
+                        </div>
+                        <!-- Conversation End -->
+                    </div>
+                    <!-- Message End -->
+
+                    <!-- Reply -->
+                    <div class="inbox__right-card-btm">
+                        <v-list v-if="allMessages.length > 0">
+                            <v-list-item>
+                                <v-list-item-content>
+                                    <form @submit.prevent="onReply">
+                                        <div class="field">
+                                            <label for="reply"
+                                                >Write Message</label
+                                            >
+                                            <v-text-field
+                                                type="text"
+                                                name="reply"
+                                                v-model="newReply"
+                                            ></v-text-field>
+                                            <p
+                                                v-if="feedback"
+                                                class="red-text center"
+                                            >
+                                                {{ feedback }}
+                                            </p>
+                                        </div>
+                                        <v-btn color="teal" type="submit" dark
+                                            >Send</v-btn
+                                        >
+                                    </form>
+                                </v-list-item-content>
+                            </v-list-item>
                         </v-list>
                     </div>
-                    <!-- Conversation End -->
-                </div>
-                <!-- Message End -->
-
-                <!-- Reply -->
-                <div class="inbox__right-card-btm">
-                    <v-list v-if="allMessages.length > 0">
-                        <v-list-item>
-                            <v-list-item-content>
-                                <form @submit.prevent="onReply">
-                                    <div class="field">
-                                        <label for="reply">Write Message</label>
-                                        <v-text-field
-                                            type="text"
-                                            name="reply"
-                                            v-model="newReply"
-                                        ></v-text-field>
-                                        <p
-                                            v-if="feedback"
-                                            class="red-text center"
+                    <div
+                        v-if="allMessages.length <= 0"
+                        class="inbox__right-card-btm"
+                    >
+                        <v-list>
+                            <v-list-item>
+                                <v-list-item-content>
+                                    <form @submit.prevent="onReply">
+                                        <div class="field">
+                                            <label for="reply"
+                                                >Write Message</label
+                                            >
+                                            <v-text-field
+                                                type="text"
+                                                name="reply"
+                                                v-model="newReply"
+                                            ></v-text-field>
+                                            <p
+                                                v-if="feedback"
+                                                class="red-text center"
+                                            >
+                                                {{ feedback }}
+                                            </p>
+                                        </div>
+                                        <v-btn color="teal" type="submit" dark
+                                            >Send</v-btn
                                         >
-                                            {{ feedback }}
-                                        </p>
-                                    </div>
-                                    <v-btn color="teal" type="submit" dark
-                                        >Send</v-btn
-                                    >
-                                </form>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
-                </div>
-                <!-- Reply End -->
-            </v-card>
+                                    </form>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-list>
+                    </div>
+                    <!-- Reply End -->
+                </v-card>
+            </div>
+            <!-- MESSAGE -->
         </div>
-        <!-- MESSAGE -->
     </div>
 </template>
 
@@ -187,12 +280,14 @@ export default {
         selectedItem: [],
         newReply: null,
         feedback: null,
-        role: null
+        role: null,
+        filteredUserData: []
     }),
     computed: {
         ...mapGetters({
             replies: 'chat/replies',
             user: 'user'
+            // userData: 'dashboard/userData'
         }),
         ...mapState({
             allMessagesData: 'chat',
@@ -200,9 +295,6 @@ export default {
         }),
         allMessages() {
             return this.allMessagesData.messages;
-        },
-        filteredUserData() {
-            return this.userData.userData[0].storeProfile;
         }
     },
     methods: {
@@ -210,49 +302,77 @@ export default {
             loadMessages: 'chat/loadMessages',
             loadReplies: 'chat/loadReplies'
         }),
-        loadAllReplies(messageId) {
+        loadFirstReply(messageData) {
             this.$store
-                .dispatch('chat/loadReplies', this.user.uid)
+                .dispatch('chat/loadReplies', messageData.userId)
                 .then((res) => {
                     // only filter once async call is complete
                     const filteredMessages = this.replies.filter((res) => {
-                        return res.messagePreviewId === messageId;
+                        return res.messagePreviewId === messageData.id;
+                    });
+                    this.messages = filteredMessages;
+                });
+        },
+        loadAllReplies(messageData) {
+            this.$store
+                .dispatch('chat/loadReplies', messageData.userId)
+                .then((res) => {
+                    // only filter once async call is complete
+                    const filteredMessages = this.replies.filter((res) => {
+                        return (
+                            res.messagePreviewId ===
+                            messageData.messagePreviewId
+                        );
                     });
                     this.messages = filteredMessages;
                 });
         },
         onChange(e) {
             this.messagePreview = new Array(e);
+            console.log(`admin.vue - 234 - 🍣`, this.messagePreview);
 
             const value = e.messagePreviewId;
-
-            // if all is selected show all
-            if (this.messages.length <= 0) {
-                this.messages = this.replies;
-            }
-
-            // function which we can use filter object
-            if (value !== 'all') {
-                const filteredMessages = this.messages.filter((res) => {
+            this.loadReplies(e.userId).then(() => {
+                const data = this.replies.filter((res) => {
                     return res.messagePreviewId === value;
                 });
-                this.messages = filteredMessages;
-            }
-
-            //  if service length is less than zero, repopulate and then filter accordingly
-            if (this.messages.length <= 0) {
-                this.messages = this.replies;
-
-                const filteredMessages = this.messages.filter((res) => {
-                    return res.messagePreviewId === value;
-                });
-                this.messages = filteredMessages;
-            }
+                if (data.length <= 0) {
+                    this.messages = new Array(e);
+                } else {
+                    this.messages = data;
+                }
+                console.log(`admin.vue - 385 - 🙏🏾`, this.messages[0]);
+            });
         },
         //NOTE  this is adding new reply
         onReply() {
             if (this.role.customer) {
-                if (this.newReply) {
+                if (this.newReply && this.messages[0].name) {
+                    const createdMessage = {
+                        to: this.messages[0].storeName,
+                        from: this.user.name,
+                        userId: this.user.uid,
+                        storeId: this.messages[0].storeId,
+                        messageId: this.messages[0].messagePreviewId,
+                        storeName: this.messages[0].storeName,
+                        storePhoneNumber: this.messages[0].storePhoneNumber,
+                        storeEmail: this.messages[0].storeEmail,
+                        storeOwnerImage: this.filteredUserData.storeOwnerImage,
+                        message: this.newReply,
+                        messagePreviewId: this.messages[0].messagePreviewId
+                    };
+                    console.log(`_id.vue - 364 - 🤔`, createdMessage);
+                    this.$store.dispatch('chat/sendReply', createdMessage);
+                    this.newReply = null;
+                    this.feedback = null;
+
+                    this.loadFirstReply(this.messages[0]);
+                } else {
+                    this.feedback = 'You must enter a reply to add it';
+                }
+
+                // if to
+                if (this.newReply && !this.messages[0].name) {
                     const createdMessage = {
                         to: this.messages[0].from,
                         from: this.user.name,
@@ -266,11 +386,12 @@ export default {
                         message: this.newReply,
                         messagePreviewId: this.messages[0].messagePreviewId
                     };
+                    console.log(`_id.vue - 390 - 🌱`, createdMessage);
                     this.$store.dispatch('chat/sendReply', createdMessage);
                     this.newReply = null;
                     this.feedback = null;
 
-                    this.loadAllReplies(this.messages[0].messagePreviewId);
+                    this.loadAllReplies(this.messages[0]);
                 } else {
                     this.feedback = 'You must enter a reply to add it';
                 }
@@ -278,12 +399,6 @@ export default {
         }
     },
     mounted() {
-        this.loadMessages(this.$route.params.id).then(() => {});
-        this.loadReplies(this.$route.params.id).then(() => {
-            // this.messages = this.replies;
-        });
-
-        // check if signed in user is admin or customer
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 // User is signed in.
@@ -298,28 +413,22 @@ export default {
                     });
             }
         });
+
+        this.loadMessages(this.user.uid).then(() => {});
+
+        // load store profile data here
+
+        // only do something when userdata is available
+        if (this.userData.userData.length > 0) {
+            this.filteredUserData = this.userData.userData[0].storeProfile;
+        }
+
+        // this.filteredUserData = this.userData.userData[0].storeProfile;
+
+        // console.log(`admin.vue - 385 - 🍫`, this.userData);
     }
 };
 </script>
 
 <style lang="scss" scoped>
-.inbox {
-    display: flex;
-    &__left {
-        width: 40%;
-        margin: 0 10px 0 0;
-    }
-    &__right {
-        width: 60%;
-    }
-    &__right-card {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    &__right-card-middle {
-        overflow: auto;
-        max-height: 50vh;
-    }
-}
 </style>

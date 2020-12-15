@@ -49,6 +49,9 @@ export const actions = {
 };
 
 export const mutations = {
+    DEFAULT_CART: (state, payload) => {
+        state.order = payload
+    },
     SET_CART: (state, payload) => {
         // set state here
         console.log('typeof 🤔', typeof (state.order))
