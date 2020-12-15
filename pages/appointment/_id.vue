@@ -175,6 +175,7 @@
                             outlined
                             name="input-7-4"
                             label="Leave a note"
+                            v-model="note"
                         ></v-textarea>
                     </v-col>
                 </v-row>
@@ -188,6 +189,7 @@
                             dark
                             large
                             class="teal darker-1"
+                            @click="addToCart()"
                             >Add to Cart</v-btn
                         >
                     </v-row>
@@ -201,7 +203,7 @@
 <script>
 import BookingCalendar from '@/components/cart/BookingCalendar';
 import Messages from '@/components/chat/Messages';
-import { mapGetters, mapState } from 'vuex';
+import { mapGetters, mapState, mapActions } from 'vuex';
 
 export default {
     components: {
@@ -239,7 +241,9 @@ export default {
                 time: '10:00 AM - 5:00 PM'
             }
         ],
-        imageUrl: 'https://via.placeholder.com/600'
+        imageUrl: 'https://via.placeholder.com/600',
+        note: '',
+        alert: ''
     }),
     computed: {
         ...mapGetters({
@@ -260,9 +264,28 @@ export default {
         }
     },
     methods: {
+        ...mapActions({
+            addToCartAction: 'cart/addToCart'
+        }),
         addToCart() {
-            // push service data to persisted local storage state
-            // create order entry in database
+            // validate
+            if (events !== null) {
+                // push service data to persisted local storage state
+                // create order entry in database
+                const event = this.bookingState;
+                const service = this.service;
+                const note = this.note;
+
+                const order = {
+                    event,
+                    service,
+                    note
+                };
+                this.addToCartAction(order);
+                this.alert = '';
+            } else {
+                this.alert = 'Please select date and time.';
+            }
         }
     }
 };

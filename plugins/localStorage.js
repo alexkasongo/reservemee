@@ -10,7 +10,8 @@ export default ({ store }) => {
             'dashboard.filteredServiceId',
             'chat.messages',
             'chat.replies',
-            'booking.bookingState'
+            'booking.bookingState',
+            'cart.cartState'
         ]
     })(store);
 };
