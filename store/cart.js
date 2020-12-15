@@ -8,7 +8,7 @@ export const actions = {
     async addToCart({ commit }, payload) {
         // const order = await new Array(payload)
 
-        const order = await [{
+        const order = await {
             id: payload.id,
             note: payload.note,
             serviceCategory: payload.service.category,
@@ -25,7 +25,7 @@ export const actions = {
             eventName: payload.event.name,
             eventStart: payload.event.start,
             eventTimed: payload.event.timed,
-        }]
+        }
 
         console.log(`booking.js - 7 -  🤌🏾`, order);
         // commit state here
