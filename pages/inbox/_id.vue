@@ -329,7 +329,6 @@ export default {
         },
         onChange(e) {
             this.messagePreview = new Array(e);
-            console.log(`admin.vue - 234 - 🍣`, this.messagePreview);
 
             const value = e.messagePreviewId;
             this.loadReplies(e.userId).then(() => {
@@ -341,7 +340,6 @@ export default {
                 } else {
                     this.messages = data;
                 }
-                console.log(`admin.vue - 385 - 🙏🏾`, this.messages[0]);
             });
         },
         //NOTE  this is adding new reply

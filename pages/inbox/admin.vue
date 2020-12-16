@@ -329,7 +329,6 @@ export default {
         },
         onChange(e) {
             this.messagePreview = new Array(e);
-            console.log(`admin.vue - 234 - 🍣`, this.messagePreview);
 
             const value = e.id;
             this.loadReplies(e.userId).then(() => {
@@ -421,11 +420,6 @@ export default {
         if (this.userData.userData.length > 0) {
             this.filteredUserData = this.userData.userData[0].storeProfile;
         }
-
-        // this.filteredUserData = this.userData.userData[0].storeProfile;
-        console.log(`admin.vue - 385 - 🙏🏾`, this.filteredUserData);
-
-        console.log(`admin.vue - 385 - 🍫`, this.userData);
     }
 };
 </script>

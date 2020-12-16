@@ -51,14 +51,19 @@
                 <v-spacer></v-spacer>
 
                 <!-- MESSAGES START -->
-                <v-btn v-if="user" @click="$router.push('/inbox/admin')" icon>
+                <v-btn v-if="user" icon>
                     <v-icon
                         v-if="role.customer"
                         @click="$router.push(`/inbox/${user.uid}`)"
                         color="white"
                         >mdi-message</v-icon
                     >
-                    <v-icon v-if="role.admin" color="white">mdi-message</v-icon>
+                    <v-icon
+                        v-if="role.admin"
+                        @click="$router.push('/inbox/admin')"
+                        color="white"
+                        >mdi-message</v-icon
+                    >
                 </v-btn>
                 <!-- MESSAGES END -->
 
