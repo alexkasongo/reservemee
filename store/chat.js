@@ -231,7 +231,7 @@ export const mutations = {
         state.messages = payload
     },
     NEW_REPLY: (state, payload) => state.replies.push(payload),
-    SET_LOADED_REPLIES: (state, payload) => {
+    yu: (state, payload) => {
         state.replies = payload
     },
     /*

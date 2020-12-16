@@ -2,14 +2,14 @@
     <div>
         <v-sheet height="64">
             <v-toolbar flat>
-                <v-btn
+                <!-- <v-btn
                     class="mr-4"
                     color="teal darker-1"
                     @click.stop="dialog = true"
                     dark
                 >
                     New Event
-                </v-btn>
+                </v-btn> -->
                 <v-btn
                     outlined
                     class="mr-4"
@@ -285,9 +285,6 @@
             >
                 <v-card color="grey lighten-4" min-width="350px" flat>
                     <v-toolbar :color="selectedEvent.color" dark>
-                        <v-btn @click="deleteEvent(selectedEvent.id)" icon>
-                            <v-icon>mdi-delete</v-icon>
-                        </v-btn>
                         <v-toolbar-title
                             v-html="selectedEvent.name"
                         ></v-toolbar-title>
@@ -845,12 +842,6 @@ export default {
                     timer: 10000
                 });
             }
-        },
-        async deleteEvent(ev) {
-            await db.collection(this.user.uid).doc(ev).delete();
-
-            this.selectedOpen = false;
-            this.getEvents();
         },
         /*
          ** LOCAL LOGIC
