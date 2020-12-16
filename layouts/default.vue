@@ -50,6 +50,7 @@
 
                 <v-spacer></v-spacer>
 
+                <!-- MESSAGES START -->
                 <v-btn v-if="user" icon>
                     <v-icon
                         v-if="role.customer"
@@ -64,90 +65,66 @@
                         >mdi-message</v-icon
                     >
                 </v-btn>
+                <!-- MESSAGES END -->
+
+                <!-- BOOKMARKS START -->
                 <v-btn v-if="user" icon>
                     <v-icon color="white">mdi-heart-outline</v-icon>
                 </v-btn>
-                <v-btn v-if="user" icon>
-                    <v-icon
-                        @click.stop="drawerRight = !drawerRight"
-                        color="white"
-                        >mdi-cart</v-icon
-                    >
-                </v-btn>
+                <!-- BOOKMARKS END -->
 
+                <!-- NOTIFICATIONS START -->
                 <div v-if="user" class="text-center">
                     <v-menu
-                        open-on-hover
-                        transition="scale-transition"
-                        origin="top center 0"
+                        v-if="user"
                         bottom
                         left
+                        transition="scale-transition"
+                        origin="top right 0"
                     >
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn v-bind="attrs" v-on="on" icon>
+                            <v-btn dark icon v-bind="attrs" v-on="on">
                                 <v-icon color="white">mdi-bell-outline</v-icon>
                             </v-btn>
                         </template>
 
-                        <!-- NOTIFICATIONS START -->
-                        <v-card max-width="600" class="mx-auto">
-                            <v-toolbar dense flat>
-                                <v-toolbar-title>Notifications</v-toolbar-title>
-                            </v-toolbar>
+                        <v-list width="250px">
+                            <v-list-item
+                                v-for="notice in notifications"
+                                :key="notice.id"
+                                link
+                            >
+                                <v-list-item-icon>
+                                    <v-icon>mdi-cog-outline </v-icon>
+                                </v-list-item-icon>
 
-                            <v-divider></v-divider>
-
-                            <v-list subheader two-line>
-                                <v-list-item
-                                    link
-                                    v-if="user.emailVerified === false"
-                                >
-                                    <v-list-item-content>
-                                        <v-list-item-title
-                                            >Your email address is not verified
-                                            {{
-                                                user.displayName
-                                            }}.</v-list-item-title
-                                        >
-
-                                        <v-list-item-subtitle
-                                            >Jan 14, 2020</v-list-item-subtitle
-                                        >
-                                    </v-list-item-content>
-
-                                    <v-list-item-action>
-                                        <v-btn icon>
-                                            <v-icon color="grey lighten-1"
-                                                >mdi-information</v-icon
-                                            >
-                                        </v-btn>
-                                    </v-list-item-action>
-                                </v-list-item>
-                                <v-list-item-content link v-else>
-                                    <v-list-item-content>
-                                        <v-list-item-title
-                                            >You have no new
-                                            notifications.</v-list-item-title
-                                        >
-
-                                        <v-list-item-subtitle
-                                            >Jan 14, 2020</v-list-item-subtitle
-                                        >
-                                    </v-list-item-content>
-
-                                    <v-list-item-action>
-                                        <v-btn icon>
-                                            <v-icon color="grey lighten-1"
-                                                >mdi-information</v-icon
-                                            >
-                                        </v-btn>
-                                    </v-list-item-action>
+                                <v-list-item-content>
+                                    <v-list-item-title>{{
+                                        notice.message
+                                    }}</v-list-item-title>
                                 </v-list-item-content>
-                            </v-list>
-                        </v-card>
-                        <!-- NOTIFICATIONS END -->
+                            </v-list-item>
+                        </v-list>
                     </v-menu>
                 </div>
+                <!-- NOTIFICATIONS END -->
+
+                <!-- CART START -->
+                <v-btn
+                    v-if="user"
+                    icon
+                    @click.stop="drawerRight = !drawerRight"
+                >
+                    <v-badge
+                        :content="orders"
+                        :value="orders"
+                        color="red darker-1"
+                        overlap
+                    >
+                        <v-icon color="white">mdi-cart</v-icon>
+                    </v-badge>
+                </v-btn>
+                <!-- CART END -->
 
                 <!-- THREE DOTS -->
                 <v-menu
@@ -309,19 +286,7 @@
                 width="600px"
                 right
             >
-                <v-list nav>
-                    <v-list-item-group
-                        v-model="drawerRight"
-                        active-class="teal--text text--accent-4"
-                    >
-                    </v-list-item-group>
-                </v-list>
-
-                <template v-if="user" v-slot:append>
-                    <div @click="signout" class="pa-2">
-                        <v-btn class="teal darker-1" block dark> Bottom </v-btn>
-                    </div>
-                </template>
+                <Cart />
             </v-navigation-drawer>
             <!-- DRAWER RIGHT END -->
 
@@ -371,7 +336,14 @@ export default {
             groupRight: null,
             multiLine: true,
             text: 'Success.',
-            timeout: 3000
+            timeout: 3000,
+            notifications: [
+                { message: 'Noticfication example one' },
+                { message: 'Noticfication example two' },
+                { message: 'Noticfication example three' },
+                { message: 'Noticfication example four' },
+                { message: 'Noticfication example five' }
+            ]
         };
     },
     computed: {
@@ -380,8 +352,18 @@ export default {
             userId: 'userId'
         }),
         ...mapState({
-            snackbarState: 'loaders'
+            snackbarState: 'loaders',
+            cart: 'cart'
         }),
+        orders: {
+            // return this.cart.order;
+            get() {
+                return this.cart.order.length;
+            },
+            set() {
+                return new Array();
+            }
+        },
         storeProfile() {
             if (
                 // if the state is undfined or the object does not exist, return null
@@ -408,7 +390,6 @@ export default {
             $('.navbar-collapse').collapse('hide');
             this.loadServices(this.userId);
             // great spot for debuggin
-            console.log(`default.vue - 415 - 🥶`, this.$route.name);
         },
         group() {
             this.drawer = false;
@@ -427,7 +408,8 @@ export default {
             loadCategories: 'dashboard/loadCategories',
             loadServices: 'dashboard/loadServices',
             setSnackbar: 'loaders/setSnackbar',
-            removeUserData: 'removeUserData'
+            removeUserData: 'removeUserData',
+            orders: null
         }),
         signin() {
             this.$router.replace('/signin');
@@ -481,7 +463,7 @@ export default {
         }
     },
     mounted() {
-        console.log(`default.vue - 491 - 🏝`, this.$route.name);
+        console.log(`default.vue - 491 - 🏝`, this.orders);
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 // User is signed in.

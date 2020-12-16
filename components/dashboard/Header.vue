@@ -1,6 +1,6 @@
 <template>
     <!-- Header -->
-    <div>
+    <div class="header">
         <!-- IF PROFILE EXISTS -->
         <div
             v-if="storeProfile !== null && Object.keys(storeProfile).length > 1"
@@ -12,7 +12,7 @@
                 v-if="storeProfile.storeBanner !== ''"
                 :src="storeProfile.storeBanner"
             >
-                <div class="bg-center">
+                <div class="header__profile-image">
                     <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
                             <div class="float-left mr-3">
@@ -21,7 +21,7 @@
                                     @click="viewProfile(user.uid)"
                                     :src="storeProfile.storeLogo"
                                     alt
-                                    class="thumb-lg rounded-circle"
+                                    class="header__thumb-lg rounded-circle"
                                     v-bind="attrs"
                                     v-on="on"
                                 />
@@ -30,7 +30,7 @@
                                     @click="viewProfile(user.uid)"
                                     :src="defaultStoreLogo"
                                     alt
-                                    class="thumb-lg rounded-circle"
+                                    class="header__thumb-lg rounded-circle"
                                     v-bind="attrs"
                                     v-on="on"
                                 />
@@ -39,33 +39,33 @@
                         <span>Settings</span>
                     </v-tooltip>
 
-                    <div class="media-body text-white">
-                        <h4 class="mt-1 mb-1 font-18">
+                    <div class="header__titles">
+                        <h4>
                             {{ storeProfile.storeName | capitalize }}
                         </h4>
-                        <p>
+                        <p class="header__subtitle">
                             {{ user.displayName }}
                         </p>
                     </div>
                 </div>
             </v-parallax>
             <v-parallax
+                v-else
                 class="rounded-xl"
                 height="300"
-                v-else
                 :src="defaultStoreBanner"
             >
                 <div class="bg-center">
-                    <div class="col-sm-6">
+                    <div class="header__profile-image">
                         <v-tooltip bottom>
                             <template v-slot:activator="{ on, attrs }">
-                                <span class="float-left mr-3">
+                                <div class="float-left mr-3">
                                     <img
                                         v-if="storeProfile.storeLogo !== ''"
                                         @click="viewProfile(user.uid)"
                                         :src="storeProfile.storeLogo"
                                         alt
-                                        class="thumb-lg rounded-circle"
+                                        class="header__thumb-lg rounded-circle"
                                         v-bind="attrs"
                                         v-on="on"
                                     />
@@ -74,20 +74,20 @@
                                         @click="viewProfile(user.uid)"
                                         :src="defaultStoreLogo"
                                         alt
-                                        class="thumb-lg rounded-circle"
+                                        class="header__thumb-lg rounded-circle"
                                         v-bind="attrs"
                                         v-on="on"
                                     />
-                                </span>
+                                </div>
                             </template>
                             <span>Settings</span>
                         </v-tooltip>
 
-                        <div class="media-body text-white">
+                        <div class="header__titles">
                             <h4 class="mt-1 mb-1 font-18">
                                 {{ storeProfile.storeName | capitalize }}
                             </h4>
-                            <p>
+                            <p class="header__subtitle">
                                 {{ user.displayName }}
                             </p>
                         </div>
@@ -112,7 +112,7 @@
                                     @click="viewProfile(user.uid)"
                                     src="https://via.placeholder.com/1200/00897b"
                                     alt
-                                    class="thumb-lg rounded-circle"
+                                    class="header__thumb-lg rounded-circle"
                                     v-bind="attrs"
                                     v-on="on"
                                 />

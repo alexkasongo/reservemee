@@ -2,14 +2,14 @@
     <div>
         <v-sheet height="64">
             <v-toolbar flat>
-                <v-btn
+                <!-- <v-btn
                     class="mr-4"
                     color="teal darker-1"
                     @click.stop="dialog = true"
                     dark
                 >
                     New Event
-                </v-btn>
+                </v-btn> -->
                 <v-btn
                     outlined
                     class="mr-4"
@@ -285,9 +285,6 @@
             >
                 <v-card color="grey lighten-4" min-width="350px" flat>
                     <v-toolbar :color="selectedEvent.color" dark>
-                        <v-btn @click="deleteEvent(selectedEvent.id)" icon>
-                            <v-icon>mdi-delete</v-icon>
-                        </v-btn>
                         <v-toolbar-title
                             v-html="selectedEvent.name"
                         ></v-toolbar-title>
@@ -518,10 +515,12 @@
                         </v-btn>
                         <v-btn
                             text
+                            class="teal darken-1"
+                            dark
                             v-if="currentlyEditing !== selectedEvent.id"
-                            @click.prevent="editEvent(selectedEvent)"
+                            @click.prevent="onBookTime(selectedEvent)"
                         >
-                            Edit
+                            Select Time
                         </v-btn>
                         <v-btn
                             text
@@ -540,7 +539,7 @@
 
 <script>
 import { db } from '@/plugins/firebase';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState, mapActions } from 'vuex';
 
 export default {
     name: 'Calendar',
@@ -586,8 +585,8 @@ export default {
         dialog: false,
         defaultEvents: [
             {
-                booked: false,
-                color: '#00897b',
+                booked: true,
+                color: '#9E9E9E',
                 details: 'Available for booking',
                 end: new Date().setHours(10, 0, 0),
                 name: 'Open',
@@ -640,7 +639,7 @@ export default {
                 timed: true
             },
             {
-                booked: false,
+                booked: true,
                 color: '#9E9E9E',
                 details: 'Available for booking',
                 end: new Date().setHours(16, 0, 0),
@@ -727,9 +726,16 @@ export default {
         }
     },
     mounted() {
+        this.setBookingState(null);
         this.getEvents();
     },
     methods: {
+        /*
+         ** Vuex
+         */
+        ...mapActions({
+            setBookingState: 'booking/setBookingState'
+        }),
         /*
          ** FIRESTORE LOGIC
          */
@@ -837,12 +843,6 @@ export default {
                 });
             }
         },
-        async deleteEvent(ev) {
-            await db.collection(this.user.uid).doc(ev).delete();
-
-            this.selectedOpen = false;
-            this.getEvents();
-        },
         /*
          ** LOCAL LOGIC
          */
@@ -862,8 +862,15 @@ export default {
         next() {
             this.$refs.calendar.next();
         },
-        editEvent(ev) {
-            this.currentlyEditing = ev.id;
+        onBookTime(ev) {
+            // this.currentlyEditing = ev.id;
+            console.log(
+                `BookingCalendar.vue - 869 - Reminder: You need the ID 🌎`,
+                ev.id
+            );
+
+            // onBookTime, take ev/event object and persist state to local storage
+            this.setBookingState(ev);
         },
         showEvent({ nativeEvent, event }) {
             // parse date object and get date out

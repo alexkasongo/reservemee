@@ -111,7 +111,7 @@
                     <v-dialog v-model="dialog" persistent max-width="500">
                         <template v-slot:activator="{ on, attrs }">
                             <!-- SERVICE CARD -->
-                            <v-row dense>
+                            <v-row>
                                 <v-col
                                     v-for="(service, id) in storeServices"
                                     :key="id"
@@ -151,6 +151,11 @@
                                                         small
                                                         v-bind="attrs"
                                                         v-on="on"
+                                                        @click="
+                                                            openQuickBook(
+                                                                service
+                                                            )
+                                                        "
                                                     >
                                                         Quick Booking
                                                     </v-btn>
@@ -171,10 +176,74 @@
                             <!-- SERVICE CARD END-->
                         </template>
                         <v-card>
-                            <v-card-title class="headline">
+                            <!-- <v-card-title class="headline">
                                 Quick Service Booking
-                            </v-card-title>
-                            <v-card-text>Data</v-card-text>
+                            </v-card-title> -->
+                            <QuickBook />
+                            <div class="container">
+                                <v-alert v-if="alert" dense type="error">
+                                    {{ alert }}
+                                </v-alert>
+
+                                <v-card color="teal darker-1" dark>
+                                    <div
+                                        class="d-flex flex-no-wrap justify-space-between"
+                                    >
+                                        <div>
+                                            <v-card-title class="headline">{{
+                                                service.name
+                                            }}</v-card-title>
+
+                                            <!-- <v-card-text>
+                                                <div class="text--primary">
+                                                    well meaning and kindly.<br />
+                                                    "a benevolent smile"
+                                                </div>
+                                            </v-card-text> -->
+
+                                            <v-card-subtitle
+                                                v-if="bookingState !== null"
+                                            >
+                                                <div>
+                                                    Start:
+                                                    {{
+                                                        new Date(
+                                                            this.bookingState.start
+                                                        ).toLocaleString()
+                                                    }}
+                                                </div>
+                                                <div>
+                                                    End:
+                                                    {{
+                                                        new Date(
+                                                            this.bookingState.end
+                                                        ).toLocaleString()
+                                                    }}
+                                                </div>
+                                            </v-card-subtitle>
+
+                                            <!-- <v-card-actions>
+                                                <v-btn
+                                                    class="ml-2 mt-3"
+                                                    fab
+                                                    icon
+                                                    height="40px"
+                                                    right
+                                                    width="40px"
+                                                >
+                                                    <v-icon>mdi-play</v-icon>
+                                                </v-btn>
+                                            </v-card-actions> -->
+                                        </div>
+
+                                        <v-avatar class="ma-3" size="125" tile>
+                                            <v-img
+                                                :src="service.serviceImage"
+                                            ></v-img>
+                                        </v-avatar>
+                                    </div>
+                                </v-card>
+                            </div>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn
@@ -187,7 +256,7 @@
                                 <v-btn
                                     color="teal darken-1"
                                     text
-                                    @click="dialog = false"
+                                    @click="quickBook"
                                 >
                                     Book Service
                                 </v-btn>
@@ -212,31 +281,36 @@
 import * as firebase from 'firebase/app';
 import 'firebase/database';
 import { db } from '@/plugins/firebase';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import Messages from '@/components/chat/Messages';
+import QuickBook from '@/components/cart/QuickBook';
 
 export default {
     components: {
-        Messages
+        Messages,
+        QuickBook
     },
     data: () => ({
         storeServices: [],
         categories: [],
-        testData: [],
         dialog: false,
+        testData: [],
+        service: [],
         events: [],
-        role: []
+        role: [],
+        ServiceId: '',
+        alert: '',
+        note: ''
     }),
     watch: {
         // call function when dialog/modal opens
         dialog(visible) {
             if (visible) {
                 // Do this when dialog opens up
-                console.log('Dialog was opened! 🐣');
-                this.quickBooking();
+                // console.log('Dialog was opened! 🐣');
             } else {
                 // Do this when dialog closes
-                console.log('Dialog was closed! 🥚');
+                // console.log('Dialog was closed! 🥚');
             }
         }
     },
@@ -246,17 +320,20 @@ export default {
             storeCategories: 'storeFront/loadedStoreCategories',
             storeProfile: 'storeFront/loadedStoreProfile',
             loading: 'loaders/loading'
-        })
+        }),
+        ...mapState({
+            booking: 'booking'
+        }),
+        bookingState() {
+            return this.booking.bookingState;
+        }
     },
     methods: {
         ...mapActions({
-            loadStoreServices: 'storeFront/loadStoreServices'
+            loadStoreServices: 'storeFront/loadStoreServices',
+            addToCartAction: 'cart/addToCart'
         }),
-        // reserve() {
-        //     this.loading = true;
 
-        //     setTimeout(() => (this.loading = false), 2000);
-        // },
         // filter services using category name
         onChange(e) {
             const services = this.services;
@@ -287,26 +364,7 @@ export default {
                 this.storeServices = filteredServices;
             }
         },
-        async quickBooking() {
-            // get firebase calendar events
-            let snapshot = await db.collection(this.$route.params.id).get();
-            let events = [];
-            // loop through and push events on each itteration
-            snapshot.forEach((doc) => {
-                let appData = [];
-                appData.id = doc.id;
-                appData.color = doc.data().color;
-                appData.details = doc.data().details;
-                appData.end = doc.data().end.toDate();
-                appData.name = doc.data().name;
-                appData.start = doc.data().start.toDate();
-                // Must include timed:boolean else timed events will not be displayed accordingly
-                appData.timed = doc.data().timed;
-                events.push(appData);
-            });
-            this.events = events;
-            // add to cart or cancel
-        },
+        async quickBooking() {},
         goToServiceInfo(id) {
             this.$router.push({
                 name: 'appointment-id',
@@ -315,8 +373,32 @@ export default {
                 }
             });
         },
-        loadCalendar() {
-            // load calendar using store ID
+        openQuickBook(ev) {
+            // locally store all the data
+            this.service = ev;
+            this.note = '';
+            this.ServiceId = ev.id;
+            console.log(`_id.vue - 374 - 🧽`, this.service);
+        },
+        quickBook() {
+            if (this.bookingState !== null) {
+                const event = this.bookingState;
+                const service = this.service;
+                const note = this.note;
+                const id = this.ServiceId;
+
+                const order = {
+                    id,
+                    event,
+                    service,
+                    note
+                };
+                this.addToCartAction(order);
+                this.dialog = false;
+                this.alert = '';
+            } else {
+                this.alert = 'Please select a date and time.';
+            }
         }
     },
     mounted() {

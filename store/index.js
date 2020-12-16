@@ -207,12 +207,17 @@ export const actions = {
         commit('LOADED_USER', '')
         commit('LOADED_USER_ID', '')
         commit('LOGGEDIN_USER', '')
-        // in other modules
+        // in dashboard module
         commit('dashboard/SET_LOADED_SEVICES', [], { root: true })
         commit('dashboard/USER_DATA', [], { root: true })
         commit('dashboard/SET_LOADED_CATEGORIES', [], { root: true })
         commit('dashboard/UPDATE_SERVICE_ID', [], { root: true })
         commit('dashboard/SET_LOADED_STORE', [], { root: true })
+        // In cart module
+        commit('cart/DEFAULT_CART', [], { root: true })
+        // In chat
+        commit('chat/SET_LOADED_MESSAGES', [], { root: true })
+        commit('chat/SET_LOADED_REPLIES', [], { root: true })
 
     },
     // USER ACCOUNTS END

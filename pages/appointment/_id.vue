@@ -98,7 +98,7 @@
             <!-- RIGHT -->
             <div class="appointment__right">
                 <div class="mx-auto appointment__calendar" elevation="0">
-                    <Calendar />
+                    <BookingCalendar />
                 </div>
                 <v-card elevation="0" class="appointment__cart-container">
                     <v-card-title> Your Order </v-card-title>
@@ -126,7 +126,29 @@
                                         v-text="service.description"
                                     ></v-card-subtitle>
 
-                                    <v-card-text>
+                                    <v-card-text
+                                        v-if="bookingState !== null"
+                                        class="pb-0"
+                                    >
+                                        <div>
+                                            Start:
+                                            {{
+                                                new Date(
+                                                    this.bookingState.start
+                                                ).toLocaleString()
+                                            }}
+                                        </div>
+                                        <div>
+                                            End:
+                                            {{
+                                                new Date(
+                                                    this.bookingState.end
+                                                ).toLocaleString()
+                                            }}
+                                        </div>
+                                    </v-card-text>
+
+                                    <v-card-text class="pt-2">
                                         <div class="display-1 text--primary">
                                             ${{ service.price }}
                                         </div>
@@ -153,19 +175,24 @@
                             outlined
                             name="input-7-4"
                             label="Leave a note"
+                            v-model="note"
                         ></v-textarea>
                     </v-col>
                 </v-row>
+
+                <v-alert v-if="alert" dense type="error">
+                    {{ alert }}
+                </v-alert>
 
                 <v-list-item class="grow">
                     <v-row align="center" justify="end">
                         <v-btn
                             rounded
                             elevation="0"
-                            outlined
                             dark
                             large
                             class="teal darker-1"
+                            @click="addToCart()"
                             >Add to Cart</v-btn
                         >
                     </v-row>
@@ -177,14 +204,14 @@
 </template>
 
 <script>
-import Calendar from '@/components/Calendar';
+import BookingCalendar from '@/components/cart/BookingCalendar';
 import Messages from '@/components/chat/Messages';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState, mapActions } from 'vuex';
 
 export default {
     components: {
         Messages,
-        Calendar
+        BookingCalendar
     },
     data: () => ({
         workingHours: [
@@ -217,13 +244,21 @@ export default {
                 time: '10:00 AM - 5:00 PM'
             }
         ],
-        imageUrl: 'https://via.placeholder.com/600'
+        imageUrl: 'https://via.placeholder.com/600',
+        note: '',
+        alert: ''
     }),
     computed: {
         ...mapGetters({
             storeProfile: 'storeFront/loadedStoreProfile',
             services: 'storeFront/loadedStoreServices'
         }),
+        ...mapState({
+            booking: 'booking'
+        }),
+        bookingState() {
+            return this.booking.bookingState;
+        },
         service() {
             const filtered = this.services.filter((res) => {
                 return res.id === this.$route.params.id;
@@ -232,9 +267,34 @@ export default {
         }
     },
     methods: {
+        ...mapActions({
+            addToCartAction: 'cart/addToCart'
+        }),
+        getRandomInt(max) {
+            return Math.floor(Math.random() * Math.floor(max));
+        },
         addToCart() {
-            // push service data to persisted local storage state
-            // create order entry in database
+            // validate
+            if (this.bookingState !== null) {
+                // push service data to persisted local storage state
+                // create order entry in database
+                const event = this.bookingState;
+                const service = this.service;
+                const note = this.note;
+                const id = this.getRandomInt(100);
+
+                const order = {
+                    id,
+                    event,
+                    service,
+                    note
+                };
+                this.addToCartAction(order);
+                this.alert = '';
+                this.note = '';
+            } else {
+                this.alert = 'Please select a date and time.';
+            }
         }
     }
 };

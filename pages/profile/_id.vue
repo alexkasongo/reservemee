@@ -458,6 +458,134 @@
                                     >
                                 </div>
                                 <div class="form-group">
+                                    <label for="fullName"
+                                        >Store Service Category</label
+                                    >
+                                    <v-container fluid>
+                                        <v-row align="center">
+                                            <v-col cols="12" sm="6">
+                                                <v-select
+                                                    v-model="storeForm.cat1"
+                                                    :items="beauty"
+                                                    label="Select"
+                                                    multiple
+                                                    hint="Beauty"
+                                                    persistent-hint
+                                                    color="teal darker-1"
+                                                >
+                                                    <template
+                                                        v-slot:selection="{
+                                                            item,
+                                                            index
+                                                        }"
+                                                    >
+                                                        <v-chip
+                                                            v-if="index === 0"
+                                                            color="teal darker-1"
+                                                            dark
+                                                        >
+                                                            <span>{{
+                                                                item
+                                                            }}</span>
+                                                        </v-chip>
+                                                        <span
+                                                            v-if="index === 1"
+                                                            class="grey--text caption"
+                                                        >
+                                                            (+{{
+                                                                storeForm.cat1
+                                                                    .length - 1
+                                                            }}
+                                                            others)
+                                                        </span>
+                                                    </template></v-select
+                                                >
+                                            </v-col>
+                                            <v-col cols="12" sm="6">
+                                                <v-select
+                                                    v-model="storeForm.cat2"
+                                                    :items="wellness"
+                                                    label="Select"
+                                                    multiple
+                                                    hint="Wellness"
+                                                    persistent-hint
+                                                    color="teal darker-1"
+                                                >
+                                                    <template
+                                                        v-slot:selection="{
+                                                            item,
+                                                            index
+                                                        }"
+                                                    >
+                                                        <v-chip
+                                                            v-if="index === 0"
+                                                            color="teal darker-1"
+                                                            dark
+                                                        >
+                                                            <span>{{
+                                                                item
+                                                            }}</span>
+                                                        </v-chip>
+                                                        <span
+                                                            v-if="index === 1"
+                                                            class="grey--text caption"
+                                                        >
+                                                            (+{{
+                                                                storeForm.cat2
+                                                                    .length - 1
+                                                            }}
+                                                            others)
+                                                        </span>
+                                                    </template></v-select
+                                                >
+                                            </v-col>
+
+                                            <v-col cols="12" sm="6">
+                                                <v-select
+                                                    v-model="storeForm.cat3"
+                                                    :items="fitness"
+                                                    label="Select"
+                                                    multiple
+                                                    hint="Fitness"
+                                                    persistent-hint
+                                                    color="teal darker-1"
+                                                >
+                                                    <template
+                                                        v-slot:selection="{
+                                                            item,
+                                                            index
+                                                        }"
+                                                    >
+                                                        <v-chip
+                                                            v-if="index === 0"
+                                                            color="teal darker-1"
+                                                            dark
+                                                        >
+                                                            <span>{{
+                                                                item
+                                                            }}</span>
+                                                        </v-chip>
+                                                        <span
+                                                            v-if="index === 1"
+                                                            class="grey--text caption"
+                                                        >
+                                                            (+{{
+                                                                storeForm.cat3
+                                                                    .length - 1
+                                                            }}
+                                                            others)
+                                                        </span>
+                                                    </template>
+                                                </v-select>
+                                            </v-col>
+                                        </v-row>
+                                    </v-container>
+                                    <small class="form-text text-muted"
+                                        >Select a category that best describes
+                                        your service.</small
+                                    >
+                                </div>
+                                <div class="form-group">
                                     <label for="bio">Your Store Bio</label>
                                     <v-textarea
                                         outlined
@@ -803,32 +931,35 @@ export default {
     data() {
         return {
             role: [],
-            user: '',
-            alert: '',
-            errors: '',
-            logoDisplay: '',
-            newPassword: '',
-            loggedInUser: '',
-            bannerDisplay: '',
-            currentPassword: '',
-            confirmNewPassword: '',
-            storeOwnerImageDisplay: '',
+            user: [],
+            alert: [],
+            errors: [],
+            logoDisplay: [],
+            newPassword: [],
+            loggedInUser: [],
+            bannerDisplay: [],
+            currentPassword: [],
+            confirmNewPassword: [],
+            storeOwnerImageDisplay: [],
             currentUser: {
-                name: ''
+                name: []
             },
             profileForm: {
-                name: ''
+                name: []
             },
             storeForm: {
-                storeLogo: '', // https://via.placeholder.com/500
-                storeName: '',
-                storeBio: '',
-                storeBanner: '', // https://via.placeholder.com/500
-                storeLocation: '',
-                storeOwnerImage: '',
+                storeLogo: [], // https://via.placeholder.com/500
+                storeName: [],
+                storeBio: [],
+                storeBanner: [], // https://via.placeholder.com/500
+                storeLocation: [],
+                storeOwnerImage: [],
                 rawStoreLogo: null,
                 rawStoreBanner: null,
-                rawStoreOwnerImage: null
+                rawStoreOwnerImage: null,
+                cat1: [] || '💦',
+                cat2: [] || '💦',
+                cat3: [] || '💦'
             },
             items: [
                 {
@@ -861,6 +992,34 @@ export default {
                     text: 'Account Settings',
                     href: '#account'
                 }
+            ],
+            beauty: [
+                'Salon',
+                'Massage',
+                'Nail',
+                'Spa',
+                'Barber',
+                'Tanning',
+                'Makeup',
+                'Hair Removal'
+            ],
+            wellness: [
+                'Coaching',
+                'Acupuncture',
+                'Physical Therapy',
+                'Nutritionist',
+                'Chiropractor',
+                'Med Spa'
+            ],
+            fitness: [
+                'Pilates',
+                'Yoga',
+                'Personal Trainer',
+                'Cross Training',
+                'Cycling',
+                'Dance',
+                'Gym',
+                'All Fitness'
             ]
         };
     },
@@ -1032,15 +1191,15 @@ export default {
                 storeBio: this.storeForm.storeBio,
                 storeLogo: this.storeForm.storeLogo,
                 storeBanner: this.storeForm.storeBanner,
-                // storeOwnerImage: this.storeForm.storeOwnerImage,
                 rawStoreLogo: this.storeForm.rawStoreLogo,
                 rawStoreBanner: this.storeForm.rawStoreBanner,
-                // rawStoreOwnerImage: this.storeForm.rawStoreOwnerImage,
-                storeLocation: this.storeForm.storeLocation
+                storeLocation: this.storeForm.storeLocation,
+                beauty: this.storeForm.cat1,
+                wellness: this.storeForm.cat2,
+                fitness: this.storeForm.cat3
             };
-
+            console.log(`_id.vue - 1201 - 💦`, data);
             this.updateStoreProfile(data);
-            // this.alert = 'Saved...';
         },
         profileImagePickFile() {
             this.$refs.fileInputOne.$refs.input.click();
@@ -1297,6 +1456,11 @@ export default {
             this.storeForm.storePhoneNumber = this.userInfo[0].storeProfile.storePhoneNumber;
             this.storeForm.storeBio = this.userInfo[0].storeProfile.storeBio;
             this.storeForm.storeLocation = this.userInfo[0].storeProfile.storeLocation;
+            // the || sets null in the event that userInfo[0].storeProfile is undefined
+            this.storeForm.cat1 = this.userInfo[0].storeProfile.beauty || null;
+            this.storeForm.cat2 =
+                this.userInfo[0].storeProfile.wellness || null;
+            this.storeForm.cat3 = this.userInfo[0].storeProfile.fitness || null;
         }
     }
 };

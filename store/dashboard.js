@@ -496,6 +496,7 @@ export const actions = {
      */
     async updateStoreProfile({ commit, dispatch }, payload) {
         commit('loaders/SET_LOADING', true, { root: true });
+        console.log(`dashboard.js - 499 - 🪣`, payload);
 
         // if both logo and banner have been added run the code below
         let logoImageUrl = ''
@@ -515,7 +516,10 @@ export const actions = {
                     storePhoneNumber: payload.storePhoneNumber,
                     storeBio: payload.storeBio,
                     storeBanner: payload.storeBanner,
-                    storeLocation: payload.storeLocation
+                    storeLocation: payload.storeLocation,
+                    beauty: payload.beauty,
+                    wellness: payload.wellness,
+                    fitness: payload.fitness
                 })
 
             // update successful
@@ -560,7 +564,10 @@ export const actions = {
                             storePhoneNumber: payload.storePhoneNumber,
                             storeBio: payload.storeBio,
                             storeBanner: payload.storeBanner,
-                            storeLocation: payload.storeLocation
+                            storeLocation: payload.storeLocation,
+                            beauty: payload.beauty,
+                            wellness: payload.wellness,
+                            fitness: payload.fitness
                         })
 
                     // update successful
@@ -611,7 +618,10 @@ export const actions = {
                             storePhoneNumber: payload.storePhoneNumber,
                             storeBio: payload.storeBio,
                             storeBanner: banner,
-                            storeLocation: payload.storeLocation
+                            storeLocation: payload.storeLocation,
+                            beauty: payload.beauty,
+                            wellness: payload.wellness,
+                            fitness: payload.fitness
                         })
 
                     // update successful
@@ -670,7 +680,10 @@ export const actions = {
                                 storePhoneNumber: payload.storePhoneNumber,
                                 storeBio: payload.storeBio,
                                 storeBanner: banner,
-                                storeLocation: payload.storeLocation
+                                storeLocation: payload.storeLocation,
+                                beauty: payload.beauty,
+                                wellness: payload.wellness,
+                                fitness: payload.fitness
                             })
 
                         // update successful

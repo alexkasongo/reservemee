@@ -36,7 +36,6 @@ export default {
         // }
     },
     created() {
-        console.log(`NewMessage.vue - 36 - 🍎`, this.currentUserId);
         this.uis = this.currentUserId;
         this.$store.dispatch('chat/loadMessages', this.user.uid);
         this.$store.dispatch('chat/loadReplies', this.user.uid);
