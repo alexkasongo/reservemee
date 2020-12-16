@@ -185,27 +185,64 @@
                                     {{ alert }}
                                 </v-alert>
 
-                                <v-card-text
-                                    v-if="bookingState !== null"
-                                    class="pb-0"
-                                >
-                                    <div>
-                                        Start:
-                                        {{
-                                            new Date(
-                                                this.bookingState.start
-                                            ).toLocaleString()
-                                        }}
+                                <v-card color="teal darker-1" dark>
+                                    <div
+                                        class="d-flex flex-no-wrap justify-space-between"
+                                    >
+                                        <div>
+                                            <v-card-title class="headline">{{
+                                                service.name
+                                            }}</v-card-title>
+
+                                            <!-- <v-card-text>
+                                                <div class="text--primary">
+                                                    well meaning and kindly.<br />
+                                                    "a benevolent smile"
+                                                </div>
+                                            </v-card-text> -->
+
+                                            <v-card-subtitle
+                                                v-if="bookingState !== null"
+                                            >
+                                                <div>
+                                                    Start:
+                                                    {{
+                                                        new Date(
+                                                            this.bookingState.start
+                                                        ).toLocaleString()
+                                                    }}
+                                                </div>
+                                                <div>
+                                                    End:
+                                                    {{
+                                                        new Date(
+                                                            this.bookingState.end
+                                                        ).toLocaleString()
+                                                    }}
+                                                </div>
+                                            </v-card-subtitle>
+
+                                            <!-- <v-card-actions>
+                                                <v-btn
+                                                    class="ml-2 mt-3"
+                                                    fab
+                                                    icon
+                                                    height="40px"
+                                                    right
+                                                    width="40px"
+                                                >
+                                                    <v-icon>mdi-play</v-icon>
+                                                </v-btn>
+                                            </v-card-actions> -->
+                                        </div>
+
+                                        <v-avatar class="ma-3" size="125" tile>
+                                            <v-img
+                                                :src="service.serviceImage"
+                                            ></v-img>
+                                        </v-avatar>
                                     </div>
-                                    <div>
-                                        End:
-                                        {{
-                                            new Date(
-                                                this.bookingState.end
-                                            ).toLocaleString()
-                                        }}
-                                    </div>
-                                </v-card-text>
+                                </v-card>
                             </div>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
@@ -341,6 +378,7 @@ export default {
             this.service = ev;
             this.note = '';
             this.ServiceId = ev.id;
+            console.log(`_id.vue - 374 - 🧽`, this.service);
         },
         quickBook() {
             if (this.bookingState !== null) {
