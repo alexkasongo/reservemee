@@ -371,7 +371,7 @@ export default {
                     this.feedback = 'You must enter a reply to add it';
                 }
 
-                // if to
+                // if the reply is to the initial message then use these details
                 if (this.newReply && !this.messages[0].name) {
                     const createdMessage = {
                         to: this.messages[0].from,
@@ -422,10 +422,6 @@ export default {
         if (this.userData.userData.length > 0) {
             this.filteredUserData = this.userData.userData[0].storeProfile;
         }
-
-        // this.filteredUserData = this.userData.userData[0].storeProfile;
-
-        // console.log(`admin.vue - 385 - 🍫`, this.userData);
     }
 };
 </script>
