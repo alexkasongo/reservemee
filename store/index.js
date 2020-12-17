@@ -156,22 +156,39 @@ export const actions = {
                 commit('loaders/SET_LOADING', false, { root: true });
             });
     },
-    async verifyEmail({ commit }) {
+    async verifyEmail({ commit, dispatch }) {
         commit('loaders/SET_LOADING', true, { root: true });
+
+        // get logged in user auth details
         let user = await firebase.auth().currentUser;
 
+        // using the details retrieved, send verification email to currently logged in user.
         user.sendEmailVerification()
             .then(() => {
-                // commit('VERIFICATION_SENT', true);
+                commit('loaders/SET_LOADING', false, { root: true });
+            })
+            // notify user that the operation was successful
+            .then(() => {
                 this.$swal({
                     toast: true,
                     position: 'top-end',
                     icon: 'success',
                     title: 'A verification email has been sent to your mailbox',
                     showConfirmButton: true,
-                    timer: 60000
+                    timer: '300000'
+                }).then((result) => {
+                    // once the user clicks on OK, log them out and redirect them to the log in page!
+                    if (result.isConfirmed) {
+                        firebase
+                            .auth()
+                            .signOut()
+                            .then(() => {
+                                // remove persistent state data
+                                dispatch('removeUserData')
+                                this.$router.push('/signin');
+                            });
+                    }
                 });
-                commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 // An error happened.
@@ -212,6 +229,8 @@ export const actions = {
             });
     },
     async removeUserData({ commit }) {
+        // calling on localStorage.removeItem() does not seem to removed the vuex persistent state
+        // instead re initialize all state with empty Arrays, Objects, strings etc.
         commit('LOADED_USER', '')
         commit('LOADED_USER_ID', '')
         commit('LOGGEDIN_USER', '')

@@ -2,6 +2,7 @@
     <!-- EmailVerified -->
     <div class="w-100 mb-5">
         <v-alert
+            class="mb-0"
             style="cursor: pointer"
             @click="onSubmit"
             icon="mdi-alert-circle-outline"
@@ -11,6 +12,12 @@
                 Click to verify your email {{ user.name }}.
             </span></v-alert
         >
+        <v-progress-linear
+            v-if="loading"
+            indeterminate
+            class="rounded-xl"
+            color="primary"
+        ></v-progress-linear>
     </div>
     <!-- EmailVerified -->
 </template>
@@ -21,14 +28,15 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
     computed: {
         ...mapGetters({
-            user: 'user'
+            user: 'user',
+            loading: 'loaders/loading'
         })
     },
 
     methods: {
         ...mapActions(['verifyEmail', 'loadUserId']),
         onSubmit() {
-            this.verifyEmail(emailAddress);
+            this.verifyEmail();
         },
         async signout() {
             await firebase
