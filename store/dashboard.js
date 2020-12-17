@@ -519,7 +519,10 @@ export const actions = {
                     storeLocation: payload.storeLocation,
                     beauty: payload.beauty,
                     wellness: payload.wellness,
-                    fitness: payload.fitness
+                    fitness: payload.fitness,
+                    twitter: payload.twitter,
+                    facebook: payload.facebook,
+                    instagram: payload.instagram
                 })
 
             // update successful
@@ -567,7 +570,10 @@ export const actions = {
                             storeLocation: payload.storeLocation,
                             beauty: payload.beauty,
                             wellness: payload.wellness,
-                            fitness: payload.fitness
+                            fitness: payload.fitness,
+                            twitter: payload.twitter,
+                            facebook: payload.facebook,
+                            instagram: payload.instagram
                         })
 
                     // update successful
@@ -621,7 +627,10 @@ export const actions = {
                             storeLocation: payload.storeLocation,
                             beauty: payload.beauty,
                             wellness: payload.wellness,
-                            fitness: payload.fitness
+                            fitness: payload.fitness,
+                            twitter: payload.twitter,
+                            facebook: payload.facebook,
+                            instagram: payload.instagram
                         })
 
                     // update successful

@@ -58,7 +58,43 @@
                     </p>
                 </div>
             </div>
-            <ul class="social-links list-inline mt-4 mb-0">
+            <v-card class="mx-auto" color="#26c6da" dark max-width="400">
+                <v-card-actions>
+                    <v-list-item class="grow">
+                        <v-list-item-avatar color="grey darken-3">
+                            <v-img
+                                class="elevation-6"
+                                alt=""
+                                :src="storeProfile.storeOwnerImage"
+                            ></v-img>
+                        </v-list-item-avatar>
+
+                        <v-list-item-content>
+                            <v-list-item-title>{{
+                                storeProfile.storeName | capitalize
+                            }}</v-list-item-title>
+                        </v-list-item-content>
+
+                        <v-row align="center" justify="end">
+                            <v-btn
+                                @click="$route.push(`${storeProfile.facebook}`)"
+                                icon
+                            >
+                                <v-icon>mdi-facebook</v-icon>
+                            </v-btn>
+
+                            <v-btn icon>
+                                <v-icon>mdi-instagram</v-icon>
+                            </v-btn>
+
+                            <v-btn icon>
+                                <v-icon>mdi-twitter</v-icon>
+                            </v-btn>
+                        </v-row>
+                    </v-list-item>
+                </v-card-actions>
+            </v-card>
+            <!-- <ul class="social-links list-inline mt-4 mb-0">
                 <li class="list-inline-item">
                     <a
                         title
@@ -95,7 +131,7 @@
                         <i class="fa text-dark fa-skype"></i>
                     </a>
                 </li>
-            </ul>
+            </ul> -->
         </div>
         <div v-else>
             <v-alert
