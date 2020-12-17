@@ -4,6 +4,7 @@
         <div v-if="storeProfile !== null" class="panel-body">
             <p class="text-muted font-13">{{ storeProfile.storeBio }}</p>
             <hr />
+
             <div class="text-left">
                 <p class="text-muted font-13">
                     <strong>Store Name :</strong>
@@ -25,6 +26,7 @@
                     <strong>Location :</strong>
                     <span class="m-l-15">{{ storeProfile.storeLocation }}</span>
                 </p>
+                <!-- Services start -->
                 <div v-if="this.storeProfile">
                     <p v-if="beauty !== null" class="text-muted font-13">
                         <strong>Services :</strong>
@@ -58,6 +60,9 @@
                     </p>
                 </div>
             </div>
+            <!-- Services end -->
+            <!-- Social media card start -->
+            <div v-if="this.storeProfile"></div>
             <v-card
                 class="mx-auto"
                 color="teal darker-1"
@@ -75,32 +80,73 @@
                             ></v-img>
                         </v-list-item-avatar>
 
-                        <v-list-item-content>
+                        <v-list-item-content
+                            v-if="
+                                storeProfile.facebook ||
+                                storeProfile.instagram ||
+                                storeProfile.twitter
+                            "
+                        >
                             <v-list-item-title>{{
                                 storeProfile.storeName | capitalize
                             }}</v-list-item-title>
                         </v-list-item-content>
+                        <v-list-item-content
+                            v-if="
+                                !storeProfile.facebook &&
+                                !storeProfile.instagram &&
+                                !storeProfile.twitter
+                            "
+                        >
+                            <v-list-item-title>Social Card</v-list-item-title>
+                        </v-list-item-content>
 
                         <v-row align="center" justify="end">
-                            <a :href="storeProfile.facebook" target="_blank">
+                            <a
+                                v-if="storeProfile.facebook"
+                                :href="storeProfile.facebook"
+                                target="_blank"
+                            >
                                 <v-btn icon>
                                     <v-icon>mdi-facebook</v-icon>
                                 </v-btn>
                             </a>
-                            <a :href="storeProfile.instagram" target="_blank">
+                            <a
+                                v-if="storeProfile.instagram"
+                                :href="storeProfile.instagram"
+                                target="_blank"
+                            >
                                 <v-btn icon>
                                     <v-icon>mdi-instagram</v-icon>
                                 </v-btn>
                             </a>
-                            <a :href="storeProfile.twitter" target="_blank">
+                            <a
+                                v-if="storeProfile.twitter"
+                                :href="storeProfile.twitter"
+                                target="_blank"
+                            >
                                 <v-btn icon>
                                     <v-icon>mdi-twitter</v-icon>
                                 </v-btn>
                             </a>
+                            <a
+                                v-if="
+                                    !storeProfile.facebook &&
+                                    !storeProfile.instagram &&
+                                    !storeProfile.twitter
+                                "
+                                ><v-btn
+                                    @click="$router.push(`profile/${user.uid}`)"
+                                    icon
+                                >
+                                    <v-icon>mdi-pencil</v-icon>
+                                </v-btn></a
+                            >
                         </v-row>
                     </v-list-item>
                 </v-card-actions>
             </v-card>
+            <!-- Social media card end -->
         </div>
         <div v-else>
             <v-alert
