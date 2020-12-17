@@ -390,6 +390,7 @@ export default {
             $('.navbar-collapse').collapse('hide');
             this.loadServices(this.userId);
             // great spot for debuggin
+            console.log(`default.vue - 393 - 🤌🏾`);
         },
         group() {
             this.drawer = false;
@@ -463,7 +464,6 @@ export default {
         }
     },
     mounted() {
-        console.log(`default.vue - 491 - 🏝`, this.orders);
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 // User is signed in.

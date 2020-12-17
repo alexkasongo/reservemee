@@ -1,33 +1,14 @@
 <template>
     <!-- EmailVerified -->
-    <!-- FIXME move email verificaiton logic here -->
     <div class="w-100 mb-5">
-        <!-- <v-card class="light-blue lighten-5" elevation="0">
-            <div class="card-body">
-                <h5 v-if="user">
-                    Your email address is not verified {{ user.name }}.
-                </h5>
-                <p>Please verify your email.</p>
-                <v-btn
-                    @click="verifyEmail"
-                    type="button"
-                    color="blue-grey darken-3
-"
-                    dark
-                    block
-                >
-                    Verify Email
-                </v-btn>
-            </div>
-        </v-card> -->
         <v-alert
             style="cursor: pointer"
-            @click="verifyEmail"
+            @click="onSubmit"
             icon="mdi-alert-circle-outline"
             text
             type="info"
             ><span v-if="user">
-                Your email address is not verified {{ user.name }}.
+                Click to verify your email {{ user.name }}.
             </span></v-alert
         >
     </div>
@@ -35,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'EmailVerified',
@@ -45,8 +26,20 @@ export default {
         })
     },
     methods: {
-        verifyEmail() {
-            this.$router.push('/verification');
+        ...mapActions(['verifyEmail', 'loadUserId', 'user']),
+        onSubmit() {
+            this.verifyEmail(emailAddress);
+        },
+        async signout() {
+            await firebase
+                .auth()
+                .signOut()
+                .then((result) => {
+                    this.user = '';
+                    window.localStorage.removeItem('email');
+                    window.localStorage.removeItem('vuex');
+                });
+            this.$router.push('/signin');
         }
     }
 };

@@ -156,13 +156,21 @@ export const actions = {
                 commit('loaders/SET_LOADING', false, { root: true });
             });
     },
-    async verifyEmail({ commit }, payload) {
+    async verifyEmail({ commit }) {
         commit('loaders/SET_LOADING', true, { root: true });
         let user = await firebase.auth().currentUser;
 
         user.sendEmailVerification()
             .then(() => {
-                commit('NOTIFICATION', true);
+                // commit('VERIFICATION_SENT', true);
+                this.$swal({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'A verification email has been sent to your mailbox',
+                    showConfirmButton: true,
+                    timer: 60000
+                });
                 commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
@@ -229,7 +237,7 @@ export const mutations = {
     // USER ACCOUNTS START
     LOADED_USER: (state, payload) => (state.user = payload),
     LOADED_USER_ID: (state, payload) => (state.userId = payload),
-    NOTIFICATION: (state, payload) => (state.verificationSent = payload),
+    VERIFICATION_SENT: (state, payload) => (state.verificationSent = payload),
     LOGGEDIN_USER: (state, user) => {
         (state.user = JSON.parse(JSON.stringify(user)))
     },
