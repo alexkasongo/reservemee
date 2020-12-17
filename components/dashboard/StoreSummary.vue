@@ -1,6 +1,6 @@
 <template>
     <!-- StoreSummary -->
-    <div class="row mb-5">
+    <div class="row">
         <div class="col-sm-4">
             <div class="tilebox-one">
                 <i class="icon-layers float-right text-muted"></i>

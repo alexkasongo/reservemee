@@ -1,6 +1,7 @@
 <template>
     <!-- BusinessInfo -->
-    <div class="mb-5">
+    <!-- FIXME -->
+    <div>
         <div v-if="storeProfile !== null" class="panel-body">
             <p class="text-muted font-13">{{ storeProfile.storeBio }}</p>
             <hr />
@@ -148,7 +149,8 @@
             </v-card>
             <!-- Social media card end -->
         </div>
-        <div v-else>
+        <!-- FIXME -->
+        <!-- <div v-else>
             <v-alert
                 style="cursor: pointer"
                 @click="goToSettings"
@@ -157,7 +159,7 @@
                 type="info"
                 >Update Store Information</v-alert
             >
-        </div>
+        </div> -->
     </div>
     <!-- BusinessInfo -->
 </template>

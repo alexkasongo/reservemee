@@ -1,6 +1,6 @@
 <template>
     <!-- EmailVerified -->
-    <div class="w-100 mb-5">
+    <div class="w-100">
         <v-alert
             class="mb-0"
             style="cursor: pointer"

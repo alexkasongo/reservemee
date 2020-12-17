@@ -2,7 +2,7 @@
     <div v-if="user" class="content">
         <!-- Header -->
         <div class="container">
-            <Header class="mb-5" />
+            <Header />
         </div>
         <!-- Header End-->
 
@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-xl-4">
                     <div>
-                        <h2 class="header-title mt-5 mb-5">Bio</h2>
+                        <h2 class="header-title mt-5">Bio</h2>
                         <!-- Personal-Information -->
                         <BusinessInfo />
                         <!-- Personal-Information -->
@@ -20,7 +20,7 @@
                                     categories.length <= 0 ||
                                     !user.emailVerified
                                 "
-                                class="header-title mt-0 mb-5"
+                                class="header-title mt-0"
                             >
                                 Todos
                             </h2>
@@ -42,9 +42,9 @@
                     </div>
 
                     <div>
-                        <h2 class="header-title mt-5 mb-5">Messages</h2>
+                        <h2 class="header-title mt-5">Messages</h2>
                         <!-- Messages -->
-                        <StoreMessages class="mb-5" />
+                        <StoreMessages />
                         <!-- Messages -->
                     </div>
                 </div>
@@ -57,13 +57,13 @@
                         <Scheduling class="services" />
                         <UpcomingEvents />
                     </div> -->
-                    <h2 class="header-title mt-0 mb-5">Calendar</h2>
-                    <v-card elevation="2">
-                        <Calendar class="mb-5" />
-                    </v-card>
+                    <h2 class="header-title mt-0">Calendar</h2>
+                    <!-- <v-card elevation="2"> -->
+                    <Calendar />
+                    <!-- </v-card>s -->
 
                     <div>
-                        <h2 class="header-title mt-0 mb-5">Services</h2>
+                        <h2 class="header-title mt-0">Services</h2>
                         <!-- ManageServices -->
                         <ManageServices v-if="categories.length !== 0" />
                         <!-- ManageServices -->

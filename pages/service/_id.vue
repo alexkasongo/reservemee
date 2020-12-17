@@ -3,7 +3,7 @@
         <div v-if="loading">
             <p>loading...</p>
         </div>
-        <h2 class="mb-5" v-if="!loading">
+        <h2 v-if="!loading">
             {{ this.$route.params.id | capitalize }} Services
         </h2>
 

@@ -13,7 +13,8 @@
                 :src="storeProfile.storeBanner"
             >
                 <div class="header__profile-image">
-                    <v-tooltip bottom>
+                    <!-- FIXME -->
+                    <!-- <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
                             <div class="float-left mr-3">
                                 <img
@@ -37,7 +38,7 @@
                             </div>
                         </template>
                         <span>Settings</span>
-                    </v-tooltip>
+                    </v-tooltip> -->
 
                     <div class="header__titles">
                         <h4>
@@ -57,7 +58,8 @@
             >
                 <div class="bg-center">
                     <div class="header__profile-image">
-                        <v-tooltip bottom>
+                        <!-- FIXME -->
+                        <!-- <v-tooltip bottom>
                             <template v-slot:activator="{ on, attrs }">
                                 <div class="float-left mr-3">
                                     <img
@@ -81,7 +83,7 @@
                                 </div>
                             </template>
                             <span>Settings</span>
-                        </v-tooltip>
+                        </v-tooltip> -->
 
                         <div class="header__titles">
                             <h4 class="mt-1 mb-1 font-18">
@@ -105,7 +107,8 @@
                 src="https://via.placeholder.com/1200"
             >
                 <div class="bg-center">
-                    <v-tooltip bottom>
+                    <!-- FIXME -->
+                    <!-- <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
                             <span class="float-left mr-3">
                                 <img
@@ -119,13 +122,13 @@
                             </span>
                         </template>
                         <span>Settings</span>
-                    </v-tooltip>
+                    </v-tooltip> -->
 
-                    <div class="media-body text-white">
+                    <!-- <div class="media-body text-white">
                         <p>
                             {{ user.displayName }}
                         </p>
-                    </div>
+                    </div> -->
                 </div>
             </v-parallax>
         </div>

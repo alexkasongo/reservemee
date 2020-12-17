@@ -111,7 +111,7 @@
                 </v-card>
                 <!-- SERVICE CARD -->
                 <v-row dense>
-                    <v-col cols="12 mb-5">
+                    <v-col cols="12">
                         <v-card class="rounded-xl" :ripple="false">
                             <div
                                 class="d-flex flex-no-wrap justify-space-between"

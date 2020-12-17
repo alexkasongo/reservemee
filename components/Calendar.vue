@@ -558,14 +558,14 @@ export default {
         modal: false,
         // Date and time picker logic
         startDate: new Date().toISOString().substr(0, 10),
-        startTime: new Date(),
+        startTime: new Date().toISOString().substr(0, 10),
         endDate: new Date().toISOString().substr(0, 10),
-        endTime: new Date(),
+        endTime: new Date().toISOString().substr(0, 10),
         // Date and time picker logic END
         timeStart: false,
         timeEnd: false,
-        today: new Date(),
-        focus: new Date(),
+        today: new Date().toISOString().substr(0, 10),
+        focus: new Date().toISOString().substr(0, 10),
         type: 'day',
         typeToLabel: {
             month: 'Month',
@@ -631,8 +631,8 @@ export default {
                 timed: true
             },
             {
-                booked: false,
-                color: '#00897b',
+                booked: true,
+                color: '#9E9E9E',
                 details: 'Available for booking',
                 end: new Date().setHours(15, 0, 0),
                 name: 'Open',
@@ -640,7 +640,7 @@ export default {
                 timed: true
             },
             {
-                booked: false,
+                booked: true,
                 color: '#9E9E9E',
                 details: 'Available for booking',
                 end: new Date().setHours(16, 0, 0),
@@ -728,6 +728,8 @@ export default {
     },
     mounted() {
         this.getEvents();
+        // if no events add default events
+        // this.addEvents()
     },
     methods: {
         /*

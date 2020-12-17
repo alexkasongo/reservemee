@@ -6,13 +6,9 @@
         <!-- Masthead -->
         <div v-if="!loading">
             <header v-if="!user" class="masthead text-white text-center">
-                <!-- <header class="masthead text-white text-center" style="background: url("~assets/images/finance-stability.png")"> -->
                 <div class="overlay"></div>
                 <div class="container">
                     <div class="row">
-                        <!-- <div class="col-xl-9 mx-auto">
-                        <h1 class="mb-5 text-dark">Create, Offer & Get Paid!</h1>
-                        </div>-->
                         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
                             <form @submit.prevent="onSubmit">
                                 <div class="form-row">
@@ -99,11 +95,11 @@
             <!-- Testimonials -->
             <section class="testimonials text-center bg-light">
                 <div class="container">
-                    <h2 class="mb-5">What people are saying...</h2>
+                    <h2>What people are saying...</h2>
                     <div class="row">
                         <div class="col-lg-4">
                             <div
-                                class="testimonial-item mx-auto mb-5 mb-lg-0 user-container"
+                                class="testimonial-item mx-auto mb-lg-0 user-container"
                             >
                                 <div class="user mb-3">
                                     <div class="user__container"></div>
@@ -121,7 +117,7 @@
                         </div>
                         <div class="col-lg-4">
                             <div
-                                class="testimonial-item mx-auto mb-5 mb-lg-0 user-container"
+                                class="testimonial-item mx-auto mb-lg-0 user-container"
                             >
                                 <div class="user mb-3">
                                     <div class="user__container"></div>
@@ -140,7 +136,7 @@
                         </div>
                         <div class="col-lg-4">
                             <div
-                                class="testimonial-item mx-auto mb-5 mb-lg-0 user-container"
+                                class="testimonial-item mx-auto mb-lg-0 user-container"
                             >
                                 <div class="user mb-3">
                                     <div class="user__container"></div>
