@@ -735,6 +735,7 @@
                                         @click="changePassword"
                                         color="red darken-1"
                                         type="button"
+                                        dark
                                     >
                                         Change
                                     </v-btn>
