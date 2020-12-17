@@ -58,44 +58,49 @@
                     </p>
                 </div>
             </div>
-            <ul class="social-links list-inline mt-4 mb-0">
-                <li class="list-inline-item">
-                    <a
-                        title
-                        data-placement="top"
-                        data-toggle="tooltip"
-                        class="tooltips"
-                        href
-                        data-original-title="Facebook"
-                    >
-                        <i class="fa text-dark fa-facebook"></i>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a
-                        title
-                        data-placement="top"
-                        data-toggle="tooltip"
-                        class="tooltips"
-                        href
-                        data-original-title="Twitter"
-                    >
-                        <i class="fa text-dark fa-twitter"></i>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a
-                        title
-                        data-placement="top"
-                        data-toggle="tooltip"
-                        class="tooltips"
-                        href
-                        data-original-title="Skype"
-                    >
-                        <i class="fa text-dark fa-skype"></i>
-                    </a>
-                </li>
-            </ul>
+            <v-card
+                class="mx-auto"
+                color="teal darker-1"
+                elevation="0"
+                dark
+                max-width="400"
+            >
+                <v-card-actions>
+                    <v-list-item class="grow">
+                        <v-list-item-avatar color="grey darken-3">
+                            <v-img
+                                class="elevation-6"
+                                alt=""
+                                :src="storeProfile.storeOwnerImage"
+                            ></v-img>
+                        </v-list-item-avatar>
+
+                        <v-list-item-content>
+                            <v-list-item-title>{{
+                                storeProfile.storeName | capitalize
+                            }}</v-list-item-title>
+                        </v-list-item-content>
+
+                        <v-row align="center" justify="end">
+                            <a :href="storeProfile.facebook" target="_blank">
+                                <v-btn icon>
+                                    <v-icon>mdi-facebook</v-icon>
+                                </v-btn>
+                            </a>
+                            <a :href="storeProfile.instagram" target="_blank">
+                                <v-btn icon>
+                                    <v-icon>mdi-instagram</v-icon>
+                                </v-btn>
+                            </a>
+                            <a :href="storeProfile.twitter" target="_blank">
+                                <v-btn icon>
+                                    <v-icon>mdi-twitter</v-icon>
+                                </v-btn>
+                            </a>
+                        </v-row>
+                    </v-list-item>
+                </v-card-actions>
+            </v-card>
         </div>
         <div v-else>
             <v-alert

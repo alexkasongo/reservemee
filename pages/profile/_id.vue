@@ -620,6 +620,44 @@
                                     }"
                                 ></div>
                                 <div class="form-group">
+                                    <label for="location">Social Media</label>
+                                    <v-form>
+                                        <v-container>
+                                            <v-row>
+                                                <v-col cols="12" md="4">
+                                                    <v-text-field
+                                                        v-model="
+                                                            storeForm.facebook
+                                                        "
+                                                        label="Facebook"
+                                                        required
+                                                    ></v-text-field>
+                                                </v-col>
+
+                                                <v-col cols="12" md="4">
+                                                    <v-text-field
+                                                        v-model="
+                                                            storeForm.instagram
+                                                        "
+                                                        label="Instagram"
+                                                        required
+                                                    ></v-text-field>
+                                                </v-col>
+
+                                                <v-col cols="12" md="4">
+                                                    <v-text-field
+                                                        v-model="
+                                                            storeForm.twitter
+                                                        "
+                                                        label="Twitter"
+                                                        required
+                                                    ></v-text-field>
+                                                </v-col>
+                                            </v-row>
+                                        </v-container>
+                                    </v-form>
+                                </div>
+                                <div class="form-group">
                                     <label for="location">Location</label>
                                     <input
                                         required
@@ -957,9 +995,12 @@ export default {
                 rawStoreLogo: null,
                 rawStoreBanner: null,
                 rawStoreOwnerImage: null,
-                cat1: [] || '💦',
-                cat2: [] || '💦',
-                cat3: [] || '💦'
+                cat1: [],
+                cat2: [],
+                cat3: [],
+                twitter: '',
+                facebook: '',
+                instagram: ''
             },
             items: [
                 {
@@ -1196,9 +1237,12 @@ export default {
                 storeLocation: this.storeForm.storeLocation,
                 beauty: this.storeForm.cat1,
                 wellness: this.storeForm.cat2,
-                fitness: this.storeForm.cat3
+                fitness: this.storeForm.cat3,
+                twitter: this.storeForm.twitter,
+                facebook: this.storeForm.facebook,
+                instagram: this.storeForm.instagram
             };
-            console.log(`_id.vue - 1201 - 💦`, data);
+            // console.log(`_id.vue - 1201 - 🧰`, data);
             this.updateStoreProfile(data);
         },
         profileImagePickFile() {
@@ -1461,6 +1505,13 @@ export default {
             this.storeForm.cat2 =
                 this.userInfo[0].storeProfile.wellness || null;
             this.storeForm.cat3 = this.userInfo[0].storeProfile.fitness || null;
+            // the || sets null in the event that userInfo[0].storeProfile is undefined
+            this.storeForm.facebook =
+                this.userInfo[0].storeProfile.facebook || null;
+            this.storeForm.twitter =
+                this.userInfo[0].storeProfile.twitter || null;
+            this.storeForm.instagram =
+                this.userInfo[0].storeProfile.instagram || null;
         }
     }
 };
