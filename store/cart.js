@@ -39,7 +39,7 @@ export const actions = {
         // commit('loaders/SET_SNACKBAR', true, { root: true });
         this.$swal({
             toast: true,
-            position: 'top-end',
+            position: 'top-start',
             icon: 'success',
             title: 'Added to Cart',
             showConfirmButton: false,
