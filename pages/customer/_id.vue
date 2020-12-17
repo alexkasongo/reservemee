@@ -105,7 +105,6 @@ export default {
         }
     },
     created() {
-        console.log(`_id.vue - 102 - 💜`, this.sender);
         this.$store
             .dispatch('chat/loadReplies', this.filteredSender.userId)
             .then((res) => {
@@ -186,7 +185,6 @@ export default {
                         messagePreviewId: this.filteredSender.id
                     };
                     this.$store.dispatch('chat/sendReply', createdMessage);
-                    // console.log(`_id.vue - 180 - 🥶`, createdMessage);
                     this.newReply = null;
                     this.feedback = null;
 

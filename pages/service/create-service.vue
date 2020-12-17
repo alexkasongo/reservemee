@@ -173,19 +173,12 @@ export default {
     mounted() {
         // If serviceImageDisplay state is empty, run this
         this.serviceImageDisplay = 'none';
-        console.log(`create-service.vue - 159 - 🤌🏾`, this.categories);
 
         // this.categoryNames = new Array(this.categories.name);
 
         for (let key in this.categories) {
-            console.log(
-                `create-service.vue - 164 - 🧰`,
-                this.categories[key].name
-            );
             this.categoryNames.push(this.categories[key].name);
         }
-
-        // console.log(`create-service.vue - 158 - 🌎`, this.categoryNames);
     }
 };
 </script>

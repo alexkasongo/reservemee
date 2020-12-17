@@ -99,9 +99,6 @@ export default {
                 this.alert = 'Please select a date and time.';
             }
         }
-    },
-    mounted() {
-        console.log(`QuickBook.vue - 100 - 💦`);
     }
 };
 </script>

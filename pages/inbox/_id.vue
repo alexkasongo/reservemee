@@ -359,7 +359,6 @@ export default {
                         message: this.newReply,
                         messagePreviewId: this.messages[0].messagePreviewId
                     };
-                    console.log(`_id.vue - 364 - 🤔`, createdMessage);
                     this.$store.dispatch('chat/sendReply', createdMessage);
                     this.newReply = null;
                     this.feedback = null;
@@ -384,7 +383,6 @@ export default {
                         message: this.newReply,
                         messagePreviewId: this.messages[0].messagePreviewId
                     };
-                    console.log(`_id.vue - 390 - 🌱`, createdMessage);
                     this.$store.dispatch('chat/sendReply', createdMessage);
                     this.newReply = null;
                     this.feedback = null;

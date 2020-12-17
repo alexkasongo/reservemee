@@ -102,7 +102,6 @@ export const actions = {
         this.commit('USER_NAME', payload)
     },
     async sendReply({ commit, dispatch }, payload) {
-        // console.log(`chat.js - 93 - 🌈`, payload);
 
         const comment = {
             to: payload.to,

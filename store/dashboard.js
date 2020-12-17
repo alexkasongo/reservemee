@@ -496,7 +496,6 @@ export const actions = {
      */
     async updateStoreProfile({ commit, dispatch }, payload) {
         commit('loaders/SET_LOADING', true, { root: true });
-        console.log(`dashboard.js - 499 - 🪣`, payload);
 
         // if both logo and banner have been added run the code below
         let logoImageUrl = ''

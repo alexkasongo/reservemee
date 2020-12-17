@@ -352,7 +352,6 @@ export default {
         },
         clearStorage() {
             localStorage.clear();
-            console.log(`index.vue - 364 - 🥶`);
         }
     }
 };

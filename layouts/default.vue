@@ -1,5 +1,6 @@
 <template>
     <v-app>
+        <!-- SNACKBAR -->
         <v-snackbar
             top
             v-model="snackbar"
@@ -19,6 +20,278 @@
                 </v-btn>
             </template>
         </v-snackbar>
+        <!-- SNACKBAR -->
+
+        <v-card
+            class="rounded-0 mx-auto overflow-hidden"
+            height="100%"
+            width="100%"
+        >
+            <div v-if="loading" class="loading">
+                <p>loading...</p>
+            </div>
+            <!-- NAVBAR -->
+            <v-app-bar color="teal darken-1" fixed flat>
+                <!-- open drawer -->
+                <v-app-bar-nav-icon
+                    color="white"
+                    @click.stop="drawer = !drawer"
+                ></v-app-bar-nav-icon>
+                <!-- open drawer end -->
+
+                <v-btn
+                    v-if="user"
+                    color="white"
+                    @click="goHome(user)"
+                    elevation="0"
+                    text
+                    x-large
+                >
+                    Bookme
+                </v-btn>
+
+                <v-spacer></v-spacer>
+
+                <!-- MESSAGES START -->
+                <v-btn v-if="user" icon>
+                    <v-icon
+                        v-if="role.customer"
+                        @click="$router.push(`/inbox/${user.uid}`)"
+                        color="white"
+                        >mdi-message</v-icon
+                    >
+                    <v-icon
+                        v-if="role.admin"
+                        @click="$router.push('/inbox/admin')"
+                        color="white"
+                        >mdi-message</v-icon
+                    >
+                </v-btn>
+                <!-- MESSAGES END -->
+
+                <!-- BOOKMARKS START -->
+                <v-btn v-if="user" icon>
+                    <v-icon color="white">mdi-heart-outline</v-icon>
+                </v-btn>
+                <!-- BOOKMARKS END -->
+
+                <!-- NOTIFICATIONS START -->
+                <div v-if="user" class="text-center">
+                    <v-menu
+                        v-if="user"
+                        bottom
+                        left
+                        transition="scale-transition"
+                        origin="top right 0"
+                    >
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-btn dark icon v-bind="attrs" v-on="on">
+                                <v-icon color="white">mdi-bell-outline</v-icon>
+                            </v-btn>
+                        </template>
+
+                        <v-list width="250px">
+                            <v-list-item
+                                v-for="notice in notifications"
+                                :key="notice.id"
+                                link
+                            >
+                                <v-list-item-icon>
+                                    <v-icon>mdi-cog-outline </v-icon>
+                                </v-list-item-icon>
+
+                                <v-list-item-content>
+                                    <v-list-item-title>{{
+                                        notice.message
+                                    }}</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-list>
+                    </v-menu>
+                </div>
+                <!-- NOTIFICATIONS END -->
+
+                <!-- CART START -->
+                <v-btn
+                    v-if="user"
+                    icon
+                    @click.stop="drawerRight = !drawerRight"
+                >
+                    <v-badge
+                        :content="orders"
+                        :value="orders"
+                        color="red darker-1"
+                        overlap
+                    >
+                        <v-icon color="white">mdi-cart</v-icon>
+                    </v-badge>
+                </v-btn>
+                <!-- CART END -->
+
+                <!-- THREE DOTS -->
+                <v-menu
+                    v-if="user"
+                    bottom
+                    left
+                    transition="scale-transition"
+                    origin="top right 0"
+                >
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn dark icon v-bind="attrs" v-on="on">
+                            <v-icon color="white">mdi-dots-vertical</v-icon>
+                        </v-btn>
+                    </template>
+
+                    <v-list width="250px">
+                        <v-list-item @click="viewProfile(user.uid)" link>
+                            <v-list-item-icon>
+                                <v-icon>mdi-cog-outline </v-icon>
+                            </v-list-item-icon>
+
+                            <v-list-item-content>
+                                <v-list-item-title>Settings</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
+                <!-- THREE DOTS END -->
+
+                <!-- if router name is not Sign in then show, else do not show -->
+                <div v-if="this.$route.name !== 'signin'">
+                    <v-btn
+                        outlined
+                        elevation="0"
+                        text
+                        class="text-lowercase white"
+                        v-if="!user"
+                        @click="signin"
+                        >Sign In</v-btn
+                    >
+                </div>
+                <div v-else>
+                    <v-btn
+                        outlined
+                        elevation="0"
+                        text
+                        class="text-lowercase white"
+                        v-if="!user"
+                        @click="signup"
+                        >Sign Up</v-btn
+                    >
+                    <v-btn
+                        outlined
+                        elevation="0"
+                        text
+                        class="text-lowercase white"
+                        v-if="!user"
+                        @click="$router.push('/signup-admin')"
+                        >Admin</v-btn
+                    >
+                </div>
+            </v-app-bar>
+            <!-- NAVBAR END -->
+
+            <!-- DRAWER LEFT-->
+            <v-navigation-drawer
+                v-model="drawer"
+                fixed
+                temporary
+                height="100vh"
+            >
+                <v-list nav>
+                    <v-list-item-group
+                        v-model="group"
+                        active-class="teal--text text--accent-4"
+                    >
+                        <div v-if="user">
+                            <v-list-item @click="goToStore" link>
+                                <v-list-item-icon>
+                                    <v-icon>mdi-cart</v-icon>
+                                </v-list-item-icon>
+
+                                <v-list-item-content>
+                                    <v-list-item-title>Store</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item
+                                v-if="role.admin"
+                                @click="goToDashboard"
+                                link
+                            >
+                                <v-list-item-icon>
+                                    <v-icon>mdi-view-dashboard-outline</v-icon>
+                                </v-list-item-icon>
+
+                                <v-list-item-content>
+                                    <v-list-item-title
+                                        >Dashboard</v-list-item-title
+                                    >
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item
+                                v-if="role.admin"
+                                @click="goToBookings"
+                                link
+                            >
+                                <v-list-item-icon>
+                                    <v-icon>mdi-cart-arrow-down</v-icon>
+                                </v-list-item-icon>
+
+                                <v-list-item-content>
+                                    <v-list-item-title
+                                        >Bookings</v-list-item-title
+                                    >
+                                </v-list-item-content>
+                            </v-list-item>
+                        </div>
+
+                        <div v-if="!user">
+                            <v-list-item @click="signin">
+                                <v-list-item-icon>
+                                    <v-icon>mdi-login</v-icon>
+                                </v-list-item-icon>
+
+                                <v-list-item-title
+                                    ><a>Sign In</a></v-list-item-title
+                                >
+                            </v-list-item>
+                        </div>
+
+                        <div v-if="!user">
+                            <v-list-item @click="signup">
+                                <v-list-item-icon>
+                                    <v-icon>mdi-account-plus-outline</v-icon>
+                                </v-list-item-icon>
+
+                                <v-list-item-title
+                                    ><a>Sign Up</a></v-list-item-title
+                                >
+                            </v-list-item>
+                        </div>
+                    </v-list-item-group>
+                </v-list>
+
+                <template v-if="user" v-slot:append>
+                    <div @click="signout" class="pa-2">
+                        <v-btn class="teal darker-1" block dark> Logout </v-btn>
+                    </div>
+                </template>
+            </v-navigation-drawer>
+            <!-- DRAWER LEFT END -->
+
+            <!-- DRAWER RIGHT-->
+            <v-navigation-drawer
+                v-model="drawerRight"
+                fixed
+                temporary
+                height="100vh"
+                width="600px"
+                right
+            >
+                <Cart />
+            </v-navigation-drawer>
+            <!-- DRAWER RIGHT END -->
+        </v-card>
 
         <div class="margin margin-bt">
             <Nuxt />

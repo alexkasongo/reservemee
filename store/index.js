@@ -47,7 +47,6 @@ export const actions = {
             .auth()
             .createUserWithEmailAndPassword(user.email, user.password)
             .then((response) => {
-                console.log(`index.js - 92 - 💜 1`, response);
                 if (response) {
                     const data = {
                         uid: response.user.uid,
@@ -57,7 +56,6 @@ export const actions = {
                     setAdmin(data)
                         .then((result) => {
                             commit('loaders/SET_LOADING', true, { root: true });
-                            console.log(`index.js - 92 - 🐣 2`, result);
                             if (result) {
                                 response.user
                                     .updateProfile({
@@ -95,12 +93,10 @@ export const actions = {
     },
     async signupAdmin({ commit, dispatch }, user) {
         commit('loaders/SET_LOADING', true, { root: true });
-        console.log(`index.js - 87 🌦 - variable`, user);
         await firebase
             .auth()
             .createUserWithEmailAndPassword(user.email, user.password)
             .then((response) => {
-                console.log(`index.js - 92 - Response >>>`, response);
                 if (response) {
                     const data = {
                         uid: response.user.uid,

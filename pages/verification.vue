@@ -70,12 +70,6 @@ export default {
             notification: ''
         };
     },
-    watch: {
-        $route() {
-            // great spot for debuggin
-            console.log(`verification.vue - 78 - 🤌🏾`, $route);
-        }
-    },
     computed: {
         ...mapGetters({
             verification: 'verificationSent',
@@ -123,7 +117,6 @@ export default {
                 localStorage.clear();
             }
         });
-        console.log(`verification.vue - 115 - 💦`, this.userId);
     }
 };
 </script>

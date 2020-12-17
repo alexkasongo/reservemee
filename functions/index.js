@@ -7,32 +7,6 @@ admin.initializeApp()
 
 const db = admin.firestore()
 
-// automatically assign customer role on signup
-// trigger function on new user creation.
-// when a new user is created this fucntion is triggered. When triggered a defualt 
-// data object is pushed to the roles collection, this object contains the user's role status
-// exports.addUserRole = functions.auth.user().onCreate(async (authUser) => {
-
-//     if (authUser.email) {
-//         const customClaims = {
-//             customer: true,
-//         };
-//         try {
-//             var _ = await admin.auth().setCustomUserClaims(authUser.uid, customClaims)
-
-//             return db.collection("roles").doc(authUser.uid).set({
-//                 email: authUser.email,
-//                 role: customClaims
-//             })
-
-//         } catch (error) {
-//             console.log('🤡', error)
-//         }
-
-
-//     }
-// });
-
 // create admin user on signup
 exports.addUserRole = functions.https.onCall(async (data, context) => {
 
@@ -48,14 +22,13 @@ exports.addUserRole = functions.https.onCall(async (data, context) => {
         })
 
     } catch (error) {
+        // FIXME
         console.log('🤡', error)
     }
 
 });
 // create admin user on signup
 exports.setAdmin = functions.https.onCall(async (data, context) => {
-    console.log(`index.js - 43 - ❤️`, data);
-
     // if (!context.auth.token.admin) return
     if (!context.auth) return
 
@@ -68,6 +41,7 @@ exports.setAdmin = functions.https.onCall(async (data, context) => {
         })
 
     } catch (error) {
+        // FIXME
         console.log('🤡', error)
     }
 
@@ -87,6 +61,7 @@ exports.setUserRole = functions.https.onCall(async (data, context) => {
         })
 
     } catch (error) {
+        // FIXME
         console.log('🤡', error)
     }
 

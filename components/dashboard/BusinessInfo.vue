@@ -221,7 +221,6 @@ export default {
     mounted() {
         // If storeProfile is null do something
         if (this.storeProfile) {
-            console.log(`BusinessInfo.vue - 167 - 🐷`, this.storeProfile);
             this.beauty = this.storeProfile.beauty;
             this.wellness = this.storeProfile.wellness;
             this.fitness = this.storeProfile.fitness;

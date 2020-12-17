@@ -307,10 +307,8 @@ export default {
         dialog(visible) {
             if (visible) {
                 // Do this when dialog opens up
-                // console.log('Dialog was opened! 🐣');
             } else {
                 // Do this when dialog closes
-                // console.log('Dialog was closed! 🥚');
             }
         }
     },
@@ -378,7 +376,6 @@ export default {
             this.service = ev;
             this.note = '';
             this.ServiceId = ev.id;
-            console.log(`_id.vue - 374 - 🧽`, this.service);
         },
         quickBook() {
             if (this.bookingState !== null) {

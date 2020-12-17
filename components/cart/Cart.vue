@@ -95,14 +95,10 @@ export default {
         // }
     },
     methods: {
-        deleteItem(ev) {
-            console.log(`Cart.vue - 151 - 🐣`, ev);
-        }
+        deleteItem(ev) {}
     },
     mounted() {
-        console.log(`playground.vue - 52 - 💦`, this.ordersState);
         this.orders = this.ordersState.order;
-        console.log(`playground.vue - 68 - 🏝`, this.ordersState);
     }
 };
 </script>
