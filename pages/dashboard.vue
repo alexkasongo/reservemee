@@ -91,11 +91,9 @@ import 'firebase/auth';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-    data() {
-        return {
-            user: ''
-        };
-    },
+    data: () => ({
+        user: []
+    }),
     computed: {
         ...mapGetters({
             categories: 'dashboard/categories',

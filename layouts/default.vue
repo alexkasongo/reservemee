@@ -390,7 +390,6 @@ export default {
             $('.navbar-collapse').collapse('hide');
             this.loadServices(this.userId);
             // great spot for debuggin
-            console.log(`default.vue - 393 - 🤌🏾`);
         },
         group() {
             this.drawer = false;

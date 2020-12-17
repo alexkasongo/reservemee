@@ -19,14 +19,14 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-    name: 'EmailVerified',
     computed: {
         ...mapGetters({
             user: 'user'
         })
     },
+
     methods: {
-        ...mapActions(['verifyEmail', 'loadUserId', 'user']),
+        ...mapActions(['verifyEmail', 'loadUserId']),
         onSubmit() {
             this.verifyEmail(emailAddress);
         },
@@ -35,7 +35,7 @@ export default {
                 .auth()
                 .signOut()
                 .then((result) => {
-                    this.user = '';
+                    // this.user = '';
                     window.localStorage.removeItem('email');
                     window.localStorage.removeItem('vuex');
                 });
