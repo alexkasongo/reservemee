@@ -1,12 +1,12 @@
 <template>
-    <div class="container margin">
-        <h3>Update Service</h3>
-        <form @submit.prevent="onSubmit">
+    <div class="container">
+        <div class="display-1">Update Service</div>
+        <form @submit.prevent="onSubmit" class="pt-5">
             <div class="form-group">
-                <label for="exampleInputEmail1">Select Category</label>
                 <v-select
+                    label="Select Category"
                     class="form-control"
-                    :items="categories"
+                    :items="categoryNames"
                     required
                     v-model="category"
                 >
@@ -15,8 +15,8 @@
             </div>
             <div>
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Name</label>
                     <v-text-field
+                        label="Name"
                         required
                         type="name"
                         placeholder="Service Name"
@@ -24,11 +24,10 @@
                     ></v-text-field>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Description</label>
                     <v-textarea
                         required
                         outlined
-                        placeholder="Describe the service"
+                        label="Description"
                         v-model="description"
                     ></v-textarea>
                 </div>
@@ -64,8 +63,8 @@
                     }"
                 ></div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Price</label>
                     <v-text-field
+                        label="Price"
                         required
                         type="number"
                         min="1"
@@ -99,7 +98,8 @@ export default {
             price: '',
             serviceImage: '',
             serviceImageDisplay: '',
-            rawServiceImage: null
+            rawServiceImage: null,
+            categoryNames: []
         };
     },
     computed: {
@@ -205,6 +205,10 @@ export default {
         this.description = this.serviceUpdateInfo.description;
         this.price = this.serviceUpdateInfo.price;
         this.serviceImage = this.serviceUpdateInfo.serviceImage;
+
+        for (let key in this.categories) {
+            this.categoryNames.push(this.categories[key].name);
+        }
     }
 };
 </script>

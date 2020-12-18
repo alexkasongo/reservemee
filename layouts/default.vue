@@ -22,11 +22,7 @@
                 </template>
             </v-snackbar>
             <!-- SNACKBAR -->
-            <v-card
-                class="rounded-0 mx-auto overflow-hidden"
-                height="100%"
-                width="100%"
-            >
+            <v-card class="rounded-0 mx-auto overflow-hidden">
                 <div v-if="loading" class="loading">
                     <p>loading...</p>
                 </div>
@@ -305,7 +301,7 @@
                 <!-- DRAWER RIGHT END -->
             </v-card>
 
-            <div class="margin margin-bt">
+            <div class="margin">
                 <Nuxt />
             </div>
         </client-only>
@@ -517,7 +513,8 @@ export default {
 
 <style lang="scss" scoped>
 .margin {
-    margin: 90px auto 300px auto;
+    // margin: 90px auto 0 auto;
+    margin-top: 90px;
 }
 
 .app {

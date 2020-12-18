@@ -1,94 +1,87 @@
 <template>
     <div class="container">
         <div class="display-1 p-3">Create Service</div>
-        <v-card>
-            <div class="p-3">
-                <form @submit.prevent="onSubmit">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Select Category</label>
-                        <v-select
-                            :items="categoryNames"
-                            required
-                            v-model="category"
-                        >
-                            {{ categoryNames }}
-                        </v-select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Name</label>
-                        <v-text-field
-                            required
-                            type="name"
-                            id="exampleFormControlInput1"
-                            placeholder="Service Name"
-                            v-model="name"
-                        ></v-text-field>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Description</label>
-                        <textarea
-                            required
-                            class="form-control"
-                            style="min-width: 100%"
-                            placeholder="Describe the service"
-                            v-model="description"
-                        ></textarea>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Picture</label>
-                            <v-file-input
-                                type="file"
-                                color="teal accent-4"
-                                @change="onUploadServiceImage"
-                                label="Upload profile image"
-                                outlined
-                                truncate-length="50"
-                                prepend-icon="mdi-camera"
-                                dense
-                                accept="image/*"
-                                ref="fileInputOne"
-                            >
-                                <template v-slot:selection="{ text }">
-                                    <v-chip
-                                        small
-                                        label
-                                        dark
-                                        color="teal darken-1"
-                                    >
-                                        {{ text }}
-                                    </v-chip>
-                                </template>
-                            </v-file-input>
-                        </div>
-                        <div
-                            class="form-group imgPreview"
-                            v-bind:style="{
-                                'background-image': 'url(' + serviceImage + ')',
-                                display: serviceImageDisplay
-                            }"
-                        ></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Price</label>
-                        <v-text-field
-                            required
-                            type="number"
-                            min="1"
-                            step="any"
-                            placeholder="50"
-                            v-model="price"
-                        ></v-text-field>
-                    </div>
-                    <v-btn
-                        :loading="loading"
-                        class="teal darken-1"
-                        dark
-                        type="submit"
-                        >Create</v-btn
+        <v-card elevation="0">
+            <form @submit.prevent="onSubmit" class="pt-5">
+                <div class="form-group">
+                    <v-select
+                        label="Select Category"
+                        :items="categoryNames"
+                        required
+                        v-model="category"
                     >
-                </form>
-            </div>
+                        {{ categoryNames }}
+                    </v-select>
+                </div>
+                <div class="form-group">
+                    <v-text-field
+                        label="Name"
+                        required
+                        type="name"
+                        id="exampleFormControlInput1"
+                        placeholder="Service Name"
+                        v-model="name"
+                    ></v-text-field>
+                </div>
+                <div class="form-group">
+                    <v-textarea
+                        outlined
+                        required
+                        class="form-control"
+                        style="min-width: 100%"
+                        label="Description"
+                        v-model="description"
+                    ></v-textarea>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Picture</label>
+                        <v-file-input
+                            type="file"
+                            color="teal accent-4"
+                            @change="onUploadServiceImage"
+                            label="Upload profile image"
+                            outlined
+                            truncate-length="50"
+                            prepend-icon="mdi-camera"
+                            dense
+                            accept="image/*"
+                            ref="fileInputOne"
+                        >
+                            <template v-slot:selection="{ text }">
+                                <v-chip small label dark color="teal darken-1">
+                                    {{ text }}
+                                </v-chip>
+                            </template>
+                        </v-file-input>
+                    </div>
+                    <div
+                        class="form-group imgPreview"
+                        v-bind:style="{
+                            'background-image': 'url(' + serviceImage + ')',
+                            display: serviceImageDisplay
+                        }"
+                    ></div>
+                </div>
+                <div class="form-group">
+                    <v-text-field
+                        label="Price"
+                        required
+                        type="number"
+                        min="1"
+                        step="any"
+                        placeholder="50"
+                        v-model="price"
+                    ></v-text-field>
+                </div>
+                <v-btn
+                    :loading="loading"
+                    class="teal darken-1"
+                    dark
+                    type="submit"
+                    >Create</v-btn
+                >
+            </form>
         </v-card>
     </div>
 </template>
