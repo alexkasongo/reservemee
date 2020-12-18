@@ -1,326 +1,114 @@
 <template>
-    <div class="inbox container">
-        <!-- PREVIEW -->
+    <div id="app">
+        <v-app id="inspire">
+            <v-app id="keep">
+                <v-app-bar app clipped-left color="teal darker-1">
+                    <v-app-bar-nav-icon
+                        @click="drawer = !drawer"
+                    ></v-app-bar-nav-icon>
+                    <span class="title ml-3 mr-5">Google</span>
+                    <v-text-field
+                        solo-inverted
+                        flat
+                        hide-details
+                        label="Search"
+                    ></v-text-field>
 
-        <div class="inbox__left">
-            <v-card class="mx-auto" height="90vh" width="100%" tile>
-                <v-navigation-drawer width="100%" permanent>
-                    <!-- HEADER -->
-                    <v-card elevation="0" class="mx-auto" max-width="434" tile>
-                        <v-img height="100%" class="teal darker-1">
-                            <v-row align="end" class="fill-height">
-                                <v-col
-                                    align-self="start"
-                                    class="pa-0"
-                                    cols="12"
-                                >
-                                    <v-avatar
-                                        class="profile"
-                                        color="grey"
-                                        size="164"
-                                        tile
-                                    >
-                                        <v-img
-                                            :src="
-                                                filteredUserData.storeOwnerImage
-                                            "
-                                        ></v-img>
-                                    </v-avatar>
+                    <v-spacer></v-spacer>
+                </v-app-bar>
+
+                <v-navigation-drawer
+                    v-model="drawer"
+                    app
+                    clipped
+                    color="grey lighten-4"
+                    :mini-variant.sync="mini"
+                >
+                    <v-btn icon @click.stop="mini = !mini">
+                        <v-icon>mdi-chevron-left</v-icon>
+                    </v-btn>
+                    <v-list dense class="grey lighten-4">
+                        <template v-for="(item, i) in items">
+                            <!-- <v-row v-if="item.heading" :key="i" align="center">
+                                <v-col cols="6">
+                                    <v-subheader v-if="item.heading">
+                                        {{ item.heading }}
+                                    </v-subheader>
                                 </v-col>
-                                <v-col class="py-0">
-                                    <v-list-item color="rgba(0, 0, 0, .4)" dark>
-                                        <v-list-item-content>
-                                            <v-list-item-title class="title">
-                                                {{ user.name }}
-                                            </v-list-item-title>
-                                            <v-list-item-subtitle>{{
-                                                user.email
-                                            }}</v-list-item-subtitle>
-                                        </v-list-item-content>
-                                    </v-list-item>
+                                <v-col cols="6" class="text-right">
+                                    <v-btn small text>edit</v-btn>
                                 </v-col>
-                            </v-row>
-                        </v-img>
-                    </v-card>
-                    <!-- HEADER -->
-                    <v-divider></v-divider>
-                    <v-list nav>
-                        <v-list-item-group
-                            v-model="selectedItem"
-                            color="teal darker-1"
-                        >
-                            <v-list-item
-                                v-for="(messenger, i) in allMessages"
+                            </v-row> -->
+                            <v-divider
+                                v-if="item.divider"
                                 :key="i"
-                            >
-                                <v-list-item-avatar>
-                                    <v-img
-                                        :src="messenger.storeOwnerImage"
-                                    ></v-img>
-                                </v-list-item-avatar>
-
-                                <v-list-item-content
-                                    @click="onChange(messenger)"
-                                >
-                                    <v-list-item-title
-                                        >To:
-                                        {{
-                                            messenger.storeName
-                                        }}</v-list-item-title
-                                    >
-                                    <v-list-item-subtitle
-                                        v-text="messenger.message"
-                                    ></v-list-item-subtitle>
+                                dark
+                                class="my-4"
+                            ></v-divider>
+                            <v-list-item v-else :key="i" link>
+                                <v-list-item-action>
+                                    <v-icon>{{ item.icon }}</v-icon>
+                                </v-list-item-action>
+                                <v-list-item-content>
+                                    <v-list-item-title class="grey--text">
+                                        {{ item.text }}
+                                    </v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
-                        </v-list-item-group>
+                        </template>
                     </v-list>
                 </v-navigation-drawer>
-            </v-card>
-        </div>
-        <!-- PREVIEW END -->
 
-        <!-- MESSAGE -->
-        <div class="inbox__right">
-            <v-card height="90vh" class="container inbox__right-card mx-auto">
-                <!-- Message -->
-                <div class="inbox__right-card-top">
-                    <v-card
-                        v-if="messagePreview.length > 0"
-                        elevation="0"
-                        class="mx-auto"
-                    >
-                        <v-card-text>
-                            <p class="display-1 text--primary">
-                                {{ messagePreview[0].name | capitalize }}
-                            </p>
-                            <p>{{ messagePreview[0].timestamp }}</p>
-                            <div class="text--primary">
-                                {{ messagePreview[0].message }}
-                            </div>
-                        </v-card-text>
-                    </v-card>
-                    <v-divider v-if="messagePreview.length > 0"></v-divider>
-                    <!-- conversation start -->
-                    <div class="inbox__right-card-middle">
-                        <v-list three-line>
-                            <div>
-                                <template v-for="(message, index) in messages">
-                                    <v-list-item :key="index">
-                                        <v-list-item-avatar>
-                                            <v-img
-                                                :src="message.storeOwnerImage"
-                                            ></v-img>
-                                        </v-list-item-avatar>
-                                        <v-list-item-content>
-                                            <v-list-item-title
-                                                class="deep-purple-text"
-                                                >{{
-                                                    message.from
-                                                }}</v-list-item-title
-                                            >
-                                            <v-alert
-                                                v-bind:class="{
-                                                    teal:
-                                                        message.from ===
-                                                        `${user.name}`,
-                                                    grey:
-                                                        message.from !==
-                                                        `${user.name}`
-                                                }"
-                                                dark
-                                            >
-                                                {{ message.message }}
-                                            </v-alert>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                </template>
-                            </div>
-                        </v-list>
-                    </div>
-                    <!-- Conversation End -->
-                </div>
-                <!-- Message End -->
-
-                <!-- Reply -->
-                <div class="inbox__right-card-btm">
-                    <v-list v-if="allMessages.length > 0">
-                        <v-list-item>
-                            <v-list-item-content>
-                                <form @submit.prevent="onReply">
-                                    <div class="field">
-                                        <label for="reply">Write Message</label>
-                                        <v-text-field
-                                            type="text"
-                                            name="reply"
-                                            v-model="newReply"
-                                        ></v-text-field>
-                                        <p
-                                            v-if="feedback"
-                                            class="red-text center"
+                <v-main>
+                    <v-container fluid class="grey lighten-4 fill-height">
+                        <v-row justify="center" align="center">
+                            <v-col class="shrink">
+                                <v-tooltip right>
+                                    <template v-slot:activator="{ on }">
+                                        <v-btn
+                                            :href="source"
+                                            icon
+                                            large
+                                            target="_blank"
+                                            v-on="on"
                                         >
-                                            {{ feedback }}
-                                        </p>
-                                    </div>
-                                    <v-btn color="teal" type="submit" dark
-                                        >Send</v-btn
-                                    >
-                                </form>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
-                </div>
-                <!-- Reply End -->
-            </v-card>
-        </div>
-        <!-- MESSAGE -->
+                                            <v-icon large>mdi-code-tags</v-icon>
+                                        </v-btn>
+                                    </template>
+                                    <span>Source</span>
+                                </v-tooltip>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-main>
+            </v-app>
+        </v-app>
     </div>
 </template>
 
 <script>
-import * as firebase from 'firebase/app';
-import { mapState, mapGetters, mapActions } from 'vuex';
-
 export default {
     data: () => ({
-        messages: [],
-        messagePreview: [],
-        selectedItem: [],
-        newReply: null,
-        feedback: null,
-        role: null
-    }),
-    computed: {
-        ...mapGetters({
-            replies: 'chat/replies',
-            user: 'user'
-        }),
-        ...mapState({
-            allMessagesData: 'chat',
-            userData: 'dashboard'
-        }),
-        allMessages() {
-            return this.allMessagesData.messages;
-        },
-        filteredUserData() {
-            return this.userData.userData[0].storeProfile;
-        }
-    },
-    methods: {
-        ...mapActions({
-            loadMessages: 'chat/loadMessages',
-            loadReplies: 'chat/loadReplies'
-        }),
-        loadAllReplies(messageId) {
-            this.$store
-                .dispatch('chat/loadReplies', this.user.uid)
-                .then((res) => {
-                    // only filter once async call is complete
-                    const filteredMessages = this.replies.filter((res) => {
-                        return res.messagePreviewId === messageId;
-                    });
-                    this.messages = filteredMessages;
-                });
-        },
-        onChange(e) {
-            this.messagePreview = new Array(e);
-
-            const value = e.messagePreviewId;
-
-            // if all is selected show all
-            if (this.messages.length <= 0) {
-                this.messages = this.replies;
-            }
-
-            // function which we can use filter object
-            if (value !== 'all') {
-                const filteredMessages = this.messages.filter((res) => {
-                    return res.messagePreviewId === value;
-                });
-                this.messages = filteredMessages;
-            }
-
-            //  if service length is less than zero, repopulate and then filter accordingly
-            if (this.messages.length <= 0) {
-                this.messages = this.replies;
-
-                const filteredMessages = this.messages.filter((res) => {
-                    return res.messagePreviewId === value;
-                });
-                this.messages = filteredMessages;
-            }
-        },
-        //NOTE  this is adding new reply
-        onReply() {
-            if (this.role.customer) {
-                if (this.newReply) {
-                    const createdMessage = {
-                        to: this.messages[0].from,
-                        from: this.user.name,
-                        userId: this.user.uid,
-                        storeId: this.messages[0].storeId,
-                        messageId: this.messages[0].messageId,
-                        storeName: this.messages[0].storeName,
-                        storePhoneNumber: this.messages[0].storePhoneNumber,
-                        storeEmail: this.messages[0].storeEmail,
-                        storeOwnerImage: this.filteredUserData.storeOwnerImage,
-                        message: this.newReply,
-                        messagePreviewId: this.messages[0].messagePreviewId
-                    };
-                    this.$store.dispatch('chat/sendReply', createdMessage);
-                    this.newReply = null;
-                    this.feedback = null;
-
-                    this.loadAllReplies(this.messages[0].messagePreviewId);
-                } else {
-                    this.feedback = 'You must enter a reply to add it';
-                }
-            }
-        }
-    },
-    mounted() {
-        this.loadMessages(this.$route.params.id).then(() => {});
-        this.loadReplies(this.$route.params.id).then(() => {
-            // this.messages = this.replies;
-        });
-
-        // check if signed in user is admin or customer
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                // User is signed in.
-                // check user status
-                firebase
-                    .auth()
-                    .currentUser.getIdTokenResult()
-                    .then((tokenResult) => {
-                        if (tokenResult) {
-                            this.role = tokenResult.claims;
-                        }
-                    });
-            }
-        });
-    }
+        drawer: null,
+        items: [
+            { icon: 'mdi-account', text: 'Profile Information' },
+            { icon: 'mdi-cart', text: 'Store Settings' },
+            { divider: true },
+            { icon: 'mdi-shield', text: 'Security' },
+            { divider: true },
+            { icon: 'mdi-bell', text: 'Notifications' },
+            { divider: true },
+            { icon: 'mdi-credit-card', text: 'Billing' },
+            { icon: 'mdi-cog', text: 'Account Settings' },
+            { icon: 'mdi-help-circle', text: 'Help' }
+        ],
+        mini: false
+    })
 };
 </script>
 
 <style lang="scss" scoped>
-.inbox {
-    display: flex;
-    &__left {
-        width: 40%;
-        margin: 0 10px 0 0;
-    }
-    &__right {
-        width: 60%;
-    }
-    &__right-card {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    &__right-card-middle {
-        overflow: auto;
-        max-height: 50vh;
-    }
+#keep .v-navigation-drawer__border {
+    display: none;
 }
 </style>
