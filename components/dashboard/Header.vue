@@ -14,7 +14,8 @@
             >
                 <div class="header__profile-image">
                     <!-- FIXME -->
-                    <!-- <v-tooltip bottom>
+                    <!-- SSR ISSUE -->
+                    <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
                             <div class="float-left mr-3">
                                 <img
@@ -38,7 +39,7 @@
                             </div>
                         </template>
                         <span>Settings</span>
-                    </v-tooltip> -->
+                    </v-tooltip>
 
                     <div class="header__titles">
                         <h4>
@@ -59,7 +60,8 @@
                 <div class="bg-center">
                     <div class="header__profile-image">
                         <!-- FIXME -->
-                        <!-- <v-tooltip bottom>
+                        <!-- SSR ISSUE -->
+                        <v-tooltip bottom>
                             <template v-slot:activator="{ on, attrs }">
                                 <div class="float-left mr-3">
                                     <img
@@ -83,7 +85,7 @@
                                 </div>
                             </template>
                             <span>Settings</span>
-                        </v-tooltip> -->
+                        </v-tooltip>
 
                         <div class="header__titles">
                             <h4 class="mt-1 mb-1 font-18">
@@ -108,7 +110,8 @@
             >
                 <div class="bg-center">
                     <!-- FIXME -->
-                    <!-- <v-tooltip bottom>
+                    <!-- SSR ISSUE -->
+                    <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
                             <span class="float-left mr-3">
                                 <img
@@ -122,13 +125,13 @@
                             </span>
                         </template>
                         <span>Settings</span>
-                    </v-tooltip> -->
+                    </v-tooltip>
 
-                    <!-- <div class="media-body text-white">
+                    <div class="media-body text-white">
                         <p>
                             {{ user.displayName }}
                         </p>
-                    </div> -->
+                    </div>
                 </div>
             </v-parallax>
         </div>
@@ -159,16 +162,6 @@ export default {
             return this.dashboardStore.userData;
         },
         storeProfile() {
-            // if (
-            //     // if the state is undfined or the object does not exist, return null
-            //     this.$store.state.userData.length <= 0 ||
-            //     !this.$store.state.userData[0].storeProfile
-            // ) {
-            //     return null;
-            // } else {
-            //     const data = this.$store.state.userData[0].storeProfile;
-            //     return data;
-            // }
             if (
                 // if the state is undfined or the object does not exist, return null
                 this.userData.length <= 0 ||

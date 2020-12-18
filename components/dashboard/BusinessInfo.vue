@@ -149,8 +149,7 @@
             </v-card>
             <!-- Social media card end -->
         </div>
-        <!-- FIXME -->
-        <!-- <div v-else>
+        <div v-else>
             <v-alert
                 style="cursor: pointer"
                 @click="goToSettings"
@@ -159,7 +158,7 @@
                 type="info"
                 >Update Store Information</v-alert
             >
-        </div> -->
+        </div>
     </div>
     <!-- BusinessInfo -->
 </template>

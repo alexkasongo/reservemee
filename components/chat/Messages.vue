@@ -21,8 +21,7 @@
         </div>
 
         <!--If Messages end-->
-        <!-- FIXME -->
-        <!-- <v-list-item-content v-if="!messages">
+        <v-list-item-content v-if="!messages">
             <v-alert
                 style="cursor: pointer"
                 icon="mdi-alert-circle-outline"
@@ -30,7 +29,7 @@
                 type="info"
                 ><span> You have no messages. </span></v-alert
             >
-        </v-list-item-content> -->
+        </v-list-item-content>
         <!--If No Messages end-->
     </div>
 </template>
