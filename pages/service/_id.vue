@@ -1,14 +1,14 @@
 <template>
-    <div class="services container margin">
+    <div class="services container">
         <div v-if="loading">
             <p>loading...</p>
         </div>
-        <h2 v-if="!loading">
+        <div class="display-1" v-if="!loading">
             {{ this.$route.params.id | capitalize }} Services
-        </h2>
+        </div>
 
         <!-- SERVICE CARD -->
-        <v-row class="services__left">
+        <v-row class="services__left pt-5">
             <v-col
                 v-for="service in filteredServices"
                 :key="service.id"
