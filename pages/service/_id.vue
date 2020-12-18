@@ -14,11 +14,7 @@
                 :key="service.id"
                 class="col-md-6"
             >
-                <v-card
-                    @click="updService(service.id)"
-                    class="rounded-xl"
-                    :ripple="false"
-                >
+                <v-card class="rounded-xl" :ripple="false">
                     <div
                         class="services__left-card d-flex flex-no-wrap justify-space-between"
                     >
@@ -47,7 +43,11 @@
                             <v-card-actions>
                                 <v-spacer></v-spacer>
 
-                                <v-btn icon>
+                                <v-btn
+                                    :class="fav ? 'red--text' : ''"
+                                    icon
+                                    @click="fav = !fav"
+                                >
                                     <v-icon>mdi-heart</v-icon>
                                 </v-btn>
 
@@ -77,9 +77,9 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-    data() {
-        return {};
-    },
+    data: () => ({
+        fav: false
+    }),
     computed: {
         ...mapGetters({
             services: 'dashboard/services',

@@ -48,46 +48,59 @@
 
                     <v-spacer></v-spacer>
 
-                    <!-- MESSAGES START -->
-                    <v-btn v-if="user" icon>
-                        <v-icon
-                            v-if="role.customer"
-                            @click="$router.push(`/inbox/${user.uid}`)"
-                            color="white"
-                            >mdi-message</v-icon
-                        >
-                        <v-icon
-                            v-if="role.admin"
-                            @click="$router.push('/inbox/admin')"
-                            color="white"
-                            >mdi-message</v-icon
-                        >
-                    </v-btn>
+                    <v-tooltip open-delay="200" bottom>
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-btn
+                                color="primary"
+                                dark
+                                v-bind="attrs"
+                                v-on="on"
+                                icon
+                            >
+                                <v-icon
+                                    v-if="role.customer"
+                                    @click="$router.push(`/inbox/${user.uid}`)"
+                                    color="white"
+                                    >mdi-message</v-icon
+                                >
+                                <v-icon
+                                    v-if="role.admin"
+                                    @click="$router.push('/inbox/admin')"
+                                    color="white"
+                                    >mdi-message</v-icon
+                                >
+                            </v-btn>
+                        </template>
+                        <span>Messages</span>
+                    </v-tooltip>
                     <!-- MESSAGES END -->
 
-                    <!-- BOOKMARKS START -->
-                    <v-btn v-if="user" icon>
-                        <v-icon color="white">mdi-heart-outline</v-icon>
-                    </v-btn>
-                    <!-- BOOKMARKS END -->
-
                     <!-- NOTIFICATIONS START -->
-                    <div v-if="user" class="text-center">
+                    <div class="text-center">
                         <v-menu
-                            v-if="user"
-                            bottom
-                            left
-                            transition="scale-transition"
-                            origin="top right 0"
+                            nudge-bottom="56"
+                            transition="slide-y-transition"
+                            open-delay="200"
                         >
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn dark icon v-bind="attrs" v-on="on">
-                                    <v-icon color="white"
-                                        >mdi-bell-outline</v-icon
+                            <template v-slot:activator="{ on: menu, attrs }">
+                                <v-tooltip open-delay="200" bottom>
+                                    <template
+                                        v-slot:activator="{ on: tooltip }"
                                     >
-                                </v-btn>
+                                        <v-btn
+                                            dark
+                                            icon
+                                            v-bind="attrs"
+                                            v-on="{ ...tooltip, ...menu }"
+                                        >
+                                            <v-icon color="white"
+                                                >mdi-bell-outline</v-icon
+                                            >
+                                        </v-btn>
+                                    </template>
+                                    <span>Notifications</span>
+                                </v-tooltip>
                             </template>
-
                             <v-list width="250px">
                                 <v-list-item
                                     v-for="notice in notifications"
@@ -110,50 +123,78 @@
                     <!-- NOTIFICATIONS END -->
 
                     <!-- CART START -->
-                    <v-btn
-                        v-if="user"
-                        icon
-                        @click.stop="drawerRight = !drawerRight"
-                    >
-                        <v-badge
-                            :content="orders"
-                            :value="orders"
-                            color="red darker-1"
-                            overlap
-                        >
-                            <v-icon color="white">mdi-cart</v-icon>
-                        </v-badge>
-                    </v-btn>
+                    <v-tooltip open-delay="200" bottom>
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-btn
+                                color="primary"
+                                dark
+                                v-bind="attrs"
+                                v-on="on"
+                                icon
+                                @click.stop="drawerRight = !drawerRight"
+                            >
+                                <v-badge
+                                    :content="orders"
+                                    :value="orders"
+                                    color="red darker-1"
+                                    overlap
+                                >
+                                    <v-icon color="white">mdi-cart</v-icon>
+                                </v-badge>
+                            </v-btn>
+                        </template>
+                        <span>View Cart</span>
+                    </v-tooltip>
                     <!-- CART END -->
 
                     <!-- THREE DOTS -->
-                    <v-menu
-                        v-if="user"
-                        bottom
-                        left
-                        transition="scale-transition"
-                        origin="top right 0"
-                    >
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-btn dark icon v-bind="attrs" v-on="on">
-                                <v-icon color="white">mdi-dots-vertical</v-icon>
-                            </v-btn>
-                        </template>
+                    <!-- <v-avatar class="ml-2" size="36"
+                        ><img src="http://i.pravatar.cc/150?img=53"
+                    /></v-avatar> -->
 
-                        <v-list width="250px">
-                            <v-list-item @click="viewProfile(user.uid)" link>
-                                <v-list-item-icon>
-                                    <v-icon>mdi-cog-outline </v-icon>
-                                </v-list-item-icon>
-
-                                <v-list-item-content>
-                                    <v-list-item-title
-                                        >Settings</v-list-item-title
+                    <div class="text-center">
+                        <v-menu
+                            nudge-bottom="52"
+                            transition="slide-y-transition"
+                            open-delay="200"
+                        >
+                            <template v-slot:activator="{ on: menu, attrs }">
+                                <v-tooltip
+                                    nudge-bottom="6"
+                                    open-delay="200"
+                                    bottom
+                                >
+                                    <template
+                                        v-slot:activator="{ on: tooltip }"
                                     >
-                                </v-list-item-content>
-                            </v-list-item>
-                        </v-list>
-                    </v-menu>
+                                        <v-btn
+                                            elevation="0"
+                                            color="transparent"
+                                            dark
+                                            v-bind="attrs"
+                                            v-on="{ ...tooltip, ...menu }"
+                                        >
+                                            {{ user.displayName }}
+                                            <v-icon> mdi-chevron-down</v-icon>
+                                        </v-btn>
+                                    </template>
+                                    <span>Open menu</span>
+                                </v-tooltip>
+                            </template>
+                            <v-list width="250px">
+                                <v-list-item
+                                    v-for="(item, index) in nav"
+                                    :key="index"
+                                    link
+                                >
+                                    <v-list-item-title
+                                        @click="dropDown(item)"
+                                        >{{ item.title }}</v-list-item-title
+                                    >
+                                </v-list-item>
+                            </v-list>
+                        </v-menu>
+                    </div>
                     <!-- THREE DOTS END -->
 
                     <!-- if router name is not Sign in then show, else do not show -->
@@ -342,6 +383,7 @@ export default {
             role: '',
             drawer: false,
             drawerRight: false,
+            drawerDown: false,
             group: null,
             groupRight: null,
             multiLine: true,
@@ -353,6 +395,20 @@ export default {
                 { message: 'Noticfication example three' },
                 { message: 'Noticfication example four' },
                 { message: 'Noticfication example five' }
+            ],
+            nav: [
+                {
+                    title: 'Settings',
+                    icon: 'mdi-cog'
+                },
+                {
+                    title: 'Bookmarks',
+                    icon: 'mdi-heart-outline'
+                },
+                {
+                    title: 'Logout',
+                    icon: 'mdi-logout-variant'
+                }
             ]
         };
     },
@@ -421,6 +477,17 @@ export default {
             removeUserData: 'removeUserData',
             orders: null
         }),
+        clickToggleDrawer() {
+            this.drawerDown = !this.drawerDown;
+        },
+        dropDown(item) {
+            if (item.title === 'Settings') {
+                this.viewProfile(this.user.uid);
+            }
+            if (item.title === 'Logout') {
+                this.signout();
+            }
+        },
         signin() {
             this.$router.replace('/signin');
         },

@@ -64,13 +64,7 @@
             <!-- Services end -->
             <!-- Social media card start -->
             <div v-if="this.storeProfile"></div>
-            <v-card
-                class="mx-auto"
-                color="teal darker-1"
-                elevation="0"
-                dark
-                max-width="400"
-            >
+            <v-card class="mx-auto" color="teal darker-1" elevation="0" dark>
                 <v-card-actions>
                     <v-list-item class="grow">
                         <v-list-item-avatar color="grey darken-3">
