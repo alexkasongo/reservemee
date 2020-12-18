@@ -188,6 +188,7 @@
                                     link
                                 >
                                     <v-list-item-title
+                                        width="100%"
                                         @click="dropDown(item)"
                                         >{{ item.title }}</v-list-item-title
                                     >
