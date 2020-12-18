@@ -4,32 +4,33 @@
         <form @submit.prevent="onSubmit">
             <div class="form-group">
                 <label for="exampleInputEmail1">Select Category</label>
-                <select class="form-control" required v-model="category">
-                    <option v-for="category in categories" :key="category.id">
-                        {{ category.name | capitalize }}
-                    </option>
-                </select>
+                <v-select
+                    class="form-control"
+                    :items="categories"
+                    required
+                    v-model="category"
+                >
+                    {{ categoryNames }}
+                </v-select>
             </div>
             <div>
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Name</label>
-                    <input
+                    <v-text-field
                         required
                         type="name"
-                        class="form-control"
                         placeholder="Service Name"
                         v-model="name"
-                    />
+                    ></v-text-field>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Description</label>
-                    <textarea
+                    <v-textarea
                         required
-                        class="form-control"
-                        style="min-width: 100%"
+                        outlined
                         placeholder="Describe the service"
                         v-model="description"
-                    ></textarea>
+                    ></v-textarea>
                 </div>
                 <div class="form-group">
                     <div class="form-group">
@@ -64,15 +65,14 @@
                 ></div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Price</label>
-                    <input
+                    <v-text-field
                         required
-                        class="form-control"
                         type="number"
                         min="1"
                         step="any"
                         placeholder="50"
                         v-model="price"
-                    />
+                    ></v-text-field>
                 </div>
                 <v-btn
                     type="submit"

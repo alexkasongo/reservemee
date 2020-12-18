@@ -1,5 +1,5 @@
 <template>
-    <div class="container margin">
+    <div class="container">
         <div class="display-1 p-3">Create Service</div>
         <v-card>
             <div class="p-3">
@@ -11,9 +11,7 @@
                             required
                             v-model="category"
                         >
-                            <!-- <option v-for="category in categories" :key="category.id"> -->
                             {{ categoryNames }}
-                            <!-- </option> -->
                         </v-select>
                     </div>
                     <div class="form-group">

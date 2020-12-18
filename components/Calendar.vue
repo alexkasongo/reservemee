@@ -558,14 +558,14 @@ export default {
         modal: false,
         // Date and time picker logic
         startDate: new Date().toISOString().substr(0, 10),
-        startTime: new Date().toISOString().substr(0, 10),
+        startTime: new Date(),
         endDate: new Date().toISOString().substr(0, 10),
-        endTime: new Date().toISOString().substr(0, 10),
+        endTime: new Date(),
         // Date and time picker logic END
         timeStart: false,
         timeEnd: false,
-        today: new Date().toISOString().substr(0, 10),
-        focus: new Date().toISOString().substr(0, 10),
+        today: new Date(),
+        focus: new Date(),
         type: 'day',
         typeToLabel: {
             month: 'Month',
@@ -727,9 +727,10 @@ export default {
         }
     },
     mounted() {
+        // this.setBookingState(null);
         this.getEvents();
         // if no events add default events
-        // this.addEvents()
+        // this.addEvents();
     },
     methods: {
         /*
