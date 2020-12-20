@@ -146,12 +146,6 @@
                         <span>View Cart</span>
                     </v-tooltip>
                     <!-- CART END -->
-
-                    <!-- THREE DOTS -->
-                    <!-- <v-avatar class="ml-2" size="36"
-                        ><img src="http://i.pravatar.cc/150?img=53"
-                    /></v-avatar> -->
-
                     <div class="text-center">
                         <v-menu
                             nudge-bottom="52"
@@ -162,7 +156,7 @@
                                 <v-tooltip
                                     nudge-bottom="6"
                                     open-delay="200"
-                                    bottom
+                                    bottoma
                                 >
                                     <template
                                         v-slot:activator="{ on: tooltip }"
