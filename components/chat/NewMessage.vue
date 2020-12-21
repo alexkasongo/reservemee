@@ -31,9 +31,6 @@ export default {
     },
     computed: {
         ...mapState(['user'])
-        // currentUserId() {
-        //     return this.user.uid;
-        // }
     },
     created() {
         this.uis = this.currentUserId;
