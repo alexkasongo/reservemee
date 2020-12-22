@@ -76,7 +76,7 @@
                     <!-- MESSAGES END -->
 
                     <!-- NOTIFICATIONS START -->
-                    <div class="text-center">
+                    <div class="text-center" v-if="user">
                         <v-menu
                             nudge-bottom="56"
                             transition="slide-y-transition"
@@ -123,7 +123,7 @@
                     <!-- NOTIFICATIONS END -->
 
                     <!-- CART START -->
-                    <v-tooltip open-delay="200" bottom>
+                    <v-tooltip open-delay="200" bottom v-if="user">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn
                                 color="primary"
@@ -146,7 +146,7 @@
                         <span>View Cart</span>
                     </v-tooltip>
                     <!-- CART END -->
-                    <div class="text-center">
+                    <div class="text-center" v-if="user">
                         <v-menu
                             nudge-bottom="52"
                             transition="slide-y-transition"
