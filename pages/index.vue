@@ -4,41 +4,51 @@
             <p>loading...</p>
         </div>
         <!-- Masthead -->
-        <div v-if="!loading">
-            <header v-if="!user" class="masthead text-white text-center">
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                            <form @submit.prevent="onSubmit">
-                                <div class="form-row">
-                                    <v-text-field
-                                        solo-inverted
-                                        flat
-                                        hide-details
-                                        label="Search"
-                                        type="email"
-                                        class="form-control form-control-lg"
-                                        placeholder="Enter your email..."
-                                        required
-                                        v-model="email"
-                                    ></v-text-field>
+        <v-container v-if="!loading">
+            <v-row align="center" justify="center" no-gutters>
+                <v-col v-if="!user" class="masthead text-white text-center">
+                    <div class="overlay"></div>
+                    <v-card elevation="0" max-width="800" class="mx-auto">
+                        <v-form @submit.prevent="onSubmit">
+                            <v-container>
+                                <v-row
+                                    align="center"
+                                    justify="center"
+                                    no-gutters
+                                >
+                                    <v-col cols="12" sm="8">
+                                        <v-text-field
+                                            solo-inverted
+                                            flat
+                                            hide-details
+                                            label="Search"
+                                            type="email"
+                                            placeholder="Enter your email..."
+                                            required
+                                            v-model="email"
+                                            height="52"
+                                            class="rounded-br-sm rounded-tr-sm"
+                                        ></v-text-field>
+                                    </v-col>
 
-                                    <div class="col-12 col-md-3">
+                                    <v-col cols="12" md="4">
                                         <v-btn
+                                            elevation="0"
                                             type="submit"
-                                            class="teal darker-1"
+                                            block
+                                            class="teal darker-1 rounded-tl-sm rounded-bl-sm"
                                             dark
+                                            x-large
                                         >
                                             Get started!
                                         </v-btn>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </header>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-form>
+                    </v-card>
+                </v-col>
+            </v-row>
 
             <!-- Image Showcases -->
             <section class="showcase margin">
@@ -301,7 +311,7 @@
                     </v-card-text>
                 </v-card>
             </v-footer> -->
-        </div>
+        </v-container>
     </div>
 </template>
 
