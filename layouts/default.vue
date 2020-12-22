@@ -48,7 +48,7 @@
 
                     <v-spacer></v-spacer>
 
-                    <v-tooltip open-delay="200" bottom>
+                    <v-tooltip open-delay="200" bottom v-if="user">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn
                                 color="primary"
