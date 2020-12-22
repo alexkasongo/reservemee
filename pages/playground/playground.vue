@@ -31,7 +31,9 @@
                             ></v-img>
                         </v-list-item-avatar>
 
-                        <v-list-item-title>John Leider</v-list-item-title>
+                        <v-list-item-title>{{
+                            user.displayName
+                        }}</v-list-item-title>
 
                         <v-btn icon @click.stop="mini = !mini">
                             <v-icon>mdi-chevron-left</v-icon>
@@ -99,8 +101,13 @@
 </template>
 
 <script>
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+
 export default {
     data: () => ({
+        user: [],
+        role: [],
         drawer: null,
         items: [
             { icon: 'mdi-account', text: 'Profile Information' },
@@ -122,6 +129,25 @@ export default {
         onLinkClick(item) {
             this.selected = item.text;
         }
+    },
+    mounted() {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in.
+                // check user status
+                firebase
+                    .auth()
+                    .currentUser.getIdTokenResult()
+                    .then((tokenResult) => {
+                        if (tokenResult) {
+                            this.role = tokenResult.claims;
+                        }
+                    });
+
+                this.user = user;
+                console.log(`playground.vue - 146 - 🤌🏾`, this.user);
+            }
+        });
     }
 };
 </script>
