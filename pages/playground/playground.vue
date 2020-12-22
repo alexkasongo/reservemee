@@ -1,7 +1,7 @@
 <template>
-    <div id="app">
-        <v-app id="inspire">
-            <v-app id="keep">
+    <div class="settings">
+        <v-app>
+            <v-app>
                 <v-app-bar app clipped-left color="teal darker-1">
                     <v-app-bar-nav-icon
                         @click="drawer = !drawer"
@@ -55,31 +55,27 @@
                 </v-navigation-drawer>
 
                 <v-main>
-                    <v-container fluid class="grey lighten-4 fill-height">
-                        <v-row>
-                            <!-- <v-row justify="center" align="center"> -->
+                    <v-container fluid class="fill-height">
+                        <v-row class="settings__right-row">
                             <v-col>
-                                <!-- <v-tooltip right>
-                                    <template v-slot:activator="{ on }">
-                                        <v-btn
-                                            :href="source"
-                                            icon
-                                            large
-                                            target="_blank"
-                                            v-on="on"
-                                        >
-                                            <v-icon large>mdi-code-tags</v-icon>
-                                        </v-btn>
-                                    </template>
-                                    <span>Source</span>
-                                </v-tooltip> -->
-
-                                <ProfileInformation />
-                                <!-- <ProfileInformation
+                                <ProfileInformation
                                     v-if="
-                                        this.selected === 'Profile Information'
+                                        this.selected ===
+                                            'Profile Information' ||
+                                        this.selected === ''
                                     "
-                                /> -->
+                                />
+                                <StoreSettings
+                                    v-if="this.selected === 'Store Settings'"
+                                />
+                                <Security v-if="this.selected === 'Security'" />
+                                <Notifications
+                                    v-if="this.selected === 'Notifications'"
+                                />
+                                <Billing v-if="this.selected === 'Billing'" />
+                                <AccountSettings
+                                    v-if="this.selected === 'Account Settings'"
+                                />
                             </v-col>
                         </v-row>
                     </v-container>
@@ -111,7 +107,6 @@ export default {
     }),
     methods: {
         onLinkClick(item) {
-            console.log(`playground.vue - 100 - 🐣`, item.text);
             this.selected = item.text;
         }
     }
@@ -119,7 +114,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#keep .v-navigation-drawer__border {
-    display: none;
+.settings {
+    &__right-row {
+        height: 100%;
+    }
 }
 </style>

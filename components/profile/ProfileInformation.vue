@@ -1,12 +1,12 @@
 <template>
     <!-- USER PROFILE -->
-    <div class="tab-pane active" id="profile">
-        <h6>YOUR PROFILE INFORMATION</h6>
-        <hr />
+    <div>
+        <div class="display-1 mb-5">PROFILE INFORMATION</div>
+
         <form @submit.prevent="onUpdprofileForm">
             <!-- Profile image upload -->
             <div class="form-group">
-                <label for="exampleFormControlFile1">Picture</label>
+                <!-- <label for="exampleFormControlFile1">Picture</label> -->
                 <v-file-input
                     type="file"
                     color="teal accent-4"
@@ -28,7 +28,7 @@
                 </v-file-input>
             </div>
             <div
-                class="form-group imgPreview"
+                class="imgPreview"
                 v-bind:style="{
                     'background-image':
                         'url(' + storeForm.storeOwnerImage + ')',
@@ -37,24 +37,25 @@
             ></div>
             <!-- Profile image upload end -->
             <div class="form-group">
-                <label for="fullName">Full Name</label>
-                <input
+                <!-- <label for="fullName">Full Name</label> -->
+                <v-text-field
+                    outlined
+                    label="Full Name"
                     type="text"
-                    class="form-control"
                     aria-describedby="fullNameHelp"
                     placeholder="Enter your fullname"
                     v-model="profileForm.name"
-                />
-                <small class="form-text text-muted"
-                    >Your name may appear around here where you are mentioned.
-                    You can change or remove it at any time.</small
-                >
+                ></v-text-field>
+                <div class="caption font-weight-light mb-3">
+                    Your name may appear around here where you are mentioned.
+                    You can change or remove it at any time.
+                </div>
             </div>
-            <div class="form-group small text-muted">
+            <!-- <div class="form-group small text-muted">
                 All of the fields on this page are optional and can be deleted
                 at any time, and by filling them out, you're giving us consent
                 to share this data wherever your user profile appears.
-            </div>
+            </div> -->
             <v-btn :loading="loading" type="submit" class="teal darken-1" dark>
                 Update Profile
             </v-btn>
@@ -251,5 +252,6 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+    margin: 0 0 30px 0;
 }
 </style>
