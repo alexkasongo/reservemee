@@ -76,12 +76,7 @@ export default {
             user: [],
             alert: [],
             errors: [],
-            logoDisplay: [],
-            newPassword: [],
             loggedInUser: [],
-            bannerDisplay: [],
-            currentPassword: [],
-            confirmNewPassword: [],
             storeOwnerImageDisplay: [],
             currentUser: {
                 name: []
@@ -90,87 +85,12 @@ export default {
                 name: []
             },
             storeForm: {
-                storeLogo: [], // https://via.placeholder.com/500
-                storeName: [],
-                storeBio: [],
-                storeBanner: [], // https://via.placeholder.com/500
-                storeLocation: [],
-                storeOwnerImage: [],
-                rawStoreLogo: null,
-                rawStoreBanner: null,
-                rawStoreOwnerImage: null,
-                cat1: [],
-                cat2: [],
-                cat3: [],
-                twitter: '',
-                facebook: '',
-                instagram: ''
-            },
-            items: [
-                {
-                    icon: 'mdi-wifi',
-                    text: 'Profile Information',
-                    href: '#profile'
-                },
-                {
-                    icon: 'mdi-bluetooth',
-                    text: 'Store Settings',
-                    href: '#store'
-                },
-                {
-                    icon: 'mdi-chart-donut',
-                    text: 'Security',
-                    href: '#security'
-                },
-                {
-                    icon: 'mdi-chart-donut',
-                    text: 'Notification',
-                    href: '#notification'
-                },
-                {
-                    icon: 'mdi-chart-donut',
-                    text: 'Billing',
-                    href: '#billing'
-                },
-                {
-                    icon: 'mdi-chart-donut',
-                    text: 'Account Settings',
-                    href: '#account'
-                }
-            ],
-            beauty: [
-                'Salon',
-                'Massage',
-                'Nail',
-                'Spa',
-                'Barber',
-                'Tanning',
-                'Makeup',
-                'Hair Removal'
-            ],
-            wellness: [
-                'Coaching',
-                'Acupuncture',
-                'Physical Therapy',
-                'Nutritionist',
-                'Chiropractor',
-                'Med Spa'
-            ],
-            fitness: [
-                'Pilates',
-                'Yoga',
-                'Personal Trainer',
-                'Cross Training',
-                'Cycling',
-                'Dance',
-                'Gym',
-                'All Fitness'
-            ]
+                storeOwnerImage: []
+            }
         };
     },
     computed: {
         ...mapGetters({
-            storeProfile: 'dashboard/storeProfile',
             categories: 'dashboard/categories',
             userData: 'dashboard/userData',
             loading: 'loaders/loading',
@@ -185,122 +105,10 @@ export default {
     },
     methods: {
         ...mapActions({
-            updateStoreProfile: 'dashboard/updateStoreProfile',
-            loadStoreProfile: 'dashboard/loadStoreProfile',
             loadUserIdData: 'dashboard/loadUserIdData',
             updateUserProfile: 'dashboard/updateUserProfile',
-            loadUser: 'loadUser',
-            closeAlert: 'closeAlert'
+            loadUser: 'loadUser'
         }),
-        async signout() {
-            await firebase
-                .auth()
-                .signOut()
-                .then(() => {
-                    this.user = '';
-                    window.localStorage.removeItem('email');
-                    window.localStorage.removeItem('vuex');
-                });
-            this.$router.push('/signin');
-        },
-        changePassword() {
-            if (this.newPassword !== this.confirmNewPassword) {
-                // FIXME manage error
-                this.$swal({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'error',
-                    title: 'Passwords do not match.',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-            } else {
-                this.$swal({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, change it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        if (this.newPassword === this.confirmNewPassword) {
-                            const currentPassword = this.currentPassword;
-                            const newPassword = this.confirmNewPassword;
-
-                            this.reauthenticate(currentPassword);
-                            this.changePasswordNow(
-                                currentPassword,
-                                newPassword
-                            );
-                        }
-                    }
-                });
-            }
-        },
-        reauthenticate(currentPassword) {
-            const user = firebase.auth().currentUser;
-            const cred = firebase.auth.EmailAuthProvider.credential(
-                this.user.email,
-                currentPassword
-            );
-            return user.reauthenticateWithCredential(cred);
-        },
-        changePasswordNow(currentPassword, newPassword) {
-            this.reauthenticate(currentPassword)
-                .then(() => {
-                    var user = firebase.auth().currentUser;
-                    user.updatePassword(newPassword)
-                        .then(() => {
-                            this.$swal({
-                                toast: true,
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Password changed.',
-                                showConfirmButton: false,
-                                timer: 3000
-                            });
-                            this.signout();
-                        })
-                        .catch((error) => {
-                            this.errors = error;
-                        });
-                })
-                .catch((error) => {
-                    this.errors = error;
-                });
-            this.signout();
-        },
-        async deleteAccount() {
-            var user = await firebase.auth().currentUser;
-            const userData = firebase
-                .database()
-                .ref('users')
-                .child(`${this.user.uid}`);
-            userData.remove();
-
-            this.$swal({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    user.delete()
-                        .then(function () {})
-                        .catch(function (error) {
-                            // FIXME
-                            console.log(`_id.vue - 989 - 🥶`, error);
-                        });
-                    this.signout;
-                }
-            });
-        },
-
         // Profile Form start
         onUpdprofileForm() {
             // TODO should be able to upload image
@@ -316,38 +124,9 @@ export default {
             // store image as binary in database
             this.updateUserProfile(payload);
         },
-        closeAlert() {
-            this.closeAlert();
-        },
         // Profile Form End
 
-        // Store Info start
-        onUpdStoreInfo() {
-            //NOTE replace empty space with a dash and lowercase all uppercases
-            let storeName = this.storeForm.storeName
-                .replace(/\s+/g, '-')
-                .toLowerCase();
-
-            const data = {
-                userId: this.user.uid,
-                storeName: storeName,
-                storeEmail: this.storeForm.storeEmail,
-                storePhoneNumber: this.storeForm.storePhoneNumber,
-                storeBio: this.storeForm.storeBio,
-                storeLogo: this.storeForm.storeLogo,
-                storeBanner: this.storeForm.storeBanner,
-                rawStoreLogo: this.storeForm.rawStoreLogo,
-                rawStoreBanner: this.storeForm.rawStoreBanner,
-                storeLocation: this.storeForm.storeLocation,
-                beauty: this.storeForm.cat1,
-                wellness: this.storeForm.cat2,
-                fitness: this.storeForm.cat3,
-                twitter: this.storeForm.twitter,
-                facebook: this.storeForm.facebook,
-                instagram: this.storeForm.instagram
-            };
-            this.updateStoreProfile(data);
-        },
+        // Pick and Upload Image
         profileImagePickFile() {
             this.$refs.fileInputOne.$refs.input.click();
         },
@@ -398,98 +177,8 @@ export default {
             fileReader.readAsDataURL(files);
             // raw file to be used on storeForm submit
             this.storeForm.rawStoreOwnerImage = files;
-        },
-        onUploadLogo(event) {
-            // if a file is inserted or a logo exists then show it
-            if (event || this.storeForm.storeLogo) {
-                this.logoDisplay = 'block';
-            }
-            // if user removes file, clear local state and revert back to uploaded image
-            let logoState = null;
-            this.userInfo.forEach((res) => {
-                if (res.storeProfile === undefined) {
-                    logoState = null;
-                    return;
-                }
-
-                if (res.storeProfile.storeLogo) {
-                    logoState = true;
-                } else {
-                    logoState = null;
-                }
-            });
-            // if no image then do this
-            if (event === undefined) {
-                this.logoDisplay = 'none';
-                this.storeForm.storeLogo = '';
-                if (this.userInfo[0] === undefined || logoState === null) {
-                    return;
-                }
-                this.storeForm.storeLogo = this.userInfo[0].storeProfile.storeLogo;
-                this.storeForm.rawStoreLogo = null;
-                return;
-            }
-            const files = event;
-            let filename = files.name;
-            // check if the file doesn't have an extension
-            if (filename.lastIndexOf('.') <= 0) {
-                return alert('Please add a valid file!');
-            }
-            // turn file into base64 string which can be used to upload
-            const fileReader = new FileReader();
-            fileReader.addEventListener('load', () => {
-                this.storeForm.storeLogo = fileReader.result;
-            });
-            fileReader.readAsDataURL(files);
-            // raw file to be used on storeForm submit
-            this.storeForm.rawStoreLogo = files;
-        },
-        onUploadBanner(event) {
-            // if a file is inserted or a logo exists then show it
-            if (event || this.storeForm.storeLogo) {
-                this.bannerDisplay = 'block';
-            }
-            // if user removes file, clear local state and revert back to uploaded image
-            let bannerState = null;
-            this.userInfo.forEach((res) => {
-                if (res.storeProfile === undefined) {
-                    bannerState = null;
-                    return;
-                }
-
-                if (res.storeProfile.storeBanner) {
-                    bannerState = true;
-                } else {
-                    bannerState = null;
-                }
-            });
-            //  if no image then do this
-            if (event === undefined) {
-                this.bannerDisplay = 'none';
-                this.storeForm.storeBanner = '';
-                if (this.userInfo[0] === undefined || bannerState === null) {
-                    return;
-                }
-                this.storeForm.storeBanner = this.userInfo[0].storeProfile.storeBanner;
-                this.storeForm.rawStoreBanner = null;
-                return;
-            }
-            const files = event;
-            let filename = files.name;
-            // check if the file doesn't have an extension
-            if (filename.lastIndexOf('.') <= 0) {
-                return alert('Please add a valid file!');
-            }
-            // turn file into base64 string which can be used to upload
-            const fileReader = new FileReader();
-            fileReader.addEventListener('load', () => {
-                this.storeForm.storeBanner = fileReader.result;
-            });
-            fileReader.readAsDataURL(files);
-            // raw file to be used on storeForm submit
-            this.storeForm.rawStoreBanner = files;
         }
-        // Store Info End
+        // Pick and Upload Image End
     },
     mounted() {
         // observer to keep track of the user's sign-in status.
@@ -521,34 +210,6 @@ export default {
             this.loadUserIdData(this.user.uid);
         }
 
-        // if logo does not exist do not disply it's containers
-        let logoState = null;
-        this.userInfo.forEach((res) => {
-            if (res.storeProfile === undefined) {
-                logoState = null;
-                return;
-            }
-
-            if (res.storeProfile.storeLogo) {
-                logoState = true;
-            } else {
-                logoState = null;
-            }
-        });
-        // if banner does not exist do not disply it's containers
-        let bannerState = null;
-        this.userInfo.forEach((res) => {
-            if (res.storeProfile === undefined) {
-                bannerState = null;
-                return;
-            }
-
-            if (res.storeProfile.storeBanner) {
-                bannerState = true;
-            } else {
-                bannerState = null;
-            }
-        });
         // if storeOwnerImage does not exist do not disply it's containers
         let profileImageState = null;
         this.userInfo.forEach((res) => {
@@ -564,23 +225,6 @@ export default {
             }
         });
 
-        if (
-            (this.storeForm.storeLogo =
-                '' || this.userData === undefined || logoState === null)
-        ) {
-            this.logoDisplay = 'none';
-        } else {
-            this.logoDisplay = 'block';
-        }
-        // if banner does not exist do not disply their containers
-        if (
-            (this.storeForm.storeBanner =
-                '' || this.userData === undefined || bannerState === null)
-        ) {
-            this.bannerDisplay = 'none';
-        } else {
-            this.bannerDisplay = 'block';
-        }
         // if storeOwnerImage does not exist do not disply their containers
         if (
             (this.storeForm.storeOwnerImage =
@@ -595,26 +239,7 @@ export default {
         if (this.userInfo.length <= 0 || !this.userInfo[0].storeProfile) {
             return null;
         } else {
-            this.storeForm.storeLogo = this.userInfo[0].storeProfile.storeLogo;
-            this.storeForm.storeBanner = this.userInfo[0].storeProfile.storeBanner;
             this.storeForm.storeOwnerImage = this.userInfo[0].storeProfile.storeOwnerImage;
-            this.storeForm.storeName = this.userInfo[0].storeProfile.storeName;
-            this.storeForm.storeEmail = this.userInfo[0].storeProfile.storeEmail;
-            this.storeForm.storePhoneNumber = this.userInfo[0].storeProfile.storePhoneNumber;
-            this.storeForm.storeBio = this.userInfo[0].storeProfile.storeBio;
-            this.storeForm.storeLocation = this.userInfo[0].storeProfile.storeLocation;
-            // the || sets null in the event that userInfo[0].storeProfile is undefined
-            this.storeForm.cat1 = this.userInfo[0].storeProfile.beauty || null;
-            this.storeForm.cat2 =
-                this.userInfo[0].storeProfile.wellness || null;
-            this.storeForm.cat3 = this.userInfo[0].storeProfile.fitness || null;
-            // the || sets null in the event that userInfo[0].storeProfile is undefined
-            this.storeForm.facebook =
-                this.userInfo[0].storeProfile.facebook || null;
-            this.storeForm.twitter =
-                this.userInfo[0].storeProfile.twitter || null;
-            this.storeForm.instagram =
-                this.userInfo[0].storeProfile.instagram || null;
         }
     }
 };
