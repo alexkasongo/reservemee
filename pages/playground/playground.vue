@@ -2,7 +2,7 @@
     <div class="settings">
         <v-app>
             <v-app>
-                <v-app-bar app clipped-left color="teal darker-1">
+                <!-- <v-app-bar app clipped-left color="teal darker-1">
                     <v-app-bar-nav-icon
                         @click="drawer = !drawer"
                     ></v-app-bar-nav-icon>
@@ -15,19 +15,19 @@
                     ></v-text-field>
 
                     <v-spacer></v-spacer>
-                </v-app-bar>
+                </v-app-bar> -->
 
                 <v-navigation-drawer
+                    class="margin"
                     v-model="drawer"
                     app
                     clipped
-                    color="grey lighten-4"
                     :mini-variant.sync="mini"
                 >
                     <v-btn icon @click.stop="mini = !mini">
                         <v-icon>mdi-chevron-left</v-icon>
                     </v-btn>
-                    <v-list dense class="grey lighten-4">
+                    <v-list dense>
                         <template v-for="(item, i) in items">
                             <v-divider
                                 v-if="item.divider"
@@ -35,6 +35,7 @@
                                 dark
                                 class="my-4"
                             ></v-divider>
+
                             <v-list-item
                                 v-else
                                 :key="i"
@@ -42,7 +43,9 @@
                                 link
                             >
                                 <v-list-item-action>
-                                    <v-icon>{{ item.icon }}</v-icon>
+                                    <v-icon color="teal darker-1">{{
+                                        item.icon
+                                    }}</v-icon>
                                 </v-list-item-action>
                                 <v-list-item-content>
                                     <v-list-item-title class="grey--text">
@@ -114,6 +117,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.margin {
+    // margin: 90px auto 0 auto;
+    margin-top: 64px;
+}
 .settings {
     &__right-row {
         height: 100%;

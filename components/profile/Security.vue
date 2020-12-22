@@ -1,35 +1,38 @@
 <template>
     <!-- SECURITY SETTINGS -->
     <div class="tab-pane" id="security">
-        <h6>SECURITY SETTINGS</h6>
-        <hr />
-        <form>
-            <div class="form-group">
-                <label class="d-block">Change Password</label>
-                <input
+        <div class="display-1 mb-5">SECURITY SETTINGS</div>
+
+        <v-form>
+            <div>
+                <!-- <label class="d-block">Change Password</label> -->
+                <v-text-field
+                    outlined
+                    label="Change Password"
                     type="password"
                     class="form-control"
-                    placeholder="Enter your current password"
                     v-model="currentPassword"
                     required
-                />
+                ></v-text-field>
                 <div v-if="errors" class="form-group text-muted">
                     {{ errors.message }}
                 </div>
-                <input
+                <v-text-field
+                    outlined
+                    label="New password"
                     type="password"
                     class="form-control mt-1"
-                    placeholder="New password"
                     v-model="newPassword"
                     required
-                />
-                <input
+                ></v-text-field>
+                <v-text-field
+                    outlined
+                    label="Confirm new password"
                     type="password"
                     class="form-control mt-1 mb-4"
-                    placeholder="Confirm new password"
                     v-model="confirmNewPassword"
                     required
-                />
+                ></v-text-field>
                 <div v-if="errors" class="form-group text-muted">
                     {{ errors.message }}
                 </div>
@@ -42,9 +45,9 @@
                     Change
                 </v-btn>
             </div>
-        </form>
-        <hr />
-        <form>
+        </v-form>
+
+        <v-form class="mt-5">
             <div class="form-group mb-0">
                 <label class="d-block">Sessions</label>
                 <p class="font-size-sm text-secondary">
@@ -62,16 +65,16 @@
                                 States</small
                             >
                         </div>
-                        <button
+                        <v-btn
                             class="btn btn-light btn-sm ml-auto"
                             type="button"
                         >
                             More info
-                        </button>
+                        </v-btn>
                     </li>
                 </ul>
             </div>
-        </form>
+        </v-form>
     </div>
     <!-- SECURITY SETTINGS END -->
 </template>
