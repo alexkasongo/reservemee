@@ -1,245 +1,270 @@
 <template>
     <!-- STORE SETTINGS -->
-    <div v-if="role.admin">
-        <div class="display-1 mb-5">STORE SETTINGS</div>
-        <form @submit.prevent="onUpdStoreInfo">
-            <!-- Logo image upload -->
-            <div class="form-group">
-                <v-file-input
-                    type="file"
-                    @change="onUploadLogo"
-                    label="Upload store logo"
-                    outlined
-                    truncate-length="50"
-                    prepend-icon="mdi-camera"
-                    dense
-                    accept="image/*"
-                    ref="fileInputTwo"
-                ></v-file-input>
-            </div>
-            <div
-                class="form-group imgPreview"
-                v-bind:style="{
-                    'background-image': 'url(' + storeForm.storeLogo + ')',
-                    display: logoDisplay
-                }"
-            ></div>
-            <!-- Logo image upload End-->
-            <div class="form-group">
-                <v-text-field
-                    outlined
-                    label="Store Name"
-                    required
-                    type="text"
-                    aria-describedby="storeNameHelp"
-                    placeholder="Enter your store name"
-                    v-model="storeForm.storeName"
-                ></v-text-field>
-                <div class="caption font-weight-light mb-3">
+    <v-container v-if="role.admin">
+        <v-row>
+            <v-col class="col-md-6">
+                <div class="display-1 mb-5">STORE SETTINGS</div>
+                <form @submit.prevent="onUpdStoreInfo">
+                    <!-- Logo image upload -->
+                    <div>
+                        <v-file-input
+                            type="file"
+                            @change="onUploadLogo"
+                            label="Upload store logo"
+                            outlined
+                            truncate-length="50"
+                            prepend-icon="mdi-camera"
+                            dense
+                            accept="image/*"
+                            ref="fileInputTwo"
+                        ></v-file-input>
+                    </div>
+                    <div
+                        class="form-group imgPreview"
+                        v-bind:style="{
+                            'background-image':
+                                'url(' + storeForm.storeLogo + ')',
+                            display: logoDisplay
+                        }"
+                    ></div>
+                    <!-- Logo image upload End-->
+                    <div>
+                        <v-text-field
+                            outlined
+                            label="Store Name"
+                            required
+                            type="text"
+                            aria-describedby="storeNameHelp"
+                            placeholder="Enter your store name"
+                            v-model="storeForm.storeName"
+                        ></v-text-field>
+                        <!-- <div class="caption font-weight-light mb-">
                     Your name may appear around here where you are mentioned.
                     You can change or remove it at any time.
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="fullName">Store Email</label>
-                <input
-                    required
-                    type="email"
-                    class="form-control"
-                    aria-describedby="storeEmailHelp"
-                    placeholder="Enter your store email"
-                    v-model="storeForm.storeEmail"
-                />
-            </div>
-            <div class="form-group">
-                <label for="fullName">Store phone number</label>
-                <input
-                    required
-                    type="tel"
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                    class="form-control"
-                    aria-describedby="storeEmailHelp"
-                    placeholder="Enter your store phone number"
-                    v-model="storeForm.storePhoneNumber"
-                />
-                <small class="form-text text-muted">Format: 123-456-7890</small>
-            </div>
-            <div class="form-group">
-                <label for="fullName">Store Service Category</label>
-                <v-container fluid>
-                    <v-row align="center">
-                        <v-col cols="12" sm="6">
-                            <v-select
-                                v-model="storeForm.cat1"
-                                :items="beauty"
-                                label="Select"
-                                multiple
-                                hint="Beauty"
-                                persistent-hint
-                                color="teal darker-1"
-                            >
-                                <template v-slot:selection="{ item, index }">
-                                    <v-chip
-                                        v-if="index === 0"
+                </div> -->
+                    </div>
+                    <div>
+                        <v-text-field
+                            outlined
+                            label="Store Email"
+                            required
+                            type="email"
+                            aria-describedby="storeEmailHelp"
+                            placeholder="Enter your store email"
+                            v-model="storeForm.storeEmail"
+                        ></v-text-field>
+                    </div>
+                    <div>
+                        <v-text-field
+                            outlined
+                            label="Store phone number"
+                            required
+                            type="tel"
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                            class="form-control"
+                            aria-describedby="storeEmailHelp"
+                            placeholder="Enter your store phone number"
+                            v-model="storeForm.storePhoneNumber"
+                        ></v-text-field>
+                        <!-- <small class="form-text text-muted">Format: 123-456-7890</small> -->
+                    </div>
+                    <div>
+                        <label>Store Service Category</label>
+                        <v-container fluid>
+                            <v-row align="center">
+                                <v-col cols="12" sm="6">
+                                    <v-select
+                                        v-model="storeForm.cat1"
+                                        :items="beauty"
+                                        label="Select"
+                                        multiple
+                                        hint="Beauty"
+                                        persistent-hint
                                         color="teal darker-1"
-                                        dark
                                     >
-                                        <span>{{ item }}</span>
-                                    </v-chip>
-                                    <span
-                                        v-if="index === 1"
-                                        class="grey--text caption"
+                                        <template
+                                            v-slot:selection="{ item, index }"
+                                        >
+                                            <v-chip
+                                                v-if="index === 0"
+                                                color="teal darker-1"
+                                                dark
+                                            >
+                                                <span>{{ item }}</span>
+                                            </v-chip>
+                                            <span
+                                                v-if="index === 1"
+                                                class="grey--text caption"
+                                            >
+                                                (+{{
+                                                    storeForm.cat1.length - 1
+                                                }}
+                                                others)
+                                            </span>
+                                        </template></v-select
                                     >
-                                        (+{{ storeForm.cat1.length - 1 }}
-                                        others)
-                                    </span>
-                                </template></v-select
-                            >
-                        </v-col>
-                        <v-col cols="12" sm="6">
-                            <v-select
-                                v-model="storeForm.cat2"
-                                :items="wellness"
-                                label="Select"
-                                multiple
-                                hint="Wellness"
-                                persistent-hint
-                                color="teal darker-1"
-                            >
-                                <template v-slot:selection="{ item, index }">
-                                    <v-chip
-                                        v-if="index === 0"
+                                </v-col>
+                                <v-col cols="12" sm="6">
+                                    <v-select
+                                        v-model="storeForm.cat2"
+                                        :items="wellness"
+                                        label="Select"
+                                        multiple
+                                        hint="Wellness"
+                                        persistent-hint
                                         color="teal darker-1"
-                                        dark
                                     >
-                                        <span>{{ item }}</span>
-                                    </v-chip>
-                                    <span
-                                        v-if="index === 1"
-                                        class="grey--text caption"
+                                        <template
+                                            v-slot:selection="{ item, index }"
+                                        >
+                                            <v-chip
+                                                v-if="index === 0"
+                                                color="teal darker-1"
+                                                dark
+                                            >
+                                                <span>{{ item }}</span>
+                                            </v-chip>
+                                            <span
+                                                v-if="index === 1"
+                                                class="grey--text caption"
+                                            >
+                                                (+{{
+                                                    storeForm.cat2.length - 1
+                                                }}
+                                                others)
+                                            </span>
+                                        </template></v-select
                                     >
-                                        (+{{ storeForm.cat2.length - 1 }}
-                                        others)
-                                    </span>
-                                </template></v-select
-                            >
-                        </v-col>
+                                </v-col>
 
-                        <v-col cols="12" sm="6">
-                            <v-select
-                                v-model="storeForm.cat3"
-                                :items="fitness"
-                                label="Select"
-                                multiple
-                                hint="Fitness"
-                                persistent-hint
-                                color="teal darker-1"
-                            >
-                                <template v-slot:selection="{ item, index }">
-                                    <v-chip
-                                        v-if="index === 0"
+                                <v-col cols="12" sm="6">
+                                    <v-select
+                                        v-model="storeForm.cat3"
+                                        :items="fitness"
+                                        label="Select"
+                                        multiple
+                                        hint="Fitness"
+                                        persistent-hint
                                         color="teal darker-1"
-                                        dark
                                     >
-                                        <span>{{ item }}</span>
-                                    </v-chip>
-                                    <span
-                                        v-if="index === 1"
-                                        class="grey--text caption"
-                                    >
-                                        (+{{ storeForm.cat3.length - 1 }}
-                                        others)
-                                    </span>
-                                </template>
-                            </v-select>
-                        </v-col>
-                    </v-row>
-                </v-container>
-                <small class="form-text text-muted"
-                    >Select a category that best describes your service.</small
-                >
-            </div>
-            <div class="form-group">
-                <label for="bio">Your Store Bio</label>
-                <v-textarea
-                    outlined
-                    placeholder="Write a description of your store"
-                    v-model="storeForm.storeBio"
-                ></v-textarea>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlFile1">Store banner</label>
-                <v-file-input
-                    type="file"
-                    @change="onUploadBanner"
-                    label="Upload store banner"
-                    outlined
-                    truncate-length="50"
-                    prepend-icon="mdi-camera"
-                    dense
-                    accept="image/*"
-                    ref="fileInputThree"
-                ></v-file-input>
-            </div>
-            <div
-                class="form-group imgPreview"
-                v-bind:style="{
-                    'background-image': 'url(' + storeForm.storeBanner + ')',
-                    display: bannerDisplay
-                }"
-            ></div>
-            <div class="form-group">
-                <label for="location">Social Media</label>
-                <v-form>
-                    <v-container>
-                        <v-row>
-                            <v-col cols="12" md="4">
-                                <v-text-field
-                                    v-model="storeForm.facebook"
-                                    label="Facebook"
-                                    required
-                                ></v-text-field>
-                            </v-col>
+                                        <template
+                                            v-slot:selection="{ item, index }"
+                                        >
+                                            <v-chip
+                                                v-if="index === 0"
+                                                color="teal darker-1"
+                                                dark
+                                            >
+                                                <span>{{ item }}</span>
+                                            </v-chip>
+                                            <span
+                                                v-if="index === 1"
+                                                class="grey--text caption"
+                                            >
+                                                (+{{
+                                                    storeForm.cat3.length - 1
+                                                }}
+                                                others)
+                                            </span>
+                                        </template>
+                                    </v-select>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                        <div class="text-muted">
+                            Select a category that best describes your service.
+                        </div>
+                    </div>
+                    <div>
+                        <label for="bio">Your Store Bio</label>
+                        <v-textarea
+                            outlined
+                            placeholder="Write a description of your store"
+                            v-model="storeForm.storeBio"
+                        ></v-textarea>
+                    </div>
+                    <div>
+                        <v-file-input
+                            type="file"
+                            @change="onUploadBanner"
+                            label="Upload Store Banner"
+                            outlined
+                            truncate-length="50"
+                            prepend-icon="mdi-camera"
+                            dense
+                            accept="image/*"
+                            ref="fileInputThree"
+                        ></v-file-input>
+                    </div>
+                    <div
+                        class="form-group imgPreview"
+                        v-bind:style="{
+                            'background-image':
+                                'url(' + storeForm.storeBanner + ')',
+                            display: bannerDisplay
+                        }"
+                    ></div>
+                    <div>
+                        <label for="location">Social Media</label>
+                        <v-form>
+                            <v-container fluid>
+                                <v-row align="center">
+                                    <v-col cols="12" sm="4">
+                                        <v-text-field
+                                            v-model="storeForm.facebook"
+                                            label="Facebook"
+                                            required
+                                        ></v-text-field>
+                                    </v-col>
 
-                            <v-col cols="12" md="4">
-                                <v-text-field
-                                    v-model="storeForm.instagram"
-                                    label="Instagram"
-                                    required
-                                ></v-text-field>
-                            </v-col>
+                                    <v-col cols="12" md="4">
+                                        <v-text-field
+                                            v-model="storeForm.instagram"
+                                            label="Instagram"
+                                            required
+                                        ></v-text-field>
+                                    </v-col>
 
-                            <v-col cols="12" md="4">
-                                <v-text-field
-                                    v-model="storeForm.twitter"
-                                    label="Twitter"
-                                    required
-                                ></v-text-field>
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </v-form>
-            </div>
-            <div class="form-group">
-                <label for="location">Location</label>
-                <input
-                    required
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter your location"
-                    v-model="storeForm.storeLocation"
-                />
-            </div>
-            <div class="form-group small text-muted">
-                All of the fields on this page are optional and can be deleted
-                at any time, and by filling them out, you're giving us consent
-                to share this data wherever your user profile appears.
-            </div>
-            <v-btn :loading="loading" type="submit" class="teal darken-1" dark>
-                Save Settings
-            </v-btn>
-        </form>
-    </div>
+                                    <v-col cols="12" md="4">
+                                        <v-text-field
+                                            v-model="storeForm.twitter"
+                                            label="Twitter"
+                                            required
+                                        ></v-text-field>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-form>
+                    </div>
+                    <div>
+                        <v-text-field
+                            outlined
+                            label="Location"
+                            required
+                            type="text"
+                            class="form-control"
+                            placeholder="Enter your location"
+                            v-model="storeForm.storeLocation"
+                        ></v-text-field>
+                    </div>
+                    <div class="text-muted mb-5">
+                        All of the fields on this page are optional and can be
+                        deleted at any time, and by filling them out, you're
+                        giving us consent to share this data wherever your user
+                        profile appears.
+                    </div>
+                    <v-btn
+                        :loading="loading"
+                        type="submit"
+                        class="teal darken-1"
+                        dark
+                    >
+                        Save Settings
+                    </v-btn>
+                </form>
+            </v-col>
+        </v-row>
+    </v-container>
     <!-- STORE SETTINGS END -->
 </template>
 
