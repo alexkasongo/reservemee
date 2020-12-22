@@ -112,16 +112,13 @@ export default {
         }),
         // Profile Form start
         onUpdprofileForm() {
-            // TODO should be able to upload image
-            // if (!this.profileForm.rawImage) {
-            //     return;
-            // }
             const payload = {
-                rawStoreOwnerImage: this.storeForm.rawStoreOwnerImage,
+                rawStoreOwnerImage: this.storeForm.rawStoreOwnerImage || null,
                 storeOwnerImage: this.storeForm.storeOwnerImage,
                 name: this.profileForm.name,
                 userId: this.user.uid
             };
+            // console.log(`ProfileInformation.vue - 125 - 🍎`, payload);
             // store image as binary in database
             this.updateUserProfile(payload);
         },

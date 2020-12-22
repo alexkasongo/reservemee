@@ -388,48 +388,71 @@ export const actions = {
      */
     // we receive service id as payload to use for filtering
     async updateUserProfile({ commit, dispatch }, payload) {
+        console.log(`dashboard.js - 391 - 🌎`, payload);
         commit('loaders/SET_LOADING', true, { root: true });
 
-        // 1. IF NO PROFILE IMAGE
+        // 1. IF NO PROFILE IMAGE EXISTS
         if (payload.rawStoreOwnerImage === null) {
+            console.log(`dashboard.js - 396 - 🍿`, payload);
             const user = await firebase.auth().currentUser;
+            // check if the storeOwnerImage does not exist, if it does not exist
+            // run the code below
+            if (payload.storeOwnerImage !== null) {
+                user.updateProfile({
+                    displayName: payload.name,
+                    photoURL: payload.storeOwnerImage
+                })
+                    .then(() => {
+                        firebase
+                            .database()
+                            .ref('users/' + payload.userId)
+                            .child('storeProfile/')
+                            .update({
+                                // this allows the store to display properly on the store page!
+                                storeId: payload.userId,
+                            })
+                    })
+                    .then(() => {
+                        commit('loaders/SET_SNACKBAR', true, { root: true })
+                        commit('loaders/SET_LOADING', false, { root: true });
+                    })
+                    .catch((error) => {
+                        // An error happened.
+                        commit('ERRORS', error);
+                        commit('loaders/SET_LOADING', false, { root: true });
+                    });
+                // if the storeOwnerImage does exist then run the code below
+            } else {
+                user.updateProfile({
+                    displayName: payload.name,
+                })
+                    .then(() => {
+                        firebase
+                            .database()
+                            .ref('users/' + payload.userId)
+                            .child('storeProfile/')
+                            .update({
+                                // this allows the store to display properly on the store page!
+                                storeId: payload.userId,
+                            })
+                    })
+                    .then(() => {
+                        commit('loaders/SET_SNACKBAR', true, { root: true })
+                        commit('loaders/SET_LOADING', false, { root: true });
+                    })
+                    .catch((error) => {
+                        // An error happened.
+                        commit('ERRORS', error);
+                        commit('loaders/SET_LOADING', false, { root: true });
+                    });
 
-            user.updateProfile({
-                displayName: payload.name,
-            })
-                .then(() => {
-                    firebase
-                        .database()
-                        .ref('users/' + payload.userId)
-                        .child('storeProfile/')
-                        .update({
-                            // this allows the store to display properly on the store page!
-                            storeId: payload.userId,
-                        })
-                })
-                .then(() => {
-                    // Update successful.
-                    // this.$swal({
-                    //     toast: true,
-                    //     position: 'top-end',
-                    //     icon: 'success',
-                    //     title: 'Saved',
-                    //     showConfirmButton: false,
-                    //     timer: 2500
-                    // });
-                    commit('loaders/SET_SNACKBAR', true, { root: true })
-                    commit('loaders/SET_LOADING', false, { root: true });
-                })
-                .catch((error) => {
-                    // An error happened.
-                    commit('ERRORS', error);
-                    commit('loaders/SET_LOADING', false, { root: true });
-                });
+            }
         }
         // 1. IF NO PROFILE IMAGE
 
-        // 1. IF IMAGE EXISTS PROFILE IMAGE
+        // 2. IF IMAGE EXISTS PROFILE IMAGE
         if (payload.rawStoreOwnerImage !== null) {
+            console.log(`dashboard.js - 425 - 🧽`, payload);
             let storeOwnerImage = ''
 
             // upload store banner
@@ -462,6 +485,7 @@ export const actions = {
 
                             user.updateProfile({
                                 displayName: payload.name,
+                                photoURL: image
                                 // we are updating the image attached to the storeProfile, this is easier to maintain
                                 // photoURL: image
                             })
@@ -486,7 +510,7 @@ export const actions = {
                 });
             return
         }
-        // 1. IF IMAGE EXISTS END
+        // 2. IF IMAGE EXISTS END
 
 
     },

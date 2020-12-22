@@ -20,7 +20,7 @@
                             <div class="float-left mr-3">
                                 <img
                                     v-if="storeProfile.storeLogo !== ''"
-                                    @click="viewProfile(user.uid)"
+                                    @click="$router.push('/settings')"
                                     :src="storeProfile.storeLogo"
                                     alt
                                     class="header__thumb-lg rounded-circle"
@@ -29,7 +29,7 @@
                                 />
                                 <img
                                     v-else
-                                    @click="viewProfile(user.uid)"
+                                    @click="$router.push('/settings')"
                                     :src="defaultStoreLogo"
                                     alt
                                     class="header__thumb-lg rounded-circle"
@@ -66,7 +66,7 @@
                                 <div class="float-left mr-3">
                                     <img
                                         v-if="storeProfile.storeLogo !== ''"
-                                        @click="viewProfile(user.uid)"
+                                        @click="$router.push('/settings')"
                                         :src="storeProfile.storeLogo"
                                         alt
                                         class="header__thumb-lg rounded-circle"
@@ -75,7 +75,7 @@
                                     />
                                     <img
                                         v-else
-                                        @click="viewProfile(user.uid)"
+                                        @click="$router.push('/settings')"
                                         :src="defaultStoreLogo"
                                         alt
                                         class="header__thumb-lg rounded-circle"
@@ -115,7 +115,7 @@
                         <template v-slot:activator="{ on, attrs }">
                             <span class="float-left mr-3">
                                 <img
-                                    @click="viewProfile(user.uid)"
+                                    @click="$router.push('/settings')"
                                     src="https://via.placeholder.com/1200/00897b"
                                     alt
                                     class="header__thumb-lg rounded-circle"
@@ -190,14 +190,14 @@ export default {
         });
     },
     methods: {
-        viewProfile(id) {
-            this.$router.push({
-                name: 'profile-id',
-                params: {
-                    id: id
-                }
-            });
-        }
+        // viewProfile(id) {
+        //     this.$router.push({
+        //         name: 'profile-id',
+        //         params: {
+        //             id: id
+        //         }
+        //     });
+        // }
     }
 };
 </script>

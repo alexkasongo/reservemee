@@ -12,22 +12,26 @@
                         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
                             <form @submit.prevent="onSubmit">
                                 <div class="form-row">
-                                    <div class="col-12 col-md-9 mb-2 mb-md-0">
-                                        <input
-                                            type="email"
-                                            class="form-control form-control-lg"
-                                            placeholder="Enter your email..."
-                                            required
-                                            v-model="email"
-                                        />
-                                    </div>
+                                    <v-text-field
+                                        solo-inverted
+                                        flat
+                                        hide-details
+                                        label="Search"
+                                        type="email"
+                                        class="form-control form-control-lg"
+                                        placeholder="Enter your email..."
+                                        required
+                                        v-model="email"
+                                    ></v-text-field>
+
                                     <div class="col-12 col-md-3">
-                                        <button
+                                        <v-btn
                                             type="submit"
-                                            class="btn btn-block btn-lg btn-dark"
+                                            class="teal darker-1"
+                                            dark
                                         >
                                             Get started!
-                                        </button>
+                                        </v-btn>
                                     </div>
                                 </div>
                             </form>

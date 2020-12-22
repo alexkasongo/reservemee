@@ -477,7 +477,7 @@ export default {
         },
         dropDown(item) {
             if (item.title === 'Settings') {
-                this.viewProfile(this.user.uid);
+                this.$router.push('/settings');
             }
             if (item.title === 'Logout') {
                 this.signout();
