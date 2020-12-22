@@ -631,8 +631,8 @@ export default {
                 timed: true
             },
             {
-                booked: false,
-                color: '#00897b',
+                booked: true,
+                color: '#9E9E9E',
                 details: 'Available for booking',
                 end: new Date().setHours(15, 0, 0),
                 name: 'Open',
@@ -640,7 +640,7 @@ export default {
                 timed: true
             },
             {
-                booked: false,
+                booked: true,
                 color: '#9E9E9E',
                 details: 'Available for booking',
                 end: new Date().setHours(16, 0, 0),
@@ -727,7 +727,10 @@ export default {
         }
     },
     mounted() {
+        // this.setBookingState(null);
         this.getEvents();
+        // if no events add default events
+        // this.addEvents();
     },
     methods: {
         /*

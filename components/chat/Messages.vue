@@ -2,29 +2,6 @@
     <div>
         <!-- If Messages -->
         <div class="mx-auto">
-            <!-- <div
-                class="inbox-widget"
-                v-for="message in messages"
-                :key="message.id"
-            >
-                <div class="inbox-item">
-                    <div class="inbox-item__left">
-                        <div class="inbox-item-img">
-                            <img src="https://via.placeholder.com/150" alt />
-                        </div>
-                        <div>
-                            <p class="inbox-item-author">
-                                {{ message.name }}
-                            </p>
-                            <p class="inbox-item-text">
-                                {{ message.message }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- If Messages -->
-
             <!-- NEW MESSAGE -->
             <div class="new-message">
                 <form @submit.prevent="addMessage()">

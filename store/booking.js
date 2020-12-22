@@ -6,7 +6,6 @@ export const getters = {};
 
 export const actions = {
     setBookingState({ commit }, payload) {
-        console.log(`booking.js - 7 - 🍎`, { payload });
         // commit state here
         if (payload !== null) {
             commit('loaders/SET_SNACKBAR', true, { root: true });

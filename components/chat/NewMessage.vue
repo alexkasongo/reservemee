@@ -21,7 +21,6 @@ import 'firebase/database';
 
 export default {
     name: 'NewMessage',
-    // props: ['name'],
     data() {
         return {
             newMessage: null,
@@ -31,9 +30,6 @@ export default {
     },
     computed: {
         ...mapState(['user'])
-        // currentUserId() {
-        //     return this.user.uid;
-        // }
     },
     created() {
         this.uis = this.currentUserId;

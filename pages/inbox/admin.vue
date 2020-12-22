@@ -136,7 +136,7 @@
                         <v-card
                             v-if="messagePreview.length > 0"
                             elevation="0"
-                            class="mx-auto"
+                            class="mx-auto inbox__right-card-head"
                         >
                             <v-card-text>
                                 <p class="display-1 text--primary">

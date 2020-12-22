@@ -1,24 +1,20 @@
 <template>
-    <div class="services container margin">
+    <div class="services container">
         <div v-if="loading">
             <p>loading...</p>
         </div>
-        <h2 class="mb-5" v-if="!loading">
+        <div class="display-1" v-if="!loading">
             {{ this.$route.params.id | capitalize }} Services
-        </h2>
+        </div>
 
         <!-- SERVICE CARD -->
-        <v-row class="services__left">
+        <v-row class="services__left pt-5">
             <v-col
                 v-for="service in filteredServices"
                 :key="service.id"
                 class="col-md-6"
             >
-                <v-card
-                    @click="updService(service.id)"
-                    class="rounded-xl"
-                    :ripple="false"
-                >
+                <v-card class="rounded-xl" :ripple="false">
                     <div
                         class="services__left-card d-flex flex-no-wrap justify-space-between"
                     >
@@ -47,7 +43,11 @@
                             <v-card-actions>
                                 <v-spacer></v-spacer>
 
-                                <v-btn icon>
+                                <v-btn
+                                    :class="fav ? 'red--text' : ''"
+                                    icon
+                                    @click="fav = !fav"
+                                >
                                     <v-icon>mdi-heart</v-icon>
                                 </v-btn>
 
@@ -77,9 +77,9 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-    data() {
-        return {};
-    },
+    data: () => ({
+        fav: false
+    }),
     computed: {
         ...mapGetters({
             services: 'dashboard/services',

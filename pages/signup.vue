@@ -137,7 +137,6 @@ export default {
                     customer: true
                 }
             };
-            console.log(`signup.vue - 131 - 🥶`, signupDetails);
             this.signup(signupDetails);
             this.clear;
         },

@@ -1,52 +1,53 @@
 <template>
     <!-- EmailVerified -->
-    <!-- FIXME move email verificaiton logic here -->
-    <div class="w-100 mb-5">
-        <!-- <v-card class="light-blue lighten-5" elevation="0">
-            <div class="card-body">
-                <h5 v-if="user">
-                    Your email address is not verified {{ user.name }}.
-                </h5>
-                <p>Please verify your email.</p>
-                <v-btn
-                    @click="verifyEmail"
-                    type="button"
-                    color="blue-grey darken-3
-"
-                    dark
-                    block
-                >
-                    Verify Email
-                </v-btn>
-            </div>
-        </v-card> -->
+    <div class="w-100">
         <v-alert
+            class="mb-0"
             style="cursor: pointer"
-            @click="verifyEmail"
+            @click="onSubmit"
             icon="mdi-alert-circle-outline"
             text
             type="info"
             ><span v-if="user">
-                Your email address is not verified {{ user.name }}.
+                Click to verify your email {{ user.name }}.
             </span></v-alert
         >
+        <v-progress-linear
+            v-if="loading"
+            indeterminate
+            class="rounded-xl"
+            color="primary"
+        ></v-progress-linear>
     </div>
     <!-- EmailVerified -->
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
-    name: 'EmailVerified',
     computed: {
         ...mapGetters({
-            user: 'user'
+            user: 'user',
+            loading: 'loaders/loading'
         })
     },
+
     methods: {
-        verifyEmail() {
-            this.$router.push('/verification');
+        ...mapActions(['verifyEmail', 'loadUserId']),
+        onSubmit() {
+            this.verifyEmail();
+        },
+        async signout() {
+            await firebase
+                .auth()
+                .signOut()
+                .then((result) => {
+                    // this.user = '';
+                    window.localStorage.removeItem('email');
+                    window.localStorage.removeItem('vuex');
+                });
+            this.$router.push('/signin');
         }
     }
 };

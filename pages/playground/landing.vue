@@ -1,111 +1,129 @@
 <template>
-    <div class="margin">
-        <splide
-            :options="secondaryOptions"
-            ref="secondary"
-            @splide:moved="moved"
-            :slides="slides"
-        >
-            <splide-slide v-for="slide in slides" :key="slide.id">
-                <div class="slider-image">
-                    <!-- <img :src="slide.src" /> -->
-                    <div>{{ slide.color }}</div>
-                </div>
-            </splide-slide>
-        </splide>
+    <div class="settings">
+        <v-app>
+            <v-app>
+                <!-- <v-app-bar app clipped-left color="teal darker-1">
+                    <v-app-bar-nav-icon
+                        @click="drawer = !drawer"
+                    ></v-app-bar-nav-icon>
+                    <span class="title ml-3 mr-5">Google</span>
+                    <v-text-field
+                        solo-inverted
+                        flat
+                        hide-details
+                        label="Search"
+                    ></v-text-field>
 
-        <splide :options="primaryOptions" ref="primary" :slides="slides">
-            <splide-slide v-for="slide in slides" :key="slide.id">
-                <!-- <img :src="slide.src" /> -->
-                <div class="slider-image">
-                    <!-- <img :src="slide.src" /> -->
-                    <div>{{ slide.color }}</div>
-                </div>
-            </splide-slide>
-        </splide>
+                    <v-spacer></v-spacer>
+                </v-app-bar> -->
+
+                <v-navigation-drawer
+                    class="margin"
+                    v-model="drawer"
+                    app
+                    clipped
+                    :mini-variant.sync="mini"
+                >
+                    <v-btn icon @click.stop="mini = !mini">
+                        <v-icon>mdi-chevron-left</v-icon>
+                    </v-btn>
+                    <v-list dense>
+                        <template v-for="(item, i) in items">
+                            <v-divider
+                                v-if="item.divider"
+                                :key="i"
+                                dark
+                                class="my-4"
+                            ></v-divider>
+
+                            <v-list-item
+                                v-else
+                                :key="i"
+                                @click="onLinkClick(item)"
+                                link
+                            >
+                                <v-list-item-action>
+                                    <v-icon color="teal darker-1">{{
+                                        item.icon
+                                    }}</v-icon>
+                                </v-list-item-action>
+                                <v-list-item-content>
+                                    <v-list-item-title class="grey--text">
+                                        {{ item.text }}
+                                    </v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </template>
+                    </v-list>
+                </v-navigation-drawer>
+
+                <v-main>
+                    <v-container fluid class="fill-height">
+                        <v-row class="settings__right-row">
+                            <v-col>
+                                <ProfileInformation
+                                    v-if="
+                                        this.selected ===
+                                            'Profile Information' ||
+                                        this.selected === ''
+                                    "
+                                />
+                                <StoreSettings
+                                    v-if="this.selected === 'Store Settings'"
+                                />
+                                <Security v-if="this.selected === 'Security'" />
+                                <Notifications
+                                    v-if="this.selected === 'Notifications'"
+                                />
+                                <Billing v-if="this.selected === 'Billing'" />
+                                <AccountSettings
+                                    v-if="this.selected === 'Account Settings'"
+                                />
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-main>
+            </v-app>
+        </v-app>
     </div>
 </template>
 
 <script>
-import { db } from '@/plugins/firebase';
-
 export default {
-    data() {
-        return {
-            slides: [],
-            // slides: [
-            //     { src: 'https://via.placeholder.com/150/FFADAD' },
-            //     { src: 'https://via.placeholder.com/150/264653' },
-            //     { src: 'https://via.placeholder.com/150/2A9D8F' },
-            //     { src: 'https://via.placeholder.com/150/E9C46A' },
-            //     { src: 'https://via.placeholder.com/150/F4A261' },
-            //     { src: 'https://via.placeholder.com/150/E76F51' },
-            //     { src: 'https://via.placeholder.com/150/E63946' },
-            //     { src: 'https://via.placeholder.com/150/F1FAEE' },
-            //     { src: 'https://via.placeholder.com/150/A8DADC' },
-            //     { src: 'https://via.placeholder.com/150/457B9D' }
-            // ],
-            primaryOptions: {
-                type: 'loop',
-                // width: 800,
-                pagination: false,
-                arrows: false,
-                fixedHeight: 185
-            },
-            secondaryOptions: {
-                type: 'slide',
-                rewind: true,
-                // width: 800,
-                pagination: false,
-                fixedWidth: 150,
-                fixedHeight: 185,
-                cover: true,
-                focus: 'center',
-                isNavigation: true
-            }
-        };
-    },
-
-    mounted() {
-        this.getEvents();
-        this.$refs.primary.sync(this.$refs.secondary.splide);
-    },
+    data: () => ({
+        drawer: null,
+        items: [
+            { icon: 'mdi-account', text: 'Profile Information' },
+            { icon: 'mdi-cart', text: 'Store Settings' },
+            { divider: true },
+            { icon: 'mdi-shield', text: 'Security' },
+            { divider: true },
+            { icon: 'mdi-bell', text: 'Notifications' },
+            { divider: true },
+            { icon: 'mdi-credit-card', text: 'Billing' },
+            { icon: 'mdi-cog', text: 'Account Settings' },
+            { icon: 'mdi-help-circle', text: 'Help' }
+        ],
+        mini: false,
+        source: 'https://via.placeholder.com/500',
+        selected: ''
+    }),
     methods: {
-        moved(splide, newIndex) {},
-        async getEvents() {
-            let snapshot = await db
-                .collection('jKWLSv7dhUfUIDXWalNfnDZKX2I2')
-                .get();
-            let events = [];
-            // loop through and push events on each itteration
-            snapshot.forEach((doc) => {
-                let appData = [];
-                appData.id = doc.id;
-                appData.color = doc.data().color;
-                appData.details = doc.data().details;
-                appData.end = doc.data().end.toDate();
-                appData.name = doc.data().name;
-                appData.start = doc.data().start.toDate();
-                // Must include timed:boolean else timed events will not be displayed accordingly
-                appData.timed = doc.data().timed;
-                events.push(appData);
-            });
-            this.slides = events;
+        onLinkClick(item) {
+            this.selected = item.text;
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-.slider-image {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background-color: lemonchiffon;
-    // width: 150px;
-    // height: 100px;
-    height: 100%;
-    width: 100%;
+.margin {
+    // margin: 90px auto 0 auto;
+    margin-top: 64px;
+}
+.settings {
+    &__right-row {
+        height: 100%;
+    }
 }
 </style>

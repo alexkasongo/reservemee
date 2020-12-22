@@ -26,20 +26,11 @@ export const actions = {
             eventStart: payload.event.start,
             eventTimed: payload.event.timed,
         }
-
-        console.log(`booking.js - 7 -  🤌🏾`, order);
-        // commit state here
-
-        // commit('SET_CART', {
-        //     ...order,
-        //     id: payload.id,
-        // });
-
         commit("SET_CART", order)
         // commit('loaders/SET_SNACKBAR', true, { root: true });
         this.$swal({
             toast: true,
-            position: 'top-end',
+            position: 'top-start',
             icon: 'success',
             title: 'Added to Cart',
             showConfirmButton: false,
@@ -54,7 +45,6 @@ export const mutations = {
     },
     SET_CART: (state, payload) => {
         // set state here
-        console.log('typeof 🤔', typeof (state.order))
         state.order.push(payload)
     },
 

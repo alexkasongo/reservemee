@@ -200,7 +200,7 @@ export default {
                 this.storesLoading = false;
             })
             .catch((error) => {
-                // TODO handle this error
+                // FIXME
                 console.log(`🙈`, error);
             });
     }

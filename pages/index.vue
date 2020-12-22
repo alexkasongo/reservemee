@@ -4,41 +4,51 @@
             <p>loading...</p>
         </div>
         <!-- Masthead -->
-        <div v-if="!loading">
-            <header v-if="!user" class="masthead text-white text-center">
-                <!-- <header class="masthead text-white text-center" style="background: url("~assets/images/finance-stability.png")"> -->
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="row">
-                        <!-- <div class="col-xl-9 mx-auto">
-                        <h1 class="mb-5 text-dark">Create, Offer & Get Paid!</h1>
-                        </div>-->
-                        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                            <form @submit.prevent="onSubmit">
-                                <div class="form-row">
-                                    <div class="col-12 col-md-9 mb-2 mb-md-0">
-                                        <input
+        <v-container v-if="!loading">
+            <v-row align="center" justify="center" no-gutters>
+                <v-col v-if="!user" class="masthead text-white text-center">
+                    <div class="overlay"></div>
+                    <v-card elevation="0" max-width="800" class="mx-auto">
+                        <v-form @submit.prevent="onSubmit">
+                            <v-container>
+                                <v-row
+                                    align="center"
+                                    justify="center"
+                                    no-gutters
+                                >
+                                    <v-col cols="12" sm="8">
+                                        <v-text-field
+                                            solo-inverted
+                                            flat
+                                            hide-details
+                                            label="Search"
                                             type="email"
-                                            class="form-control form-control-lg"
                                             placeholder="Enter your email..."
                                             required
                                             v-model="email"
-                                        />
-                                    </div>
-                                    <div class="col-12 col-md-3">
-                                        <button
+                                            height="52"
+                                            class="rounded-br-sm rounded-tr-sm"
+                                        ></v-text-field>
+                                    </v-col>
+
+                                    <v-col cols="12" md="4">
+                                        <v-btn
+                                            elevation="0"
                                             type="submit"
-                                            class="btn btn-block btn-lg btn-dark"
+                                            block
+                                            class="teal darker-1 rounded-tl-sm rounded-bl-sm"
+                                            dark
+                                            x-large
                                         >
                                             Get started!
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </header>
+                                        </v-btn>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-form>
+                    </v-card>
+                </v-col>
+            </v-row>
 
             <!-- Image Showcases -->
             <section class="showcase margin">
@@ -99,11 +109,11 @@
             <!-- Testimonials -->
             <section class="testimonials text-center bg-light">
                 <div class="container">
-                    <h2 class="mb-5">What people are saying...</h2>
+                    <h2>What people are saying...</h2>
                     <div class="row">
                         <div class="col-lg-4">
                             <div
-                                class="testimonial-item mx-auto mb-5 mb-lg-0 user-container"
+                                class="testimonial-item mx-auto mb-lg-0 user-container"
                             >
                                 <div class="user mb-3">
                                     <div class="user__container"></div>
@@ -121,7 +131,7 @@
                         </div>
                         <div class="col-lg-4">
                             <div
-                                class="testimonial-item mx-auto mb-5 mb-lg-0 user-container"
+                                class="testimonial-item mx-auto mb-lg-0 user-container"
                             >
                                 <div class="user mb-3">
                                     <div class="user__container"></div>
@@ -140,7 +150,7 @@
                         </div>
                         <div class="col-lg-4">
                             <div
-                                class="testimonial-item mx-auto mb-5 mb-lg-0 user-container"
+                                class="testimonial-item mx-auto mb-lg-0 user-container"
                             >
                                 <div class="user mb-3">
                                     <div class="user__container"></div>
@@ -301,7 +311,7 @@
                     </v-card-text>
                 </v-card>
             </v-footer> -->
-        </div>
+        </v-container>
     </div>
 </template>
 
@@ -356,7 +366,6 @@ export default {
         },
         clearStorage() {
             localStorage.clear();
-            console.log(`index.vue - 364 - 🥶`);
         }
     }
 };

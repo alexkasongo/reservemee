@@ -2,7 +2,7 @@
     <div v-if="user" class="content">
         <!-- Header -->
         <div class="container">
-            <Header class="mb-5" />
+            <Header />
         </div>
         <!-- Header End-->
 
@@ -10,20 +10,20 @@
             <div class="row">
                 <div class="col-xl-4">
                     <div>
-                        <h2 class="header-title mt-5 mb-5">Bio</h2>
+                        <div class="display-1 mt-5 mb-5">Bio</div>
                         <!-- Personal-Information -->
                         <BusinessInfo />
                         <!-- Personal-Information -->
                         <div v-if="user">
-                            <h2
+                            <div
                                 v-if="
                                     categories.length <= 0 ||
                                     !user.emailVerified
                                 "
-                                class="header-title mt-0 mb-5"
+                                class="display-1 mt-10 mb-5"
                             >
                                 Todos
-                            </h2>
+                            </div>
                         </div>
                         <div v-if="user">
                             <div>
@@ -42,9 +42,9 @@
                     </div>
 
                     <div>
-                        <h2 class="header-title mt-5 mb-5">Messages</h2>
+                        <div class="display-1 mt-10 mb-5">Messages</div>
                         <!-- Messages -->
-                        <StoreMessages class="mb-5" />
+                        <StoreMessages />
                         <!-- Messages -->
                     </div>
                 </div>
@@ -57,13 +57,13 @@
                         <Scheduling class="services" />
                         <UpcomingEvents />
                     </div> -->
-                    <h2 class="header-title mt-0 mb-5">Calendar</h2>
-                    <v-card elevation="2">
-                        <Calendar class="mb-5" />
-                    </v-card>
+                    <div class="display-1 mt-10 mb-5">Calendar</div>
+                    <!-- <v-card elevation="2"> -->
+                    <Calendar />
+                    <!-- </v-card>s -->
 
                     <div>
-                        <h2 class="header-title mt-0 mb-5">Services</h2>
+                        <div class="display-1 mt-10 mb-5">Services</div>
                         <!-- ManageServices -->
                         <ManageServices v-if="categories.length !== 0" />
                         <!-- ManageServices -->
@@ -91,11 +91,9 @@ import 'firebase/auth';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-    data() {
-        return {
-            user: ''
-        };
-    },
+    data: () => ({
+        user: []
+    }),
     computed: {
         ...mapGetters({
             categories: 'dashboard/categories',

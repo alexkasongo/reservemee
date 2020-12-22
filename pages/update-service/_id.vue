@@ -1,35 +1,35 @@
 <template>
-    <div class="container margin">
-        <h3>Update Service</h3>
-        <form @submit.prevent="onSubmit">
+    <div class="container">
+        <div class="display-1">Update Service</div>
+        <form @submit.prevent="onSubmit" class="pt-5">
             <div class="form-group">
-                <label for="exampleInputEmail1">Select Category</label>
-                <select class="form-control" required v-model="category">
-                    <option v-for="category in categories" :key="category.id">
-                        {{ category.name | capitalize }}
-                    </option>
-                </select>
+                <v-select
+                    label="Select Category"
+                    class="form-control"
+                    :items="categoryNames"
+                    required
+                    v-model="category"
+                >
+                    {{ categoryNames }}
+                </v-select>
             </div>
             <div>
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Name</label>
-                    <input
+                    <v-text-field
+                        label="Name"
                         required
                         type="name"
-                        class="form-control"
                         placeholder="Service Name"
                         v-model="name"
-                    />
+                    ></v-text-field>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Description</label>
-                    <textarea
+                    <v-textarea
                         required
-                        class="form-control"
-                        style="min-width: 100%"
-                        placeholder="Describe the service"
+                        outlined
+                        label="Description"
                         v-model="description"
-                    ></textarea>
+                    ></v-textarea>
                 </div>
                 <div class="form-group">
                     <div class="form-group">
@@ -63,16 +63,15 @@
                     }"
                 ></div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Price</label>
-                    <input
+                    <v-text-field
+                        label="Price"
                         required
-                        class="form-control"
                         type="number"
                         min="1"
                         step="any"
                         placeholder="50"
                         v-model="price"
-                    />
+                    ></v-text-field>
                 </div>
                 <v-btn
                     type="submit"
@@ -99,7 +98,8 @@ export default {
             price: '',
             serviceImage: '',
             serviceImageDisplay: '',
-            rawServiceImage: null
+            rawServiceImage: null,
+            categoryNames: []
         };
     },
     computed: {
@@ -205,6 +205,10 @@ export default {
         this.description = this.serviceUpdateInfo.description;
         this.price = this.serviceUpdateInfo.price;
         this.serviceImage = this.serviceUpdateInfo.serviceImage;
+
+        for (let key in this.categories) {
+            this.categoryNames.push(this.categories[key].name);
+        }
     }
 };
 </script>

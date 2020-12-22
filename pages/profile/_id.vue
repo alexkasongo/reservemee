@@ -735,6 +735,7 @@
                                         @click="changePassword"
                                         color="red darken-1"
                                         type="button"
+                                        dark
                                     >
                                         Change
                                     </v-btn>
@@ -1101,8 +1102,7 @@ export default {
         },
         changePassword() {
             if (this.newPassword !== this.confirmNewPassword) {
-                // TODO manage error
-                console.log('Passwords do not match');
+                // FIXME manage error
                 this.$swal({
                     toast: true,
                     position: 'top-end',
@@ -1190,6 +1190,7 @@ export default {
                     user.delete()
                         .then(function () {})
                         .catch(function (error) {
+                            // FIXME
                             console.log(`_id.vue - 989 - 🥶`, error);
                         });
                     this.signout;
@@ -1242,7 +1243,6 @@ export default {
                 facebook: this.storeForm.facebook,
                 instagram: this.storeForm.instagram
             };
-            // console.log(`_id.vue - 1201 - 🧰`, data);
             this.updateStoreProfile(data);
         },
         profileImagePickFile() {

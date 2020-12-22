@@ -60,13 +60,7 @@
   &:hover {
     text-decoration: none;
   }
-  &:active {
-    // position: relative;
-    // top: 1px;
-  }
-  //   @media (min-width: $mobile) {
-  //     @include custom-text($size: 30px);
-  //   }
+
 }
 @mixin button-shadow {
   display: inline-block;

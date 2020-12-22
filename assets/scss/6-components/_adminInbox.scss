@@ -1,13 +1,13 @@
 .inbox {
     &__card-container {
         display: flex;
+        height: 85vh;
     }
     // LEFT
     &__left {
         width: 70px;
         margin: 0 10px 0 0;
-        height: 85vh;
-        height: 85vh;
+        // height: 85vh;
         @media (min-width: $small-desktop) {
            width: 40%
         }
@@ -51,9 +51,15 @@
         flex-direction: column;
         justify-content: space-between;
     }
+    &__right-card-top {
+        height: calc(100% - 180px);
+    }
     &__right-card-middle {
         overflow: auto;
-        max-height: calc(85vh - 50vh);
+        height: calc(100% - 180px);
+    }
+    &__right-card-btm {
+        height: 155px;
     }
     // RIGHT END
 }

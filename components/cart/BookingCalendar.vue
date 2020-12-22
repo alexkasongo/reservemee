@@ -2,14 +2,6 @@
     <div>
         <v-sheet height="64">
             <v-toolbar flat>
-                <!-- <v-btn
-                    class="mr-4"
-                    color="teal darker-1"
-                    @click.stop="dialog = true"
-                    dark
-                >
-                    New Event
-                </v-btn> -->
                 <v-btn
                     outlined
                     class="mr-4"
@@ -864,11 +856,6 @@ export default {
         },
         onBookTime(ev) {
             // this.currentlyEditing = ev.id;
-            console.log(
-                `BookingCalendar.vue - 869 - Reminder: You need the ID 🌎`,
-                ev.id
-            );
-
             // onBookTime, take ev/event object and persist state to local storage
             this.setBookingState(ev);
         },
@@ -933,6 +920,7 @@ export default {
             nativeEvent.stopPropagation();
         },
         updateRange({ start, end }) {
+            // FIXME
             console.log(`Calendar.vue - 428 - 🥛`);
         },
         // add these to numbers

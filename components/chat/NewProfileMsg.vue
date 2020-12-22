@@ -19,7 +19,6 @@ import database from '@/firebase/init';
 
 export default {
     name: 'NewMessage',
-    // props: ['name'],
     data() {
         return {
             newMessage: null,

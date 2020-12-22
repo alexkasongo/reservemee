@@ -47,7 +47,6 @@ export const actions = {
             .auth()
             .createUserWithEmailAndPassword(user.email, user.password)
             .then((response) => {
-                console.log(`index.js - 92 - 💜 1`, response);
                 if (response) {
                     const data = {
                         uid: response.user.uid,
@@ -57,7 +56,6 @@ export const actions = {
                     setAdmin(data)
                         .then((result) => {
                             commit('loaders/SET_LOADING', true, { root: true });
-                            console.log(`index.js - 92 - 🐣 2`, result);
                             if (result) {
                                 response.user
                                     .updateProfile({
@@ -95,12 +93,10 @@ export const actions = {
     },
     async signupAdmin({ commit, dispatch }, user) {
         commit('loaders/SET_LOADING', true, { root: true });
-        console.log(`index.js - 87 🌦 - variable`, user);
         await firebase
             .auth()
             .createUserWithEmailAndPassword(user.email, user.password)
             .then((response) => {
-                console.log(`index.js - 92 - Response >>>`, response);
                 if (response) {
                     const data = {
                         uid: response.user.uid,
@@ -156,14 +152,39 @@ export const actions = {
                 commit('loaders/SET_LOADING', false, { root: true });
             });
     },
-    async verifyEmail({ commit }, payload) {
+    async verifyEmail({ commit, dispatch }) {
         commit('loaders/SET_LOADING', true, { root: true });
+
+        // get logged in user auth details
         let user = await firebase.auth().currentUser;
 
+        // using the details retrieved, send verification email to currently logged in user.
         user.sendEmailVerification()
             .then(() => {
-                commit('NOTIFICATION', true);
                 commit('loaders/SET_LOADING', false, { root: true });
+            })
+            // notify user that the operation was successful
+            .then(() => {
+                this.$swal({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'A verification email has been sent to your mailbox',
+                    showConfirmButton: true,
+                    timer: '300000'
+                }).then((result) => {
+                    // once the user clicks on OK, log them out and redirect them to the log in page!
+                    if (result.isConfirmed) {
+                        firebase
+                            .auth()
+                            .signOut()
+                            .then(() => {
+                                // remove persistent state data
+                                dispatch('removeUserData')
+                                this.$router.push('/signin');
+                            });
+                    }
+                });
             })
             .catch((error) => {
                 // An error happened.
@@ -204,6 +225,8 @@ export const actions = {
             });
     },
     async removeUserData({ commit }) {
+        // calling on localStorage.removeItem() does not seem to removed the vuex persistent state
+        // instead re initialize all state with empty Arrays, Objects, strings etc.
         commit('LOADED_USER', '')
         commit('LOADED_USER_ID', '')
         commit('LOGGEDIN_USER', '')
@@ -229,7 +252,7 @@ export const mutations = {
     // USER ACCOUNTS START
     LOADED_USER: (state, payload) => (state.user = payload),
     LOADED_USER_ID: (state, payload) => (state.userId = payload),
-    NOTIFICATION: (state, payload) => (state.verificationSent = payload),
+    VERIFICATION_SENT: (state, payload) => (state.verificationSent = payload),
     LOGGEDIN_USER: (state, user) => {
         (state.user = JSON.parse(JSON.stringify(user)))
     },

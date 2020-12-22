@@ -2,21 +2,6 @@
     <div class="settings">
         <v-app>
             <v-app>
-                <!-- <v-app-bar app clipped-left color="teal darker-1">
-                    <v-app-bar-nav-icon
-                        @click="drawer = !drawer"
-                    ></v-app-bar-nav-icon>
-                    <span class="title ml-3 mr-5">Google</span>
-                    <v-text-field
-                        solo-inverted
-                        flat
-                        hide-details
-                        label="Search"
-                    ></v-text-field>
-
-                    <v-spacer></v-spacer>
-                </v-app-bar> -->
-
                 <v-navigation-drawer
                     class="margin"
                     v-model="drawer"
@@ -25,13 +10,18 @@
                     :mini-variant.sync="mini"
                 >
                     <v-list-item class="px-2">
-                        <v-list-item-avatar>
+                        <v-list-item-avatar v-if="user.photoURL">
+                            <v-img :src="user.photoURL"></v-img>
+                        </v-list-item-avatar>
+                        <v-list-item-avatar v-else>
                             <v-img
-                                src="https://randomuser.me/api/portraits/men/85.jpg"
+                                src="https://via.placeholder.com/250"
                             ></v-img>
                         </v-list-item-avatar>
 
-                        <v-list-item-title>John Leider</v-list-item-title>
+                        <v-list-item-title>{{
+                            user.displayName
+                        }}</v-list-item-title>
 
                         <v-btn icon @click.stop="mini = !mini">
                             <v-icon>mdi-chevron-left</v-icon>
@@ -79,7 +69,10 @@
                                     "
                                 />
                                 <StoreSettings
-                                    v-if="this.selected === 'Store Settings'"
+                                    v-if="
+                                        this.selected === 'Store Settings' &&
+                                        role.admin
+                                    "
                                 />
                                 <Security v-if="this.selected === 'Security'" />
                                 <Notifications
@@ -107,18 +100,7 @@ export default {
         user: [],
         role: [],
         drawer: null,
-        items: [
-            { icon: 'mdi-account', text: 'Profile Information' },
-            { icon: 'mdi-cart', text: 'Store Settings' },
-            { divider: true },
-            { icon: 'mdi-shield', text: 'Security' },
-            { divider: true },
-            { icon: 'mdi-bell', text: 'Notifications' },
-            { divider: true },
-            { icon: 'mdi-credit-card', text: 'Billing' },
-            { icon: 'mdi-cog', text: 'Account Settings' },
-            { icon: 'mdi-help-circle', text: 'Help' }
-        ],
+        items: null,
         mini: false,
         source: 'https://via.placeholder.com/500',
         selected: ''
@@ -128,7 +110,38 @@ export default {
             this.selected = item.text;
         }
     },
+    computed: {
+        validatedItems() {
+            if (this.role.admin) {
+                return [
+                    { icon: 'mdi-account', text: 'Profile Information' },
+                    { icon: 'mdi-cart', text: 'Store Settings' },
+                    { divider: true },
+                    { icon: 'mdi-shield', text: 'Security' },
+                    { divider: true },
+                    { icon: 'mdi-bell', text: 'Notifications' },
+                    { divider: true },
+                    { icon: 'mdi-credit-card', text: 'Billing' },
+                    { icon: 'mdi-cog', text: 'Account Settings' },
+                    { icon: 'mdi-help-circle', text: 'Help' }
+                ];
+            } else if (this.role.customer) {
+                return [
+                    { icon: 'mdi-account', text: 'Profile Information' },
+                    { divider: true },
+                    { icon: 'mdi-shield', text: 'Security' },
+                    { divider: true },
+                    { icon: 'mdi-bell', text: 'Notifications' },
+                    { divider: true },
+                    { icon: 'mdi-credit-card', text: 'Billing' },
+                    { icon: 'mdi-cog', text: 'Account Settings' },
+                    { icon: 'mdi-help-circle', text: 'Help' }
+                ];
+            }
+        }
+    },
     mounted() {
+        console.log(`settings.vue - 155 - 🐷`, this.validatedItems);
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 // User is signed in.
@@ -139,6 +152,11 @@ export default {
                     .then((tokenResult) => {
                         if (tokenResult) {
                             this.role = tokenResult.claims;
+                            console.log(
+                                `settings.vue - 166 - 🥶`,
+                                this.validatedItems
+                            );
+                            this.items = this.validatedItems;
                         }
                     });
 
