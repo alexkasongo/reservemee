@@ -154,7 +154,7 @@
                         >
                             <template v-slot:activator="{ on: menu, attrs }">
                                 <v-tooltip
-                                    nudge-bottom="6"
+                                    nudge-bottom="66"
                                     open-delay="200"
                                     bottoma
                                 >
