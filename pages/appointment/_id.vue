@@ -114,7 +114,7 @@
                     <v-col cols="12">
                         <v-card class="rounded-xl" :ripple="false">
                             <div
-                                class="d-flex flex-no-wrap justify-space-between"
+                                class="appointment__left-card d-flex flex-no-wrap justify-space-between"
                             >
                                 <div>
                                     <v-card-title
