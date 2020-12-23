@@ -148,7 +148,7 @@
                     <!-- CART END -->
                     <div class="text-center" v-if="user">
                         <v-menu
-                            nudge-bottom="52"
+                            nudge-bottom="56"
                             transition="slide-y-transition"
                             open-delay="200"
                         >
@@ -168,13 +168,15 @@
                                             v-bind="attrs"
                                             v-on="{ ...tooltip, ...menu }"
                                         >
-                                            <!-- {{ user.displayName }} -->
                                             <v-icon>mdi-dots-vertical</v-icon>
                                         </v-btn>
                                     </template>
                                     <span>Open menu</span>
                                 </v-tooltip>
                             </template>
+                            <!-- <v-btn elevation="0" icon dark>
+                                <v-icon>mdi-dots-vertical</v-icon>
+                            </v-btn> -->
                             <v-list width="250px">
                                 <v-list-item
                                     v-for="(item, index) in nav"

@@ -7,7 +7,7 @@
                     v-model="drawer"
                     app
                     permanent
-                    :mini-variant.sync="mini"
+                    :mini-variant="mini"
                 >
                     <v-list-item class="px-2">
                         <v-list-item-avatar v-if="user.photoURL">
@@ -23,9 +23,9 @@
                             user.displayName
                         }}</v-list-item-title>
 
-                        <v-btn icon @click.stop="mini = !mini">
+                        <!-- <v-btn icon @click.stop="mini = !mini">
                             <v-icon>mdi-chevron-left</v-icon>
-                        </v-btn>
+                        </v-btn> -->
                     </v-list-item>
                     <v-list dense>
                         <template v-for="(item, i) in items">
@@ -138,10 +138,51 @@ export default {
                     { icon: 'mdi-help-circle', text: 'Help' }
                 ];
             }
+        },
+        viewPort() {
+            // Define our viewportWidth variable
+            let viewportWidth;
+
+            // Set/update the viewportWidth value
+            let setViewportWidth = function () {
+                viewportWidth =
+                    window.innerWidth || document.documentElement.clientWidth;
+            };
+
+            // Log the viewport width into the console
+            let logWidth = () => {
+                if (viewportWidth > 640) {
+                    // console.log('Wide viewport');
+                    this.mini = false;
+                } else {
+                    // console.log('Small viewport');
+                    this.mini = true;
+                }
+            };
+
+            // Set our initial width and log it
+            setViewportWidth();
+            logWidth();
+
+            // On resize events, recalculate and log
+            window.addEventListener(
+                'resize',
+                function () {
+                    setViewportWidth();
+                    logWidth();
+                },
+                false
+            );
+            // console.log(`settings.vue - 144 - 🍇`, vw);
+            // if (vw <= 768) {
+            //     this.mini = true;
+            // } else if (vw > 768) {
+            //     this.mini = false;
+            // }
+            // return vw;
         }
     },
     mounted() {
-        console.log(`settings.vue - 155 - 🐷`, this.validatedItems);
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 // User is signed in.
@@ -152,18 +193,17 @@ export default {
                     .then((tokenResult) => {
                         if (tokenResult) {
                             this.role = tokenResult.claims;
-                            console.log(
-                                `settings.vue - 166 - 🥶`,
-                                this.validatedItems
-                            );
+                            console.log(this.validatedItems);
                             this.items = this.validatedItems;
                         }
                     });
 
                 this.user = user;
-                console.log(`playground.vue - 146 - 🤌🏾`, this.user);
             }
         });
+
+        // start tracking the viewport
+        this.viewPort;
     }
 };
 </script>
