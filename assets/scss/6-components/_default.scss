@@ -1,3 +1,6 @@
-.global {
-    padding: 0 80px 0 80px;
+.cart-width {
+    width: 100% !important;
+    @media (min-width: $tablet) {
+       width: 600px !important;
+    }
 }

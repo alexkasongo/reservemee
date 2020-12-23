@@ -329,9 +329,16 @@
                     fixed
                     temporary
                     height="100vh"
-                    width="600px"
+                    class="cart-width"
                     right
                 >
+                    <div>
+                        <v-btn @click.stop="drawerRight = !drawerRight" icon>
+                            <v-icon color="teal darker-1"
+                                >mdi-chevron-right</v-icon
+                            >
+                        </v-btn>
+                    </div>
                     <Cart />
                 </v-navigation-drawer>
                 <!-- DRAWER RIGHT END -->
