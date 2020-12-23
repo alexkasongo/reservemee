@@ -180,7 +180,8 @@ export default {
             { text: 'Store 4', image: 'https://via.placeholder.com/150' },
             { text: 'Store 5', image: 'https://via.placeholder.com/150' },
             { text: 'Store 6', image: 'https://via.placeholder.com/150' }
-        ]
+        ],
+        fav: false
     }),
     computed: {
         user() {

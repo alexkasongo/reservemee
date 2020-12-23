@@ -163,13 +163,13 @@
                                     >
                                         <v-btn
                                             elevation="0"
-                                            color="transparent"
+                                            icon
                                             dark
                                             v-bind="attrs"
                                             v-on="{ ...tooltip, ...menu }"
                                         >
-                                            {{ user.displayName }}
-                                            <v-icon> mdi-chevron-down</v-icon>
+                                            <!-- {{ user.displayName }} -->
+                                            <v-icon>mdi-dots-vertical</v-icon>
                                         </v-btn>
                                     </template>
                                     <span>Open menu</span>
