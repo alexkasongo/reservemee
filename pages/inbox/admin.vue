@@ -41,9 +41,9 @@
                                             tile
                                         >
                                             <v-img
-                                                :src="
-                                                    filteredUserData.storeOwnerImage
-                                                "
+                                                lazy-src="https://picsum.photos/id/11/10/6"
+                                                m
+                                                :src="user.photoUrl"
                                             ></v-img>
                                         </v-avatar>
                                     </v-col>
