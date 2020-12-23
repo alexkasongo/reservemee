@@ -7,18 +7,9 @@
 
             <div style="width: 100%">
                 <div class="store__layout">
-                    <!-- SIDE BANNER -->
-                    <!-- <div class="store__left">
-                        <SideBar />
-                        <SideBarAd />
-                    </div> -->
-                    <!-- SIDE BANNER END -->
-
-                    <!-- <div class="store__right"> -->
                     <!-- STORE CATEGORIES -->
                     <StoreCategories />
                     <!-- STORE CATEGORIES END -->
-                    <!-- </div> -->
                 </div>
             </div>
         </div>
