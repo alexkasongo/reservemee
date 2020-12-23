@@ -1,6 +1,6 @@
 <template>
     <div class="categories">
-        <h2>Popular Stores</h2>
+        <div class="display-1">Popular Stores</div>
 
         <!-- SORT -->
         <div class="categories__sort-card">
@@ -22,7 +22,7 @@
         </div>
         <div v-if="!storesLoading" class="categories__popular">
             <div v-for="(store, id) in stores" :key="id">
-                <v-card
+                <!-- <v-card
                     outlined
                     elevation="0"
                     class="rounded-xl mb-3"
@@ -49,6 +49,62 @@
                                     >Visit Store</v-btn
                                 >
                             </div>
+                        </div>
+                    </div>
+                </v-card> -->
+
+                <v-card
+                    outlined
+                    elevation="0"
+                    class="rounded-xl mb-3"
+                    style="width: 100%"
+                    :ripple="false"
+                >
+                    <div
+                        class="services__left-card d-flex flex-no-wrap justify-space-between"
+                    >
+                        <div class="services__left-card-img-container">
+                            <img
+                                class="services__left-service-img"
+                                :src="store.storeBanner"
+                                alt=""
+                            />
+                        </div>
+                        <div class="services__left-card-info">
+                            <v-card-title class="headline">{{
+                                store.storeName | capitalize
+                            }}</v-card-title>
+
+                            <v-card-subtitle>{{
+                                store.storeBio | truncate(50, '...')
+                            }}</v-card-subtitle>
+
+                            <v-card-text
+                                class="display-1 text--primary services__left-card-price"
+                            >
+                                <v-btn @click="viewStore(store)" elevation="0"
+                                    >Visit Store</v-btn
+                                >
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+
+                                <v-btn
+                                    :class="fav ? 'red--text' : ''"
+                                    icon
+                                    @click="fav = !fav"
+                                >
+                                    <v-icon>mdi-heart</v-icon>
+                                </v-btn>
+
+                                <!-- <v-btn @click="updService()" icon>
+                                    <v-icon>mdi-pencil-box</v-icon>
+                                </v-btn>
+
+                                <v-btn @click="removeService()" icon>
+                                    <v-icon>mdi-delete</v-icon>
+                                </v-btn> -->
+                            </v-card-actions>
                         </div>
                     </div>
                 </v-card>
