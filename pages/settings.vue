@@ -22,10 +22,6 @@
                         <v-list-item-title>{{
                             user.displayName
                         }}</v-list-item-title>
-
-                        <!-- <v-btn icon @click.stop="mini = !mini">
-                            <v-icon>mdi-chevron-left</v-icon>
-                        </v-btn> -->
                     </v-list-item>
                     <v-list dense>
                         <template v-for="(item, i) in items">
@@ -173,13 +169,6 @@ export default {
                 },
                 false
             );
-            // console.log(`settings.vue - 144 - 🍇`, vw);
-            // if (vw <= 768) {
-            //     this.mini = true;
-            // } else if (vw > 768) {
-            //     this.mini = false;
-            // }
-            // return vw;
         }
     },
     mounted() {
