@@ -23,6 +23,7 @@
                             loggedInUser.displayName
                         }}</v-list-item-title>
                     </v-list-item>
+                    <v-divider dark class="my-4"></v-divider>
                     <v-list dense>
                         <template v-for="(messenger, i) in allMessages">
                             <!-- <v-divider
@@ -32,22 +33,43 @@
                                     class="my-4"
                                 ></v-divider> -->
 
-                            <v-list-item
+                            <v-list
                                 :key="i"
                                 @click="onChange(messenger)"
                                 link
+                                nav
                             >
-                                <v-list-item-avatar>
-                                    <v-img
-                                        :src="messenger.storeOwnerImage"
-                                    ></v-img>
-                                </v-list-item-avatar>
-                                <v-list-item-content>
-                                    <v-list-item-title class="grey--text">
-                                        {{ messenger.name }}
-                                    </v-list-item-title>
-                                </v-list-item-content>
-                            </v-list-item>
+                                <v-list-item-group
+                                    v-model="selectedItem"
+                                    color="teal darker-1"
+                                >
+                                    <v-list-item
+                                        v-for="(messenger, i) in allMessages"
+                                        :key="i"
+                                    >
+                                        <v-list-item-avatar
+                                            @click="onChange(messenger)"
+                                        >
+                                            <v-img
+                                                :src="messenger.storeOwnerImage"
+                                            ></v-img>
+                                        </v-list-item-avatar>
+
+                                        <v-list-item-content
+                                            class="inbox__left-content"
+                                            @click="onChange(messenger)"
+                                        >
+                                            <v-list-item-title
+                                                >From:
+                                                {{
+                                                    messenger.name
+                                                }}</v-list-item-title
+                                            >
+                                            <p v-text="messenger.message"></p>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-list-item-group>
+                            </v-list>
                         </template>
                     </v-list>
                 </v-navigation-drawer>
@@ -455,8 +477,6 @@ export default {
                 this.loggedInUser = user;
             }
         });
-
-        console.log(`playground.vue - 315 - 💋`, this.allMessages);
 
         // start tracking the viewport
         this.viewPort;
