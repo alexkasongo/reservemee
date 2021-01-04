@@ -29,7 +29,7 @@
             <v-row class="cart__totals">
                 <v-col class="cart__totals-item">
                     <div class="cart__totals-label">Subtotal</div>
-                    <div class="cart__totals-label">Tax (5%)</div>
+                    <div class="cart__totals-label">Tax (6.5%)</div>
                     <div class="cart__totals-grand-label">Grand Total</div>
                 </v-col>
                 <v-col class="cart__totals-item">
@@ -37,10 +37,10 @@
                         {{ subTotal }}
                     </div>
                     <div class="cart__totals-value" id="cart-shipping">
-                        15.00
+                        {{ tax }}
                     </div>
                     <div class="cart__totals-value" id="cart-total">
-                        <!-- {{ grandTotal }} -->
+                        {{ grandTotal }}
                     </div>
                 </v-col>
             </v-row>
@@ -78,6 +78,7 @@ export default {
             { text: 'Total', sortable: false, value: 'servicePrice' }
         ],
         subTotal: 0,
+        tax: 0,
         grandTotal: 0
     }),
     computed: {
@@ -101,6 +102,9 @@ export default {
             total += parseInt(order.servicePrice);
         });
         this.subTotal = total;
+        // Tax only
+        this.tax = Math.round((6.5 / 100) * total * 100 + Number.EPSILON) / 100;
+
         // Tex inclusive
         this.grandTotal = (6.5 / 100) * total + total;
         // WORK OUT CART TOTAL END
