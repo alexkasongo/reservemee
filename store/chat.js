@@ -1,10 +1,9 @@
 import * as firebase from 'firebase/app';
 import 'firebase/database';
 
-
 export const state = () => ({
     messages: [],
-    replies: [],
+    replies: []
 });
 
 export const getters = {
@@ -13,29 +12,31 @@ export const getters = {
     alert: (state) => state.alert,
 
     messages: (state) => state.messages,
-    replies: (state) => state.replies,
+    replies: (state) => state.replies
 };
 
 export const actions = {
     /*
-    ** CHAT
-    ** TODO research ways to search firebase realtime database
-    */
+     ** CHAT
+     ** TODO research ways to search firebase realtime database
+     */
     deleteMessage: function (context, payload) {
-        database.collection('messages').doc(payload.id).delete()
+        database
+            .collection('messages')
+            .doc(payload.id)
+            .delete()
             .then(() => {
-                this.commit('DELETE_MESSAGE', payload)
-            })
+                this.commit('DELETE_MESSAGE', payload);
+            });
     },
     currentMessage: function (context, payload) {
-        this.commit('CURRENT_MESSAGE', payload)
+        this.commit('CURRENT_MESSAGE', payload);
     },
     /*
-    ** CHAT
-    ** FIXME new messages should get added to the users collections
-    */
+     ** CHAT
+     ** REVIEW new messages should get added to the users collections
+     */
     async addMsg({ commit }, payload) {
-
         const message = {
             name: payload.name,
             message: payload.message,
@@ -65,7 +66,7 @@ export const actions = {
                     .database()
                     .ref('users/' + payload.userId)
                     .child('messages')
-                    .push(backupMessage)
+                    .push(backupMessage);
 
                 commit('NEW_MESSAGE', {
                     ...message,
@@ -88,21 +89,25 @@ export const actions = {
             });
     },
     editMsg: function (payload) {
-        database.collection('messages').doc(payload.id).update({
-            content: payload.content,
-            name: payload.name,
-            timestamp: Date.now()
-        }).then(() => {
-            this.commit('EDIT_MESSAGE', payload)
-        }).catch(error => {
-            commit('ERRORS', error);
-        })
+        database
+            .collection('messages')
+            .doc(payload.id)
+            .update({
+                content: payload.content,
+                name: payload.name,
+                timestamp: Date.now()
+            })
+            .then(() => {
+                this.commit('EDIT_MESSAGE', payload);
+            })
+            .catch((error) => {
+                commit('ERRORS', error);
+            });
     },
     userName: function (payload) {
-        this.commit('USER_NAME', payload)
+        this.commit('USER_NAME', payload);
     },
     async sendReply({ commit, dispatch }, payload) {
-
         const comment = {
             to: payload.to,
             from: payload.from,
@@ -148,7 +153,6 @@ export const actions = {
     },
 
     async loadMessages({ commit }, payload) {
-
         commit('loaders/SET_LOADING', true, { root: true });
         //to make it realtime use on() instead of once()
         await firebase
@@ -171,7 +175,7 @@ export const actions = {
                         storeName: obj[key].storeName,
                         storeOwnerImage: obj[key].storeOwnerImage,
                         storePhoneNumber: obj[key].storePhoneNumber,
-                        messagePreviewId: obj[key].messagePreviewId,
+                        messagePreviewId: obj[key].messagePreviewId
                     });
                 }
                 commit('SET_LOADED_MESSAGES', messages);
@@ -207,7 +211,7 @@ export const actions = {
                         storeOwnerImage: obj[key].storeOwnerImage,
                         message: obj[key].message,
                         messagePreviewId: obj[key].messagePreviewId,
-                        timestamp: obj[key].timestamp,
+                        timestamp: obj[key].timestamp
                     });
                 }
                 commit('SET_LOADED_REPLIES', replies);
@@ -217,23 +221,23 @@ export const actions = {
                 commit('ERRORS', error);
                 commit('loaders/SET_LOADING', false, { root: true });
             });
-    },
+    }
     // CHAT END
 };
 
 export const mutations = {
     /*
-    ** CHAT
-    */
+     ** CHAT
+     */
     NEW_MESSAGE: (state, payload) => state.messages.push(payload),
     SET_LOADED_MESSAGES: (state, payload) => {
-        state.messages = payload
+        state.messages = payload;
     },
     NEW_REPLY: (state, payload) => state.replies.push(payload),
     SET_LOADED_REPLIES: (state, payload) => {
-        state.replies = payload
-    },
+        state.replies = payload;
+    }
     /*
-    ** CHAT END
-    */
+     ** CHAT END
+     */
 };

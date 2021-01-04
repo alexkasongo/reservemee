@@ -369,7 +369,6 @@ export default {
                 } else {
                     this.messages = data;
                 }
-                console.log(`playground.vue - 400 - 🛍`, this.messages);
             });
         },
         //NOTE  this is adding new reply
