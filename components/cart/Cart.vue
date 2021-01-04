@@ -33,11 +33,15 @@
                     <div class="cart__totals-grand-label">Grand Total</div>
                 </v-col>
                 <v-col class="cart__totals-item">
-                    <div class="cart__totals-value" id="cart-tax">3.60</div>
+                    <div class="cart__totals-value" id="cart-tax">
+                        {{ subTotal }}
+                    </div>
                     <div class="cart__totals-value" id="cart-shipping">
                         15.00
                     </div>
-                    <div class="cart__totals-value" id="cart-total">90.57</div>
+                    <div class="cart__totals-value" id="cart-total">
+                        <!-- {{ grandTotal }} -->
+                    </div>
                 </v-col>
             </v-row>
             <div class="cart__checkout-btn pt-5 pr-0 pb-10">
@@ -72,7 +76,9 @@ export default {
             { text: 'Quantity', sortable: false, value: 'quantity' },
             { text: 'Actions', sortable: false, value: 'actions' },
             { text: 'Total', sortable: false, value: 'servicePrice' }
-        ]
+        ],
+        subTotal: 0,
+        grandTotal: 0
     }),
     computed: {
         ...mapState({
@@ -87,6 +93,17 @@ export default {
     },
     mounted() {
         this.orders = this.ordersState.order;
+
+        // WORK OUT CART TOTAL
+        const orders = this.ordersState.order;
+        let total = 0;
+        orders.forEach((order) => {
+            total += parseInt(order.servicePrice);
+        });
+        this.subTotal = total;
+        // Tex inclusive
+        this.grandTotal = (6.5 / 100) * total + total;
+        // WORK OUT CART TOTAL END
     }
 };
 </script>
