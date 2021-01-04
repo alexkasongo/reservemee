@@ -218,6 +218,7 @@ export const actions = {
                 commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
+                console.log(`chat.js - 181 - 🍎🐷`, error);
                 commit('ERRORS', error);
                 commit('loaders/SET_LOADING', false, { root: true });
             });

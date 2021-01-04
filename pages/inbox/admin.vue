@@ -1,5 +1,6 @@
 <template>
     <div class="settings">
+        {{ messages }}
         <v-app>
             <v-app>
                 <v-navigation-drawer
@@ -361,9 +362,11 @@ export default {
 
             const value = e.id;
             this.loadReplies(e.userId).then(() => {
+                // filter replies by message ID
                 const data = this.replies.filter((res) => {
                     return res.messageId === value;
                 });
+                console.log(`admin.vue - 368 - 🌎🥎💋`, data);
                 if (data.length <= 0) {
                     this.messages = new Array(e);
                 } else {
