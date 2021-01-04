@@ -25,7 +25,7 @@
                     </v-list-item>
                     <v-divider dark class="my-4"></v-divider>
                     <v-list dense>
-                        <template v-for="(messenger, i) in allMessages">
+                        <template>
                             <!-- <v-divider
                                     v-if="item.divider"
                                     :key="i"
@@ -33,12 +33,7 @@
                                     class="my-4"
                                 ></v-divider> -->
 
-                            <v-list
-                                :key="i"
-                                @click="onChange(messenger)"
-                                link
-                                nav
-                            >
+                            <v-list @click="onChange(messenger)" link nav>
                                 <v-list-item-group
                                     v-model="selectedItem"
                                     color="teal darker-1"
@@ -402,6 +397,7 @@ export default {
                 } else {
                     this.messages = data;
                 }
+                console.log(`playground.vue - 400 - 🛍`, this.messages);
             });
         },
         //NOTE  this is adding new reply
@@ -469,7 +465,7 @@ export default {
                     .then((tokenResult) => {
                         if (tokenResult) {
                             this.role = tokenResult.claims;
-                            console.log(this.validatedItems);
+                            // console.log(this.validatedItems);
                             this.items = this.validatedItems;
                         }
                     });
