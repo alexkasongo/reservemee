@@ -30,13 +30,9 @@
                 <v-col class="cart__totals-item">
                     <div class="cart__totals-label">Subtotal</div>
                     <div class="cart__totals-label">Tax (5%)</div>
-                    <div class="cart__totals-label">Shipping</div>
                     <div class="cart__totals-grand-label">Grand Total</div>
                 </v-col>
                 <v-col class="cart__totals-item">
-                    <div class="cart__totals-value" id="cart-subtotal">
-                        71.97
-                    </div>
                     <div class="cart__totals-value" id="cart-tax">3.60</div>
                     <div class="cart__totals-value" id="cart-shipping">
                         15.00
@@ -95,5 +91,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
