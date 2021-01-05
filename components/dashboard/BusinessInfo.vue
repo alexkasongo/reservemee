@@ -4,9 +4,10 @@
     <div>
         <div v-if="storeProfile !== null" class="panel-body">
             <p class="text-muted font-13">{{ storeProfile.storeBio }}</p>
-            <hr />
 
-            <div class="text-left">
+            <v-divider></v-divider>
+
+            <div class="mt-5">
                 <p class="text-muted font-13">
                     <strong>Store Name :</strong>
                     <span class="m-l-15">{{

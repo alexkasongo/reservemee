@@ -148,7 +148,7 @@
                     <!-- CART END -->
                     <div class="text-center" v-if="user">
                         <v-menu
-                            nudge-bottom="52"
+                            nudge-bottom="56"
                             transition="slide-y-transition"
                             open-delay="200"
                         >
@@ -163,18 +163,20 @@
                                     >
                                         <v-btn
                                             elevation="0"
-                                            color="transparent"
+                                            icon
                                             dark
                                             v-bind="attrs"
                                             v-on="{ ...tooltip, ...menu }"
                                         >
-                                            {{ user.displayName }}
-                                            <v-icon> mdi-chevron-down</v-icon>
+                                            <v-icon>mdi-dots-vertical</v-icon>
                                         </v-btn>
                                     </template>
                                     <span>Open menu</span>
                                 </v-tooltip>
                             </template>
+                            <!-- <v-btn elevation="0" icon dark>
+                                <v-icon>mdi-dots-vertical</v-icon>
+                            </v-btn> -->
                             <v-list width="250px">
                                 <v-list-item
                                     v-for="(item, index) in nav"
@@ -329,9 +331,16 @@
                     fixed
                     temporary
                     height="100vh"
-                    width="600px"
+                    class="cart-width"
                     right
                 >
+                    <div>
+                        <v-btn @click.stop="drawerRight = !drawerRight" icon>
+                            <v-icon color="teal darker-1"
+                                >mdi-chevron-right</v-icon
+                            >
+                        </v-btn>
+                    </div>
                     <Cart />
                 </v-navigation-drawer>
                 <!-- DRAWER RIGHT END -->

@@ -8,7 +8,7 @@
 
         <section class="container">
             <div class="row">
-                <div class="col-xl-4">
+                <div class="col-md-4">
                     <div>
                         <div class="display-1 mt-5 mb-5">Bio</div>
                         <!-- Personal-Information -->
@@ -48,7 +48,7 @@
                         <!-- Messages -->
                     </div>
                 </div>
-                <div class="col-xl-8">
+                <div class="col-md-8">
                     <!-- StoreSummary -->
                     <StoreSummary />
                     <!-- StoreSummary -->

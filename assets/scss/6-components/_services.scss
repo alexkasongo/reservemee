@@ -6,7 +6,7 @@
     ** LEFT
     */
     &__left {
-        display: flex;
+        display: flex; 
         flex-direction: column;
         @media (min-width: $large-desktop) {
             flex-direction: row;
@@ -17,9 +17,10 @@
     }
     &__left-card-img-container {
         width: 35%;
-        max-height: 200px;
+        max-height: 250px;
         @media (min-width: $tablet) {
             width: 50%;
+            max-height: 200px;
         }
     }
     &__left-service-img {

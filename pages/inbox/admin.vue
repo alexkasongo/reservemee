@@ -1,76 +1,32 @@
 <template>
-    <div class="inbox container">
-        <!-- Alert -->
-        <div v-if="!filteredUserData.storeOwnerImage">
-            <v-alert
-                style="cursor: pointer"
-                @click="$router.push(`/profile/${user.uid}`)"
-                icon="mdi-alert-circle-outline"
-                text
-                type="info"
-                >Go to setting and add profile picture to unlock inbox</v-alert
-            >
-        </div>
-        <!-- Alert End -->
+    <div class="settings">
+        <v-app>
+            <v-app>
+                <v-navigation-drawer
+                    class="margin"
+                    v-model="drawer"
+                    app
+                    permanent
+                    :mini-variant="mini"
+                >
+                    <v-list-item class="px-2">
+                        <v-list-item-avatar v-if="loggedInUser.photoURL">
+                            <v-img :src="loggedInUser.photoURL"></v-img>
+                        </v-list-item-avatar>
+                        <v-list-item-avatar v-else>
+                            <v-img
+                                src="https://via.placeholder.com/250"
+                            ></v-img>
+                        </v-list-item-avatar>
 
-        <div class="inbox__card-container">
-            <div class="inbox__left">
-                <v-card class="mx-auto" height="100%" width="100%" tile>
-                    <v-navigation-drawer width="100%" permanent>
-                        <!-- HEADER -->
-                        <v-card
-                            elevation="0"
-                            class="mx-auto inbox__left-card"
-                            width="100%"
-                            tile
-                        >
-                            <v-img height="100%" class="teal darker-1">
-                                <v-row
-                                    align="end"
-                                    class="fill-height inbox__left-card-header"
-                                >
-                                    <v-col
-                                        align-self="start"
-                                        class="pa-0"
-                                        cols="12"
-                                    >
-                                        <v-avatar
-                                            class="profile"
-                                            color="grey"
-                                            size="164"
-                                            tile
-                                        >
-                                            <v-img
-                                                lazy-src="https://picsum.photos/id/11/10/6"
-                                                m
-                                                :src="user.photoUrl"
-                                            ></v-img>
-                                        </v-avatar>
-                                    </v-col>
-                                    <v-col class="py-0">
-                                        <v-list-item
-                                            color="rgba(0, 0, 0, .4)"
-                                            dark
-                                        >
-                                            <v-list-item-content>
-                                                <v-list-item-title
-                                                    class="title"
-                                                >
-                                                    {{ user.name }}
-                                                </v-list-item-title>
-                                                <v-list-item-subtitle>{{
-                                                    user.email
-                                                }}</v-list-item-subtitle>
-                                            </v-list-item-content>
-                                        </v-list-item>
-                                    </v-col>
-                                </v-row>
-                            </v-img>
-                        </v-card>
-                        <!-- HEADER -->
-                        <div class="inbox__left-messages">
-                            <!-- <v-divider></v-divider> -->
-                            <v-list nav>
+                        <v-list-item-title>{{
+                            loggedInUser.displayName
+                        }}</v-list-item-title>
+                    </v-list-item>
+                    <v-divider dark class="my-4"></v-divider>
+                    <v-list dense>
+                        <template>
+                            <v-list @click="onChange(messenger)" link nav>
                                 <v-list-item-group
                                     v-model="selectedItem"
                                     color="teal darker-1"
@@ -102,170 +58,195 @@
                                     </v-list-item>
                                 </v-list-item-group>
                             </v-list>
-                        </div>
-                        <v-list v-if="allMessages.length <= 0" nav>
-                            <v-list-item-group color="teal darker-1">
-                                <v-list-item>
-                                    <v-list-item-content>
-                                        <v-alert
-                                            class="m-0"
-                                            icon="mdi-alert-circle-outline"
-                                            text
-                                            type="info"
-                                            ><span>
-                                                You have no messages.
-                                            </span></v-alert
+                        </template>
+                    </v-list>
+                </v-navigation-drawer>
+
+                <v-main>
+                    <v-container fluid class="fill-height">
+                        <v-row class="settings__right-row">
+                            <v-col>
+                                <v-card
+                                    height="100%"
+                                    class="container inbox__right-card mx-auto"
+                                >
+                                    <!-- Message -->
+                                    <div class="inbox__right-card-top">
+                                        <v-card
+                                            v-if="messagePreview.length > 0"
+                                            elevation="0"
+                                            class="mx-auto inbox__right-card-head"
                                         >
-                                    </v-list-item-content>
-                                </v-list-item>
-                            </v-list-item-group>
-                        </v-list>
-                    </v-navigation-drawer>
-                </v-card>
-            </div>
-            <!-- PREVIEW END -->
+                                            <v-card-text>
+                                                <p
+                                                    class="display-1 text--primary"
+                                                >
+                                                    {{
+                                                        messagePreview[0].name
+                                                            | capitalize
+                                                    }}
+                                                </p>
+                                                <p>
+                                                    {{
+                                                        new Date(
+                                                            messagePreview[0].timestamp
+                                                        )
+                                                    }}
+                                                </p>
+                                                <div class="text--primary">
+                                                    {{
+                                                        messagePreview[0]
+                                                            .message
+                                                    }}
+                                                </div>
+                                            </v-card-text>
+                                        </v-card>
+                                        <v-divider
+                                            v-if="messagePreview.length > 0"
+                                        ></v-divider>
 
-            <!-- MESSAGE -->
-            <div class="inbox__right">
-                <v-card
-                    height="100%"
-                    class="container inbox__right-card mx-auto"
-                >
-                    <!-- Message -->
-                    <div class="inbox__right-card-top">
-                        <v-card
-                            v-if="messagePreview.length > 0"
-                            elevation="0"
-                            class="mx-auto inbox__right-card-head"
-                        >
-                            <v-card-text>
-                                <p class="display-1 text--primary">
-                                    {{ messagePreview[0].name | capitalize }}
-                                </p>
-                                <p>
-                                    {{ new Date(messagePreview[0].timestamp) }}
-                                </p>
-                                <div class="text--primary">
-                                    {{ messagePreview[0].message }}
-                                </div>
-                            </v-card-text>
-                        </v-card>
-                        <v-divider v-if="messagePreview.length > 0"></v-divider>
+                                        <!-- Conversation start -->
+                                        <div class="inbox__right-card-middle">
+                                            <v-list three-line>
+                                                <div>
+                                                    <template
+                                                        v-for="(message,
+                                                        index) in messages"
+                                                    >
+                                                        <v-list-item
+                                                            :key="index"
+                                                        >
+                                                            <v-list-item-avatar
+                                                                class="inbox__right-avatar"
+                                                            >
+                                                                <v-img
+                                                                    :src="
+                                                                        message.storeOwnerImage
+                                                                    "
+                                                                ></v-img>
+                                                            </v-list-item-avatar>
+                                                            <v-list-item-content>
+                                                                <v-list-item-title
+                                                                    class="deep-purple-text"
+                                                                    >{{
+                                                                        message.from
+                                                                    }}</v-list-item-title
+                                                                >
+                                                                <v-alert
+                                                                    v-bind:class="{
+                                                                        teal:
+                                                                            message.from ===
+                                                                            `${user.name}`,
+                                                                        grey:
+                                                                            message.from !==
+                                                                            `${user.name}`
+                                                                    }"
+                                                                    dark
+                                                                >
+                                                                    {{
+                                                                        message.message
+                                                                    }}
+                                                                </v-alert>
+                                                            </v-list-item-content>
+                                                        </v-list-item>
+                                                    </template>
+                                                </div>
+                                            </v-list>
+                                        </div>
+                                        <!-- Conversation End -->
+                                    </div>
+                                    <!-- Message End -->
 
-                        <!-- Conversation End -->
-                        <div class="inbox__right-card-middle">
-                            <v-list three-line>
-                                <div>
-                                    <template
-                                        v-for="(message, index) in messages"
+                                    <!-- Reply -->
+                                    <div class="inbox__right-card-btm">
+                                        <v-list v-if="allMessages.length > 0">
+                                            <v-list-item>
+                                                <v-list-item-content>
+                                                    <form
+                                                        @submit.prevent="
+                                                            onReply
+                                                        "
+                                                    >
+                                                        <div class="field">
+                                                            <label for="reply"
+                                                                >Write
+                                                                Message</label
+                                                            >
+                                                            <v-text-field
+                                                                type="text"
+                                                                name="reply"
+                                                                v-model="
+                                                                    newReply
+                                                                "
+                                                            ></v-text-field>
+                                                            <p
+                                                                v-if="feedback"
+                                                                class="red-text center"
+                                                            >
+                                                                {{ feedback }}
+                                                            </p>
+                                                        </div>
+                                                        <v-btn
+                                                            color="teal"
+                                                            type="submit"
+                                                            dark
+                                                            >Send</v-btn
+                                                        >
+                                                    </form>
+                                                </v-list-item-content>
+                                            </v-list-item>
+                                        </v-list>
+                                    </div>
+                                    <div
+                                        v-if="allMessages.length <= 0"
+                                        class="inbox__right-card-btm"
                                     >
-                                        <v-list-item :key="index">
-                                            <v-list-item-avatar
-                                                class="inbox__right-avatar"
-                                            >
-                                                <v-img
-                                                    :src="
-                                                        message.storeOwnerImage
-                                                    "
-                                                ></v-img>
-                                            </v-list-item-avatar>
-                                            <v-list-item-content>
-                                                <v-list-item-title
-                                                    class="deep-purple-text"
-                                                    >{{
-                                                        message.from
-                                                    }}</v-list-item-title
-                                                >
-                                                <v-alert
-                                                    v-bind:class="{
-                                                        teal:
-                                                            message.from ===
-                                                            `${user.name}`,
-                                                        grey:
-                                                            message.from !==
-                                                            `${user.name}`
-                                                    }"
-                                                    dark
-                                                >
-                                                    {{ message.message }}
-                                                </v-alert>
-                                            </v-list-item-content>
-                                        </v-list-item>
-                                    </template>
-                                </div>
-                            </v-list>
-                        </div>
-                        <!-- Conversation End -->
-                    </div>
-                    <!-- Message End -->
-
-                    <!-- Reply -->
-                    <div class="inbox__right-card-btm">
-                        <v-list v-if="allMessages.length > 0">
-                            <v-list-item>
-                                <v-list-item-content>
-                                    <form @submit.prevent="onReply">
-                                        <div class="field">
-                                            <label for="reply"
-                                                >Write Message</label
-                                            >
-                                            <v-text-field
-                                                type="text"
-                                                name="reply"
-                                                v-model="newReply"
-                                            ></v-text-field>
-                                            <p
-                                                v-if="feedback"
-                                                class="red-text center"
-                                            >
-                                                {{ feedback }}
-                                            </p>
-                                        </div>
-                                        <v-btn color="teal" type="submit" dark
-                                            >Send</v-btn
-                                        >
-                                    </form>
-                                </v-list-item-content>
-                            </v-list-item>
-                        </v-list>
-                    </div>
-                    <div
-                        v-if="allMessages.length <= 0"
-                        class="inbox__right-card-btm"
-                    >
-                        <v-list>
-                            <v-list-item>
-                                <v-list-item-content>
-                                    <form @submit.prevent="onReply">
-                                        <div class="field">
-                                            <label for="reply"
-                                                >Write Message</label
-                                            >
-                                            <v-text-field
-                                                type="text"
-                                                name="reply"
-                                                v-model="newReply"
-                                            ></v-text-field>
-                                            <p
-                                                v-if="feedback"
-                                                class="red-text center"
-                                            >
-                                                {{ feedback }}
-                                            </p>
-                                        </div>
-                                        <v-btn color="teal" type="submit" dark
-                                            >Send</v-btn
-                                        >
-                                    </form>
-                                </v-list-item-content>
-                            </v-list-item>
-                        </v-list>
-                    </div>
-                    <!-- Reply End -->
-                </v-card>
-            </div>
-            <!-- MESSAGE -->
-        </div>
+                                        <v-list>
+                                            <v-list-item>
+                                                <v-list-item-content>
+                                                    <form
+                                                        @submit.prevent="
+                                                            onReply
+                                                        "
+                                                    >
+                                                        <div class="field">
+                                                            <label for="reply"
+                                                                >Write
+                                                                Message</label
+                                                            >
+                                                            <v-text-field
+                                                                type="text"
+                                                                name="reply"
+                                                                v-model="
+                                                                    newReply
+                                                                "
+                                                            ></v-text-field>
+                                                            <p
+                                                                v-if="feedback"
+                                                                class="red-text center"
+                                                            >
+                                                                {{ feedback }}
+                                                            </p>
+                                                        </div>
+                                                        <v-btn
+                                                            color="teal"
+                                                            type="submit"
+                                                            dark
+                                                            >Send</v-btn
+                                                        >
+                                                    </form>
+                                                </v-list-item-content>
+                                            </v-list-item>
+                                        </v-list>
+                                    </div>
+                                    <!-- Reply End -->
+                                </v-card>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-main>
+            </v-app>
+        </v-app>
     </div>
 </template>
 
@@ -281,13 +262,19 @@ export default {
         newReply: null,
         feedback: null,
         role: null,
-        filteredUserData: []
+        filteredUserData: [],
+
+        loggedInUser: [],
+        drawer: null,
+        items: null,
+        mini: false,
+        source: 'https://via.placeholder.com/500',
+        selected: ''
     }),
     computed: {
         ...mapGetters({
             replies: 'chat/replies',
             user: 'user'
-            // userData: 'dashboard/userData'
         }),
         ...mapState({
             allMessagesData: 'chat',
@@ -295,6 +282,41 @@ export default {
         }),
         allMessages() {
             return this.allMessagesData.messages;
+        },
+        viewPort() {
+            // Define our viewportWidth variable
+            let viewportWidth;
+
+            // Set/update the viewportWidth value
+            let setViewportWidth = function () {
+                viewportWidth =
+                    window.innerWidth || document.documentElement.clientWidth;
+            };
+
+            // Log the viewport width into the console
+            let logWidth = () => {
+                if (viewportWidth > 640) {
+                    // console.log('Wide viewport');
+                    this.mini = false;
+                } else {
+                    // console.log('Small viewport');
+                    this.mini = true;
+                }
+            };
+
+            // Set our initial width and log it
+            setViewportWidth();
+            logWidth();
+
+            // On resize events, recalculate and log
+            window.addEventListener(
+                'resize',
+                function () {
+                    setViewportWidth();
+                    logWidth();
+                },
+                false
+            );
         }
     },
     methods: {
@@ -332,6 +354,7 @@ export default {
 
             const value = e.id;
             this.loadReplies(e.userId).then(() => {
+                // filter replies by message ID
                 const data = this.replies.filter((res) => {
                     return res.messageId === value;
                 });
@@ -409,8 +432,13 @@ export default {
                             this.role = tokenResult.claims;
                         }
                     });
+
+                this.loggedInUser = user;
             }
         });
+
+        // start tracking the viewport
+        this.viewPort;
 
         this.loadMessages(this.user.uid).then(() => {});
 
@@ -425,4 +453,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.margin {
+    // margin: 90px auto 0 auto;
+    margin-top: 64px;
+}
+.settings {
+    &__right-row {
+        height: 100%;
+    }
+}
 </style>

@@ -85,21 +85,21 @@
                                     <label for="exampleInputEmail1"
                                         >Select Category</label
                                     >
-                                    <select
-                                        @change="onChange($event)"
-                                        class="form-control"
-                                        required
+                                    <v-select
+                                        v-model="selectedItem"
+                                        :items="categoryNames"
+                                        outlined
                                     >
-                                        <option value="all" selected>
+                                        <!-- <option value="all" selected>
                                             All
-                                        </option>
-                                        <option
+                                        </option> -->
+                                        <!-- <option
                                             v-for="category in storeCategories"
                                             :key="category.id"
                                         >
                                             {{ category.name | capitalize }}
-                                        </option>
-                                    </select>
+                                        </option> -->
+                                    </v-select>
                                 </div>
                             </div>
                         </v-card-text>
@@ -300,7 +300,9 @@ export default {
         role: [],
         ServiceId: '',
         alert: '',
-        note: ''
+        note: '',
+        categoryNames: ['all'],
+        selectedItem: ''
     }),
     watch: {
         // call function when dialog/modal opens
@@ -310,34 +312,15 @@ export default {
             } else {
                 // Do this when dialog closes
             }
-        }
-    },
-    computed: {
-        ...mapGetters({
-            loadedStoreServices: 'storeFront/loadedStoreServices',
-            storeCategories: 'storeFront/loadedStoreCategories',
-            storeProfile: 'storeFront/loadedStoreProfile',
-            loading: 'loaders/loading'
-        }),
-        ...mapState({
-            booking: 'booking'
-        }),
-        bookingState() {
-            return this.booking.bookingState;
-        }
-    },
-    methods: {
-        ...mapActions({
-            loadStoreServices: 'storeFront/loadStoreServices',
-            addToCartAction: 'cart/addToCart'
-        }),
-
+        },
         // filter services using category name
-        onChange(e) {
+        // because v-select is a custom select vuetify component, $event does not trigger
+        // therefore we use a watcher to act as onChange($event)
+        selectedItem(newVal) {
             const services = this.services;
             // replace empty space with dash and transform to lowercase as value Array.filter()
             // is case sensitive
-            const value = e.target.value.replace(/\s+/g, '-').toLowerCase();
+            const value = newVal.replace(/\s+/g, '-').toLowerCase();
 
             // if all is selected show all
             if (value === 'all') {
@@ -361,7 +344,27 @@ export default {
                 });
                 this.storeServices = filteredServices;
             }
-        },
+        }
+    },
+    computed: {
+        ...mapGetters({
+            loadedStoreServices: 'storeFront/loadedStoreServices',
+            storeCategories: 'storeFront/loadedStoreCategories',
+            storeProfile: 'storeFront/loadedStoreProfile',
+            loading: 'loaders/loading'
+        }),
+        ...mapState({
+            booking: 'booking'
+        }),
+        bookingState() {
+            return this.booking.bookingState;
+        }
+    },
+    methods: {
+        ...mapActions({
+            loadStoreServices: 'storeFront/loadStoreServices',
+            addToCartAction: 'cart/addToCart'
+        }),
         async quickBooking() {},
         goToServiceInfo(id) {
             this.$router.push({
@@ -404,7 +407,14 @@ export default {
             // only perform this once async function is complete
 
             this.storeServices = this.loadedStoreServices;
+            for (let key in this.storeCategories) {
+                this.categoryNames.push(this.storeCategories[key].name);
+                // this.categoryNames.push('all');
+            }
         });
+
+        // load categories
+        console.log(`_id.vue - 414 - 🍎`, this.categoryNames);
     }
 };
 </script>

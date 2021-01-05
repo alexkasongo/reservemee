@@ -11,9 +11,8 @@
             <template v-slot:[`item.serviceImage`]="{ item }">
                 <div class="p-3">
                     <v-img
+                        class="cart__image"
                         lazy-src="https://picsum.photos/id/11/10/6"
-                        max-height="100"
-                        max-width="150"
                         :src="item.serviceImage"
                     ></v-img>
                 </div>
@@ -27,31 +26,24 @@
         </v-data-table>
 
         <div class="pt-10 pr-10 cart__total-container">
-            <div class="cart__totals">
-                <div class="cart__totals-item">
+            <v-row class="cart__totals">
+                <v-col class="cart__totals-item">
                     <div class="cart__totals-label">Subtotal</div>
-                    <div class="cart__totals-label">Tax (5%)</div>
-                    <div class="cart__totals-label">Shipping</div>
-                    <div class="cart__totals-grand-label display-1">
-                        Grand Total
+                    <div class="cart__totals-label">Tax (6.5%)</div>
+                    <div class="cart__totals-grand-label">Grand Total</div>
+                </v-col>
+                <v-col class="cart__totals-item">
+                    <div class="cart__totals-value" id="cart-tax">
+                        {{ subTotal }}
                     </div>
-                </div>
-                <div class="cart__totals-item">
-                    <div class="cart__totals-value" id="cart-subtotal">
-                        71.97
-                    </div>
-                    <div class="cart__totals-value" id="cart-tax">3.60</div>
                     <div class="cart__totals-value" id="cart-shipping">
-                        15.00
+                        {{ tax }}
                     </div>
-                    <div
-                        class="cart__totals-value display-1"
-                        id="cart-total display-1"
-                    >
-                        90.57
+                    <div class="cart__totals-value" id="cart-total">
+                        {{ grandTotal }}
                     </div>
-                </div>
-            </div>
+                </v-col>
+            </v-row>
             <div class="cart__checkout-btn pt-5 pr-0 pb-10">
                 <v-btn color="teal darker-1" dark x-large class="cart__checkout"
                     >Checkout</v-btn
@@ -84,7 +76,10 @@ export default {
             { text: 'Quantity', sortable: false, value: 'quantity' },
             { text: 'Actions', sortable: false, value: 'actions' },
             { text: 'Total', sortable: false, value: 'servicePrice' }
-        ]
+        ],
+        subTotal: 0,
+        tax: 0,
+        grandTotal: 0
     }),
     computed: {
         ...mapState({
@@ -99,43 +94,22 @@ export default {
     },
     mounted() {
         this.orders = this.ordersState.order;
+
+        // WORK OUT CART TOTAL
+        const orders = this.ordersState.order;
+        let total = 0;
+        orders.forEach((order) => {
+            total += parseInt(order.servicePrice);
+        });
+        this.subTotal = total;
+        // Tax only
+        this.tax = Math.round((6.5 / 100) * total * 100 + Number.EPSILON) / 100;
+
+        // Tex inclusive
+        this.grandTotal = (6.5 / 100) * total + total;
+        // WORK OUT CART TOTAL END
     }
 };
 </script>
 
-<style lang="scss" scoped>
-/* Totals section */
-.cart {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    &__total-container {
-        // background: darkcyan;
-        width: 100%;
-    }
-    &__totals {
-        display: flex;
-        justify-content: space-between;
-        width: 400px;
-        margin: 0 0 0 auto;
-        // background: coral;
-    }
-    &__totals-label {
-        margin: 0 0 10px 0;
-        text-align: right;
-    }
-    // &__totals-grand-label {
-    //     font-weight: bold;
-    // }
-    &__totals-value {
-        margin: 0 0 10px 0;
-        text-align: right;
-    }
-    &__checkout-btn {
-        display: flex;
-        justify-content: flex-end;
-    }
-}
-/* Totals section */
-</style>
+<style lang="scss" scoped></style>
