@@ -1,8 +1,12 @@
 {
-    "name": "bookme",
-    "version": "1.0.0",
-    "author": "Alex Kasongo",
+    "name": "reservemee",
     "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/alexkasongo/bookme.git"
+    },
+    "author": "Alex Kasongo <alexkasongo@yahoo.com>",
+    "license": "MIT",
     "scripts": {
         "dev": "nuxt",
         "build": "nuxt build",
