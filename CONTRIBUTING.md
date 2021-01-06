@@ -1,3 +1,5 @@
+# Contributing to ReserveMee
+
 Thanks for showing interest to contribute to ReserveMee 🌱, you're amazing!
 
 When it comes to open source, there are different ways you can contribute, all
