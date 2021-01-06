@@ -1,191 +1,59 @@
 Thanks for showing interest to contribute to ReserveMee 🌱, you're amazing!
 
 When it comes to open source, there are different ways you can contribute, all
-of which are valuable. Here's a few guidelines that should help you as you
-prepare your contribution.
+of which are valuable. We love your input! We want to make contributing to this project as easy and transparent as possible, whether it's:
 
-## Setup the Project
+- Reporting a bug
+- Discussing the current state of the code
+- Submitting a fix
+- Proposing new features
+- Becoming a maintainer
 
-The following steps will get you up and running to contribute to ReserveMee:
+## We Develop with Github
+We use github to host code, to track issues and feature requests, as well as accept pull requests.
 
-1. Fork the repo (click the <kbd>Fork</kbd> button at the top right of
-   [this page](https://github.com/alexkasongo/reservemee))
+## We Use [Github Flow](https://guides.github.com/introduction/flow/index.html), So All Code Changes Happen Through Pull Requests
+Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
 
-2. Clone your fork locally
+1. Fork the repo and create your branch from `master`.
+2. If you've added code that should be tested, add tests.
+3. If you've changed APIs, update the documentation.
+4. Ensure the test suite passes.
+5. Make sure your code lints.
+6. Issue that pull request!
 
-```sh
-git clone https://github.com/<your_github_username>/reservemee.git
-cd reservemee
-```
+## Any contributions you make will be under the MIT Software License
+In short, when you submit code changes, your submissions are understood to be under the same [MIT License](http://choosealicense.com/licenses/mit/) that covers the project. Feel free to contact the maintainers if that's a concern.
 
-3. Setup all the dependencies and packages by running `yarn or npm install`. This
-   command will install dependencies and bootstrap the.
+## Report bugs using Github's [issues](https://github.com/briandk/transcriptase-atom/issues)
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](); it's that easy!
 
-> If you run into any issues during this step, kindly reach out to the ReserveMee
-> Nuxt team here: 
+## Write bug reports with detail, background, and sample code
+[This is an example](http://stackoverflow.com/q/12488905/180626) of a well written bug report, and I think it's not a bad model. Here's [another example from Craig Hockenberry](http://www.openradar.me/11905408), a well respected app developer.
 
-## Development
+**Great Bug Reports** tend to have:
 
-To improve our development process, we've set up tooling and systems. ReserveMee
-uses a monorepo structure and we treat each component has an independent package
-that can be consumed in isolation.
+- A quick summary and/or background
+- Steps to reproduce
+  - Be specific!
+  - Give sample code if you can. [My stackoverflow question](http://stackoverflow.com/q/12488905/180626) includes sample code that *anyone* with a base R setup can run to reproduce what I was seeing
+- What you expected would happen
+- What actually happens
+- Notes (possibly including why you think this might be happening, or stuff you tried that didn't work)
 
-### Tooling
+People *love* thorough bug reports. I'm not even kidding.
 
-- [Nuxtjs](https://nuxtjs.org/) for a blazing fast simple and powerful web apps.
-  Versioning and changelogs
+## Use a Consistent Coding Style
+I'm again borrowing these from [Facebook's Guidelines](https://github.com/facebook/draft-js/blob/a9316a723f9e918afde44dea68b5f9f39b7d9b00/CONTRIBUTING.md)
 
-### Commands
+* 2 spaces for indentation rather than tabs
+* You can try running `npm run lint` for style unification
 
-**`yarn or npm build`**: run build for all component packages.
+## License
+By contributing, you agree that your contributions will be licensed under its MIT License.
 
-**`yarn or npm dev`**: publish changed packages.
-
-<!-- **`yarn pkg [package] <cmd>`**: Run a command on the specific package you're
-working on. You can run `build`, `test`, `lint` commands. -->
-
-#### Package Aliasing and Yarn Workspace
-
-Since we're using lerna monorepo + yarn workspaces by default, this enables us
-to run commands within component packages directly from the root.
-
-Each component is named this way: `@reservemee/[component]`. Let's say we want to
-build the button component. Here's how to do it:
-
-```bash
-yarn workspace @reservemee/button build
-
-# or
-
-lerna run build --scope @reservemee/button
-```
-
-**Shortcut:** To make this shorter and more convenient, we've added an alias for
-each component in the root `package.json`. Now you can simply do:
-
-```bash
-# to build
-yarn pkg tabs build
-
-# to test
-yarn pkg tabs test
-yarn pkg tabs test --watch
-
-# to lint
-yarn pkg tabs lint
-```
-
-This alias is particularly useful when you're working on a specific component
-and want to avoid running the command for all components.
-
-### Documentation
-
-The documentation site is built with Next.js. If you'd like to contribute to the
-docs, simply run `yarn build`, and `yarn docs:dev`
-
-
-## Think you found a bug?
-
-Please conform to the issue template and provide a clear path to reproduction
-with a code example. The best way to show a bug is by sending a CodeSandbox
-link.
-
-## Proposing new or changed API?
-
-Please provide thoughtful comments and some sample API code. Proposals that
-don't line up with our roadmap or don't have a thoughtful explanation will be
-closed.
-
-## Making a Pull Request?
-
-Pull requests need only the :+1: of two or more collaborators to be merged; when
-the PR author is a collaborator, that counts as one.
-
-### Commit Convention
-
-Before you create a Pull Request, please check whether your commits comply with
-the commit conventions used in this repository.
-
-When you create a commit we kindly ask you to follow the convention
-`category(scope or module): message` in your commit message while using one of
-the following categories:
-
-- `feat / feature`: all changes that introduce completely new code or new
-  features
-- `fix`: changes that fix a bug (ideally you will additionally reference an
-  issue if present)
-- `refactor`: any code related change that is not a fix nor a feature
-- `docs`: changing existing or creating new documentation (i.e. README, docs for
-  usage of a lib or cli usage)
-- `build`: all changes regarding the build of the software, changes to
-  dependencies or the addition of new dependencies
-- `test`: all changes regarding tests (adding new tests or changing existing
-  ones)
-- `ci`: all changes regarding the configuration of continuous integration (i.e.
-  github actions, ci system)
-- `chore`: all changes to the repository that do not fit into any of the above
-  categories
-
-If you are interested in the detailed specification you can visit
-https://www.conventionalcommits.org/ or check out the
-[Angular Commit Message Guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines).
-
-### Steps to PR
-
-1. Fork of the reservemee repository and clone your fork
-
-2. Create a new branch out of the `develop` branch. We follow the convention
-   `[type/scope]`. For example `fix/accordion-hook` or `docs/menu-typo`. `type`
-   can be either `docs`, `fix`, `feat`, `build`, or any other conventional
-   commit type. `scope` is just a short id that describes the scope of work.
-
-3. Make and commit your changes following the
-   [commit convention](https://github.com/reservemee/reservemee/blob/develop/CONTRIBUTING.md#commit-convention).
-   As you develop, you can run `yarn pkg <module> build` and
-   `yarn pkg <module> test` to make sure everything works as expected. Please
-   note that you might have to run `yarn boot` first in order to build all
-   dependencies.
-
-4. Run `yarn changeset` to create a detailed description of your changes. This
-   will be used to generate a changelog when we publish an update.
-   [Learn more about Changeset](https://github.com/atlassian/changesets/tree/master/packages/cli).
-   Please note that you might have to run `git fetch origin master:master`
-   (where origin will be your fork on GitHub) before `yarn changeset` works.
-
-> If you made minor changes like CI config, prettier, etc, you can run
-> `yarn changeset add --empty` to generate an empty changeset file to document
-> your changes.
-
-### Tests
-
-All commits that fix bugs or add features need a test.
-
-> **Dear Chakra team:** Please do not merge code without tests
-
-## Want to write a blog post or tutorial
-
-That would be amazing! Reach out to the core team here:
-https://discord.gg/dQHfcWF. We would love to support you any way we can.
-
-## Want to help improve the docs?
-
-By default, the GitHub REST API has an anonymous user rate limit. This can be
-hit during heavy local docs development if the server is frequently restarted.
-
-Creating a GitHub token and storing it as the `GITHUB_TOKEN` environment
-variable allows the user to avoid the limit.
-
-Visit
-https://github.com/settings/tokens/new?description=Chakra+website+development to
-create a new personal access token. After creating the token, be sure to copy
-the token string to your clipboard.
-
-You'll then run the following command in the terminal that you'll start the docs
-from:
-
-```sh
-export GITHUB_TOKEN=<PASTE YOUR TOKEN HERE>
-```
+## References
+This document was adapted from the open-source contribution guidelines for [Facebook's Draft](https://github.com/facebook/draft-js/blob/a9316a723f9e918afde44dea68b5f9f39b7d9b00/CONTRIBUTING.md)
 
 ## License
 
