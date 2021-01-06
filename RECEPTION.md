@@ -16,7 +16,7 @@ requests, which includes adding labels and milestones, opening and closing
 issues, and more.
 
 Effective use of this responsibility is an essential part of the process that
-maintains Chakra's growth.
+maintains ReserveMee's growth.
 
 # 🥇 Why is reception important?
 
@@ -35,16 +35,16 @@ are some of the most important tasks we have as an organization.
 The reception team plays a huge part in this. By being the direct face of the
 organization in managing issues and pull requests, team members have a unique
 opportunity to make our users feel welcome and respected, and to demonstrate to
-them that we're working our hardest to make Chakra the best it can be.
+them that we're working our hardest to make ReserveMee the best it can be.
 
 ## ⏱ Time management
 
 None of us is getting paid to work on this project and we all have busy lives
-outside of Chakra, so contributor time is one of the most important resources we
+outside of ReserveMee, so contributor time is one of the most important resources we
 have available to us.
 
 As a growing project with an ever-larger number of users,
-[Chakra receives a large volume of issues and pull requests each week](https://github.com/chakra-ui/chakra-ui/pulse).
+[ReserveMee receives a large volume of issues and pull requests each week](https://github.com/ReserveMee-ui/ReserveMee-ui/pulse).
 Each of these needs to be addressed in some way, and addressing them takes time.
 Given enough issues and pull requests, a contributor could dedicate all of their
 time to managing these alone. Trust me, I know from experience.
@@ -70,7 +70,7 @@ accomplished in less time.
 
 ## 🌐 Building a web of knowledge
 
-Chakra is a large project with lots of moving parts. It can be hard for us as
+ReserveMee is a large project with lots of moving parts. It can be hard for us as
 members of the organization to keep up with everything going on, so imagine how
 it must feel to be a user new to the project or unfamiliar with how we work.
 
@@ -122,7 +122,7 @@ reception team members should be doing.
 
 - if the feature already exists, point the user to the relevant docs
 - make sure the user has explained the request well enough that a maintainer can
-  determine if it is something we'd like to add to Chakra
+  determine if it is something we'd like to add to ReserveMee
 - if it makes sense, ask the user to provide examples of the API they imagine
   for the feature and/or examples of how the feature would be used
 
