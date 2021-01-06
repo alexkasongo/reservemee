@@ -17,8 +17,6 @@
         "@nuxtjs/vuetify": "^1.11.2",
         "@splidejs/vue-splide": "^0.3.5",
         "axios": "^0.20.0",
-        "bootstrap": "^4.5.0",
-        "bootstrap-vue": "^2.15.0",
         "firebase": "^7.21.1",
         "firebase-admin": "^9.4.1",
         "firebase-functions": "^3.11.0",

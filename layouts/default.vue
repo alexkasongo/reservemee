@@ -35,6 +35,7 @@
                     ></v-app-bar-nav-icon>
                     <!-- open drawer end -->
 
+                    <!-- FIXME -->
                     <v-btn
                         v-if="user"
                         color="white"
@@ -43,7 +44,7 @@
                         text
                         x-large
                     >
-                        Bookme
+                        ReserveMee
                     </v-btn>
 
                     <v-spacer></v-spacer>
