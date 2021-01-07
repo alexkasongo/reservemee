@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://github.com/reservemee/reservemee">
+    <img src="https://github.com/reservemee/reservemee/static/reservemee.png?raw=true" alt="Reservemee logo" width="300" />
+  </a>
+</p>
+
 <h1 align="center">Multi-tenant SaaS boilerplate 🌱</h1>
 
 <br>
