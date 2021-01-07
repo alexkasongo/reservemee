@@ -58,7 +58,10 @@ module.exports = {
     /*
      ** Nuxt.js dev-modules
      */
-    buildModules: ['@nuxtjs/vuetify'],
+    buildModules: [
+        '@nuxtjs/vuetify',
+        '@nuxtjs/dotenv'
+    ],
     /*
      ** Nuxt.js modules
      */
