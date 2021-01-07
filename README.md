@@ -4,7 +4,7 @@
   </a>
 </p>
 
-<h1 align="center">Multi-tenant SaaS boilerplate 🌱</h1>
+<h1 align="center">Multi-tenant SaaS Scheduling and Management Nuxt.js boilerplate 🌱</h1>
 
 <br>
 
