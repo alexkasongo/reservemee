@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/reservemee/reservemee">
-    <img src="https://github.com/alexkasongo/reservemee/static/reservemee.png?raw=true" alt="Reservemee logo" width="300" />
+    <img src="https://i.imgur.com/K6N34GH.png?raw=true" alt="Reservemee logo" width="300" />
   </a>
 </p>
 
