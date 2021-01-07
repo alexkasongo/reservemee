@@ -15,7 +15,6 @@
     },
     "dependencies": {
         "@nuxtjs/axios": "^5.12.0",
-        "@nuxtjs/dotenv": "^1.4.1",
         "@nuxtjs/firebase": "^6.1.1",
         "@nuxtjs/ngrok": "^2.0.0",
         "@nuxtjs/pwa": "^3.0.2",
@@ -25,6 +24,7 @@
         "firebase": "^7.21.1",
         "firebase-admin": "^9.4.1",
         "firebase-functions": "^3.11.0",
+        "fs": "^0.0.1-security",
         "nuxt": "^2.14.0",
         "vee-validate": "^3.4.5",
         "vue-sweetalert2": "^3.0.8",
