@@ -10,10 +10,10 @@ sustainable without proper financial backing.
 
 You can get regular insider updates and become an Insider from as little as 5
 USD / mo by sponsoring the lead maintainer,
-[Alex Kasongo via Patreon](https://patreon.com/alexkasongo). You'll get
+[Alex Kasongo via Patreon](https://www.patreon.com/alexkasongo). You'll get
 regular updates with all the news, blogs, content, and early access to features.
 
-[Become a Backer today](https://patreon.com/alexkasongo)
+[Become a Backer today](https://www.patreon.com/alexkasongo)
 
 ## Individual backers (Patreon / GitHub)
 
