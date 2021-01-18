@@ -18,9 +18,7 @@
 
 - Ease of Styling: ReserveMee ships with Vuetify. Vuetify is a Vue UI Library with beautifully handcrafted Material Components. No design skills required — everything you need to create amazing applications is at your fingertips.
   [Learn more](https://vuetifyjs.com/en/)
-- Flexible & composable: ReserveMee is built using Nuxtjs and Firebase for easy scalability.
-- Accessible. ReserveMee follows the WAI-ARIA guidelines specifications
-  and have the right `aria-*` attributes.
+- Flexible & scalable: ReserveMee is built using Nuxtjs and Firebase for easy scalability.
 - Dark Mode 😍: ReserveMee ships with dark mode out the box.
 
 ## Support ReverveMee 💖
