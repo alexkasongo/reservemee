@@ -25,7 +25,7 @@
             </div>
             <v-btn
                 v-if="messages.length > 0"
-                @click="$router.push('/inbox/admin')"
+                @click="$router.push('/settings')"
                 class="teal darken-1"
                 block
                 dark

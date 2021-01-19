@@ -1,6 +1,6 @@
 <template>
     <div class="inbox container">
-        <!-- Alert -->
+        <!-- Alert start-->
         <div v-if="!filteredUserData.storeOwnerImage">
             <v-alert
                 style="cursor: pointer"

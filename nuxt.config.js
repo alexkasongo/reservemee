@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     /*
      ** Nuxt rendering mode
      ** See https://nuxtjs.org/api/configuration-mode
@@ -58,7 +58,10 @@ export default {
     /*
      ** Nuxt.js dev-modules
      */
-    buildModules: ['@nuxtjs/vuetify'],
+    buildModules: [
+        '@nuxtjs/vuetify',
+        '@nuxtjs/dotenv'
+    ],
     /*
      ** Nuxt.js modules
      */
@@ -89,5 +92,18 @@ export default {
      */
     build: {
         transpile: ["vee-validate/dist/rules"],
+        extractCss: true,
+    babel: {
+            presets: ({ isServer }) => [
+                [
+                    '@nuxt/babel-preset-app',
+                    {
+                        targets: isServer
+                        ? { node: '10.21.0' }
+                        : { browsers: ['defaults'] },
+                    },
+                ],
+            ],
+        },
     }
 };
