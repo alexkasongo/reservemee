@@ -93,7 +93,9 @@ export const actions = {
                     db.collection('roles')
                         .doc(data.uid)
                         .set({
-                            role: data
+                            uid: data.uid,
+                            role: data.role,
+                            email: data.email
                         })
                         .then(() => {
                             this.$swal({
@@ -236,14 +238,12 @@ export const actions = {
                     if (!doc.exists) {
                         console.log('No such document!');
                     } else {
-                        const data = doc.data().role;
-                        console.log('Document data:', doc.data());
-                        if (data.role.customer === true) {
-                            console.log(`🍎 customer`, data.role);
+                        const data = doc.data();
+                        console.log('Document data:', data);
+                        if (data.role.customer) {
                             this.$router.push('/store');
                         }
-                        if (data.role.admin === true) {
-                            console.log(`🌦 customer`);
+                        if (data.role.admin) {
                             this.$router.push('/dashboard');
                         }
                     }
