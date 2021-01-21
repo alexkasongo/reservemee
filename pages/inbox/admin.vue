@@ -36,7 +36,7 @@
                                         :key="i"
                                     >
                                         <v-list-item-avatar
-                                        size="25"
+                                            size="25"
                                             @click="onChange(messenger)"
                                         >
                                             <v-img
@@ -67,7 +67,8 @@
                     <v-container fluid class="fill-height">
                         <v-row class="settings__right-row">
                             <v-col>
-                                <v-card elevation="0"
+                                <v-card
+                                    elevation="0"
                                     height="100%"
                                     class="container inbox__right-card mx-auto"
                                 >
@@ -297,10 +298,8 @@ export default {
             // Log the viewport width into the console
             let logWidth = () => {
                 if (viewportWidth > 640) {
-                    // console.log('Wide viewport');
                     this.mini = false;
                 } else {
-                    // console.log('Small viewport');
                     this.mini = true;
                 }
             };

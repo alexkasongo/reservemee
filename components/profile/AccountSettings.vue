@@ -40,7 +40,8 @@ export default {
             loggedInUser: [],
             currentUser: {
                 name: []
-            }
+            },
+            error: null
         };
     },
     computed: {
@@ -94,8 +95,7 @@ export default {
                     user.delete()
                         .then(function () {})
                         .catch(function (error) {
-                            // FIXME
-                            console.log(`_id.vue - 989 - 🥶`, error);
+                            this.error = error;
                         });
                     this.signout;
                 }
@@ -137,5 +137,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

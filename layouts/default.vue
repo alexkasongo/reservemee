@@ -362,27 +362,7 @@ import { db } from '@/plugins/firebase';
 import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
-    head: {
-        script: [
-            { src: 'https://code.jquery.com/jquery-3.3.1.slim.min.js' },
-            {
-                src:
-                    'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'
-            },
-            {
-                src:
-                    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'
-            }
-        ],
-        link: [
-            {
-                rel: 'stylesheet',
-                type: 'text/css',
-                href:
-                    'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
-            }
-        ]
-    },
+    head: {},
     data() {
         return {
             user: '',

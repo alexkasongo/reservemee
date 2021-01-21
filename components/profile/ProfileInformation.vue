@@ -119,7 +119,6 @@ export default {
                 name: this.profileForm.name,
                 userId: this.user.uid
             };
-            // console.log(`ProfileInformation.vue - 125 - 🍎`, payload);
             // store image as binary in database
             this.updateUserProfile(payload);
         },

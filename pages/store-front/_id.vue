@@ -412,12 +412,8 @@ export default {
                 // this.categoryNames.push('all');
             }
         });
-
-        // load categories
-        console.log(`_id.vue - 414 - 🍎`, this.categoryNames);
     }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

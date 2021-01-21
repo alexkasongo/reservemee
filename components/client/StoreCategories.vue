@@ -181,7 +181,8 @@ export default {
             { text: 'Store 5', image: 'https://via.placeholder.com/150' },
             { text: 'Store 6', image: 'https://via.placeholder.com/150' }
         ],
-        fav: false
+        fav: false,
+        error: null
     }),
     computed: {
         user() {
@@ -258,11 +259,10 @@ export default {
             })
             .catch((error) => {
                 // FIXME
-                console.log(`🙈`, error);
+                this.error = error;
             });
     }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

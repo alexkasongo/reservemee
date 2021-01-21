@@ -331,10 +331,8 @@ export default {
             // Log the viewport width into the console
             let logWidth = () => {
                 if (viewportWidth > 640) {
-                    // console.log('Wide viewport');
                     this.mini = false;
                 } else {
-                    // console.log('Small viewport');
                     this.mini = true;
                 }
             };
@@ -397,7 +395,6 @@ export default {
                 } else {
                     this.messages = data;
                 }
-                console.log(`playground.vue - 400 - 🛍`, this.messages);
             });
         },
         //NOTE  this is adding new reply
@@ -465,7 +462,6 @@ export default {
                     .then((tokenResult) => {
                         if (tokenResult) {
                             this.role = tokenResult.claims;
-                            // console.log(this.validatedItems);
                             this.items = this.validatedItems;
                         }
                     });

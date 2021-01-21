@@ -155,10 +155,8 @@ export default {
             // Log the viewport width into the console
             let logWidth = () => {
                 if (viewportWidth > 640) {
-                    // console.log('Wide viewport');
                     this.mini = false;
                 } else {
-                    // console.log('Small viewport');
                     this.mini = true;
                 }
             };
@@ -189,7 +187,6 @@ export default {
                 //     .then((tokenResult) => {
                 //         if (tokenResult) {
                 //             this.role = tokenResult.claims;
-                //             console.log(this.validatedItems);
                 //             this.items = this.validatedItems;
                 //         }
                 //     });

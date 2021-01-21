@@ -1190,8 +1190,7 @@ export default {
                     user.delete()
                         .then(function () {})
                         .catch(function (error) {
-                            // FIXME
-                            console.log(`_id.vue - 989 - 🥶`, error);
+                            this.errors = error;
                         });
                     this.signout;
                 }
