@@ -39,6 +39,7 @@
             <div class="form-group">
                 <!-- <label for="fullName">Full Name</label> -->
                 <v-text-field
+                    required
                     outlined
                     label="Full Name"
                     type="text"
