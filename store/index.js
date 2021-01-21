@@ -129,52 +129,78 @@ export const actions = {
                         role: user.role,
                         email: user.email
                     };
-                    const setAdmin = firebase
-                        .functions()
-                        .httpsCallable('setAdmin');
-                    setAdmin(data)
-                        .then((result) => {
-                            if (result) {
-                                response.user.updateProfile({
-                                    displayName: user.name
-                                });
-                                this.$swal({
-                                    toast: true,
-                                    position: 'top-end',
-                                    icon: 'success',
-                                    title:
-                                        'Account created. Go ahead and signin.',
-                                    showConfirmButton: true,
-                                    timer: 60000
-                                });
-                                commit('loaders/SET_LOADING', false, {
-                                    root: true
-                                });
-                            } else {
-                                this.$swal({
-                                    toast: true,
-                                    position: 'top-end',
-                                    icon: 'fail',
-                                    title:
-                                        'Account failed to create. Try again.',
-                                    showConfirmButton: true,
-                                    timer: 60000
-                                });
-                            }
+                    // use firebase cloud function
+
+                    // const setAdmin = firebase
+                    //     .functions()
+                    //     .httpsCallable('setAdmin');
+                    // setAdmin(data)
+                    //     .then((result) => {
+                    //         if (result) {
+                    //             response.user.updateProfile({
+                    //                 displayName: user.name
+                    //             });
+                    //             this.$swal({
+                    //                 toast: true,
+                    //                 position: 'top-end',
+                    //                 icon: 'success',
+                    //                 title:
+                    //                     'Account created. Go ahead and signin.',
+                    //                 showConfirmButton: true,
+                    //                 timer: 60000
+                    //             });
+                    //             commit('loaders/SET_LOADING', false, {
+                    //                 root: true
+                    //             });
+                    //         } else {
+                    //             this.$swal({
+                    //                 toast: true,
+                    //                 position: 'top-end',
+                    //                 icon: 'fail',
+                    //                 title:
+                    //                     'Account failed to create. Try again.',
+                    //                 showConfirmButton: true,
+                    //                 timer: 60000
+                    //             });
+                    //         }
+                    //     })
+                    //     .then(() => {
+                    //         firebase
+                    //             .auth()
+                    //             .signOut()
+                    //             .then(() => {
+                    //                 dispatch('removeUserData');
+                    //             })
+                    //             .then(() => {
+                    //                 this.$router.push('/signin');
+                    //                 window.localStorage.removeItem('email');
+                    //                 window.localStorage.removeItem('vuex');
+                    //             });
+                    //     });
+
+                    // use firebase cloud function end
+
+                    // no firebase cloud function
+                    db.collection('roles')
+                        .doc(data.uid)
+                        .set({
+                            uid: data.uid,
+                            role: data.role,
+                            email: data.email
                         })
                         .then(() => {
-                            firebase
-                                .auth()
-                                .signOut()
-                                .then(() => {
-                                    dispatch('removeUserData');
-                                })
-                                .then(() => {
-                                    this.$router.push('/signin');
-                                    window.localStorage.removeItem('email');
-                                    window.localStorage.removeItem('vuex');
-                                });
+                            this.$swal({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Event added successfully.',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
                         });
+                    commit('loaders/SET_LOADING', false, { root: true });
+                    this.$router.push('/dashboard');
+                    // no firebase cloud function - end
                 }
             })
             .catch((error) => {
