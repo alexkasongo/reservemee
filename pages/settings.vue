@@ -90,11 +90,12 @@
 <script>
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import { db } from '@/plugins/firebase';
 
 export default {
     data: () => ({
         user: [],
-        role: [],
+        role: null,
         drawer: null,
         items: null,
         mini: false,
@@ -105,6 +106,12 @@ export default {
         onLinkClick(item) {
             this.selected = item.text;
         }
+        // async getUserRole(id) {
+        //     // get logged in user role
+        //     const userRole = await db.collection('roles').doc(id).get();
+        //     this.role = userRole.data().role;
+        //     // get logged in user role - end
+        // }
     },
     computed: {
         validatedItems() {
@@ -172,22 +179,31 @@ export default {
         }
     },
     mounted() {
-        firebase.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {
                 // User is signed in.
                 // check user status
-                firebase
-                    .auth()
-                    .currentUser.getIdTokenResult()
-                    .then((tokenResult) => {
-                        if (tokenResult) {
-                            this.role = tokenResult.claims;
-                            console.log(this.validatedItems);
-                            this.items = this.validatedItems;
-                        }
-                    });
+                // firebase
+                //     .auth()
+                //     .currentUser.getIdTokenResult()
+                //     .then((tokenResult) => {
+                //         if (tokenResult) {
+                //             this.role = tokenResult.claims;
+                //             console.log(this.validatedItems);
+                //             this.items = this.validatedItems;
+                //         }
+                //     });
 
                 this.user = user;
+
+                // get logged in user role
+                const userRole = await db
+                    .collection('roles')
+                    .doc(user.uid)
+                    .get();
+                this.role = userRole.data().role;
+                console.log(`settings.vue - 205 - 💋`, this.role);
+                // get logged in user role - end
             }
         });
 
