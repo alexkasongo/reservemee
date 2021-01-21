@@ -200,9 +200,13 @@ export default {
                 const userRole = await db
                     .collection('roles')
                     .doc(user.uid)
-                    .get();
-                this.role = userRole.data().role;
-                console.log(`settings.vue - 205 - 💋`, this.role);
+                    .get()
+                    .then((res) => {
+                        this.role = res.data().role;
+                        this.items = this.validatedItems;
+                        console.log(`settings.vue - 205 - 🥎`, res.data().role);
+                    });
+
                 // get logged in user role - end
             }
         });
