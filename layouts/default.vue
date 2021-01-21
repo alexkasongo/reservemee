@@ -571,7 +571,9 @@ export default {
                 this.user = user;
                 console.log(`default.vue - 563 - 🌎`, user);
 
+                // get logged in user role
                 this.getUserRole();
+                // get logged in user role - end
 
                 const userDetails = {
                     name: user.displayName,
