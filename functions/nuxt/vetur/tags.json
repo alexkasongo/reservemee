@@ -89,12 +89,6 @@
   "LazyStoreCategories": {
     "description": "Auto imported from components/client/StoreCategories.vue"
   },
-  "DefaultManageServices": {
-    "description": "Auto imported from components/default/DefaultManageServices.vue"
-  },
-  "LazyDefaultManageServices": {
-    "description": "Auto imported from components/default/DefaultManageServices.vue"
-  },
   "BusinessInfo": {
     "description": "Auto imported from components/dashboard/BusinessInfo.vue"
   },
@@ -142,6 +136,12 @@
   },
   "LazyUpcomingEvents": {
     "description": "Auto imported from components/dashboard/UpcomingEvents.vue"
+  },
+  "DefaultManageServices": {
+    "description": "Auto imported from components/default/DefaultManageServices.vue"
+  },
+  "LazyDefaultManageServices": {
+    "description": "Auto imported from components/default/DefaultManageServices.vue"
   },
   "AccountSettings": {
     "description": "Auto imported from components/profile/AccountSettings.vue"
