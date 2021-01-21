@@ -357,6 +357,7 @@
 <script>
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import { db } from '@/plugins/firebase';
 
 import { mapState, mapGetters, mapActions } from 'vuex';
 
@@ -542,6 +543,15 @@ export default {
                     id: id
                 }
             });
+        },
+        async getUserRole() {
+            // get logged in user role
+            const userRole = await db
+                .collection('roles')
+                .doc(this.user.uid)
+                .get();
+            this.role = userRole.data().role;
+            // get logged in user role - end
         }
     },
     mounted() {
@@ -549,16 +559,19 @@ export default {
             if (user) {
                 // User is signed in.
                 // check user status
-                firebase
-                    .auth()
-                    .currentUser.getIdTokenResult()
-                    .then((tokenResult) => {
-                        if (tokenResult) {
-                            this.role = tokenResult.claims;
-                        }
-                    });
+                // firebase
+                //     .auth()
+                //     .currentUser.getIdTokenResult()
+                //     .then((tokenResult) => {
+                //         if (tokenResult) {
+                //             this.role = tokenResult.claims;
+                //         }
+                //     });
 
                 this.user = user;
+                console.log(`default.vue - 563 - 🌎`, user);
+
+                this.getUserRole();
 
                 const userDetails = {
                     name: user.displayName,
