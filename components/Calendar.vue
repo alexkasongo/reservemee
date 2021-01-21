@@ -2,21 +2,26 @@
     <div>
         <v-sheet height="64">
             <v-toolbar flat>
-                <v-btn
+                <!-- <v-btn
                     class="mr-4"
                     color="teal darker-1"
                     @click.stop="dialog = true"
                     dark
                 >
                     New Event
+                </v-btn> -->
+                <v-btn outlined color="grey darken-2" @click="setToday">
+                    Today
                 </v-btn>
                 <v-btn
-                    outlined
-                    class="mr-4"
-                    color="grey darken-2"
-                    @click="setToday"
+                    class="mx-2"
+                    fab
+                    dark
+                    color="teal darker-1"
+                    @click.stop="dialog = true"
+                    small
                 >
-                    Today
+                    <v-icon dark> mdi-plus </v-icon>
                 </v-btn>
                 <v-btn fab text small color="grey darken-2" @click="prev">
                     <v-icon small> mdi-chevron-left </v-icon>
