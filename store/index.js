@@ -233,12 +233,20 @@ export const actions = {
                     const uid = response.user.uid;
                     const role = db.collection('roles').doc(uid);
                     const doc = await role.get();
-                    console.log(`index.js - 236 - 🥶`, doc.data());
-                    // if (!doc.exists) {
-                    //     console.log('No such document!');
-                    // } else {
-                    //     console.log('Document data:', doc.data());
-                    // }
+                    if (!doc.exists) {
+                        console.log('No such document!');
+                    } else {
+                        const data = doc.data().role;
+                        console.log('Document data:', doc.data());
+                        if (data.role.customer === true) {
+                            console.log(`🍎 customer`, data.role);
+                            this.$router.push('/store');
+                        }
+                        if (data.role.admin === true) {
+                            console.log(`🌦 customer`);
+                            this.$router.push('/dashboard');
+                        }
+                    }
                 }
 
                 // if (response) {
