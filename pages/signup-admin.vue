@@ -6,7 +6,7 @@
         <div class="signup">
             <div class="signup__left"></div>
             <div class="signup__right">
-                <div class="col-6">
+                <div class="signin__right-card">
                     <div class="h1">Admin Signup</div>
                     <validation-observer ref="observer" v-slot="{ invalid }">
                         <form @submit.prevent="onSubmit">
@@ -161,19 +161,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.signup {
-    display: flex;
-    height: 100vh;
-    &__left {
-        width: 35%;
-        background-color: white;
-    }
-    &__right {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 65%;
-    }
-}
+// .signup {
+//     display: flex;
+//     height: 100vh;
+//     &__left {
+//         width: 35%;
+//         background-color: white;
+//     }
+//     &__right {
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         width: 65%;
+//     }
+// }
 </style>
-
