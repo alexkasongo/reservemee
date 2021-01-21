@@ -13,6 +13,7 @@ export { default as SideBar } from '../../components/client/SideBar.vue'
 export { default as SideBarAd } from '../../components/client/SideBarAd.vue'
 export { default as StoreBanner } from '../../components/client/StoreBanner.vue'
 export { default as StoreCategories } from '../../components/client/StoreCategories.vue'
+export { default as DefaultManageServices } from '../../components/default/DefaultManageServices.vue'
 export { default as BusinessInfo } from '../../components/dashboard/BusinessInfo.vue'
 export { default as CategoryCheck } from '../../components/dashboard/CategoryCheck.vue'
 export { default as EmailVerified } from '../../components/dashboard/EmailVerified.vue'
@@ -21,7 +22,6 @@ export { default as ManageServices } from '../../components/dashboard/ManageServ
 export { default as Scheduling } from '../../components/dashboard/Scheduling.vue'
 export { default as StoreSummary } from '../../components/dashboard/StoreSummary.vue'
 export { default as UpcomingEvents } from '../../components/dashboard/UpcomingEvents.vue'
-export { default as DefaultManageServices } from '../../components/default/DefaultManageServices.vue'
 export { default as AccountSettings } from '../../components/profile/AccountSettings.vue'
 export { default as Billing } from '../../components/profile/Billing.vue'
 export { default as Notifications } from '../../components/profile/Notifications.vue'
@@ -44,6 +44,7 @@ export const LazySideBar = import('../../components/client/SideBar.vue' /* webpa
 export const LazySideBarAd = import('../../components/client/SideBarAd.vue' /* webpackChunkName: "components/client/SideBarAd" */).then(c => c.default || c)
 export const LazyStoreBanner = import('../../components/client/StoreBanner.vue' /* webpackChunkName: "components/client/StoreBanner" */).then(c => c.default || c)
 export const LazyStoreCategories = import('../../components/client/StoreCategories.vue' /* webpackChunkName: "components/client/StoreCategories" */).then(c => c.default || c)
+export const LazyDefaultManageServices = import('../../components/default/DefaultManageServices.vue' /* webpackChunkName: "components/default/DefaultManageServices" */).then(c => c.default || c)
 export const LazyBusinessInfo = import('../../components/dashboard/BusinessInfo.vue' /* webpackChunkName: "components/dashboard/BusinessInfo" */).then(c => c.default || c)
 export const LazyCategoryCheck = import('../../components/dashboard/CategoryCheck.vue' /* webpackChunkName: "components/dashboard/CategoryCheck" */).then(c => c.default || c)
 export const LazyEmailVerified = import('../../components/dashboard/EmailVerified.vue' /* webpackChunkName: "components/dashboard/EmailVerified" */).then(c => c.default || c)
@@ -52,7 +53,6 @@ export const LazyManageServices = import('../../components/dashboard/ManageServi
 export const LazyScheduling = import('../../components/dashboard/Scheduling.vue' /* webpackChunkName: "components/dashboard/Scheduling" */).then(c => c.default || c)
 export const LazyStoreSummary = import('../../components/dashboard/StoreSummary.vue' /* webpackChunkName: "components/dashboard/StoreSummary" */).then(c => c.default || c)
 export const LazyUpcomingEvents = import('../../components/dashboard/UpcomingEvents.vue' /* webpackChunkName: "components/dashboard/UpcomingEvents" */).then(c => c.default || c)
-export const LazyDefaultManageServices = import('../../components/default/DefaultManageServices.vue' /* webpackChunkName: "components/default/DefaultManageServices" */).then(c => c.default || c)
 export const LazyAccountSettings = import('../../components/profile/AccountSettings.vue' /* webpackChunkName: "components/profile/AccountSettings" */).then(c => c.default || c)
 export const LazyBilling = import('../../components/profile/Billing.vue' /* webpackChunkName: "components/profile/Billing" */).then(c => c.default || c)
 export const LazyNotifications = import('../../components/profile/Notifications.vue' /* webpackChunkName: "components/profile/Notifications" */).then(c => c.default || c)

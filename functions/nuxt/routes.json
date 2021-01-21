@@ -3,161 +3,138 @@
     "name": "dashboard",
     "path": "/dashboard",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/dashboard.vue",
-    "chunkName": "pages/dashboard",
-    "_name": "_07cafb8e"
+    "chunkName": "pages/dashboard"
   },
   {
     "name": "password-reset",
     "path": "/password-reset",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/password-reset.vue",
-    "chunkName": "pages/password-reset",
-    "_name": "_1f090c93"
+    "chunkName": "pages/password-reset"
   },
   {
     "name": "settings",
     "path": "/settings",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/settings.vue",
-    "chunkName": "pages/settings",
-    "_name": "_6bb44899"
+    "chunkName": "pages/settings"
   },
   {
     "name": "signin",
     "path": "/signin",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/signin.vue",
-    "chunkName": "pages/signin",
-    "_name": "_5b806418"
+    "chunkName": "pages/signin"
   },
   {
     "name": "signup",
     "path": "/signup",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/signup.vue",
-    "chunkName": "pages/signup",
-    "_name": "_7016ba8e"
+    "chunkName": "pages/signup"
   },
   {
     "name": "signup-admin",
     "path": "/signup-admin",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/signup-admin.vue",
-    "chunkName": "pages/signup-admin",
-    "_name": "_f9fddf60"
+    "chunkName": "pages/signup-admin"
   },
   {
     "name": "store",
     "path": "/store",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/store.vue",
-    "chunkName": "pages/store",
-    "_name": "_778ec74a"
+    "chunkName": "pages/store"
   },
   {
     "name": "verification",
     "path": "/verification",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/verification.vue",
-    "chunkName": "pages/verification",
-    "_name": "_fa6670de"
+    "chunkName": "pages/verification"
   },
   {
     "name": "inbox-admin",
     "path": "/inbox/admin",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/inbox/admin.vue",
-    "chunkName": "pages/inbox/admin",
-    "_name": "_24dea600"
+    "chunkName": "pages/inbox/admin"
   },
   {
     "name": "playground-landing",
     "path": "/playground/landing",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/playground/landing.vue",
-    "chunkName": "pages/playground/landing",
-    "_name": "_9b3d4e8e"
+    "chunkName": "pages/playground/landing"
   },
   {
     "name": "playground-playground",
     "path": "/playground/playground",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/playground/playground.vue",
-    "chunkName": "pages/playground/playground",
-    "_name": "_2cde9709"
+    "chunkName": "pages/playground/playground"
   },
   {
     "name": "service-bookings",
     "path": "/service/bookings",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/service/bookings.vue",
-    "chunkName": "pages/service/bookings",
-    "_name": "_898cb16c"
+    "chunkName": "pages/service/bookings"
   },
   {
     "name": "service-create-category",
     "path": "/service/create-category",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/service/create-category.vue",
-    "chunkName": "pages/service/create-category",
-    "_name": "_5f79e84f"
+    "chunkName": "pages/service/create-category"
   },
   {
     "name": "service-create-service",
     "path": "/service/create-service",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/service/create-service.vue",
-    "chunkName": "pages/service/create-service",
-    "_name": "_346a93f4"
+    "chunkName": "pages/service/create-service"
   },
   {
     "name": "appointment-id",
     "path": "/appointment/:id?",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/appointment/_id.vue",
-    "chunkName": "pages/appointment/_id",
-    "_name": "_b8e69078"
+    "chunkName": "pages/appointment/_id"
   },
   {
     "name": "customer-id",
     "path": "/customer/:id?",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/customer/_id.vue",
-    "chunkName": "pages/customer/_id",
-    "_name": "_7ab50b02"
+    "chunkName": "pages/customer/_id"
   },
   {
     "name": "inbox-id",
     "path": "/inbox/:id?",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/inbox/_id.vue",
-    "chunkName": "pages/inbox/_id",
-    "_name": "_2b9ff92b"
+    "chunkName": "pages/inbox/_id"
   },
   {
     "name": "profile-id",
     "path": "/profile/:id?",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/profile/_id.vue",
-    "chunkName": "pages/profile/_id",
-    "_name": "_5f26fcce"
+    "chunkName": "pages/profile/_id"
   },
   {
     "name": "service-id",
     "path": "/service/:id?",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/service/_id.vue",
-    "chunkName": "pages/service/_id",
-    "_name": "_b6f7244c"
+    "chunkName": "pages/service/_id"
   },
   {
     "name": "store-front-id",
     "path": "/store-front/:id?",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/store-front/_id.vue",
-    "chunkName": "pages/store-front/_id",
-    "_name": "_a94c473c"
+    "chunkName": "pages/store-front/_id"
   },
   {
     "name": "update-category-id",
     "path": "/update-category/:id?",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/update-category/_id.vue",
-    "chunkName": "pages/update-category/_id",
-    "_name": "_c4dd3cb2"
+    "chunkName": "pages/update-category/_id"
   },
   {
     "name": "update-service-id",
     "path": "/update-service/:id?",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/update-service/_id.vue",
-    "chunkName": "pages/update-service/_id",
-    "_name": "_ded57a5c"
+    "chunkName": "pages/update-service/_id"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_2f3d6bcc"
+    "chunkName": "pages/index"
   }
 ]

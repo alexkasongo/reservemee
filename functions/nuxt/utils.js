@@ -150,7 +150,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: '/',
-      env: {}
+      env: {"API_KEY":"AIzaSyAjtsjs0bT6R9BxvypR1hq1dB1Gq7314GY","AUTH_DOMAIN":"bookme-7de5a.firebaseapp.com","DATABASE_URL":"https://bookme-7de5a.firebaseio.com","PROJECT_ID":"bookme-7de5a","STORAGE_BUCKET":"bookme-7de5a.appspot.com","MESSAGING_SENDER_ID":"712900995493","APP_ID":"1:712900995493:web:dec7f1a097c48a8709a04c","MEASUREMENT_ID":"G-WT6J1JBQ2B","NGROK_AUTH":"aleko:qwerty"}
     }
     // Only set once
     if (!process.static && context.req) {
