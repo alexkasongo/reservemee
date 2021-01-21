@@ -3,6 +3,7 @@ import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/storage';
 import 'firebase/functions';
+import { db } from '@/plugins/firebase';
 
 export const state = () => ({
     // USER ACCOUNTS START
@@ -14,9 +15,8 @@ export const state = () => ({
     // LOADING & ERRORS
     signupError: '',
     // loading: false,
-    alert: false,
+    alert: false
     // LOADING & ERRORS END
-
 });
 
 export const getters = {
@@ -29,7 +29,7 @@ export const getters = {
     // LOADING & ERRORS
     signupError: (state) => state.signupError,
     // loading: (state) => state.loading,
-    alert: (state) => state.alert,
+    alert: (state) => state.alert
     // LOADING & ERRORS END
 };
 
@@ -43,6 +43,7 @@ export const actions = {
     },
     signup({ commit }, user) {
         commit('loaders/SET_LOADING', true, { root: true });
+        console.log(`index.js - 46 - 🍎`, user);
         firebase
             .auth()
             .createUserWithEmailAndPassword(user.email, user.password)
@@ -50,46 +51,69 @@ export const actions = {
                 if (response) {
                     const data = {
                         uid: response.user.uid,
-                        role: user.role, email: user.email
+                        role: user.role,
+                        email: user.email
                     };
-                    const setAdmin = firebase.functions().httpsCallable("addUserRole");
-                    setAdmin(data)
-                        .then((result) => {
-                            commit('loaders/SET_LOADING', true, { root: true });
-                            if (result) {
-                                response.user
-                                    .updateProfile({
-                                        displayName: user.name
-                                    })
-                                this.$swal({
-                                    toast: true,
-                                    position: 'top-end',
-                                    icon: 'success',
-                                    title: 'Account created. Go ahead and signin.',
-                                    showConfirmButton: true,
-                                    timer: 60000
-                                });
-                                commit('loaders/SET_LOADING', false, { root: true });
-                                this.$router.push('/store');
-                            } else {
-                                this.$swal({
-                                    toast: true,
-                                    position: 'top-end',
-                                    icon: 'fail',
-                                    title: 'Account failed to create. Try again.',
-                                    showConfirmButton: true,
-                                    timer: 60000
-                                });
-                            }
+                    // call firebase cloud function - start
+                    // const setAdmin = firebase
+                    //     .functions()
+                    //     .httpsCallable('addUserRole');
+                    // // setAdmin(data)
+                    //     .then((result) => {
+                    //         commit('loaders/SET_LOADING', true, { root: true });
+                    //         if (result) {
+                    //             response.user
+                    //                 .updateProfile({
+                    //                     displayName: user.name
+                    //                 })
+                    //             this.$swal({
+                    //                 toast: true,
+                    //                 position: 'top-end',
+                    //                 icon: 'success',
+                    //                 title: 'Account created. Go ahead and signin.',
+                    //                 showConfirmButton: true,
+                    //                 timer: 60000
+                    //             });
+                    //             commit('loaders/SET_LOADING', false, { root: true });
+                    //             this.$router.push('/store');
+                    //         } else {
+                    //             this.$swal({
+                    //                 toast: true,
+                    //                 position: 'top-end',
+                    //                 icon: 'fail',
+                    //                 title: 'Account failed to create. Try again.',
+                    //                 showConfirmButton: true,
+                    //                 timer: 60000
+                    //             });
+                    //         }
+                    //     })
+                    // call firebase cloud function - end
+
+                    // add user role to firestore without cloud function - start
+                    db.collection('roles')
+                        .doc(data.uid)
+                        .set({
+                            role: data
                         })
+                        .then(() => {
+                            this.$swal({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Event added successfully.',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                        });
+                    commit('loaders/SET_LOADING', false, { root: true });
+                    this.$router.push('/store');
+                    // add user role to firestore without cloud function - end
                 }
             })
             .catch((error) => {
                 commit('ERRORS', error);
                 commit('loaders/SET_LOADING', false, { root: true });
             });
-
-
     },
     async signupAdmin({ commit, dispatch }, user) {
         commit('loaders/SET_LOADING', true, { root: true });
@@ -100,32 +124,37 @@ export const actions = {
                 if (response) {
                     const data = {
                         uid: response.user.uid,
-                        role: user.role, email: user.email
+                        role: user.role,
+                        email: user.email
                     };
-                    const setAdmin = firebase.functions().httpsCallable("setAdmin");
+                    const setAdmin = firebase
+                        .functions()
+                        .httpsCallable('setAdmin');
                     setAdmin(data)
                         .then((result) => {
-
                             if (result) {
-                                response.user
-                                    .updateProfile({
-                                        displayName: user.name
-                                    })
+                                response.user.updateProfile({
+                                    displayName: user.name
+                                });
                                 this.$swal({
                                     toast: true,
                                     position: 'top-end',
                                     icon: 'success',
-                                    title: 'Account created. Go ahead and signin.',
+                                    title:
+                                        'Account created. Go ahead and signin.',
                                     showConfirmButton: true,
                                     timer: 60000
                                 });
-                                commit('loaders/SET_LOADING', false, { root: true });
+                                commit('loaders/SET_LOADING', false, {
+                                    root: true
+                                });
                             } else {
                                 this.$swal({
                                     toast: true,
                                     position: 'top-end',
                                     icon: 'fail',
-                                    title: 'Account failed to create. Try again.',
+                                    title:
+                                        'Account failed to create. Try again.',
                                     showConfirmButton: true,
                                     timer: 60000
                                 });
@@ -136,15 +165,14 @@ export const actions = {
                                 .auth()
                                 .signOut()
                                 .then(() => {
-                                    dispatch('removeUserData')
+                                    dispatch('removeUserData');
                                 })
                                 .then(() => {
                                     this.$router.push('/signin');
                                     window.localStorage.removeItem('email');
                                     window.localStorage.removeItem('vuex');
-                                })
-                        })
-
+                                });
+                        });
                 }
             })
             .catch((error) => {
@@ -180,7 +208,7 @@ export const actions = {
                             .signOut()
                             .then(() => {
                                 // remove persistent state data
-                                dispatch('removeUserData')
+                                dispatch('removeUserData');
                                 this.$router.push('/signin');
                             });
                     }
@@ -197,52 +225,65 @@ export const actions = {
         await firebase
             .auth()
             .signInWithEmailAndPassword(user.email, user.password)
-            .then((response) => {
+            .then(async (response) => {
                 commit('LOGGEDIN_USER', response.user);
 
                 if (response) {
-                    firebase
-                        .auth()
-                        .currentUser.getIdTokenResult()
-                        .then((tokenResult) => {
-                            if (tokenResult) {
-                                this.role = tokenResult.claims;
-                                if (tokenResult.claims.admin) {
-                                    this.$router.push('/dashboard');
-                                }
-                                if (tokenResult.claims.customer) {
-                                    this.$router.push('/store');
-                                }
-                            }
-                        });
+                    console.log(`index.js - 230 - 🔥`, response.user.uid);
+                    const uid = response.user.uid;
+                    const role = db.collection('roles').doc(uid);
+                    const doc = await role.get();
+                    console.log(`index.js - 236 - 🥶`, doc.data());
+                    // if (!doc.exists) {
+                    //     console.log('No such document!');
+                    // } else {
+                    //     console.log('Document data:', doc.data());
+                    // }
                 }
+
+                // if (response) {
+                //     firebase
+                //         .auth()
+                //         .currentUser.getIdTokenResult()
+                //         .then((tokenResult) => {
+                //             if (tokenResult) {
+                //                 this.role = tokenResult.claims;
+                //                 if (tokenResult.claims.admin) {
+                //                     this.$router.push('/dashboard');
+                //                 }
+                //                 if (tokenResult.claims.customer) {
+                //                     this.$router.push('/store');
+                //                 }
+                //             }
+                //         });
+                // }
                 commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
                 // Handle Errors here.
                 commit('ERRORS', error);
                 commit('loaders/SET_LOADING', false, { root: true });
+                console.log(`index.js - 257 - 🐷`, error);
             });
     },
     async removeUserData({ commit }) {
         // calling on localStorage.removeItem() does not seem to removed the vuex persistent state
         // instead re initialize all state with empty Arrays, Objects, strings etc.
-        commit('LOADED_USER', '')
-        commit('LOADED_USER_ID', '')
-        commit('LOGGEDIN_USER', '')
+        commit('LOADED_USER', '');
+        commit('LOADED_USER_ID', '');
+        commit('LOGGEDIN_USER', '');
         // in dashboard module
-        commit('dashboard/SET_LOADED_SEVICES', [], { root: true })
-        commit('dashboard/USER_DATA', [], { root: true })
-        commit('dashboard/SET_LOADED_CATEGORIES', [], { root: true })
-        commit('dashboard/UPDATE_SERVICE_ID', [], { root: true })
-        commit('dashboard/SET_LOADED_STORE', [], { root: true })
+        commit('dashboard/SET_LOADED_SEVICES', [], { root: true });
+        commit('dashboard/USER_DATA', [], { root: true });
+        commit('dashboard/SET_LOADED_CATEGORIES', [], { root: true });
+        commit('dashboard/UPDATE_SERVICE_ID', [], { root: true });
+        commit('dashboard/SET_LOADED_STORE', [], { root: true });
         // In cart module
-        commit('cart/DEFAULT_CART', [], { root: true })
+        commit('cart/DEFAULT_CART', [], { root: true });
         // In chat
-        commit('chat/SET_LOADED_MESSAGES', [], { root: true })
-        commit('chat/SET_LOADED_REPLIES', [], { root: true })
-
-    },
+        commit('chat/SET_LOADED_MESSAGES', [], { root: true });
+        commit('chat/SET_LOADED_REPLIES', [], { root: true });
+    }
     // USER ACCOUNTS END
 };
 
@@ -254,13 +295,13 @@ export const mutations = {
     LOADED_USER_ID: (state, payload) => (state.userId = payload),
     VERIFICATION_SENT: (state, payload) => (state.verificationSent = payload),
     LOGGEDIN_USER: (state, user) => {
-        (state.user = JSON.parse(JSON.stringify(user)))
+        state.user = JSON.parse(JSON.stringify(user));
     },
     // USER ACCOUNTS END
 
     // LOADING START
     SET_ALERT(state, payload) {
         state.alert = payload;
-    },
+    }
     // LOADING END
 };
