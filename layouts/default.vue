@@ -437,19 +437,6 @@ export default {
             }
         }
     },
-    watch: {
-        $route() {
-            $('.navbar-collapse').collapse('hide');
-            this.loadServices(this.userId);
-            // great spot for debuggin
-        },
-        group() {
-            this.drawer = false;
-        },
-        groupRight() {
-            this.drawerRight = false;
-        }
-    },
     methods: {
         ...mapActions({
             loadUser: 'loadUser',
