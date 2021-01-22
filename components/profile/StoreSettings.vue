@@ -1,6 +1,6 @@
 <template>
     <!-- STORE SETTINGS -->
-    <div v-if="role.admin">
+    <div>
         <!-- <v-row>
             <v-col class="col-md-6"> -->
         <div class="display-1 mb-5">STORE SETTINGS</div>
@@ -251,13 +251,14 @@
 <script>
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import { db } from '@/plugins/firebase';
 
 import { mapGetters, mapActions, mapState } from 'vuex';
 
 export default {
     data() {
         return {
-            role: [],
+            role: null,
             user: [],
             alert: [],
             errors: [],
@@ -476,25 +477,41 @@ export default {
         // observer to keep track of the user's sign-in status.
         // on onUpdprofileForm user details are updated in firebase triggering observer
         // allowing for reactive user update experience
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user !== null) {
-                firebase
-                    .auth()
-                    .currentUser.getIdTokenResult()
-                    .then((tokenResult) => {
-                        if (tokenResult) {
-                            this.role = tokenResult.claims;
-                        }
-                    });
+        firebase.auth().onAuthStateChanged(async (user) => {
+            if (user) {
+                // firebase
+                //     .auth()
+                //     .currentUser.getIdTokenResult()
+                //     .then((tokenResult) => {
+                //         if (tokenResult) {
+                //             this.role = tokenResult.claims;
+                //         }
+                //     });
 
                 this.user = user;
                 this.profileForm.name = user.displayName;
-                // using the image store in the storeProfile database makes it easier to catch profile image error
+
+                // get logged in user role
+                // await db
+                //     .collection('roles')
+                //     .doc(user.uid)
+                //     .get()
+                //     .then((res) => {
+                //         this.role = res.data().role;
+                //     });
+                // this.role = {
+                //     admin: true
+                // };
+                // console.log(`StoreSettings.vue - 501 - 🍎`, this.role);
+
+                // get logged in user role - end
             }
         });
 
         const loadedUserData = this.userData;
         if (
+            // if there's no user data or the length is less than = to zero or loaded user
+            // is undefined
             !loadedUserData ||
             Object.keys(loadedUserData).length <= 0 ||
             loadedUserData === undefined

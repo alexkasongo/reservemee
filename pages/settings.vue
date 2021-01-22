@@ -104,6 +104,7 @@ export default {
     }),
     methods: {
         onLinkClick(item) {
+            console.log(`settings.vue - 107 - 🥎`, item);
             this.selected = item.text;
         }
         // async getUserRole(id) {
@@ -201,6 +202,7 @@ export default {
                     .then((res) => {
                         this.role = res.data().role;
                         this.items = this.validatedItems;
+                        console.log(`settings.vue - 205 - 🛍`, this.role);
                     });
 
                 // get logged in user role - end
