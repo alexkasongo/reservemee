@@ -1,11 +1,7 @@
 <template>
     <!-- CategoryCheck -->
     <div class="w-100">
-        <v-alert
-            style="cursor: pointer"
-            icon="mdi-alert-circle-outline"
-            text
-            type="info"
+        <v-alert icon="mdi-alert-circle-outline" text type="info"
             >You currently have no services. Start by creating a
             category.</v-alert
         >
