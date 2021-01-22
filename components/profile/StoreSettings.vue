@@ -479,32 +479,8 @@ export default {
         // allowing for reactive user update experience
         firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {
-                // firebase
-                //     .auth()
-                //     .currentUser.getIdTokenResult()
-                //     .then((tokenResult) => {
-                //         if (tokenResult) {
-                //             this.role = tokenResult.claims;
-                //         }
-                //     });
-
                 this.user = user;
                 this.profileForm.name = user.displayName;
-
-                // get logged in user role
-                // await db
-                //     .collection('roles')
-                //     .doc(user.uid)
-                //     .get()
-                //     .then((res) => {
-                //         this.role = res.data().role;
-                //     });
-                // this.role = {
-                //     admin: true
-                // };
-                // console.log(`StoreSettings.vue - 501 - 🍎`, this.role);
-
-                // get logged in user role - end
             }
         });
 
