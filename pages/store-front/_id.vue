@@ -365,7 +365,6 @@ export default {
             loadStoreServices: 'storeFront/loadStoreServices',
             addToCartAction: 'cart/addToCart'
         }),
-        async quickBooking() {},
         goToServiceInfo(id) {
             this.$router.push({
                 name: 'appointment-id',
