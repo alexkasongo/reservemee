@@ -89,8 +89,8 @@ export default {
     methods: {
         deleteItem(ev) {}
     },
-    mounted() {
-        this.orders = this.ordersState.order;
+    async mounted() {
+        this.orders = await this.ordersState.order;
 
         // WORK OUT CART TOTAL
         const orders = this.ordersState.order;

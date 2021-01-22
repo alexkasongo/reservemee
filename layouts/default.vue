@@ -132,7 +132,7 @@
                                 v-bind="attrs"
                                 v-on="on"
                                 icon
-                                @click.stop="drawerRight = !drawerRight"
+                                @click.stop="openCart"
                             >
                                 <v-badge
                                     :content="orders"
@@ -450,6 +450,9 @@ export default {
             removeUserData: 'removeUserData',
             orders: null
         }),
+        openCart() {
+            this.drawerRight = !this.drawerRight;
+        },
         clickToggleDrawer() {
             this.drawerDown = !this.drawerDown;
         },
