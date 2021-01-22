@@ -24,10 +24,9 @@ export const actions = {
             eventEnd: payload.event.end,
             eventName: payload.event.name,
             eventStart: payload.event.start,
-            eventTimed: payload.event.timed,
-        }
-        commit("SET_CART", order)
-        // commit('loaders/SET_SNACKBAR', true, { root: true });
+            eventTimed: payload.event.timed
+        };
+        commit('SET_CART', order);
         this.$swal({
             toast: true,
             position: 'top-start',
@@ -41,12 +40,12 @@ export const actions = {
 
 export const mutations = {
     DEFAULT_CART: (state, payload) => {
-        state.order = payload
+        state.order = payload;
     },
     SET_CART: (state, payload) => {
         // set state here
-        state.order.push(payload)
-    },
+        state.order.push(payload);
+    }
 
     // SET_CART: (state, payload) => state.order.push(payload),
 };
