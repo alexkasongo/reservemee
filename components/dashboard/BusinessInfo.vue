@@ -131,10 +131,7 @@
                                     !storeProfile.instagram &&
                                     !storeProfile.twitter
                                 "
-                                ><v-btn
-                                    @click="$router.push(`profile/${user.uid}`)"
-                                    icon
-                                >
+                                ><v-btn @click="$router.push('/settings')" icon>
                                     <v-icon>mdi-pencil</v-icon>
                                 </v-btn></a
                             >

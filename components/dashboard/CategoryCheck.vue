@@ -3,7 +3,6 @@
     <div class="w-100">
         <v-alert
             style="cursor: pointer"
-            @click="onCreateInitCat"
             icon="mdi-alert-circle-outline"
             text
             type="info"
@@ -23,11 +22,6 @@ export default {
         ...mapGetters({
             user: 'user'
         })
-    },
-    methods: {
-        onCreateInitCat() {
-            this.$router.push('/service/create-category');
-        }
     }
 };
 </script>
