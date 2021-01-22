@@ -84,13 +84,6 @@
     "_name": "_898cb16c"
   },
   {
-    "name": "service-create-category",
-    "path": "/service/create-category",
-    "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/service/create-category.vue",
-    "chunkName": "pages/service/create-category",
-    "_name": "_5f79e84f"
-  },
-  {
     "name": "service-create-service",
     "path": "/service/create-service",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/bookme/pages/service/create-service.vue",

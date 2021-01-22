@@ -15,7 +15,6 @@ const _24dea600 = () => interopDefault(import('../pages/inbox/admin.vue' /* webp
 const _9b3d4e8e = () => interopDefault(import('../pages/playground/landing.vue' /* webpackChunkName: "pages/playground/landing" */))
 const _2cde9709 = () => interopDefault(import('../pages/playground/playground.vue' /* webpackChunkName: "pages/playground/playground" */))
 const _898cb16c = () => interopDefault(import('../pages/service/bookings.vue' /* webpackChunkName: "pages/service/bookings" */))
-const _5f79e84f = () => interopDefault(import('../pages/service/create-category.vue' /* webpackChunkName: "pages/service/create-category" */))
 const _346a93f4 = () => interopDefault(import('../pages/service/create-service.vue' /* webpackChunkName: "pages/service/create-service" */))
 const _b8e69078 = () => interopDefault(import('../pages/appointment/_id.vue' /* webpackChunkName: "pages/appointment/_id" */))
 const _7ab50b02 = () => interopDefault(import('../pages/customer/_id.vue' /* webpackChunkName: "pages/customer/_id" */))
@@ -91,10 +90,6 @@ export const routerOptions = {
     path: "/service/bookings",
     component: _898cb16c,
     name: "service-bookings"
-  }, {
-    path: "/service/create-category",
-    component: _5f79e84f,
-    name: "service-create-category"
   }, {
     path: "/service/create-service",
     component: _346a93f4,
