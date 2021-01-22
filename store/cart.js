@@ -6,8 +6,7 @@ export const getters = {};
 
 export const actions = {
     async addToCart({ commit }, payload) {
-        // const order = await new Array(payload)
-
+        // create order object
         const order = await {
             id: payload.id,
             note: payload.note,
@@ -46,6 +45,4 @@ export const mutations = {
         // set state here
         state.order.push(payload);
     }
-
-    // SET_CART: (state, payload) => state.order.push(payload),
 };
