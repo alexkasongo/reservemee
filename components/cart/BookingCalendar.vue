@@ -858,6 +858,7 @@ export default {
             // this.currentlyEditing = ev.id;
             // onBookTime, take ev/event object and persist state to local storage
             this.setBookingState(ev);
+            this.selectedOpen = false;
         },
         showEvent({ nativeEvent, event }) {
             // parse date object and get date out
