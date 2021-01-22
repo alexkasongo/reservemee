@@ -85,9 +85,6 @@ export default {
         ...mapState({
             ordersState: 'cart'
         })
-        // orders() {
-        //     return this.ordersState.order;
-        // }
     },
     methods: {
         deleteItem(ev) {}
