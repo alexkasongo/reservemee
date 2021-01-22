@@ -104,15 +104,8 @@ export default {
     }),
     methods: {
         onLinkClick(item) {
-            console.log(`settings.vue - 107 - 🥎`, item);
             this.selected = item.text;
         }
-        // async getUserRole(id) {
-        //     // get logged in user role
-        //     const userRole = await db.collection('roles').doc(id).get();
-        //     this.role = userRole.data().role;
-        //     // get logged in user role - end
-        // }
     },
     computed: {
         validatedItems() {
