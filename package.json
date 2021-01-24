@@ -26,7 +26,7 @@
         "firebase-admin": "^9.4.1",
         "firebase-functions": "^3.11.0",
         "fs": "^0.0.1-security",
-        "nuxt": "^2.14.0",
+        "nuxt": "^2.14.12",
         "vee-validate": "^3.4.5",
         "vue-sweetalert2": "^3.0.8",
         "vue-textarea-autosize": "^1.1.1",
