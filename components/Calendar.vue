@@ -2,14 +2,6 @@
     <div>
         <v-sheet height="64">
             <v-toolbar flat>
-                <!-- <v-btn
-                    class="mr-4"
-                    color="teal darker-1"
-                    @click.stop="dialog = true"
-                    dark
-                >
-                    New Event
-                </v-btn> -->
                 <v-btn outlined color="grey darken-2" @click="setToday">
                     Today
                 </v-btn>
