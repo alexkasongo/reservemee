@@ -13,7 +13,11 @@
         "start": "nuxt start",
         "generate": "nuxt generate"
     },
-    "dependencies": {},
+    "dependencies": {
+        "@nuxtjs/pwa": "^3.0.2",
+        "core-js": "^3.6.5",
+        "nuxt": "^2.14.6"
+    },
     "devDependencies": {
         "eslint-config-prettier": "^6.11.0",
         "eslint-plugin-prettier": "^3.1.4",
@@ -24,7 +28,6 @@
         "@nuxtjs/dotenv": "^1.4.1",
         "@nuxtjs/firebase": "^6.1.1",
         "@nuxtjs/ngrok": "^2.0.0",
-        "@nuxtjs/pwa": "^3.0.2",
         "@nuxtjs/vuetify": "^1.11.2",
         "@splidejs/vue-splide": "^0.3.5",
         "axios": "^0.20.0",
@@ -32,7 +35,6 @@
         "firebase-admin": "^9.4.1",
         "firebase-functions": "^3.11.0",
         "fs": "^0.0.1-security",
-        "nuxt": "^2.14.12",
         "vee-validate": "^3.4.5",
         "vue-sweetalert2": "^3.0.8",
         "vue-textarea-autosize": "^1.1.1",
