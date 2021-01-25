@@ -89,18 +89,18 @@ export default {
      */
     build: {
         transpile: ['vee-validate/dist/rules'],
-        extractCss: true,
-        babel: {
-            presets: ({ isServer }) => [
-                [
-                    '@nuxt/babel-preset-app',
-                    {
-                        targets: isServer
-                            ? { node: '10.21.0' }
-                            : { browsers: ['defaults'] }
-                    }
-                ]
-            ]
-        }
+        extractCss: true
+        // babel: {
+        //     presets: ({ isServer }) => [
+        //         [
+        //             '@nuxt/babel-preset-app',
+        //             {
+        //                 targets: isServer
+        //                     ? { node: '10.21.0' }
+        //                     : { browsers: ['defaults'] }
+        //             }
+        //         ]
+        //     ]
+        // }
     }
 };
