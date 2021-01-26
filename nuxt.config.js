@@ -3,12 +3,12 @@ module.exports = {
      ** Nuxt rendering mode
      ** See https://nuxtjs.org/api/configuration-mode
      */
-    // mode: 'universal',
+    mode: 'universal',
     /*
      ** Nuxt target
      ** See https://nuxtjs.org/api/configuration-target
      */
-    target: 'sever',
+    target: 'server',
     /*
      ** Headers of the page
      ** See https://nuxtjs.org/api/configuration-head
@@ -70,9 +70,9 @@ module.exports = {
         // Doc: https://axios.nuxtjs.org/usage
         '@nuxtjs/axios',
         // sweet water notifications
-        'vue-sweetalert2/nuxt'
+        'vue-sweetalert2/nuxt',
         // expose localhost to the internet
-        // '@nuxtjs/ngrok'
+        '@nuxtjs/ngrok'
     ],
     /*
      ** Axios module configuration
@@ -88,19 +88,19 @@ module.exports = {
      ** See https://nuxtjs.org/api/configuration-build/
      */
     build: {
-        transpile: ['vee-validate/dist/rules']
-        // extractCss: true
-        // babel: {
-        //     presets: ({ isServer }) => [
-        //         [
-        //             '@nuxt/babel-preset-app',
-        //             {
-        //                 targets: isServer
-        //                     ? { node: '10.21.0' }
-        //                     : { browsers: ['defaults'] }
-        //             }
-        //         ]
-        //     ]
-        // }
+        transpile: ['vee-validate/dist/rules'],
+        extractCss: true,
+        babel: {
+            presets: ({ isServer }) => [
+                [
+                    '@nuxt/babel-preset-app',
+                    {
+                        targets: isServer
+                            ? { node: '10.21.0' }
+                            : { browsers: ['defaults'] }
+                    }
+                ]
+            ]
+        }
     }
 };
