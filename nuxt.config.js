@@ -70,9 +70,9 @@ module.exports = {
         // Doc: https://axios.nuxtjs.org/usage
         '@nuxtjs/axios',
         // sweet water notifications
-        'vue-sweetalert2/nuxt',
+        'vue-sweetalert2/nuxt'
         // expose localhost to the internet
-        '@nuxtjs/ngrok'
+        // '@nuxtjs/ngrok'
     ],
     /*
      ** Axios module configuration
