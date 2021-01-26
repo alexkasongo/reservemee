@@ -3,9 +3,9 @@
     "builds": [
         {
             "src": "nuxt.config.js",
-            "use": "@nuxtjs/now-builder",
+            "use": "@nuxtjs/vercel-builder",
             "config": {
-                "serverFiles": [".nuxt/dist/sitemap-routes.json"]
+                "serverFiles": ["package.json"]
             }
         }
     ],

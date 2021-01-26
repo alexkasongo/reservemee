@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     /*
      ** Nuxt rendering mode
      ** See https://nuxtjs.org/api/configuration-mode
@@ -41,6 +41,7 @@ export default {
         '~/plugins/firebase.js',
         '~plugins/filters.js',
         { src: '~/plugins/localStorage.js', ssr: false },
+        { src: '~/plugins/vueSplide.js', ssr: false },
         { src: '~/plugins/vee-validate.js', ssr: true }
     ],
     /*
@@ -88,18 +89,18 @@ export default {
      */
     build: {
         transpile: ['vee-validate/dist/rules'],
-        extractCss: true
-        // babel: {
-        //     presets: ({ isServer }) => [
-        //         [
-        //             '@nuxt/babel-preset-app',
-        //             {
-        //                 targets: isServer
-        //                     ? { node: '10.21.0' }
-        //                     : { browsers: ['defaults'] }
-        //             }
-        //         ]
-        //     ]
-        // }
+        extractCss: true,
+        babel: {
+            presets: ({ isServer }) => [
+                [
+                    '@nuxt/babel-preset-app',
+                    {
+                        targets: isServer
+                            ? { node: '10.21.0' }
+                            : { browsers: ['defaults'] }
+                    }
+                ]
+            ]
+        }
     }
 };
