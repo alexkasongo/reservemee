@@ -9,9 +9,10 @@
     "license": "MIT",
     "scripts": {
         "dev": "nuxt",
-        "build": "nuxt generate",
+        "build": "nuxt build",
         "start": "nuxt start",
-        "generate": "nuxt generate"
+        "generate": "nuxt generate",
+        "heroku-postbuild": "npm run build"
     },
     "dependencies": {},
     "devDependencies": {
