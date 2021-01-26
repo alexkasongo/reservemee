@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     /*
      ** Nuxt rendering mode
      ** See https://nuxtjs.org/api/configuration-mode
@@ -8,7 +8,7 @@ module.exports = {
      ** Nuxt target
      ** See https://nuxtjs.org/api/configuration-target
      */
-    target: 'server',
+    target: 'static',
     /*
      ** Headers of the page
      ** See https://nuxtjs.org/api/configuration-head
@@ -89,18 +89,18 @@ module.exports = {
      */
     build: {
         transpile: ['vee-validate/dist/rules'],
-        extractCss: true,
-        babel: {
-            presets: ({ isServer }) => [
-                [
-                    '@nuxt/babel-preset-app',
-                    {
-                        targets: isServer
-                            ? { node: '10.21.0' }
-                            : { browsers: ['defaults'] }
-                    }
-                ]
-            ]
-        }
+        extractCss: true
+        // babel: {
+        //     presets: ({ isServer }) => [
+        //         [
+        //             '@nuxt/babel-preset-app',
+        //             {
+        //                 targets: isServer
+        //                     ? { node: '10.21.0' }
+        //                     : { browsers: ['defaults'] }
+        //             }
+        //         ]
+        //     ]
+        // }
     }
 };
