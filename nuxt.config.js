@@ -3,7 +3,7 @@ module.exports = {
      ** Nuxt rendering mode
      ** See https://nuxtjs.org/api/configuration-mode
      */
-    mode: 'universal',
+    mode: 'spa',
     /*
      ** Nuxt target
      ** See https://nuxtjs.org/api/configuration-target
@@ -101,14 +101,6 @@ module.exports = {
                     }
                 ]
             ]
-        },
-        extend(config, { isDev, isClient, isServer }) {
-            if (isServer) {
-                config.externals = {
-                    '@firebase/app': 'commonjs @firebase/app',
-                    '@firebase/firestore': 'commonjs @firebase/firestore'
-                };
-            }
         }
     }
 };
