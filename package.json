@@ -11,8 +11,7 @@
         "dev": "nuxt",
         "build": "nuxt build",
         "start": "nuxt start",
-        "generate": "nuxt generate",
-        "heroku-postbuild": "npm run build"
+        "generate": "nuxt generate"
     },
     "dependencies": {},
     "devDependencies": {
