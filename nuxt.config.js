@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     /*
      ** Nuxt rendering mode
      ** See https://nuxtjs.org/api/configuration-mode
@@ -88,8 +88,8 @@ export default {
      ** See https://nuxtjs.org/api/configuration-build/
      */
     build: {
-        transpile: ['vee-validate/dist/rules'],
-        extractCss: true
+        transpile: ['vee-validate/dist/rules']
+        // extractCss: true
         // babel: {
         //     presets: ({ isServer }) => [
         //         [
