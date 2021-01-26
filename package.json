@@ -13,16 +13,11 @@
         "start": "nuxt start",
         "generate": "nuxt generate"
     },
-    "dependencies": {},
-    "devDependencies": {
-        "eslint-config-prettier": "^6.11.0",
-        "eslint-plugin-prettier": "^3.1.4",
-        "node-sass": "^4.14.1",
-        "prettier": "^2.0.5",
-        "sass-loader": "^10.0.2",
+    "dependencies": {
         "@nuxtjs/axios": "^5.12.0",
         "@nuxtjs/dotenv": "^1.4.1",
         "@nuxtjs/firebase": "^6.1.1",
+        "@nuxtjs/ngrok": "^2.0.0",
         "@nuxtjs/pwa": "^3.0.2",
         "@nuxtjs/vuetify": "^1.11.2",
         "@splidejs/vue-splide": "^0.3.5",
@@ -36,5 +31,12 @@
         "vue-sweetalert2": "^3.0.8",
         "vue-textarea-autosize": "^1.1.1",
         "vuex-persistedstate": "^3.1.0"
+    },
+    "devDependencies": {
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "node-sass": "^4.14.1",
+        "prettier": "^2.0.5",
+        "sass-loader": "^10.0.2"
     }
 }
