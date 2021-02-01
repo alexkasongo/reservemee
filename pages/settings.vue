@@ -176,7 +176,7 @@ export default {
                 this.user = user;
 
                 // get logged in user role
-                const userRole = await db
+                await db
                     .collection('roles')
                     .doc(user.uid)
                     .get()

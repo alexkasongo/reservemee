@@ -12,9 +12,10 @@
                         name="new-message"
                         placeholder="type in a message and press enter"
                         v-model="newMessage"
-                        class="mb-3"
                     ></v-textarea>
-                    <v-btn type="submit">Send Me</v-btn>
+                    <v-btn dark type="submit" class="teal darker-1"
+                        >Send Me</v-btn
+                    >
                 </form>
             </div>
             <!-- NEW MESSAGE END -->
@@ -132,18 +133,18 @@ export default {
         this.$store.dispatch('chat/loadReplies', this.user.uid);
         // NEW MESSAGE
 
-        firebase.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {
-                // User is signed in.
-                // check user status
-                firebase
-                    .auth()
-                    .currentUser.getIdTokenResult()
-                    .then((tokenResult) => {
-                        if (tokenResult) {
-                            this.role = tokenResult.claims;
-                        }
+                // get logged in user role
+                await db
+                    .collection('roles')
+                    .doc(user.uid)
+                    .get()
+                    .then((res) => {
+                        this.role = res.data().role;
                     });
+
+                // get logged in user role - end
             }
         });
     }

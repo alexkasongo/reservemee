@@ -2,7 +2,8 @@
     <div class="container margin">
         <div class="appointment">
             <div class="appointment__left">
-                <div class="shop-inf">
+                <!-- START: SHOP WORK HOURS-->
+                <!-- <div class="shop-inf">
                     <div class="shop-name">
                         <b
                             ><a href="#" class="text-capitalize"
@@ -32,10 +33,10 @@
                     <strong style="padding-top: 20px"
                         >Booking available until 7:00 PM today</strong
                     >
-                </div>
+                </div> -->
                 <!-- END: SHOP WORK HOURS-->
                 <div class="side-menu">
-                    <div class="side-menu-itm">
+                    <!-- <div class="side-menu-itm">
                         <p class="active">Staff</p>
                         <div
                             class="staff-selected"
@@ -83,7 +84,7 @@
                     </div>
                     <div class="side-menu-itm">
                         <p class="your-inf">Your info</p>
-                    </div>
+                    </div> -->
                     <div>
                         <h2 class="header-title">Messages</h2>
                         <!-- Messages -->
