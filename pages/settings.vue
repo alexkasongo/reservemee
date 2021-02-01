@@ -173,18 +173,6 @@ export default {
     mounted() {
         firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {
-                // User is signed in.
-                // check user status
-                // firebase
-                //     .auth()
-                //     .currentUser.getIdTokenResult()
-                //     .then((tokenResult) => {
-                //         if (tokenResult) {
-                //             this.role = tokenResult.claims;
-                //             this.items = this.validatedItems;
-                //         }
-                //     });
-
                 this.user = user;
 
                 // get logged in user role
