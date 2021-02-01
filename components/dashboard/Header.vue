@@ -188,16 +188,6 @@ export default {
                 this.user = user;
             }
         });
-    },
-    methods: {
-        // viewProfile(id) {
-        //     this.$router.push({
-        //         name: 'profile-id',
-        //         params: {
-        //             id: id
-        //         }
-        //     });
-        // }
     }
 };
 </script>

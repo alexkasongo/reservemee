@@ -42,8 +42,7 @@ export default {
             await firebase
                 .auth()
                 .signOut()
-                .then((result) => {
-                    // this.user = '';
+                .then(() => {
                     window.localStorage.removeItem('email');
                     window.localStorage.removeItem('vuex');
                 });

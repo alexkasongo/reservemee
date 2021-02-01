@@ -47,9 +47,8 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import NewMessage from '@/components/chat/NewMessage';
-import Modal from '@/components/chat/Modal.vue';
 
 export default {
     name: 'Chat',

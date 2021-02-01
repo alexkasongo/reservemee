@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import * as firebase from 'firebase/app';
 import { db } from '@/plugins/firebase';
 import 'firebase/database';
@@ -127,7 +127,6 @@ export default {
     mounted() {
         this.$store.dispatch('chat/loadMessages', this.user.uid);
 
-        // NEW MESSAGE
         // this.uis = this.currentUserId;
         this.$store.dispatch('chat/loadMessages', this.user.uid);
         this.$store.dispatch('chat/loadReplies', this.user.uid);
