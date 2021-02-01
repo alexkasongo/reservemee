@@ -20,8 +20,8 @@
         <div v-if="storesLoading">
             <p>Loading...</p>
         </div>
-        <div v-if="!storesLoading" class="categories__popular">
-            <div v-for="(store, id) in stores" :key="id">
+        <v-row v-if="!storesLoading" class="categories__popular">
+            <v-col v-for="(store, id) in stores" :key="id" class="col-md-6">
                 <v-card
                     @click="viewStore(store)"
                     outlined
@@ -70,8 +70,8 @@
                         </div>
                     </div>
                 </v-card>
-            </div>
-        </div>
+            </v-col>
+        </v-row>
     </div>
 </template>
 
