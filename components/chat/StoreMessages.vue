@@ -4,7 +4,7 @@
         <div class="mx-auto">
             <div
                 class="inbox-widget"
-                v-for="message in messages"
+                v-for="message in messages.slice(0, 3)"
                 :key="message.id"
             >
                 <div class="inbox-item">
