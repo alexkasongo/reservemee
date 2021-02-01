@@ -26,13 +26,6 @@
                     <v-divider dark class="my-4"></v-divider>
                     <v-list dense>
                         <template>
-                            <!-- <v-divider
-                                    v-if="item.divider"
-                                    :key="i"
-                                    dark
-                                    class="my-4"
-                                ></v-divider> -->
-
                             <v-list @click="onChange(messenger)" link nav>
                                 <v-list-item-group
                                     v-model="selectedItem"
@@ -117,8 +110,9 @@
                                             <v-list three-line>
                                                 <div>
                                                     <template
-                                                        v-for="(message,
-                                                        index) in messages"
+                                                        v-for="(
+                                                            message, index
+                                                        ) in messages"
                                                     >
                                                         <v-list-item
                                                             :key="index"
