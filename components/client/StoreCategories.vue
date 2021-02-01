@@ -24,46 +24,37 @@
             <v-col v-for="(store, id) in stores" :key="id" class="col-md-6">
                 <v-card
                     @click="viewStore(store)"
-                    outlined
-                    elevation="0"
-                    class="rounded-xl mb-3"
-                    style="width: 100%"
+                    class="rounded-xl"
                     :ripple="false"
                 >
                     <div
-                        class="services__left-card d-flex flex-no-wrap justify-space-between"
+                        class="categories__left-card d-flex flex-no-wrap justify-space-between"
                     >
-                        <div class="services__left-card-img-container">
+                        <div class="categories__left-card-img-container">
                             <img
-                                class="services__left-service-img"
+                                class="categories__left-service-img"
                                 :src="store.storeBanner"
                                 alt=""
                             />
                         </div>
-                        <div class="services__left-card-info">
+                        <div class="categories__left-card-info">
                             <v-card-title class="headline">{{
                                 store.storeName | capitalize
                             }}</v-card-title>
 
-                            <v-card-subtitle>{{
-                                store.storeBio | truncate(50, '...')
-                            }}</v-card-subtitle>
+                            <v-card-subtitle
+                                v-text="store.description"
+                            ></v-card-subtitle>
 
                             <v-card-text
-                                class="display-1 text--primary services__left-card-price"
+                                class="text--primary categories__left-card-price"
                             >
-                                <v-btn @click="viewStore(store)" elevation="0"
-                                    >Visit Store</v-btn
-                                >
+                                {{ store.storeBio | truncate(100, '...') }}
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
 
-                                <v-btn
-                                    :class="fav ? 'red--text' : ''"
-                                    icon
-                                    @click="fav = !fav"
-                                >
+                                <v-btn icon>
                                     <v-icon>mdi-heart</v-icon>
                                 </v-btn>
                             </v-card-actions>
