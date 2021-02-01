@@ -265,6 +265,7 @@
                 ref="calendar"
                 v-model="focus"
                 color="teal darker-1"
+                class="selected-date"
                 :events="events"
                 :event-color="getEventColor"
                 :type="type"
@@ -940,4 +941,4 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="scss" scoped></style>
