@@ -1,182 +1,182 @@
 {
   "Calendar": {
-    "description": "Auto imported from components/Calendar.vue"
+    "description": "Auto imported from /components/Calendar.vue"
   },
   "LazyCalendar": {
-    "description": "Auto imported from components/Calendar.vue"
+    "description": "Auto imported from /components/Calendar.vue"
   },
   "BookingCalendar": {
-    "description": "Auto imported from components/cart/BookingCalendar.vue"
+    "description": "Auto imported from /components/cart/BookingCalendar.vue"
   },
   "LazyBookingCalendar": {
-    "description": "Auto imported from components/cart/BookingCalendar.vue"
+    "description": "Auto imported from /components/cart/BookingCalendar.vue"
   },
   "Cart": {
-    "description": "Auto imported from components/cart/Cart.vue"
+    "description": "Auto imported from /components/cart/Cart.vue"
   },
   "LazyCart": {
-    "description": "Auto imported from components/cart/Cart.vue"
+    "description": "Auto imported from /components/cart/Cart.vue"
   },
   "QuickBook": {
-    "description": "Auto imported from components/cart/QuickBook.vue"
+    "description": "Auto imported from /components/cart/QuickBook.vue"
   },
   "LazyQuickBook": {
-    "description": "Auto imported from components/cart/QuickBook.vue"
+    "description": "Auto imported from /components/cart/QuickBook.vue"
   },
   "Chat": {
-    "description": "Auto imported from components/chat/Chat.vue"
+    "description": "Auto imported from /components/chat/Chat.vue"
   },
   "LazyChat": {
-    "description": "Auto imported from components/chat/Chat.vue"
+    "description": "Auto imported from /components/chat/Chat.vue"
   },
   "Messages": {
-    "description": "Auto imported from components/chat/Messages.vue"
+    "description": "Auto imported from /components/chat/Messages.vue"
   },
   "LazyMessages": {
-    "description": "Auto imported from components/chat/Messages.vue"
+    "description": "Auto imported from /components/chat/Messages.vue"
   },
   "NewMessage": {
-    "description": "Auto imported from components/chat/NewMessage.vue"
+    "description": "Auto imported from /components/chat/NewMessage.vue"
   },
   "LazyNewMessage": {
-    "description": "Auto imported from components/chat/NewMessage.vue"
+    "description": "Auto imported from /components/chat/NewMessage.vue"
   },
   "NewProfileMsg": {
-    "description": "Auto imported from components/chat/NewProfileMsg.vue"
+    "description": "Auto imported from /components/chat/NewProfileMsg.vue"
   },
   "LazyNewProfileMsg": {
-    "description": "Auto imported from components/chat/NewProfileMsg.vue"
+    "description": "Auto imported from /components/chat/NewProfileMsg.vue"
   },
   "StoreMessages": {
-    "description": "Auto imported from components/chat/StoreMessages.vue"
+    "description": "Auto imported from /components/chat/StoreMessages.vue"
   },
   "LazyStoreMessages": {
-    "description": "Auto imported from components/chat/StoreMessages.vue"
+    "description": "Auto imported from /components/chat/StoreMessages.vue"
   },
   "HorizontalCard": {
-    "description": "Auto imported from components/client/HorizontalCard.vue"
+    "description": "Auto imported from /components/client/HorizontalCard.vue"
   },
   "LazyHorizontalCard": {
-    "description": "Auto imported from components/client/HorizontalCard.vue"
+    "description": "Auto imported from /components/client/HorizontalCard.vue"
   },
   "Ratings": {
-    "description": "Auto imported from components/client/Ratings.vue"
+    "description": "Auto imported from /components/client/Ratings.vue"
   },
   "LazyRatings": {
-    "description": "Auto imported from components/client/Ratings.vue"
+    "description": "Auto imported from /components/client/Ratings.vue"
   },
   "SideBar": {
-    "description": "Auto imported from components/client/SideBar.vue"
+    "description": "Auto imported from /components/client/SideBar.vue"
   },
   "LazySideBar": {
-    "description": "Auto imported from components/client/SideBar.vue"
+    "description": "Auto imported from /components/client/SideBar.vue"
   },
   "SideBarAd": {
-    "description": "Auto imported from components/client/SideBarAd.vue"
+    "description": "Auto imported from /components/client/SideBarAd.vue"
   },
   "LazySideBarAd": {
-    "description": "Auto imported from components/client/SideBarAd.vue"
+    "description": "Auto imported from /components/client/SideBarAd.vue"
   },
   "StoreBanner": {
-    "description": "Auto imported from components/client/StoreBanner.vue"
+    "description": "Auto imported from /components/client/StoreBanner.vue"
   },
   "LazyStoreBanner": {
-    "description": "Auto imported from components/client/StoreBanner.vue"
+    "description": "Auto imported from /components/client/StoreBanner.vue"
   },
   "StoreCategories": {
-    "description": "Auto imported from components/client/StoreCategories.vue"
+    "description": "Auto imported from /components/client/StoreCategories.vue"
   },
   "LazyStoreCategories": {
-    "description": "Auto imported from components/client/StoreCategories.vue"
-  },
-  "DefaultManageServices": {
-    "description": "Auto imported from components/default/DefaultManageServices.vue"
-  },
-  "LazyDefaultManageServices": {
-    "description": "Auto imported from components/default/DefaultManageServices.vue"
+    "description": "Auto imported from /components/client/StoreCategories.vue"
   },
   "BusinessInfo": {
-    "description": "Auto imported from components/dashboard/BusinessInfo.vue"
+    "description": "Auto imported from /components/dashboard/BusinessInfo.vue"
   },
   "LazyBusinessInfo": {
-    "description": "Auto imported from components/dashboard/BusinessInfo.vue"
+    "description": "Auto imported from /components/dashboard/BusinessInfo.vue"
   },
   "CategoryCheck": {
-    "description": "Auto imported from components/dashboard/CategoryCheck.vue"
+    "description": "Auto imported from /components/dashboard/CategoryCheck.vue"
   },
   "LazyCategoryCheck": {
-    "description": "Auto imported from components/dashboard/CategoryCheck.vue"
+    "description": "Auto imported from /components/dashboard/CategoryCheck.vue"
   },
   "EmailVerified": {
-    "description": "Auto imported from components/dashboard/EmailVerified.vue"
+    "description": "Auto imported from /components/dashboard/EmailVerified.vue"
   },
   "LazyEmailVerified": {
-    "description": "Auto imported from components/dashboard/EmailVerified.vue"
+    "description": "Auto imported from /components/dashboard/EmailVerified.vue"
   },
   "Header": {
-    "description": "Auto imported from components/dashboard/Header.vue"
+    "description": "Auto imported from /components/dashboard/Header.vue"
   },
   "LazyHeader": {
-    "description": "Auto imported from components/dashboard/Header.vue"
+    "description": "Auto imported from /components/dashboard/Header.vue"
   },
   "ManageServices": {
-    "description": "Auto imported from components/dashboard/ManageServices.vue"
+    "description": "Auto imported from /components/dashboard/ManageServices.vue"
   },
   "LazyManageServices": {
-    "description": "Auto imported from components/dashboard/ManageServices.vue"
+    "description": "Auto imported from /components/dashboard/ManageServices.vue"
   },
   "Scheduling": {
-    "description": "Auto imported from components/dashboard/Scheduling.vue"
+    "description": "Auto imported from /components/dashboard/Scheduling.vue"
   },
   "LazyScheduling": {
-    "description": "Auto imported from components/dashboard/Scheduling.vue"
+    "description": "Auto imported from /components/dashboard/Scheduling.vue"
   },
   "StoreSummary": {
-    "description": "Auto imported from components/dashboard/StoreSummary.vue"
+    "description": "Auto imported from /components/dashboard/StoreSummary.vue"
   },
   "LazyStoreSummary": {
-    "description": "Auto imported from components/dashboard/StoreSummary.vue"
+    "description": "Auto imported from /components/dashboard/StoreSummary.vue"
   },
   "UpcomingEvents": {
-    "description": "Auto imported from components/dashboard/UpcomingEvents.vue"
+    "description": "Auto imported from /components/dashboard/UpcomingEvents.vue"
   },
   "LazyUpcomingEvents": {
-    "description": "Auto imported from components/dashboard/UpcomingEvents.vue"
+    "description": "Auto imported from /components/dashboard/UpcomingEvents.vue"
   },
   "AccountSettings": {
-    "description": "Auto imported from components/profile/AccountSettings.vue"
+    "description": "Auto imported from /components/profile/AccountSettings.vue"
   },
   "LazyAccountSettings": {
-    "description": "Auto imported from components/profile/AccountSettings.vue"
+    "description": "Auto imported from /components/profile/AccountSettings.vue"
   },
   "Billing": {
-    "description": "Auto imported from components/profile/Billing.vue"
+    "description": "Auto imported from /components/profile/Billing.vue"
   },
   "LazyBilling": {
-    "description": "Auto imported from components/profile/Billing.vue"
+    "description": "Auto imported from /components/profile/Billing.vue"
   },
   "Notifications": {
-    "description": "Auto imported from components/profile/Notifications.vue"
+    "description": "Auto imported from /components/profile/Notifications.vue"
   },
   "LazyNotifications": {
-    "description": "Auto imported from components/profile/Notifications.vue"
+    "description": "Auto imported from /components/profile/Notifications.vue"
   },
   "ProfileInformation": {
-    "description": "Auto imported from components/profile/ProfileInformation.vue"
+    "description": "Auto imported from /components/profile/ProfileInformation.vue"
   },
   "LazyProfileInformation": {
-    "description": "Auto imported from components/profile/ProfileInformation.vue"
+    "description": "Auto imported from /components/profile/ProfileInformation.vue"
   },
   "Security": {
-    "description": "Auto imported from components/profile/Security.vue"
+    "description": "Auto imported from /components/profile/Security.vue"
   },
   "LazySecurity": {
-    "description": "Auto imported from components/profile/Security.vue"
+    "description": "Auto imported from /components/profile/Security.vue"
   },
   "StoreSettings": {
-    "description": "Auto imported from components/profile/StoreSettings.vue"
+    "description": "Auto imported from /components/profile/StoreSettings.vue"
   },
   "LazyStoreSettings": {
-    "description": "Auto imported from components/profile/StoreSettings.vue"
+    "description": "Auto imported from /components/profile/StoreSettings.vue"
+  },
+  "DefaultManageServices": {
+    "description": "Auto imported from /components/default/DefaultManageServices.vue"
+  },
+  "LazyDefaultManageServices": {
+    "description": "Auto imported from /components/default/DefaultManageServices.vue"
   }
 }

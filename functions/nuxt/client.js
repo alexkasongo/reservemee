@@ -475,6 +475,7 @@ function setLayoutForNextPage (to) {
   if (typeof layout === 'function') {
     layout = layout(app.context)
   }
+
   this.setLayout(layout)
 }
 
@@ -495,6 +496,8 @@ function fixPrepatch (to, ___) {
   const instances = getMatchedComponentsInstances(to)
   const Components = getMatchedComponents(to)
 
+  let triggerScroll = false
+
   Vue.nextTick(() => {
     instances.forEach((instance, i) => {
       if (!instance || instance._isDestroyed) {
@@ -512,12 +515,17 @@ function fixPrepatch (to, ___) {
           Vue.set(instance.$data, key, newData[key])
         }
 
-        // Ensure to trigger scroll event after calling scrollBehavior
-        window.$nuxt.$nextTick(() => {
-          window.$nuxt.$emit('triggerScroll')
-        })
+        triggerScroll = true
       }
     })
+
+    if (triggerScroll) {
+      // Ensure to trigger scroll event after calling scrollBehavior
+      window.$nuxt.$nextTick(() => {
+        window.$nuxt.$emit('triggerScroll')
+      })
+    }
+
     checkForErrors(this)
   })
 }

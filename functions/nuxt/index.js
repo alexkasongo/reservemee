@@ -14,15 +14,15 @@ import { createStore } from './store.js'
 /* Plugins */
 
 import nuxt_plugin_plugin_63746d88 from 'nuxt_plugin_plugin_63746d88' // Source: ./components/plugin.js (mode: 'all')
-import nuxt_plugin_workbox_1ee5d224 from 'nuxt_plugin_workbox_1ee5d224' // Source: ./workbox.js (mode: 'client')
-import nuxt_plugin_nuxticons_090e5e36 from 'nuxt_plugin_nuxticons_090e5e36' // Source: ./nuxt-icons.js (mode: 'all')
 import nuxt_plugin_plugin_5c5c6432 from 'nuxt_plugin_plugin_5c5c6432' // Source: ./vuetify/plugin.js (mode: 'all')
 import nuxt_plugin_vuesweetalert2_2c3ed169 from 'nuxt_plugin_vuesweetalert2_2c3ed169' // Source: ./vue-sweetalert2.js (mode: 'client')
 import nuxt_plugin_axios_22beee52 from 'nuxt_plugin_axios_22beee52' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_workbox_1ee5d224 from 'nuxt_plugin_workbox_1ee5d224' // Source: ./workbox.js (mode: 'client')
+import nuxt_plugin_metaplugin_e3e0dffe from 'nuxt_plugin_metaplugin_e3e0dffe' // Source: ./pwa/meta.plugin.js (mode: 'all')
+import nuxt_plugin_iconplugin_da919516 from 'nuxt_plugin_iconplugin_da919516' // Source: ./pwa/icon.plugin.js (mode: 'all')
 import nuxt_plugin_firebase_34d6f55a from 'nuxt_plugin_firebase_34d6f55a' // Source: ../plugins/firebase.js (mode: 'all')
 import nuxt_plugin_filters_2b4f519a from 'nuxt_plugin_filters_2b4f519a' // Source: ../plugins/filters.js (mode: 'all')
 import nuxt_plugin_localStorage_830ec59e from 'nuxt_plugin_localStorage_830ec59e' // Source: ../plugins/localStorage.js (mode: 'client')
-import nuxt_plugin_vueSplide_2b031de8 from 'nuxt_plugin_vueSplide_2b031de8' // Source: ../plugins/vueSplide.js (mode: 'client')
 import nuxt_plugin_veevalidate_1a0c1998 from 'nuxt_plugin_veevalidate_1a0c1998' // Source: ../plugins/vee-validate.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -50,6 +50,13 @@ Vue.component('NChild', NuxtChild)
 // Component: <Nuxt>
 Vue.component(Nuxt.name, Nuxt)
 
+Object.defineProperty(Vue.prototype, '$nuxt', {
+  get() {
+    return this.$root.$options.$nuxt
+  },
+  configurable: true
+})
+
 Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n-head-ssr","tagIDKeyName":"hid"})
 
 const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
@@ -76,7 +83,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"reservemee","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""},{"hid":"mobile-web-app-capable","name":"mobile-web-app-capable","content":"yes"},{"hid":"apple-mobile-web-app-title","name":"apple-mobile-web-app-title","content":"reservemee"},{"hid":"theme-color","name":"theme-color","content":"black"},{"hid":"og:type","name":"og:type","property":"og:type","content":"website"},{"hid":"og:title","name":"og:title","property":"og:title","content":"reservemee"},{"hid":"og:site_name","name":"og:site_name","property":"og:site_name","content":"reservemee"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"},{"rel":"manifest","href":"\u002F_nuxt\u002Fmanifest.92df8532.json"},{"rel":"shortcut icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_64x64.40f8ab.png"},{"rel":"apple-touch-icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_512x512.40f8ab.png","sizes":"512x512"}],"style":[],"script":[],"htmlAttrs":{"lang":"en"}},
+    head: {"title":"reservemee","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"}],"style":[],"script":[]},
 
     store,
     router,
@@ -209,14 +216,6 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_plugin_63746d88(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_workbox_1ee5d224 === 'function') {
-    await nuxt_plugin_workbox_1ee5d224(app.context, inject)
-  }
-
-  if (typeof nuxt_plugin_nuxticons_090e5e36 === 'function') {
-    await nuxt_plugin_nuxticons_090e5e36(app.context, inject)
-  }
-
   if (typeof nuxt_plugin_plugin_5c5c6432 === 'function') {
     await nuxt_plugin_plugin_5c5c6432(app.context, inject)
   }
@@ -229,6 +228,18 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_axios_22beee52(app.context, inject)
   }
 
+  if (process.client && typeof nuxt_plugin_workbox_1ee5d224 === 'function') {
+    await nuxt_plugin_workbox_1ee5d224(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_metaplugin_e3e0dffe === 'function') {
+    await nuxt_plugin_metaplugin_e3e0dffe(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_iconplugin_da919516 === 'function') {
+    await nuxt_plugin_iconplugin_da919516(app.context, inject)
+  }
+
   if (typeof nuxt_plugin_firebase_34d6f55a === 'function') {
     await nuxt_plugin_firebase_34d6f55a(app.context, inject)
   }
@@ -239,10 +250,6 @@ async function createApp(ssrContext, config = {}) {
 
   if (process.client && typeof nuxt_plugin_localStorage_830ec59e === 'function') {
     await nuxt_plugin_localStorage_830ec59e(app.context, inject)
-  }
-
-  if (process.client && typeof nuxt_plugin_vueSplide_2b031de8 === 'function') {
-    await nuxt_plugin_vueSplide_2b031de8(app.context, inject)
   }
 
   if (typeof nuxt_plugin_veevalidate_1a0c1998 === 'function') {

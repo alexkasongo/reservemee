@@ -41,8 +41,7 @@ module.exports = {
         '~/plugins/firebase.js',
         '~plugins/filters.js',
         { src: '~/plugins/localStorage.js', ssr: false },
-        { src: '~/plugins/vueSplide.js', ssr: false },
-        { src: '~/plugins/vee-validate.js', ssr: true },
+        { src: '~/plugins/vee-validate.js', ssr: true }
     ],
     /*
      ** Router Settings
@@ -58,24 +57,17 @@ module.exports = {
     /*
      ** Nuxt.js dev-modules
      */
-    buildModules: [
-        '@nuxtjs/vuetify',
-        '@nuxtjs/dotenv'
-    ],
+    buildModules: ['@nuxtjs/vuetify', '@nuxtjs/dotenv'],
     /*
      ** Nuxt.js modules
      */
     modules: [
         // add pwa functionality
         '@nuxtjs/pwa',
-        // Doc: https://bootstrap-vue.js.org
-        // 'bootstrap-vue/nuxt',
         // Doc: https://axios.nuxtjs.org/usage
         '@nuxtjs/axios',
         // sweet water notifications
-        'vue-sweetalert2/nuxt',
-        // expose localhost to the internet
-        '@nuxtjs/ngrok',
+        'vue-sweetalert2/nuxt'
     ],
     /*
      ** Axios module configuration
@@ -91,19 +83,19 @@ module.exports = {
      ** See https://nuxtjs.org/api/configuration-build/
      */
     build: {
-        transpile: ["vee-validate/dist/rules"],
+        transpile: ['vee-validate/dist/rules'],
         extractCss: true,
-    babel: {
+        babel: {
             presets: ({ isServer }) => [
                 [
                     '@nuxt/babel-preset-app',
                     {
                         targets: isServer
-                        ? { node: '10.21.0' }
-                        : { browsers: ['defaults'] },
-                    },
-                ],
-            ],
-        },
+                            ? { node: '10.21.0' }
+                            : { browsers: ['defaults'] }
+                    }
+                ]
+            ]
+        }
     }
 };

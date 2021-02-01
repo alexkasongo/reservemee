@@ -12,7 +12,7 @@
       </p>
 
       <div class="logo">
-        <a href="https://nuxtjs.org" target="_blank" rel="noopener">Nuxt.js</a>
+        <a href="https://nuxtjs.org" target="_blank" rel="noopener">Nuxt</a>
       </div>
     </div>
   </div>
