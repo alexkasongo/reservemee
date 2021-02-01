@@ -47,7 +47,7 @@ module.exports = {
      ** Router Settings
      */
     router: {
-        middleware: ['authenticated']
+        // middleware: ['authenticated']
     },
     /*
      ** Auto import components
