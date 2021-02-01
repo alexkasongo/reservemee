@@ -3,7 +3,7 @@ module.exports = {
      ** Nuxt rendering mode
      ** See https://nuxtjs.org/api/configuration-mode
      */
-    mode: 'universal',
+    ssr: true,
     /*
      ** Nuxt target
      ** See https://nuxtjs.org/api/configuration-target
@@ -47,7 +47,7 @@ module.exports = {
      ** Router Settings
      */
     router: {
-        middleware: ['authenticated']
+        // middleware: ['authenticated']
     },
     /*
      ** Auto import components

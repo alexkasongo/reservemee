@@ -5,90 +5,6 @@
   "LazyCalendar": {
     "description": "Auto imported from /components/Calendar.vue"
   },
-  "BookingCalendar": {
-    "description": "Auto imported from /components/cart/BookingCalendar.vue"
-  },
-  "LazyBookingCalendar": {
-    "description": "Auto imported from /components/cart/BookingCalendar.vue"
-  },
-  "Cart": {
-    "description": "Auto imported from /components/cart/Cart.vue"
-  },
-  "LazyCart": {
-    "description": "Auto imported from /components/cart/Cart.vue"
-  },
-  "QuickBook": {
-    "description": "Auto imported from /components/cart/QuickBook.vue"
-  },
-  "LazyQuickBook": {
-    "description": "Auto imported from /components/cart/QuickBook.vue"
-  },
-  "Chat": {
-    "description": "Auto imported from /components/chat/Chat.vue"
-  },
-  "LazyChat": {
-    "description": "Auto imported from /components/chat/Chat.vue"
-  },
-  "Messages": {
-    "description": "Auto imported from /components/chat/Messages.vue"
-  },
-  "LazyMessages": {
-    "description": "Auto imported from /components/chat/Messages.vue"
-  },
-  "NewMessage": {
-    "description": "Auto imported from /components/chat/NewMessage.vue"
-  },
-  "LazyNewMessage": {
-    "description": "Auto imported from /components/chat/NewMessage.vue"
-  },
-  "NewProfileMsg": {
-    "description": "Auto imported from /components/chat/NewProfileMsg.vue"
-  },
-  "LazyNewProfileMsg": {
-    "description": "Auto imported from /components/chat/NewProfileMsg.vue"
-  },
-  "StoreMessages": {
-    "description": "Auto imported from /components/chat/StoreMessages.vue"
-  },
-  "LazyStoreMessages": {
-    "description": "Auto imported from /components/chat/StoreMessages.vue"
-  },
-  "HorizontalCard": {
-    "description": "Auto imported from /components/client/HorizontalCard.vue"
-  },
-  "LazyHorizontalCard": {
-    "description": "Auto imported from /components/client/HorizontalCard.vue"
-  },
-  "Ratings": {
-    "description": "Auto imported from /components/client/Ratings.vue"
-  },
-  "LazyRatings": {
-    "description": "Auto imported from /components/client/Ratings.vue"
-  },
-  "SideBar": {
-    "description": "Auto imported from /components/client/SideBar.vue"
-  },
-  "LazySideBar": {
-    "description": "Auto imported from /components/client/SideBar.vue"
-  },
-  "SideBarAd": {
-    "description": "Auto imported from /components/client/SideBarAd.vue"
-  },
-  "LazySideBarAd": {
-    "description": "Auto imported from /components/client/SideBarAd.vue"
-  },
-  "StoreBanner": {
-    "description": "Auto imported from /components/client/StoreBanner.vue"
-  },
-  "LazyStoreBanner": {
-    "description": "Auto imported from /components/client/StoreBanner.vue"
-  },
-  "StoreCategories": {
-    "description": "Auto imported from /components/client/StoreCategories.vue"
-  },
-  "LazyStoreCategories": {
-    "description": "Auto imported from /components/client/StoreCategories.vue"
-  },
   "BusinessInfo": {
     "description": "Auto imported from /components/dashboard/BusinessInfo.vue"
   },
@@ -137,6 +53,42 @@
   "LazyUpcomingEvents": {
     "description": "Auto imported from /components/dashboard/UpcomingEvents.vue"
   },
+  "HorizontalCard": {
+    "description": "Auto imported from /components/client/HorizontalCard.vue"
+  },
+  "LazyHorizontalCard": {
+    "description": "Auto imported from /components/client/HorizontalCard.vue"
+  },
+  "Ratings": {
+    "description": "Auto imported from /components/client/Ratings.vue"
+  },
+  "LazyRatings": {
+    "description": "Auto imported from /components/client/Ratings.vue"
+  },
+  "SideBar": {
+    "description": "Auto imported from /components/client/SideBar.vue"
+  },
+  "LazySideBar": {
+    "description": "Auto imported from /components/client/SideBar.vue"
+  },
+  "SideBarAd": {
+    "description": "Auto imported from /components/client/SideBarAd.vue"
+  },
+  "LazySideBarAd": {
+    "description": "Auto imported from /components/client/SideBarAd.vue"
+  },
+  "StoreBanner": {
+    "description": "Auto imported from /components/client/StoreBanner.vue"
+  },
+  "LazyStoreBanner": {
+    "description": "Auto imported from /components/client/StoreBanner.vue"
+  },
+  "StoreCategories": {
+    "description": "Auto imported from /components/client/StoreCategories.vue"
+  },
+  "LazyStoreCategories": {
+    "description": "Auto imported from /components/client/StoreCategories.vue"
+  },
   "AccountSettings": {
     "description": "Auto imported from /components/profile/AccountSettings.vue"
   },
@@ -178,5 +130,53 @@
   },
   "LazyDefaultManageServices": {
     "description": "Auto imported from /components/default/DefaultManageServices.vue"
+  },
+  "Chat": {
+    "description": "Auto imported from /components/chat/Chat.vue"
+  },
+  "LazyChat": {
+    "description": "Auto imported from /components/chat/Chat.vue"
+  },
+  "Messages": {
+    "description": "Auto imported from /components/chat/Messages.vue"
+  },
+  "LazyMessages": {
+    "description": "Auto imported from /components/chat/Messages.vue"
+  },
+  "NewMessage": {
+    "description": "Auto imported from /components/chat/NewMessage.vue"
+  },
+  "LazyNewMessage": {
+    "description": "Auto imported from /components/chat/NewMessage.vue"
+  },
+  "NewProfileMsg": {
+    "description": "Auto imported from /components/chat/NewProfileMsg.vue"
+  },
+  "LazyNewProfileMsg": {
+    "description": "Auto imported from /components/chat/NewProfileMsg.vue"
+  },
+  "StoreMessages": {
+    "description": "Auto imported from /components/chat/StoreMessages.vue"
+  },
+  "LazyStoreMessages": {
+    "description": "Auto imported from /components/chat/StoreMessages.vue"
+  },
+  "BookingCalendar": {
+    "description": "Auto imported from /components/cart/BookingCalendar.vue"
+  },
+  "LazyBookingCalendar": {
+    "description": "Auto imported from /components/cart/BookingCalendar.vue"
+  },
+  "Cart": {
+    "description": "Auto imported from /components/cart/Cart.vue"
+  },
+  "LazyCart": {
+    "description": "Auto imported from /components/cart/Cart.vue"
+  },
+  "QuickBook": {
+    "description": "Auto imported from /components/cart/QuickBook.vue"
+  },
+  "LazyQuickBook": {
+    "description": "Auto imported from /components/cart/QuickBook.vue"
   }
 }
