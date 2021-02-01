@@ -257,7 +257,6 @@ export const actions = {
                 commit('LOGGEDIN_USER', response.user);
 
                 if (response) {
-                    console.log(`index.js - 230 - 🔥`, response.user.uid);
                     const uid = response.user.uid;
                     const role = db.collection('roles').doc(uid);
                     const doc = await role.get();
