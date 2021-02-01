@@ -45,8 +45,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
-import { db } from '@/plugins/firebase';
+import { mapState, mapGetters } from 'vuex';
 import 'firebase/database';
 
 export default {
