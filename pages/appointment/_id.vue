@@ -1,6 +1,5 @@
 <template>
     <div class="container margin">
-        <!-- <h1>Welcome: {{ this.$route.params.id }}</h1> -->
         <div class="appointment">
             <div class="appointment__left">
                 <div class="shop-inf">
@@ -300,5 +299,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
