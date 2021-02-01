@@ -183,7 +183,6 @@ export default {
                     .then((res) => {
                         this.role = res.data().role;
                         this.items = this.validatedItems;
-                        console.log(`settings.vue - 205 - 🛍`, this.role);
                     });
 
                 // get logged in user role - end

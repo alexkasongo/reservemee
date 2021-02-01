@@ -926,7 +926,7 @@ export default {
             nativeEvent.stopPropagation();
         },
         updateRange({ start, end }) {
-            console.log(`Calendar.vue - 428 - 🥛`);
+            // console.log(`Calendar.vue - 428 - 🥛`);
         },
         // add these to numbers
         nth(d) {
