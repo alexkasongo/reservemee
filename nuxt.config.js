@@ -64,14 +64,10 @@ module.exports = {
     modules: [
         // add pwa functionality
         '@nuxtjs/pwa',
-        // Doc: https://bootstrap-vue.js.org
-        // 'bootstrap-vue/nuxt',
         // Doc: https://axios.nuxtjs.org/usage
         '@nuxtjs/axios',
         // sweet water notifications
         'vue-sweetalert2/nuxt'
-        // expose localhost to the internet
-        // '@nuxtjs/ngrok'
     ],
     /*
      ** Axios module configuration
