@@ -2,21 +2,6 @@
     <div class="settings">
         <v-app>
             <v-app>
-                <!-- <v-app-bar app clipped-left color="teal darker-1">
-                    <v-app-bar-nav-icon
-                        @click="drawer = !drawer"
-                    ></v-app-bar-nav-icon>
-                    <span class="title ml-3 mr-5">Google</span>
-                    <v-text-field
-                        solo-inverted
-                        flat
-                        hide-details
-                        label="Search"
-                    ></v-text-field>
-
-                    <v-spacer></v-spacer>
-                </v-app-bar> -->
-
                 <v-navigation-drawer
                     class="margin"
                     v-model="drawer"
