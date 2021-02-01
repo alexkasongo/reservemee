@@ -265,6 +265,7 @@
                 ref="calendar"
                 v-model="focus"
                 color="teal darker-1"
+                class="selected-date"
                 :events="events"
                 :event-color="getEventColor"
                 :type="type"
@@ -926,7 +927,7 @@ export default {
             nativeEvent.stopPropagation();
         },
         updateRange({ start, end }) {
-            console.log(`Calendar.vue - 428 - 🥛`);
+            // console.log(`Calendar.vue - 428 - 🥛`);
         },
         // add these to numbers
         nth(d) {
@@ -940,4 +941,4 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="scss" scoped></style>

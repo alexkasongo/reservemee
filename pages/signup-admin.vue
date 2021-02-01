@@ -160,19 +160,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-// .signup {
-//     display: flex;
-//     height: 100vh;
-//     &__left {
-//         width: 35%;
-//         background-color: white;
-//     }
-//     &__right {
-//         display: flex;
-//         justify-content: center;
-//         align-items: center;
-//         width: 65%;
-//     }
-// }
-</style>
+<style lang="scss" scoped></style>

@@ -229,8 +229,6 @@ export default {
         },
 
         deleteItem(item) {
-            // this.editedIndex = item.id;
-            // this.editedItem = Object.assign({}, item);
             this.item = item;
             this.dialogDelete = true;
         },

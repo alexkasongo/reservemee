@@ -20,137 +20,49 @@
         <div v-if="storesLoading">
             <p>Loading...</p>
         </div>
-        <div v-if="!storesLoading" class="categories__popular">
-            <div v-for="(store, id) in stores" :key="id">
-                <!-- <v-card
-                    outlined
-                    elevation="0"
-                    class="rounded-xl mb-3"
-                    style="width: 100%"
-                >
-                    <div class="row no-gutters">
-                        <div
-                            class="categories__store-card col-md-4"
-                            v-bind:style="{
-                                'background-image':
-                                    'url(' + store.storeBanner + ')'
-                            }"
-                        ></div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    {{ store.storeName | capitalize }}
-                                </h5>
-                                <p class="card-text">
-                                    {{ store.storeBio | truncate(50, '...') }}
-                                </p>
-
-                                <v-btn @click="viewStore(store)" elevation="0"
-                                    >Visit Store</v-btn
-                                >
-                            </div>
-                        </div>
-                    </div>
-                </v-card> -->
-
+        <v-row v-if="!storesLoading" class="categories__popular">
+            <v-col v-for="(store, id) in stores" :key="id" class="col-md-6">
                 <v-card
-                    outlined
-                    elevation="0"
-                    class="rounded-xl mb-3"
-                    style="width: 100%"
+                    @click="viewStore(store)"
+                    class="rounded-xl"
                     :ripple="false"
                 >
                     <div
-                        class="services__left-card d-flex flex-no-wrap justify-space-between"
+                        class="categories__left-card d-flex flex-no-wrap justify-space-between"
                     >
-                        <div class="services__left-card-img-container">
+                        <div class="categories__left-card-img-container">
                             <img
-                                class="services__left-service-img"
+                                class="categories__left-service-img"
                                 :src="store.storeBanner"
                                 alt=""
                             />
                         </div>
-                        <div class="services__left-card-info">
+                        <div class="categories__left-card-info">
                             <v-card-title class="headline">{{
                                 store.storeName | capitalize
                             }}</v-card-title>
 
-                            <v-card-subtitle>{{
-                                store.storeBio | truncate(50, '...')
-                            }}</v-card-subtitle>
+                            <v-card-subtitle
+                                v-text="store.description"
+                            ></v-card-subtitle>
 
                             <v-card-text
-                                class="display-1 text--primary services__left-card-price"
+                                class="text--primary categories__left-card-price"
                             >
-                                <v-btn @click="viewStore(store)" elevation="0"
-                                    >Visit Store</v-btn
-                                >
+                                {{ store.storeBio | truncate(100, '...') }}
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
 
-                                <v-btn
-                                    :class="fav ? 'red--text' : ''"
-                                    icon
-                                    @click="fav = !fav"
-                                >
+                                <v-btn icon>
                                     <v-icon>mdi-heart</v-icon>
                                 </v-btn>
-
-                                <!-- <v-btn @click="updService()" icon>
-                                    <v-icon>mdi-pencil-box</v-icon>
-                                </v-btn>
-
-                                <v-btn @click="removeService()" icon>
-                                    <v-icon>mdi-delete</v-icon>
-                                </v-btn> -->
                             </v-card-actions>
                         </div>
                     </div>
                 </v-card>
-            </div>
-        </div>
-        <!-- POPULAR STORES END -->
-
-        <!-- NEW STORES -->
-        <!-- <div class="categories__new">
-            <h2>New Stores</h2>
-            <div class="categories__new-stores">
-                <div
-                    class="categories__new-store-card"
-                    v-for="(store, id) in newStores"
-                    :key="id"
-                >
-                    <div
-                        class="categories__new-store"
-                        v-bind:style="{
-                            'background-image': 'url(' + store.image + ')'
-                        }"
-                    ></div>
-                </div>
-            </div>
-        </div> -->
-        <!-- NEW STORES -->
-
-        <!-- RECOMMENDED STORES -->
-        <!-- <div class="categories__new">
-            <h2>Recommended Stores</h2>
-            <div class="categories__new-stores">
-                <div
-                    class="categories__new-store-card"
-                    v-for="(store, id) in newStores"
-                    :key="id"
-                >
-                    <div
-                        class="categories__new-store"
-                        v-bind:style="{
-                            'background-image': 'url(' + store.image + ')'
-                        }"
-                    ></div>
-                </div>
-            </div>
-        </div> -->
-        <!-- RECOMMENDED STORES -->
+            </v-col>
+        </v-row>
     </div>
 </template>
 

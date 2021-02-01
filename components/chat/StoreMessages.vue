@@ -4,7 +4,7 @@
         <div class="mx-auto">
             <div
                 class="inbox-widget"
-                v-for="message in messages"
+                v-for="message in messages.slice(0, 3)"
                 :key="message.id"
             >
                 <div class="inbox-item">
@@ -25,7 +25,7 @@
             </div>
             <v-btn
                 v-if="messages.length > 0"
-                @click="$router.push('/settings')"
+                @click="$router.push('/inbox/admin')"
                 class="teal darken-1"
                 block
                 dark
@@ -45,8 +45,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
-import { db } from '@/plugins/firebase';
+import { mapState, mapGetters } from 'vuex';
 import 'firebase/database';
 
 export default {

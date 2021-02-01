@@ -1,5 +1,40 @@
 .categories {
-    width: 100%;
+    // FIX
+    &__left {
+        display: flex;
+        flex-direction: column;
+        @media (min-width: $large-desktop) {
+            flex-direction: row;
+        }
+    }
+    &__left-banner {
+        margin: 0 0 30px 0;
+    }
+    &__left-card-img-container {
+        width: 35%;
+        max-height: 250px;
+        @media (min-width: $tablet) {
+            width: 50%;
+            max-height: 200px;
+        }
+    }
+    &__left-service-img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-top-left-radius: 24px;
+        border-bottom-left-radius: 24px;
+    }
+    &__left-card-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    &__left-card-price {
+        text-align: right;
+    }
+    // FIX END
+
     &__sort {
         background-color: #cccccc;
         height: 40px;
@@ -47,36 +82,33 @@
         }
     }
     &__popular {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-gap: 10px;
+        display: flex;
+        flex-direction: column;
         @media (min-width: $large-desktop) {
-            grid-template-columns: 1fr 1fr;
+            flex-direction: row;
         }
-    
     }
-    &__new-stores {
-        margin-top: 40px;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-gap: 10px;
-        @media (min-width: $tablet) {
-            grid-template-columns: 1fr 1fr ;
-        }
-        @media (min-width: $small-desktop) {
-            grid-template-columns: 1fr 1fr 1fr;
-        }
-        @media (min-width: $large-desktop) {
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-        }
-        @media (min-width: $x-large-desktop) {
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        }
-        @media (min-width: $xx-large-desktop) {
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-        }
-    
-    }
+    // &__new-stores {
+    //     margin-top: 40px;
+    //     display: grid;
+    //     grid-template-columns: 1fr;
+    //     grid-gap: 10px;
+    //     @media (min-width: $tablet) {
+    //         grid-template-columns: 1fr 1fr;
+    //     }
+    //     @media (min-width: $small-desktop) {
+    //         grid-template-columns: 1fr 1fr 1fr;
+    //     }
+    //     @media (min-width: $large-desktop) {
+    //         grid-template-columns: 1fr 1fr 1fr 1fr;
+    //     }
+    //     @media (min-width: $x-large-desktop) {
+    //         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    //     }
+    //     @media (min-width: $xx-large-desktop) {
+    //         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    //     }
+    // }
     &__new-store {
         height: 390px;
         background-color: lightcoral;

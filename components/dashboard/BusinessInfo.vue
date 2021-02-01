@@ -1,6 +1,5 @@
 <template>
     <!-- BusinessInfo -->
-    <!-- FIXME -->
     <div>
         <div v-if="storeProfile !== null" class="panel-body">
             <p class="text-muted font-13">{{ storeProfile.storeBio }}</p>

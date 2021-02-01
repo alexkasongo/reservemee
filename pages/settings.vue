@@ -173,29 +173,16 @@ export default {
     mounted() {
         firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {
-                // User is signed in.
-                // check user status
-                // firebase
-                //     .auth()
-                //     .currentUser.getIdTokenResult()
-                //     .then((tokenResult) => {
-                //         if (tokenResult) {
-                //             this.role = tokenResult.claims;
-                //             this.items = this.validatedItems;
-                //         }
-                //     });
-
                 this.user = user;
 
                 // get logged in user role
-                const userRole = await db
+                await db
                     .collection('roles')
                     .doc(user.uid)
                     .get()
                     .then((res) => {
                         this.role = res.data().role;
                         this.items = this.validatedItems;
-                        console.log(`settings.vue - 205 - 🛍`, this.role);
                     });
 
                 // get logged in user role - end

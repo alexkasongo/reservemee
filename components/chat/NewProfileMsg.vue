@@ -14,8 +14,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
-import database from '@/firebase/init';
+import { mapState } from 'vuex';
 
 export default {
     name: 'NewMessage',

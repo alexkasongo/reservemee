@@ -1,8 +1,5 @@
 <template>
     <div>
-        <!-- <div v-if="loading">
-            <p>Loading...</p>
-        </div> -->
         <div class="signup">
             <div class="signup__left"></div>
             <div class="signup__right">

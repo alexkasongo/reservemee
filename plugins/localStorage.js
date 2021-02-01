@@ -11,7 +11,8 @@ export default ({ store }) => {
             'chat.messages',
             'chat.replies',
             'booking.bookingState',
-            'cart.order'
+            'cart.order',
+            'storeFront.loadedStoreServices'
         ]
     })(store);
 };
