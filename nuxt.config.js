@@ -41,7 +41,6 @@ module.exports = {
         '~/plugins/firebase.js',
         '~plugins/filters.js',
         { src: '~/plugins/localStorage.js', ssr: false },
-        { src: '~/plugins/vueSplide.js', ssr: false },
         { src: '~/plugins/vee-validate.js', ssr: true }
     ],
     /*
