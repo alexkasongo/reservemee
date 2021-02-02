@@ -922,7 +922,6 @@ export default {
         },
         updateRange({ start, end }) {
             // FIXME
-            // console.log(`Calendar.vue - 428 - 🥛`);
         },
         // add these to numbers
         nth(d) {

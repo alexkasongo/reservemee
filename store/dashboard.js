@@ -388,12 +388,10 @@ export const actions = {
      */
     // we receive service id as payload to use for filtering
     async updateUserProfile({ commit, dispatch }, payload) {
-        console.log(`dashboard.js - 391 - 🌎`, payload);
         commit('loaders/SET_LOADING', true, { root: true });
 
         // 1. IF NO PROFILE IMAGE EXISTS
         if (payload.rawStoreOwnerImage === null) {
-            console.log(`dashboard.js - 396 - 🍿`, payload);
             const user = await firebase.auth().currentUser;
             // check if the storeOwnerImage does not exist, if it does not exist
             // run the code below
@@ -452,7 +450,6 @@ export const actions = {
 
         // 2. IF IMAGE EXISTS PROFILE IMAGE
         if (payload.rawStoreOwnerImage !== null) {
-            console.log(`dashboard.js - 425 - 🧽`, payload);
             let storeOwnerImage = ''
 
             // upload store banner

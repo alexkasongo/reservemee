@@ -43,7 +43,6 @@ export const actions = {
     },
     signup({ commit }, user) {
         commit('loaders/SET_LOADING', true, { root: true });
-        console.log(`index.js - 46 - 🍎`, user);
         firebase
             .auth()
             .createUserWithEmailAndPassword(user.email, user.password)
@@ -261,10 +260,9 @@ export const actions = {
                     const role = db.collection('roles').doc(uid);
                     const doc = await role.get();
                     if (!doc.exists) {
-                        console.log('No such document!');
+                        return
                     } else {
                         const data = doc.data();
-                        console.log('Document data:', data);
                         if (data.role.customer) {
                             this.$router.push('/store');
                         }
@@ -296,7 +294,6 @@ export const actions = {
                 // Handle Errors here.
                 commit('ERRORS', error);
                 commit('loaders/SET_LOADING', false, { root: true });
-                console.log(`index.js - 257 - 🐷`, error);
             });
     },
     async removeUserData({ commit }) {
