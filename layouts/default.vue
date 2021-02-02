@@ -1,6 +1,11 @@
 <template>
-    <v-app>
+    <div>
         <client-only>
+            <div v-if="loading" class="loading">
+                <p>loading...</p>
+            </div>
+            <Navbar />
+
             <!-- SNACKBAR -->
             <v-snackbar
                 top
@@ -23,9 +28,6 @@
             </v-snackbar>
             <!-- SNACKBAR -->
             <v-card class="rounded-0 mx-auto overflow-hidden">
-                <div v-if="loading" class="loading">
-                    <p>loading...</p>
-                </div>
                 <!-- NAVBAR -->
                 <v-app-bar color="teal darken-1" fixed flat>
                     <!-- open drawer -->
@@ -351,7 +353,7 @@
                 <Nuxt />
             </div>
         </client-only>
-    </v-app>
+    </div>
 </template>
 
 <script>
