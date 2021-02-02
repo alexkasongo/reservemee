@@ -7,7 +7,7 @@
             <Navbar />
 
             <!-- SNACKBAR -->
-            <v-snackbar
+            <!-- <v-snackbar
                 top
                 v-model="snackbar"
                 :timeout="timeout"
@@ -25,7 +25,7 @@
                         Close
                     </v-btn>
                 </template>
-            </v-snackbar>
+            </v-snackbar> -->
             <!-- SNACKBAR -->
             <v-card class="rounded-0 mx-auto overflow-hidden">
                 <!-- NAVBAR -->
@@ -51,6 +51,7 @@
 
                     <v-spacer></v-spacer>
 
+                    <!-- MESSAGES START -->
                     <v-tooltip open-delay="200" bottom v-if="user">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn
