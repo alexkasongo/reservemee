@@ -3,10 +3,10 @@
         <div class="signin__left"></div>
         <div class="signin__right">
             <div class="signin__right-card">
-                <div class="h1">Signin</div>
-                <validation-observer ref="observer" v-slot="{ invalid }">
+                <!-- <div class="h1">Signin</div> -->
+                <!-- <validation-observer ref="observer" v-slot="{ invalid }">
                     <form @submit.prevent="onSubmit">
-                        <!-- Email -->
+
                         <validation-provider
                             v-slot="{ errors }"
                             name="email"
@@ -19,8 +19,8 @@
                                 required
                             ></v-text-field>
                         </validation-provider>
-                        <!-- Email End -->
-                        <!-- Password -->
+
+
                         <validation-provider
                             v-slot="{ errors }"
                             name="Password"
@@ -35,13 +35,13 @@
                                 required
                             ></v-text-field>
                         </validation-provider>
-                        <!-- Password End -->
-                        <!-- ERRORS -->
+
+
                         <div v-if="errors" class="form-group text-muted mt-3">
                             {{ errors.message }}
                         </div>
-                        <!-- ERRORS END -->
-                        <!-- Submit Button -->
+
+
                         <v-btn
                             class="mr-4"
                             type="submit"
@@ -52,7 +52,39 @@
                         </v-btn>
                         <v-btn @click="clear"> clear </v-btn>
                     </form>
-                </validation-observer>
+                </validation-observer> -->
+
+                <form @submit.prevent="onSubmit">
+                    <section>
+                        <b-field label="Email">
+                            <b-input
+                                v-model="email"
+                                type="email"
+                                maxlength="30"
+                            >
+                            </b-input>
+                        </b-field>
+
+                        <b-field label="Password">
+                            <b-input
+                                type="password"
+                                v-model="password"
+                                password-reveal
+                            >
+                            </b-input>
+                        </b-field>
+
+                        <b-field class="buttons">
+                            <b-button
+                                type="submit"
+                                class="button is-primary"
+                                @click="onSubmit"
+                                expanded
+                                >signin</b-button
+                            >
+                        </b-field>
+                    </section>
+                </form>
             </div>
         </div>
     </div>
@@ -112,23 +144,28 @@ export default {
     methods: {
         ...mapActions(['login']),
         onSubmit() {
+            if (this.email || this.password === '') {
+                this.error = 'you must fill in email and password.';
+                return;
+            }
             let loginDetails = {
                 email: this.email,
                 password: this.password
             };
+            // console.log(`signin.vue - 150 - 🍎`, loginDetails);
             this.login(loginDetails);
-        },
-        // Vee Validate
-        submit() {
-            this.$refs.observer.validate();
-        },
-        clear() {
-            this.name = '';
-            this.email = '';
-            this.select = null;
-            this.checkbox = null;
-            this.$refs.observer.reset();
         }
+        // Vee Validate
+        // submit() {
+        //     this.$refs.observer.validate();
+        // },
+        // clear() {
+        //     this.name = '';
+        //     this.email = '';
+        //     this.select = null;
+        //     this.checkbox = null;
+        //     this.$refs.observer.reset();
+        // }
         // Vee Validate End
     },
     mounted() {
@@ -137,5 +174,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

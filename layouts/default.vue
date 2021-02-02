@@ -27,17 +27,14 @@
                 </template>
             </v-snackbar> -->
             <!-- SNACKBAR -->
-            <v-card class="rounded-0 mx-auto overflow-hidden">
-                <!-- NAVBAR -->
+
+            <!-- <v-card class="rounded-0 mx-auto overflow-hidden">
                 <v-app-bar color="teal darken-1" fixed flat>
-                    <!-- open drawer -->
                     <v-app-bar-nav-icon
                         color="white"
                         @click.stop="drawer = !drawer"
                     ></v-app-bar-nav-icon>
-                    <!-- open drawer end -->
 
-                    <!-- FIXME -->
                     <v-btn
                         v-if="user"
                         color="white"
@@ -51,7 +48,7 @@
 
                     <v-spacer></v-spacer>
 
-                    <!-- MESSAGES START -->
+
                     <v-tooltip open-delay="200" bottom v-if="user">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn
@@ -77,9 +74,9 @@
                         </template>
                         <span>Messages</span>
                     </v-tooltip>
-                    <!-- MESSAGES END -->
 
-                    <!-- NOTIFICATIONS START -->
+
+
                     <div class="text-center" v-if="user">
                         <v-menu
                             nudge-bottom="56"
@@ -124,9 +121,9 @@
                             </v-list>
                         </v-menu>
                     </div>
-                    <!-- NOTIFICATIONS END -->
 
-                    <!-- CART START -->
+
+
                     <v-tooltip open-delay="200" bottom v-if="user">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn
@@ -149,7 +146,7 @@
                         </template>
                         <span>View Cart</span>
                     </v-tooltip>
-                    <!-- CART END -->
+
                     <div class="text-center" v-if="user">
                         <v-menu
                             nudge-bottom="56"
@@ -178,9 +175,6 @@
                                     <span>Open menu</span>
                                 </v-tooltip>
                             </template>
-                            <!-- <v-btn elevation="0" icon dark>
-                                <v-icon>mdi-dots-vertical</v-icon>
-                            </v-btn> -->
                             <v-list width="250px">
                                 <v-list-item
                                     v-for="(item, index) in nav"
@@ -196,9 +190,8 @@
                             </v-list>
                         </v-menu>
                     </div>
-                    <!-- THREE DOTS END -->
 
-                    <!-- if router name is not Sign in then show, else do not show -->
+
                     <div v-if="this.$route.name !== 'signin'">
                         <v-btn
                             outlined
@@ -231,9 +224,9 @@
                         >
                     </div>
                 </v-app-bar>
-                <!-- NAVBAR END -->
 
-                <!-- DRAWER LEFT-->
+
+
                 <v-navigation-drawer
                     v-model="drawer"
                     fixed
@@ -327,9 +320,7 @@
                         </div>
                     </template>
                 </v-navigation-drawer>
-                <!-- DRAWER LEFT END -->
 
-                <!-- DRAWER RIGHT-->
                 <v-navigation-drawer
                     v-model="drawerRight"
                     fixed
@@ -347,8 +338,7 @@
                     </div>
                     <Cart />
                 </v-navigation-drawer>
-                <!-- DRAWER RIGHT END -->
-            </v-card>
+            </v-card> -->
 
             <div class="margin">
                 <Nuxt />

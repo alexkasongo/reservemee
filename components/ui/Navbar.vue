@@ -11,7 +11,6 @@
         </template>
         <template #start>
             <b-navbar-item @click="goHome(user)"> Dasboard </b-navbar-item>
-            <b-navbar-item href="#"> Documentation </b-navbar-item>
             <b-navbar-dropdown label="Info">
                 <div v-for="(item, index) in nav" :key="index">
                     <b-navbar-item @click="dropDown(item)">{{
@@ -24,10 +23,16 @@
         <template #end>
             <b-navbar-item tag="div">
                 <div class="buttons">
-                    <a class="button is-primary">
+                    <a @click="signin" class="button is-light"> Log in </a>
+                    <a @click="signup" class="button is-primary">
                         <strong>Sign up</strong>
                     </a>
-                    <a class="button is-light"> Log in </a>
+                    <a
+                        @click="$router.push('/signup-admin')"
+                        class="button is-primary"
+                    >
+                        <strong>Admin</strong>
+                    </a>
                 </div>
             </b-navbar-item>
         </template>
