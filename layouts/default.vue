@@ -559,18 +559,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.margin {
-    // margin: 90px auto 0 auto;
-    margin-top: 90px;
-}
+// .margin {
+//     // margin: 90px auto 0 auto;
+//     margin-top: 90px;
+// }
 
-.app {
-    position: relative;
-}
+// .app {
+//     position: relative;
+// }
 
-.loading {
-    position: absolute;
-    top: 22px;
-    left: 50%;
-}
+// .loading {
+//     position: absolute;
+//     top: 22px;
+//     left: 50%;
+// }
 </style>
