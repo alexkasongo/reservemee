@@ -2,11 +2,6 @@ export { default as Calendar } from '../../components/Calendar.vue'
 export { default as BookingCalendar } from '../../components/cart/BookingCalendar.vue'
 export { default as Cart } from '../../components/cart/Cart.vue'
 export { default as QuickBook } from '../../components/cart/QuickBook.vue'
-export { default as Chat } from '../../components/chat/Chat.vue'
-export { default as Messages } from '../../components/chat/Messages.vue'
-export { default as NewMessage } from '../../components/chat/NewMessage.vue'
-export { default as NewProfileMsg } from '../../components/chat/NewProfileMsg.vue'
-export { default as StoreMessages } from '../../components/chat/StoreMessages.vue'
 export { default as HorizontalCard } from '../../components/client/HorizontalCard.vue'
 export { default as Ratings } from '../../components/client/Ratings.vue'
 export { default as SideBar } from '../../components/client/SideBar.vue'
@@ -28,16 +23,16 @@ export { default as Notifications } from '../../components/profile/Notifications
 export { default as ProfileInformation } from '../../components/profile/ProfileInformation.vue'
 export { default as Security } from '../../components/profile/Security.vue'
 export { default as StoreSettings } from '../../components/profile/StoreSettings.vue'
+export { default as Chat } from '../../components/chat/Chat.vue'
+export { default as Messages } from '../../components/chat/Messages.vue'
+export { default as NewMessage } from '../../components/chat/NewMessage.vue'
+export { default as NewProfileMsg } from '../../components/chat/NewProfileMsg.vue'
+export { default as StoreMessages } from '../../components/chat/StoreMessages.vue'
 
 export const LazyCalendar = import('../../components/Calendar.vue' /* webpackChunkName: "components/calendar" */).then(c => c.default || c)
 export const LazyBookingCalendar = import('../../components/cart/BookingCalendar.vue' /* webpackChunkName: "components/booking-calendar" */).then(c => c.default || c)
 export const LazyCart = import('../../components/cart/Cart.vue' /* webpackChunkName: "components/cart" */).then(c => c.default || c)
 export const LazyQuickBook = import('../../components/cart/QuickBook.vue' /* webpackChunkName: "components/quick-book" */).then(c => c.default || c)
-export const LazyChat = import('../../components/chat/Chat.vue' /* webpackChunkName: "components/chat" */).then(c => c.default || c)
-export const LazyMessages = import('../../components/chat/Messages.vue' /* webpackChunkName: "components/messages" */).then(c => c.default || c)
-export const LazyNewMessage = import('../../components/chat/NewMessage.vue' /* webpackChunkName: "components/new-message" */).then(c => c.default || c)
-export const LazyNewProfileMsg = import('../../components/chat/NewProfileMsg.vue' /* webpackChunkName: "components/new-profile-msg" */).then(c => c.default || c)
-export const LazyStoreMessages = import('../../components/chat/StoreMessages.vue' /* webpackChunkName: "components/store-messages" */).then(c => c.default || c)
 export const LazyHorizontalCard = import('../../components/client/HorizontalCard.vue' /* webpackChunkName: "components/horizontal-card" */).then(c => c.default || c)
 export const LazyRatings = import('../../components/client/Ratings.vue' /* webpackChunkName: "components/ratings" */).then(c => c.default || c)
 export const LazySideBar = import('../../components/client/SideBar.vue' /* webpackChunkName: "components/side-bar" */).then(c => c.default || c)
@@ -59,3 +54,8 @@ export const LazyNotifications = import('../../components/profile/Notifications.
 export const LazyProfileInformation = import('../../components/profile/ProfileInformation.vue' /* webpackChunkName: "components/profile-information" */).then(c => c.default || c)
 export const LazySecurity = import('../../components/profile/Security.vue' /* webpackChunkName: "components/security" */).then(c => c.default || c)
 export const LazyStoreSettings = import('../../components/profile/StoreSettings.vue' /* webpackChunkName: "components/store-settings" */).then(c => c.default || c)
+export const LazyChat = import('../../components/chat/Chat.vue' /* webpackChunkName: "components/chat" */).then(c => c.default || c)
+export const LazyMessages = import('../../components/chat/Messages.vue' /* webpackChunkName: "components/messages" */).then(c => c.default || c)
+export const LazyNewMessage = import('../../components/chat/NewMessage.vue' /* webpackChunkName: "components/new-message" */).then(c => c.default || c)
+export const LazyNewProfileMsg = import('../../components/chat/NewProfileMsg.vue' /* webpackChunkName: "components/new-profile-msg" */).then(c => c.default || c)
+export const LazyStoreMessages = import('../../components/chat/StoreMessages.vue' /* webpackChunkName: "components/store-messages" */).then(c => c.default || c)

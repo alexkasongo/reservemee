@@ -23,36 +23,6 @@
   "LazyQuickBook": {
     "description": "Auto imported from /components/cart/QuickBook.vue"
   },
-  "Chat": {
-    "description": "Auto imported from /components/chat/Chat.vue"
-  },
-  "LazyChat": {
-    "description": "Auto imported from /components/chat/Chat.vue"
-  },
-  "Messages": {
-    "description": "Auto imported from /components/chat/Messages.vue"
-  },
-  "LazyMessages": {
-    "description": "Auto imported from /components/chat/Messages.vue"
-  },
-  "NewMessage": {
-    "description": "Auto imported from /components/chat/NewMessage.vue"
-  },
-  "LazyNewMessage": {
-    "description": "Auto imported from /components/chat/NewMessage.vue"
-  },
-  "NewProfileMsg": {
-    "description": "Auto imported from /components/chat/NewProfileMsg.vue"
-  },
-  "LazyNewProfileMsg": {
-    "description": "Auto imported from /components/chat/NewProfileMsg.vue"
-  },
-  "StoreMessages": {
-    "description": "Auto imported from /components/chat/StoreMessages.vue"
-  },
-  "LazyStoreMessages": {
-    "description": "Auto imported from /components/chat/StoreMessages.vue"
-  },
   "HorizontalCard": {
     "description": "Auto imported from /components/client/HorizontalCard.vue"
   },
@@ -178,5 +148,35 @@
   },
   "LazyStoreSettings": {
     "description": "Auto imported from /components/profile/StoreSettings.vue"
+  },
+  "Chat": {
+    "description": "Auto imported from /components/chat/Chat.vue"
+  },
+  "LazyChat": {
+    "description": "Auto imported from /components/chat/Chat.vue"
+  },
+  "Messages": {
+    "description": "Auto imported from /components/chat/Messages.vue"
+  },
+  "LazyMessages": {
+    "description": "Auto imported from /components/chat/Messages.vue"
+  },
+  "NewMessage": {
+    "description": "Auto imported from /components/chat/NewMessage.vue"
+  },
+  "LazyNewMessage": {
+    "description": "Auto imported from /components/chat/NewMessage.vue"
+  },
+  "NewProfileMsg": {
+    "description": "Auto imported from /components/chat/NewProfileMsg.vue"
+  },
+  "LazyNewProfileMsg": {
+    "description": "Auto imported from /components/chat/NewProfileMsg.vue"
+  },
+  "StoreMessages": {
+    "description": "Auto imported from /components/chat/StoreMessages.vue"
+  },
+  "LazyStoreMessages": {
+    "description": "Auto imported from /components/chat/StoreMessages.vue"
   }
 }
