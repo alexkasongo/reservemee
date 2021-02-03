@@ -17,8 +17,6 @@
                         :src="storeProfile.storeLogo"
                         alt
                         class="header__thumb-lg rounded-circle"
-                        v-bind="attrs"
-                        v-on="on"
                     />
                     <img
                         v-else
@@ -26,8 +24,6 @@
                         :src="defaultStoreLogo"
                         alt
                         class="header__thumb-lg rounded-circle"
-                        v-bind="attrs"
-                        v-on="on"
                     />
                     <p class="title">
                         {{ storeProfile.storeName | capitalize }}
@@ -43,8 +39,6 @@
                         :src="storeProfile.storeLogo"
                         alt
                         class="header__thumb-lg rounded-circle"
-                        v-bind="attrs"
-                        v-on="on"
                     />
                     <img
                         v-else
@@ -52,8 +46,6 @@
                         :src="defaultStoreLogo"
                         alt
                         class="header__thumb-lg rounded-circle"
-                        v-bind="attrs"
-                        v-on="on"
                     />
                     <p class="title">
                         {{ storeProfile.storeName | capitalize }}
@@ -70,8 +62,6 @@
                     src="https://via.placeholder.com/1200/00897b"
                     alt
                     class="header__thumb-lg rounded-circle"
-                    v-bind="attrs"
-                    v-on="on"
                 />
                 <p class="subtitle">{{ user.displayName }}</p>
             </div>
