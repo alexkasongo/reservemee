@@ -8,7 +8,7 @@
             <section
                 v-if="storeProfile.storeBanner !== ''"
                 :src="storeProfile.storeBanner"
-                class="hero is-small is-link"
+                class="hero is-small is-link header__bg"
             >
                 <div class="hero-body">
                     <img
@@ -144,7 +144,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.parallax {
-    width: 100%;
+.header {
+    &__bg {
+        border-radius: 24px;
+    }
 }
 </style>
