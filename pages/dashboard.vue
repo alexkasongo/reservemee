@@ -12,7 +12,7 @@
             >
                 <div class="mt-5 mb-5">Bio</div>
                 <!-- Personal-Information -->
-                <BusinessInfo />
+                <BusinessInfo class="mb-5" />
                 <!-- Personal-Information -->
                 <div v-if="user">
                     <div

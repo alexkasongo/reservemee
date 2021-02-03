@@ -6,7 +6,7 @@
 
             <v-divider></v-divider>
 
-            <div class="mt-5">
+            <div class="mt-5 mb-5">
                 <p class="text-muted font-13">
                     <strong>Store Name :</strong>
                     <span class="m-l-15">{{
