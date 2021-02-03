@@ -1,13 +1,13 @@
 <template>
     <div class="container">
-        <client-only>
-            <!-- <div v-if="loading" class="loading">
+        <!-- <client-only> -->
+        <!-- <div v-if="loading" class="loading">
                 <p>loading...</p>
             </div> -->
-            <Navbar />
+        <Navbar />
 
-            <!-- SNACKBAR -->
-            <!-- <v-snackbar
+        <!-- SNACKBAR -->
+        <!-- <v-snackbar
                 top
                 v-model="snackbar"
                 :timeout="timeout"
@@ -26,9 +26,9 @@
                     </v-btn>
                 </template>
             </v-snackbar> -->
-            <!-- SNACKBAR -->
+        <!-- SNACKBAR -->
 
-            <!-- <v-card class="rounded-0 mx-auto overflow-hidden">
+        <!-- <v-card class="rounded-0 mx-auto overflow-hidden">
                 <v-app-bar color="teal darken-1" fixed flat>
                     <v-app-bar-nav-icon
                         color="white"
@@ -340,10 +340,10 @@
                 </v-navigation-drawer>
             </v-card> -->
 
-            <div class="margin">
-                <Nuxt />
-            </div>
-        </client-only>
+        <div>
+            <Nuxt />
+        </div>
+        <!-- </client-only> -->
     </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
-    <div v-if="user" class="dashboard">
+    <div v-if="user" class="dashboard container">
         <!-- Header -->
-        <div class="container">
+        <div>
             <Header />
         </div>
         <!-- Header End-->
@@ -183,8 +183,11 @@ export default {
 
 <style lang="scss" scoped>
 .dashboard {
+    margin: 0 0 200px 0;
     .dashboard__bg {
-        background-color: #fafafa;
+        background-color: purple;
+        // background-color: #fafafa;
+        border-radius: 24px;
     }
 }
 </style>
