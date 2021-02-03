@@ -3,7 +3,7 @@
         <div class="signin__left"></div>
         <div class="signin__right">
             <div class="signin__right-card">
-                <form class="signin__right-form" @keyup.enter="onSubmit">
+                <form @keyup.enter="onSubmit">
                     <b-field>
                         <b-input
                             placeholder="Email"
