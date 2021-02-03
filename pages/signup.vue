@@ -3,27 +3,40 @@
         <div class="signup">
             <div class="signup__left"></div>
             <div class="signup__right">
-                <div class="signin__right-card">
+                <div class="signup__right-card">
                     <form @keyup.enter="onSubmit">
-                        <b-field label="Name">
-                            <b-input v-model="name" type="text" maxlength="30">
-                            </b-input>
-                        </b-field>
-
-                        <b-field label="Email">
+                        <b-field>
                             <b-input
-                                v-model="email"
-                                type="email"
+                                placeholder="Name"
+                                v-model="name"
+                                type="text"
                                 maxlength="30"
+                                icon="account"
                             >
                             </b-input>
                         </b-field>
 
-                        <b-field label="Password">
+                        <b-field>
                             <b-input
+                                placeholder="Email"
+                                v-model="email"
+                                type="email"
+                                maxlength="30"
+                                icon="email"
+                                icon-right="close-circle"
+                                icon-right-clickable
+                                @icon-right-click="clearIconClick"
+                            >
+                            </b-input>
+                        </b-field>
+
+                        <b-field>
+                            <b-input
+                                placeholder="Passwordm"
                                 type="password"
                                 v-model="password"
                                 password-reveal
+                                icon="lock"
                             >
                             </b-input>
                         </b-field>
@@ -81,6 +94,9 @@ export default {
             };
             this.signup(signupDetails);
             this.clear;
+        },
+        clearIconClick() {
+            this.email = '';
         }
     },
     mounted() {

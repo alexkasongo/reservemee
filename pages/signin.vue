@@ -6,6 +6,7 @@
                 <form class="signin__right-form" @keyup.enter="onSubmit">
                     <b-field>
                         <b-input
+                            placeholder="Email"
                             v-model="email"
                             type="email"
                             maxlength="30"
@@ -19,6 +20,7 @@
 
                     <b-field>
                         <b-input
+                            placeholder="Password"
                             type="password"
                             v-model="password"
                             password-reveal

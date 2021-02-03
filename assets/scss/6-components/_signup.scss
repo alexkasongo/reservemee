@@ -10,12 +10,15 @@
         }
     }
     &__right {
+        background-color: #1b1b3a;
+        // background-color: #7957d5;
+        // background-color: #ff9891;
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         width: 100%;
         @media (min-width: $small-desktop) {
-            width: 55%;
+            // width: 55%;
         }
     }
     &__right-card {
