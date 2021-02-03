@@ -1,35 +1,33 @@
 <template>
     <!-- BusinessInfo -->
-    <div>
+    <div class="content is-normal">
         <div v-if="storeProfile !== null" class="panel-body">
-            <p class="text-muted font-13">{{ storeProfile.storeBio }}</p>
-
-            <v-divider></v-divider>
+            <p>{{ storeProfile.storeBio }}</p>
 
             <div class="mt-5 mb-5">
-                <p class="text-muted font-13">
+                <p>
                     <strong>Store Name :</strong>
                     <span class="m-l-15">{{
                         storeProfile.storeName | capitalize
                     }}</span>
                 </p>
-                <p class="text-muted font-13">
+                <p>
                     <strong>Mobile :</strong>
                     <span class="m-l-15">{{
                         storeProfile.storePhoneNumber
                     }}</span>
                 </p>
-                <p class="text-muted font-13">
+                <p>
                     <strong>Email :</strong>
                     <span class="m-l-15">{{ storeProfile.storeEmail }}</span>
                 </p>
-                <p class="text-muted font-13">
+                <p>
                     <strong>Location :</strong>
                     <span class="m-l-15">{{ storeProfile.storeLocation }}</span>
                 </p>
                 <!-- Services start -->
                 <div v-if="this.storeProfile">
-                    <p v-if="beauty !== null" class="text-muted font-13">
+                    <p v-if="beauty !== null">
                         <strong>Services :</strong>
                         <span v-for="service in beauty" :key="service.name">
                             <span class="m-l-5">

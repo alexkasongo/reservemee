@@ -1,5 +1,5 @@
 <template>
-    <div v-if="user" class="">
+    <div v-if="user" class="dashboard">
         <!-- Header -->
         <div class="container">
             <Header />
@@ -8,9 +8,8 @@
 
         <div class="columns mt-5">
             <div
-                class="column is-full-mobile is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd"
+                class="dashboard__bg column is-full-mobile is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd"
             >
-                <div class="mb-5">Bio</div>
                 <!-- Personal-Information -->
                 <BusinessInfo class="mb-5" />
                 <!-- Personal-Information -->
@@ -47,13 +46,17 @@
                 <StoreSummary />
                 <!-- StoreSummary -->
 
-                <div class="display-1 mt-10 mb-5">Calendar</div>
+                <!-- <div class="display-1 mt-10 mb-5">Calendar</div> -->
                 <!-- <v-card elevation="2"> -->
-                <Calendar />
+                <!-- <Calendar /> -->
                 <!-- </v-card>s -->
 
                 <div>
-                    <div class="display-1 mt-10 mb-5">Services</div>
+                    <h1 class="title mt-5 mb-5">Services</h1>
+                    <h2 class="subtitle">
+                        Create and edit categories and view services for each
+                        category
+                    </h2>
                     <!-- ManageServices -->
                     <ManageServices v-if="categories.length !== 0" />
                     <!-- ManageServices -->
@@ -178,4 +181,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.dashboard {
+    .dashboard__bg {
+        background-color: #fafafa;
+    }
+}
+</style>
