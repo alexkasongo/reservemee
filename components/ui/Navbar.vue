@@ -13,6 +13,9 @@
             <b-navbar-item @click="goHome(user)" v-if="user">
                 Dasboard
             </b-navbar-item>
+            <b-navbar-item @click="$router.push('/store')">
+                Store
+            </b-navbar-item>
         </template>
 
         <template #end>
