@@ -7,7 +7,7 @@
             <Navbar />
 
             <!-- SNACKBAR -->
-            <v-snackbar
+            <!-- <v-snackbar
                 top
                 v-model="snackbar"
                 :timeout="timeout"
@@ -25,34 +25,7 @@
                         Close
                     </v-btn>
                 </template>
-            </v-snackbar>
-
-            <section>
-                <div class="buttons">
-                    <b-button
-                        label="Launch snackbar (default)"
-                        size="is-medium"
-                        @click="snackbar"
-                    />
-                    <b-button
-                        label="Launch snackbar (custom)"
-                        type="is-warning"
-                        size="is-medium"
-                        @click="warning"
-                    />
-                    <b-button
-                        label="Launch snackbar (custom)"
-                        type="is-danger"
-                        size="is-medium"
-                        @click="danger"
-                    />
-                    <b-button
-                        label="Launch snackbar (with cancel)"
-                        size="is-medium"
-                        @click="hasCancel"
-                    />
-                </div>
-            </section>
+            </v-snackbar> -->
             <!-- SNACKBAR -->
 
             <!-- <v-card class="rounded-0 mx-auto overflow-hidden">
