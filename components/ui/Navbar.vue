@@ -10,18 +10,20 @@
             </b-navbar-item>
         </template>
         <template #start>
-            <b-navbar-item @click="goHome(user)"> Dasboard </b-navbar-item>
-            <b-navbar-dropdown label="Info">
-                <div v-for="(item, index) in nav" :key="index">
-                    <b-navbar-item @click="dropDown(item)">{{
-                        item.title
-                    }}</b-navbar-item>
-                </div>
-            </b-navbar-dropdown>
+            <b-navbar-item @click="goHome(user)" v-if="user">
+                Dasboard
+            </b-navbar-item>
         </template>
 
         <template #end>
             <b-navbar-item tag="div">
+                <b-navbar-dropdown label="Info" v-if="user">
+                    <div v-for="(item, index) in nav" :key="index">
+                        <b-navbar-item @click="dropDown(item)">{{
+                            item.title
+                        }}</b-navbar-item>
+                    </div>
+                </b-navbar-dropdown>
                 <div class="buttons">
                     <div v-if="$route.name !== 'signin'">
                         <a @click="signin" v-if="!user" class="button is-light">

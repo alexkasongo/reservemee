@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <client-only>
             <!-- <div v-if="loading" class="loading">
                 <p>loading...</p>
@@ -7,7 +7,7 @@
             <Navbar />
 
             <!-- SNACKBAR -->
-            <!-- <v-snackbar
+            <v-snackbar
                 top
                 v-model="snackbar"
                 :timeout="timeout"
@@ -25,7 +25,34 @@
                         Close
                     </v-btn>
                 </template>
-            </v-snackbar> -->
+            </v-snackbar>
+
+            <section>
+                <div class="buttons">
+                    <b-button
+                        label="Launch snackbar (default)"
+                        size="is-medium"
+                        @click="snackbar"
+                    />
+                    <b-button
+                        label="Launch snackbar (custom)"
+                        type="is-warning"
+                        size="is-medium"
+                        @click="warning"
+                    />
+                    <b-button
+                        label="Launch snackbar (custom)"
+                        type="is-danger"
+                        size="is-medium"
+                        @click="danger"
+                    />
+                    <b-button
+                        label="Launch snackbar (with cancel)"
+                        size="is-medium"
+                        @click="hasCancel"
+                    />
+                </div>
+            </section>
             <!-- SNACKBAR -->
 
             <!-- <v-card class="rounded-0 mx-auto overflow-hidden">
@@ -359,36 +386,7 @@ export default {
     data() {
         return {
             user: '',
-            role: '',
-            drawer: false,
-            drawerRight: false,
-            drawerDown: false,
-            group: null,
-            groupRight: null,
-            multiLine: true,
-            text: 'Success.',
-            timeout: 3000,
-            notifications: [
-                { message: 'Noticfication example one' },
-                { message: 'Noticfication example two' },
-                { message: 'Noticfication example three' },
-                { message: 'Noticfication example four' },
-                { message: 'Noticfication example five' }
-            ],
-            nav: [
-                {
-                    title: 'Settings',
-                    icon: 'mdi-cog'
-                },
-                {
-                    title: 'Bookmarks',
-                    icon: 'mdi-heart-outline'
-                },
-                {
-                    title: 'Logout',
-                    icon: 'mdi-logout-variant'
-                }
-            ]
+            role: ''
         };
     },
     computed: {
@@ -428,6 +426,25 @@ export default {
             set() {
                 return this.setSnackbar(false);
             }
+        },
+        warning() {
+            if (this.snackbar) {
+                console.log(`default.vue - 432 - 🥎`, this.snackbar);
+                // this.$buefy.snackbar.open({
+                //     message:
+                //         'Yellow button and positioned on top, click to close',
+                //     type: 'is-warning',
+                //     position: 'is-top',
+                //     actionText: 'Retry',
+                //     indefinite: true,
+                //     onAction: () => {
+                //         this.$buefy.toast.open({
+                //             message: 'Action pressed',
+                //             queue: false
+                //         });
+                //     }
+                // });
+            }
         }
     },
     methods: {
@@ -445,17 +462,6 @@ export default {
         }),
         openCart() {
             this.drawerRight = !this.drawerRight;
-        },
-        clickToggleDrawer() {
-            this.drawerDown = !this.drawerDown;
-        },
-        dropDown(item) {
-            if (item.title === 'Settings') {
-                this.$router.push('/settings');
-            }
-            if (item.title === 'Logout') {
-                this.signout();
-            }
         },
         signin() {
             this.$router.replace('/signin');
@@ -507,6 +513,21 @@ export default {
                 }
             });
         },
+        // warning() {
+        //     this.$buefy.snackbar.open({
+        //         message: 'Yellow button and positioned on top, click to close',
+        //         type: 'is-warning',
+        //         position: 'is-top',
+        //         actionText: 'Retry',
+        //         indefinite: true,
+        //         onAction: () => {
+        //             this.$buefy.toast.open({
+        //                 message: 'Action pressed',
+        //                 queue: false
+        //             });
+        //         }
+        //     });
+        // },
         async getUserRole() {
             // get logged in user role
             const userRole = await db
