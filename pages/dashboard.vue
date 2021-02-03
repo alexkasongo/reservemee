@@ -1,16 +1,16 @@
 <template>
-    <div v-if="user" class="content">
+    <div v-if="user" class="">
         <!-- Header -->
         <div class="container">
             <Header />
         </div>
         <!-- Header End-->
 
-        <div class="columns">
+        <div class="columns mt-5">
             <div
                 class="column is-full-mobile is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd"
             >
-                <div class="mt-5 mb-5">Bio</div>
+                <div class="mb-5">Bio</div>
                 <!-- Personal-Information -->
                 <BusinessInfo class="mb-5" />
                 <!-- Personal-Information -->
