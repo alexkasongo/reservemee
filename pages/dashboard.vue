@@ -8,7 +8,7 @@
 
         <div class="columns">
             <div
-                class="column is-full-quarters-mobile is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd"
+                class="column is-full-mobile is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd"
             >
                 <div class="mt-5 mb-5">Bio</div>
                 <!-- Personal-Information -->
@@ -23,14 +23,12 @@
                     </div>
                 </div>
                 <div v-if="user">
-                    <div>
-                        <div v-if="categories.length <= 0">
-                            <!-- CategoryCheck -->
-                            <CategoryCheck />
-                            <!-- CategoryCheck -->
-                        </div>
+                    <div v-if="categories.length <= 0" class="mb-5">
+                        <!-- CategoryCheck -->
+                        <CategoryCheck />
+                        <!-- CategoryCheck -->
                     </div>
-                    <div v-if="!user.emailVerified" class="w-100">
+                    <div v-if="!user.emailVerified" class="mb-5">
                         <!-- EmailVerified -->
                         <EmailVerified />
                         <!-- EmailVerified -->
