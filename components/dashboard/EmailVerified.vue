@@ -9,7 +9,7 @@
                 type="is-warning"
                 aria-close-label="Close notification"
             >
-                Click to verify your email {{ user.name }}.
+                Click to verify your email {{ user.name }}
             </b-notification>
             <template v-slot:content>
                 <b>Email verification</b>, click on this notification to get a
