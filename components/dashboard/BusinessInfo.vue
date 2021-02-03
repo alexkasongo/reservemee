@@ -71,8 +71,13 @@
                             <v-img
                                 class="elevation-6"
                                 alt=""
-                                :src="storeProfile.storeOwnerImage"
+                                src="https://via.placeholder.com/150"
                             ></v-img>
+                            <!-- <v-img
+                                class="elevation-6"
+                                alt=""
+                                :src="storeProfile.storeOwnerImage"
+                            ></v-img> -->
                         </v-list-item-avatar>
 
                         <v-list-item-content
@@ -86,55 +91,75 @@
                                 storeProfile.storeName | capitalize
                             }}</v-list-item-title>
                         </v-list-item-content>
-                        <v-list-item-content
-                            v-if="
-                                !storeProfile.facebook &&
-                                !storeProfile.instagram &&
-                                !storeProfile.twitter
-                            "
-                        >
-                            <v-list-item-title>Social Card</v-list-item-title>
-                        </v-list-item-content>
 
-                        <v-row align="center" justify="end">
-                            <a
-                                v-if="storeProfile.facebook"
-                                :href="storeProfile.facebook"
-                                target="_blank"
+                        <section class="b-tooltips">
+                            <b-tooltip
+                                position="is-bottom"
+                                multilined
+                                style="width: 100%"
                             >
-                                <v-btn icon>
-                                    <v-icon>mdi-facebook</v-icon>
-                                </v-btn>
+                                <div @click="$router.push('/settings')">
+                                    <b-notification
+                                        type="is-primary"
+                                        style="cursor: pointer"
+                                        :closable="false"
+                                        v-if="
+                                            !storeProfile.facebook &&
+                                            !storeProfile.instagram &&
+                                            !storeProfile.twitter
+                                        "
+                                    >
+                                        <div
+                                            class="is-flex is-justify-content-space-between"
+                                        >
+                                            <p class="m-0">Social Card</p>
+                                            <b-icon
+                                                icon="pencil"
+                                                size="is-small"
+                                            >
+                                            </b-icon>
+                                        </div>
+                                    </b-notification>
+                                </div>
+                                <template v-slot:content>
+                                    Click on this notification to add social
+                                    handles.
+                                </template>
+                            </b-tooltip>
+                        </section>
+
+                        <section>
+                            <a :href="storeProfile.facebook" target="_blank">
+                                <b-icon
+                                    icon="facebook"
+                                    v-if="storeProfile.facebook"
+                                >
+                                    <v-btn icon>
+                                        <v-icon>mdi-facebook</v-icon>
+                                    </v-btn>
+                                </b-icon>
                             </a>
-                            <a
-                                v-if="storeProfile.instagram"
-                                :href="storeProfile.instagram"
-                                target="_blank"
-                            >
-                                <v-btn icon>
-                                    <v-icon>mdi-instagram</v-icon>
-                                </v-btn>
+                            <a :href="storeProfile.instagram" target="_blank">
+                                <b-icon
+                                    icon="instagram"
+                                    v-if="storeProfile.instagram"
+                                >
+                                    <v-btn icon>
+                                        <v-icon>mdi-instagram</v-icon>
+                                    </v-btn>
+                                </b-icon>
                             </a>
-                            <a
-                                v-if="storeProfile.twitter"
-                                :href="storeProfile.twitter"
-                                target="_blank"
-                            >
-                                <v-btn icon>
-                                    <v-icon>mdi-twitter</v-icon>
-                                </v-btn>
+                            <a :href="storeProfile.twitter" target="_blank">
+                                <b-icon
+                                    icon="twitter"
+                                    v-if="storeProfile.twitter"
+                                >
+                                    <v-btn icon>
+                                        <v-icon>mdi-twitter</v-icon>
+                                    </v-btn>
+                                </b-icon>
                             </a>
-                            <a
-                                v-if="
-                                    !storeProfile.facebook &&
-                                    !storeProfile.instagram &&
-                                    !storeProfile.twitter
-                                "
-                                ><v-btn @click="$router.push('/settings')" icon>
-                                    <v-icon>mdi-pencil</v-icon>
-                                </v-btn></a
-                            >
-                        </v-row>
+                        </section>
                     </v-list-item>
                 </v-card-actions>
             </v-card>
