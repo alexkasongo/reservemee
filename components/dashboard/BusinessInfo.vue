@@ -63,106 +63,74 @@
             </div>
             <!-- Services end -->
             <!-- Social media card start -->
-            <div v-if="this.storeProfile"></div>
-            <v-card class="mx-auto" color="teal darker-1" elevation="0" dark>
-                <v-card-actions>
-                    <v-list-item class="grow">
-                        <v-list-item-avatar color="grey darken-3">
-                            <v-img
-                                class="elevation-6"
-                                alt=""
-                                src="https://via.placeholder.com/150"
-                            ></v-img>
-                            <!-- <v-img
-                                class="elevation-6"
-                                alt=""
-                                :src="storeProfile.storeOwnerImage"
-                            ></v-img> -->
-                        </v-list-item-avatar>
+            <section>
+                <div
+                    v-if="
+                        storeProfile.facebook ||
+                        storeProfile.instagram ||
+                        storeProfile.twitter
+                    "
+                >
+                    {{ storeProfile.storeName | capitalize }}
+                </div>
 
-                        <v-list-item-content
-                            v-if="
-                                storeProfile.facebook ||
-                                storeProfile.instagram ||
-                                storeProfile.twitter
-                            "
-                        >
-                            <v-list-item-title>{{
-                                storeProfile.storeName | capitalize
-                            }}</v-list-item-title>
-                        </v-list-item-content>
-
-                        <section class="b-tooltips">
-                            <b-tooltip
-                                position="is-bottom"
-                                multilined
-                                style="width: 100%"
+                <section class="b-tooltips">
+                    <b-tooltip
+                        position="is-bottom"
+                        multilined
+                        style="width: 100%"
+                    >
+                        <div @click="$router.push('/settings')">
+                            <b-notification
+                                type="is-primary"
+                                style="cursor: pointer"
+                                :closable="false"
+                                v-if="
+                                    !storeProfile.facebook &&
+                                    !storeProfile.instagram &&
+                                    !storeProfile.twitter
+                                "
                             >
-                                <div @click="$router.push('/settings')">
-                                    <b-notification
-                                        type="is-primary"
-                                        style="cursor: pointer"
-                                        :closable="false"
-                                        v-if="
-                                            !storeProfile.facebook &&
-                                            !storeProfile.instagram &&
-                                            !storeProfile.twitter
-                                        "
-                                    >
-                                        <div
-                                            class="is-flex is-justify-content-space-between"
-                                        >
-                                            <p class="m-0">Social Card</p>
-                                            <b-icon
-                                                icon="pencil"
-                                                size="is-small"
-                                            >
-                                            </b-icon>
-                                        </div>
-                                    </b-notification>
+                                <div
+                                    class="is-flex is-justify-content-space-between"
+                                >
+                                    <p class="m-0">Social Card</p>
+                                    <b-icon icon="pencil" size="is-small">
+                                    </b-icon>
                                 </div>
-                                <template v-slot:content>
-                                    Click on this notification to add social
-                                    handles.
-                                </template>
-                            </b-tooltip>
-                        </section>
+                            </b-notification>
+                        </div>
+                        <template v-slot:content>
+                            Click on this notification to add social handles.
+                        </template>
+                    </b-tooltip>
+                </section>
 
-                        <section>
-                            <a :href="storeProfile.facebook" target="_blank">
-                                <b-icon
-                                    icon="facebook"
-                                    v-if="storeProfile.facebook"
-                                >
-                                    <v-btn icon>
-                                        <v-icon>mdi-facebook</v-icon>
-                                    </v-btn>
-                                </b-icon>
-                            </a>
-                            <a :href="storeProfile.instagram" target="_blank">
-                                <b-icon
-                                    icon="instagram"
-                                    v-if="storeProfile.instagram"
-                                >
-                                    <v-btn icon>
-                                        <v-icon>mdi-instagram</v-icon>
-                                    </v-btn>
-                                </b-icon>
-                            </a>
-                            <a :href="storeProfile.twitter" target="_blank">
-                                <b-icon
-                                    icon="twitter"
-                                    v-if="storeProfile.twitter"
-                                >
-                                    <v-btn icon>
-                                        <v-icon>mdi-twitter</v-icon>
-                                    </v-btn>
-                                </b-icon>
-                            </a>
-                        </section>
-                    </v-list-item>
-                </v-card-actions>
-            </v-card>
+                <section>
+                    <a :href="storeProfile.facebook" target="_blank">
+                        <b-icon icon="facebook" v-if="storeProfile.facebook">
+                            <v-btn icon>
+                                <v-icon>mdi-facebook</v-icon>
+                            </v-btn>
+                        </b-icon>
+                    </a>
+                    <a :href="storeProfile.instagram" target="_blank">
+                        <b-icon icon="instagram" v-if="storeProfile.instagram">
+                            <v-btn icon>
+                                <v-icon>mdi-instagram</v-icon>
+                            </v-btn>
+                        </b-icon>
+                    </a>
+                    <a :href="storeProfile.twitter" target="_blank">
+                        <b-icon icon="twitter" v-if="storeProfile.twitter">
+                            <v-btn icon>
+                                <v-icon>mdi-twitter</v-icon>
+                            </v-btn>
+                        </b-icon>
+                    </a>
+                </section>
+            </section>
+
             <!-- Social media card end -->
         </div>
         <div v-else>
