@@ -6,9 +6,9 @@
         </div>
         <!-- Header End-->
 
-        <div class="columns mt-5">
+        <div class="columns pl-3 mt-5">
             <div
-                class="dashboard__bg column is-full-mobile is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd"
+                class="p-5 dashboard__bg column is-full-mobile is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd"
             >
                 <!-- Personal-Information -->
                 <BusinessInfo class="mb-5" />
@@ -185,8 +185,7 @@ export default {
 .dashboard {
     margin: 0 0 200px 0;
     .dashboard__bg {
-        background-color: purple;
-        // background-color: #fafafa;
+        background-color: #fafafa;
         border-radius: 24px;
     }
 }
