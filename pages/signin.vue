@@ -73,7 +73,9 @@
                             >
                             </b-input>
                         </b-field>
-
+                        <b-field v-if="error">
+                            <p>{{ this.error }}</p>
+                        </b-field>
                         <b-field class="buttons">
                             <b-button
                                 type="submit"
@@ -132,7 +134,8 @@ export default {
     data() {
         return {
             email: '',
-            password: ''
+            password: '',
+            error: ''
         };
     },
     computed: {
@@ -144,15 +147,14 @@ export default {
     methods: {
         ...mapActions(['login']),
         onSubmit() {
-            if (this.email || this.password === '') {
-                this.error = 'you must fill in email and password.';
+            if (this.email === '' || this.password === '') {
+                this.error = 'you must enter both email and password.';
                 return;
             }
             let loginDetails = {
                 email: this.email,
                 password: this.password
             };
-            // console.log(`signin.vue - 150 - 🍎`, loginDetails);
             this.login(loginDetails);
         }
         // Vee Validate
