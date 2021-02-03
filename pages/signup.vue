@@ -4,82 +4,12 @@
             <div class="signup__left"></div>
             <div class="signup__right">
                 <div class="signin__right-card">
-                    <div class="h1">Customer Signup</div>
-                    <validation-observer ref="observer" v-slot="{ invalid }">
-                        <form @submit.prevent="onSubmit">
-                            <!-- Name -->
-                            <validation-provider
-                                v-slot="{ errors }"
-                                name="Name"
-                                rules="required|max:10"
-                            >
-                                <v-text-field
-                                    v-model="name"
-                                    :counter="10"
-                                    :error-messages="errors"
-                                    label="Name"
-                                    required
-                                ></v-text-field>
-                            </validation-provider>
-                            <!-- Name End -->
-                            <!-- Email -->
-                            <validation-provider
-                                v-slot="{ errors }"
-                                name="email"
-                                rules="required|email"
-                            >
-                                <v-text-field
-                                    v-model="email"
-                                    :error-messages="errors"
-                                    label="E-mail"
-                                    required
-                                ></v-text-field>
-                            </validation-provider>
-                            <!-- Email End -->
-                            <!-- Password -->
-                            <validation-provider
-                                v-slot="{ errors }"
-                                name="Password"
-                                rules="required|max:10"
-                            >
-                                <v-text-field
-                                    type="password"
-                                    v-model="password"
-                                    :counter="10"
-                                    :error-messages="errors"
-                                    label="Password"
-                                    required
-                                ></v-text-field>
-                            </validation-provider>
-                            <!-- Password End -->
-                            <!-- ERRORS -->
-                            <div v-if="errors" class="form-group text-muted">
-                                {{ errors.message }}
-                            </div>
-                            <!-- ERRORS END -->
-                            <!-- Submit Button -->
-                            <v-btn
-                                class="mr-4"
-                                type="submit"
-                                :loading="loading"
-                                :disabled="invalid"
-                            >
-                                submit
-                            </v-btn>
-                            <v-btn @click="clear"> clear </v-btn>
-                        </form>
-                    </validation-observer>
-                </div>
-
-                <!--  -->
-
-                <div class="signin__right-card">
                     <form @submit.prevent="onSubmit">
                         <section>
-                            <b-field label="Email">
+                            <b-field label="Name">
                                 <b-input
                                     v-model="name"
-                                    type="email"
+                                    type="text"
                                     maxlength="30"
                                 >
                                 </b-input>
@@ -163,7 +93,8 @@ export default {
         name: '',
         phone: '',
         email: '',
-        password: ''
+        password: '',
+        error: ''
     }),
     computed: {
         ...mapGetters({
@@ -174,6 +105,10 @@ export default {
     methods: {
         ...mapActions(['signup']),
         onSubmit() {
+            if (this.name === '' || this.email === '' || this.password === '') {
+                this.error = 'you must enter both email and password.';
+                return;
+            }
             let signupDetails = {
                 name: this.name,
                 email: this.email,
