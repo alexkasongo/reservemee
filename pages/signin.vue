@@ -3,57 +3,6 @@
         <div class="signin__left"></div>
         <div class="signin__right">
             <div class="signin__right-card">
-                <!-- <div class="h1">Signin</div> -->
-                <!-- <validation-observer ref="observer" v-slot="{ invalid }">
-                    <form @submit.prevent="onSubmit">
-
-                        <validation-provider
-                            v-slot="{ errors }"
-                            name="email"
-                            rules="required|email"
-                        >
-                            <v-text-field
-                                v-model="email"
-                                :error-messages="errors"
-                                label="E-mail"
-                                required
-                            ></v-text-field>
-                        </validation-provider>
-
-
-                        <validation-provider
-                            v-slot="{ errors }"
-                            name="Password"
-                            rules="required|max:10"
-                        >
-                            <v-text-field
-                                type="password"
-                                v-model="password"
-                                :counter="10"
-                                :error-messages="errors"
-                                label="Password"
-                                required
-                            ></v-text-field>
-                        </validation-provider>
-
-
-                        <div v-if="errors" class="form-group text-muted mt-3">
-                            {{ errors.message }}
-                        </div>
-
-
-                        <v-btn
-                            class="mr-4"
-                            type="submit"
-                            :loading="loading"
-                            :disabled="invalid"
-                        >
-                            signin
-                        </v-btn>
-                        <v-btn @click="clear"> clear </v-btn>
-                    </form>
-                </validation-observer> -->
-
                 <form @submit.prevent="onSubmit">
                     <section>
                         <b-field label="Email">
@@ -78,6 +27,7 @@
                         </b-field>
                         <b-field class="buttons">
                             <b-button
+                                :loading="loading"
                                 type="submit"
                                 class="button is-primary"
                                 @click="onSubmit"
