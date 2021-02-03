@@ -3,7 +3,7 @@
         <div class="signup">
             <div class="signup__left"></div>
             <div class="signup__right">
-                <div class="signin__right-card">
+                <div class="signup__right-card">
                     <form @keyup.enter="onSubmit">
                         <b-field>
                             <b-input
