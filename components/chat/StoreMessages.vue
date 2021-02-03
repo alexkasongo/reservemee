@@ -23,13 +23,12 @@
                     </div>
                 </div>
             </div>
-            <v-btn
+            <b-button
+                type="is-primary"
+                expanded
                 v-if="messages.length > 0"
                 @click="$router.push('/inbox/admin')"
-                class="teal darken-1"
-                block
-                dark
-                >View All</v-btn
+                >View All</b-button
             >
         </div>
         <!--If Messages end-->

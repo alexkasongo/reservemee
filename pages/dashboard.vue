@@ -6,36 +6,34 @@
         </div>
         <!-- Header End-->
 
-        <div class="columns is-mobile">
+        <div class="columns">
             <div
-                class="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
+                class="column is-full-quarters-mobile is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd"
             >
-                <div>
-                    <div class="mt-5 mb-5">Bio</div>
-                    <!-- Personal-Information -->
-                    <BusinessInfo />
-                    <!-- Personal-Information -->
-                    <div v-if="user">
-                        <div
-                            v-if="categories.length <= 0 || !user.emailVerified"
-                            class="mt-10 mb-5"
-                        >
-                            Todos
+                <div class="mt-5 mb-5">Bio</div>
+                <!-- Personal-Information -->
+                <BusinessInfo />
+                <!-- Personal-Information -->
+                <div v-if="user">
+                    <div
+                        v-if="categories.length <= 0 || !user.emailVerified"
+                        class="mt-10 mb-5"
+                    >
+                        Todos
+                    </div>
+                </div>
+                <div v-if="user">
+                    <div>
+                        <div v-if="categories.length <= 0">
+                            <!-- CategoryCheck -->
+                            <CategoryCheck />
+                            <!-- CategoryCheck -->
                         </div>
                     </div>
-                    <div v-if="user">
-                        <div>
-                            <div v-if="categories.length <= 0">
-                                <!-- CategoryCheck -->
-                                <CategoryCheck />
-                                <!-- CategoryCheck -->
-                            </div>
-                        </div>
-                        <div v-if="!user.emailVerified" class="w-100">
-                            <!-- EmailVerified -->
-                            <EmailVerified />
-                            <!-- EmailVerified -->
-                        </div>
+                    <div v-if="!user.emailVerified" class="w-100">
+                        <!-- EmailVerified -->
+                        <EmailVerified />
+                        <!-- EmailVerified -->
                     </div>
                 </div>
 
@@ -47,34 +45,24 @@
                 </div>
             </div>
             <div class="column">
-                <div class="col-md-8">
-                    <!-- StoreSummary -->
-                    <StoreSummary />
-                    <!-- StoreSummary -->
+                <!-- StoreSummary -->
+                <StoreSummary />
+                <!-- StoreSummary -->
 
-                    <!-- <div v-if="!loading">
-                        <Scheduling class="services" />
-                        <UpcomingEvents />
-                    </div> -->
-                    <div class="display-1 mt-10 mb-5">Calendar</div>
-                    <!-- <v-card elevation="2"> -->
-                    <Calendar />
-                    <!-- </v-card>s -->
+                <div class="display-1 mt-10 mb-5">Calendar</div>
+                <!-- <v-card elevation="2"> -->
+                <Calendar />
+                <!-- </v-card>s -->
 
-                    <div>
-                        <div class="display-1 mt-10 mb-5">Services</div>
-                        <!-- ManageServices -->
-                        <ManageServices v-if="categories.length !== 0" />
-                        <!-- ManageServices -->
+                <div>
+                    <div class="display-1 mt-10 mb-5">Services</div>
+                    <!-- ManageServices -->
+                    <ManageServices v-if="categories.length !== 0" />
+                    <!-- ManageServices -->
 
-                        <!-- ManageServices -->
-                        <ManageServices v-else />
-                        <!-- ManageServices -->
-                    </div>
-
-                    <!-- <v-card elevation="2">
-                            <UpcomingEvents />
-                        </v-card> -->
+                    <!-- ManageServices -->
+                    <ManageServices v-else />
+                    <!-- ManageServices -->
                 </div>
             </div>
         </div>
