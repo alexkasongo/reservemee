@@ -27,7 +27,6 @@
         "fs": "^0.0.1-security",
         "nuxt": "^2.14.12",
         "nuxt-buefy": "^0.4.4",
-        "vee-validate": "^3.4.5",
         "vue-cal": "^3.10.0",
         "vue-sweetalert2": "^3.0.8",
         "vue-textarea-autosize": "^1.1.1",

@@ -40,8 +40,7 @@ module.exports = {
     plugins: [
         '~/plugins/firebase.js',
         '~plugins/filters.js',
-        { src: '~/plugins/localStorage.js', ssr: false },
-        { src: '~/plugins/vee-validate.js', ssr: true }
+        { src: '~/plugins/localStorage.js', ssr: false }
     ],
     /*
      ** Router Settings
@@ -87,7 +86,6 @@ module.exports = {
      ** See https://nuxtjs.org/api/configuration-build/
      */
     build: {
-        transpile: ['vee-validate/dist/rules'],
         extractCss: true,
         babel: {
             presets: ({ isServer }) => [
