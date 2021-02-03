@@ -6,48 +6,47 @@
         </div>
         <!-- Header End-->
 
-        <section class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div>
-                        <div class="display-1 mt-5 mb-5">Bio</div>
-                        <!-- Personal-Information -->
-                        <BusinessInfo />
-                        <!-- Personal-Information -->
-                        <div v-if="user">
-                            <div
-                                v-if="
-                                    categories.length <= 0 ||
-                                    !user.emailVerified
-                                "
-                                class="display-1 mt-10 mb-5"
-                            >
-                                Todos
-                            </div>
-                        </div>
-                        <div v-if="user">
-                            <div>
-                                <div v-if="categories.length <= 0">
-                                    <!-- CategoryCheck -->
-                                    <CategoryCheck />
-                                    <!-- CategoryCheck -->
-                                </div>
-                            </div>
-                            <div v-if="!user.emailVerified" class="w-100">
-                                <!-- EmailVerified -->
-                                <EmailVerified />
-                                <!-- EmailVerified -->
-                            </div>
+        <div class="columns is-mobile">
+            <div
+                class="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
+            >
+                <div>
+                    <div class="mt-5 mb-5">Bio</div>
+                    <!-- Personal-Information -->
+                    <BusinessInfo />
+                    <!-- Personal-Information -->
+                    <div v-if="user">
+                        <div
+                            v-if="categories.length <= 0 || !user.emailVerified"
+                            class="mt-10 mb-5"
+                        >
+                            Todos
                         </div>
                     </div>
-
-                    <div>
-                        <div class="display-1 mt-10 mb-5">Messages</div>
-                        <!-- Messages -->
-                        <StoreMessages />
-                        <!-- Messages -->
+                    <div v-if="user">
+                        <div>
+                            <div v-if="categories.length <= 0">
+                                <!-- CategoryCheck -->
+                                <CategoryCheck />
+                                <!-- CategoryCheck -->
+                            </div>
+                        </div>
+                        <div v-if="!user.emailVerified" class="w-100">
+                            <!-- EmailVerified -->
+                            <EmailVerified />
+                            <!-- EmailVerified -->
+                        </div>
                     </div>
                 </div>
+
+                <div>
+                    <div class="display-1 mt-10 mb-5">Messages</div>
+                    <!-- Messages -->
+                    <StoreMessages />
+                    <!-- Messages -->
+                </div>
+            </div>
+            <div class="column">
                 <div class="col-md-8">
                     <!-- StoreSummary -->
                     <StoreSummary />
@@ -77,10 +76,71 @@
                             <UpcomingEvents />
                         </v-card> -->
                 </div>
-
-                <!-- end col -->
             </div>
-        </section>
+        </div>
+
+        <!-- <section class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div>
+                        <div class="display-1 mt-5 mb-5">Bio</div>
+
+                        <BusinessInfo />
+
+                        <div v-if="user">
+                            <div
+                                v-if="
+                                    categories.length <= 0 ||
+                                    !user.emailVerified
+                                "
+                                class="display-1 mt-10 mb-5"
+                            >
+                                Todos
+                            </div>
+                        </div>
+                        <div v-if="user">
+                            <div>
+                                <div v-if="categories.length <= 0">
+
+                                    <CategoryCheck />
+
+                                </div>
+                            </div>
+                            <div v-if="!user.emailVerified" class="w-100">
+
+                                <EmailVerified />
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="display-1 mt-10 mb-5">Messages</div>
+
+                        <StoreMessages />
+
+                    </div>
+                </div>
+                <div class="col-md-8">
+
+                    <StoreSummary />
+
+                    <div class="display-1 mt-10 mb-5">Calendar</div>
+
+                    <Calendar />
+
+
+                    <div>
+                        <div class="display-1 mt-10 mb-5">Services</div>
+
+                        <ManageServices v-if="categories.length !== 0" />
+
+                        <ManageServices v-else />
+
+                    </div>
+                </div>
+            </div>
+        </section> -->
     </div>
 </template>
 
@@ -132,5 +192,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
