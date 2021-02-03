@@ -4,7 +4,7 @@
             <b-navbar-item tag="router-link" :to="{ path: '/' }">
                 <img
                     @click="goHome(user)"
-                    src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png"
+                    :src="logo"
                     alt="Lightweight UI components for Vue.js based on Bulma"
                 />
             </b-navbar-item>
@@ -23,16 +23,27 @@
         <template #end>
             <b-navbar-item tag="div">
                 <div class="buttons">
-                    <a @click="signin" class="button is-light"> Log in </a>
-                    <a @click="signup" class="button is-primary">
-                        <strong>Sign up</strong>
-                    </a>
-                    <a
-                        @click="$router.push('/signup-admin')"
-                        class="button is-primary"
-                    >
-                        <strong>Admin</strong>
-                    </a>
+                    <div v-if="$route.name !== 'signin'">
+                        <a @click="signin" v-if="!user" class="button is-light">
+                            Log in
+                        </a>
+                    </div>
+                    <div v-else>
+                        <a
+                            @click="signup"
+                            v-if="!user"
+                            class="button is-primary"
+                        >
+                            <strong>Sign up</strong>
+                        </a>
+                        <a
+                            @click="$router.push('/signup-admin')"
+                            v-if="!user"
+                            class="button is-primary"
+                        >
+                            <strong>Admin</strong>
+                        </a>
+                    </div>
                 </div>
             </b-navbar-item>
         </template>
@@ -40,6 +51,8 @@
 </template>
 
 <script>
+import logo from 'assets/images/logo.png';
+
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { db } from '@/plugins/firebase';
@@ -50,6 +63,7 @@ export default {
     head: {},
     data() {
         return {
+            logo: logo,
             user: '',
             role: '',
             drawer: false,
@@ -210,6 +224,7 @@ export default {
         }
     },
     mounted() {
+        console.log(`Navbar.vue - 220 - ✅`, this.$route.name);
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.user = user;

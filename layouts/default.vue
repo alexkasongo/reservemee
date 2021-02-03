@@ -1,9 +1,9 @@
 <template>
     <div>
         <client-only>
-            <div v-if="loading" class="loading">
+            <!-- <div v-if="loading" class="loading">
                 <p>loading...</p>
-            </div>
+            </div> -->
             <Navbar />
 
             <!-- SNACKBAR -->

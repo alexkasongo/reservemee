@@ -43,44 +43,8 @@
 </template>
 
 <script>
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
 import { mapGetters, mapActions } from 'vuex';
-
-import { required, email, max } from 'vee-validate/dist/rules';
-import {
-    extend,
-    ValidationObserver,
-    ValidationProvider,
-    setInteractionMode
-} from 'vee-validate';
-
-/*
- ** Vee Validate
- */
-setInteractionMode('eager');
-
-extend('required', {
-    ...required,
-    message: '{_field_} can not be empty'
-});
-
-extend('max', {
-    ...max,
-    message: '{_field_} may not be greater than {length} characters'
-});
-
-extend('email', {
-    ...email,
-    message: 'Email must be valid'
-});
-// Vee Validate End
-
 export default {
-    components: {
-        ValidationProvider,
-        ValidationObserver
-    },
     data() {
         return {
             email: '',
@@ -107,18 +71,6 @@ export default {
             };
             this.login(loginDetails);
         }
-        // Vee Validate
-        // submit() {
-        //     this.$refs.observer.validate();
-        // },
-        // clear() {
-        //     this.name = '';
-        //     this.email = '';
-        //     this.select = null;
-        //     this.checkbox = null;
-        //     this.$refs.observer.reset();
-        // }
-        // Vee Validate End
     },
     mounted() {
         this.email = localStorage.getItem('email');

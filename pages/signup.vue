@@ -42,7 +42,7 @@
                                     class="button is-primary"
                                     @click="onSubmit"
                                     expanded
-                                    >signin</b-button
+                                    >signup</b-button
                                 >
                             </b-field>
                         </section>
@@ -55,40 +55,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import { required, email, max } from 'vee-validate/dist/rules';
-import {
-    extend,
-    ValidationObserver,
-    ValidationProvider,
-    setInteractionMode
-} from 'vee-validate';
-
-/*
- ** Vee Validate
- */
-setInteractionMode('eager');
-
-extend('required', {
-    ...required,
-    message: '{_field_} can not be empty'
-});
-
-extend('max', {
-    ...max,
-    message: '{_field_} may not be greater than {length} characters'
-});
-
-extend('email', {
-    ...email,
-    message: 'Email must be valid'
-});
-// Vee Validate End
 
 export default {
-    components: {
-        ValidationProvider,
-        ValidationObserver
-    },
     data: () => ({
         name: '',
         phone: '',
@@ -117,22 +85,9 @@ export default {
                     customer: true
                 }
             };
-            console.log(`signup.vue - 185 - 🍎`, signupDetails);
-            // this.signup(signupDetails);
+            this.signup(signupDetails);
             this.clear;
-        },
-        // Vee Validate
-        submit() {
-            this.$refs.observer.validate();
-        },
-        clear() {
-            this.name = '';
-            this.email = '';
-            this.select = null;
-            this.checkbox = null;
-            this.$refs.observer.reset();
         }
-        // Vee Validate End
     },
     mounted() {
         this.email = localStorage.getItem('email');
