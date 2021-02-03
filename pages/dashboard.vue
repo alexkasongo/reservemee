@@ -14,12 +14,12 @@
                 <BusinessInfo class="mb-5" />
                 <!-- Personal-Information -->
                 <div v-if="user">
-                    <div
+                    <h5
                         v-if="categories.length <= 0 || !user.emailVerified"
-                        class="mt-10 mb-5"
+                        class="title is-5 mt-10 mb-5"
                     >
                         Todos
-                    </div>
+                    </h5>
                 </div>
                 <div v-if="user">
                     <div v-if="categories.length <= 0" class="mb-5">
@@ -35,7 +35,7 @@
                 </div>
 
                 <div>
-                    <div class="display-1 mt-10 mb-5">Messages</div>
+                    <h5 class="title is-5 mt-10 mb-5">Messages</h5>
                     <!-- Messages -->
                     <StoreMessages />
                     <!-- Messages -->

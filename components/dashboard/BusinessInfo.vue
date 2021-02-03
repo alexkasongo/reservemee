@@ -4,7 +4,7 @@
         <div v-if="storeProfile !== null" class="panel-body">
             <p>{{ storeProfile.storeBio }}</p>
 
-            <div class="mt-5 mb-5">
+            <div class="mt-5">
                 <p>
                     <strong>Store Name :</strong>
                     <span class="m-l-15">{{
@@ -28,49 +28,51 @@
                 <!-- Services start -->
                 <div v-if="this.storeProfile">
                     <p v-if="beauty !== null">
-                        <strong>Services :</strong>
-                        <span v-for="service in beauty" :key="service.name">
-                            <span class="m-l-5">
-                                <span
-                                    class="flag-icon flag-icon-us m-r-5"
-                                    title="us"
-                                ></span>
-                                <v-chip class="mb-2">{{ service }}</v-chip>
-                            </span>
-                        </span>
-                        <span v-for="service in wellness" :key="service.name">
-                            <span class="m-l-5">
-                                <span
-                                    class="flag-icon flag-icon-us m-r-5 m-t-0"
-                                    title="us"
-                                ></span>
-                                <v-chip class="mb-2">{{ service }}</v-chip>
-                            </span>
-                        </span>
-                        <span v-for="service in fitness" :key="service.name">
-                            <span class="m-l-5">
-                                <span
-                                    class="flag-icon flag-icon-us m-r-5 m-t-0"
-                                    title="us"
-                                ></span>
-                                <v-chip class="mb-2">{{ service }}</v-chip>
-                            </span>
-                        </span>
+                        <b-taglist>
+                            <div v-for="service in beauty" :key="service.name">
+                                <b-tag
+                                    class="ml-1 mr-1"
+                                    type="is-link is-light"
+                                    >{{ service }}</b-tag
+                                >
+                            </div>
+                        </b-taglist>
+                        <b-taglist>
+                            <div
+                                v-for="service in wellness"
+                                :key="service.name"
+                            >
+                                <b-tag
+                                    class="ml-1 mr-1"
+                                    type="is-link is-light"
+                                    >{{ service }}</b-tag
+                                >
+                            </div>
+                        </b-taglist>
+                        <b-taglist>
+                            <div v-for="service in fitness" :key="service.name">
+                                <b-tag class="mr-1" type="is-link is-light">{{
+                                    service
+                                }}</b-tag>
+                            </div>
+                        </b-taglist>
                     </p>
                 </div>
             </div>
             <!-- Services end -->
             <!-- Social media card start -->
             <section>
-                <div
+                <h5
+                    class="title is-5 m-0"
                     v-if="
                         storeProfile.facebook ||
                         storeProfile.instagram ||
                         storeProfile.twitter
                     "
                 >
-                    {{ storeProfile.storeName | capitalize }}
-                </div>
+                    <!-- {{ storeProfile.storeName | capitalize }} -->
+                    Socials
+                </h5>
 
                 <section class="b-tooltips">
                     <b-tooltip
