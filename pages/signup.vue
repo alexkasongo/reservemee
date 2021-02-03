@@ -4,48 +4,42 @@
             <div class="signup__left"></div>
             <div class="signup__right">
                 <div class="signin__right-card">
-                    <form @submit.prevent="onSubmit">
-                        <section>
-                            <b-field label="Name">
-                                <b-input
-                                    v-model="name"
-                                    type="text"
-                                    maxlength="30"
-                                >
-                                </b-input>
-                            </b-field>
+                    <form @keyup.enter="onSubmit">
+                        <b-field label="Name">
+                            <b-input v-model="name" type="text" maxlength="30">
+                            </b-input>
+                        </b-field>
 
-                            <b-field label="Email">
-                                <b-input
-                                    v-model="email"
-                                    type="email"
-                                    maxlength="30"
-                                >
-                                </b-input>
-                            </b-field>
+                        <b-field label="Email">
+                            <b-input
+                                v-model="email"
+                                type="email"
+                                maxlength="30"
+                            >
+                            </b-input>
+                        </b-field>
 
-                            <b-field label="Password">
-                                <b-input
-                                    type="password"
-                                    v-model="password"
-                                    password-reveal
-                                >
-                                </b-input>
-                            </b-field>
-                            <b-field v-if="error">
-                                <p>{{ this.error }}</p>
-                            </b-field>
-                            <b-field class="buttons">
-                                <b-button
-                                    :loading="loading"
-                                    type="submit"
-                                    class="button is-primary"
-                                    @click="onSubmit"
-                                    expanded
-                                    >signup</b-button
-                                >
-                            </b-field>
-                        </section>
+                        <b-field label="Password">
+                            <b-input
+                                type="password"
+                                v-model="password"
+                                password-reveal
+                            >
+                            </b-input>
+                        </b-field>
+                        <b-field v-if="error">
+                            <p>{{ this.error }}</p>
+                        </b-field>
+                        <b-field class="buttons">
+                            <b-button
+                                :loading="loading"
+                                type="submit"
+                                class="button is-primary"
+                                @click="onSubmit"
+                                expanded
+                                >signup</b-button
+                            >
+                        </b-field>
                     </form>
                 </div>
             </div>
