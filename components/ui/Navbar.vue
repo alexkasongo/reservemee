@@ -229,7 +229,6 @@ export default {
         }
     },
     mounted() {
-        console.log(`Navbar.vue - 220 - ✅`, this.$route.name);
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.user = user;

@@ -25,10 +25,10 @@
                         alt
                         class="header__thumb-lg rounded-circle"
                     />
-                    <p class="title">
+                    <h1 class="title">
                         {{ storeProfile.storeName | capitalize }}
-                    </p>
-                    <p class="subtitle">{{ user.displayName }}</p>
+                    </h1>
+                    <h2 class="subtitle">{{ user.displayName }}</h2>
                 </div>
             </section>
             <section v-else class="hero is-small is-link">
@@ -47,10 +47,10 @@
                         alt
                         class="header__thumb-lg rounded-circle"
                     />
-                    <p class="title">
+                    <h1 class="title">
                         {{ storeProfile.storeName | capitalize }}
-                    </p>
-                    <p class="subtitle">{{ user.displayName }}</p>
+                    </h1>
+                    <h2 class="subtitle">{{ user.displayName }}</h2>
                 </div>
             </section>
         </section>
@@ -63,7 +63,7 @@
                     alt
                     class="header__thumb-lg rounded-circle"
                 />
-                <p class="subtitle">{{ user.displayName }}</p>
+                <h2 class="subtitle">{{ user.displayName }}</h2>
             </div>
         </section>
 

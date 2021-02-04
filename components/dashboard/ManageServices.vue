@@ -125,59 +125,6 @@
 
         <!-- BEUFY -->
         <section class="service__border">
-            <!-- <b-field grouped group-multiline>
-                <b-select v-model="defaultSortDirection">
-                    <option value="asc">Default sort direction: ASC</option>
-                    <option value="desc">Default sort direction: DESC</option>
-                </b-select>
-                <b-select v-model="perPage" :disabled="!isPaginated">
-                    <option value="5">5 per page</option>
-                    <option value="10">10 per page</option>
-                    <option value="15">15 per page</option>
-                    <option value="20">20 per page</option>
-                </b-select>
-                <div class="control">
-                    <b-button
-                        label="Set page to 2"
-                        :disabled="!isPaginated"
-                        @click="currentPage = 2"
-                    />
-                </div>
-                <div class="control is-flex">
-                    <b-switch v-model="isPaginated">Paginated</b-switch>
-                </div>
-                <div class="control is-flex">
-                    <b-switch
-                        v-model="isPaginationSimple"
-                        :disabled="!isPaginated"
-                        >Simple pagination</b-switch
-                    >
-                </div>
-                <div class="control is-flex">
-                    <b-switch
-                        v-model="isPaginationRounded"
-                        :disabled="!isPaginated"
-                        >Rounded pagination</b-switch
-                    >
-                </div>
-                <b-select v-model="paginationPosition" :disabled="!isPaginated">
-                    <option value="bottom">bottom pagination</option>
-                    <option value="top">top pagination</option>
-                    <option value="both">both</option>
-                </b-select>
-                <b-select v-model="sortIcon">
-                    <option value="arrow-up">Arrow sort icon</option>
-                    <option value="menu-up">Caret sort icon</option>
-                    <option value="chevron-up">Chevron sort icon</option>
-                </b-select>
-                <b-select v-model="sortIconSize">
-                    <option value="is-small">Small sort icon</option>
-                    <option value="">Regular sort icon</option>
-                    <option value="is-medium">Medium sort icon</option>
-                    <option value="is-large">Large sort icon</option>
-                </b-select>
-            </b-field> -->
-
             <b-table
                 :data="data"
                 :paginated="isPaginated"
