@@ -11,12 +11,10 @@
                 >
                     <v-list-item class="px-2">
                         <v-list-item-avatar v-if="user.photoURL">
-                            <v-img :src="user.photoURL"></v-img>
+                            <img :src="user.photoURL" />
                         </v-list-item-avatar>
                         <v-list-item-avatar v-else>
-                            <v-img
-                                src="https://via.placeholder.com/250"
-                            ></v-img>
+                            <img src="https://via.placeholder.com/250" />
                         </v-list-item-avatar>
 
                         <v-list-item-title>{{

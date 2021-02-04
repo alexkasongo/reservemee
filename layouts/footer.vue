@@ -1,8 +1,8 @@
 <template>
     <v-footer dark padless>
-        <v-card flat tile class="teal darker-1 white--text text-center">
-            <v-card-text>
-                <v-btn
+        <div flat tile class="teal darker-1 white--text text-center">
+            <div-text>
+                <div
                     v-for="icon in icons"
                     :key="icon"
                     class="mx-4 white--text"
@@ -11,10 +11,10 @@
                     <v-icon size="24px">
                         {{ icon }}
                     </v-icon>
-                </v-btn>
-            </v-card-text>
+                </div>
+            </div-text>
 
-            <v-card-text class="white--text pt-0">
+            <div-text class="white--text pt-0">
                 Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit
                 amet. Mauris cursus commodo interdum. Praesent ut risus eget
                 metus luctus accumsan id ultrices nunc. Sed at orci sed massa
@@ -24,15 +24,15 @@
                 Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci
                 varius natoque penatibus et magnis dis parturient montes,
                 nascetur ridiculus mus.
-            </v-card-text>
+            </div-text>
 
             <v-divider></v-divider>
 
-            <v-card-text class="white--text">
+            <div-text class="white--text">
                 {{ new Date().getFullYear() }} —
                 <strong>Aleko</strong>
-            </v-card-text>
-        </v-card>
+            </div-text>
+        </div>
     </v-footer>
 </template>
 
@@ -40,5 +40,4 @@
 export default {};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

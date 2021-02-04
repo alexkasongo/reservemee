@@ -2,7 +2,7 @@
     <div>
         <v-row cols="12" sm="6">
             <v-col v-for="(store, id) in stores" :key="id">
-                <v-card
+                <div
                     outlined
                     elevation="0"
                     class="rounded-xl mb-3"
@@ -25,11 +25,11 @@
                                     {{ store.storeBio | truncate(50, '...') }}
                                 </p>
 
-                                <v-btn elevation="0">Visit Store</v-btn>
+                                <div elevation="0">Visit Store</div>
                             </div>
                         </div>
                     </div>
-                </v-card>
+                </div>
             </v-col>
         </v-row>
     </div>

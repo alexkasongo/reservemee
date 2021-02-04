@@ -18,14 +18,14 @@
                 <small class="form-text text-muted mb-4">{{
                     errors.message
                 }}</small>
-                <v-btn
+                <div
                     @click="resetPassword"
                     class="teal darken-1"
                     dark
                     type="button"
                 >
                     Send me reset password instructions
-                </v-btn>
+                </div>
             </div>
         </form>
     </div>

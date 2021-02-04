@@ -22,7 +22,7 @@
         </div>
         <v-row v-if="!storesLoading" class="categories__popular">
             <v-col v-for="(store, id) in stores" :key="id" class="col-md-6">
-                <v-card
+                <div
                     @click="viewStore(store)"
                     class="rounded-xl"
                     :ripple="false"
@@ -38,29 +38,25 @@
                             />
                         </div>
                         <div class="categories__left-card-info">
-                            <v-card-title class="headline">{{
+                            <div-title class="headline">{{
                                 store.storeName | capitalize
-                            }}</v-card-title>
+                            }}</div-title>
 
-                            <v-card-subtitle
-                                v-text="store.description"
-                            ></v-card-subtitle>
+                            <div v-text="store.description"></div>
 
-                            <v-card-text
+                            <div-text
                                 class="text--primary categories__left-card-price"
                             >
                                 {{ store.storeBio | truncate(100, '...') }}
-                            </v-card-text>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-
-                                <v-btn icon>
+                            </div-text>
+                            <div>
+                                <div icon>
                                     <v-icon>mdi-heart</v-icon>
-                                </v-btn>
-                            </v-card-actions>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </v-card>
+                </div>
             </v-col>
         </v-row>
     </div>

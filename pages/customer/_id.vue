@@ -1,17 +1,17 @@
 <template>
-    <v-card class="container mx-auto">
+    <div>
         <v-list three-line>
             <div>
                 <template v-for="(reply, index) in filteredReplies">
                     <v-list-item :key="index">
                         <v-list-item-avatar>
-                            <v-img :src="reply.storeOwnerImage"></v-img>
+                            <img :src="reply.storeOwnerImage" />
                         </v-list-item-avatar>
                         <v-list-item-content>
                             <v-list-item-title class="deep-purple-text">{{
                                 reply.from
                             }}</v-list-item-title>
-                            <v-alert
+                            <div
                                 v-bind:class="{
                                     teal: reply.from === `${user.name}`,
                                     grey: reply.from !== `${user.name}`
@@ -19,7 +19,7 @@
                                 dark
                             >
                                 {{ reply.message }}
-                            </v-alert>
+                            </div>
                         </v-list-item-content>
                     </v-list-item>
                 </template>
@@ -40,13 +40,13 @@
                                     {{ feedback }}
                                 </p>
                             </div>
-                            <v-btn color="teal" type="submit" dark>Send</v-btn>
+                            <div color="teal" type="submit" dark>Send</div>
                         </form>
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
         </v-list>
-    </v-card>
+    </div>
 </template>
 
 <script>

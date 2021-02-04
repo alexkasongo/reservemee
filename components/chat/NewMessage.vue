@@ -9,7 +9,7 @@
                 placeholder="type in a message and press enter"
                 v-model="newMessage"
             ></v-text-field>
-            <v-btn type="submit">Send</v-btn>
+            <div type="submit">Send</div>
         </form>
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
     <div class="container margin">
-        <div class="mx-auto appointment__calendar" elevation="0">
+        <div class="appointment__calendar" elevation="0">
             <BookingCalendar />
         </div>
     </div>
@@ -103,5 +103,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

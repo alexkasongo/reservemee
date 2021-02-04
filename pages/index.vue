@@ -8,7 +8,7 @@
             <v-row align="center" justify="center" no-gutters>
                 <v-col v-if="!user" class="masthead text-white text-center">
                     <div class="overlay"></div>
-                    <v-card elevation="0" max-width="800" class="mx-auto">
+                    <div elevation="0" max-width="800">
                         <v-form @submit.prevent="onSubmit">
                             <v-container>
                                 <v-row
@@ -32,7 +32,7 @@
                                     </v-col>
 
                                     <v-col cols="12" md="4">
-                                        <v-btn
+                                        <div
                                             elevation="0"
                                             type="submit"
                                             block
@@ -41,12 +41,12 @@
                                             x-large
                                         >
                                             Get started!
-                                        </v-btn>
+                                        </div>
                                     </v-col>
                                 </v-row>
                             </v-container>
                         </v-form>
-                    </v-card>
+                    </div>
                 </v-col>
             </v-row>
 
@@ -112,9 +112,7 @@
                     <h2>What people are saying...</h2>
                     <div class="row">
                         <div class="col-lg-4">
-                            <div
-                                class="testimonial-item mx-auto mb-lg-0 user-container"
-                            >
+                            <div>
                                 <div class="user mb-3">
                                     <div class="user__container"></div>
                                 </div>
@@ -130,9 +128,7 @@
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <div
-                                class="testimonial-item mx-auto mb-lg-0 user-container"
-                            >
+                            <div>
                                 <div class="user mb-3">
                                     <div class="user__container"></div>
                                 </div>
@@ -149,9 +145,7 @@
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <div
-                                class="testimonial-item mx-auto mb-lg-0 user-container"
-                            >
+                            <div>
                                 <div class="user mb-3">
                                     <div class="user__container"></div>
                                 </div>
@@ -181,12 +175,12 @@
                 <div class="overlay"></div>
                 <div class="container">
                     <div class="row">
-                        <div class="col-xl-9 mx-auto">
+                        <div>
                             <h2 class="mb-4">
                                 Ready to get started? Sign up now!
                             </h2>
                         </div>
-                        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+                        <div>
                             <form>
                                 <div class="form-row">
                                     <div class="col-12 col-md-9 mb-2 mb-md-0">

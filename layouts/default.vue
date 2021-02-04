@@ -16,26 +16,26 @@
                 {{ text }}
 
                 <template v-slot:action="{ attrs }">
-                    <v-btn
+                    <div
                         color="teal darker-1"
                         text
                         v-bind="attrs"
                         @click="snackbar = false"
                     >
                         Close
-                    </v-btn>
+                    </div>
                 </template>
             </v-snackbar> -->
         <!-- SNACKBAR -->
 
-        <!-- <v-card class="rounded-0 mx-auto overflow-hidden">
+        <!-- <div class="rounded-0 mx-auto overflow-hidden">
                 <v-app-bar color="teal darken-1" fixed flat>
                     <v-app-bar-nav-icon
                         color="white"
                         @click.stop="drawer = !drawer"
                     ></v-app-bar-nav-icon>
 
-                    <v-btn
+                    <div
                         v-if="user"
                         color="white"
                         @click="goHome(user)"
@@ -44,14 +44,14 @@
                         x-large
                     >
                         ReserveMee
-                    </v-btn>
+                    </div>
 
-                    <v-spacer></v-spacer>
+                    
 
 
                     <v-tooltip open-delay="200" bottom v-if="user">
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn
+                            <div
                                 color="primary"
                                 dark
                                 v-bind="attrs"
@@ -70,7 +70,7 @@
                                     color="white"
                                     >mdi-message</v-icon
                                 >
-                            </v-btn>
+                            </div>
                         </template>
                         <span>Messages</span>
                     </v-tooltip>
@@ -88,7 +88,7 @@
                                     <template
                                         v-slot:activator="{ on: tooltip }"
                                     >
-                                        <v-btn
+                                        <div
                                             dark
                                             icon
                                             v-bind="attrs"
@@ -97,7 +97,7 @@
                                             <v-icon color="white"
                                                 >mdi-bell-outline</v-icon
                                             >
-                                        </v-btn>
+                                        </div>
                                     </template>
                                     <span>Notifications</span>
                                 </v-tooltip>
@@ -126,7 +126,7 @@
 
                     <v-tooltip open-delay="200" bottom v-if="user">
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn
+                            <div
                                 color="primary"
                                 dark
                                 v-bind="attrs"
@@ -142,7 +142,7 @@
                                 >
                                     <v-icon color="white">mdi-cart</v-icon>
                                 </v-badge>
-                            </v-btn>
+                            </div>
                         </template>
                         <span>View Cart</span>
                     </v-tooltip>
@@ -162,7 +162,7 @@
                                     <template
                                         v-slot:activator="{ on: tooltip }"
                                     >
-                                        <v-btn
+                                        <div
                                             elevation="0"
                                             icon
                                             dark
@@ -170,7 +170,7 @@
                                             v-on="{ ...tooltip, ...menu }"
                                         >
                                             <v-icon>mdi-dots-vertical</v-icon>
-                                        </v-btn>
+                                        </div>
                                     </template>
                                     <span>Open menu</span>
                                 </v-tooltip>
@@ -193,34 +193,34 @@
 
 
                     <div v-if="this.$route.name !== 'signin'">
-                        <v-btn
+                        <div
                             outlined
                             elevation="0"
                             text
                             class="text-lowercase white"
                             v-if="!user"
                             @click="signin"
-                            >Sign In</v-btn
+                            >Sign In</div
                         >
                     </div>
                     <div v-else>
-                        <v-btn
+                        <div
                             outlined
                             elevation="0"
                             text
                             class="text-lowercase white"
                             v-if="!user"
                             @click="signup"
-                            >Sign Up</v-btn
+                            >Sign Up</div
                         >
-                        <v-btn
+                        <div
                             outlined
                             elevation="0"
                             text
                             class="text-lowercase white"
                             v-if="!user"
                             @click="$router.push('/signup-admin')"
-                            >Admin</v-btn
+                            >Admin</div
                         >
                     </div>
                 </v-app-bar>
@@ -314,9 +314,9 @@
 
                     <template v-if="user" v-slot:append>
                         <div @click="signout" class="pa-2">
-                            <v-btn class="teal darker-1" block dark>
+                            <div class="teal darker-1" block dark>
                                 Logout
-                            </v-btn>
+                            </div>
                         </div>
                     </template>
                 </v-navigation-drawer>
@@ -330,15 +330,15 @@
                     right
                 >
                     <div>
-                        <v-btn @click.stop="drawerRight = !drawerRight" icon>
+                        <div @click.stop="drawerRight = !drawerRight" icon>
                             <v-icon color="teal darker-1"
                                 >mdi-chevron-right</v-icon
                             >
-                        </v-btn>
+                        </div>
                     </div>
                     <Cart />
                 </v-navigation-drawer>
-            </v-card> -->
+            </div> -->
 
         <div>
             <Nuxt />

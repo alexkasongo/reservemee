@@ -10,11 +10,11 @@
             <template v-slot:top> </template>
             <template v-slot:[`item.serviceImage`]="{ item }">
                 <div class="p-3">
-                    <v-img
+                    <img
                         class="cart__image"
                         lazy-src="https://picsum.photos/id/11/10/6"
                         :src="item.serviceImage"
-                    ></v-img>
+                    />
                 </div>
             </template>
             <template v-slot:[`item.actions`]="{ item }">
@@ -45,9 +45,9 @@
                 </v-col>
             </v-row>
             <div class="cart__checkout-btn pt-5 pr-0 pb-10">
-                <v-btn color="teal darker-1" dark x-large class="cart__checkout"
-                    >Checkout</v-btn
-                >
+                <div color="teal darker-1" dark x-large class="cart__checkout">
+                    Checkout
+                </div>
             </div>
         </div>
     </div>

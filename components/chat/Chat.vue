@@ -1,7 +1,7 @@
 <template>
     <div class="chat">
         <!-- Messages -->
-        <v-card>
+        <div>
             <div class="container">
                 <p>test</p>
                 <div
@@ -28,12 +28,13 @@
                         </div>
 
                         <div class="inbox-item__left">
-                            <v-btn
+                            <div
                                 @click="viewProfile(message)"
                                 class="teal darken-1"
                                 dark
-                                >Reply</v-btn
                             >
+                                Reply
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -41,7 +42,7 @@
                     <NewMessage />
                 </div>
             </div>
-        </v-card>
+        </div>
         <!-- Messages -->
     </div>
 </template>

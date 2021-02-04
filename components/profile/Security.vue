@@ -36,14 +36,14 @@
                 <div v-if="errors" class="form-group text-muted">
                     {{ errors.message }}
                 </div>
-                <v-btn
+                <div
                     @click="changePassword"
                     color="red darken-1"
                     type="button"
                     dark
                 >
                     Change
-                </v-btn>
+                </div>
             </div>
         </v-form>
 
@@ -65,12 +65,9 @@
                                 States</small
                             >
                         </div>
-                        <v-btn
-                            class="btn btn-light btn-sm ml-auto"
-                            type="button"
-                        >
+                        <div class="btn btn-light btn-sm ml-auto" type="button">
                             More info
-                        </v-btn>
+                        </div>
                     </li>
                 </ul>
             </div>

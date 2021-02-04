@@ -2,71 +2,66 @@
     <div class="inbox container">
         <!-- Alert start-->
         <div v-if="!filteredUserData.storeOwnerImage">
-            <v-alert
+            <div
                 style="cursor: pointer"
                 @click="$router.push(`/profile/${user.uid}`)"
                 icon="mdi-alert-circle-outline"
                 text
                 type="info"
-                >Go to setting and add profile picture to unlock inbox</v-alert
             >
+                Go to setting and add profile picture to unlock inbox
+            </div>
         </div>
         <!-- Alert End -->
 
         <div class="inbox__card-container">
             <div class="inbox__left">
-                <v-card class="mx-auto" height="100%" width="100%" tile>
+                <div>
                     <v-navigation-drawer width="100%" permanent>
                         <!-- HEADER -->
-                        <v-card
+                        <div
                             elevation="0"
-                            class="mx-auto inbox__left-card"
+                            class="inbox__left-card"
                             width="100%"
                             tile
                         >
-                            <v-img height="100%" class="teal darker-1">
-                                <v-row
-                                    align="end"
-                                    class="fill-height inbox__left-card-header"
+                            <img height="100%" class="teal darker-1" />
+                            <v-row
+                                align="end"
+                                class="fill-height inbox__left-card-header"
+                            >
+                                <v-col
+                                    align-self="start"
+                                    class="pa-0"
+                                    cols="12"
                                 >
-                                    <v-col
-                                        align-self="start"
-                                        class="pa-0"
-                                        cols="12"
+                                    <div
+                                        class="profile"
+                                        color="grey"
+                                        size="164"
+                                        tile
                                     >
-                                        <v-avatar
-                                            class="profile"
-                                            color="grey"
-                                            size="164"
-                                            tile
-                                        >
-                                            <v-img
-                                                :src="
-                                                    filteredUserData.storeOwnerImage
-                                                "
-                                            ></v-img>
-                                        </v-avatar>
-                                    </v-col>
-                                    <v-col class="py-0">
-                                        <v-list-item
-                                            color="rgba(0, 0, 0, .4)"
-                                            dark
-                                        >
-                                            <v-list-item-content>
-                                                <v-list-item-title
-                                                    class="title"
-                                                >
-                                                    {{ user.name }}
-                                                </v-list-item-title>
-                                                <v-list-item-subtitle>{{
-                                                    user.email
-                                                }}</v-list-item-subtitle>
-                                            </v-list-item-content>
-                                        </v-list-item>
-                                    </v-col>
-                                </v-row>
-                            </v-img>
-                        </v-card>
+                                        <img
+                                            :src="
+                                                filteredUserData.storeOwnerImage
+                                            "
+                                        />
+                                    </div>
+                                </v-col>
+                                <v-col class="py-0">
+                                    <v-list-item color="rgba(0, 0, 0, .4)" dark>
+                                        <v-list-item-content>
+                                            <v-list-item-title class="title">
+                                                {{ user.name }}
+                                            </v-list-item-title>
+                                            <v-list-item-subtitle>{{
+                                                user.email
+                                            }}</v-list-item-subtitle>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-col>
+                            </v-row>
+                        </div>
                         <!-- HEADER -->
                         <div class="inbox__left-messages">
                             <!-- <v-divider></v-divider> -->
@@ -82,9 +77,9 @@
                                         <v-list-item-avatar
                                             @click="onChange(messenger)"
                                         >
-                                            <v-img
+                                            <img
                                                 :src="messenger.storeOwnerImage"
-                                            ></v-img>
+                                            />
                                         </v-list-item-avatar>
 
                                         <v-list-item-content
@@ -107,38 +102,30 @@
                             <v-list-item-group color="teal darker-1">
                                 <v-list-item>
                                     <v-list-item-content>
-                                        <v-alert
+                                        <div
                                             class="m-0"
                                             icon="mdi-alert-circle-outline"
                                             text
                                             type="info"
-                                            ><span>
-                                                You have no messages.
-                                            </span></v-alert
                                         >
+                                            <span> You have no messages. </span>
+                                        </div>
                                     </v-list-item-content>
                                 </v-list-item>
                             </v-list-item-group>
                         </v-list>
                     </v-navigation-drawer>
-                </v-card>
+                </div>
             </div>
             <!-- PREVIEW END -->
 
             <!-- MESSAGE -->
             <div class="inbox__right">
-                <v-card
-                    height="100%"
-                    class="container inbox__right-card mx-auto"
-                >
+                <div height="100%" class="inbox__right-card">
                     <!-- Message -->
                     <div class="inbox__right-card-top">
-                        <v-card
-                            v-if="messagePreview.length > 0"
-                            elevation="0"
-                            class="mx-auto"
-                        >
-                            <v-card-text>
+                        <div v-if="messagePreview.length > 0" elevation="0">
+                            <div-text>
                                 <p class="display-1 text--primary">
                                     {{ messagePreview[0].name | capitalize }}
                                 </p>
@@ -148,8 +135,8 @@
                                 <div class="text--primary">
                                     {{ messagePreview[0].message }}
                                 </div>
-                            </v-card-text>
-                        </v-card>
+                            </div-text>
+                        </div>
                         <v-divider v-if="messagePreview.length > 0"></v-divider>
 
                         <!-- Conversation start -->
@@ -163,11 +150,11 @@
                                             <v-list-item-avatar
                                                 class="inbox__right-avatar"
                                             >
-                                                <v-img
+                                                <img
                                                     :src="
                                                         message.storeOwnerImage
                                                     "
-                                                ></v-img>
+                                                />
                                             </v-list-item-avatar>
                                             <v-list-item-content>
                                                 <v-list-item-title
@@ -176,7 +163,7 @@
                                                         message.from
                                                     }}</v-list-item-title
                                                 >
-                                                <v-alert
+                                                <div
                                                     v-bind:class="{
                                                         teal:
                                                             message.from ===
@@ -188,7 +175,7 @@
                                                     dark
                                                 >
                                                     {{ message.message }}
-                                                </v-alert>
+                                                </div>
                                             </v-list-item-content>
                                         </v-list-item>
                                     </template>
@@ -221,9 +208,9 @@
                                                 {{ feedback }}
                                             </p>
                                         </div>
-                                        <v-btn color="teal" type="submit" dark
-                                            >Send</v-btn
-                                        >
+                                        <div color="teal" type="submit" dark>
+                                            Send
+                                        </div>
                                     </form>
                                 </v-list-item-content>
                             </v-list-item>
@@ -253,16 +240,16 @@
                                                 {{ feedback }}
                                             </p>
                                         </div>
-                                        <v-btn color="teal" type="submit" dark
-                                            >Send</v-btn
-                                        >
+                                        <div color="teal" type="submit" dark>
+                                            Send
+                                        </div>
                                     </form>
                                 </v-list-item-content>
                             </v-list-item>
                         </v-list>
                     </div>
                     <!-- Reply End -->
-                </v-card>
+                </div>
             </div>
             <!-- MESSAGE -->
         </div>
@@ -422,5 +409,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

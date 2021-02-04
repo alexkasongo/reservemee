@@ -2,7 +2,7 @@
     <div v-if="user" class="dashboard container">
         <!-- Header -->
         <div>
-            <Header />
+            <!-- <Header /> -->
         </div>
         <!-- Header End-->
 
@@ -11,7 +11,7 @@
                 class="p-5 dashboard__bg column is-full-mobile is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd"
             >
                 <!-- Personal-Information -->
-                <BusinessInfo class="mb-5" />
+                <!-- <BusinessInfo class="mb-5" /> -->
                 <!-- Personal-Information -->
                 <div v-if="user">
                     <h5
@@ -37,7 +37,7 @@
                 <div>
                     <h5 class="title is-5 mt-10 mb-5">Messages</h5>
                     <!-- Messages -->
-                    <StoreMessages />
+                    <!-- <StoreMessages /> -->
                     <!-- Messages -->
                 </div>
             </div>
@@ -49,9 +49,9 @@
                 <!-- StoreSummary -->
 
                 <!-- <div class="display-1 mt-10 mb-5">Calendar</div> -->
-                <!-- <v-card elevation="2"> -->
+                <!-- <div elevation="2"> -->
                 <!-- <Calendar /> -->
-                <!-- </v-card>s -->
+                <!-- </div>s -->
 
                 <!-- Vue-cal -->
                 <div>

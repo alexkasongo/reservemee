@@ -367,14 +367,14 @@
                                     to share this data wherever your user
                                     profile appears.
                                 </div>
-                                <v-btn
+                                <div
                                     :loading="loading"
                                     type="submit"
                                     class="teal darken-1"
                                     dark
                                 >
                                     Update Profile
-                                </v-btn>
+                                </div>
                                 <!-- <button type="reset" class="btn btn-light">
                                     Reset Changes
                                 </button> -->
@@ -674,14 +674,14 @@
                                     to share this data wherever your user
                                     profile appears.
                                 </div>
-                                <v-btn
+                                <div
                                     :loading="loading"
                                     type="submit"
                                     class="teal darken-1"
                                     dark
                                 >
                                     Save Settings
-                                </v-btn>
+                                </div>
                                 <!-- <button type="reset" class="btn btn-light">
                                     Reset Changes
                                 </button> -->
@@ -731,14 +731,14 @@
                                     >
                                         {{ errors.message }}
                                     </div>
-                                    <v-btn
+                                    <div
                                         @click="changePassword"
                                         color="red darken-1"
                                         type="button"
                                         dark
                                     >
                                         Change
-                                    </v-btn>
+                                    </div>
                                 </div>
                             </form>
                             <hr />
@@ -906,13 +906,13 @@
                                     <div class="small text-muted mb-3">
                                         You have not added a payment method
                                     </div>
-                                    <v-btn
+                                    <div
                                         dark
                                         class="teal darken-1"
                                         type="button"
                                     >
                                         Add Payment Method
-                                    </v-btn>
+                                    </div>
                                 </div>
                                 <div class="form-group mb-0">
                                     <label class="d-block"
@@ -942,14 +942,14 @@
                                         no going back. Please be certain.
                                     </p>
                                 </div>
-                                <v-btn
+                                <div
                                     @click="deleteAccount"
                                     color="red darken-1"
                                     type="button"
                                     dark
                                 >
                                     Delete Account
-                                </v-btn>
+                                </div>
                             </form>
                         </div>
                         <!-- ACCOUNT END -->

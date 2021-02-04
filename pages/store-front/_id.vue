@@ -4,12 +4,7 @@
             <!-- LEFT -->
             <div class="store-front__left">
                 <div class="store-front__left-banner">
-                    <v-card
-                        elevation="0"
-                        outlined
-                        :loading="loading"
-                        class="mx-auto rounded-xl"
-                    >
+                    <div elevation="0" outlined :loading="loading">
                         <template slot="progress">
                             <v-progress-linear
                                 color="deep-purple"
@@ -18,16 +13,13 @@
                             ></v-progress-linear>
                         </template>
 
-                        <v-img
-                            height="250"
-                            :src="storeProfile.storeBanner"
-                        ></v-img>
+                        <img height="250" :src="storeProfile.storeBanner" />
 
-                        <v-card-title>{{
+                        <div-title>{{
                             storeProfile.storeName | capitalize
-                        }}</v-card-title>
+                        }}</div-title>
 
-                        <v-card-text>
+                        <div-text>
                             <v-row align="center" class="mx-0">
                                 <v-rating
                                     :value="4.5"
@@ -59,16 +51,12 @@
                             <div>
                                 {{ storeProfile.storeBio }}
                             </div>
-                        </v-card-text>
-                    </v-card>
+                        </div-text>
+                    </div>
                 </div>
 
                 <div class="store-front__left-title">
-                    <v-card
-                        :loading="loading"
-                        elevation="0"
-                        class="mx-auto rounded-xl"
-                    >
+                    <div :loading="loading" elevation="0">
                         <template slot="progress">
                             <v-progress-linear
                                 color="deep-purple"
@@ -77,9 +65,9 @@
                             ></v-progress-linear>
                         </template>
 
-                        <v-card-title>Services</v-card-title>
+                        <div-title>Services</div-title>
 
-                        <v-card-text>
+                        <div-text>
                             <div class="my-4 subtitle-1">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1"
@@ -102,14 +90,14 @@
                                     </v-select>
                                 </div>
                             </div>
-                        </v-card-text>
-                    </v-card>
+                        </div-text>
+                    </div>
                 </div>
 
                 <!-- DIALOG BOX -->
                 <div class="store-front__left-services">
-                    <v-dialog v-model="dialog" persistent max-width="500">
-                        <template v-slot:activator="{ on, attrs }">
+                    <div persistent max-width="500">
+                        <template>
                             <!-- SERVICE CARD -->
                             <v-row>
                                 <v-col
@@ -117,7 +105,7 @@
                                     :key="id"
                                     cols="12"
                                 >
-                                    <v-card
+                                    <div
                                         @click="goToServiceInfo(service.id)"
                                         class="rounded-xl"
                                         :ripple="false"
@@ -126,25 +114,25 @@
                                             class="store-front__left-card d-flex flex-no-wrap justify-space-between"
                                         >
                                             <div>
-                                                <v-card-title
+                                                <div-title
                                                     class="headline"
                                                     v-text="service.name"
-                                                ></v-card-title>
+                                                ></div-title>
 
-                                                <v-card-subtitle
+                                                <div
                                                     v-text="service.description"
-                                                ></v-card-subtitle>
+                                                ></div>
 
-                                                <v-card-text>
+                                                <div-text>
                                                     <div
                                                         class="display-1 text--primary"
                                                     >
                                                         ${{ service.price }}
                                                     </div>
-                                                </v-card-text>
+                                                </div-text>
                                                 <!-- OPEN DIALOG -->
-                                                <v-card-actions>
-                                                    <v-btn
+                                                <div>
+                                                    <div
                                                         class="ml-2"
                                                         outlined
                                                         rounded
@@ -158,9 +146,9 @@
                                                         "
                                                     >
                                                         Quick Booking
-                                                    </v-btn>
+                                                    </div>
                                                     <!-- CLOSE DIALOG -->
-                                                </v-card-actions>
+                                                </div>
                                             </div>
                                             <div>
                                                 <img
@@ -170,40 +158,38 @@
                                                 />
                                             </div>
                                         </div>
-                                    </v-card>
+                                    </div>
                                 </v-col>
                             </v-row>
                             <!-- SERVICE CARD END-->
                         </template>
-                        <v-card>
-                            <!-- <v-card-title class="headline">
+                        <div>
+                            <!-- <div-title class="headline">
                                 Quick Service Booking
-                            </v-card-title> -->
+                            </div-title> -->
                             <QuickBook />
                             <div class="container">
-                                <v-alert v-if="alert" dense type="error">
+                                <div v-if="alert" dense type="error">
                                     {{ alert }}
-                                </v-alert>
+                                </div>
 
-                                <v-card color="teal darker-1" dark>
+                                <div color="teal darker-1" dark>
                                     <div
                                         class="d-flex flex-no-wrap justify-space-between"
                                     >
                                         <div>
-                                            <v-card-title class="headline">{{
+                                            <div-title class="headline">{{
                                                 service.name
-                                            }}</v-card-title>
+                                            }}</div-title>
 
-                                            <!-- <v-card-text>
+                                            <!-- <div-text>
                                                 <div class="text--primary">
                                                     well meaning and kindly.<br />
                                                     "a benevolent smile"
                                                 </div>
-                                            </v-card-text> -->
+                                            </div-text> -->
 
-                                            <v-card-subtitle
-                                                v-if="bookingState !== null"
-                                            >
+                                            <div v-if="bookingState !== null">
                                                 <div>
                                                     Start:
                                                     {{
@@ -220,10 +206,10 @@
                                                         ).toLocaleString()
                                                     }}
                                                 </div>
-                                            </v-card-subtitle>
+                                            </div>
 
-                                            <!-- <v-card-actions>
-                                                <v-btn
+                                            <!-- <div>
+                                                <div
                                                     class="ml-2 mt-3"
                                                     fab
                                                     icon
@@ -232,37 +218,34 @@
                                                     width="40px"
                                                 >
                                                     <v-icon>mdi-play</v-icon>
-                                                </v-btn>
-                                            </v-card-actions> -->
+                                                </div>
+                                            </div> -->
                                         </div>
 
-                                        <v-avatar class="ma-3" size="125" tile>
-                                            <v-img
-                                                :src="service.serviceImage"
-                                            ></v-img>
-                                        </v-avatar>
+                                        <div class="ma-3" size="125" tile>
+                                            <img :src="service.serviceImage" />
+                                        </div>
                                     </div>
-                                </v-card>
+                                </div>
                             </div>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn
+                            <div>
+                                <div
                                     color="teal darken-1"
                                     text
                                     @click="dialog = false"
                                 >
                                     Cancel
-                                </v-btn>
-                                <v-btn
+                                </div>
+                                <div
                                     color="teal darken-1"
                                     text
                                     @click="quickBook"
                                 >
                                     Book Service
-                                </v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- DIALOG END -->
             </div>

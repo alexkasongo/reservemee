@@ -73,14 +73,14 @@
                         v-model="price"
                     ></v-text-field>
                 </div>
-                <v-btn
+                <div
                     type="submit"
                     :loading="loading"
                     class="teal darker-1 mt-2"
                     dark
                 >
                     Update
-                </v-btn>
+                </div>
             </div>
         </form>
     </div>

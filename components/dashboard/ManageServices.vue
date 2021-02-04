@@ -11,26 +11,26 @@
                 <v-toolbar flat>
                     <v-toolbar-title>My Categories</v-toolbar-title>
                     <v-divider class="mx-4" inset vertical></v-divider>
-                    <v-spacer></v-spacer>
-                    <v-dialog v-model="dialog" max-width="500px">
+                    
+                    <div v-model="dialog" max-width="500px">
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn
+                            <div
                                 dark
                                 class="teal darken-1 mb-2"
                                 v-bind="attrs"
                                 v-on="on"
                             >
                                 New Category
-                            </v-btn>
+                            </div>
                         </template>
 
 
-                        <v-card>
-                            <v-card-title>
+                        <div>
+                            <div-title>
                                 <span class="headline">{{ formTitle }}</span>
-                            </v-card-title>
+                            </div-title>
 
-                            <v-card-text>
+                            <div-text>
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12">
@@ -47,62 +47,62 @@
                                         </v-col>
                                     </v-row>
                                 </v-container>
-                            </v-card-text>
+                            </div-text>
 
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn
+                            <div>
+                                
+                                <div
                                     color="teal darken-1"
                                     text
                                     @click="close"
                                 >
                                     Cancel
-                                </v-btn>
-                                <v-btn
+                                </div>
+                                <div
                                     v-if="formTitle === 'New Category'"
                                     color="teal darken-1"
                                     text
                                     @click="save"
                                 >
                                     Create
-                                </v-btn>
-                                <v-btn
+                                </div>
+                                <div
                                     v-else
                                     color="teal darken-1"
                                     text
                                     @click="update"
                                 >
                                     Update
-                                </v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
-                    <v-dialog v-model="dialogDelete" max-width="500px">
-                        <v-card>
-                            <v-card-title class="headline"
+                    <div v-model="dialogDelete" max-width="500px">
+                        <div>
+                            <div-title class="headline"
                                 >Are you sure you want to delete this
-                                item?</v-card-title
+                                item?</div-title
                             >
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn
+                            <div>
+                                
+                                <div
                                     color="teal darken-1"
                                     text
                                     @click="closeDelete"
-                                    >Cancel</v-btn
+                                    >Cancel</div
                                 >
-                                <v-btn
+                                <div
                                     color="teal darken-1"
                                     text
                                     @click="deleteItemConfirm"
-                                    >OK</v-btn
+                                    >OK</div
                                 >
-                                <v-spacer></v-spacer>
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
+                                
+                            </div>
+                        </div>
+                    </div>
                 </v-toolbar>
             </template>
             <template v-slot:[`item.actions`]="{ item }">
@@ -112,14 +112,14 @@
                 <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
             </template>
             <template v-slot:[`item.services`]="{ item }">
-                <v-btn
+                <div
                     elevation="0"
                     small
                     class="mr-2"
                     @click="goToService(item.name)"
                 >
                     View Services
-                </v-btn>
+                </div>
             </template>
         </v-data-table> -->
 

@@ -15,36 +15,32 @@
 
             <!-- RIGHT -->
             <div class="appointment__right">
-                <div class="mx-auto appointment__calendar" elevation="0">
+                <div>
                     <BookingCalendar />
                 </div>
-                <v-card elevation="0" class="appointment__cart-container">
-                    <v-card-title> Your Order </v-card-title>
-                    <v-card-subtitle>
+                <div elevation="0" class="appointment__cart-container">
+                    <div-title> Your Order </div-title>
+                    <div>
                         Below is a summary of your order. When ready, push add
                         to cart.
-                    </v-card-subtitle>
-
-                    <v-spacer></v-spacer>
-                </v-card>
+                    </div>
+                </div>
                 <!-- SERVICE CARD -->
                 <v-row dense>
                     <v-col cols="12">
-                        <v-card class="rounded-xl" :ripple="false">
+                        <div class="rounded-xl" :ripple="false">
                             <div
                                 class="appointment__left-card d-flex flex-no-wrap justify-space-between"
                             >
                                 <div>
-                                    <v-card-title
+                                    <div-title
                                         class="headline"
                                         v-text="service.name"
-                                    ></v-card-title>
+                                    ></div-title>
 
-                                    <v-card-subtitle
-                                        v-text="service.description"
-                                    ></v-card-subtitle>
+                                    <div v-text="service.description"></div>
 
-                                    <v-card-text
+                                    <div-text
                                         v-if="bookingState !== null"
                                         class="pb-0"
                                     >
@@ -64,13 +60,13 @@
                                                 ).toLocaleString()
                                             }}
                                         </div>
-                                    </v-card-text>
+                                    </div-text>
 
-                                    <v-card-text class="pt-2">
+                                    <div-text class="pt-2">
                                         <div class="display-1 text--primary">
                                             ${{ service.price }}
                                         </div>
-                                    </v-card-text>
+                                    </div-text>
                                     <!-- OPEN DIALOG -->
                                 </div>
                                 <div>
@@ -81,7 +77,7 @@
                                     />
                                 </div>
                             </div>
-                        </v-card>
+                        </div>
                     </v-col>
                 </v-row>
                 <!-- SERVICE CARD END-->
@@ -98,21 +94,22 @@
                     </v-col>
                 </v-row>
 
-                <v-alert v-if="alert" dense type="error">
+                <div v-if="alert" dense type="error">
                     {{ alert }}
-                </v-alert>
+                </div>
 
                 <v-list-item class="grow">
                     <v-row align="center" justify="end">
-                        <v-btn
+                        <div
                             rounded
                             elevation="0"
                             dark
                             large
                             class="teal darker-1"
                             @click="addToCart()"
-                            >Add to Cart</v-btn
                         >
+                            Add to Cart
+                        </div>
                     </v-row>
                 </v-list-item>
             </div>

@@ -11,12 +11,10 @@
                 >
                     <v-list-item class="px-2">
                         <v-list-item-avatar v-if="loggedInUser.photoURL">
-                            <v-img :src="loggedInUser.photoURL"></v-img>
+                            <img :src="loggedInUser.photoURL" />
                         </v-list-item-avatar>
                         <v-list-item-avatar v-else>
-                            <v-img
-                                src="https://via.placeholder.com/250"
-                            ></v-img>
+                            <img src="https://via.placeholder.com/250" />
                         </v-list-item-avatar>
 
                         <v-list-item-title>{{
@@ -39,9 +37,9 @@
                                             size="25"
                                             @click="onChange(messenger)"
                                         >
-                                            <v-img
+                                            <img
                                                 :src="messenger.storeOwnerImage"
-                                            ></v-img>
+                                            />
                                         </v-list-item-avatar>
 
                                         <v-list-item-content
@@ -67,19 +65,19 @@
                     <v-container fluid class="fill-height">
                         <v-row class="settings__right-row">
                             <v-col>
-                                <v-card
+                                <div
                                     elevation="0"
                                     height="100%"
-                                    class="container inbox__right-card mx-auto"
+                                    class="inbox__right-card"
                                 >
                                     <!-- Message -->
                                     <div class="inbox__right-card-top">
-                                        <v-card
+                                        <div
                                             v-if="messagePreview.length > 0"
                                             elevation="0"
-                                            class="mx-auto inbox__right-card-head"
+                                            class="inbox__right-card-head"
                                         >
-                                            <v-card-text>
+                                            <div-text>
                                                 <p
                                                     class="display-1 text--primary"
                                                 >
@@ -101,8 +99,8 @@
                                                             .message
                                                     }}
                                                 </div>
-                                            </v-card-text>
-                                        </v-card>
+                                            </div-text>
+                                        </div>
                                         <v-divider
                                             v-if="messagePreview.length > 0"
                                         ></v-divider>
@@ -112,8 +110,9 @@
                                             <v-list three-line>
                                                 <div>
                                                     <template
-                                                        v-for="(message,
-                                                        index) in messages"
+                                                        v-for="(
+                                                            message, index
+                                                        ) in messages"
                                                     >
                                                         <v-list-item
                                                             :key="index"
@@ -121,11 +120,11 @@
                                                             <v-list-item-avatar
                                                                 class="inbox__right-avatar"
                                                             >
-                                                                <v-img
+                                                                <img
                                                                     :src="
                                                                         message.storeOwnerImage
                                                                     "
-                                                                ></v-img>
+                                                                />
                                                             </v-list-item-avatar>
                                                             <v-list-item-content>
                                                                 <v-list-item-title
@@ -134,7 +133,7 @@
                                                                         message.from
                                                                     }}</v-list-item-title
                                                                 >
-                                                                <v-alert
+                                                                <div
                                                                     v-bind:class="{
                                                                         teal:
                                                                             message.from ===
@@ -148,7 +147,7 @@
                                                                     {{
                                                                         message.message
                                                                     }}
-                                                                </v-alert>
+                                                                </div>
                                                             </v-list-item-content>
                                                         </v-list-item>
                                                     </template>
@@ -188,12 +187,13 @@
                                                                 {{ feedback }}
                                                             </p>
                                                         </div>
-                                                        <v-btn
+                                                        <div
                                                             color="teal"
                                                             type="submit"
                                                             dark
-                                                            >Send</v-btn
                                                         >
+                                                            Send
+                                                        </div>
                                                     </form>
                                                 </v-list-item-content>
                                             </v-list-item>
@@ -230,19 +230,20 @@
                                                                 {{ feedback }}
                                                             </p>
                                                         </div>
-                                                        <v-btn
+                                                        <div
                                                             color="teal"
                                                             type="submit"
                                                             dark
-                                                            >Send</v-btn
                                                         >
+                                                            Send
+                                                        </div>
                                                     </form>
                                                 </v-list-item-content>
                                             </v-list-item>
                                         </v-list>
                                     </div>
                                     <!-- Reply End -->
-                                </v-card>
+                                </div>
                             </v-col>
                         </v-row>
                     </v-container>

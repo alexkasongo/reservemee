@@ -2,27 +2,27 @@
     <div>
         <v-sheet height="64">
             <v-toolbar flat>
-                <v-btn
+                <div
                     outlined
                     class="mr-4"
                     color="grey darken-2"
                     @click="setToday"
                 >
                     Today
-                </v-btn>
-                <v-btn fab text small color="grey darken-2" @click="prev">
+                </div>
+                <div fab text small color="grey darken-2" @click="prev">
                     <v-icon small> mdi-chevron-left </v-icon>
-                </v-btn>
-                <v-btn fab text small color="grey darken-2" @click="next">
+                </div>
+                <div fab text small color="grey darken-2" @click="next">
                     <v-icon small> mdi-chevron-right </v-icon>
-                </v-btn>
+                </div>
                 <v-toolbar-title v-if="$refs.calendar">
                     {{ this.title }}
                 </v-toolbar-title>
-                <v-spacer></v-spacer>
+
                 <v-menu bottom right>
                     <template v-slot:activator="{ on, attrs }">
-                        <v-btn
+                        <div
                             outlined
                             color="grey darken-2"
                             v-bind="attrs"
@@ -30,7 +30,7 @@
                         >
                             <span>{{ typeToLabel[type] }}</span>
                             <v-icon right> mdi-menu-down </v-icon>
-                        </v-btn>
+                        </div>
                     </template>
                     <v-list>
                         <v-list-item @click="type = 'day'">
@@ -51,8 +51,8 @@
         </v-sheet>
 
         <!-- Add event dialog -->
-        <v-dialog v-model="dialog" max-width="500">
-            <v-card>
+        <div v-model="dialog" max-width="500">
+            <div>
                 <v-container>
                     <v-form @submit.prevent="addEvent">
                         <v-text-field
@@ -67,7 +67,7 @@
                         ></v-text-field>
 
                         <!-- START DATE/TIME PICKER -->
-                        <v-spacer></v-spacer>
+
                         <v-row>
                             <v-col cols="11" sm="5">
                                 <v-menu
@@ -94,27 +94,26 @@
                                         no-title
                                         scrollable
                                     >
-                                        <v-spacer></v-spacer>
-                                        <v-btn
+                                        <div
                                             dark
                                             text
                                             color="teal darker-1"
                                             @click="menu = false"
                                         >
                                             Cancel
-                                        </v-btn>
-                                        <v-btn
+                                        </div>
+                                        <div
                                             dark
                                             text
                                             color="teal darker-1"
                                             @click="$refs.date.save(startDate)"
                                         >
                                             OK
-                                        </v-btn>
+                                        </div>
                                     </v-date-picker>
                                 </v-menu>
                             </v-col>
-                            <v-spacer></v-spacer>
+
                             <v-col cols="11" sm="5">
                                 <v-menu
                                     ref="endDate"
@@ -148,7 +147,6 @@
                                     ></v-time-picker>
                                 </v-menu>
                             </v-col>
-                            <v-spacer></v-spacer>
                         </v-row>
                         <!-- START DATE/TIME PICKER END-->
 
@@ -179,25 +177,24 @@
                                         no-title
                                         scrollable
                                     >
-                                        <v-spacer></v-spacer>
-                                        <v-btn
+                                        <div
                                             text
                                             color="teal darker-1"
                                             @click="menu = false"
                                         >
                                             Cancel
-                                        </v-btn>
-                                        <v-btn
+                                        </div>
+                                        <div
                                             text
                                             color="teal darker-1"
                                             @click="$refs.end.save(endDate)"
                                         >
                                             OK
-                                        </v-btn>
+                                        </div>
                                     </v-date-picker>
                                 </v-menu>
                             </v-col>
-                            <v-spacer></v-spacer>
+
                             <v-col cols="11" sm="5">
                                 <v-menu
                                     ref="endTime"
@@ -231,7 +228,6 @@
                                     ></v-time-picker>
                                 </v-menu>
                             </v-col>
-                            <v-spacer></v-spacer>
                         </v-row>
                         <!-- END END/TIME PICKER END-->
                         <v-text-field
@@ -239,7 +235,7 @@
                             type="color"
                             label="color (click to open color menu)"
                         ></v-text-field>
-                        <v-btn
+                        <div
                             dark
                             type="submit"
                             color="teal darker-1"
@@ -247,11 +243,11 @@
                             @click.stop="dialog = false"
                         >
                             create event
-                        </v-btn>
+                        </div>
                     </v-form>
                 </v-container>
-            </v-card>
-        </v-dialog>
+            </div>
+        </div>
         <!-- Add event dialog end -->
 
         <!-- Pop up -->
@@ -275,14 +271,13 @@
                 :activator="selectedElement"
                 offset-x
             >
-                <v-card color="grey lighten-4" min-width="350px" flat>
+                <div color="grey lighten-4" min-width="350px" flat>
                     <v-toolbar :color="selectedEvent.color" dark>
                         <v-toolbar-title
                             v-html="selectedEvent.name"
                         ></v-toolbar-title>
-                        <v-spacer></v-spacer>
                     </v-toolbar>
-                    <v-card-text>
+                    <div-text>
                         <form v-if="currentlyEditing !== selectedEvent.id">
                             {{ selectedEvent.details }}
                         </form>
@@ -301,7 +296,7 @@
                                 ></v-text-field>
 
                                 <!-- EDIT START TIME PICKER END -->
-                                <v-spacer></v-spacer>
+
                                 <v-row>
                                     <v-col cols="11" sm="5">
                                         <v-menu
@@ -330,16 +325,15 @@
                                                 no-title
                                                 scrollable
                                             >
-                                                <v-spacer></v-spacer>
-                                                <v-btn
+                                                <div
                                                     dark
                                                     text
                                                     color="teal darker-1"
                                                     @click="menu5 = false"
                                                 >
                                                     Cancel
-                                                </v-btn>
-                                                <v-btn
+                                                </div>
+                                                <div
                                                     dark
                                                     text
                                                     color="teal darker-1"
@@ -350,11 +344,11 @@
                                                     "
                                                 >
                                                     OK
-                                                </v-btn>
+                                                </div>
                                             </v-date-picker>
                                         </v-menu>
                                     </v-col>
-                                    <v-spacer></v-spacer>
+
                                     <v-col cols="11" sm="5">
                                         <v-menu
                                             ref="startTime"
@@ -392,7 +386,6 @@
                                             ></v-time-picker>
                                         </v-menu>
                                     </v-col>
-                                    <v-spacer></v-spacer>
                                 </v-row>
                                 <!-- EDIT START TIME PICKER END-->
 
@@ -425,16 +418,15 @@
                                                 no-title
                                                 scrollable
                                             >
-                                                <v-spacer></v-spacer>
-                                                <v-btn
+                                                <div
                                                     dark
                                                     text
                                                     color="teal darker-1"
                                                     @click="menu7 = false"
                                                 >
                                                     Cancel
-                                                </v-btn>
-                                                <v-btn
+                                                </div>
+                                                <div
                                                     dark
                                                     text
                                                     color="teal darker-1"
@@ -443,11 +435,11 @@
                                                     "
                                                 >
                                                     OK
-                                                </v-btn>
+                                                </div>
                                             </v-date-picker>
                                         </v-menu>
                                     </v-col>
-                                    <v-spacer></v-spacer>
+
                                     <v-col cols="11" sm="5">
                                         <v-menu
                                             ref="endTime"
@@ -483,7 +475,6 @@
                                             ></v-time-picker>
                                         </v-menu>
                                     </v-col>
-                                    <v-spacer></v-spacer>
                                 </v-row>
                                 <!-- EDIT END TIME PICKER-->
                                 <v-text-field
@@ -495,17 +486,17 @@
                         </form>
 
                         <!-- Edit card -->
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn
+                    </div-text>
+                    <div>
+                        <div
                             text
                             class="teal darken-1"
                             dark
                             @click="selectedOpen = false"
                         >
                             Close
-                        </v-btn>
-                        <v-btn
+                        </div>
+                        <div
                             text
                             class="teal darken-1"
                             dark
@@ -513,16 +504,16 @@
                             @click.prevent="onBookTime(selectedEvent)"
                         >
                             Select Time
-                        </v-btn>
-                        <v-btn
+                        </div>
+                        <div
                             text
                             v-else
                             @click.prevent="updateEvent(selectedEvent)"
                         >
                             Save
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
+                        </div>
+                    </div>
+                </div>
             </v-menu>
         </v-sheet>
         <!-- Pop up end -->

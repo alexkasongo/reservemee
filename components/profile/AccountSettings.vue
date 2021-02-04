@@ -11,14 +11,9 @@
                     be certain.
                 </p>
             </div>
-            <v-btn
-                @click="deleteAccount"
-                color="red darken-1"
-                type="button"
-                dark
-            >
+            <div @click="deleteAccount" color="red darken-1" type="button" dark>
                 Delete Account
-            </v-btn>
+            </div>
         </form>
     </div>
     <!-- ACCOUNT END -->

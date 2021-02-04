@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- If Messages -->
-        <div class="mx-auto">
+        <div>
             <!-- NEW MESSAGE -->
             <div class="new-message">
                 <form @submit.prevent="addMessage()">
@@ -13,9 +13,7 @@
                         placeholder="type in a message and press enter"
                         v-model="newMessage"
                     ></v-textarea>
-                    <v-btn dark type="submit" class="teal darker-1"
-                        >Send Me</v-btn
-                    >
+                    <div dark type="submit" class="teal darker-1">Send Me</div>
                 </form>
             </div>
             <!-- NEW MESSAGE END -->
@@ -23,13 +21,14 @@
 
         <!--If Messages end-->
         <v-list-item-content v-if="!messages">
-            <v-alert
+            <div
                 style="cursor: pointer"
                 icon="mdi-alert-circle-outline"
                 text
                 type="info"
-                ><span> You have no messages. </span></v-alert
             >
+                <span> You have no messages. </span>
+            </div>
         </v-list-item-content>
         <!--If No Messages end-->
     </div>

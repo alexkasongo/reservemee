@@ -20,21 +20,21 @@
                 <div class="card-body">
                     <h3>A verification email has been sent to your mailbox</h3>
                     <p>Verify your email address before signing in.</p>
-                    <v-btn
+                    <div
                         @click="signout"
                         type="button"
                         color="teal darker-1"
                         dark
                     >
                         Signin
-                    </v-btn>
+                    </div>
                 </div>
             </div>
         </div>
         <div v-if="!loading" class="d-flex flex-row justify-content-center">
             <div v-if="!userLoaded.emailVerified" class="w-100 mt-2">
                 <div class="display-1 p-3">Verify Email</div>
-                <v-card class="card-body">
+                <div class="card-body">
                     <form @submit.prevent="onSubmit">
                         <div class="form-group">
                             <v-text-field
@@ -47,11 +47,11 @@
                         <div v-if="errors" class="form-group text-muted">
                             {{ errors.message }}
                         </div>
-                        <v-btn type="submit" color="teal darker-1" dark
-                            >Submit</v-btn
-                        >
+                        <div type="submit" color="teal darker-1" dark>
+                            Submit
+                        </div>
                     </form>
-                </v-card>
+                </div>
             </div>
         </div>
     </div>

@@ -27,7 +27,7 @@
                 </p>
                 <!-- Services start -->
                 <div v-if="this.storeProfile">
-                    <p v-if="beauty !== null">
+                    <div v-if="beauty !== null">
                         <b-taglist>
                             <div v-for="service in beauty" :key="service.name">
                                 <b-tag
@@ -56,7 +56,7 @@
                                 }}</b-tag>
                             </div>
                         </b-taglist>
-                    </p>
+                    </div>
                 </div>
             </div>
             <!-- Services end -->
@@ -109,23 +109,23 @@
                 <section>
                     <a :href="storeProfile.facebook" target="_blank">
                         <b-icon icon="facebook" v-if="storeProfile.facebook">
-                            <v-btn icon>
+                            <div icon>
                                 <v-icon>mdi-facebook</v-icon>
-                            </v-btn>
+                            </div>
                         </b-icon>
                     </a>
                     <a :href="storeProfile.instagram" target="_blank">
                         <b-icon icon="instagram" v-if="storeProfile.instagram">
-                            <v-btn icon>
+                            <div icon>
                                 <v-icon>mdi-instagram</v-icon>
-                            </v-btn>
+                            </div>
                         </b-icon>
                     </a>
                     <a :href="storeProfile.twitter" target="_blank">
                         <b-icon icon="twitter" v-if="storeProfile.twitter">
-                            <v-btn icon>
+                            <div icon>
                                 <v-icon>mdi-twitter</v-icon>
-                            </v-btn>
+                            </div>
                         </b-icon>
                     </a>
                 </section>
@@ -134,14 +134,15 @@
             <!-- Social media card end -->
         </div>
         <div v-else>
-            <v-alert
+            <div
                 style="cursor: pointer"
                 @click="goToSettings"
                 icon="mdi-alert-circle-outline"
                 text
                 type="info"
-                >Update Store Information</v-alert
             >
+                Update Store Information
+            </div>
         </div>
     </div>
     <!-- BusinessInfo -->

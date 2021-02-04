@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="display-1 p-3">Create Service</div>
-        <v-card elevation="0">
+        <div elevation="0">
             <form @submit.prevent="onSubmit" class="pt-5">
                 <div class="form-group">
                     <v-select
@@ -74,15 +74,16 @@
                         v-model="price"
                     ></v-text-field>
                 </div>
-                <v-btn
+                <div
                     :loading="loading"
                     class="teal darken-1"
                     dark
                     type="submit"
-                    >Create</v-btn
                 >
+                    Create
+                </div>
             </form>
-        </v-card>
+        </div>
     </div>
 </template>
 

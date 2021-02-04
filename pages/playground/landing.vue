@@ -9,9 +9,9 @@
                     clipped
                     :mini-variant.sync="mini"
                 >
-                    <v-btn icon @click.stop="mini = !mini">
+                    <div icon @click.stop="mini = !mini">
                         <v-icon>mdi-chevron-left</v-icon>
-                    </v-btn>
+                    </div>
                     <v-list dense>
                         <template v-for="(item, i) in items">
                             <v-divider

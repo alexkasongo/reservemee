@@ -9,9 +9,9 @@
                 <div class="small text-muted mb-3">
                     You have not added a payment method
                 </div>
-                <v-btn dark class="teal darken-1" type="button">
+                <div dark class="teal darken-1" type="button">
                     Add Payment Method
-                </v-btn>
+                </div>
             </div>
             <div class="form-group mb-0">
                 <label class="d-block">Payment History</label>
@@ -30,5 +30,4 @@
 export default {};
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="sass" scoped></style>

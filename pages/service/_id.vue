@@ -14,7 +14,7 @@
                 :key="service.id"
                 class="col-md-6"
             >
-                <v-card class="rounded-xl" :ripple="false">
+                <div class="rounded-xl" :ripple="false">
                     <div
                         class="services__left-card d-flex flex-no-wrap justify-space-between"
                     >
@@ -26,49 +26,45 @@
                             />
                         </div>
                         <div class="services__left-card-info">
-                            <v-card-title
+                            <div-title
                                 class="headline"
                                 v-text="service.name"
-                            ></v-card-title>
+                            ></div-title>
 
-                            <v-card-subtitle
-                                v-text="service.description"
-                            ></v-card-subtitle>
+                            <div v-text="service.description"></div>
 
-                            <v-card-text
+                            <div-text
                                 class="display-1 text--primary services__left-card-price"
                             >
                                 ${{ service.price }}
-                            </v-card-text>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-
-                                <v-btn
+                            </div-text>
+                            <div>
+                                <div
                                     :class="fav ? 'red--text' : ''"
                                     icon
                                     @click="fav = !fav"
                                 >
                                     <v-icon>mdi-heart</v-icon>
-                                </v-btn>
+                                </div>
 
-                                <v-btn @click="updService(service.id)" icon>
+                                <div @click="updService(service.id)" icon>
                                     <v-icon>mdi-pencil-box</v-icon>
-                                </v-btn>
+                                </div>
 
-                                <v-btn @click="removeService(service.id)" icon>
+                                <div @click="removeService(service.id)" icon>
                                     <v-icon>mdi-delete</v-icon>
-                                </v-btn>
-                            </v-card-actions>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </v-card>
+                </div>
             </v-col>
         </v-row>
         <!-- SERVICE CARD END-->
         <div class="col-md-6">
-            <v-btn @click="onCreate" type="button" color="teal darken-1" dark>
+            <div @click="onCreate" type="button" color="teal darken-1" dark>
                 Create New Service
-            </v-btn>
+            </div>
         </div>
     </div>
 </template>

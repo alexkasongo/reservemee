@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- If Messages -->
-        <div class="mx-auto">
+        <div>
             <div
                 class="inbox-widget"
                 v-for="message in messages.slice(0, 3)"
@@ -35,9 +35,9 @@
 
         <!-- If No Messages -->
         <v-list-item-content v-if="messages.length <= 0">
-            <v-alert icon="mdi-alert-circle-outline" text type="info"
-                ><span> You have no messages. </span></v-alert
-            >
+            <div icon="mdi-alert-circle-outline" text type="info">
+                <span> You have no messages. </span>
+            </div>
         </v-list-item-content>
         <!--If No Messages end-->
     </div>

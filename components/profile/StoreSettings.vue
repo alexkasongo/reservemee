@@ -238,9 +238,9 @@
                 at any time, and by filling them out, you're giving us consent
                 to share this data wherever your user profile appears.
             </div>
-            <v-btn :loading="loading" type="submit" class="teal darken-1" dark>
+            <div :loading="loading" type="submit" class="teal darken-1" dark>
                 Save Settings
-            </v-btn>
+            </div>
         </form>
         <!-- </v-col>
         </v-row> -->

@@ -1,6 +1,6 @@
 <template>
-    <v-card elevation="2" class="mx-auto mt-3" width="100%">
-        <v-card-text class="py-0">
+    <div>
+        <div-text class="py-0">
             <v-timeline align-top dense>
                 <v-timeline-item color="pink" small>
                     <v-row class="pt-1">
@@ -24,21 +24,19 @@
                             <div class="caption mb-2">
                                 Customer + Service Name
                             </div>
-                            <v-avatar>
-                                <v-img
-                                    src="https://via.placeholder.com/150"
-                                ></v-img>
-                            </v-avatar>
-                            <v-avatar>
-                                <v-img
+                            <div>
+                                <img src="https://via.placeholder.com/150" />
+                            </div>
+                            <div>
+                                <img
                                     src="https://via.placeholder.com/150/00796B"
-                                ></v-img>
-                            </v-avatar>
-                            <v-avatar>
-                                <v-img
+                                />
+                            </div>
+                            <div>
+                                <img
                                     src="https://via.placeholder.com/150/80D8FF"
-                                ></v-img>
-                            </v-avatar>
+                                />
+                            </div>
                         </v-col>
                     </v-row>
                 </v-timeline-item>
@@ -66,8 +64,8 @@
                     </v-row>
                 </v-timeline-item>
             </v-timeline>
-        </v-card-text>
-    </v-card>
+        </div-text>
+    </div>
 </template>
 
 <script>
