@@ -1,7 +1,7 @@
 <template>
     <b-navbar>
         <template #brand>
-            <b-navbar-item tag="router-link" :to="{ path: '/' }">
+            <b-navbar-item @click="$router.push('/')">
                 <img
                     @click="goHome(user)"
                     :src="logo"

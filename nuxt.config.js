@@ -40,7 +40,8 @@ module.exports = {
     plugins: [
         '~/plugins/firebase.js',
         '~plugins/filters.js',
-        { src: '~/plugins/localStorage.js', ssr: false }
+        { src: '~/plugins/localStorage.js', ssr: false },
+        { src: '~plugins/vue-cal.js', ssr: false }
     ],
     /*
      ** Router Settings

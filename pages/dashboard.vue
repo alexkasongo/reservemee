@@ -51,6 +51,10 @@
                 <!-- <Calendar /> -->
                 <!-- </v-card>s -->
 
+                <!-- Vue-cal -->
+                <EventCalendar />
+                <!-- Vue-cal End -->
+
                 <div>
                     <h1 class="title mt-5 mb-5">Services</h1>
                     <h2 class="subtitle">
