@@ -43,7 +43,9 @@
             </div>
             <div class="column">
                 <!-- StoreSummary -->
-                <StoreSummary />
+                <div class="mb-5">
+                    <StoreSummary />
+                </div>
                 <!-- StoreSummary -->
 
                 <!-- <div class="display-1 mt-10 mb-5">Calendar</div> -->
@@ -52,7 +54,14 @@
                 <!-- </v-card>s -->
 
                 <!-- Vue-cal -->
-                <EventCalendar />
+                <div>
+                    <h1 class="title mt-5 mb-5">Calendar</h1>
+                    <h2 class="subtitle">
+                        Create and edit events such as store opening hours and
+                        todos
+                    </h2>
+                    <EventCalendar />
+                </div>
                 <!-- Vue-cal End -->
 
                 <div>

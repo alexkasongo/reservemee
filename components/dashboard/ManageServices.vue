@@ -1,6 +1,6 @@
 <template>
     <div class="service">
-        <v-data-table
+        <!-- <v-data-table
             :headers="headers"
             :items="categories"
             :items-per-page="5"
@@ -24,7 +24,7 @@
                             </v-btn>
                         </template>
 
-                        <!-- NEW CATEGORY -->
+
                         <v-card>
                             <v-card-title>
                                 <span class="headline">{{ formTitle }}</span>
@@ -76,10 +76,9 @@
                                 </v-btn>
                             </v-card-actions>
                         </v-card>
-                        <!-- NEW CATEGORY END -->
                     </v-dialog>
 
-                    <!-- DELETE DIALOG -->
+
                     <v-dialog v-model="dialogDelete" max-width="500px">
                         <v-card>
                             <v-card-title class="headline"
@@ -104,7 +103,6 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
-                    <!-- DELETE DIALOG -->
                 </v-toolbar>
             </template>
             <template v-slot:[`item.actions`]="{ item }">
@@ -123,10 +121,8 @@
                     View Services
                 </v-btn>
             </template>
-            <!-- <template v-slot:no-data>
-            <v-btn color="primary" @click="initialize"> Reset </v-btn>
-        </template> -->
-        </v-data-table>
+        </v-data-table> -->
+
         <!-- BEUFY -->
         <section class="service__border">
             <!-- <b-field grouped group-multiline>
