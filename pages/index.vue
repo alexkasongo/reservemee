@@ -4,19 +4,15 @@
             <p>loading...</p>
         </div>
         <!-- Masthead -->
-        <v-container v-if="!loading">
-            <v-row align="center" justify="center" no-gutters>
-                <v-col v-if="!user" class="masthead text-white text-center">
+        <div v-if="!loading">
+            <div align="center" justify="center" no-gutters>
+                <div v-if="!user" class="masthead text-white text-center">
                     <div class="overlay"></div>
                     <div elevation="0" max-width="800">
-                        <v-form @submit.prevent="onSubmit">
-                            <v-container>
-                                <v-row
-                                    align="center"
-                                    justify="center"
-                                    no-gutters
-                                >
-                                    <v-col cols="12" sm="8">
+                        <form @submit.prevent="onSubmit">
+                            <div>
+                                <div align="center" justify="center" no-gutters>
+                                    <div cols="12" sm="8">
                                         <v-text-field
                                             solo-inverted
                                             flat
@@ -29,9 +25,9 @@
                                             height="52"
                                             class="rounded-br-sm rounded-tr-sm"
                                         ></v-text-field>
-                                    </v-col>
+                                    </div>
 
-                                    <v-col cols="12" md="4">
+                                    <div cols="12" md="4">
                                         <div
                                             elevation="0"
                                             type="submit"
@@ -42,13 +38,13 @@
                                         >
                                             Get started!
                                         </div>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-                        </v-form>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </v-col>
-            </v-row>
+                </div>
+            </div>
 
             <!-- Image Showcases -->
             <section class="showcase margin">
@@ -204,7 +200,7 @@
                     </div>
                 </div>
             </section>
-        </v-container>
+        </div>
     </div>
 </template>
 
