@@ -29,19 +29,21 @@
             </div>
         </div> -->
 
+        <div class="buttons mb-5">
+            <b-button type="is-primary" @click="customEventCreation"
+                >Add event</b-button
+            >
+        </div>
+
         <vue-cal
             :selected-date="selectedDate"
             today-button
             :time-from="8 * 60"
-            :time-to="19 * 60"
-            hide-weekends
+            :time-to="20 * 60"
+            :special-hours="specialHours"
             :snap-to-time="15"
             editable-events
             :events="events"
-            :split-days="[
-                { id: 1, label: 'Dr 1' },
-                { id: 2, label: 'Dr 2' }
-            ]"
             class="vuecal--full-height-delete"
             @cell-click="logEvents('cell-click', $event)"
             @event-focus="logEvents('event-focus', $event)"
@@ -72,13 +74,24 @@
 //     },
 //     events: []
 // };
+const dailyHours = { from: 9 * 60, to: 18 * 60, class: 'business-hours' };
 
 export default {
     name: 'EventCalendar',
     data: () => ({
         // store,
         selectedDate: new Date(),
-        events: []
+        events: [],
+        specialHours: {
+            1: dailyHours,
+            2: dailyHours,
+            3: [
+                { from: 9 * 60, to: 12 * 60, class: 'business-hours' },
+                { from: 14 * 60, to: 18 * 60, class: 'business-hours' }
+            ],
+            4: dailyHours,
+            5: dailyHours
+        }
     }),
     computed: {
         // Get the Monday of the real time current week.
@@ -101,7 +114,7 @@ export default {
             // Check if date format is correct before creating event.
             if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test(dateTime)) {
                 // this.$refs.vuecal.createEvent(
-                this.store.events.push({
+                this.events.push({
                     start: `${thursday} 14:00`,
                     end: `${thursday} 16:00`,
                     title: 'Aleko',
@@ -200,12 +213,12 @@ export default {
 
 <style lang="scss">
 .vuecal__menu {
-    background-color: #42b983;
+    background-color: #7957d5;
     color: #fff;
 }
 
 .vuecal__title-bar {
-    background-color: #e4f5ef;
+    background-color: #f2eefb;
 }
 
 .vuecal__event--dragging {
@@ -213,8 +226,19 @@ export default {
 }
 
 .vuecal__event {
-    background-color: rgba(164, 230, 210, 0.9);
-    border: 1px solid #90d2be;
+    background-color: #a189e2;
+    border: 1px solid #a189e2;
+    color: #fff;
+}
+
+// .business-hours {
+//     background-color: rgba(255, 255, 0, 0.2);
+//     border: solid rgba(255, 210, 0, 0.6);
+//     border-width: 2px 0;
+// }
+
+.vuecal__cell--selected {
+    background-color: rgba(121, 87, 213, 0.1);
 }
 
 // $Aleko: #42b983;
