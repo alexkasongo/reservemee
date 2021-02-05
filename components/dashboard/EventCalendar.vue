@@ -29,11 +29,41 @@
             </div>
         </div> -->
 
-        <div class="buttons mb-5">
+        <!-- <div class="buttons mb-5">
             <b-button type="is-primary" @click="customEventCreation"
                 >Add event</b-button
             >
-        </div>
+        </div> -->
+        <section class="mb-5">
+            <b-button
+                label="Instructions"
+                :disabled="isActive"
+                @click="isActive = true"
+            />
+            <b-notification
+                class="mb-5"
+                v-model="isActive"
+                aria-close-label="Close notification"
+            >
+                <ul>
+                    <li>
+                        - Create a new event (by clicking and dragging on a cell
+                        or clicking and holding on a cell)
+                    </li>
+                    <li>
+                        - Change time of an event by dragging the resizer
+                        handle.
+                    </li>
+                    <li>
+                        - Drag and drop an event (not from the editable title
+                        text selection and not from the resizer).
+                    </li>
+                    <li>
+                        - Delete an event (by clicking and holding an event)
+                    </li>
+                </ul>
+            </b-notification>
+        </section>
 
         <vue-cal
             style="height: 650px"
@@ -94,7 +124,8 @@ export default {
             ],
             4: dailyHours,
             5: dailyHours
-        }
+        },
+        isActive: false
     }),
     computed: {
         user() {

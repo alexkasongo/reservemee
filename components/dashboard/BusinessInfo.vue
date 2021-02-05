@@ -2,7 +2,15 @@
     <!-- BusinessInfo -->
     <div class="content is-normal">
         <div v-if="storeProfile !== null" class="panel-body">
-            <p>{{ storeProfile.storeBio }}</p>
+            <b-notification
+                type="is-primary"
+                style="cursor: pointer"
+                :closable="false"
+            >
+                {{
+                    storeProfile.storeBio | truncate(100, '...')
+                }}</b-notification
+            >
 
             <div class="mt-5">
                 <p>
