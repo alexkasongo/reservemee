@@ -197,7 +197,7 @@ export default {
 .dashboard {
     margin: 0 0 200px 0;
     .dashboard__bg {
-        background-color: #fafafa;
+        background-color: #f5f5f5;
         border-radius: 24px;
     }
 }

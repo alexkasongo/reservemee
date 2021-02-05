@@ -44,6 +44,7 @@
                 class="mb-5"
                 v-model="isActive"
                 aria-close-label="Close notification"
+                animation="fade"
             >
                 <ul>
                     <li>
