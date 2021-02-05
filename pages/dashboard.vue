@@ -55,10 +55,9 @@
 
                 <!-- Vue-cal -->
                 <div>
-                    <h1 class="title mt-5 mb-5">Calendar</h1>
+                    <h1 class="title mt-5 mb-5">Business Hours</h1>
                     <h2 class="subtitle">
-                        Create and edit events such as store opening hours and
-                        todos
+                        Create and edit business operating hours
                     </h2>
                     <EventCalendar />
                 </div>

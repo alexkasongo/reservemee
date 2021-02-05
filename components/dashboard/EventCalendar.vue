@@ -36,6 +36,7 @@
         </div>
 
         <vue-cal
+            style="height: 650px"
             :selected-date="selectedDate"
             today-button
             :time-from="8 * 60"
@@ -74,6 +75,8 @@
 //     },
 //     events: []
 // };
+import { db } from '@/plugins/firebase';
+
 const dailyHours = { from: 9 * 60, to: 18 * 60, class: 'business-hours' };
 
 export default {
@@ -94,6 +97,9 @@ export default {
         }
     }),
     computed: {
+        user() {
+            return this.$store.state.user;
+        },
         // Get the Monday of the real time current week.
         previousFirstDayOfWeek() {
             return new Date(
@@ -126,8 +132,37 @@ export default {
             } else if (dateTime) alert('Wrong date format.');
         },
         logEvents(name, event) {
-            console.log(`EventCalendar.vue - 84 - 🍎`, name, event);
+            // console.log(`EventCalendar.vue - 84 - 🍎`, name, event);
+        },
+        async getEvents(uid) {
+            let snapshot = await db.collection(uid).get();
+            let events = [];
+            // loop through and push events on each itteration
+            snapshot.forEach((doc) => {
+                let appData = [];
+                appData.id = doc.id;
+                appData.start = doc.data().start.toDate();
+                appData.end = doc.data().end.toDate();
+                appData.title = doc.data().title;
+                appData.deletable = doc.data().deletable;
+                appData.draggable = doc.data().draggable;
+                // Must include timed:boolean else timed events will not be displayed accordingly
+                appData.resizable = doc.data().resizable;
+                events.push(appData);
+            });
+            if (events.length <= 0) {
+                // this.events = this.defaultEvents;
+                this.events = [];
+            }
+            if (events.length > 0) {
+                console.log(`EventCalendar.vue - 154 - ✅`, events);
+                this.events = events;
+            }
         }
+    },
+    created() {
+        console.log(`EventCalendar.vue - 163 - 🏝`, this.user.uid);
+        this.getEvents(this.user.uid);
     }
     // async created() {
     //     // Place all the events in the real time current week.
