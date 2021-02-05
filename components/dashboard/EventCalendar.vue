@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vue-cal style="height: 250px" />
+        <vue-cal style="height: 500px" />
     </div>
 </template>
 
