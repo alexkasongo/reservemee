@@ -167,7 +167,7 @@ export default {
             // console.log(`EventCalendar.vue - 84 - 🍎`, name, event);
         },
         async getEvents(uid) {
-            let snapshot = await db.collection(uid).get();
+            let snapshot = await db.collection(`${uid}`).get();
             let events = [];
             // loop through and push events on each itteration
             snapshot.forEach((doc) => {
@@ -192,7 +192,7 @@ export default {
             }
         }
     },
-    created() {
+    mounted() {
         console.log(`EventCalendar.vue - 163 - 🏝`, this.user.uid);
         this.getEvents(this.user.uid);
     }
