@@ -298,12 +298,6 @@ export default {
     color: #fff;
 }
 
-// .business-hours {
-//     background-color: rgba(255, 255, 0, 0.2);
-//     border: solid rgba(255, 210, 0, 0.6);
-//     border-width: 2px 0;
-// }
-
 .vuecal__cell--selected {
     background-color: rgba(121, 87, 213, 0.1);
 }
