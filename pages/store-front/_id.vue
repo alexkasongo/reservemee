@@ -182,13 +182,6 @@
                                                 service.name
                                             }}</div-title>
 
-                                            <!-- <div-text>
-                                                <div class="text--primary">
-                                                    well meaning and kindly.<br />
-                                                    "a benevolent smile"
-                                                </div>
-                                            </div-text> -->
-
                                             <div v-if="bookingState !== null">
                                                 <div>
                                                     Start:
