@@ -86,26 +86,125 @@
             @event-create="logEvents('event-create', $event)"
             @event-drag-create="logEvents('event-drag-create', $event)"
             @event-delete="logEvents('event-delete', $event)"
+            :on-event-click="onEventClick"
         >
         </vue-cal>
+
+        <!-- <v-dialog v-model="showDialog">
+            <v-card>
+                <v-card-title>
+                    <v-icon>{{ selectedEvent.icon }}</v-icon>
+                    <span>{{ selectedEvent.title }}</span>
+                    <v-spacer />
+                    <strong>{{
+                        selectedEvent.start &&
+                        selectedEvent.start.format('DD/MM/YYYY')
+                    }}</strong>
+                </v-card-title>
+                <v-card-text>
+                    <p v-html="selectedEvent.contentFull" />
+                    <strong>Event details:</strong>
+                    <ul>
+                        <li>
+                            Event starts at:
+                            {{
+                                selectedEvent.start &&
+                                selectedEvent.start.formatTime()
+                            }}
+                        </li>
+                        <li>
+                            Event ends at:
+                            {{
+                                selectedEvent.end &&
+                                selectedEvent.end.formatTime()
+                            }}
+                        </li>
+                    </ul>
+                </v-card-text>
+            </v-card>
+        </v-dialog> -->
+
+        <section>
+            <!-- <div class="buttons">
+                <b-button
+                    label="Launch card modal (keep scroll)"
+                    type="is-primary"
+                    size="is-medium"
+                    @click="isCardModalActive = true"
+                />
+            </div> -->
+
+            <b-modal
+                v-model="isCardModalActive"
+                :width="960"
+                scroll="keep"
+                :destroy-on-hide="false"
+                aria-role="dialog"
+                aria-label="Events Modal"
+                aria-modal
+            >
+                <section class="card">
+                    <div class="card-content dialog">
+                        <div class="columns">
+                            <div class="column">
+                                <b-field>
+                                    <b-switch v-model="isAmPm">AM/PM</b-switch>
+                                </b-field>
+                            </div>
+                            <div class="column">
+                                <b-field label="Select start time">
+                                    <b-clockpicker
+                                        rounded
+                                        placeholder="Click to select..."
+                                        icon="clock"
+                                        :hour-format="format"
+                                    >
+                                    </b-clockpicker>
+                                </b-field>
+                            </div>
+                            <div class="column">
+                                <b-field label="Select end time">
+                                    <b-clockpicker
+                                        rounded
+                                        placeholder="Click to select..."
+                                        icon="clock"
+                                        :hour-format="format"
+                                    >
+                                    </b-clockpicker>
+                                </b-field>
+                            </div>
+                        </div>
+
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-48x48">
+                                    <img
+                                        src="https://via.placeholder.com/300"
+                                        alt="Image"
+                                    />
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">John Smith</p>
+                                <p class="subtitle is-6">@johnsmith</p>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+                            <a>#css</a> <a>#responsive</a>
+                            <br />
+                            <small>11:09 PM - 1 Jan 2016</small>
+                        </div>
+                    </div>
+                </section>
+            </b-modal>
+        </section>
     </div>
 </template>
 
 <script>
-// const store = {
-//     splits: [
-//         { label: 'Aleko', class: 'Aleko' },
-//         { label: 'Ketsia', class: 'Ketsia' }
-//     ],
-//     editable: {
-//         title: false,
-//         drag: true,
-//         resize: true,
-//         create: true,
-//         delete: true
-//     },
-//     events: []
-// };
 import { db } from '@/plugins/firebase';
 
 const dailyHours = { from: 9 * 60, to: 18 * 60, class: 'business-hours' };
@@ -126,7 +225,11 @@ export default {
             4: dailyHours,
             5: dailyHours
         },
-        isActive: false
+        isActive: false,
+        // Dialog
+        selectedEvent: {},
+        isCardModalActive: false,
+        isAmPm: false
     }),
     computed: {
         user() {
@@ -139,9 +242,20 @@ export default {
                     new Date().getDate() - ((new Date().getDay() + 6) % 7)
                 )
             );
+        },
+        format() {
+            return this.isAmPm ? '12' : '24';
         }
     },
     methods: {
+        onEventClick(event, e) {
+            console.log(`EventCalendar.vue - 218 - 🇨🇩`, event);
+            this.selectedEvent = event;
+            this.isCardModalActive = true;
+
+            // Prevent navigating to narrower view (default vue-cal behavior).
+            // e.stopPropagation();
+        },
         customEventCreation() {
             const thursday = this.previousFirstDayOfWeek.addDays(3).format();
             const dateTime = prompt(
@@ -499,85 +613,6 @@ export default {
         console.log(`EventCalendar.vue - 163 - 🏝`, this.user.uid);
         this.getEvents(this.user.uid);
     }
-    // async created() {
-    //     // Place all the events in the real time current week.
-    //     for (let i = 0; i < 5; i++) {
-    //         const day = await this.previousFirstDayOfWeek.addDays(i).format();
-    //         this.store.events.push(
-    //             {
-    //                 start: `${day} 12:00`,
-    //                 end: `${day} 13:00`,
-    //                 title: 'LUNCH',
-    //                 class: 'lunch',
-    //                 background: true,
-    //                 deletable: false,
-    //                 resizable: false,
-    //                 split: 1
-    //             },
-    //             {
-    //                 start: `${day} 12:00`,
-    //                 end: `${day} 13:00`,
-    //                 title: 'LUNCH',
-    //                 class: 'lunch',
-    //                 background: true,
-    //                 deletable: false,
-    //                 resizable: false,
-    //                 split: 2
-    //             }
-    //         );
-    //     }
-    //     // Date.format() and Date.addDays() are helper methods added by Vue Cal.
-    //     const monday = await this.previousFirstDayOfWeek.format();
-    //     const tuesday = await this.previousFirstDayOfWeek.addDays(1).format();
-    //     const thursday = await this.previousFirstDayOfWeek.addDays(3).format();
-    //     const friday = await this.previousFirstDayOfWeek.addDays(4).format();
-    //     this.store.events.push(
-    //         {
-    //             start: `${monday} 15:30`,
-    //             end: `${monday} 17:30`,
-    //             title: 'Tennis',
-    //             content:
-    //                 '<i class="v-icon material-icons mt-1">sports_tennis</i>',
-    //             resizable: false,
-    //             split: 1
-    //         },
-    //         {
-    //             start: `${monday} 15:30`,
-    //             end: `${monday} 17:30`,
-    //             title: 'Tennis',
-    //             content:
-    //                 '<i class="v-icon material-icons mt-1">sports_tennis</i>',
-    //             resizable: false,
-    //             split: 2
-    //         },
-    //         {
-    //             start: `${tuesday} 08:00`,
-    //             end: `${tuesday} 10:00`,
-    //             title: 'Volleyball',
-    //             content:
-    //                 '<i class="v-icon material-icons mt-1">sports_volleyball</i>',
-    //             resizable: false,
-    //             split: 2
-    //         },
-    //         {
-    //             start: `${thursday} 09:00`,
-    //             end: `${thursday} 11:30`,
-    //             title: 'Golf',
-    //             content:
-    //                 '<i class="v-icon material-icons mt-2">golf_course</i>',
-    //             resizable: false,
-    //             split: 1
-    //         },
-    //         {
-    //             start: `${friday} 16:45`,
-    //             end: `${friday} 18:45`,
-    //             title: 'Movie',
-    //             content: '<i class="v-icon material-icons mt-1">local_play</i>',
-    //             resizable: false,
-    //             split: 2
-    //         }
-    //     );
-    // }
 };
 </script>
 
@@ -605,112 +640,28 @@ export default {
     background-color: rgba(121, 87, 213, 0.1);
 }
 
-// $Aleko: #42b983;
-// $Ketsia: #ff7fc8;
-// .demo {
-//     border-radius: 4px;
-//     // Date picker.
-//     &.vuecal--date-picker .vuecal__cell-events-count {
-//         width: 4px;
-//         height: 4px;
-//         min-width: 0;
-//         padding: 0;
-//         margin-top: 4px;
-//         color: transparent;
-//         background-color: $Aleko;
-//     }
-//     &.vuecal--date-picker .vuecal__cell--selected .vuecal__cell-events-count {
-//         background-color: #fff;
-//     }
-//     // Both calendars.
-//     .vuecal__cell--out-of-scope {
-//         color: rgba(0, 0, 0, 0.15);
-//     }
-//     // Full power calendar.
-//     // ------------------------------------------------------
-//     &.full-cal .vuecal__menu {
-//         background-color: transparent;
-//     }
-//     &.full-cal .vuecal__title-bar {
-//         background: rgba(0, 0, 0, 0.03);
-//     }
-//     .vuecal__view-btn {
-//         background: none;
-//         padding: 0 10px;
-//         margin: 4px 2px;
-//         border-radius: 30px;
-//         height: 20px;
-//         line-height: 20px;
-//         font-size: 13px;
-//         text-transform: uppercase;
-//         border: none;
-//         color: inherit;
-//         &--active {
-//             background: rgb(66, 185, 130);
-//             color: #fff;
-//         }
-//     }
-//     &.full-cal .weekday-label {
-//         opacity: 0.4;
-//         font-weight: 500;
-//     }
-//     .vuecal__header .v-icon {
-//         color: inherit;
-//     }
-//     &:not(.vuecal--day-view) .vuecal__cell--selected {
-//         background-color: transparent;
-//     }
-//     &:not(.vuecal--day-view).full-cal .vuecal__cell--selected:before {
-//         border: 1px solid rgba($Aleko, 0.8);
-//     }
-//     .vuecal__event-time {
-//         margin: 3px 0;
-//         font-size: 12px;
-//         font-weight: 500;
-//         line-height: 1.2;
-//     }
-//     // Aleko.
-//     .vuecal__header .Aleko {
-//         color: darken($Aleko, 5);
-//     }
-//     .vuecal__body .Aleko {
-//         background-color: rgba($Aleko, 0.08);
-//     }
-//     .Aleko .vuecal__event {
-//         background-color: rgba(lighten($Aleko, 5), 0.85);
-//         color: #fff;
-//     }
-//     .Aleko .lunch {
-//         background: repeating-linear-gradient(
-//             45deg,
-//             transparent,
-//             transparent 10px,
-//             rgba($Aleko, 0.15) 10px,
-//             rgba($Aleko, 0.15) 20px
-//         );
-//         color: transparentize(darken($Aleko, 10), 0.4);
-//     }
-//     // Ketsia.
-//     .vuecal__header .Ketsia {
-//         color: darken($Ketsia, 5);
-//     }
-//     .vuecal__body .Ketsia {
-//         background-color: rgba($Ketsia, 0.08);
-//     }
-//     .Ketsia .vuecal__event {
-//         background-color: rgba(lighten($Ketsia, 5), 0.85);
-//         color: #fff;
-//     }
-//     .Ketsia .lunch {
-//         background: repeating-linear-gradient(
-//             45deg,
-//             transparent,
-//             transparent 10px,
-//             rgba($Ketsia, 0.15) 10px,
-//             rgba($Ketsia, 0.15) 20px
-//         );
-//         color: transparentize(darken($Ketsia, 10), 0.4);
-//     }
-//     // ------------------------------------------------------
-// }
+.vuecal__event {
+    cursor: pointer;
+}
+
+.vuecal__event-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 4px 0 8px;
+}
+
+.vuecal__event-time {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.vuecal__event-content {
+    font-style: italic;
+}
+
+.dialog {
+    height: 500px;
+}
 </style>
