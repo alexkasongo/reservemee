@@ -164,18 +164,7 @@ export default {
             } else if (dateTime) alert('Wrong date format.');
         },
         // MANIPULATE EVENTS START
-        /**
-        @cell-click="logEvents('cell-click', $event)"
-            @event-focus="logEvents('event-focus', $event)"
-            @event-title-change="logEvents('event-title-change', $event)"
-            @event-content-change="logEvents('event-content-change', $event)"
-            @event-duration-change="logEvents('event-duration-change', $event)"
-            @event-drop="logEvents('event-drop', $event)"
-            @event-create="logEvents('event-create', $event)"
-            @event-drag-create="logEvents('event-drag-create', $event)"
-            @event-delete="logEvents('event-delete', $event)"
-        */
-        logEvents(name, event) {
+        async logEvents(name, event) {
             if (name === 'cell-click') {
                 // click event
                 console.log(`EventCalendar.vue - 171 - cell-click`);
@@ -183,34 +172,250 @@ export default {
             if (name === 'event-create') {
                 // create event
                 console.log(`EventCalendar.vue - 171 - create-event`, event);
+
+                // Get all events after creating new event
+                // this.getEvents();
+
+                // this.name = '';
+                // this.details = '';
+                // this.start = '';
+                // this.end = '';
+                // this.color = '';
             }
+
+            // event CLICK
+            // if (name === 'event-focus') {
+            //     console.log(`EventCalendar.vue - 171 - event-focus`);
+            // }
+
+            // event FOCUS
+            // if (name === 'event-focus') {
+            //     console.log(`EventCalendar.vue - 171 - event-focus`);
+            // }
+
+            // event TITLE CHANGE
             if (name === 'event-title-change') {
-                // event title change
                 console.log(`EventCalendar.vue - 171 - event-title-change`);
+
+                const docId = event.event.id;
+
+                const newEvent = {
+                    allDay: event.event.allallDay || '',
+                    background: event.event.background,
+                    class: event.event.class,
+                    content: event.event.content,
+                    daysCount: event.event.daysCount,
+                    end: event.event.end,
+                    endTimeMinutes: event.event.endTimeMinutes,
+                    split: event.event.split || '',
+                    start: event.event.start,
+                    startTimeMinutes: event.event.startTimeMinutes,
+                    title: event.event.title || '',
+                    booked: false,
+                    deletable: 'deletable',
+                    draggable: 'draggable',
+                    resizable: 'resizable'
+                };
+
+                try {
+                    await db
+                        .collection(this.user.uid)
+                        .doc(`${docId}`)
+                        .update(newEvent)
+                        .then(() => {
+                            // Alert
+                            this.$swal({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Event added successfully.',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                            // Get all events after creating new event
+                            this.getEvents(this.user.uid);
+                        });
+                } catch (error) {
+                    console.log(`EventCalendar.vue - 293 - 🔥`, error);
+                }
             }
+
+            // event CONTENT CHANGE
             if (name === 'event-content-change') {
-                // event content change
                 console.log(`EventCalendar.vue - 171 - event-content-change`);
             }
+
+            // event DURATION CHANGE
             if (name === 'event-duration-change') {
-                // Create event
-                console.log(`EventCalendar.vue - 171 - event-duration-change`);
+                console.log(
+                    `EventCalendar.vue - 171 - event-duration-change`,
+                    event
+                );
+
+                const docId = event.event.id;
+
+                const newEvent = {
+                    allDay: event.event.allallDay || '',
+                    background: event.event.background,
+                    class: event.event.class,
+                    content: event.event.content,
+                    daysCount: event.event.daysCount,
+                    end: event.event.end,
+                    endTimeMinutes: event.event.endTimeMinutes,
+                    split: event.event.split || '',
+                    start: event.event.start,
+                    startTimeMinutes: event.event.startTimeMinutes,
+                    title: event.event.title || '',
+                    booked: false,
+                    deletable: 'deletable',
+                    draggable: 'draggable',
+                    resizable: 'resizable'
+                };
+
+                console.log(`EventCalendar.vue - 233 - 🛍`, newEvent);
+
+                try {
+                    await db
+                        .collection(this.user.uid)
+                        .doc(`${docId}`)
+                        .update(newEvent)
+                        .then(() => {
+                            // Alert
+                            this.$swal({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Event added successfully.',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                            // Get all events after creating new event
+                            this.getEvents(this.user.uid);
+                        });
+                } catch (error) {
+                    console.log(`EventCalendar.vue - 293 - 🔥`, error);
+                }
             }
+
+            // event DROP
             if (name === 'event-drop') {
-                // Create event
                 console.log(`EventCalendar.vue - 171 - event-drop`);
+
+                const docId = event.event.id;
+
+                const newEvent = {
+                    allDay: event.event.allallDay || '',
+                    background: event.event.background,
+                    class: event.event.class,
+                    content: event.event.content,
+                    daysCount: event.event.daysCount,
+                    end: event.event.end,
+                    endTimeMinutes: event.event.endTimeMinutes,
+                    split: event.event.split || '',
+                    start: event.event.start,
+                    startTimeMinutes: event.event.startTimeMinutes,
+                    title: event.event.title || '',
+                    booked: false,
+                    deletable: 'deletable',
+                    draggable: 'draggable',
+                    resizable: 'resizable'
+                };
+
+                console.log(`EventCalendar.vue - 233 - 🛍`, newEvent);
+
+                try {
+                    await db
+                        .collection(this.user.uid)
+                        .doc(`${docId}`)
+                        .update(newEvent)
+                        .then(() => {
+                            // Alert
+                            this.$swal({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Event added successfully.',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                            // Get all events after creating new event
+                            this.getEvents(this.user.uid);
+                        });
+                } catch (error) {
+                    console.log(`EventCalendar.vue - 293 - 🔥`, error);
+                }
             }
-            if (name === 'event-drop') {
-                // Create event
-                console.log(`EventCalendar.vue - 171 - event-drop`);
-            }
+
+            // event drag CREATE
             if (name === 'event-drag-create') {
-                // Create event
                 console.log(`EventCalendar.vue - 171 - event-drag-create`);
+
+                const newEvent = {
+                    allDay: event.allallDay || '',
+                    background: event.background,
+                    class: event.class,
+                    content: event.content,
+                    daysCount: event.daysCount,
+                    end: event.end,
+                    endTimeMinutes: event.endTimeMinutes,
+                    split: event.split || '',
+                    start: event.start,
+                    startTimeMinutes: event.startTimeMinutes,
+                    title: event.event || '',
+                    booked: false,
+                    deletable: 'deletable',
+                    draggable: 'draggable',
+                    resizable: 'resizable'
+                };
+
+                try {
+                    await db
+                        .collection(this.user.uid)
+                        .add(newEvent)
+                        .then(() => {
+                            // Alert
+                            this.$swal({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Event added successfully.',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                            // Get all events after creating new event
+                            this.getEvents(this.user.uid);
+                        });
+                } catch (error) {
+                    console.log(`EventCalendar.vue - 293 - 🔥`, error);
+                }
             }
+
+            // event DELETE
             if (name === 'event-delete') {
-                // Create event
-                console.log(`EventCalendar.vue - 171 - event-delete`);
+                console.log(`EventCalendar.vue - 171 - event-delete`, event);
+
+                const docId = event.id;
+
+                try {
+                    await db
+                        .collection(this.user.uid)
+                        .doc(`${docId}`)
+                        .delete.then(() => {
+                            // Alert
+                            this.$swal({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Event added successfully.',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                            // Get all events after creating new event
+                            this.getEvents(this.user.uid);
+                        });
+                } catch (error) {
+                    console.log(`EventCalendar.vue - 293 - 🔥`, error);
+                }
             }
         },
         // MANIPULATE EVENTS END
@@ -220,13 +425,22 @@ export default {
             // loop through and push events on each itteration
             snapshot.forEach((doc) => {
                 let appData = [];
+
                 appData.id = doc.id;
-                appData.start = doc.data().start.toDate();
+                appData.allDay = doc.data().allallDay;
+                appData.background = doc.data().background;
+                appData.class = doc.data().class;
+                appData.content = doc.data().content;
+                appData.daysCount = doc.data().daysCount;
                 appData.end = doc.data().end.toDate();
+                appData.endTimeMinutes = doc.data().endTimeMinutes;
+                appData.split = doc.data().split;
+                appData.start = doc.data().start.toDate();
+                appData.startTimeMinutes = doc.data().startTimeMinutes;
                 appData.title = doc.data().title;
+                appData.booked = doc.data().booked;
                 appData.deletable = doc.data().deletable;
                 appData.draggable = doc.data().draggable;
-                // Must include timed:boolean else timed events will not be displayed accordingly
                 appData.resizable = doc.data().resizable;
                 events.push(appData);
             });
