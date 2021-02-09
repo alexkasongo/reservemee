@@ -72,7 +72,6 @@
             today-button
             :time-from="8 * 60"
             :time-to="20 * 60"
-            :special-hours="specialHours"
             :snap-to-time="15"
             editable-events
             :events="events"
@@ -89,40 +88,6 @@
             :on-event-click="onEventClick"
         >
         </vue-cal>
-
-        <!-- <v-dialog v-model="showDialog">
-            <v-card>
-                <v-card-title>
-                    <v-icon>{{ selectedEvent.icon }}</v-icon>
-                    <span>{{ selectedEvent.title }}</span>
-                    <v-spacer />
-                    <strong>{{
-                        selectedEvent.start &&
-                        selectedEvent.start.format('DD/MM/YYYY')
-                    }}</strong>
-                </v-card-title>
-                <v-card-text>
-                    <p v-html="selectedEvent.contentFull" />
-                    <strong>Event details:</strong>
-                    <ul>
-                        <li>
-                            Event starts at:
-                            {{
-                                selectedEvent.start &&
-                                selectedEvent.start.formatTime()
-                            }}
-                        </li>
-                        <li>
-                            Event ends at:
-                            {{
-                                selectedEvent.end &&
-                                selectedEvent.end.formatTime()
-                            }}
-                        </li>
-                    </ul>
-                </v-card-text>
-            </v-card>
-        </v-dialog> -->
 
         <section>
             <!-- <div class="buttons">
@@ -144,58 +109,59 @@
                 aria-modal
             >
                 <section class="card">
-                    <div class="card-content dialog">
-                        <div class="columns">
-                            <div class="column">
-                                <b-field>
-                                    <b-switch v-model="isAmPm">AM/PM</b-switch>
-                                </b-field>
-                            </div>
-                            <div class="column">
-                                <b-field label="Select start time">
-                                    <b-clockpicker
-                                        rounded
-                                        placeholder="Click to select..."
-                                        icon="clock"
-                                        :hour-format="format"
-                                    >
-                                    </b-clockpicker>
-                                </b-field>
-                            </div>
-                            <div class="column">
-                                <b-field label="Select end time">
-                                    <b-clockpicker
-                                        rounded
-                                        placeholder="Click to select..."
-                                        icon="clock"
-                                        :hour-format="format"
-                                    >
-                                    </b-clockpicker>
-                                </b-field>
-                            </div>
+                    <div class="field card-content dialog">
+                        <!-- <section class="columns"> -->
+                        <div class="mb-5">
+                            <b-field label="Select start datetime">
+                                <b-datetimepicker
+                                    placeholder="Click to select..."
+                                    icon="calendar-today"
+                                    :locale="locale"
+                                    :datepicker="{ showWeekNumber }"
+                                    :timepicker="{
+                                        enableSeconds,
+                                        hourFormat
+                                    }"
+                                    horizontal-time-picker
+                                    v-model="selectedEvent.start"
+                                >
+                                </b-datetimepicker>
+                            </b-field>
                         </div>
-
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img
-                                        src="https://via.placeholder.com/300"
-                                        alt="Image"
-                                    />
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4">John Smith</p>
-                                <p class="subtitle is-6">@johnsmith</p>
-                            </div>
+                        <div class="mb-5">
+                            <b-field label="Select end datetime">
+                                <b-datetimepicker
+                                    placeholder="Click to select..."
+                                    icon="calendar-today"
+                                    :locale="locale"
+                                    :datepicker="{ showWeekNumber }"
+                                    :timepicker="{
+                                        enableSeconds,
+                                        hourFormat
+                                    }"
+                                    horizontal-time-picker
+                                    v-model="selectedEvent.end"
+                                >
+                                </b-datetimepicker>
+                            </b-field>
                         </div>
-
-                        <div class="content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                            <a>#css</a> <a>#responsive</a>
-                            <br />
-                            <small>11:09 PM - 1 Jan 2016</small>
+                        <!-- </section> -->
+                        <p>{{ start }}</p>
+                        <p style="color: red">{{ selectedEvent.start }}</p>
+                        <div class="field">
+                            <b-field label="Details">
+                                <b-input
+                                    maxlength="200"
+                                    type="textarea"
+                                ></b-input>
+                            </b-field>
+                        </div>
+                        <div class="field">
+                            <p class="control">
+                                <button class="button is-primary">
+                                    Update
+                                </button>
+                            </p>
                         </div>
                     </div>
                 </section>
@@ -215,21 +181,16 @@ export default {
         // store,
         selectedDate: new Date(),
         events: [],
-        specialHours: {
-            1: dailyHours,
-            2: dailyHours,
-            3: [
-                { from: 9 * 60, to: 12 * 60, class: 'business-hours' },
-                { from: 14 * 60, to: 18 * 60, class: 'business-hours' }
-            ],
-            4: dailyHours,
-            5: dailyHours
-        },
         isActive: false,
         // Dialog
         selectedEvent: {},
         isCardModalActive: false,
-        isAmPm: false
+        minutesGranularity: 15,
+        showWeekNumber: false,
+        enableSeconds: false,
+        hourFormat: undefined, // Browser locale
+        locale: undefined, // Browser locale
+        start: null
     }),
     computed: {
         user() {
@@ -243,8 +204,15 @@ export default {
                 )
             );
         },
-        format() {
-            return this.isAmPm ? '12' : '24';
+        sampleFormat() {
+            const dtf = new Intl.DateTimeFormat(this.locale, {
+                hour: 'numeric',
+                minute: 'numeric',
+                second: this.enableSeconds ? 'numeric' : undefined,
+                hour12: this.hourFormat ? this.hourFormat === '12' : undefined,
+                timezome: 'UTC'
+            });
+            return dtf.format(new Date(2000, 12, 12, 22, 23, 24));
         }
     },
     methods: {
@@ -279,24 +247,6 @@ export default {
         },
         // MANIPULATE EVENTS START
         async logEvents(name, event) {
-            if (name === 'cell-click') {
-                // click event
-                console.log(`EventCalendar.vue - 171 - cell-click`);
-            }
-            if (name === 'event-create') {
-                // create event
-                console.log(`EventCalendar.vue - 171 - create-event`, event);
-
-                // Get all events after creating new event
-                // this.getEvents();
-
-                // this.name = '';
-                // this.details = '';
-                // this.start = '';
-                // this.end = '';
-                // this.color = '';
-            }
-
             // event CLICK
             // if (name === 'event-focus') {
             //     console.log(`EventCalendar.vue - 171 - event-focus`);
@@ -608,6 +558,10 @@ export default {
                 this.events = events;
             }
         }
+        // Time formatting
+        // dateFormatter(dt) {
+        //     return dt.toLocaleDateString('en-GB', dateoptions);
+        // }
     },
     mounted() {
         console.log(`EventCalendar.vue - 163 - 🏝`, this.user.uid);
@@ -662,6 +616,6 @@ export default {
 }
 
 .dialog {
-    height: 500px;
+    height: 600px;
 }
 </style>
