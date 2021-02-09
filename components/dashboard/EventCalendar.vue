@@ -243,6 +243,48 @@ export default {
             // event CONTENT CHANGE
             if (name === 'event-content-change') {
                 console.log(`EventCalendar.vue - 171 - event-content-change`);
+
+                const docId = event.event.id;
+
+                const newEvent = {
+                    allDay: event.event.allallDay || '',
+                    background: event.event.background,
+                    class: event.event.class,
+                    content: event.event.content,
+                    daysCount: event.event.daysCount,
+                    end: event.event.end,
+                    endTimeMinutes: event.event.endTimeMinutes,
+                    split: event.event.split || '',
+                    start: event.event.start,
+                    startTimeMinutes: event.event.startTimeMinutes,
+                    title: event.event.title || '',
+                    booked: false,
+                    deletable: 'deletable',
+                    draggable: 'draggable',
+                    resizable: 'resizable'
+                };
+
+                try {
+                    await db
+                        .collection(this.user.uid)
+                        .doc(`${docId}`)
+                        .update(newEvent)
+                        .then(() => {
+                            // Alert
+                            this.$swal({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Event added successfully.',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                            // Get all events after creating new event
+                            this.getEvents(this.user.uid);
+                        });
+                } catch (error) {
+                    console.log(`EventCalendar.vue - 293 - 🔥`, error);
+                }
             }
 
             // event DURATION CHANGE
@@ -396,25 +438,24 @@ export default {
 
                 const docId = event.id;
 
+                console.log(`EventCalendar.vue - 399 - 🤣`, docId);
+
                 try {
-                    await db
-                        .collection(this.user.uid)
-                        .doc(`${docId}`)
-                        .delete.then(() => {
-                            // Alert
-                            this.$swal({
-                                toast: true,
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Event added successfully.',
-                                showConfirmButton: false,
-                                timer: 3000
-                            });
-                            // Get all events after creating new event
-                            this.getEvents(this.user.uid);
-                        });
+                    await db.collection(this.user.uid).doc(`${docId}`).delete();
                 } catch (error) {
                     console.log(`EventCalendar.vue - 293 - 🔥`, error);
+                } finally {
+                    // Alert
+                    this.$swal({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Event deleted successfully.',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                    // Get all events after creating new event
+                    this.getEvents(this.user.uid);
                 }
             }
         },
