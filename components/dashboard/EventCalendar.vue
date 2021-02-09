@@ -163,9 +163,57 @@ export default {
                 });
             } else if (dateTime) alert('Wrong date format.');
         },
+        // MANIPULATE EVENTS START
+        /**
+        @cell-click="logEvents('cell-click', $event)"
+            @event-focus="logEvents('event-focus', $event)"
+            @event-title-change="logEvents('event-title-change', $event)"
+            @event-content-change="logEvents('event-content-change', $event)"
+            @event-duration-change="logEvents('event-duration-change', $event)"
+            @event-drop="logEvents('event-drop', $event)"
+            @event-create="logEvents('event-create', $event)"
+            @event-drag-create="logEvents('event-drag-create', $event)"
+            @event-delete="logEvents('event-delete', $event)"
+        */
         logEvents(name, event) {
-            // console.log(`EventCalendar.vue - 84 - 🍎`, name, event);
+            if (name === 'cell-click') {
+                // click event
+                console.log(`EventCalendar.vue - 171 - cell-click`);
+            }
+            if (name === 'event-create') {
+                // create event
+                console.log(`EventCalendar.vue - 171 - create-event`, event);
+            }
+            if (name === 'event-title-change') {
+                // event title change
+                console.log(`EventCalendar.vue - 171 - event-title-change`);
+            }
+            if (name === 'event-content-change') {
+                // event content change
+                console.log(`EventCalendar.vue - 171 - event-content-change`);
+            }
+            if (name === 'event-duration-change') {
+                // Create event
+                console.log(`EventCalendar.vue - 171 - event-duration-change`);
+            }
+            if (name === 'event-drop') {
+                // Create event
+                console.log(`EventCalendar.vue - 171 - event-drop`);
+            }
+            if (name === 'event-drop') {
+                // Create event
+                console.log(`EventCalendar.vue - 171 - event-drop`);
+            }
+            if (name === 'event-drag-create') {
+                // Create event
+                console.log(`EventCalendar.vue - 171 - event-drag-create`);
+            }
+            if (name === 'event-delete') {
+                // Create event
+                console.log(`EventCalendar.vue - 171 - event-delete`);
+            }
         },
+        // MANIPULATE EVENTS END
         async getEvents(uid) {
             let snapshot = await db.collection(`${uid}`).get();
             let events = [];
