@@ -59,6 +59,7 @@
                         - Drag and drop an event (not from the editable title
                         text selection and not from the resizer).
                     </li>
+                    <li>- Click on event to view full details.</li>
                     <li>
                         - Delete an event (by clicking and holding an event)
                     </li>
@@ -90,15 +91,6 @@
         </vue-cal>
 
         <section>
-            <!-- <div class="buttons">
-                <b-button
-                    label="Launch card modal (keep scroll)"
-                    type="is-primary"
-                    size="is-medium"
-                    @click="isCardModalActive = true"
-                />
-            </div> -->
-
             <b-modal
                 v-model="isCardModalActive"
                 :width="960"
@@ -123,7 +115,7 @@
                                         hourFormat
                                     }"
                                     horizontal-time-picker
-                                    v-model="selectedEvent.start"
+                                    v-model="start"
                                 >
                                 </b-datetimepicker>
                             </b-field>
@@ -140,28 +132,25 @@
                                         hourFormat
                                     }"
                                     horizontal-time-picker
-                                    v-model="selectedEvent.end"
+                                    v-model="end"
                                 >
                                 </b-datetimepicker>
                             </b-field>
                         </div>
-                        <!-- </section> -->
-                        <p>{{ start }}</p>
-                        <p style="color: red">{{ selectedEvent.start }}</p>
+
                         <div class="field">
                             <b-field label="Details">
                                 <b-input
+                                    v-model="details"
                                     maxlength="200"
                                     type="textarea"
                                 ></b-input>
                             </b-field>
                         </div>
                         <div class="field">
-                            <p class="control">
-                                <button class="button is-primary">
-                                    Update
-                                </button>
-                            </p>
+                            <button class="button is-primary" @click="onUpdate">
+                                Update
+                            </button>
                         </div>
                     </div>
                 </section>
@@ -190,7 +179,9 @@ export default {
         enableSeconds: false,
         hourFormat: undefined, // Browser locale
         locale: undefined, // Browser locale
-        start: null
+        start: '',
+        end: '',
+        details: ''
     }),
     computed: {
         user() {
@@ -217,8 +208,9 @@ export default {
     },
     methods: {
         onEventClick(event, e) {
-            console.log(`EventCalendar.vue - 218 - 🇨🇩`, event);
             this.selectedEvent = event;
+            this.start = event.start;
+            this.end = event.end;
             this.isCardModalActive = true;
 
             // Prevent navigating to narrower view (default vue-cal behavior).
@@ -557,11 +549,59 @@ export default {
                 console.log(`EventCalendar.vue - 154 - ✅`, events);
                 this.events = events;
             }
+        },
+        async onUpdate() {
+            // const dateTime = {
+            //     start: this.start,
+            //     end: this.end,
+            //     content: this.details
+            // };
+            // console.log(`EventCalendar.vue - 562 - 🔥`, dateTime);
+
+            const docId = this.selectedEvent.id;
+
+            const newEvent = {
+                allDay: this.selectedEvent.allallDay || '',
+                background: this.selectedEvent.background,
+                class: this.selectedEvent.class,
+                content: this.details,
+                daysCount: this.selectedEvent.daysCount,
+                end: this.end,
+                endTimeMinutes: this.selectedEvent.endTimeMinutes,
+                split: this.selectedEvent.split || '',
+                start: this.start,
+                startTimeMinutes: this.selectedEvent.startTimeMinutes,
+                title: this.selectedEvent.title || '',
+                booked: false,
+                deletable: 'deletable',
+                draggable: 'draggable',
+                resizable: 'resizable'
+            };
+
+            try {
+                await db
+                    .collection(this.user.uid)
+                    .doc(`${docId}`)
+                    .update(newEvent)
+                    .then(() => {
+                        // Alert
+                        this.$swal({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Event added successfully.',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                        // Get all events after creating new event
+                        this.getEvents(this.user.uid);
+                    });
+            } catch (error) {
+                console.log(`EventCalendar.vue - 293 - 🔥`, error);
+            } finally {
+                this.isCardModalActive = false;
+            }
         }
-        // Time formatting
-        // dateFormatter(dt) {
-        //     return dt.toLocaleDateString('en-GB', dateoptions);
-        // }
     },
     mounted() {
         console.log(`EventCalendar.vue - 163 - 🏝`, this.user.uid);
