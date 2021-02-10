@@ -148,7 +148,7 @@ export default {
         start: '',
         end: '',
         details: '',
-        errors
+        errors: []
     }),
     computed: {
         user() {
