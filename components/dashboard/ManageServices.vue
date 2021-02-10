@@ -124,10 +124,13 @@
         </v-data-table> -->
 
         <!-- BEUFY -->
-        <b-button @click="onCreateCategory" class="is-primary mb-5"
-            >Create Service</b-button
-        >
+
         <section class="service__border">
+            <b-field>
+                <b-button @click="onCreateCategory" class="is-primary mb-5"
+                    >Create Service</b-button
+                >
+            </b-field>
             <b-table
                 :data="categories"
                 :paginated="isPaginated"
