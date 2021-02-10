@@ -124,9 +124,12 @@
         </v-data-table> -->
 
         <!-- BEUFY -->
+        <b-button @click="onCreateCategory" class="is-primary mb-5"
+            >Create Service</b-button
+        >
         <section class="service__border">
             <b-table
-                :data="data"
+                :data="categories"
                 :paginated="isPaginated"
                 :per-page="perPage"
                 :current-page.sync="currentPage"
@@ -142,7 +145,7 @@
                 aria-page-label="Page"
                 aria-current-label="Current page"
             >
-                <b-table-column
+                <!-- <b-table-column
                     field="id"
                     label="ID"
                     width="40"
@@ -151,51 +154,77 @@
                     v-slot="props"
                 >
                     {{ props.row.id }}
-                </b-table-column>
+                </b-table-column> -->
 
                 <b-table-column
-                    field="user.first_name"
-                    label="First Name"
+                    field="name"
+                    label="Name"
                     sortable
                     v-slot="props"
                 >
-                    {{ props.row.user.first_name }}
+                    {{ props.row.name }}
                 </b-table-column>
 
                 <b-table-column
-                    field="user.last_name"
-                    label="Last Name"
+                    field="description"
+                    label="Description"
                     sortable
                     v-slot="props"
                 >
-                    {{ props.row.user.last_name }}
+                    {{ props.row.description }}
                 </b-table-column>
 
                 <b-table-column
-                    field="date"
-                    label="Date"
+                    field="name"
+                    label="Services"
                     sortable
                     centered
                     v-slot="props"
                 >
-                    <span class="tag is-success">
-                        {{ new Date(props.row.date).toLocaleDateString() }}
+                    <span
+                        class="tag is-success"
+                        style="cursor: pointer"
+                        @click="goToService(props.row.name)"
+                    >
+                        View Services
                     </span>
                 </b-table-column>
 
-                <b-table-column label="Gender" v-slot="props">
+                <b-table-column label="Actions">
                     <span>
-                        <b-icon
-                            pack="fas"
-                            :icon="
-                                props.row.gender === 'Male' ? 'mars' : 'venus'
-                            "
-                        >
-                        </b-icon>
-                        {{ props.row.gender }}
+                        <b-icon icon="pencil" style="cursor: pointer"> </b-icon>
+                        <b-icon icon="delete" style="cursor: pointer"> </b-icon>
                     </span>
                 </b-table-column>
             </b-table>
+        </section>
+
+        <section>
+            <b-modal
+                v-model="isCardModalActive"
+                :width="960"
+                scroll="keep"
+                :destroy-on-hide="false"
+                aria-role="dialog"
+                aria-label="Events Modal"
+                aria-modal
+            >
+                <section class="card">
+                    <div class="field card-content dialog">
+                        <div class="field">
+                            <b-field label="Details">
+                                <b-input
+                                    maxlength="200"
+                                    type="textarea"
+                                ></b-input>
+                            </b-field>
+                        </div>
+                        <div class="field">
+                            <button class="button is-primary">Update</button>
+                        </div>
+                    </div>
+                </section>
+            </b-modal>
         </section>
     </div>
 </template>
@@ -600,7 +629,9 @@ export default {
         sortIcon: 'arrow-up',
         sortIconSize: 'is-small',
         currentPage: 1,
-        perPage: 5
+        perPage: 5,
+        // MODAL
+        isCardModalActive: false
     }),
     computed: {
         ...mapGetters({
@@ -625,7 +656,8 @@ export default {
             this.$router.push('/service/create-service');
         },
         onCreateCategory() {
-            this.$router.push('/service/create-category');
+            this.isCardModalActive = true;
+            // this.$router.push('/service/create-category');
         },
         goToService(service) {
             this.$router.push({
