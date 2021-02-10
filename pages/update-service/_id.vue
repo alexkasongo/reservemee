@@ -1,88 +1,87 @@
 <template>
     <div class="container">
-        <div class="display-1">Update Service</div>
-        <form @submit.prevent="onSubmit" class="pt-5">
-            <div class="form-group">
-                <v-select
-                    label="Select Category"
-                    class="form-control"
-                    :items="categoryNames"
-                    required
-                    v-model="category"
-                >
-                    {{ categoryNames }}
-                </v-select>
-            </div>
-            <div>
-                <div class="form-group">
-                    <v-text-field
-                        label="Name"
-                        required
-                        type="name"
-                        placeholder="Service Name"
-                        v-model="name"
-                    ></v-text-field>
-                </div>
-                <div class="form-group">
-                    <v-textarea
-                        required
-                        outlined
-                        label="Description"
-                        v-model="description"
-                    ></v-textarea>
-                </div>
-                <div class="form-group">
-                    <div class="form-group">
-                        <label for="exampleFormControlFile1">Picture</label>
-                        <v-file-input
-                            type="file"
-                            color="teal accent-4"
-                            @change="updateServiceImage"
-                            label="Upload profile image"
-                            outlined
-                            truncate-length="50"
-                            prepend-icon="mdi-camera"
-                            dense
-                            accept="image/*"
-                            ref="fileInputOne"
+        <div>
+            <h1 class="title">Update Service</h1>
+            <h2 class="subtitle">Update the service</h2>
+
+            <!-- Beaufy -->
+            <section>
+                <b-field label="Category">
+                    <b-select
+                        placeholder="Select a category"
+                        v-model="category"
+                        expanded
+                    >
+                        <option
+                            v-for="(category, id) in categoryNames"
+                            :key="id"
+                            :value="category"
                         >
-                            <template v-slot:selection="{ text }">
-                                <v-chip small label dark color="teal darken-1">
-                                    {{ text }}
-                                </v-chip>
-                            </template>
-                        </v-file-input>
+                            {{ category }}
+                        </option>
+                    </b-select>
+                </b-field>
+
+                <b-field label="Name">
+                    <b-input v-model="name"></b-input>
+                </b-field>
+
+                <b-field label="Description">
+                    <b-input
+                        v-model="description"
+                        maxlength="200"
+                        type="textarea"
+                    ></b-input>
+                </b-field>
+
+                <b-field label="Image upload">
+                    <div class="file has-name is-fullwidth">
+                        <label class="file-label">
+                            <input
+                                class="file-input"
+                                type="file"
+                                name="resume"
+                                @change="
+                                    onUploadServiceImage($event.target.files[0])
+                                "
+                                accept="image/*"
+                                ref="fileInputOne"
+                            />
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label"> Choose a file… </span>
+                            </span>
+                            <span class="file-name">
+                                {{ previewImgName }}
+                            </span>
+                        </label>
                     </div>
-                </div>
-                <div
-                    required
-                    class="form-group imgPreview"
-                    v-bind:style="{
-                        'background-image': 'url(' + serviceImage + ')',
-                        display: serviceImageDisplay
-                    }"
-                ></div>
-                <div class="form-group">
-                    <v-text-field
-                        label="Price"
-                        required
-                        type="number"
-                        min="1"
-                        step="any"
-                        placeholder="50"
-                        v-model="price"
-                    ></v-text-field>
-                </div>
-                <div
-                    type="submit"
-                    :loading="loading"
-                    class="teal darker-1 mt-2"
-                    dark
-                >
-                    Update
-                </div>
-            </div>
-        </form>
+                </b-field>
+
+                <b-field>
+                    <div
+                        class="form-group imgPreview"
+                        v-bind:style="{
+                            'background-image': 'url(' + serviceImage + ')',
+                            display: serviceImageDisplay
+                        }"
+                    ></div>
+                </b-field>
+
+                <b-field>
+                    <b-button
+                        class="is-primary"
+                        :loading="loading"
+                        @click="onSubmit"
+                    >
+                        Update
+                    </b-button>
+                </b-field>
+            </section>
+            <!-- Beaufy End -->
+        </div>
     </div>
 </template>
 
@@ -99,7 +98,8 @@ export default {
             serviceImage: '',
             serviceImageDisplay: '',
             rawServiceImage: null,
-            categoryNames: []
+            categoryNames: [],
+            previewImgName: '' || 'no image uploaded'
         };
     },
     computed: {
@@ -165,7 +165,8 @@ export default {
             this.filteredService(this.$route.params.id);
         },
         // UPLOAD IMAGE
-        updateServiceImage(event) {
+        onUploadServiceImage(event) {
+            this.previewImgName = event.name;
             // if a file is inserted or a logo exists then show it
             if (event || this.storeLogo) {
                 this.serviceImageDisplay = 'block';

@@ -1,13 +1,13 @@
 <template>
-    <div class="container">
+    <div>
         <h1 class="title">Create Service</h1>
         <h2 class="subtitle">Create new service</h2>
 
         <!-- Beaufy -->
         <section>
-            <b-field label="Expanded">
+            <b-field label="Category">
                 <b-select
-                    placeholder="Select a character"
+                    placeholder="Select a category"
                     v-model="category"
                     expanded
                 >
@@ -98,7 +98,7 @@ export default {
             serviceImageDisplay: '',
             rawServiceImage: null,
             categoryNames: [],
-            previewImgName: '' || 'no image selected'
+            previewImgName: '' || 'no image uploaded'
         };
     },
     computed: {
