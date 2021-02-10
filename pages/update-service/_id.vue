@@ -104,6 +104,9 @@ export default {
         };
     },
     computed: {
+        ...mapState({
+            dashboardState: 'dashboard'
+        }),
         ...mapGetters({
             filteredService: 'dashboard/filteredService',
             categories: 'dashboard/categories',
@@ -159,8 +162,6 @@ export default {
             };
 
             this.updateService(data);
-            // this.$router.push(`/service/${res}`);
-            // this.loadServices(this.user.uid);
         },
         loadfilteredService() {
             this.filteredService(this.$route.params.id);
@@ -215,7 +216,7 @@ export default {
         } catch (error) {
             this.errors = error;
         } finally {
-            console.log(`_id.vue - 218 - 🏝`, this.categoryNames);
+            console.log(`_id.vue - 219 - 🔥`);
         }
     }
 };
