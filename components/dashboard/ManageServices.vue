@@ -154,7 +154,7 @@
                     sortable
                     v-slot="props"
                 >
-                    {{ props.row.name }}
+                    {{ props.row.name | capitalize }}
                 </b-table-column>
 
                 <b-table-column
@@ -185,7 +185,7 @@
                     <span @click="editItem(props.row)">
                         <b-icon icon="pencil" style="cursor: pointer"> </b-icon>
                     </span>
-                    <span @click="deleteItem(item.row)">
+                    <span @click="deleteItem(props.row)">
                         <b-icon icon="delete" style="cursor: pointer"> </b-icon>
                     </span>
                 </b-table-column>
@@ -226,7 +226,9 @@
                             >
                                 Create
                             </b-button>
-                            <b-button v-else @click="update"> Update </b-button>
+                            <b-button v-else @click="update" class="is-primary">
+                                Update
+                            </b-button>
                         </div>
                     </div>
                 </section>
@@ -347,7 +349,6 @@ export default {
         },
 
         editItem(item) {
-            console.log(`ManageServices.vue - 374 - 🌎`, item);
             this.editedItem = Object.assign({}, item);
             this.editedIndex = item.id;
             this.isCardModalActive = true;
@@ -355,18 +356,20 @@ export default {
         },
 
         deleteItem(item) {
-            this.item = item;
-            this.dialogDelete = true;
+            // this.item = item;
+            // this.dialogDelete = true;
+            this.deleteItemConfirm(item);
         },
 
-        deleteItemConfirm() {
+        deleteItemConfirm(item) {
             const payload = {
                 userId: this.user.uid,
-                id: this.item.id
+                id: item.id
             };
 
-            this.loadCategories(this.user.uid);
+            console.log(`ManageServices.vue - 374 - 🌎`, payload);
             this.deleteCategory(payload);
+            this.loadCategories(this.user.uid);
             this.$swal({
                 toast: true,
                 position: 'top-end',

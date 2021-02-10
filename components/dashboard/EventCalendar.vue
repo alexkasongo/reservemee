@@ -147,7 +147,8 @@ export default {
         locale: undefined, // Browser locale
         start: '',
         end: '',
-        details: ''
+        details: '',
+        errors
     }),
     computed: {
         user() {
@@ -217,8 +218,6 @@ export default {
 
             // event TITLE CHANGE
             if (name === 'event-title-change') {
-                console.log(`EventCalendar.vue - 171 - event-title-change`);
-
                 const docId = event.event.id;
 
                 const newEvent = {
@@ -258,14 +257,12 @@ export default {
                             this.getEvents(this.user.uid);
                         });
                 } catch (error) {
-                    console.log(`EventCalendar.vue - 293 - 🔥`, error);
+                    this.errors = error;
                 }
             }
 
             // event CONTENT CHANGE
             if (name === 'event-content-change') {
-                console.log(`EventCalendar.vue - 171 - event-content-change`);
-
                 const docId = event.event.id;
 
                 const newEvent = {
@@ -305,17 +302,12 @@ export default {
                             this.getEvents(this.user.uid);
                         });
                 } catch (error) {
-                    console.log(`EventCalendar.vue - 293 - 🔥`, error);
+                    this.errors = error;
                 }
             }
 
             // event DURATION CHANGE
             if (name === 'event-duration-change') {
-                console.log(
-                    `EventCalendar.vue - 171 - event-duration-change`,
-                    event
-                );
-
                 const docId = event.event.id;
 
                 const newEvent = {
@@ -336,8 +328,6 @@ export default {
                     resizable: 'resizable'
                 };
 
-                console.log(`EventCalendar.vue - 233 - 🛍`, newEvent);
-
                 try {
                     await db
                         .collection(this.user.uid)
@@ -357,14 +347,12 @@ export default {
                             this.getEvents(this.user.uid);
                         });
                 } catch (error) {
-                    console.log(`EventCalendar.vue - 293 - 🔥`, error);
+                    this.errors = error;
                 }
             }
 
             // event DROP
             if (name === 'event-drop') {
-                console.log(`EventCalendar.vue - 171 - event-drop`);
-
                 const docId = event.event.id;
 
                 const newEvent = {
@@ -385,8 +373,6 @@ export default {
                     resizable: 'resizable'
                 };
 
-                console.log(`EventCalendar.vue - 233 - 🛍`, newEvent);
-
                 try {
                     await db
                         .collection(this.user.uid)
@@ -406,14 +392,12 @@ export default {
                             this.getEvents(this.user.uid);
                         });
                 } catch (error) {
-                    console.log(`EventCalendar.vue - 293 - 🔥`, error);
+                    this.errors = error;
                 }
             }
 
             // event drag CREATE
             if (name === 'event-drag-create') {
-                console.log(`EventCalendar.vue - 171 - event-drag-create`);
-
                 const newEvent = {
                     allDay: event.allallDay || '',
                     background: event.background,
@@ -450,22 +434,18 @@ export default {
                             this.getEvents(this.user.uid);
                         });
                 } catch (error) {
-                    console.log(`EventCalendar.vue - 293 - 🔥`, error);
+                    this.errors = error;
                 }
             }
 
             // event DELETE
             if (name === 'event-delete') {
-                console.log(`EventCalendar.vue - 171 - event-delete`, event);
-
                 const docId = event.id;
-
-                console.log(`EventCalendar.vue - 399 - 🤣`, docId);
 
                 try {
                     await db.collection(this.user.uid).doc(`${docId}`).delete();
                 } catch (error) {
-                    console.log(`EventCalendar.vue - 293 - 🔥`, error);
+                    this.errors = error;
                 } finally {
                     // Alert
                     this.$swal({
@@ -512,7 +492,6 @@ export default {
                 this.events = [];
             }
             if (events.length > 0) {
-                console.log(`EventCalendar.vue - 154 - ✅`, events);
                 this.events = events;
             }
         },
@@ -522,7 +501,6 @@ export default {
             //     end: this.end,
             //     content: this.details
             // };
-            // console.log(`EventCalendar.vue - 562 - 🔥`, dateTime);
 
             const docId = this.selectedEvent.id;
 
@@ -563,14 +541,13 @@ export default {
                         this.getEvents(this.user.uid);
                     });
             } catch (error) {
-                console.log(`EventCalendar.vue - 293 - 🔥`, error);
+                this.errors = error;
             } finally {
                 this.isCardModalActive = false;
             }
         }
     },
     mounted() {
-        console.log(`EventCalendar.vue - 163 - 🏝`, this.user.uid);
         this.getEvents(this.user.uid);
     }
 };
