@@ -9,59 +9,6 @@
         <h2 class="subtitle">View, edit and create services</h2>
 
         <!-- SERVICE CARD -->
-        <!-- <v-row class="services__left pt-5">
-            <v-col
-                v-for="service in filteredServices"
-                :key="service.id"
-                class="col-md-6"
-            >
-                <div class="rounded-xl" :ripple="false">
-                    <div
-                        class="services__left-card d-flex flex-no-wrap justify-space-between"
-                    >
-                        <div class="services__left-card-img-container">
-                            <img
-                                class="services__left-service-img"
-                                :src="service.serviceImage"
-                                alt=""
-                            />
-                        </div>
-                        <div class="services__left-card-info">
-                            <div-title
-                                class="headline"
-                                v-text="service.name"
-                            ></div-title>
-
-                            <div v-text="service.description"></div>
-
-                            <div-text
-                                class="display-1 text--primary services__left-card-price"
-                            >
-                                ${{ service.price }}
-                            </div-text>
-                            <div>
-                                <div
-                                    :class="fav ? 'red--text' : ''"
-                                    icon
-                                    @click="fav = !fav"
-                                >
-                                    <v-icon>mdi-heart</v-icon>
-                                </div>
-
-                                <div @click="updService(service.id)" icon>
-                                    <v-icon>mdi-pencil-box</v-icon>
-                                </div>
-
-                                <div @click="removeService(service.id)" icon>
-                                    <v-icon>mdi-delete</v-icon>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </v-col>
-        </v-row> -->
-
         <!-- Beufy -->
         <section>
             <div v-for="service in filteredServices" :key="service.id">
