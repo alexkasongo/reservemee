@@ -99,7 +99,8 @@ export default {
             serviceImageDisplay: '',
             rawServiceImage: null,
             categoryNames: [],
-            previewImgName: '' || 'no image uploaded'
+            previewImgName: '' || 'no image uploaded',
+            errors: []
         };
     },
     computed: {
@@ -196,7 +197,7 @@ export default {
         }
         // UPLOAD IMAGE END
     },
-    mounted() {
+    async mounted() {
         // this.serviceImageDisplay = 'none';
         /*
          ** Pre-populate form
@@ -207,8 +208,14 @@ export default {
         this.price = this.serviceUpdateInfo.price;
         this.serviceImage = this.serviceUpdateInfo.serviceImage;
 
-        for (let key in this.categories) {
-            this.categoryNames.push(this.categories[key].name);
+        try {
+            for (let key in this.categories) {
+                this.categoryNames.push(this.categories[key].name);
+            }
+        } catch (error) {
+            this.errors = error;
+        } finally {
+            console.log(`_id.vue - 218 - 🏝`, this.categoryNames);
         }
     }
 };

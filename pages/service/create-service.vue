@@ -160,7 +160,7 @@ export default {
         }
         // UPLOAD IMAGE END
     },
-    mounted() {
+    async mounted() {
         // If serviceImageDisplay state is empty, run this
         this.serviceImageDisplay = 'none';
 
