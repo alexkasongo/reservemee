@@ -8,7 +8,7 @@
 
         <div class="columns pl-3 mt-5">
             <div
-                class="p-5 dashboard__bg column is-full-mobile is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd"
+                class="dashboard__bg column is-full-mobile is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd"
             >
                 <!-- Personal-Information -->
                 <BusinessInfo class="mb-5" />
@@ -198,7 +198,7 @@ export default {
     margin: 0 0 200px 0;
     .dashboard__bg {
         background-color: #f5f5f5;
-        border-radius: 24px;
+        border-radius: 4px;
     }
 }
 </style>
