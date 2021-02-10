@@ -1,39 +1,5 @@
 <template>
     <div>
-        <!-- <div class="layout wrap align-center justify-center">
-            <div class="buttons mb-5">
-                <b-button type="is-primary" @click="customEventCreation"
-                    >Add event</b-button
-                >
-            </div>
-            <div>
-                <vue-cal
-                    class="demo full-cal vuecal--full-height-delete"
-                    hide-weekends="hide-weekends"
-                    :selected-date="selectedDate"
-                    :time-from="8 * 60"
-                    :time-to="19 * 60"
-                    :split-days="store.splits"
-                    sticky-split-labels="sticky-split-labels"
-                    :editable-events="store.editable"
-                    :events="store.events"
-                    @cell-focus="selectedDate = $event.date || $event"
-                    style="height: 500px"
-                    ><template v-slot:split-label="{ split }">
-                        <b-icon icon="edit"></b-icon
-                        ><strong :style="`color: ${split.color}`">{{
-                            split.label
-                        }}</strong>
-                    </template></vue-cal
-                >
-            </div>
-        </div> -->
-
-        <!-- <div class="buttons mb-5">
-            <b-button type="is-primary" @click="customEventCreation"
-                >Add event</b-button
-            >
-        </div> -->
         <section class="mb-5">
             <b-button
                 label="Instructions"
