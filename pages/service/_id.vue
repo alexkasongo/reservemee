@@ -3,12 +3,13 @@
         <div v-if="loading">
             <p>loading...</p>
         </div>
-        <div class="display-1" v-if="!loading">
+        <h1 class="title" v-if="!loading">
             {{ this.$route.params.id | capitalize }} Services
-        </div>
+        </h1>
+        <h2 class="subtitle">View, edit and create services</h2>
 
         <!-- SERVICE CARD -->
-        <v-row class="services__left pt-5">
+        <!-- <v-row class="services__left pt-5">
             <v-col
                 v-for="service in filteredServices"
                 :key="service.id"
@@ -59,12 +60,74 @@
                     </div>
                 </div>
             </v-col>
-        </v-row>
-        <!-- SERVICE CARD END-->
-        <div class="col-md-6">
-            <div @click="onCreate" type="button" color="teal darken-1" dark>
-                Create New Service
+        </v-row> -->
+
+        <!-- Beufy -->
+        <section>
+            <div v-for="service in filteredServices" :key="service.id">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-48x48">
+                                    <img
+                                        :src="service.serviceImage"
+                                        alt="Placeholder image"
+                                    />
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">{{ service.name }}</p>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="columns">
+                                <div class="column">
+                                    {{ service.description }}
+                                </div>
+                                <div class="column">
+                                    <div
+                                        class="block is-flex is-justify-content-flex-end"
+                                    >
+                                        <div>
+                                            <b-icon
+                                                style="cursor: pointer"
+                                                icon="heart"
+                                            ></b-icon>
+                                            <span
+                                                @click="updService(service.id)"
+                                            >
+                                                <b-icon
+                                                    style="cursor: pointer"
+                                                    icon="pencil"
+                                                ></b-icon>
+                                            </span>
+                                            <span
+                                                @click="
+                                                    removeService(service.id)
+                                                "
+                                            >
+                                                <b-icon
+                                                    style="cursor: pointer"
+                                                    icon="delete"
+                                                ></b-icon>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
+        <!-- Beufy End -->
+        <!-- SERVICE CARD END-->
+        <div class="buttons">
+            <b-button @click="onCreate" class="is-primary">
+                Create New Service
+            </b-button>
         </div>
     </div>
 </template>
