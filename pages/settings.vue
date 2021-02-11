@@ -1,155 +1,81 @@
 <template>
     <div class="settings">
-        <div>
-            <!-- <div>
-                <div class="margin" app permanent :mini-variant="mini">
-                    <ul class="px-2">
-                        <li v-if="user.photoURL">
-                            <img :src="user.photoURL" />
-                        </li>
-                        <li v-else>
-                            <img src="https://via.placeholder.com/250" />
-                        </li>
+        <div class="sidebar-page">
+            <section class="sidebar-layout">
+                <b-sidebar
+                    position="static"
+                    :mobile="mobile"
+                    :expand-on-hover="expandOnHover"
+                    :reduce="reduce"
+                    :fullheight="true"
+                    type="is-light"
+                    open
+                    class="sidebar"
+                >
+                    <div class="p-1">
+                        <div class="block">
+                            <ul>
+                                <li v-if="user.photoURL">
+                                    <img
+                                        :src="user.photoURL"
+                                        style="height: 100px"
+                                    />
+                                </li>
+                                <li v-else>
+                                    <img
+                                        src="https://via.placeholder.com/250"
+                                    />
+                                </li>
 
-                        <li>{{ user.displayName }}</li>
-                    </ul>
-                    <div dense>
-                        <div v-for="(item, i) in items" :key="i">
-                            <div
-                                v-if="item.divider"
-                                :key="i"
-                                dark
-                                class="my-4"
-                            ></div>
-
-                            <div
-                                v-else
-                                :key="i"
-                                @click="onLinkClick(item)"
-                                link
-                            >
-                                <div>
-                                    <b-icon :icon="item.icon"></b-icon>
-                                </div>
-                                <div>
-                                    <h3>
-                                        {{ item.text }}
-                                    </h3>
-                                </div>
-                            </div>
+                                <li>{{ user.displayName }}</li>
+                            </ul>
                         </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div>
-                        <div class="settings__right-row">
-                            <div>
-                                <ProfileInformation
-                                    v-if="
-                                        this.selected ===
-                                            'Profile Information' ||
-                                        this.selected === ''
-                                    "
-                                />
-                                <StoreSettings
-                                    v-if="
-                                        this.selected === 'Store Settings' &&
-                                        role.admin
-                                    "
-                                />
-                                <Security v-if="this.selected === 'Security'" />
-                                <Notifications
-                                    v-if="this.selected === 'Notifications'"
-                                />
-                                <Billing v-if="this.selected === 'Billing'" />
-                                <AccountSettings
-                                    v-if="this.selected === 'Account Settings'"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-            <div class="sidebar-page">
-                <section class="sidebar-layout">
-                    <b-sidebar
-                        position="static"
-                        :mobile="mobile"
-                        :expand-on-hover="expandOnHover"
-                        :reduce="reduce"
-                        :fullheight="true"
-                        type="is-light"
-                        open
-                        class="sidebar"
-                    >
-                        <div class="p-1">
-                            <div class="block">
-                                <ul>
-                                    <li v-if="user.photoURL">
-                                        <img
-                                            :src="user.photoURL"
-                                            style="height: 100px"
-                                        />
-                                    </li>
-                                    <li v-else>
-                                        <img
-                                            src="https://via.placeholder.com/250"
-                                        />
-                                    </li>
-
-                                    <li>{{ user.displayName }}</li>
-                                </ul>
-                            </div>
-                            <b-menu class="is-custom-mobile">
-                                <b-menu-list label="Settings">
-                                    <div v-for="(item, i) in items" :key="i">
-                                        <b-menu-item
-                                            @click="onLinkClick(item)"
-                                            :icon="item.icon"
-                                            :label="item.text"
-                                        >
-                                        </b-menu-item>
-                                    </div>
-                                </b-menu-list>
-
-                                <b-menu-list label="Actions">
+                        <b-menu class="is-custom-mobile">
+                            <b-menu-list label="Settings">
+                                <div v-for="(item, i) in items" :key="i">
                                     <b-menu-item
-                                        icon="logout"
-                                        label="Logout"
-                                    ></b-menu-item>
-                                </b-menu-list>
-                            </b-menu>
-                        </div>
-                    </b-sidebar>
+                                        @click="onLinkClick(item)"
+                                        :icon="item.icon"
+                                        :label="item.text"
+                                    >
+                                    </b-menu-item>
+                                </div>
+                            </b-menu-list>
 
-                    <div class="settings-container">
-                        <div class="ml-5 mr-5">
-                            <ProfileInformation
-                                v-if="
-                                    this.selected === 'Profile Information' ||
-                                    this.selected === ''
-                                "
-                            />
-                            <StoreSettings
-                                v-if="
-                                    this.selected === 'Store Settings' &&
-                                    role.admin
-                                "
-                            />
-                            <Security v-if="this.selected === 'Security'" />
-                            <Notifications
-                                v-if="this.selected === 'Notifications'"
-                            />
-                            <Billing v-if="this.selected === 'Billing'" />
-                            <AccountSettings
-                                v-if="this.selected === 'Account Settings'"
-                            />
-                        </div>
+                            <b-menu-list label="Actions">
+                                <b-menu-item
+                                    icon="logout"
+                                    label="Logout"
+                                ></b-menu-item>
+                            </b-menu-list>
+                        </b-menu>
                     </div>
-                </section>
-            </div>
+                </b-sidebar>
+
+                <div class="settings-container">
+                    <div class="ml-5 mr-5">
+                        <ProfileInformation
+                            v-if="
+                                this.selected === 'Profile Information' ||
+                                this.selected === ''
+                            "
+                        />
+                        <StoreSettings
+                            v-if="
+                                this.selected === 'Store Settings' && role.admin
+                            "
+                        />
+                        <Security v-if="this.selected === 'Security'" />
+                        <Notifications
+                            v-if="this.selected === 'Notifications'"
+                        />
+                        <Billing v-if="this.selected === 'Billing'" />
+                        <AccountSettings
+                            v-if="this.selected === 'Account Settings'"
+                        />
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 </template>

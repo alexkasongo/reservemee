@@ -1,7 +1,7 @@
 <template>
     <!-- USER PROFILE -->
     <div>
-        <h1 class="title">PROFILE INFORMATION</h1>
+        <h3 class="subtitle is-3">PROFILE INFORMATION</h3>
 
         <form>
             <b-field label="Image upload">

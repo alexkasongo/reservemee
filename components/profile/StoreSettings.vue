@@ -3,7 +3,7 @@
     <div>
         <!-- <v-row>
             <v-col class="col-md-6"> -->
-        <h1 class="title">STORE SETTINGS</h1>
+        <h3 class="subtitle is-3">STORE SETTINGS</h3>
         <form>
             <!-- Logo image upload -->
             <b-field label="Image upload">

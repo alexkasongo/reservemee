@@ -1,7 +1,7 @@
 <template>
     <!-- SECURITY SETTINGS -->
     <div>
-        <h1 class="title mb-5">SECURITY SETTINGS</h1>
+        <h3 class="subtitle is-3 mb-5">SECURITY SETTINGS</h3>
 
         <div>
             <b-field label="Change Password">
