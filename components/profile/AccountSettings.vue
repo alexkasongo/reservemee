@@ -4,16 +4,16 @@
         <h6>ACCOUNT SETTINGS</h6>
         <hr />
         <form>
-            <div class="form-group">
-                <label class="d-block text-danger">Delete Account</label>
+            <div class="mb-5">
+                <label>Delete Account</label>
                 <p class="text-muted font-size-sm">
                     Once you delete your account, there is no going back. Please
                     be certain.
                 </p>
             </div>
-            <div @click="deleteAccount" color="red darken-1" type="button" dark>
+            <b-button @click="deleteAccount" type="is-danger">
                 Delete Account
-            </div>
+            </b-button>
         </form>
     </div>
     <!-- ACCOUNT END -->

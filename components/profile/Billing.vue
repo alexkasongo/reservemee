@@ -9,17 +9,7 @@
                 <div class="small text-muted mb-3">
                     You have not added a payment method
                 </div>
-                <div dark class="teal darken-1" type="button">
-                    Add Payment Method
-                </div>
-            </div>
-            <div class="form-group mb-0">
-                <label class="d-block">Payment History</label>
-                <div
-                    class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm"
-                >
-                    You have not made any payment.
-                </div>
+                <b-button type="is-primary"> Add Payment Method </b-button>
             </div>
         </form>
     </div>
