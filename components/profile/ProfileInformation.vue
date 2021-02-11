@@ -2,6 +2,7 @@
     <!-- USER PROFILE -->
     <div>
         <h3 class="subtitle is-3">PROFILE INFORMATION</h3>
+        <hr />
 
         <form>
             <b-field label="Image upload">

@@ -2,7 +2,7 @@
     <!-- SECURITY SETTINGS -->
     <div>
         <h3 class="subtitle is-3 mb-5">SECURITY SETTINGS</h3>
-
+        <hr />
         <div>
             <b-field label="Change Password">
                 <b-input
