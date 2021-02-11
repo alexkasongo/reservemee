@@ -1,6 +1,6 @@
 <template>
     <div class="settings">
-        <v-app>
+        <!-- <v-app>
             <v-app>
                 <v-navigation-drawer
                     class="margin"
@@ -70,7 +70,7 @@
                                     height="100%"
                                     class="inbox__right-card"
                                 >
-                                    <!-- Message -->
+
                                     <div class="inbox__right-card-top">
                                         <div
                                             v-if="messagePreview.length > 0"
@@ -105,7 +105,7 @@
                                             v-if="messagePreview.length > 0"
                                         ></v-divider>
 
-                                        <!-- Conversation start -->
+
                                         <div class="inbox__right-card-middle">
                                             <v-list three-line>
                                                 <div>
@@ -154,11 +154,11 @@
                                                 </div>
                                             </v-list>
                                         </div>
-                                        <!-- Conversation End -->
-                                    </div>
-                                    <!-- Message End -->
 
-                                    <!-- Reply -->
+                                    </div>
+
+
+
                                     <div class="inbox__right-card-btm">
                                         <v-list v-if="allMessages.length > 0">
                                             <v-list-item>
@@ -242,14 +242,14 @@
                                             </v-list-item>
                                         </v-list>
                                     </div>
-                                    <!-- Reply End -->
+
                                 </div>
                             </v-col>
                         </v-row>
                     </v-container>
                 </v-main>
             </v-app>
-        </v-app>
+        </v-app> -->
     </div>
 </template>
 

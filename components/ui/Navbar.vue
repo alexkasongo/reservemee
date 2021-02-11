@@ -20,7 +20,28 @@
 
         <template #end>
             <b-navbar-item tag="div">
-                <b-navbar-dropdown label="Info" v-if="user">
+                <div v-if="user">
+                    <span @click="$router.push(`/inbox/${user.uid}`)">
+                        <b-icon
+                            class="ml-5"
+                            icon="message-outline"
+                            type="is-primary"
+                            v-if="role.customer"
+                            >mdi-message</b-icon
+                        >
+                    </span>
+                    <span @click="$router.push('/inbox/admin')">
+                        <b-icon
+                            class="ml-5"
+                            icon="message-outline"
+                            type="is-primary"
+                            v-if="role.admin"
+                            >mdi-message</b-icon
+                        >
+                    </span>
+                </div>
+                <!-- DROP DOWN -->
+                <b-navbar-dropdown v-if="user">
                     <div v-for="(item, index) in nav" :key="index">
                         <b-navbar-item @click="dropDown(item)">{{
                             item.title
@@ -50,6 +71,7 @@
                         </a>
                     </div>
                 </div>
+                <!-- DROP DOWN END -->
             </b-navbar-item>
         </template>
     </b-navbar>
