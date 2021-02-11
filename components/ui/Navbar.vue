@@ -19,28 +19,27 @@
         </template>
 
         <template #end>
-            <b-navbar-item tag="div">
+            <b-navbar-item>
                 <div v-if="user">
-                    <span @click="$router.push(`/inbox/${user.uid}`)">
+                    <div @click="$router.push(`/inbox/${user.uid}`)">
                         <b-icon
-                            class="ml-5"
                             icon="message-outline"
                             type="is-primary"
                             v-if="role.customer"
                             >mdi-message</b-icon
                         >
-                    </span>
-                    <span @click="$router.push('/inbox/admin')">
+                    </div>
+                    <div @click="$router.push('/inbox/admin')">
                         <b-icon
-                            class="ml-5"
                             icon="message-outline"
                             type="is-primary"
                             v-if="role.admin"
                             >mdi-message</b-icon
                         >
-                    </span>
+                    </div>
                 </div>
-                <!-- DROP DOWN -->
+            </b-navbar-item>
+            <b-navbar-item>
                 <b-navbar-dropdown v-if="user">
                     <div v-for="(item, index) in nav" :key="index">
                         <b-navbar-item @click="dropDown(item)">{{
@@ -48,30 +47,25 @@
                         }}</b-navbar-item>
                     </div>
                 </b-navbar-dropdown>
-                <div class="buttons">
-                    <div v-if="$route.name !== 'signin'">
-                        <a @click="signin" v-if="!user" class="button is-light">
-                            Log in
-                        </a>
-                    </div>
-                    <div v-else>
-                        <a
-                            @click="signup"
-                            v-if="!user"
-                            class="button is-primary"
-                        >
-                            <strong>Sign up</strong>
-                        </a>
-                        <a
-                            @click="$router.push('/signup-admin')"
-                            v-if="!user"
-                            class="button is-primary"
-                        >
-                            <strong>Admin</strong>
-                        </a>
-                    </div>
+            </b-navbar-item>
+            <b-navbar-item>
+                <div v-if="$route.name !== 'signin'">
+                    <a @click="signin" v-if="!user" class="button is-light">
+                        Log in
+                    </a>
                 </div>
-                <!-- DROP DOWN END -->
+                <div v-else>
+                    <a @click="signup" v-if="!user" class="button is-primary">
+                        <strong>Sign up</strong>
+                    </a>
+                    <a
+                        @click="$router.push('/signup-admin')"
+                        v-if="!user"
+                        class="button is-primary"
+                    >
+                        <strong>Admin</strong>
+                    </a>
+                </div>
             </b-navbar-item>
         </template>
     </b-navbar>
