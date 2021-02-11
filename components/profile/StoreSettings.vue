@@ -8,7 +8,7 @@
 
         <form>
             <!-- Logo image upload -->
-            <b-field label="Image upload">
+            <b-field label="Store Logo upload">
                 <div class="file has-name is-fullwidth">
                     <label class="file-label">
                         <input
@@ -124,7 +124,7 @@
                     v-model="storeForm.storeBio"
                 ></b-input>
             </b-field>
-            <b-field label="Image upload">
+            <b-field label="Store Banner upload">
                 <div class="file has-name is-fullwidth">
                     <label class="file-label">
                         <input
