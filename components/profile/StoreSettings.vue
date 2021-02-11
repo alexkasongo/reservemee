@@ -69,30 +69,6 @@
                     placeholder="Enter your store phone number"
                     v-model="storeForm.storePhoneNumber"
                 ></b-input>
-                <!-- <small class="form-text text-muted">Format: 123-456-7890</small> -->
-
-                <!-- <select
-                        v-model="storeForm.cat1"
-                        :items="beauty"
-                        label="Select"
-                        multiple
-                        hint="Beauty"
-                        persistent-hint
-                        color="teal darker-1"
-                    >
-                        <div>
-                            <div v-if="index === 0" color="teal darker-1" dark>
-                                <span>{{ item }}</span>
-                            </div>
-                            <span v-if="index === 1" class="grey--text caption">
-                                (+{{ storeForm.cat1.length - 1 }}
-                                others)
-                            </span>
-                        </div>
-                    </select> -->
-                <!-- <optgroup v-for="(item, id) in beauty" :key="id">
-                        <option value="flint">{{ item }}</option>
-                    </optgroup> -->
             </b-field>
 
             <h6 class="title is-6">Store Service Category</h6>
@@ -136,51 +112,6 @@
                         </option>
                     </b-select>
                 </div>
-
-                <!-- <div cols="12" sm="6">
-                    <select
-                        v-model="storeForm.cat2"
-                        :items="wellness"
-                        label="Select"
-                        multiple
-                    >
-                        <div>
-                            <div v-if="index === 0" color="teal darker-1" dark>
-                                <span>{{ item }}</span>
-                            </div>
-                            <span v-if="index === 1" class="grey--text caption">
-                                (+{{ storeForm.cat2.length - 1 }}
-                                others)
-                            </span>
-                        </div>
-                    </select>
-                </div> -->
-
-                <!-- <div cols="12" sm="6">
-                    <select
-                        v-model="storeForm.cat3"
-                        :items="fitness"
-                        label="Select"
-                        multiple
-                        hint="Fitness"
-                        persistent-hint
-                        color="teal darker-1"
-                    >
-                        <div>
-                            <v-chip
-                                v-if="index === 0"
-                                color="teal darker-1"
-                                dark
-                            >
-                                <span>{{ item }}</span>
-                            </v-chip>
-                            <span v-if="index === 1" class="grey--text caption">
-                                (+{{ storeForm.cat3.length - 1 }}
-                                others)
-                            </span>
-                        </div>
-                    </select>
-                </div> -->
             </b-field>
 
             <b-field lang="Your Store Bio">
@@ -191,27 +122,6 @@
                     v-model="storeForm.storeBio"
                 ></b-input>
             </b-field>
-            <!-- <div>
-                <v-file-input
-                    type="file"
-                    @change="onUploadBanner"
-                    label="Upload Store Banner"
-                    outlined
-                    truncate-length="50"
-                    prepend-icon="mdi-camera"
-                    dense
-                    accept="image/*"
-                    ref="fileInputThree"
-                ></v-file-input>
-            </div>
-            <div
-                class="form-group imgPreview"
-                v-bind:style="{
-                    'background-image': 'url(' + storeForm.storeBanner + ')',
-                    display: bannerDisplay
-                }"
-            ></div> -->
-
             <b-field label="Image upload">
                 <div class="file has-name is-fullwidth">
                     <label class="file-label">
@@ -284,18 +194,18 @@
                 at any time, and by filling them out, you're giving us consent
                 to share this data wherever your user profile appears.
             </div>
-            <b-button
-                @click="onUpdStoreInfo"
-                :loading="loading"
-                type="is-primary"
-                class="teal darken-1"
-                dark
-            >
-                Save Settings
-            </b-button>
+            <div class="mb-5">
+                <b-button
+                    @click="onUpdStoreInfo"
+                    :loading="loading"
+                    type="is-primary"
+                    class="teal darken-1"
+                    dark
+                >
+                    Save Settings
+                </b-button>
+            </div>
         </form>
-        <!-- </v-col>
-        </v-row> -->
     </div>
     <!-- STORE SETTINGS END -->
 </template>
