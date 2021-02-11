@@ -3,60 +3,64 @@
     <div>
         <!-- <v-row>
             <v-col class="col-md-6"> -->
-        <div class="display-1 mb-5">STORE SETTINGS</div>
-        <form @submit.prevent="onUpdStoreInfo">
+        <h1 class="title">STORE SETTINGS</h1>
+        <form>
             <!-- Logo image upload -->
-            <div>
-                <v-file-input
-                    type="file"
-                    @change="onUploadLogo"
-                    label="Upload store logo"
-                    outlined
-                    truncate-length="50"
-                    prepend-icon="mdi-camera"
-                    dense
-                    accept="image/*"
-                    ref="fileInputTwo"
-                ></v-file-input>
-            </div>
-            <div
-                class="form-group imgPreview"
-                v-bind:style="{
-                    'background-image': 'url(' + storeForm.storeLogo + ')',
-                    display: logoDisplay
-                }"
-            ></div>
+            <b-field label="Image upload">
+                <div class="file has-name is-fullwidth">
+                    <label class="file-label">
+                        <input
+                            class="file-input"
+                            type="file"
+                            name="resume"
+                            @change="onUploadLogo($event.target.files[0])"
+                            accept="image/*"
+                        />
+                        <span class="file-cta">
+                            <b-icon icon="upload"> </b-icon>
+                            <span class="file-label"> Choose a file… </span>
+                        </span>
+                        <span class="file-name">
+                            {{ previewLogoName }}
+                        </span>
+                    </label>
+                </div>
+            </b-field>
+
+            <b-field>
+                <div
+                    class="form-group imgPreview"
+                    v-bind:style="{
+                        'background-image': 'url(' + storeForm.storeLogo + ')',
+                        display: logoDisplay
+                    }"
+                ></div>
+            </b-field>
             <!-- Logo image upload End-->
-            <div>
-                <v-text-field
-                    outlined
-                    label="Store Name"
+            <b-field label="Store Name">
+                <b-input
                     required
                     type="text"
                     aria-describedby="storeNameHelp"
                     placeholder="Enter your store name"
                     v-model="storeForm.storeName"
-                ></v-text-field>
+                ></b-input>
                 <!-- <div class="caption font-weight-light mb-">
                     Your name may appear around here where you are mentioned.
                     You can change or remove it at any time.
                 </div> -->
-            </div>
-            <div>
-                <v-text-field
-                    outlined
-                    label="Store Email"
+            </b-field>
+            <b-field label="Store Email">
+                <b-input
                     required
                     type="email"
                     aria-describedby="storeEmailHelp"
                     placeholder="Enter your store email"
                     v-model="storeForm.storeEmail"
-                ></v-text-field>
-            </div>
-            <div>
-                <v-text-field
-                    outlined
-                    label="Store phone number"
+                ></b-input>
+            </b-field>
+            <b-field label="Store phone number">
+                <b-input
                     required
                     type="tel"
                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
@@ -64,113 +68,130 @@
                     aria-describedby="storeEmailHelp"
                     placeholder="Enter your store phone number"
                     v-model="storeForm.storePhoneNumber"
-                ></v-text-field>
+                ></b-input>
                 <!-- <small class="form-text text-muted">Format: 123-456-7890</small> -->
-            </div>
-            <div>
-                <label>Store Service Category</label>
-                <v-container fluid>
-                    <v-row align="center">
-                        <v-col cols="12" sm="6">
-                            <v-select
-                                v-model="storeForm.cat1"
-                                :items="beauty"
-                                label="Select"
-                                multiple
-                                hint="Beauty"
-                                persistent-hint
-                                color="teal darker-1"
-                            >
-                                <template v-slot:selection="{ item, index }">
-                                    <v-chip
-                                        v-if="index === 0"
-                                        color="teal darker-1"
-                                        dark
-                                    >
-                                        <span>{{ item }}</span>
-                                    </v-chip>
-                                    <span
-                                        v-if="index === 1"
-                                        class="grey--text caption"
-                                    >
-                                        (+{{ storeForm.cat1.length - 1 }}
-                                        others)
-                                    </span>
-                                </template></v-select
-                            >
-                        </v-col>
-                        <v-col cols="12" sm="6">
-                            <v-select
-                                v-model="storeForm.cat2"
-                                :items="wellness"
-                                label="Select"
-                                multiple
-                                hint="Wellness"
-                                persistent-hint
-                                color="teal darker-1"
-                            >
-                                <template v-slot:selection="{ item, index }">
-                                    <v-chip
-                                        v-if="index === 0"
-                                        color="teal darker-1"
-                                        dark
-                                    >
-                                        <span>{{ item }}</span>
-                                    </v-chip>
-                                    <span
-                                        v-if="index === 1"
-                                        class="grey--text caption"
-                                    >
-                                        (+{{ storeForm.cat2.length - 1 }}
-                                        others)
-                                    </span>
-                                </template></v-select
-                            >
-                        </v-col>
 
-                        <v-col cols="12" sm="6">
-                            <v-select
-                                v-model="storeForm.cat3"
-                                :items="fitness"
-                                label="Select"
-                                multiple
-                                hint="Fitness"
-                                persistent-hint
-                                color="teal darker-1"
-                            >
-                                <template v-slot:selection="{ item, index }">
-                                    <v-chip
-                                        v-if="index === 0"
-                                        color="teal darker-1"
-                                        dark
-                                    >
-                                        <span>{{ item }}</span>
-                                    </v-chip>
-                                    <span
-                                        v-if="index === 1"
-                                        class="grey--text caption"
-                                    >
-                                        (+{{ storeForm.cat3.length - 1 }}
-                                        others)
-                                    </span>
-                                </template>
-                            </v-select>
-                        </v-col>
-                    </v-row>
-                </v-container>
-                <div class="text-muted">
-                    Select a category that best describes your service.
+                <!-- <select
+                        v-model="storeForm.cat1"
+                        :items="beauty"
+                        label="Select"
+                        multiple
+                        hint="Beauty"
+                        persistent-hint
+                        color="teal darker-1"
+                    >
+                        <div>
+                            <div v-if="index === 0" color="teal darker-1" dark>
+                                <span>{{ item }}</span>
+                            </div>
+                            <span v-if="index === 1" class="grey--text caption">
+                                (+{{ storeForm.cat1.length - 1 }}
+                                others)
+                            </span>
+                        </div>
+                    </select> -->
+                <!-- <optgroup v-for="(item, id) in beauty" :key="id">
+                        <option value="flint">{{ item }}</option>
+                    </optgroup> -->
+            </b-field>
+
+            <h6 class="title is-6">Store Service Category</h6>
+            <p class="text-muted">
+                Select a category that best describes your service.
+            </p>
+            <b-field class="colums">
+                <div class="column">
+                    <b-select
+                        placeholder="Select a category"
+                        multiple
+                        native-size="8"
+                        v-model="storeForm.cat1"
+                    >
+                        <option v-for="(item, id) in beauty" :key="id">
+                            {{ item }}
+                        </option>
+                    </b-select>
                 </div>
-            </div>
-            <div>
-                <label for="bio">Your Store Bio</label>
-                <v-textarea
-                    outlined
+                <div class="column">
+                    <b-select
+                        placeholder="Select a category"
+                        multiple
+                        native-size="8"
+                        v-model="storeForm.cat1"
+                    >
+                        <option v-for="(item, id) in wellness" :key="id">
+                            {{ item }}
+                        </option>
+                    </b-select>
+                </div>
+                <div class="column">
+                    <b-select
+                        placeholder="Select a category"
+                        multiple
+                        native-size="8"
+                        v-model="storeForm.cat1"
+                    >
+                        <option v-for="(item, id) in fitness" :key="id">
+                            {{ item }}
+                        </option>
+                    </b-select>
+                </div>
+
+                <!-- <div cols="12" sm="6">
+                    <select
+                        v-model="storeForm.cat2"
+                        :items="wellness"
+                        label="Select"
+                        multiple
+                    >
+                        <div>
+                            <div v-if="index === 0" color="teal darker-1" dark>
+                                <span>{{ item }}</span>
+                            </div>
+                            <span v-if="index === 1" class="grey--text caption">
+                                (+{{ storeForm.cat2.length - 1 }}
+                                others)
+                            </span>
+                        </div>
+                    </select>
+                </div> -->
+
+                <!-- <div cols="12" sm="6">
+                    <select
+                        v-model="storeForm.cat3"
+                        :items="fitness"
+                        label="Select"
+                        multiple
+                        hint="Fitness"
+                        persistent-hint
+                        color="teal darker-1"
+                    >
+                        <div>
+                            <v-chip
+                                v-if="index === 0"
+                                color="teal darker-1"
+                                dark
+                            >
+                                <span>{{ item }}</span>
+                            </v-chip>
+                            <span v-if="index === 1" class="grey--text caption">
+                                (+{{ storeForm.cat3.length - 1 }}
+                                others)
+                            </span>
+                        </div>
+                    </select>
+                </div> -->
+            </b-field>
+
+            <b-field lang="Your Store Bio">
+                <b-input
+                    maxlength="200"
+                    type="textarea"
                     placeholder="Write a description of your store"
                     v-model="storeForm.storeBio"
-                ></v-textarea>
-            </div>
-            <div>
+                ></b-input>
+            </b-field>
+            <!-- <div>
                 <v-file-input
                     type="file"
                     @change="onUploadBanner"
@@ -189,58 +210,89 @@
                     'background-image': 'url(' + storeForm.storeBanner + ')',
                     display: bannerDisplay
                 }"
-            ></div>
-            <div>
-                <label for="location">Social Media</label>
-                <v-form>
-                    <v-container fluid>
-                        <v-row align="center">
-                            <v-col cols="12" sm="4">
-                                <v-text-field
-                                    v-model="storeForm.facebook"
-                                    label="Facebook"
-                                    required
-                                ></v-text-field>
-                            </v-col>
+            ></div> -->
 
-                            <v-col cols="12" md="4">
-                                <v-text-field
-                                    v-model="storeForm.instagram"
-                                    label="Instagram"
-                                    required
-                                ></v-text-field>
-                            </v-col>
+            <b-field label="Image upload">
+                <div class="file has-name is-fullwidth">
+                    <label class="file-label">
+                        <input
+                            class="file-input"
+                            type="file"
+                            name="resume"
+                            @change="onUploadBanner($event.target.files[0])"
+                            accept="image/*"
+                        />
+                        <span class="file-cta">
+                            <b-icon icon="upload"> </b-icon>
+                            <span class="file-label"> Choose a file… </span>
+                        </span>
+                        <span class="file-name">
+                            {{ previewBannerName }}
+                        </span>
+                    </label>
+                </div>
+            </b-field>
 
-                            <v-col cols="12" md="4">
-                                <v-text-field
-                                    v-model="storeForm.twitter"
-                                    label="Twitter"
-                                    required
-                                ></v-text-field>
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </v-form>
-            </div>
-            <div>
-                <v-text-field
-                    outlined
-                    label="Location"
+            <b-field>
+                <div
+                    class="form-group imgPreview"
+                    v-bind:style="{
+                        'background-image':
+                            'url(' + storeForm.storeBanner + ')',
+                        display: bannerDisplay
+                    }"
+                ></div>
+            </b-field>
+            <b-field label="Social Media">
+                <div class="columns">
+                    <div class="column">
+                        <b-input
+                            v-model="storeForm.facebook"
+                            label="Facebook"
+                            required
+                        ></b-input>
+                    </div>
+
+                    <div class="column">
+                        <b-input
+                            v-model="storeForm.instagram"
+                            label="Instagram"
+                            required
+                        ></b-input>
+                    </div>
+
+                    <div class="column">
+                        <b-input
+                            v-model="storeForm.twitter"
+                            label="Twitter"
+                            required
+                        ></b-input>
+                    </div>
+                </div>
+            </b-field>
+            <b-field label="Location">
+                <b-input
                     required
                     type="text"
                     class="form-control"
                     placeholder="Enter your location"
                     v-model="storeForm.storeLocation"
-                ></v-text-field>
-            </div>
+                ></b-input>
+            </b-field>
             <div class="text-muted mb-5">
                 All of the fields on this page are optional and can be deleted
                 at any time, and by filling them out, you're giving us consent
                 to share this data wherever your user profile appears.
             </div>
-            <div :loading="loading" type="submit" class="teal darken-1" dark>
+            <b-button
+                @click="onUpdStoreInfo"
+                :loading="loading"
+                type="is-primary"
+                class="teal darken-1"
+                dark
+            >
                 Save Settings
-            </div>
+            </b-button>
         </form>
         <!-- </v-col>
         </v-row> -->
@@ -259,26 +311,26 @@ export default {
     data() {
         return {
             role: null,
-            user: [],
-            alert: [],
-            errors: [],
-            logoDisplay: [],
-            loggedInUser: [],
-            bannerDisplay: [],
-            storeOwnerImageDisplay: [],
+            user: '',
+            alert: '',
+            errors: '',
+            logoDisplay: '',
+            loggedInUser: '',
+            bannerDisplay: '',
+            storeOwnerImageDisplay: '',
             currentUser: {
-                name: []
+                name: ''
             },
             profileForm: {
-                name: []
+                name: ''
             },
             storeForm: {
-                storeLogo: [], // https://via.placeholder.com/500
-                storeName: [],
-                storeBio: [],
-                storeBanner: [], // https://via.placeholder.com/500
-                storeLocation: [],
-                storeOwnerImage: [],
+                storeLogo: '', // https://via.placeholder.com/500
+                storeName: '',
+                storeBio: '',
+                storeBanner: '', // https://via.placeholder.com/500
+                storeLocation: '',
+                storeOwnerImage: '',
                 rawStoreLogo: null,
                 rawStoreBanner: null,
                 rawStoreOwnerImage: null,
@@ -316,7 +368,9 @@ export default {
                 'Dance',
                 'Gym',
                 'All Fitness'
-            ]
+            ],
+            previewLogoName: '' || 'no image uploaded',
+            previewBannerName: '' || 'no image uploaded'
         };
     },
     computed: {
@@ -382,6 +436,7 @@ export default {
             this.updateStoreProfile(data);
         },
         onUploadLogo(event) {
+            this.previewLogoName = event.name;
             // if a file is inserted or a logo exists then show it
             if (event || this.storeForm.storeLogo) {
                 this.logoDisplay = 'block';
@@ -427,6 +482,7 @@ export default {
             this.storeForm.rawStoreLogo = files;
         },
         onUploadBanner(event) {
+            this.previewBannerName = event.name;
             // if a file is inserted or a logo exists then show it
             if (event || this.storeForm.storeLogo) {
                 this.bannerDisplay = 'block';

@@ -9,10 +9,10 @@
                 <b-field label="Category">
                     <b-select
                         placeholder="Select a category"
-                        v-model="category"
+                        :v-model="category"
                         expanded
                         required
-                        validation-message="You must select a category"
+                        validation-message="Only lowercase is allowed"
                     >
                         <option
                             v-for="(category, id) in categoryNames"
@@ -146,32 +146,24 @@ export default {
             loadUserId: 'dashboard/loadUserId'
         }),
         onSubmit() {
-            if (this.category !== '') {
-                // replace empty spaces with dashes
-                let categoryName = this.category
-                    .replace(/\s+/g, '-')
-                    .toLowerCase();
-                let imageName = this.name.replace(/\s+/g, '-').toLowerCase();
+            // replace spaces with dashes
+            let routeName = this.category.replace(/\s+/g, '-').toLowerCase();
+            let imageName = this.name.replace(/\s+/g, '-').toLowerCase();
 
-                let data = {
-                    userId: this.user.uid,
-                    serviceId: this.$route.params.id,
-                    id: this.$route.params.id,
-                    category: categoryName,
-                    name: this.name,
-                    serviceImageName: imageName,
-                    description: this.description,
-                    serviceImage: this.serviceImage,
-                    rawServiceImage: this.rawServiceImage,
-                    price: this.price
-                };
+            let data = {
+                userId: this.user.uid,
+                serviceId: this.$route.params.id,
+                id: this.$route.params.id,
+                category: routeName,
+                name: this.name,
+                serviceImageName: imageName,
+                description: this.description,
+                serviceImage: this.serviceImage,
+                rawServiceImage: this.rawServiceImage,
+                price: this.price
+            };
 
-                console.log(`_id.vue - 166 - ✅`, data);
-
-                // this.updateService(data);
-            } else {
-                return;
-            }
+            this.updateService(data);
         },
         loadfilteredService() {
             this.filteredService(this.$route.params.id);

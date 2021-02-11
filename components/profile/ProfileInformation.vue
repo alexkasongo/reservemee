@@ -1,65 +1,60 @@
 <template>
     <!-- USER PROFILE -->
     <div>
-        <div class="display-1 mb-5">PROFILE INFORMATION</div>
+        <h1 class="title">PROFILE INFORMATION</h1>
 
-        <form @submit.prevent="onUpdprofileForm">
-            <!-- Profile image upload -->
-            <div class="form-group">
-                <!-- <label for="exampleFormControlFile1">Picture</label> -->
-                <v-file-input
-                    type="file"
-                    color="teal accent-4"
-                    @change="onUploadProfileImage"
-                    @click="profileImagePickFile"
-                    label="Upload profile image"
-                    outlined
-                    truncate-length="50"
-                    prepend-icon="mdi-camera"
-                    dense
-                    accept="image/*"
-                    ref="fileInputOne"
-                >
-                    <template v-slot:selection="{ text }">
-                        <v-chip small label color="teal darken-1">
-                            {{ text }}
-                        </v-chip>
-                    </template>
-                </v-file-input>
-            </div>
-            <div
-                class="imgPreview"
-                v-bind:style="{
-                    'background-image':
-                        'url(' + storeForm.storeOwnerImage + ')',
-                    display: storeOwnerImageDisplay
-                }"
-            ></div>
-            <!-- Profile image upload end -->
-            <div class="form-group">
-                <!-- <label for="fullName">Full Name</label> -->
-                <v-text-field
-                    required
-                    outlined
-                    label="Full Name"
-                    type="text"
-                    aria-describedby="fullNameHelp"
-                    placeholder="Enter your fullname"
-                    v-model="profileForm.name"
-                ></v-text-field>
-                <div class="caption font-weight-light mb-3">
-                    Your name may appear around here where you are mentioned.
-                    You can change or remove it at any time.
+        <form>
+            <b-field label="Image upload">
+                <div class="file has-name is-fullwidth">
+                    <label class="file-label">
+                        <input
+                            class="file-input"
+                            type="file"
+                            name="resume"
+                            @change="
+                                onUploadProfileImage($event.target.files[0])
+                            "
+                            accept="image/*"
+                        />
+                        <span class="file-cta">
+                            <b-icon icon="upload"> </b-icon>
+                            <span class="file-label"> Choose a file… </span>
+                        </span>
+                        <span class="file-name">
+                            {{ previewImgName }}
+                        </span>
+                    </label>
                 </div>
-            </div>
-            <!-- <div class="form-group small text-muted">
-                All of the fields on this page are optional and can be deleted
-                at any time, and by filling them out, you're giving us consent
-                to share this data wherever your user profile appears.
-            </div> -->
-            <div :loading="loading" type="submit" class="teal darken-1" dark>
+            </b-field>
+
+            <b-field>
+                <div
+                    class="form-group imgPreview"
+                    v-bind:style="{
+                        'background-image':
+                            'url(' + storeForm.storeOwnerImage + ')',
+                        display: storeOwnerImageDisplay
+                    }"
+                ></div>
+            </b-field>
+            <b-field label="Name">
+                <b-input
+                    v-model="profileForm.name"
+                    placeholder="Enter your fullname"
+                ></b-input>
+            </b-field>
+            <p class="subtitle is-6 mb-3">
+                Your name may appear around here where you are mentioned. You
+                can change or remove it at any time.
+            </p>
+            <b-button
+                @click="onUpdprofileForm"
+                :loading="loading"
+                type="is-primary"
+                expanded
+            >
                 Update Profile
-            </div>
+            </b-button>
         </form>
     </div>
     <!-- USER PROFILE END -->
@@ -81,14 +76,15 @@ export default {
             loggedInUser: [],
             storeOwnerImageDisplay: [],
             currentUser: {
-                name: []
+                name: ''
             },
             profileForm: {
-                name: []
+                name: ''
             },
             storeForm: {
                 storeOwnerImage: []
-            }
+            },
+            previewImgName: '' || 'no image uploaded'
         };
     },
     computed: {
@@ -125,10 +121,11 @@ export default {
         // Profile Form End
 
         // Pick and Upload Image
-        profileImagePickFile() {
-            this.$refs.fileInputOne.$refs.input.click();
-        },
+        // profileImagePickFile() {
+        //     this.$refs.fileInputOne.$refs.input.click();
+        // },
         onUploadProfileImage(event) {
+            this.previewImgName = event.name;
             // if a file is inserted or a logo exists then show it
             if (event || this.storeForm.profileImage) {
                 this.storeOwnerImageDisplay = 'block';
