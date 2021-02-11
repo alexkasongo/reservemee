@@ -11,6 +11,8 @@
                         placeholder="Select a category"
                         v-model="category"
                         expanded
+                        required
+                        validation-message="You must select a category"
                     >
                         <option
                             v-for="(category, id) in categoryNames"
@@ -144,24 +146,32 @@ export default {
             loadUserId: 'dashboard/loadUserId'
         }),
         onSubmit() {
-            // replace spaces with dashes
-            let routeName = this.category.replace(/\s+/g, '-').toLowerCase();
-            let imageName = this.name.replace(/\s+/g, '-').toLowerCase();
+            if (this.category !== '') {
+                // replace empty spaces with dashes
+                let categoryName = this.category
+                    .replace(/\s+/g, '-')
+                    .toLowerCase();
+                let imageName = this.name.replace(/\s+/g, '-').toLowerCase();
 
-            let data = {
-                userId: this.user.uid,
-                serviceId: this.$route.params.id,
-                id: this.$route.params.id,
-                category: routeName,
-                name: this.name,
-                serviceImageName: imageName,
-                description: this.description,
-                serviceImage: this.serviceImage,
-                rawServiceImage: this.rawServiceImage,
-                price: this.price
-            };
+                let data = {
+                    userId: this.user.uid,
+                    serviceId: this.$route.params.id,
+                    id: this.$route.params.id,
+                    category: categoryName,
+                    name: this.name,
+                    serviceImageName: imageName,
+                    description: this.description,
+                    serviceImage: this.serviceImage,
+                    rawServiceImage: this.rawServiceImage,
+                    price: this.price
+                };
 
-            this.updateService(data);
+                console.log(`_id.vue - 166 - ✅`, data);
+
+                // this.updateService(data);
+            } else {
+                return;
+            }
         },
         loadfilteredService() {
             this.filteredService(this.$route.params.id);
@@ -209,15 +219,23 @@ export default {
         this.price = this.serviceUpdateInfo.price;
         this.serviceImage = this.serviceUpdateInfo.serviceImage;
 
-        try {
-            for (let key in this.categories) {
-                this.categoryNames.push(this.categories[key].name);
-            }
-        } catch (error) {
-            this.errors = error;
-        } finally {
-            console.log(`_id.vue - 219 - 🔥`);
+        // try {
+        //     for (let key in this.categories) {
+        //         this.categoryNames.push(this.categories[key].name);
+        //     }
+        // } catch (error) {
+        //     this.errors = error;
+        // } finally {
+        //     console.log(`_id.vue - 219 - 🔥`);
+        // }
+
+        for (let key in this.categories) {
+            this.categoryNames.push(this.categories[key].name);
         }
+        // const loadCats = await (() => {
+        // });
+
+        // loadCats();
     }
 };
 </script>
