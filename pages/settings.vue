@@ -124,7 +124,7 @@
                         </div>
                     </b-sidebar>
 
-                    <div>
+                    <div class="settings-container">
                         <div class="ml-5 mr-5">
                             <ProfileInformation
                                 v-if="
@@ -350,5 +350,8 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
     }
+}
+.settings-container {
+    width: 100%;
 }
 </style>

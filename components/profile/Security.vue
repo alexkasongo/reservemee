@@ -1,53 +1,54 @@
 <template>
     <!-- SECURITY SETTINGS -->
-    <div class="tab-pane" id="security">
-        <div class="display-1 mb-5">SECURITY SETTINGS</div>
+    <div>
+        <h1 class="title mb-5">SECURITY SETTINGS</h1>
 
-        <v-form>
-            <div>
-                <!-- <label class="d-block">Change Password</label> -->
-                <v-text-field
+        <div>
+            <b-field label="Change Password">
+                <b-input
                     outlined
-                    label="Change Password"
                     type="password"
                     class="form-control"
                     v-model="currentPassword"
                     required
-                ></v-text-field>
-                <div v-if="errors" class="form-group text-muted">
-                    {{ errors.message }}
-                </div>
-                <v-text-field
+                ></b-input>
+            </b-field>
+            <div v-if="errors" class="form-group text-muted">
+                {{ errors.message }}
+            </div>
+            <b-field label="New password">
+                <b-input
                     outlined
-                    label="New password"
                     type="password"
                     class="form-control mt-1"
                     v-model="newPassword"
                     required
-                ></v-text-field>
-                <v-text-field
+                ></b-input>
+            </b-field>
+            <b-field label="Confirm new password">
+                <b-input
                     outlined
-                    label="Confirm new password"
                     type="password"
                     class="form-control mt-1 mb-4"
                     v-model="confirmNewPassword"
                     required
-                ></v-text-field>
-                <div v-if="errors" class="form-group text-muted">
-                    {{ errors.message }}
-                </div>
-                <div
-                    @click="changePassword"
-                    color="red darken-1"
-                    type="button"
-                    dark
-                >
-                    Change
-                </div>
-            </div>
-        </v-form>
+                ></b-input>
+            </b-field>
 
-        <v-form class="mt-5">
+            <div v-if="errors" class="form-group text-muted">
+                {{ errors.message }}
+            </div>
+            <b-button
+                @click="changePassword"
+                type="is-primary"
+                class="mb-5"
+                expanded
+            >
+                Change
+            </b-button>
+        </div>
+
+        <!-- <v-form class="mt-5">
             <div class="form-group mb-0">
                 <label class="d-block">Sessions</label>
                 <p class="font-size-sm text-secondary">
@@ -71,7 +72,7 @@
                     </li>
                 </ul>
             </div>
-        </v-form>
+        </v-form> -->
     </div>
     <!-- SECURITY SETTINGS END -->
 </template>
