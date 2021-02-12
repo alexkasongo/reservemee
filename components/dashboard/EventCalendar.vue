@@ -105,6 +105,11 @@
                         </div>
 
                         <div class="field">
+                            <b-field label="Title">
+                                <b-input v-model="title"></b-input>
+                            </b-field>
+                        </div>
+                        <div class="field">
                             <b-field label="Details">
                                 <b-input
                                     v-model="details"
@@ -148,6 +153,7 @@ export default {
         start: '',
         end: '',
         details: '',
+        title: '',
         errors: []
     }),
     computed: {
@@ -496,12 +502,6 @@ export default {
             }
         },
         async onUpdate() {
-            // const dateTime = {
-            //     start: this.start,
-            //     end: this.end,
-            //     content: this.details
-            // };
-
             const docId = this.selectedEvent.id;
 
             const newEvent = {
@@ -515,7 +515,7 @@ export default {
                 split: this.selectedEvent.split || '',
                 start: this.start,
                 startTimeMinutes: this.selectedEvent.startTimeMinutes,
-                title: this.selectedEvent.title || '',
+                title: this.title || '',
                 booked: false,
                 deletable: 'deletable',
                 draggable: 'draggable',
@@ -544,6 +544,7 @@ export default {
                 this.errors = error;
             } finally {
                 this.isCardModalActive = false;
+                this.title = '';
             }
         }
     },
