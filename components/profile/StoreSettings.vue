@@ -116,7 +116,7 @@
                 </div>
             </b-field>
 
-            <b-field lang="Your Store Bio">
+            <b-field label="Your Store Bio">
                 <b-input
                     maxlength="200"
                     type="textarea"
