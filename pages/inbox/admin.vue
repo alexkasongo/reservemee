@@ -27,7 +27,7 @@
                             <v-list @click="onChange(messenger)" link nav>
                                 <v-list-item-group
                                     v-model="selectedItem"
-                                    color="teal darker-1"
+                                    color="purple darker-1"
                                 >
                                     <v-list-item
                                         v-for="(messenger, i) in allMessages"
@@ -77,7 +77,7 @@
                                             elevation="0"
                                             class="inbox__right-card-head"
                                         >
-                                            <div-text>
+                                            <div>
                                                 <p
                                                     class="display-1 text--primary"
                                                 >
@@ -99,7 +99,7 @@
                                                             .message
                                                     }}
                                                 </div>
-                                            </div-text>
+                                            </div>
                                         </div>
                                         <v-divider
                                             v-if="messagePreview.length > 0"
@@ -135,7 +135,7 @@
                                                                 >
                                                                 <div
                                                                     v-bind:class="{
-                                                                        teal:
+                                                                        purple:
                                                                             message.from ===
                                                                             `${user.name}`,
                                                                         grey:
@@ -188,7 +188,7 @@
                                                             </p>
                                                         </div>
                                                         <div
-                                                            color="teal"
+                                                            color="purple"
                                                             type="submit"
                                                             dark
                                                         >
@@ -231,7 +231,7 @@
                                                             </p>
                                                         </div>
                                                         <div
-                                                            color="teal"
+                                                            color="purple"
                                                             type="submit"
                                                             dark
                                                         >
@@ -250,6 +250,201 @@
                 </v-main>
             </v-app>
         </v-app> -->
+
+        <div class="sidebar-page">
+            <section class="sidebar-layout">
+                <b-sidebar
+                    position="static"
+                    :mobile="mobile"
+                    :expand-on-hover="expandOnHover"
+                    :reduce="reduce"
+                    :fullheight="true"
+                    type="is-light"
+                    open
+                    class="sidebar"
+                >
+                    <div class="p-1">
+                        <div class="block">
+                            <ul>
+                                <li v-if="loggedInUser.photoURL">
+                                    <img
+                                        :src="loggedInUser.photoURL"
+                                        style="height: 100px"
+                                    />
+                                </li>
+                                <li v-else>
+                                    <img
+                                        src="https://via.placeholder.com/250"
+                                    />
+                                </li>
+
+                                <li>{{ loggedInUser.displayName }}</li>
+                            </ul>
+                        </div>
+                        <b-menu class="is-custom-mobile">
+                            <b-menu-list label="From:">
+                                <div
+                                    v-for="(messenger, i) in allMessages"
+                                    :key="i"
+                                >
+                                    <b-menu-item
+                                        @click="onChange(messenger)"
+                                        :label="messenger.name"
+                                    >
+                                    </b-menu-item>
+                                </div>
+                            </b-menu-list>
+
+                            <!-- <b-menu-list label="Actions">
+                                <b-menu-item
+                                    icon="logout"
+                                    label="Logout"
+                                ></b-menu-item>
+                            </b-menu-list> -->
+                        </b-menu>
+                    </div>
+                </b-sidebar>
+
+                <div class="settings-container">
+                    <div class="ml-5 mr-5">
+                        <div class="inbox__right-card-top">
+                            <div
+                                v-if="messagePreview.length > 0"
+                                elevation="0"
+                                class="inbox__right-card-head"
+                            >
+                                <div>
+                                    <p class="display-1 text--primary">
+                                        {{
+                                            messagePreview[0].name | capitalize
+                                        }}
+                                    </p>
+                                    <p>
+                                        {{
+                                            new Date(
+                                                messagePreview[0].timestamp
+                                            )
+                                        }}
+                                    </p>
+                                    <div class="text--primary">
+                                        {{ messagePreview[0].message }}
+                                    </div>
+                                </div>
+                            </div>
+                            <hr v-if="messagePreview.length > 0" />
+
+                            <div class="inbox__right-card-middle">
+                                <ul
+                                    v-for="(message, index) in messages"
+                                    :key="index"
+                                >
+                                    <li :key="index" class="is-flex mb-5">
+                                        <div class="inbox__right-avatar">
+                                            <!-- <figure class="image is-48x48"> -->
+                                            <!-- <div class="message-avatar"> -->
+                                            <img
+                                                class="message-avatar"
+                                                :src="message.storeOwnerImage"
+                                            />
+                                            <!-- </div> -->
+                                            <!-- </figure> -->
+                                        </div>
+                                        <div>
+                                            <div class="ml-2">
+                                                {{ message.from }}
+                                            </div>
+                                            <div
+                                                v-bind:class="{
+                                                    purple:
+                                                        message.from ===
+                                                        `${user.name}`,
+                                                    grey:
+                                                        message.from !==
+                                                        `${user.name}`
+                                                }"
+                                                class="ml-2"
+                                            >
+                                                {{ message.message }}
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="inbox__right-card-btm">
+                            <ul v-if="allMessages.length > 0">
+                                <li>
+                                    <div>
+                                        <form>
+                                            <div class="field">
+                                                <label for="reply"
+                                                    >Write Message</label
+                                                >
+                                                <b-input
+                                                    type="text"
+                                                    name="reply"
+                                                    v-model="newReply"
+                                                ></b-input>
+                                                <p
+                                                    v-if="feedback"
+                                                    class="red-text center"
+                                                >
+                                                    {{ feedback }}
+                                                </p>
+                                            </div>
+                                            <b-button
+                                                @click="onReply"
+                                                type="is-primary"
+                                                expanded
+                                            >
+                                                Send
+                                            </b-button>
+                                        </form>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div
+                            v-if="allMessages.length <= 0"
+                            class="inbox__right-card-btm"
+                        >
+                            <ul>
+                                <li>
+                                    <div>
+                                        <form>
+                                            <div class="field">
+                                                <label for="reply"
+                                                    >Write Message</label
+                                                >
+                                                <b-input
+                                                    type="text"
+                                                    name="reply"
+                                                    v-model="newReply"
+                                                ></b-input>
+                                                <p
+                                                    v-if="feedback"
+                                                    class="red-text center"
+                                                >
+                                                    {{ feedback }}
+                                                </p>
+                                            </div>
+                                            <b-button
+                                                @click="onReply"
+                                                type="is-primary"
+                                                expanded
+                                            >
+                                                Send
+                                            </b-button>
+                                        </form>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
 </template>
 
@@ -272,7 +467,10 @@ export default {
         items: null,
         mini: false,
         source: 'https://via.placeholder.com/500',
-        selected: ''
+        selected: '',
+        expandOnHover: false,
+        mobile: 'reduce',
+        reduce: false
     }),
     computed: {
         ...mapGetters({
@@ -453,14 +651,116 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.margin {
-    // margin: 90px auto 0 auto;
-    margin-top: 64px;
+<style lang="scss">
+.p-1 {
+    padding: 1em;
 }
-.settings {
-    &__right-row {
-        height: 100%;
+.sidebar-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    // height: 100%;
+    min-height: 100vh;
+    .sidebar-layout {
+        display: flex;
+        flex-direction: row;
+        // height: calc(100vh - 56px);
+        min-height: 100vh;
     }
+}
+@media screen and (max-width: 1023px) {
+    .b-sidebar {
+        .sidebar-content {
+            box-shadow: none;
+            &.is-mini-mobile {
+                &:not(.is-mini-expand),
+                &.is-mini-expand:not(:hover) {
+                    .menu-list {
+                        li {
+                            a {
+                                span:nth-child(2) {
+                                    display: none;
+                                }
+                            }
+                            ul {
+                                padding-left: 0;
+                                li {
+                                    a {
+                                        display: inline-block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .menu-label:not(:last-child) {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (min-width: 1024px) {
+    .b-sidebar {
+        .sidebar-content {
+            box-shadow: none;
+            &.is-mini {
+                &:not(.is-mini-expand),
+                &.is-mini-expand:not(:hover) {
+                    .menu-list {
+                        li {
+                            a {
+                                span:nth-child(2) {
+                                    display: none;
+                                }
+                            }
+                            ul {
+                                padding-left: 0;
+                                li {
+                                    a {
+                                        display: inline-block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .menu-label:not(:last-child) {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+.is-mini-expand {
+    .menu-list a {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+.settings-container {
+    width: 100%;
+}
+
+// MESSAGES
+.message-avatar {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 50%;
+    // margin: 0 0 10px 0;
+}
+.purple {
+    background-color: #7957d5;
+    color: #fff;
+    padding: 15px;
+    border-radius: 24px 24px 0px 24px;
+}
+.grey {
+    background-color: #ccc;
+    color: #fff;
+    padding: 15px;
+    border-radius: 24px 24px 24px 0px;
 }
 </style>
