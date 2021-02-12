@@ -288,25 +288,27 @@
                                     :key="i"
                                 >
                                     <b-menu-item
-                                        @click="onChange(messenger)"
+                                        expanded
+                                        icon="checkbox-blank-circle"
                                         :label="messenger.name"
                                     >
+                                        <b-menu-item
+                                            active
+                                            class="is-active"
+                                            @click="onChange(messenger)"
+                                            :label="messenger.message"
+                                        ></b-menu-item>
                                     </b-menu-item>
                                 </div>
                             </b-menu-list>
-
-                            <!-- <b-menu-list label="Actions">
-                                <b-menu-item
-                                    icon="logout"
-                                    label="Logout"
-                                ></b-menu-item>
-                            </b-menu-list> -->
                         </b-menu>
                     </div>
                 </b-sidebar>
 
                 <div class="settings-container">
-                    <div class="ml-5 mr-5">
+                    <div
+                        class="inbox-view ml-5 mr-5 is-flex is-flex-direction-column is-justify-content-space-between"
+                    >
                         <div class="inbox__right-card-top">
                             <div
                                 v-if="messagePreview.length > 0"
@@ -340,14 +342,10 @@
                                 >
                                     <li :key="index" class="is-flex mb-5">
                                         <div class="inbox__right-avatar">
-                                            <!-- <figure class="image is-48x48"> -->
-                                            <!-- <div class="message-avatar"> -->
                                             <img
                                                 class="message-avatar"
                                                 :src="message.storeOwnerImage"
                                             />
-                                            <!-- </div> -->
-                                            <!-- </figure> -->
                                         </div>
                                         <div>
                                             <div class="ml-2">
@@ -659,13 +657,13 @@ export default {
     display: flex;
     flex-direction: column;
     width: 100%;
-    // height: 100%;
-    min-height: 100vh;
+    // height: calc(100vh - 56px);
+    // min-height: 100vh;
     .sidebar-layout {
         display: flex;
         flex-direction: row;
-        // height: calc(100vh - 56px);
-        min-height: 100vh;
+        height: calc(100vh - 56px);
+        // min-height: 100vh;
     }
 }
 @media screen and (max-width: 1023px) {
@@ -758,9 +756,12 @@ export default {
     border-radius: 24px 24px 0px 24px;
 }
 .grey {
-    background-color: #ccc;
+    background-color: #777;
     color: #fff;
     padding: 15px;
     border-radius: 24px 24px 24px 0px;
+}
+.inbox-view {
+    height: calc(100vh - 56px);
 }
 </style>
