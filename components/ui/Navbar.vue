@@ -10,7 +10,7 @@
             </b-navbar-item>
         </template>
         <template #start>
-            <b-navbar-item @click="goHome(user)" v-if="user">
+            <b-navbar-item @click="goHome(user)" v-if="user && role.admin">
                 Dasboard
             </b-navbar-item>
             <b-navbar-item @click="$router.push('/store')">

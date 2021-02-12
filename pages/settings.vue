@@ -107,11 +107,8 @@ export default {
                 return [
                     { icon: 'account-outline', text: 'Profile Information' },
                     { icon: 'cart-outline', text: 'Store Settings' },
-                    // { divider: true },
                     { icon: 'shield-outline', text: 'Security' },
-                    // { divider: true },
                     { icon: 'bell-outline', text: 'Notifications' },
-                    // { divider: true },
                     { icon: 'credit-card-outline', text: 'Billing' },
                     { icon: 'cog-outline', text: 'Account Settings' },
                     { icon: 'help-circle-outline', text: 'Help' }
@@ -119,11 +116,8 @@ export default {
             } else if (this.role.customer) {
                 return [
                     { icon: 'account-outline', text: 'Profile Information' },
-                    // { divider: true },
                     { icon: 'shield-outline', text: 'Security' },
-                    { divider: true },
                     { icon: 'bell-outline', text: 'Notifications' },
-                    // { divider: true },
                     { icon: 'credit-card-outline', text: 'Billing' },
                     { icon: 'cog-outline', text: 'Account Settings' },
                     { icon: 'help-circle-outline', text: 'Help' }

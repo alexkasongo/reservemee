@@ -14,11 +14,11 @@
         </div>
         <!-- Alert End -->
 
-        <div class="inbox__card-container">
+        <!-- <div class="inbox__card-container">
             <div class="inbox__left">
                 <div>
                     <v-navigation-drawer width="100%" permanent>
-                        <!-- HEADER -->
+
                         <div
                             elevation="0"
                             class="inbox__left-card"
@@ -62,9 +62,9 @@
                                 </v-col>
                             </v-row>
                         </div>
-                        <!-- HEADER -->
+
                         <div class="inbox__left-messages">
-                            <!-- <v-divider></v-divider> -->
+
                             <v-list nav>
                                 <v-list-item-group
                                     v-model="selectedItem"
@@ -117,12 +117,12 @@
                     </v-navigation-drawer>
                 </div>
             </div>
-            <!-- PREVIEW END -->
 
-            <!-- MESSAGE -->
+
+
             <div class="inbox__right">
                 <div height="100%" class="inbox__right-card">
-                    <!-- Message -->
+
                     <div class="inbox__right-card-top">
                         <div v-if="messagePreview.length > 0" elevation="0">
                             <div-text>
@@ -139,7 +139,7 @@
                         </div>
                         <v-divider v-if="messagePreview.length > 0"></v-divider>
 
-                        <!-- Conversation start -->
+
                         <div class="inbox__right-card-middle">
                             <v-list three-line>
                                 <div>
@@ -182,11 +182,11 @@
                                 </div>
                             </v-list>
                         </div>
-                        <!-- Conversation End -->
-                    </div>
-                    <!-- Message End -->
 
-                    <!-- Reply -->
+                    </div>
+
+
+
                     <div class="inbox__right-card-btm">
                         <v-list v-if="allMessages.length > 0">
                             <v-list-item>
@@ -248,10 +248,202 @@
                             </v-list-item>
                         </v-list>
                     </div>
-                    <!-- Reply End -->
                 </div>
             </div>
-            <!-- MESSAGE -->
+        </div> -->
+
+        <div class="sidebar-page">
+            <section class="sidebar-layout">
+                <b-sidebar
+                    position="static"
+                    :mobile="mobile"
+                    :expand-on-hover="expandOnHover"
+                    :reduce="reduce"
+                    :fullheight="true"
+                    type="is-light"
+                    open
+                    class="sidebar"
+                >
+                    <div class="p-1">
+                        <div class="block">
+                            <ul>
+                                <li>
+                                    <img
+                                        :src="filteredUserData.storeOwnerImage"
+                                        style="height: 100px"
+                                    />
+                                </li>
+                                <!-- <li v-else>
+                                    <img
+                                        src="https://via.placeholder.com/250"
+                                    />
+                                </li> -->
+
+                                <li>{{ user.name }}</li>
+                                <li>{{ user.email }}</li>
+                            </ul>
+                        </div>
+                        <b-menu class="is-custom-mobile">
+                            <b-menu-list label="From:">
+                                <div
+                                    v-for="(messenger, i) in allMessages"
+                                    :key="i"
+                                >
+                                    <b-menu-item
+                                        expanded
+                                        icon="checkbox-blank-circle"
+                                        :label="messenger.name"
+                                    >
+                                        <b-menu-item
+                                            active
+                                            class="is-active"
+                                            @click="onChange(messenger)"
+                                            :label="messenger.message"
+                                        ></b-menu-item>
+                                    </b-menu-item>
+                                </div>
+                            </b-menu-list>
+                        </b-menu>
+                    </div>
+                </b-sidebar>
+
+                <div class="settings-container">
+                    <div
+                        class="inbox-view ml-5 mr-5 is-flex is-flex-direction-column is-justify-content-space-between"
+                    >
+                        <div class="inbox__right-card-top">
+                            <div
+                                v-if="messagePreview.length > 0"
+                                elevation="0"
+                                class="inbox__right-card-head"
+                            >
+                                <div>
+                                    <p class="display-1 text--primary">
+                                        {{
+                                            messagePreview[0].name | capitalize
+                                        }}
+                                    </p>
+                                    <p>
+                                        {{
+                                            new Date(
+                                                messagePreview[0].timestamp
+                                            )
+                                        }}
+                                    </p>
+                                    <div class="text--primary">
+                                        {{ messagePreview[0].message }}
+                                    </div>
+                                </div>
+                            </div>
+                            <hr v-if="messagePreview.length > 0" />
+
+                            <div class="inbox__right-card-middle">
+                                <ul
+                                    v-for="(message, index) in messages"
+                                    :key="index"
+                                >
+                                    <li :key="index" class="is-flex mb-5">
+                                        <div class="inbox__right-avatar">
+                                            <img
+                                                class="message-avatar"
+                                                :src="message.storeOwnerImage"
+                                            />
+                                        </div>
+                                        <div>
+                                            <div class="ml-2">
+                                                {{ message.from }}
+                                            </div>
+                                            <div
+                                                v-bind:class="{
+                                                    purple:
+                                                        message.from ===
+                                                        `${user.name}`,
+                                                    grey:
+                                                        message.from !==
+                                                        `${user.name}`
+                                                }"
+                                                class="ml-2"
+                                            >
+                                                {{ message.message }}
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="inbox__right-card-btm">
+                            <ul v-if="allMessages.length > 0">
+                                <li>
+                                    <div>
+                                        <form>
+                                            <div class="field">
+                                                <label for="reply"
+                                                    >Write Message</label
+                                                >
+                                                <b-input
+                                                    type="text"
+                                                    name="reply"
+                                                    v-model="newReply"
+                                                ></b-input>
+                                                <p
+                                                    v-if="feedback"
+                                                    class="red-text center"
+                                                >
+                                                    {{ feedback }}
+                                                </p>
+                                            </div>
+                                            <b-button
+                                                @click="onReply"
+                                                type="is-primary"
+                                                expanded
+                                            >
+                                                Send
+                                            </b-button>
+                                        </form>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div
+                            v-if="allMessages.length <= 0"
+                            class="inbox__right-card-btm"
+                        >
+                            <ul>
+                                <li>
+                                    <div>
+                                        <form>
+                                            <div class="field">
+                                                <label for="reply"
+                                                    >Write Message</label
+                                                >
+                                                <b-input
+                                                    type="text"
+                                                    name="reply"
+                                                    v-model="newReply"
+                                                ></b-input>
+                                                <p
+                                                    v-if="feedback"
+                                                    class="red-text center"
+                                                >
+                                                    {{ feedback }}
+                                                </p>
+                                            </div>
+                                            <b-button
+                                                @click="onReply"
+                                                type="is-primary"
+                                                expanded
+                                            >
+                                                Send
+                                            </b-button>
+                                        </form>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 </template>
@@ -268,7 +460,10 @@ export default {
         newReply: null,
         feedback: null,
         role: null,
-        filteredUserData: []
+        filteredUserData: [],
+        expandOnHover: false,
+        mobile: 'reduce',
+        reduce: false
     }),
     computed: {
         ...mapGetters({
@@ -409,4 +604,119 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.p-1 {
+    padding: 1em;
+}
+.sidebar-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    // height: calc(100vh - 56px);
+    // min-height: 100vh;
+    .sidebar-layout {
+        display: flex;
+        flex-direction: row;
+        height: calc(100vh - 56px);
+        // min-height: 100vh;
+    }
+}
+@media screen and (max-width: 1023px) {
+    .b-sidebar {
+        .sidebar-content {
+            box-shadow: none;
+            &.is-mini-mobile {
+                &:not(.is-mini-expand),
+                &.is-mini-expand:not(:hover) {
+                    .menu-list {
+                        li {
+                            a {
+                                span:nth-child(2) {
+                                    display: none;
+                                }
+                            }
+                            ul {
+                                padding-left: 0;
+                                li {
+                                    a {
+                                        display: inline-block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .menu-label:not(:last-child) {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (min-width: 1024px) {
+    .b-sidebar {
+        .sidebar-content {
+            box-shadow: none;
+            &.is-mini {
+                &:not(.is-mini-expand),
+                &.is-mini-expand:not(:hover) {
+                    .menu-list {
+                        li {
+                            a {
+                                span:nth-child(2) {
+                                    display: none;
+                                }
+                            }
+                            ul {
+                                padding-left: 0;
+                                li {
+                                    a {
+                                        display: inline-block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .menu-label:not(:last-child) {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+.is-mini-expand {
+    .menu-list a {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+.settings-container {
+    width: 100%;
+}
+
+// MESSAGES
+.message-avatar {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 50%;
+    // margin: 0 0 10px 0;
+}
+.purple {
+    background-color: #7957d5;
+    color: #fff;
+    padding: 15px;
+    border-radius: 24px 24px 0px 24px;
+}
+.grey {
+    background-color: #777;
+    color: #fff;
+    padding: 15px;
+    border-radius: 24px 24px 24px 0px;
+}
+.inbox-view {
+    height: calc(100vh - 56px);
+}
+</style>
