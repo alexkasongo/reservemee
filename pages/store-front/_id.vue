@@ -284,28 +284,37 @@
 
         <div class="categories__grid mb-5">
             <div v-for="(service, id) in storeServices" :key="id">
-                <div
-                    class="card categories__grid-card m-0"
-                    @click="goToServiceInfo(service.id)"
-                    style="cursor: pointer"
-                >
+                <div class="card categories__grid-card m-0">
+                    <!-- @click="goToServiceInfo(service.id)" -->
                     <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img
-                                        :src="service.serviceImage"
-                                        :alt="service.serviceImage"
-                                    />
-                                </figure>
+                        <div
+                            class="media is-flex is-justify-content-space-between is-align-content-center"
+                        >
+                            <div class="is-flex">
+                                <div class="media-left">
+                                    <figure class="image is-48x48">
+                                        <img
+                                            :src="service.serviceImage"
+                                            :alt="service.serviceImage"
+                                        />
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                    <p class="title is-4">
+                                        {{ service.name | capitalize }}
+                                    </p>
+                                    <p class="subtitle is-6">
+                                        ${{ service.price }}
+                                    </p>
+                                </div>
                             </div>
-                            <div class="media-content">
-                                <p class="title is-4">
-                                    {{ service.name | capitalize }}
-                                </p>
-                                <p class="subtitle is-6">
-                                    ${{ service.price }}
-                                </p>
+                            <div>
+                                <div>
+                                    <b-icon
+                                        style="cursor: pointer"
+                                        icon="heart"
+                                    ></b-icon>
+                                </div>
                             </div>
                         </div>
 
@@ -316,14 +325,14 @@
                                 </div>
                                 <div class="column">
                                     <div
-                                        class="block is-flex is-justify-content-flex-end"
+                                        class="block is-flex is-justify-content-flex-end is-align-content-center"
                                     >
-                                        <div>
-                                            <b-icon
-                                                style="cursor: pointer"
-                                                icon="heart"
-                                            ></b-icon>
-                                        </div>
+                                        <b-button
+                                            type="is-primary"
+                                            @click="quickBook"
+                                        >
+                                            Book Service
+                                        </b-button>
                                     </div>
                                 </div>
                             </div>
