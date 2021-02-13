@@ -21,10 +21,10 @@
             <p>Loading...</p>
         </div>
 
-        <div v-if="!storesLoading">
+        <div v-if="!storesLoading" class="categories__grid">
             <div v-for="(store, id) in stores" :key="id">
                 <div
-                    class="card"
+                    class="card categories__grid-card m-0"
                     @click="viewStore(store)"
                     style="cursor: pointer"
                 >

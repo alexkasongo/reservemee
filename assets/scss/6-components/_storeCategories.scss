@@ -1,40 +1,16 @@
 .categories {
     width: 100%;
-    // FIX
-    &__left {
-        display: flex;
-        flex-direction: column;
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 20px;
         @media (min-width: $large-desktop) {
-            flex-direction: row;
+            grid-template-columns: 1fr 1fr;
         }
     }
-    &__left-banner {
-        margin: 0 0 30px 0;
-    }
-    &__left-card-img-container {
-        width: 35%;
-        max-height: 250px;
-        @media (min-width: $tablet) {
-            width: 50%;
-            max-height: 200px;
-        }
-    }
-    &__left-service-img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        border-top-left-radius: 24px;
-        border-bottom-left-radius: 24px;
-    }
-    &__left-card-info {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-    }
-    &__left-card-price {
-        text-align: right;
-    }
-    // FIX END
+    // &__grid-card {
+    //     width: 50%;
+    // }
 
     &__sort {
         background-color: #cccccc;
@@ -60,9 +36,10 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        margin: 40px 0;
+
         @media (min-width: $large-desktop) {
             flex-direction: row;
+            margin: 40px 0;
         }
     }
     &__store-card {
