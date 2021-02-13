@@ -40,9 +40,10 @@
             :time-from="8 * 60"
             :time-to="20 * 60"
             :snap-to-time="15"
-            editable-events
+            active-view="day"
+            events-on-month-view="short"
             :events="events"
-            class="vuecal--full-height-delete"
+            class="vuecal--full-height-delete mb-5"
             @cell-click="logEvents('cell-click', $event)"
             @event-focus="logEvents('event-focus', $event)"
             @event-title-change="logEvents('event-title-change', $event)"
@@ -55,6 +56,16 @@
             :on-event-click="onEventClick"
         >
         </vue-cal>
+
+        <div class="field">
+            <b-field label="Message">
+                <b-input
+                    v-model="message"
+                    maxlength="200"
+                    type="textarea"
+                ></b-input>
+            </b-field>
+        </div>
 
         <section>
             <b-modal
@@ -105,22 +116,20 @@
                         </div>
 
                         <div class="field">
-                            <b-field label="Title">
-                                <b-input v-model="title"></b-input>
-                            </b-field>
-                        </div>
-                        <div class="field">
-                            <b-field label="Details">
+                            <b-field label="Message">
                                 <b-input
-                                    v-model="details"
+                                    v-model="message"
                                     maxlength="200"
                                     type="textarea"
                                 ></b-input>
                             </b-field>
                         </div>
                         <div class="field">
-                            <button class="button is-primary" @click="onUpdate">
-                                Update
+                            <button
+                                class="button is-primary"
+                                @click="selectDate"
+                            >
+                                Select
                             </button>
                         </div>
                     </div>
@@ -154,7 +163,8 @@ export default {
         end: '',
         details: '',
         title: '',
-        errors: []
+        errors: [],
+        message: ''
     }),
     computed: {
         user() {
@@ -209,6 +219,11 @@ export default {
                     split: 1
                 });
             } else if (dateTime) alert('Wrong date format.');
+        },
+        // Select Data
+        selectDate() {
+            this.isCardModalActive = false;
+            console.log(`BookingCalendar.vue - 219 - 🔥`, this.message);
         },
         // MANIPULATE EVENTS START
         async logEvents(name, event) {

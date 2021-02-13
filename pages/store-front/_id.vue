@@ -357,7 +357,7 @@
                         <BookingCalendar />
                     </div>
                     <div class="field card-content dialog">
-                        <div class="field">
+                        <!-- <div class="field">
                             <b-field label="Name">
                                 <b-input></b-input>
                             </b-field>
@@ -367,11 +367,11 @@
                                     type="textarea"
                                 ></b-input>
                             </b-field>
-                        </div>
+                        </div> -->
 
                         <div>
                             <b-button @click="close"> Cancel </b-button>
-                            <b-button class="is-primary"> Book </b-button>
+                            <!-- <b-button class="is-primary"> Book </b-button> -->
                         </div>
                     </div>
                 </section>
