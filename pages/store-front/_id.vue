@@ -265,10 +265,20 @@
             </div>
         </section>
 
-        <b-field label="Sort">
-            <b-select placeholder="Select a character" expanded>
-                <option value="flint">Flint</option>
-                <option value="silver">Silver</option>
+        <h2 class="title is-2">Sort</h2>
+        <b-field class="mb-5">
+            <b-select
+                placeholder="Select a category"
+                expanded
+                v-model="selectedItem"
+            >
+                <option
+                    v-for="(option, id) in categoryNames"
+                    :value="option"
+                    :key="id"
+                >
+                    {{ option }}
+                </option>
             </b-select>
         </b-field>
 
