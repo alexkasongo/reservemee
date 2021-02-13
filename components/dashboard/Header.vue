@@ -168,40 +168,6 @@
             </v-parallax>
         </div> -->
         <!-- IF PROFILE EXISTS -->
-
-        <!-- IF PROFILE DOESN'T EXISTS -->
-        <!-- <div v-else class="parallax">
-            <v-parallax
-                class="rounded-xl"
-                height="300"
-                src="https://via.placeholder.com/1200"
-            >
-                <div class="bg-center">
-                    <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                            <span class="float-left mr-3">
-                                <img
-                                    @click="$router.push('/settings')"
-                                    src="https://via.placeholder.com/1200/00897b"
-                                    alt
-                                    class="header__thumb-lg rounded-circle"
-                                    v-bind="attrs"
-                                    v-on="on"
-                                />
-                            </span>
-                        </template>
-                        <span>Settings</span>
-                    </v-tooltip>
-
-                    <div class="media-body text-white">
-                        <p>
-                            {{ user.displayName }}
-                        </p>
-                    </div>
-                </div>
-            </v-parallax>
-        </div> -->
-        <!-- IF PROFILE DOESN'T EXISTS -->
     </div>
     <!-- Header End-->
 </template>
