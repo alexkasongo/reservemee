@@ -218,8 +218,13 @@
         </div> -->
 
         <!-- BEUFY -->
-        <section class="hero is-small is-link">
-            <div class="hero-body">
+        <section
+            class="hero is-medium is-link store__bg"
+            v-bind:style="{
+                'background-image': 'url(' + storeProfile.storeBanner + ')'
+            }"
+        >
+            <div class="hero-body store__bg-inner">
                 <p class="title m-0">
                     {{ storeProfile.storeName | capitalize }}
                 </p>
@@ -239,20 +244,7 @@
 
                 <!-- <h1 class="title">{{ storeProfile.storeName | capitalize }}</h1> -->
 
-                <div>
-                    <div align="center" class="mx-0">
-                        <div
-                            :value="4.5"
-                            color="amber"
-                            dense
-                            half-increments
-                            readonly
-                            size="14"
-                        ></div>
-
-                        <div class="grey--text ml-4">4.5 (413)</div>
-                    </div>
-
+                <div class="mb-5">
                     <div class="my-4 subtitle-1">
                         <strong>Mobile</strong>: Type of service
                     </div>
@@ -336,9 +328,9 @@
 </template>
 
 <script>
-import * as firebase from 'firebase/app';
+// import * as firebase from 'firebase/app';
 import 'firebase/database';
-import { db } from '@/plugins/firebase';
+// import { db } from '@/plugins/firebase';
 import { mapActions, mapGetters, mapState } from 'vuex';
 import Messages from '@/components/chat/Messages';
 import QuickBook from '@/components/cart/QuickBook';
@@ -480,4 +472,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.store__bg {
+    background-size: contain;
+    background-position: center;
+    border-radius: 24px;
+}
+// .store__bg-inner {
+//     background-color: purple;
+// }
+</style>
