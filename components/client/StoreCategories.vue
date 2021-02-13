@@ -59,6 +59,54 @@
                 </div>
             </v-col>
         </v-row>
+
+        <div v-if="!storesLoading">
+            <div v-for="(store, id) in stores" :key="id">
+                <div
+                    class="card"
+                    @click="viewStore(store)"
+                    style="cursor: pointer"
+                >
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-48x48">
+                                    <img
+                                        :src="store.storeBanner"
+                                        :alt="store.storeBanner"
+                                    />
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">
+                                    {{ store.storeName | capitalize }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="columns">
+                                <div class="column">
+                                    {{ store.storeBio | truncate(100, '...') }}
+                                </div>
+                                <div class="column">
+                                    <div
+                                        class="block is-flex is-justify-content-flex-end"
+                                    >
+                                        <div>
+                                            <b-icon
+                                                style="cursor: pointer"
+                                                icon="heart"
+                                            ></b-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
