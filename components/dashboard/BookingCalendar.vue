@@ -43,7 +43,7 @@
             active-view="day"
             events-on-month-view="short"
             :events="events"
-            class="vuecal--full-height-delete mb-5"
+            class="vuecal--full-height-delete m-0"
             @cell-click="logEvents('cell-click', $event)"
             @event-focus="logEvents('event-focus', $event)"
             @event-title-change="logEvents('event-title-change', $event)"
@@ -57,7 +57,7 @@
         >
         </vue-cal>
 
-        <div class="field">
+        <!-- <div class="field">
             <b-field label="Message">
                 <b-input
                     v-model="message"
@@ -67,7 +67,10 @@
             </b-field>
         </div>
 
-        <section>
+        <b-button type="is-primary" expanded> Add to cart </b-button> -->
+
+        <!-- MODAL -->
+        <!-- <section>
             <b-modal
                 v-model="isCardModalActive"
                 :width="960"
@@ -79,7 +82,6 @@
             >
                 <section class="card">
                     <div class="field card-content dialog">
-                        <!-- <section class="columns"> -->
                         <div class="mb-5">
                             <b-field label="Select start datetime">
                                 <b-datetimepicker
@@ -135,12 +137,14 @@
                     </div>
                 </section>
             </b-modal>
-        </section>
+        </section> -->
+        <!-- MODAL END -->
     </div>
 </template>
 
 <script>
 import { db } from '@/plugins/firebase';
+import { DialogProgrammatic as Dialog } from 'buefy';
 
 const dailyHours = { from: 9 * 60, to: 18 * 60, class: 'business-hours' };
 
@@ -190,14 +194,21 @@ export default {
         }
     },
     methods: {
+        confirm() {
+            Dialog.confirm({
+                message: 'Select this date?',
+                onConfirm: () =>
+                    this.$buefy.toast.open({
+                        message: 'Added to your order',
+                        type: 'is-success'
+                    })
+            });
+        },
         onEventClick(event, e) {
             this.selectedEvent = event;
             this.start = event.start;
             this.end = event.end;
-            this.isCardModalActive = true;
-
-            // Prevent navigating to narrower view (default vue-cal behavior).
-            // e.stopPropagation();
+            this.confirm();
         },
         customEventCreation() {
             const thursday = this.previousFirstDayOfWeek.addDays(3).format();
@@ -614,7 +625,7 @@ export default {
     font-style: italic;
 }
 
-.dialog {
-    height: 600px;
-}
+// .dialog {
+//     // height: 600px;
+// }
 </style>

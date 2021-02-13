@@ -285,7 +285,6 @@
         <div class="categories__grid mb-5">
             <div v-for="(service, id) in storeServices" :key="id">
                 <div class="card categories__grid-card m-0">
-                    <!-- @click="goToServiceInfo(service.id)" -->
                     <div class="card-content">
                         <div
                             class="media is-flex is-justify-content-space-between is-align-content-center"
@@ -329,7 +328,7 @@
                                     >
                                         <b-button
                                             type="is-primary"
-                                            @click="quickBook"
+                                            @click="quickBook(service)"
                                         >
                                             Book Service
                                         </b-button>
@@ -342,6 +341,7 @@
             </div>
         </div>
 
+        <!-- BOOKING MODAL -->
         <section>
             <b-modal
                 v-model="isCardModalActive"
@@ -352,31 +352,74 @@
                 aria-label="Events Modal"
                 aria-modal
             >
-                <section class="card m-0" style="height: 100vh">
-                    <div class="p-5">
+                <section class="modal__settings card m-0" style="height: 100vh">
+                    <div class="container p-5">
                         <BookingCalendar />
                     </div>
-                    <div class="field card-content dialog">
-                        <!-- <div class="field">
-                            <b-field label="Name">
-                                <b-input></b-input>
-                            </b-field>
-                            <b-field label="Details">
+
+                    <!-- SERVICE -->
+                    <div class="container p-5">
+                        <div class="columns m-0 service__card">
+                            <div class="column p-5 m-0">
+                                <div class="media-content">
+                                    <p class="title is-4 text__color">
+                                        {{ selectedService.name | capitalize }}
+                                    </p>
+                                    <div class="text__color mb-5">
+                                        {{ selectedService.description }}
+                                    </div>
+                                    <b-notification
+                                        aria-close-label="Close notification"
+                                    >
+                                        <time datetime="2016-1-1"
+                                            >11:09 PM - 1 Jan 2016</time
+                                        >
+                                    </b-notification>
+                                </div>
+                            </div>
+                            <div
+                                class="column m-0 service__bg"
+                                v-bind:style="{
+                                    'background-image':
+                                        'url(' +
+                                        selectedService.serviceImage +
+                                        ')'
+                                }"
+                            >
+                                <div
+                                    class="p-5 is-flex is-justify-content-flex-end"
+                                >
+                                    <h1 class="title price__color">
+                                        ${{ selectedService.price }}
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- SERVICE END -->
+
+                    <div class="container field card-content dialog">
+                        <div class="field">
+                            <b-field label="Message">
                                 <b-input
+                                    v-model="note"
                                     maxlength="200"
                                     type="textarea"
                                 ></b-input>
                             </b-field>
-                        </div> -->
+                        </div>
 
                         <div>
                             <b-button @click="close"> Cancel </b-button>
-                            <!-- <b-button class="is-primary"> Book </b-button> -->
+                            <b-button class="is-primary">
+                                Add to cart
+                            </b-button>
                         </div>
                     </div>
                 </section>
             </b-modal>
         </section>
+        <!-- BOOKING MODAL END -->
     </div>
 </template>
 
@@ -413,7 +456,9 @@ export default {
                 type: 'is-success'
             });
         },
-        isCardModalActive: false
+        isCardModalActive: false,
+        selectedService: [],
+        isTag1Active: true
     }),
     watch: {
         // call function when dialog/modal opens
@@ -493,7 +538,9 @@ export default {
         close() {
             this.isCardModalActive = false;
         },
-        quickBook() {
+        quickBook(service) {
+            console.log(`_id.vue - 555 - 🆕`, service);
+            this.selectedService = service;
             this.isCardModalActive = true;
             // if (this.bookingState !== null) {
             //     const event = this.bookingState;
@@ -541,4 +588,25 @@ export default {
     background-blend-mode: multiply;
     border-radius: 24px;
 }
+.service__bg {
+    background-size: cover;
+    background-position: center;
+}
+.price__color {
+    background-color: #7957d5;
+    color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+}
+.service__card {
+    border-radius: 0.25rem;
+    -webkit-box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+        0 0px 0 1px rgb(10 10 10 / 2%);
+    box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+        0 0px 0 1px rgb(10 10 10 / 2%);
+}
+// .card {
+//     box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+//         0 0px 0 1px rgb(10 10 10 / 2%);
+// }
 </style>
