@@ -242,10 +242,6 @@
                     <div color="deep-purple" height="10" indeterminate></div>
                 </div>
 
-                <!-- <img height="250" :src="storeProfile.storeBanner" /> -->
-
-                <!-- <h1 class="title">{{ storeProfile.storeName | capitalize }}</h1> -->
-
                 <div class="mb-5">
                     <div class="my-4 subtitle-1">
                         <strong>Mobile</strong>: Type of service
