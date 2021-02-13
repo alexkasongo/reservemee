@@ -1,6 +1,6 @@
 <template>
     <div class="categories">
-        <div class="display-1">Popular Stores</div>
+        <h1 class="title">Popular Stores</h1>
 
         <!-- SORT -->
         <div class="categories__sort-card">
@@ -20,45 +20,6 @@
         <div v-if="storesLoading">
             <p>Loading...</p>
         </div>
-        <v-row v-if="!storesLoading" class="categories__popular">
-            <v-col v-for="(store, id) in stores" :key="id" class="col-md-6">
-                <div
-                    @click="viewStore(store)"
-                    class="rounded-xl"
-                    :ripple="false"
-                >
-                    <div
-                        class="categories__left-card d-flex flex-no-wrap justify-space-between"
-                    >
-                        <div class="categories__left-card-img-container">
-                            <img
-                                class="categories__left-service-img"
-                                :src="store.storeBanner"
-                                alt=""
-                            />
-                        </div>
-                        <div class="categories__left-card-info">
-                            <div-title class="headline">{{
-                                store.storeName | capitalize
-                            }}</div-title>
-
-                            <div v-text="store.description"></div>
-
-                            <div-text
-                                class="text--primary categories__left-card-price"
-                            >
-                                {{ store.storeBio | truncate(100, '...') }}
-                            </div-text>
-                            <div>
-                                <div icon>
-                                    <v-icon>mdi-heart</v-icon>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </v-col>
-        </v-row>
 
         <div v-if="!storesLoading">
             <div v-for="(store, id) in stores" :key="id">
