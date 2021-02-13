@@ -8,9 +8,6 @@
             grid-template-columns: 1fr 1fr;
         }
     }
-    // &__grid-card {
-    //     width: 50%;
-    // }
 
     &__sort {
         background-color: #cccccc;
@@ -21,6 +18,7 @@
         justify-content: center;
         align-items: center;
         display: none;
+        border-radius: 4px;
         @media (min-width: $large-desktop) {
             display: block;
         }
