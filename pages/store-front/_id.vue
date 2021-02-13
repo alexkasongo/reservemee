@@ -225,12 +225,14 @@
             }"
         >
             <div class="hero-body store__bg-inner">
-                <p class="title m-0">
-                    {{ storeProfile.storeName | capitalize }}
-                </p>
-                <section>
-                    <b-rate @change="success"></b-rate>
-                </section>
+                <div>
+                    <p class="title m-0">
+                        {{ storeProfile.storeName | capitalize }}
+                    </p>
+                    <section>
+                        <b-rate @change="success"></b-rate>
+                    </section>
+                </div>
             </div>
         </section>
 
@@ -274,7 +276,7 @@
             </b-select>
         </b-field>
 
-        <div class="categories__grid">
+        <div class="categories__grid mb-5">
             <div v-for="(service, id) in storeServices" :key="id">
                 <div
                     class="card categories__grid-card m-0"
@@ -478,7 +480,9 @@ export default {
     background-position: center;
     border-radius: 24px;
 }
-// .store__bg-inner {
-//     background-color: purple;
-// }
+.store__bg-inner {
+    background-color: rgba(121, 87, 213, 0.5); // Tint color
+    background-blend-mode: multiply;
+    border-radius: 24px;
+}
 </style>
