@@ -1,20 +1,20 @@
 <template>
     <div class="container margin">
         <div class="appointment__calendar" elevation="0">
-            <BookingCalendar />
+            <BookingCal />
         </div>
     </div>
 </template>
 
 <script>
-import BookingCalendar from '@/components/cart/BookingCalendar';
+import BookingCal from '@/components/cart/BookingCal';
 import Messages from '@/components/chat/Messages';
 import { mapGetters, mapState, mapActions } from 'vuex';
 
 export default {
     components: {
         Messages,
-        BookingCalendar
+        BookingCal
     },
     data: () => ({
         workingHours: [

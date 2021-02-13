@@ -341,6 +341,42 @@
                 </div>
             </div>
         </div>
+
+        <section>
+            <b-modal
+                v-model="isCardModalActive"
+                full-screen
+                scroll="keep"
+                :destroy-on-hide="false"
+                aria-role="dialog"
+                aria-label="Events Modal"
+                aria-modal
+            >
+                <section class="card m-0" style="height: 100vh">
+                    <div class="p-5">
+                        <BookingCalendar />
+                    </div>
+                    <div class="field card-content dialog">
+                        <div class="field">
+                            <b-field label="Name">
+                                <b-input></b-input>
+                            </b-field>
+                            <b-field label="Details">
+                                <b-input
+                                    maxlength="200"
+                                    type="textarea"
+                                ></b-input>
+                            </b-field>
+                        </div>
+
+                        <div>
+                            <b-button @click="close"> Cancel </b-button>
+                            <b-button class="is-primary"> Book </b-button>
+                        </div>
+                    </div>
+                </section>
+            </b-modal>
+        </section>
     </div>
 </template>
 
@@ -376,7 +412,8 @@ export default {
                 message: 'Thanks for your Rate!',
                 type: 'is-success'
             });
-        }
+        },
+        isCardModalActive: false
     }),
     watch: {
         // call function when dialog/modal opens
@@ -453,25 +490,29 @@ export default {
             this.note = '';
             this.ServiceId = ev.id;
         },
+        close() {
+            this.isCardModalActive = false;
+        },
         quickBook() {
-            if (this.bookingState !== null) {
-                const event = this.bookingState;
-                const service = this.service;
-                const note = this.note;
-                const id = this.ServiceId;
+            this.isCardModalActive = true;
+            // if (this.bookingState !== null) {
+            //     const event = this.bookingState;
+            //     const service = this.service;
+            //     const note = this.note;
+            //     const id = this.ServiceId;
 
-                const order = {
-                    id,
-                    event,
-                    service,
-                    note
-                };
-                this.addToCartAction(order);
-                this.dialog = false;
-                this.alert = '';
-            } else {
-                this.alert = 'Please select a date and time.';
-            }
+            //     const order = {
+            //         id,
+            //         event,
+            //         service,
+            //         note
+            //     };
+            //     this.addToCartAction(order);
+            //     this.dialog = false;
+            //     this.alert = '';
+            // } else {
+            //     this.alert = 'Please select a date and time.';
+            // }
         }
     },
     mounted() {
