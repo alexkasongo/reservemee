@@ -320,7 +320,10 @@
                         <div class="content">
                             <div class="columns">
                                 <div class="column">
-                                    {{ service.description }}
+                                    {{
+                                        service.description
+                                            | truncate(100, '...')
+                                    }}
                                 </div>
                                 <div class="column">
                                     <div
@@ -605,8 +608,7 @@ export default {
     box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
         0 0px 0 1px rgb(10 10 10 / 2%);
 }
-// .card {
-//     box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
-//         0 0px 0 1px rgb(10 10 10 / 2%);
-// }
+.modal__settings {
+    overflow: auto;
+}
 </style>
