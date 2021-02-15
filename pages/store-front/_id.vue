@@ -417,6 +417,7 @@
                         <div class="field">
                             <b-field label="Message">
                                 <b-input
+                                    placeholder="Optional"
                                     v-model="note"
                                     maxlength="200"
                                     type="textarea"
@@ -424,9 +425,19 @@
                             </b-field>
                         </div>
 
+                        <b-notification
+                            v-if="errors"
+                            type="is-danger is-light"
+                            aria-close-label="Close notification"
+                            role="alert"
+                            @click.native="clearError"
+                        >
+                            {{ errors }}
+                        </b-notification>
+
                         <div>
                             <b-button @click="close"> Cancel </b-button>
-                            <b-button class="is-primary">
+                            <b-button @click="addToCart" class="is-primary">
                                 Add to cart
                             </b-button>
                         </div>
@@ -474,7 +485,9 @@ export default {
         isCardModalActive: false,
         selectedService: [],
         isTag1Active: true,
-        isActive: true
+        isActive: true,
+        bookedTimes: '',
+        errors: ''
     }),
     watch: {
         // call function when dialog/modal opens
@@ -558,15 +571,35 @@ export default {
                 }
             });
         },
-        openQuickBook(ev) {
-            // locally store all the data
-            this.service = ev;
-            this.note = '';
-            this.ServiceId = ev.id;
+        addToCart() {
+            // check if all fields have been filled in
+            if (this.bookingState === null || this.bookingState === undefined) {
+                this.errors = 'Please select a time';
+            } else {
+                const data = {
+                    note: this.note,
+                    category: this.selectedService.category,
+                    description: this.selectedService.description,
+                    end: this.bookingState.end,
+                    id: this.selectedService.id,
+                    price: this.selectedService.price,
+                    serviceImage: this.selectedService.serviceImage,
+                    start: this.bookingState.start,
+                    userId: this.selectedService.userId,
+                    status: 'booked'
+                };
+                console.log(`_id.vue - 566 - variable`, data);
+                this.note = '';
+                this.errors = '';
+            }
+        },
+        clearError() {
+            this.errors = '';
         },
         close() {
             this.isCardModalActive = false;
             this.setBookingState('');
+            this.note = '';
             this.isActive = true;
         },
         updateBookingState(event) {
