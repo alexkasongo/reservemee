@@ -19,6 +19,11 @@
         </template>
 
         <template #end>
+            <b-navbar-item @click="openCart">
+                <div v-if="user">
+                    <div>Cart</div>
+                </div>
+            </b-navbar-item>
             <b-navbar-item>
                 <div v-if="user">
                     <div
@@ -176,10 +181,11 @@ export default {
             loadServices: 'dashboard/loadServices',
             setSnackbar: 'loaders/setSnackbar',
             removeUserData: 'removeUserData',
-            orders: null
+            orders: null,
+            setCartState: 'loaders/setCartState'
         }),
         openCart() {
-            this.drawerRight = !this.drawerRight;
+            this.setCartState(true);
         },
         clickToggleDrawer() {
             this.drawerDown = !this.drawerDown;

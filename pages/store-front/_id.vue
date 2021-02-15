@@ -570,7 +570,6 @@ export default {
             this.isActive = true;
         },
         updateBookingState(event) {
-            console.log(`_id.vue - 555 - 🔥`, event);
             // this.setBookingState('');
             this.isActive = false;
             this.setBookingState('');
