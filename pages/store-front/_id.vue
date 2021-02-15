@@ -372,11 +372,17 @@
                                         {{ selectedService.description }}
                                     </div>
                                     <b-notification
+                                        v-if="bookingState !== ''"
                                         aria-close-label="Close notification"
+                                        :close="updateBookingState"
                                     >
-                                        <time datetime="2016-1-1"
-                                            >11:09 PM - 1 Jan 2016</time
-                                        >
+                                        <time :datetime="bookingState.start">{{
+                                            bookingState.start
+                                        }}</time>
+                                        <br />
+                                        <time :datetime="bookingState.end">{{
+                                            bookingState.end
+                                        }}</time>
                                     </b-notification>
                                 </div>
                             </div>
@@ -522,7 +528,8 @@ export default {
     methods: {
         ...mapActions({
             loadStoreServices: 'storeFront/loadStoreServices',
-            addToCartAction: 'cart/addToCart'
+            addToCartAction: 'cart/addToCart',
+            setBookingState: 'booking/setBookingState'
         }),
         goToServiceInfo(id) {
             this.$router.push({
@@ -540,6 +547,10 @@ export default {
         },
         close() {
             this.isCardModalActive = false;
+            this.setBookingState('');
+        },
+        updateBookingState() {
+            this.setBookingState('');
         },
         quickBook(service) {
             console.log(`_id.vue - 555 - 🆕`, service);

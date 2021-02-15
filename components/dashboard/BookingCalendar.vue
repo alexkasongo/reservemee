@@ -143,6 +143,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { db } from '@/plugins/firebase';
 import { DialogProgrammatic as Dialog } from 'buefy';
 
@@ -194,6 +195,9 @@ export default {
         }
     },
     methods: {
+        ...mapActions({
+            setBookingState: 'booking/setBookingState'
+        }),
         confirm(event) {
             Dialog.confirm({
                 message: 'Select this date?',
@@ -202,6 +206,7 @@ export default {
                         message: 'Added to your order',
                         type: 'is-success'
                     });
+                    this.setBookingState(event);
                     console.log(`BookingCalendar.vue - 207 - 🍟`, event);
                 }
             });

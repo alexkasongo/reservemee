@@ -131,6 +131,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { db } from '@/plugins/firebase';
 
 const dailyHours = { from: 9 * 60, to: 18 * 60, class: 'business-hours' };
