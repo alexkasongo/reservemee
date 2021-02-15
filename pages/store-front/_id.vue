@@ -371,23 +371,25 @@
                                     <div class="text__color mb-5">
                                         {{ selectedService.description }}
                                     </div>
-                                    <div v-if="bookingState !== ''">
-                                        <b-notification
-                                            :active.sync="isActive"
-                                            aria-close-label="Close notification"
-                                            @click.native="updateBookingState"
+
+                                    <b-notification
+                                        v-if="bookingState !== null"
+                                        :active.sync="isActive"
+                                        aria-close-label="Close notification"
+                                        @click.native="updateBookingState"
+                                    >
+                                        <time
+                                            v-if="bookingState !== null"
+                                            :datetime="bookingState.start"
+                                            >{{ bookingState.start }}</time
                                         >
-                                            <time
-                                                :datetime="bookingState.start"
-                                                >{{ bookingState.start }}</time
-                                            >
-                                            <br />
-                                            <time
-                                                :datetime="bookingState.end"
-                                                >{{ bookingState.end }}</time
-                                            >
-                                        </b-notification>
-                                    </div>
+                                        <br />
+                                        <time
+                                            v-if="bookingState !== null"
+                                            :datetime="bookingState.end"
+                                            >{{ bookingState.end }}</time
+                                        >
+                                    </b-notification>
                                 </div>
                             </div>
                             <div
@@ -527,13 +529,18 @@ export default {
             booking: 'booking'
         }),
         bookingState() {
-            return this.booking.bookingState;
+            if (this.booking.bookingState !== '') {
+                // if bookingstate is empty then fill it up
+                return this.booking.bookingState;
+            } else {
+                // otherwise return null
+                return null;
+            }
         }
     },
     watch: {
         bookingState() {
             // do something whenever the state changes
-            console.log(`_id.vue - 535 - 🇨🇩`);
             this.isActive = true;
         }
     },

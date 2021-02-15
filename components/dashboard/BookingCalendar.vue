@@ -143,7 +143,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import { db } from '@/plugins/firebase';
 import { DialogProgrammatic as Dialog } from 'buefy';
 
@@ -172,6 +172,9 @@ export default {
         message: ''
     }),
     computed: {
+        ...mapState({
+            booking: 'booking'
+        }),
         user() {
             return this.$store.state.user;
         },
@@ -206,8 +209,20 @@ export default {
                         message: 'Added to your order',
                         type: 'is-success'
                     });
+                    // check if a bookingstate already exists, if so do nothing else do something
+                    // if (this.booking.bookingState === '') {
+                    //     console.log(
+                    //         `BookingCalendar.vue - 216 - 🥰`,
+                    //         this.booking.bookingState
+                    //     );
                     this.setBookingState(event);
-                    console.log(`BookingCalendar.vue - 207 - 🍟`, event);
+                    // } else {
+                    //     console.log(
+                    //         `BookingCalendar.vue - 216 - 🥶`,
+                    //         this.booking.bookingState
+                    //     );
+                    //     return;
+                    // }
                 }
             });
         },
@@ -216,7 +231,6 @@ export default {
             this.start = event.start;
             this.end = event.end;
             this.confirm(event);
-            // store;
         },
         customEventCreation() {
             const thursday = this.previousFirstDayOfWeek.addDays(3).format();
@@ -242,7 +256,6 @@ export default {
         // Select Data
         selectDate() {
             this.isCardModalActive = false;
-            console.log(`BookingCalendar.vue - 219 - 🔥`, this.message);
         },
         // MANIPULATE EVENTS START
         async logEvents(name, event) {
