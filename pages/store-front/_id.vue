@@ -371,19 +371,23 @@
                                     <div class="text__color mb-5">
                                         {{ selectedService.description }}
                                     </div>
-                                    <b-notification
-                                        v-if="bookingState !== ''"
-                                        aria-close-label="Close notification"
-                                        :close="updateBookingState"
-                                    >
-                                        <time :datetime="bookingState.start">{{
-                                            bookingState.start
-                                        }}</time>
-                                        <br />
-                                        <time :datetime="bookingState.end">{{
-                                            bookingState.end
-                                        }}</time>
-                                    </b-notification>
+                                    <div v-if="bookingState !== ''">
+                                        <b-notification
+                                            :active.sync="isActive"
+                                            aria-close-label="Close notification"
+                                            @click.native="updateBookingState"
+                                        >
+                                            <time
+                                                :datetime="bookingState.start"
+                                                >{{ bookingState.start }}</time
+                                            >
+                                            <br />
+                                            <time
+                                                :datetime="bookingState.end"
+                                                >{{ bookingState.end }}</time
+                                            >
+                                        </b-notification>
+                                    </div>
                                 </div>
                             </div>
                             <div
@@ -467,7 +471,8 @@ export default {
         },
         isCardModalActive: false,
         selectedService: [],
-        isTag1Active: true
+        isTag1Active: true,
+        isActive: true
     }),
     watch: {
         // call function when dialog/modal opens
@@ -525,6 +530,13 @@ export default {
             return this.booking.bookingState;
         }
     },
+    watch: {
+        bookingState() {
+            // do something whenever the state changes
+            console.log(`_id.vue - 535 - 🇨🇩`);
+            this.isActive = true;
+        }
+    },
     methods: {
         ...mapActions({
             loadStoreServices: 'storeFront/loadStoreServices',
@@ -548,12 +560,15 @@ export default {
         close() {
             this.isCardModalActive = false;
             this.setBookingState('');
+            this.isActive = true;
         },
-        updateBookingState() {
+        updateBookingState(event) {
+            console.log(`_id.vue - 555 - 🔥`, event);
+            // this.setBookingState('');
+            this.isActive = false;
             this.setBookingState('');
         },
         quickBook(service) {
-            console.log(`_id.vue - 555 - 🆕`, service);
             this.selectedService = service;
             this.isCardModalActive = true;
             // if (this.bookingState !== null) {
@@ -586,6 +601,8 @@ export default {
                 this.categoryNames.push(this.storeCategories[key].name);
                 // this.categoryNames.push('all');
             }
+
+            this.setBookingState('');
         });
     }
 };
