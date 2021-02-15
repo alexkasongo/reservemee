@@ -18,7 +18,7 @@
             >
                 <div class="p-1">
                     <img :src="logo" alt="Reservemee logo" />
-                    <b-menu>
+                    <!-- <b-menu>
                         <b-menu-list label="Menu">
                             <b-menu-item
                                 icon="information-outline"
@@ -91,7 +91,7 @@
                         <b-menu-list label="Actions">
                             <b-menu-item label="Logout"></b-menu-item>
                         </b-menu-list>
-                    </b-menu>
+                    </b-menu> -->
                 </div>
             </b-sidebar>
             <!-- TODO move to settings -->
