@@ -194,21 +194,24 @@ export default {
         }
     },
     methods: {
-        confirm() {
+        confirm(event) {
             Dialog.confirm({
                 message: 'Select this date?',
-                onConfirm: () =>
+                onConfirm: () => {
                     this.$buefy.toast.open({
                         message: 'Added to your order',
                         type: 'is-success'
-                    })
+                    });
+                    console.log(`BookingCalendar.vue - 207 - 🍟`, event);
+                }
             });
         },
         onEventClick(event, e) {
             this.selectedEvent = event;
             this.start = event.start;
             this.end = event.end;
-            this.confirm();
+            this.confirm(event);
+            // store;
         },
         customEventCreation() {
             const thursday = this.previousFirstDayOfWeek.addDays(3).format();
