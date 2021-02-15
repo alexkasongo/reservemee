@@ -210,19 +210,8 @@ export default {
                         type: 'is-success'
                     });
                     // check if a bookingstate already exists, if so do nothing else do something
-                    // if (this.booking.bookingState === '') {
-                    //     console.log(
-                    //         `BookingCalendar.vue - 216 - 🥰`,
-                    //         this.booking.bookingState
-                    //     );
+
                     this.setBookingState(event);
-                    // } else {
-                    //     console.log(
-                    //         `BookingCalendar.vue - 216 - 🥶`,
-                    //         this.booking.bookingState
-                    //     );
-                    //     return;
-                    // }
                 }
             });
         },
