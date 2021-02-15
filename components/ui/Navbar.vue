@@ -2,11 +2,7 @@
     <b-navbar>
         <template #brand>
             <b-navbar-item @click="$router.push('/')">
-                <img
-                    @click="goHome(user)"
-                    :src="logo"
-                    alt="Lightweight UI components for Vue.js based on Bulma"
-                />
+                <img @click="goHome(user)" :src="logo" alt="Reservemee logo" />
             </b-navbar-item>
         </template>
         <template #start>

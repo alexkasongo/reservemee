@@ -17,10 +17,7 @@
                 :on-cancel="closeCart"
             >
                 <div class="p-1">
-                    <img
-                        src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png"
-                        alt="Lightweight UI components for Vue.js based on Bulma"
-                    />
+                    <img :src="logo" alt="Reservemee logo" />
                     <b-menu>
                         <b-menu-list label="Menu">
                             <b-menu-item
@@ -97,7 +94,8 @@
                     </b-menu>
                 </div>
             </b-sidebar>
-            <div class="block">
+            <!-- TODO move to settings -->
+            <!-- <div class="block">
                 <b-field grouped group-multiline>
                     <div class="control">
                         <b-switch v-model="overlay">Overlay</b-switch>
@@ -112,8 +110,7 @@
                         <b-switch v-model="right">Right</b-switch>
                     </div>
                 </b-field>
-            </div>
-            <b-button @click="open = true">Show</b-button>
+            </div> -->
         </section>
 
         <!-- SNACKBAR -->
@@ -461,6 +458,7 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { db } from '@/plugins/firebase';
+import logo from 'assets/images/logo.png';
 
 import { mapState, mapGetters, mapActions } from 'vuex';
 
@@ -468,10 +466,11 @@ export default {
     head: {},
     data() {
         return {
+            logo: logo,
             user: '',
             role: '',
             open: false,
-            overlay: true,
+            overlay: false,
             fullheight: true,
             fullwidth: false,
             right: true
