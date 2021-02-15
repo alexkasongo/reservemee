@@ -588,7 +588,9 @@ export default {
                     userId: this.selectedService.userId,
                     status: 'booked'
                 };
-                console.log(`_id.vue - 566 - variable`, data);
+
+                this.addToCartAction(data);
+
                 this.note = '';
                 this.errors = '';
             }
