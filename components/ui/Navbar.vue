@@ -21,26 +21,34 @@
         <template #end>
             <b-navbar-item>
                 <div v-if="user">
-                    <div @click="$router.push(`/inbox/${user.uid}`)">
-                        <b-icon
+                    <div
+                        @click="$router.push(`/inbox/${user.uid}`)"
+                        v-if="role.customer"
+                    >
+                        <!-- <b-icon
                             icon="message-outline"
                             type="is-primary"
                             v-if="role.customer"
                             >mdi-message</b-icon
-                        >
+                        > -->
+                        Inbox
                     </div>
-                    <div @click="$router.push('/inbox/admin')">
-                        <b-icon
+                    <div
+                        @click="$router.push('/inbox/admin')"
+                        v-if="role.admin"
+                    >
+                        <!-- <b-icon
                             icon="message-outline"
                             type="is-primary"
                             v-if="role.admin"
                             >mdi-message</b-icon
-                        >
+                        > -->
+                        Inbox
                     </div>
                 </div>
             </b-navbar-item>
             <b-navbar-item>
-                <b-navbar-dropdown v-if="user">
+                <b-navbar-dropdown label="Info" v-if="user">
                     <div v-for="(item, index) in nav" :key="index">
                         <b-navbar-item @click="dropDown(item)">{{
                             item.title

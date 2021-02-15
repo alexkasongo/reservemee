@@ -594,6 +594,10 @@ export default {
 .service__bg {
     background-size: cover;
     background-position: center;
+    border-radius: 0 0 4px 4px;
+    @media (min-width: 768px) {
+        border-radius: 0 4px 4px 0;
+    }
 }
 .price__color {
     background-color: #7957d5;
