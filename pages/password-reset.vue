@@ -2,30 +2,28 @@
     <div>
         <form>
             <div class="form-group mt-4">
-                <label class="d-block">Forgot your password?</label>
-                <input
-                    type="email"
-                    class="form-control"
-                    placeholder="Enter your email address"
-                    v-model="email"
-                />
-                <input
-                    type="email"
-                    class="form-control mt-1 mb-3"
-                    placeholder="Confirm your email address"
-                    v-model="emailConfirm"
-                />
+                <b-field label="Forgot your password?">
+                    <b-input
+                        type="email"
+                        class="form-control"
+                        placeholder="Enter your email address"
+                        v-model="email"
+                    />
+                </b-field>
+                <b-field>
+                    <b-input
+                        type="email"
+                        class="form-control mt-1 mb-3"
+                        placeholder="Confirm your email address"
+                        v-model="emailConfirm"
+                    />
+                </b-field>
                 <small class="form-text text-muted mb-4">{{
                     errors.message
                 }}</small>
-                <div
-                    @click="resetPassword"
-                    class="teal darken-1"
-                    dark
-                    type="button"
-                >
+                <b-button @click="resetPassword" type="is-primary">
                     Send me reset password instructions
-                </div>
+                </b-button>
             </div>
         </form>
     </div>
