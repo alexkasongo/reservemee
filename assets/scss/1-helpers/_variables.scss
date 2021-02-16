@@ -1,4 +1,9 @@
 /*
+** Beufy
+*/
+$sidebar-width: 600px !default;
+
+/*
 * Color Variables
 * Using http://chir.ag/projects/name-that-color/#6195ED for color names
 */
@@ -78,5 +83,3 @@ $header-close-zindex: 2100;
 .page-leave-active {
     opacity: 0;
 }
-
-// BEUFY
