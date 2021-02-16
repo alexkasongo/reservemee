@@ -29,7 +29,7 @@
                     </div>
                     <div v-if="!user.emailVerified" class="mb-5">
                         <!-- EmailVerified -->
-                        <EmailVerified />
+                        <!-- <EmailVerified /> -->
                         <!-- EmailVerified -->
                     </div>
                 </div>
