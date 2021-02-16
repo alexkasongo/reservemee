@@ -571,6 +571,15 @@ export default {
                 }
             });
         },
+        clearError() {
+            this.errors = '';
+        },
+        close() {
+            this.isCardModalActive = false;
+            this.setBookingState('');
+            this.note = '';
+            this.isActive = true;
+        },
         addToCart() {
             // check if all fields have been filled in
             if (this.bookingState === null || this.bookingState === undefined) {
@@ -593,16 +602,8 @@ export default {
 
                 this.note = '';
                 this.errors = '';
+                this.close;
             }
-        },
-        clearError() {
-            this.errors = '';
-        },
-        close() {
-            this.isCardModalActive = false;
-            this.setBookingState('');
-            this.note = '';
-            this.isActive = true;
         },
         updateBookingState(event) {
             // this.setBookingState('');
