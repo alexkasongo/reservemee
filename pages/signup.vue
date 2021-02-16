@@ -1,60 +1,58 @@
 <template>
-    <div>
-        <div class="signup">
-            <div class="signup__left"></div>
-            <div class="signup__right">
-                <div class="signup__right-card">
-                    <form @keyup.enter="onSubmit">
-                        <b-field>
-                            <b-input
-                                placeholder="Name"
-                                v-model="name"
-                                type="text"
-                                maxlength="30"
-                                icon="account"
-                            >
-                            </b-input>
-                        </b-field>
+    <div class="signup">
+        <div class="signup__left"></div>
+        <div class="signup__right">
+            <div class="signup__right-card">
+                <form @keyup.enter="onSubmit">
+                    <b-field>
+                        <b-input
+                            placeholder="Name"
+                            v-model="name"
+                            type="text"
+                            maxlength="30"
+                            icon="account"
+                        >
+                        </b-input>
+                    </b-field>
 
-                        <b-field>
-                            <b-input
-                                placeholder="Email"
-                                v-model="email"
-                                type="email"
-                                maxlength="30"
-                                icon="email"
-                                icon-right="close-circle"
-                                icon-right-clickable
-                                @icon-right-click="clearIconClick"
-                            >
-                            </b-input>
-                        </b-field>
+                    <b-field>
+                        <b-input
+                            placeholder="Email"
+                            v-model="email"
+                            type="email"
+                            maxlength="30"
+                            icon="email"
+                            icon-right="close-circle"
+                            icon-right-clickable
+                            @icon-right-click="clearIconClick"
+                        >
+                        </b-input>
+                    </b-field>
 
-                        <b-field>
-                            <b-input
-                                placeholder="Passwordm"
-                                type="password"
-                                v-model="password"
-                                password-reveal
-                                icon="lock"
-                            >
-                            </b-input>
-                        </b-field>
-                        <b-field v-if="error">
-                            <p>{{ this.error }}</p>
-                        </b-field>
-                        <b-field class="buttons">
-                            <b-button
-                                :loading="loading"
-                                type="submit"
-                                class="button is-primary"
-                                @click="onSubmit"
-                                expanded
-                                >signup</b-button
-                            >
-                        </b-field>
-                    </form>
-                </div>
+                    <b-field>
+                        <b-input
+                            placeholder="Passwordm"
+                            type="password"
+                            v-model="password"
+                            password-reveal
+                            icon="lock"
+                        >
+                        </b-input>
+                    </b-field>
+                    <b-field v-if="error">
+                        <p>{{ this.error }}</p>
+                    </b-field>
+                    <b-field class="buttons">
+                        <b-button
+                            :loading="loading"
+                            type="submit"
+                            class="button is-primary"
+                            @click="onSubmit"
+                            expanded
+                            >signup</b-button
+                        >
+                    </b-field>
+                </form>
             </div>
         </div>
     </div>
