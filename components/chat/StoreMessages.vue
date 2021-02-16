@@ -34,11 +34,15 @@
         <!--If Messages end-->
 
         <!-- If No Messages -->
-        <v-list-item-content v-if="messages.length <= 0">
-            <div icon="mdi-alert-circle-outline" text type="info">
-                <span> You have no messages. </span>
-            </div>
-        </v-list-item-content>
+        <div v-if="messages.length <= 0">
+            <b-notification
+                type="is-success is-light"
+                aria-close-label="Close notification"
+                :closable="false"
+            >
+                You have no messages.
+            </b-notification>
+        </div>
         <!--If No Messages end-->
     </div>
 </template>

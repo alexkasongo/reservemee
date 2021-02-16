@@ -218,6 +218,15 @@
         </div> -->
 
         <!-- BEUFY -->
+        <!-- <div class="form-group">
+            <div for="exampleInputEmail1">Select Category</div>
+            <select
+                v-model="selectedItem"
+                :items="categoryNames"
+                outlined
+            ></select>
+        </div> -->
+
         <section
             class="hero is-medium is-link store__bg"
             v-bind:style="{
@@ -529,6 +538,10 @@ export default {
                 });
                 this.storeServices = filteredServices;
             }
+        },
+        bookingState() {
+            // do something whenever the state changes
+            this.isActive = true;
         }
     },
     computed: {
@@ -549,12 +562,6 @@ export default {
                 // otherwise return null
                 return null;
             }
-        }
-    },
-    watch: {
-        bookingState() {
-            // do something whenever the state changes
-            this.isActive = true;
         }
     },
     methods: {
