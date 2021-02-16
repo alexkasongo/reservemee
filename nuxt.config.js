@@ -57,13 +57,19 @@ module.exports = {
         dirs: [
             '~/components',
             {
+                path: '~/components/chat/'
+            },
+            {
+                path: '~/components/client/'
+            },
+            {
                 path: '~/components/dashboard/'
             },
             {
                 path: '~/components/profile/'
             },
             {
-                path: '~/components/chat/'
+                path: '~/components/ui/'
             }
         ]
     },
