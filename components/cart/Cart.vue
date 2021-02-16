@@ -72,22 +72,35 @@
             <span class="count">2 items in the bag</span>
         </header>
         <!-- Header End -->
+
+        <section class="container" v-if="orders.length <= 0">
+            <b-notification
+                :closable="false"
+                aria-close-label="Empty cart"
+                type="is-success is-light"
+            >
+                Cart is empty
+            </b-notification>
+        </section>
+
         <!-- Product -->
         <section class="container">
-            <ul class="products">
+            <ul class="products" v-for="(order, id) in orders" :key="id">
                 <li class="row" key="{index}">
                     <div class="col left">
                         <div class="thumbnail">
                             <a href="#">
-                                <img src="https://via.placeholder.com/150" />
+                                <img :src="order.serviceImage" />
                             </a>
                         </div>
                         <div class="detail">
                             <div class="name">
                                 <a href="#">product name</a>
                             </div>
-                            <div class="description">product description</div>
-                            <div class="price">$39.99</div>
+                            <div class="description">
+                                {{ order.description }}
+                            </div>
+                            <div class="price">{{ order.price }}.99</div>
                         </div>
                     </div>
 
@@ -155,7 +168,7 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 export default {
     data: () => ({
         item: '',
-        orders: [],
+        orders: [] || null,
         headers: [
             {
                 text: 'Shopping Cart',
@@ -175,7 +188,8 @@ export default {
         ],
         subTotal: 0,
         tax: 0,
-        grandTotal: 0
+        grandTotal: 0,
+        isActive: true
     }),
     computed: {
         ...mapState({
