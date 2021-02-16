@@ -48,11 +48,6 @@
                 </div>
                 <!-- StoreSummary -->
 
-                <!-- <div class="display-1 mt-10 mb-5">Calendar</div> -->
-                <!-- <div elevation="2"> -->
-                <!-- <Calendar /> -->
-                <!-- </div>s -->
-
                 <!-- Vue-cal -->
                 <div>
                     <h1 class="title mt-5 mb-5">Business Hours</h1>
