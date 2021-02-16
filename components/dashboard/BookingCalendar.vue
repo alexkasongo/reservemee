@@ -551,8 +551,4 @@ export default {
 .vuecal__event-content {
     font-style: italic;
 }
-
-// .dialog {
-//     // height: 600px;
-// }
 </style>

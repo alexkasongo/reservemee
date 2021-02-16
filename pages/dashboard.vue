@@ -11,7 +11,9 @@
                 class="dashboard__bg column is-full-mobile is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd"
             >
                 <!-- Personal-Information -->
-                <BusinessInfo class="mb-5" />
+                <div class="mb-5">
+                    <BusinessInfo />
+                </div>
                 <!-- Personal-Information -->
                 <div v-if="user">
                     <h5
@@ -29,7 +31,7 @@
                     </div>
                     <div v-if="!user.emailVerified" class="mb-5">
                         <!-- EmailVerified -->
-                        <!-- <EmailVerified /> -->
+                        <EmailVerified />
                         <!-- EmailVerified -->
                     </div>
                 </div>
@@ -69,7 +71,7 @@
                     <!-- ManageServices -->
 
                     <!-- ManageServices -->
-                    <ManageServices v-else />
+                    <!-- <ManageServices v-else /> -->
                     <!-- ManageServices -->
                 </div>
             </div>
@@ -78,12 +80,31 @@
 </template>
 
 <script>
+// import Header from '../components/dashboard/Header';
+// import BusinessInfo from '../components/dashboard/BusinessInfo';
+// import CategoryCheck from '../components/dashboard/CategoryCheck';
+// import EmailVerified from '../components/dashboard/EmailVerified';
+// import StoreMessages from '../components/chat/Header';
+// import StoreSummary from '../components/dashboard/StoreSummary';
+// import EventCalendar from '../components/dashboard/EventCalendar';
+// import ManageServices from '../components/dashboard/ManageServices';
+
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
+    // components: {
+    //     Header,
+    //     BusinessInfo,
+    //     CategoryCheck,
+    //     EmailVerified,
+    //     StoreMessages,
+    //     StoreSummary,
+    //     EventCalendar,
+    //     ManageServices
+    // },
     data: () => ({
         user: []
     }),

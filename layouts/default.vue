@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <Navbar />
         <section>
             <b-sidebar
                 type="is-light"
@@ -70,8 +71,10 @@ import { db } from '@/plugins/firebase';
 import logo from 'assets/images/logo.png';
 
 import { mapState, mapGetters, mapActions } from 'vuex';
+import Navbar from '~/components/ui/Navbar.vue';
 
 export default {
+    components: { Navbar },
     head: {},
     data() {
         return {

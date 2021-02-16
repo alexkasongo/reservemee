@@ -37,7 +37,7 @@
 
 <script>
 export default {
-    name: 'Bookings',
+    name: 'Scheduling',
     data: () => ({
         stores: [
             {

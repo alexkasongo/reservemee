@@ -70,6 +70,7 @@
 
 <script>
 export default {
+    name: 'UpcomingEvents',
     data: () => ({
         events: [],
         input: null,

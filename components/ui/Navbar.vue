@@ -90,7 +90,7 @@ import { db } from '@/plugins/firebase';
 import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
-    head: {},
+    name: 'Navbar',
     data() {
         return {
             logo: logo,
