@@ -1,7 +1,6 @@
 <template>
     <!-- Header -->
     <div class="header">
-        <!-- IF PROFILE EXISTS -->
         <section
             v-if="storeProfile !== null && Object.keys(storeProfile).length > 1"
         >
@@ -66,108 +65,6 @@
                 <h2 class="subtitle">{{ user.displayName }}</h2>
             </div>
         </section>
-
-        <!-- IF PROFILE EXISTS END -->
-
-        <!-- IF PROFILE DOESN'T EXISTS -->
-
-        <!-- IF PROFILE DOESN'T EXISTS END -->
-
-        <!-- <div
-            v-if="storeProfile !== null && Object.keys(storeProfile).length > 1"
-            class="parallax"
-        >
-            <v-parallax
-                class="rounded-xl"
-                height="300"
-                v-if="storeProfile.storeBanner !== ''"
-                :src="storeProfile.storeBanner"
-            >
-                <div class="header__profile-image">
-                    <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                            <div class="float-left mr-3">
-                                <img
-                                    v-if="storeProfile.storeLogo !== ''"
-                                    @click="$router.push('/settings')"
-                                    :src="storeProfile.storeLogo"
-                                    alt
-                                    class="header__thumb-lg rounded-circle"
-                                    v-bind="attrs"
-                                    v-on="on"
-                                />
-                                <img
-                                    v-else
-                                    @click="$router.push('/settings')"
-                                    :src="defaultStoreLogo"
-                                    alt
-                                    class="header__thumb-lg rounded-circle"
-                                    v-bind="attrs"
-                                    v-on="on"
-                                />
-                            </div>
-                        </template>
-                        <span>Settings</span>
-                    </v-tooltip>
-
-                    <div class="header__titles">
-                        <h4>
-                            {{ storeProfile.storeName | capitalize }}
-                        </h4>
-                        <p class="header__subtitle">
-                            {{ user.displayName }}
-                        </p>
-                    </div>
-                </div>
-            </v-parallax>
-
-            <v-parallax
-                v-else
-                class="rounded-xl"
-                height="300"
-                :src="defaultStoreBanner"
-            >
-                <div class="bg-center">
-                    <div class="header__profile-image">
-                        <v-tooltip bottom>
-                            <template v-slot:activator="{ on, attrs }">
-                                <div class="float-left mr-3">
-                                    <img
-                                        v-if="storeProfile.storeLogo !== ''"
-                                        @click="$router.push('/settings')"
-                                        :src="storeProfile.storeLogo"
-                                        alt
-                                        class="header__thumb-lg rounded-circle"
-                                        v-bind="attrs"
-                                        v-on="on"
-                                    />
-                                    <img
-                                        v-else
-                                        @click="$router.push('/settings')"
-                                        :src="defaultStoreLogo"
-                                        alt
-                                        class="header__thumb-lg rounded-circle"
-                                        v-bind="attrs"
-                                        v-on="on"
-                                    />
-                                </div>
-                            </template>
-                            <span>Settings</span>
-                        </v-tooltip>
-
-                        <div class="header__titles">
-                            <h4 class="mt-1 mb-1 font-18">
-                                {{ storeProfile.storeName | capitalize }}
-                            </h4>
-                            <p class="header__subtitle">
-                                {{ user.displayName }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </v-parallax>
-        </div> -->
-        <!-- IF PROFILE EXISTS -->
     </div>
     <!-- Header End-->
 </template>
