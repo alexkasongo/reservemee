@@ -1,11 +1,5 @@
 <template>
     <div class="container">
-        <!-- <client-only> -->
-        <!-- <div v-if="loading" class="loading">
-                <p>loading...</p>
-            </div> -->
-        <!-- <Navbar /> -->
-
         <section>
             <b-sidebar
                 type="is-light"
@@ -66,7 +60,6 @@
         <div>
             <Nuxt />
         </div>
-        <!-- </client-only> -->
     </div>
 </template>
 
@@ -225,21 +218,6 @@ export default {
                 }
             });
         },
-        // warning() {
-        //     this.$buefy.snackbar.open({
-        //         message: 'Yellow button and positioned on top, click to close',
-        //         type: 'is-warning',
-        //         position: 'is-top',
-        //         actionText: 'Retry',
-        //         indefinite: true,
-        //         onAction: () => {
-        //             this.$buefy.toast.open({
-        //                 message: 'Action pressed',
-        //                 queue: false
-        //             });
-        //         }
-        //     });
-        // },
         async getUserRole() {
             // get logged in user role
             const userRole = await db
@@ -281,24 +259,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss" scoped>
-// .margin {
-//     // margin: 90px auto 0 auto;
-//     margin-top: 90px;
-// }
-
-// .app {
-//     position: relative;
-// }
-
-// .loading {
-//     position: absolute;
-//     top: 22px;
-//     left: 50%;
-// }
-
-// .cart__width {
-//     width: 600px;
-// }
-</style>
