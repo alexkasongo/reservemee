@@ -6,27 +6,6 @@ export const getters = {};
 
 export const actions = {
     async addToCart({ commit }, payload) {
-        console.log(`cart.js - 9 - 🙏🏾`, payload);
-
-        // create order object
-        // const order = await {
-        //     id: payload.id,
-        //     note: payload.note,
-        //     serviceCategory: payload.service.category,
-        //     serviceDescription: payload.service.description,
-        //     serviceId: payload.service.id,
-        //     serviceName: payload.service.name,
-        //     servicePrice: payload.service.price,
-        //     serviceImage: payload.service.serviceImage,
-        //     serviceUserId: payload.service.userId,
-        //     eventBooked: payload.event.booked,
-        //     eventColor: payload.event.color,
-        //     eventDetails: payload.event.details,
-        //     eventEnd: payload.event.end,
-        //     eventName: payload.event.name,
-        //     eventStart: payload.event.start,
-        //     eventTimed: payload.event.timed
-        // };
         commit('SET_CART', payload);
         this.$swal({
             toast: true,
