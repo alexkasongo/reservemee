@@ -5,16 +5,24 @@
                 <img @click="goHome(user)" :src="logo" alt="Reservemee logo" />
             </b-navbar-item>
         </template>
-        <template #start>
+        <!-- <template #start>
             <b-navbar-item @click="goHome(user)" v-if="user && role.admin">
                 Dasboard
             </b-navbar-item>
             <b-navbar-item @click="$router.push('/store')">
                 Store
             </b-navbar-item>
+        </template> -->
+
+        <!-- FIXME -->
+        <template #start>
+            <!-- <b-navbar-item @click="goHome(user)"> Dasboard </b-navbar-item>
+            <b-navbar-item @click="$router.push('/store')">
+                Store
+            </b-navbar-item> -->
         </template>
 
-        <template #end>
+        <!-- <template #end>
             <b-navbar-item @click="openCart">
                 <div v-if="user">
                     <div>Cart</div>
@@ -26,24 +34,12 @@
                         @click="$router.push(`/inbox/${user.uid}`)"
                         v-if="role.customer"
                     >
-                        <!-- <b-icon
-                            icon="message-outline"
-                            type="is-primary"
-                            v-if="role.customer"
-                            >mdi-message</b-icon
-                        > -->
                         Inbox
                     </div>
                     <div
                         @click="$router.push('/inbox/admin')"
                         v-if="role.admin"
                     >
-                        <!-- <b-icon
-                            icon="message-outline"
-                            type="is-primary"
-                            v-if="role.admin"
-                            >mdi-message</b-icon
-                        > -->
                         Inbox
                     </div>
                 </div>
@@ -76,6 +72,50 @@
                     </a>
                 </div>
             </b-navbar-item>
+        </template> -->
+
+        <!-- FIXME -->
+        <template #end>
+            <b-navbar-item @click="openCart">
+                <div>
+                    <div>Cart</div>
+                </div>
+            </b-navbar-item>
+
+            <b-navbar-dropdown label="Info">
+                <div v-for="(item, index) in nav" :key="index">
+                    <b-navbar-item @click="dropDown(item)">{{
+                        item.title
+                    }}</b-navbar-item>
+                </div>
+                <b-navbar-item
+                    @click="$router.push(`/inbox/${user.uid}`)"
+                    v-if="role.customer"
+                    >Inbox</b-navbar-item
+                >
+                <b-navbar-item
+                    @click="$router.push('/inbox/admin')"
+                    v-if="role.admin"
+                    >Inbox</b-navbar-item
+                >
+            </b-navbar-dropdown>
+
+            <!-- <b-navbar-item>
+                <div>
+                    <a @click="signin" class="button is-light"> Log in </a>
+                </div>
+                <div>
+                    <a @click="signup" class="button is-primary">
+                        <strong>Sign up</strong>
+                    </a>
+                    <a
+                        @click="$router.push('/signup-admin')"
+                        class="button is-primary"
+                    >
+                        <strong>Admin</strong>
+                    </a>
+                </div>
+            </b-navbar-item> -->
         </template>
     </b-navbar>
 </template>
@@ -113,16 +153,13 @@ export default {
             ],
             nav: [
                 {
-                    title: 'Settings',
-                    icon: 'mdi-cog'
+                    title: 'Settings'
                 },
                 {
-                    title: 'Bookmarks',
-                    icon: 'mdi-heart-outline'
+                    title: 'Bookmarks'
                 },
                 {
-                    title: 'Logout',
-                    icon: 'mdi-logout-variant'
+                    title: 'Logout'
                 }
             ]
         };

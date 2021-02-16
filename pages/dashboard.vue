@@ -57,7 +57,7 @@
                         <h2 class="subtitle">
                             Create and edit business operating hours
                         </h2>
-                        <EventCalendar />
+                        <!-- <EventCalendar /> -->
                     </div>
                     <!-- Vue-cal End -->
 
