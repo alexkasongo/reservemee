@@ -40,6 +40,7 @@
             </div> -->
         </section>
 
+        <!-- TODO add snackbar -->
         <!-- SNACKBAR -->
         <!-- <v-snackbar
                 top
@@ -447,7 +448,6 @@ export default {
         },
         warning() {
             if (this.snackbar) {
-                console.log(`default.vue - 432 - 🥎`, this.snackbar);
                 // this.$buefy.snackbar.open({
                 //     message:
                 //         'Yellow button and positioned on top, click to close',
