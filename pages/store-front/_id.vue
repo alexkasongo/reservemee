@@ -232,9 +232,7 @@
 </template>
 
 <script>
-// import * as firebase from 'firebase/app';
 import 'firebase/database';
-// import { db } from '@/plugins/firebase';
 import { mapActions, mapGetters, mapState } from 'vuex';
 import Messages from '@/components/chat/Messages';
 import QuickBook from '@/components/cart/QuickBook';
@@ -391,28 +389,6 @@ export default {
             // this.setBookingState('');
             this.isActive = false;
             this.setBookingState('');
-        },
-        quickBook(service) {
-            this.selectedService = service;
-            this.isCardModalActive = true;
-            // if (this.bookingState !== null) {
-            //     const event = this.bookingState;
-            //     const service = this.service;
-            //     const note = this.note;
-            //     const id = this.ServiceId;
-
-            //     const order = {
-            //         id,
-            //         event,
-            //         service,
-            //         note
-            //     };
-            //     this.addToCartAction(order);
-            //     this.dialog = false;
-            //     this.alert = '';
-            // } else {
-            //     this.alert = 'Please select a date and time.';
-            // }
         }
     },
     mounted() {
