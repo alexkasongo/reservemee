@@ -1,130 +1,6 @@
 <template>
     <div class="service">
-        <!-- <v-data-table
-            :headers="headers"
-            :items="categories"
-            :items-per-page="5"
-            sort-by="calories"
-            class="elevation-1"
-        >
-            <template v-slot:top>
-                <v-toolbar flat>
-                    <v-toolbar-title>My Categories</v-toolbar-title>
-                    <v-divider class="mx-4" inset vertical></v-divider>
-                    
-                    <div v-model="dialog" max-width="500px">
-                        <template v-slot:activator="{ on, attrs }">
-                            <div
-                                dark
-                                class="teal darken-1 mb-2"
-                                v-bind="attrs"
-                                v-on="on"
-                            >
-                                New Category
-                            </div>
-                        </template>
-
-
-                        <div>
-                            <div-title>
-                                <span class="headline">{{ formTitle }}</span>
-                            </div-title>
-
-                            <div-text>
-                                <v-container>
-                                    <v-row>
-                                        <v-col cols="12">
-                                            <v-text-field
-                                                v-model="editedItem.name"
-                                                label="Category name"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12">
-                                            <v-textarea
-                                                v-model="editedItem.description"
-                                                label="Description"
-                                            ></v-textarea>
-                                        </v-col>
-                                    </v-row>
-                                </v-container>
-                            </div-text>
-
-                            <div>
-                                
-                                <div
-                                    color="teal darken-1"
-                                    text
-                                    @click="close"
-                                >
-                                    Cancel
-                                </div>
-                                <div
-                                    v-if="formTitle === 'New Category'"
-                                    color="teal darken-1"
-                                    text
-                                    @click="save"
-                                >
-                                    Create
-                                </div>
-                                <div
-                                    v-else
-                                    color="teal darken-1"
-                                    text
-                                    @click="update"
-                                >
-                                    Update
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div v-model="dialogDelete" max-width="500px">
-                        <div>
-                            <div-title class="headline"
-                                >Are you sure you want to delete this
-                                item?</div-title
-                            >
-                            <div>
-                                
-                                <div
-                                    color="teal darken-1"
-                                    text
-                                    @click="closeDelete"
-                                    >Cancel</div
-                                >
-                                <div
-                                    color="teal darken-1"
-                                    text
-                                    @click="deleteItemConfirm"
-                                    >OK</div
-                                >
-                                
-                            </div>
-                        </div>
-                    </div>
-                </v-toolbar>
-            </template>
-            <template v-slot:[`item.actions`]="{ item }">
-                <v-icon small class="mr-2" @click="editItem(item)">
-                    mdi-pencil
-                </v-icon>
-                <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
-            </template>
-            <template v-slot:[`item.services`]="{ item }">
-                <div
-                    elevation="0"
-                    small
-                    class="mr-2"
-                    @click="goToService(item.name)"
-                >
-                    View Services
-                </div>
-            </template>
-        </v-data-table> -->
-
         <!-- BEUFY -->
-
         <section class="service__border">
             <b-field>
                 <b-button @click="onCreateCategory" class="is-primary mb-5"
@@ -304,7 +180,6 @@ export default {
         onCreateCategory() {
             console.log(`ManageServices.vue - 316 - ✅`, this.formTitle);
             this.isCardModalActive = true;
-            // this.$router.push('/service/create-category');
         },
         goToService(service) {
             this.$router.push({
@@ -356,8 +231,6 @@ export default {
         },
 
         deleteItem(item) {
-            // this.item = item;
-            // this.dialogDelete = true;
             this.deleteItemConfirm(item);
         },
 
@@ -399,7 +272,7 @@ export default {
         },
 
         async save() {
-            // category with dashes
+            // format categories
             let res = this.editedItem.name.replace(/\s+/g, '-').toLowerCase();
 
             let data = {
@@ -408,7 +281,6 @@ export default {
                 userId: this.user.uid
             };
             await this.createCategory(data);
-            // this.loadCategories();
             this.close();
         },
         async update() {
