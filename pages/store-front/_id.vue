@@ -235,13 +235,11 @@
 import 'firebase/database';
 import { mapActions, mapGetters, mapState } from 'vuex';
 import Messages from '@/components/chat/Messages';
-import QuickBook from '@/components/cart/QuickBook';
 import { ToastProgrammatic as Toast } from 'buefy';
 
 export default {
     components: {
-        Messages,
-        QuickBook
+        Messages
     },
     data: () => ({
         storeServices: [],
