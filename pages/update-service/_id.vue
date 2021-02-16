@@ -201,7 +201,6 @@ export default {
         // UPLOAD IMAGE END
     },
     async mounted() {
-        // this.serviceImageDisplay = 'none';
         /*
          ** Pre-populate form
          */
@@ -211,23 +210,9 @@ export default {
         this.price = this.serviceUpdateInfo.price;
         this.serviceImage = this.serviceUpdateInfo.serviceImage;
 
-        // try {
-        //     for (let key in this.categories) {
-        //         this.categoryNames.push(this.categories[key].name);
-        //     }
-        // } catch (error) {
-        //     this.errors = error;
-        // } finally {
-        //     console.log(`_id.vue - 219 - 🔥`);
-        // }
-
         for (let key in this.categories) {
             this.categoryNames.push(this.categories[key].name);
         }
-        // const loadCats = await (() => {
-        // });
-
-        // loadCats();
     }
 };
 </script>
