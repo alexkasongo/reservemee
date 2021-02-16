@@ -53,7 +53,20 @@ module.exports = {
      ** Auto import components
      ** See https://nuxtjs.org/api/configuration-components
      */
-    components: true,
+    components: {
+        dirs: [
+            '~/components',
+            {
+                path: '~/components/dashboard/'
+            },
+            {
+                path: '~/components/profile/'
+            },
+            {
+                path: '~/components/chat/'
+            }
+        ]
+    },
     /*
      ** Nuxt.js dev-modules
      */

@@ -47,32 +47,6 @@
                 Change
             </b-button>
         </div>
-
-        <!-- <v-form class="mt-5">
-            <div class="form-group mb-0">
-                <label class="d-block">Sessions</label>
-                <p class="font-size-sm text-secondary">
-                    This is a list of devices that have logged into your
-                    account. Revoke any sessions that you do not recognize.
-                </p>
-                <ul class="list-group list-group-sm">
-                    <li class="list-group-item has-icon">
-                        <div>
-                            <h6 class="mb-0">
-                                San Francisco City 190.24.335.55
-                            </h6>
-                            <small class="text-muted"
-                                >Your current session seen in United
-                                States</small
-                            >
-                        </div>
-                        <div class="btn btn-light btn-sm ml-auto" type="button">
-                            More info
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </v-form> -->
     </div>
     <!-- SECURITY SETTINGS END -->
 </template>
@@ -90,11 +64,11 @@ export default {
             user: [],
             alert: [],
             errors: [],
-            logoDisplay: [],
-            newPassword: [],
-            loggedInUser: [],
-            currentPassword: [],
-            confirmNewPassword: [],
+            logoDisplay: null,
+            newPassword: null,
+            loggedInUser: null,
+            currentPassword: null,
+            confirmNewPassword: null,
             currentUser: {
                 name: []
             }
