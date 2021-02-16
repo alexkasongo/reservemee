@@ -1,5 +1,5 @@
 <template>
-    <b-navbar>
+    <b-navbar class="container">
         <template #brand>
             <b-navbar-item @click="$router.push('/')">
                 <img @click="goHome(user)" :src="logo" alt="Reservemee logo" />

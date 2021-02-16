@@ -1,78 +1,80 @@
 <template>
-    <div v-if="user" class="dashboard container">
-        <!-- Header -->
-        <div>
-            <Header />
-        </div>
-        <!-- Header End-->
-
-        <div class="columns pl-3 mt-5">
-            <div
-                class="dashboard__bg column is-full-mobile is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd"
-            >
-                <!-- Personal-Information -->
-                <div class="mb-5">
-                    <BusinessInfo />
-                </div>
-                <!-- Personal-Information -->
-                <div v-if="user">
-                    <h5
-                        v-if="categories.length <= 0 || !user.emailVerified"
-                        class="title is-5 mt-10 mb-5"
-                    >
-                        Todos
-                    </h5>
-                </div>
-                <div v-if="user">
-                    <div v-if="categories.length <= 0" class="mb-5">
-                        <!-- CategoryCheck -->
-                        <CategoryCheck />
-                        <!-- CategoryCheck -->
-                    </div>
-                    <div v-if="!user.emailVerified" class="mb-5">
-                        <!-- EmailVerified -->
-                        <EmailVerified />
-                        <!-- EmailVerified -->
-                    </div>
-                </div>
-
-                <div>
-                    <h5 class="title is-5 mt-10 mb-5">Messages</h5>
-                    <!-- Messages -->
-                    <StoreMessages />
-                    <!-- Messages -->
-                </div>
+    <div class="dashboard">
+        <div v-if="user">
+            <!-- Header -->
+            <div>
+                <!-- <Header /> -->
             </div>
-            <div class="column">
-                <!-- StoreSummary -->
-                <div class="mb-5">
-                    <StoreSummary />
+            <!-- Header End-->
+
+            <div class="columns pl-3 mt-5">
+                <div
+                    class="dashboard__bg column is-full-mobile is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd"
+                >
+                    <!-- Personal-Information -->
+                    <div class="mb-5">
+                        <!-- <BusinessInfo /> -->
+                    </div>
+                    <!-- Personal-Information -->
+                    <div v-if="user">
+                        <h5
+                            v-if="categories.length <= 0 || !user.emailVerified"
+                            class="title is-5 mt-10 mb-5"
+                        >
+                            Todos
+                        </h5>
+                    </div>
+                    <div v-if="user">
+                        <div v-if="categories.length <= 0" class="mb-5">
+                            <!-- CategoryCheck -->
+                            <!-- <CategoryCheck /> -->
+                            <!-- CategoryCheck -->
+                        </div>
+                        <div v-if="!user.emailVerified" class="mb-5">
+                            <!-- EmailVerified -->
+                            <!-- <EmailVerified /> -->
+                            <!-- EmailVerified -->
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5 class="title is-5 mt-10 mb-5">Messages</h5>
+                        <!-- Messages -->
+                        <!-- <StoreMessages /> -->
+                        <!-- Messages -->
+                    </div>
                 </div>
-                <!-- StoreSummary -->
+                <div class="column">
+                    <!-- StoreSummary -->
+                    <div class="mb-5">
+                        <!-- <StoreSummary /> -->
+                    </div>
+                    <!-- StoreSummary -->
 
-                <!-- Vue-cal -->
-                <div>
-                    <h1 class="title mt-5 mb-5">Business Hours</h1>
-                    <h2 class="subtitle">
-                        Create and edit business operating hours
-                    </h2>
-                    <EventCalendar />
-                </div>
-                <!-- Vue-cal End -->
+                    <!-- Vue-cal -->
+                    <div>
+                        <h1 class="title mt-5 mb-5">Business Hours</h1>
+                        <h2 class="subtitle">
+                            Create and edit business operating hours
+                        </h2>
+                        <EventCalendar />
+                    </div>
+                    <!-- Vue-cal End -->
 
-                <div>
-                    <h1 class="title mt-5 mb-5">Services</h1>
-                    <h2 class="subtitle">
-                        Create and edit categories and view services for each
-                        category
-                    </h2>
-                    <!-- ManageServices -->
-                    <ManageServices v-if="categories.length !== 0" />
-                    <!-- ManageServices -->
+                    <div>
+                        <h1 class="title mt-5 mb-5">Services</h1>
+                        <h2 class="subtitle">
+                            Create and edit categories and view services for
+                            each category
+                        </h2>
+                        <!-- ManageServices -->
+                        <!-- <ManageServices v-if="categories.length !== 0" /> -->
+                        <!-- ManageServices -->
 
-                    <!-- ManageServices -->
-                    <!-- <ManageServices v-else /> -->
-                    <!-- ManageServices -->
+                        <!-- ManageServices -->
+                        <!-- <ManageServices v-else /> -->
+                        <!-- ManageServices -->
+                    </div>
                 </div>
             </div>
         </div>

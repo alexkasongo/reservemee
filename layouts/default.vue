@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <Navbar />
         <section>
             <b-sidebar
@@ -58,7 +58,7 @@
             </v-snackbar> -->
         <!-- SNACKBAR -->
 
-        <div>
+        <div class="container">
             <Nuxt />
         </div>
     </div>
