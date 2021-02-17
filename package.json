@@ -20,6 +20,7 @@
         "@nuxtjs/ngrok": "^2.0.0",
         "@nuxtjs/pwa": "^3.0.2",
         "axios": "^0.20.0",
+        "core-js": "^2.6.12",
         "firebase": "^7.21.1",
         "firebase-admin": "^9.4.1",
         "firebase-functions": "^3.11.0",
