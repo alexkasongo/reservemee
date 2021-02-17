@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section class="mb-5">
+        <!-- <section class="mb-5">
             <b-button
                 label="Instructions"
                 :disabled="isActive"
@@ -31,7 +31,7 @@
                     </li>
                 </ul>
             </b-notification>
-        </section>
+        </section> -->
 
         <vue-cal
             style="height: 650px"
@@ -56,7 +56,7 @@
         >
         </vue-cal>
 
-        <section>
+        <!-- <section>
             <b-modal
                 v-model="isCardModalActive"
                 :width="960"
@@ -68,7 +68,6 @@
             >
                 <section class="card">
                     <div class="field card-content dialog">
-                        <!-- <section class="columns"> -->
                         <div class="mb-5">
                             <b-field label="Select start datetime">
                                 <b-datetimepicker
@@ -126,7 +125,7 @@
                     </div>
                 </section>
             </b-modal>
-        </section>
+        </section> -->
     </div>
 </template>
 
@@ -547,6 +546,9 @@ export default {
         }
     },
     mounted() {
+        if (process.client) {
+            const VueCal = () => import('vue-cal');
+        }
         this.getEvents(this.user.uid);
     }
 };

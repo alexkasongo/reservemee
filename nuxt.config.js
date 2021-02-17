@@ -41,7 +41,7 @@ module.exports = {
         '~/plugins/firebase.js',
         '~plugins/filters.js',
         { src: '~/plugins/localStorage.js', ssr: false },
-        { src: '~plugins/vue-cal.js', ssr: false }
+        { src: '~plugins/vue-cal.client.js' }
     ],
     /*
      ** Router Settings
