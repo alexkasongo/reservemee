@@ -78,25 +78,31 @@ export default {
     },
     mounted() {
         // REVIEW
-        // if the update form exists in local storage, do nothing
-        if (localStorage.getItem('categoryForm')) {
-            // get the information in local storage
+        if (process.browser) {
+            if (localStorage.getItem('categoryForm')) {
+                // get the information in local storage
+                let storedForm = JSON.parse(
+                    localStorage.getItem('categoryForm')
+                );
+            } else {
+                localStorage.setItem(
+                    'categoryForm',
+                    JSON.stringify(this.filteredCategories)
+                );
+            }
+
             let storedForm = JSON.parse(localStorage.getItem('categoryForm'));
-        } else {
-            localStorage.setItem(
-                'categoryForm',
-                JSON.stringify(this.filteredCategories)
-            );
+
+            // set the values in the form. Values should remain in the form on page reload
+            this.category = storedForm.name;
+            this.description = storedForm.description;
+            // if the update form exists in local storage, do nothing
         }
-
-        let storedForm = JSON.parse(localStorage.getItem('categoryForm'));
-
-        // set the values in the form. Values should remain in the form on page reload
-        this.category = storedForm.name;
-        this.description = storedForm.description;
     },
     destroyed() {
-        localStorage.removeItem('categoryForm');
+        if (process.browser) {
+            localStorage.removeItem('categoryForm');
+        }
     }
 };
 </script>

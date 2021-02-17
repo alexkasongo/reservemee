@@ -3,72 +3,78 @@
         <div v-if="loading">
             <p>loading...</p>
         </div>
-        <div class="display-1" v-if="!loading">
+        <h1 class="title" v-if="!loading">
             {{ this.$route.params.id | capitalize }} Services
-        </div>
+        </h1>
+        <h2 class="subtitle">View, edit and create services</h2>
 
         <!-- SERVICE CARD -->
-        <v-row class="services__left pt-5">
-            <v-col
-                v-for="service in filteredServices"
-                :key="service.id"
-                class="col-md-6"
-            >
-                <v-card class="rounded-xl" :ripple="false">
-                    <div
-                        class="services__left-card d-flex flex-no-wrap justify-space-between"
-                    >
-                        <div class="services__left-card-img-container">
-                            <img
-                                class="services__left-service-img"
-                                :src="service.serviceImage"
-                                alt=""
-                            />
+        <!-- Beufy -->
+        <section>
+            <div v-for="service in filteredServices" :key="service.id">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-48x48">
+                                    <img
+                                        :src="service.serviceImage"
+                                        alt="Placeholder image"
+                                    />
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">{{ service.name }}</p>
+                            </div>
                         </div>
-                        <div class="services__left-card-info">
-                            <v-card-title
-                                class="headline"
-                                v-text="service.name"
-                            ></v-card-title>
 
-                            <v-card-subtitle
-                                v-text="service.description"
-                            ></v-card-subtitle>
-
-                            <v-card-text
-                                class="display-1 text--primary services__left-card-price"
-                            >
-                                ${{ service.price }}
-                            </v-card-text>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-
-                                <v-btn
-                                    :class="fav ? 'red--text' : ''"
-                                    icon
-                                    @click="fav = !fav"
-                                >
-                                    <v-icon>mdi-heart</v-icon>
-                                </v-btn>
-
-                                <v-btn @click="updService(service.id)" icon>
-                                    <v-icon>mdi-pencil-box</v-icon>
-                                </v-btn>
-
-                                <v-btn @click="removeService(service.id)" icon>
-                                    <v-icon>mdi-delete</v-icon>
-                                </v-btn>
-                            </v-card-actions>
+                        <div class="content">
+                            <div class="columns">
+                                <div class="column">
+                                    {{ service.description }}
+                                </div>
+                                <div class="column">
+                                    <div
+                                        class="block is-flex is-justify-content-flex-end"
+                                    >
+                                        <div>
+                                            <b-icon
+                                                style="cursor: pointer"
+                                                icon="heart"
+                                            ></b-icon>
+                                            <span
+                                                @click="updService(service.id)"
+                                            >
+                                                <b-icon
+                                                    style="cursor: pointer"
+                                                    icon="pencil"
+                                                ></b-icon>
+                                            </span>
+                                            <span
+                                                @click="
+                                                    removeService(service.id)
+                                                "
+                                            >
+                                                <b-icon
+                                                    style="cursor: pointer"
+                                                    icon="delete"
+                                                ></b-icon>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </v-card>
-            </v-col>
-        </v-row>
+                </div>
+            </div>
+        </section>
+        <!-- Beufy End -->
         <!-- SERVICE CARD END-->
-        <div class="col-md-6">
-            <v-btn @click="onCreate" type="button" color="teal darken-1" dark>
+        <div class="buttons">
+            <b-button @click="onCreate" class="is-primary">
                 Create New Service
-            </v-btn>
+            </b-button>
         </div>
     </div>
 </template>

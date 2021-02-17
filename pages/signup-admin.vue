@@ -1,77 +1,59 @@
 <template>
     <div>
-        <!-- <div v-if="loading">
-            <p>Loading...</p>
-        </div> -->
         <div class="signup">
             <div class="signup__left"></div>
             <div class="signup__right">
-                <div class="signin__right-card">
-                    <div class="h1">Admin Signup</div>
-                    <validation-observer ref="observer" v-slot="{ invalid }">
-                        <form @submit.prevent="onSubmit">
-                            <!-- Name -->
-                            <validation-provider
-                                v-slot="{ errors }"
-                                name="Name"
-                                rules="required|max:10"
+                <div class="signup__right-card">
+                    <form @keyup.enter="onSubmit">
+                        <b-field>
+                            <b-input
+                                placeholder="Name"
+                                v-model="name"
+                                type="text"
+                                maxlength="30"
+                                icon="account"
                             >
-                                <v-text-field
-                                    v-model="name"
-                                    :counter="10"
-                                    :error-messages="errors"
-                                    label="Name"
-                                    required
-                                ></v-text-field>
-                            </validation-provider>
-                            <!-- Name End -->
-                            <!-- Email -->
-                            <validation-provider
-                                v-slot="{ errors }"
-                                name="email"
-                                rules="required|email"
+                            </b-input>
+                        </b-field>
+
+                        <b-field>
+                            <b-input
+                                placeholder="Email"
+                                v-model="email"
+                                type="email"
+                                maxlength="30"
+                                icon="email"
+                                icon-right="close-circle"
+                                icon-right-clickable
+                                @icon-right-click="clearIconClick"
                             >
-                                <v-text-field
-                                    v-model="email"
-                                    :error-messages="errors"
-                                    label="E-mail"
-                                    required
-                                ></v-text-field>
-                            </validation-provider>
-                            <!-- Email End -->
-                            <!-- Password -->
-                            <validation-provider
-                                v-slot="{ errors }"
-                                name="Password"
-                                rules="required|max:10"
+                            </b-input>
+                        </b-field>
+
+                        <b-field>
+                            <b-input
+                                placeholder="Password"
+                                type="password"
+                                v-model="password"
+                                password-reveal
+                                icon="lock"
                             >
-                                <v-text-field
-                                    type="password"
-                                    v-model="password"
-                                    :counter="10"
-                                    :error-messages="errors"
-                                    label="Password"
-                                    required
-                                ></v-text-field>
-                            </validation-provider>
-                            <!-- Password End -->
-                            <!-- ERRORS -->
-                            <div v-if="errors" class="form-group text-muted">
-                                {{ errors.message }}
-                            </div>
-                            <!-- ERRORS END -->
-                            <!-- Submit Button -->
-                            <v-btn
-                                class="mr-4"
-                                type="submit"
+                            </b-input>
+                        </b-field>
+                        <b-field v-if="error">
+                            <p>{{ this.error }}</p>
+                        </b-field>
+                        <b-field class="buttons">
+                            <b-button
                                 :loading="loading"
-                                :disabled="invalid"
+                                type="submit"
+                                class="button is-primary"
+                                @click="onSubmit"
+                                expanded
+                                >signup</b-button
                             >
-                                submit
-                            </v-btn>
-                            <v-btn @click="clear"> clear </v-btn>
-                        </form>
-                    </validation-observer>
+                        </b-field>
+                    </form>
                 </div>
             </div>
         </div>
@@ -80,46 +62,14 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import { required, email, max } from 'vee-validate/dist/rules';
-import {
-    extend,
-    ValidationObserver,
-    ValidationProvider,
-    setInteractionMode
-} from 'vee-validate';
-
-/*
- ** Vee Validate
- */
-setInteractionMode('eager');
-
-extend('required', {
-    ...required,
-    message: '{_field_} can not be empty'
-});
-
-extend('max', {
-    ...max,
-    message: '{_field_} may not be greater than {length} characters'
-});
-
-extend('email', {
-    ...email,
-    message: 'Email must be valid'
-});
-// Vee Validate End
-
 export default {
-    components: {
-        ValidationProvider,
-        ValidationObserver
-    },
     data() {
         return {
             name: '',
             phone: '',
             email: '',
-            password: ''
+            password: '',
+            error: ''
         };
     },
     computed: {
@@ -131,6 +81,10 @@ export default {
     methods: {
         ...mapActions(['signupAdmin']),
         onSubmit() {
+            if (this.name === '' || this.email === '' || this.password === '') {
+                this.error = 'you must enter both email and password.';
+                return;
+            }
             let signupDetails = {
                 name: this.name,
                 email: this.email,
@@ -141,21 +95,14 @@ export default {
             };
             this.signupAdmin(signupDetails);
         },
-        // Vee Validate
-        submit() {
-            this.$refs.observer.validate();
-        },
-        clear() {
-            this.name = '';
+        clearIconClick() {
             this.email = '';
-            this.select = null;
-            this.checkbox = null;
-            this.$refs.observer.reset();
         }
-        // Vee Validate End
     },
     mounted() {
-        this.email = localStorage.getItem('email');
+        if (process.browser) {
+            this.email = localStorage.getItem('email');
+        }
     }
 };
 </script>

@@ -1,6 +1,9 @@
 .cart-width {
     width: 100% !important;
     @media (min-width: $tablet) {
-       width: 600px !important;
+        width: 600px !important;
     }
+}
+.is-fixed {
+    width: 600px !important;
 }

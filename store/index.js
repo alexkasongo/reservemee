@@ -260,7 +260,7 @@ export const actions = {
                     const role = db.collection('roles').doc(uid);
                     const doc = await role.get();
                     if (!doc.exists) {
-                        return
+                        return;
                     } else {
                         const data = doc.data();
                         if (data.role.customer) {

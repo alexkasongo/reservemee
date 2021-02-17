@@ -1,80 +1,52 @@
 <template>
     <!-- SECURITY SETTINGS -->
-    <div class="tab-pane" id="security">
-        <div class="display-1 mb-5">SECURITY SETTINGS</div>
-
-        <v-form>
-            <div>
-                <!-- <label class="d-block">Change Password</label> -->
-                <v-text-field
+    <div>
+        <h3 class="subtitle is-3 mb-5">SECURITY SETTINGS</h3>
+        <hr />
+        <div>
+            <b-field label="Change Password">
+                <b-input
                     outlined
-                    label="Change Password"
                     type="password"
                     class="form-control"
                     v-model="currentPassword"
                     required
-                ></v-text-field>
-                <div v-if="errors" class="form-group text-muted">
-                    {{ errors.message }}
-                </div>
-                <v-text-field
+                ></b-input>
+            </b-field>
+            <div v-if="errors" class="form-group text-muted">
+                {{ errors.message }}
+            </div>
+            <b-field label="New password">
+                <b-input
                     outlined
-                    label="New password"
                     type="password"
                     class="form-control mt-1"
                     v-model="newPassword"
                     required
-                ></v-text-field>
-                <v-text-field
+                ></b-input>
+            </b-field>
+            <b-field label="Confirm new password">
+                <b-input
                     outlined
-                    label="Confirm new password"
                     type="password"
                     class="form-control mt-1 mb-4"
                     v-model="confirmNewPassword"
                     required
-                ></v-text-field>
-                <div v-if="errors" class="form-group text-muted">
-                    {{ errors.message }}
-                </div>
-                <v-btn
-                    @click="changePassword"
-                    color="red darken-1"
-                    type="button"
-                    dark
-                >
-                    Change
-                </v-btn>
-            </div>
-        </v-form>
+                ></b-input>
+            </b-field>
 
-        <v-form class="mt-5">
-            <div class="form-group mb-0">
-                <label class="d-block">Sessions</label>
-                <p class="font-size-sm text-secondary">
-                    This is a list of devices that have logged into your
-                    account. Revoke any sessions that you do not recognize.
-                </p>
-                <ul class="list-group list-group-sm">
-                    <li class="list-group-item has-icon">
-                        <div>
-                            <h6 class="mb-0">
-                                San Francisco City 190.24.335.55
-                            </h6>
-                            <small class="text-muted"
-                                >Your current session seen in United
-                                States</small
-                            >
-                        </div>
-                        <v-btn
-                            class="btn btn-light btn-sm ml-auto"
-                            type="button"
-                        >
-                            More info
-                        </v-btn>
-                    </li>
-                </ul>
+            <div v-if="errors" class="form-group text-muted">
+                {{ errors.message }}
             </div>
-        </v-form>
+            <b-button
+                @click="changePassword"
+                type="is-primary"
+                class="mb-5"
+                expanded
+            >
+                Change
+            </b-button>
+        </div>
     </div>
     <!-- SECURITY SETTINGS END -->
 </template>
@@ -92,11 +64,11 @@ export default {
             user: [],
             alert: [],
             errors: [],
-            logoDisplay: [],
-            newPassword: [],
-            loggedInUser: [],
-            currentPassword: [],
-            confirmNewPassword: [],
+            logoDisplay: null,
+            newPassword: null,
+            loggedInUser: null,
+            currentPassword: null,
+            confirmNewPassword: null,
             currentUser: {
                 name: []
             }
@@ -129,8 +101,9 @@ export default {
                 .signOut()
                 .then(() => {
                     this.user = '';
-                    window.localStorage.removeItem('email');
-                    window.localStorage.removeItem('vuex');
+                    if (process.browser) {
+                        localStorage.removeItem('vuex');
+                    }
                 });
             this.$router.push('/signin');
         },

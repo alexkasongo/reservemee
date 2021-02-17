@@ -1,91 +1,92 @@
 <template>
-    <div>
-        <Navbar />
-        <section>
-            <b-sidebar
-                type="is-light"
-                :fullheight="fullheight"
-                :fullwidth="fullwidth"
-                :overlay="overlay"
-                :right="right"
-                v-model="open"
-                :on-cancel="closeCart"
-            >
-                <div class="cart-sidebar">
-                    <!-- <img :src="logo" alt="Reservemee logo" /> -->
-                    <Cart />
+    <b-navbar class="container">
+        <template #brand>
+            <b-navbar-item @click="$router.push('/')">
+                <img @click="goHome(user)" :src="logo" alt="Reservemee logo" />
+            </b-navbar-item>
+        </template>
+
+        <template #start>
+            <b-navbar-item @click="$router.push('/store')">
+                Store
+            </b-navbar-item>
+            <b-navbar-item v-if="user" @click="goHome(user)">
+                Dasboard
+            </b-navbar-item>
+        </template>
+
+        <template #end>
+            <b-navbar-item v-if="user" @click="openCart">
+                <div>Cart</div>
+            </b-navbar-item>
+
+            <b-navbar-dropdown label="Info">
+                <b-navbar-item
+                    @click="$router.push(`/inbox/${user.uid}`)"
+                    v-if="user && role.customer"
+                    >Inbox</b-navbar-item
+                >
+                <b-navbar-item
+                    @click="$router.push('/inbox/admin')"
+                    v-if="user && role.admin"
+                    >Inbox</b-navbar-item
+                >
+                <div v-for="(item, index) in nav" :key="index">
+                    <b-navbar-item v-if="user" @click="dropDown(item)">{{
+                        item.title
+                    }}</b-navbar-item>
                 </div>
-            </b-sidebar>
-            <!-- TODO move to settings -->
-            <!-- <div class="block">
-                <b-field grouped group-multiline>
-                    <div class="control">
-                        <b-switch v-model="overlay">Overlay</b-switch>
-                    </div>
-                    <div class="control">
-                        <b-switch v-model="fullheight">Fullheight</b-switch>
-                    </div>
-                    <div class="control">
-                        <b-switch v-model="fullwidth">Fullwidth</b-switch>
-                    </div>
-                    <div class="control">
-                        <b-switch v-model="right">Right</b-switch>
-                    </div>
-                </b-field>
-            </div> -->
-        </section>
 
-        <!-- TODO add snackbar -->
-        <!-- SNACKBAR -->
-        <!-- <v-snackbar
-                top
-                v-model="snackbar"
-                :timeout="timeout"
-                :multi-line="multiLine"
-            >
-                {{ text }}
-
-                <template v-slot:action="{ attrs }">
-                    <div
-                        color="teal darker-1"
-                        text
-                        v-bind="attrs"
-                        @click="snackbar = false"
-                    >
-                        Close
-                    </div>
-                </template>
-            </v-snackbar> -->
-        <!-- SNACKBAR -->
-
-        <div class="container">
-            <Nuxt />
-        </div>
-    </div>
+                <b-navbar-item v-if="!user" @click="signin">
+                    Signin
+                </b-navbar-item>
+            </b-navbar-dropdown>
+        </template>
+    </b-navbar>
 </template>
 
 <script>
+import logo from 'assets/images/logo.png';
+
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { db } from '@/plugins/firebase';
-import logo from 'assets/images/logo.png';
 
 import { mapState, mapGetters, mapActions } from 'vuex';
-import Navbar from '~/components/ui/Navbar.vue';
 
 export default {
-    components: { Navbar },
-    head: {},
+    name: 'Navbar',
     data() {
         return {
             logo: logo,
             user: '',
             role: '',
-            open: false,
-            overlay: false,
-            fullheight: true,
-            fullwidth: false,
-            right: true
+            drawer: false,
+            drawerRight: false,
+            drawerDown: false,
+            group: null,
+            groupRight: null,
+            multiLine: true,
+            text: 'Success.',
+            timeout: 3000,
+            notifications: [
+                { message: 'Noticfication example one' },
+                { message: 'Noticfication example two' },
+                { message: 'Noticfication example three' },
+                { message: 'Noticfication example four' },
+                { message: 'Noticfication example five' }
+            ],
+            nav: [
+                {
+                    title: 'Settings'
+                },
+                {
+                    title: 'Bookmarks'
+                },
+                {
+                    title: 'Logout'
+                }
+            ]
         };
     },
     computed: {
@@ -94,7 +95,7 @@ export default {
             userId: 'userId'
         }),
         ...mapState({
-            loaders: 'loaders',
+            snackbarState: 'loaders',
             cart: 'cart'
         }),
         orders: {
@@ -120,38 +121,11 @@ export default {
         },
         snackbar: {
             get() {
-                return this.loaders.snackbar;
+                return this.snackbarState.snackbar;
             },
             set() {
                 return this.setSnackbar(false);
             }
-        },
-        cartState() {
-            // const data = this.loaders.cartState
-            return this.loaders.cartState;
-        },
-        warning() {
-            if (this.snackbar) {
-                // this.$buefy.snackbar.open({
-                //     message:
-                //         'Yellow button and positioned on top, click to close',
-                //     type: 'is-warning',
-                //     position: 'is-top',
-                //     actionText: 'Retry',
-                //     indefinite: true,
-                //     onAction: () => {
-                //         this.$buefy.toast.open({
-                //             message: 'Action pressed',
-                //             queue: false
-                //         });
-                //     }
-                // });
-            }
-        }
-    },
-    watch: {
-        cartState() {
-            this.open = this.cartState;
         }
     },
     methods: {
@@ -168,8 +142,19 @@ export default {
             orders: null,
             setCartState: 'loaders/setCartState'
         }),
-        closeCart() {
-            this.setCartState(false);
+        openCart() {
+            this.setCartState(true);
+        },
+        clickToggleDrawer() {
+            this.drawerDown = !this.drawerDown;
+        },
+        dropDown(item) {
+            if (item.title === 'Settings') {
+                this.$router.push('/settings');
+            }
+            if (item.title === 'Logout') {
+                this.signout();
+            }
         },
         signin() {
             this.$router.replace('/signin');
@@ -231,7 +216,7 @@ export default {
             // get logged in user role - end
         }
     },
-    mounted() {
+    created() {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.user = user;

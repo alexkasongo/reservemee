@@ -1,37 +1,40 @@
 <template>
     <div>
-        <!-- If Messages -->
-        <div class="mx-auto">
-            <!-- NEW MESSAGE -->
-            <div class="new-message">
-                <form @submit.prevent="addMessage()">
-                    <!-- <label for="new-message">New Message (enter to add):</label> -->
-                    <p class="red-text" v-if="feedback">{{ feedback }}</p>
-                    <v-textarea
-                        type="text"
-                        name="new-message"
-                        placeholder="type in a message and press enter"
-                        v-model="newMessage"
-                    ></v-textarea>
-                    <v-btn dark type="submit" class="teal darker-1"
-                        >Send Me</v-btn
-                    >
-                </form>
+        <client-only>
+            <!-- If Messages -->
+            <div>
+                <!-- NEW MESSAGE -->
+                <div class="new-message">
+                    <form @submit.prevent="addMessage()">
+                        <!-- <label for="new-message">New Message (enter to add):</label> -->
+                        <p class="red-text" v-if="feedback">{{ feedback }}</p>
+                        <v-textarea
+                            type="text"
+                            name="new-message"
+                            placeholder="type in a message and press enter"
+                            v-model="newMessage"
+                        ></v-textarea>
+                        <div dark type="submit" class="teal darker-1">
+                            Send Me
+                        </div>
+                    </form>
+                </div>
+                <!-- NEW MESSAGE END -->
             </div>
-            <!-- NEW MESSAGE END -->
-        </div>
 
-        <!--If Messages end-->
-        <v-list-item-content v-if="!messages">
-            <v-alert
-                style="cursor: pointer"
-                icon="mdi-alert-circle-outline"
-                text
-                type="info"
-                ><span> You have no messages. </span></v-alert
-            >
-        </v-list-item-content>
-        <!--If No Messages end-->
+            <!--If Messages end-->
+            <v-list-item-content v-if="!messages">
+                <div
+                    style="cursor: pointer"
+                    icon="mdi-alert-circle-outline"
+                    text
+                    type="info"
+                >
+                    <span> You have no messages. </span>
+                </div>
+            </v-list-item-content>
+            <!--If No Messages end-->
+        </client-only>
     </div>
 </template>
 

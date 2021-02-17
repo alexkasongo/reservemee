@@ -1,46 +1,45 @@
 <template>
     <div>
-        <!-- If Messages -->
-        <div class="mx-auto">
-            <div
-                class="inbox-widget"
-                v-for="message in messages.slice(0, 3)"
-                :key="message.id"
-            >
-                <div class="inbox-item">
-                    <div class="inbox-item__left">
-                        <div class="inbox-item-img">
-                            <img :src="message.storeOwnerImage" alt />
-                        </div>
-                        <div>
-                            <p class="inbox-item-author">
-                                {{ message.name }}
-                            </p>
-                            <p class="inbox-item-text">
-                                {{ message.message }}
-                            </p>
-                        </div>
+        <!-- FIXME -->
+        <!-- <div
+            class="inbox-widget"
+            v-for="message in messages.slice(0, 3)"
+            :key="message.id"
+        >
+            <div class="inbox-item">
+                <div class="inbox-item__left">
+                    <div class="inbox-item-img">
+                        <img :src="message.storeOwnerImage" alt />
+                    </div>
+                    <div>
+                        <p class="inbox-item-author">
+                            {{ message.name }}
+                        </p>
+                        <p class="inbox-item-text">
+                            {{ message.message }}
+                        </p>
                     </div>
                 </div>
             </div>
-            <v-btn
+        </div> -->
+        <client-only>
+            <b-button
+                type="is-primary"
+                expanded
                 v-if="messages.length > 0"
                 @click="$router.push('/inbox/admin')"
-                class="teal darken-1"
-                block
-                dark
-                >View All</v-btn
+                >View All</b-button
             >
-        </div>
-        <!--If Messages end-->
-
-        <!-- If No Messages -->
-        <v-list-item-content v-if="messages.length <= 0">
-            <v-alert icon="mdi-alert-circle-outline" text type="info"
-                ><span> You have no messages. </span></v-alert
-            >
-        </v-list-item-content>
-        <!--If No Messages end-->
+            <div v-if="messages.length <= 0">
+                <b-notification
+                    type="is-success is-light"
+                    aria-close-label="Close notification"
+                    :closable="false"
+                >
+                    You have no messages.
+                </b-notification>
+            </div>
+        </client-only>
     </div>
 </template>
 
@@ -80,8 +79,9 @@ export default {
         }
     },
     created() {
+        // if (process.client) {
+        // }
         this.$store.dispatch('chat/loadMessages', this.user.uid);
-
         // NEW MESSAGE
         this.uis = this.currentUserId;
         this.$store.dispatch('chat/loadMessages', this.user.uid);

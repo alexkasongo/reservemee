@@ -1,127 +1,140 @@
 <template>
-    <v-data-table
-        :headers="headers"
-        :items="categories"
-        :items-per-page="5"
-        sort-by="calories"
-        class="elevation-1"
-    >
-        <template v-slot:top>
-            <v-toolbar flat>
-                <v-toolbar-title>My Categories</v-toolbar-title>
-                <v-divider class="mx-4" inset vertical></v-divider>
-                <v-spacer></v-spacer>
-                <v-dialog v-model="dialog" max-width="500px">
-                    <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                            dark
-                            class="teal darken-1 mb-2"
-                            v-bind="attrs"
-                            v-on="on"
-                        >
-                            New Category
-                        </v-btn>
-                    </template>
+    <div class="service">
+        <!-- BEUFY -->
+        <section class="mb-5">
+            <b-button
+                label="Instructions"
+                :disabled="isActive"
+                @click="isActive = true"
+            />
+            <b-notification
+                class="mb-5"
+                v-model="isActive"
+                aria-close-label="Close notification"
+                animation="fade"
+            >
+                <ul>
+                    <li>
+                        - Create a new category by clicking create category.
+                    </li>
+                    <li>
+                        - Edit the category name by clicking on the pencil icon.
+                    </li>
+                    <li>- Delete a category by clicking on the trash icon.</li>
+                </ul>
+            </b-notification>
+        </section>
 
-                    <!-- NEW CATEGORY -->
-                    <v-card>
-                        <v-card-title>
-                            <span class="headline">{{ formTitle }}</span>
-                        </v-card-title>
+        <section class="service__border">
+            <b-field>
+                <b-button @click="onCreateCategory" class="is-primary mb-5"
+                    >Create Category</b-button
+                >
+            </b-field>
+            <b-table
+                :data="categories"
+                :paginated="isPaginated"
+                :per-page="perPage"
+                :current-page.sync="currentPage"
+                :pagination-simple="isPaginationSimple"
+                :pagination-position="paginationPosition"
+                :default-sort-direction="defaultSortDirection"
+                :pagination-rounded="isPaginationRounded"
+                :sort-icon="sortIcon"
+                :sort-icon-size="sortIconSize"
+                default-sort="user.first_name"
+                aria-next-label="Next page"
+                aria-previous-label="Previous page"
+                aria-page-label="Page"
+                aria-current-label="Current page"
+            >
+                <b-table-column
+                    field="name"
+                    label="Name"
+                    sortable
+                    v-slot="props"
+                >
+                    {{ props.row.name | capitalize }}
+                </b-table-column>
 
-                        <v-card-text>
-                            <v-container>
-                                <v-row>
-                                    <v-col cols="12">
-                                        <v-text-field
-                                            v-model="editedItem.name"
-                                            label="Category name"
-                                        ></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12">
-                                        <v-textarea
-                                            v-model="editedItem.description"
-                                            label="Description"
-                                        ></v-textarea>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-                        </v-card-text>
+                <b-table-column
+                    field="description"
+                    label="Description"
+                    sortable
+                    v-slot="props"
+                >
+                    {{ props.row.description }}
+                </b-table-column>
 
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="teal darken-1" text @click="close">
-                                Cancel
-                            </v-btn>
-                            <v-btn
+                <b-table-column
+                    field="name"
+                    label="Services"
+                    centered
+                    v-slot="props"
+                >
+                    <span
+                        class="tag is-success"
+                        style="cursor: pointer"
+                        @click="goToService(props.row.name)"
+                    >
+                        View Services
+                    </span>
+                </b-table-column>
+
+                <b-table-column label="Actions" numeric v-slot="props">
+                    <span @click="editItem(props.row)">
+                        <b-icon icon="pencil" style="cursor: pointer"> </b-icon>
+                    </span>
+                    <span @click="deleteItem(props.row)">
+                        <b-icon icon="delete" style="cursor: pointer"> </b-icon>
+                    </span>
+                </b-table-column>
+            </b-table>
+        </section>
+
+        <section>
+            <b-modal
+                v-model="isCardModalActive"
+                :width="450"
+                scroll="keep"
+                :destroy-on-hide="false"
+                aria-role="dialog"
+                aria-label="Events Modal"
+                aria-modal
+            >
+                <section class="card">
+                    <div class="field card-content dialog">
+                        <div class="field">
+                            <b-field label="Name">
+                                <b-input v-model="editedItem.name"></b-input>
+                            </b-field>
+                            <b-field label="Details">
+                                <b-input
+                                    maxlength="200"
+                                    type="textarea"
+                                    v-model="editedItem.description"
+                                ></b-input>
+                            </b-field>
+                        </div>
+
+                        <div>
+                            <b-button @click="close"> Cancel </b-button>
+                            <b-button
+                                class="is-primary"
                                 v-if="formTitle === 'New Category'"
-                                color="teal darken-1"
-                                text
                                 @click="save"
                             >
                                 Create
-                            </v-btn>
-                            <v-btn
-                                v-else
-                                color="teal darken-1"
-                                text
-                                @click="update"
-                            >
+                            </b-button>
+                            <b-button v-else @click="update" class="is-primary">
                                 Update
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                    <!-- NEW CATEGORY END -->
-                </v-dialog>
-
-                <!-- DELETE DIALOG -->
-                <v-dialog v-model="dialogDelete" max-width="500px">
-                    <v-card>
-                        <v-card-title class="headline"
-                            >Are you sure you want to delete this
-                            item?</v-card-title
-                        >
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn
-                                color="teal darken-1"
-                                text
-                                @click="closeDelete"
-                                >Cancel</v-btn
-                            >
-                            <v-btn
-                                color="teal darken-1"
-                                text
-                                @click="deleteItemConfirm"
-                                >OK</v-btn
-                            >
-                            <v-spacer></v-spacer>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-                <!-- DELETE DIALOG -->
-            </v-toolbar>
-        </template>
-        <template v-slot:[`item.actions`]="{ item }">
-            <v-icon small class="mr-2" @click="editItem(item)">
-                mdi-pencil
-            </v-icon>
-            <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
-        </template>
-        <template v-slot:[`item.services`]="{ item }">
-            <v-btn
-                elevation="0"
-                small
-                class="mr-2"
-                @click="goToService(item.name)"
-            >
-                View Services
-            </v-btn>
-        </template>
-        <!-- <template v-slot:no-data>
-            <v-btn color="primary" @click="initialize"> Reset </v-btn>
-        </template> -->
-    </v-data-table>
+                            </b-button>
+                        </div>
+                    </div>
+                </section>
+            </b-modal>
+        </section>
+    </div>
 </template>
 
 <script>
@@ -152,7 +165,20 @@ export default {
         defaultItem: {
             name: '',
             description: ''
-        }
+        },
+        // NEW
+        isPaginated: true,
+        isPaginationSimple: true,
+        isPaginationRounded: true,
+        paginationPosition: 'bottom',
+        defaultSortDirection: 'asc',
+        sortIcon: 'arrow-up',
+        sortIconSize: 'is-small',
+        currentPage: 1,
+        perPage: 5,
+        // MODAL
+        isCardModalActive: false,
+        isActive: false
     }),
     computed: {
         ...mapGetters({
@@ -177,7 +203,8 @@ export default {
             this.$router.push('/service/create-service');
         },
         onCreateCategory() {
-            this.$router.push('/service/create-category');
+            console.log(`ManageServices.vue - 316 - ✅`, this.formTitle);
+            this.isCardModalActive = true;
         },
         goToService(service) {
             this.$router.push({
@@ -224,23 +251,23 @@ export default {
         editItem(item) {
             this.editedItem = Object.assign({}, item);
             this.editedIndex = item.id;
-            this.dialog = true;
+            this.isCardModalActive = true;
             this.item = item;
         },
 
         deleteItem(item) {
-            this.item = item;
-            this.dialogDelete = true;
+            this.deleteItemConfirm(item);
         },
 
-        deleteItemConfirm() {
+        deleteItemConfirm(item) {
             const payload = {
                 userId: this.user.uid,
-                id: this.item.id
+                id: item.id
             };
 
-            this.loadCategories(this.user.uid);
+            console.log(`ManageServices.vue - 374 - 🌎`, payload);
             this.deleteCategory(payload);
+            this.loadCategories(this.user.uid);
             this.$swal({
                 toast: true,
                 position: 'top-end',
@@ -254,7 +281,7 @@ export default {
         },
 
         close() {
-            this.dialog = false;
+            this.isCardModalActive = false;
             this.$nextTick(() => {
                 this.editedItem = Object.assign({}, this.defaultItem);
                 this.editedIndex = -1;
@@ -270,7 +297,7 @@ export default {
         },
 
         async save() {
-            // category with dashes
+            // format categories
             let res = this.editedItem.name.replace(/\s+/g, '-').toLowerCase();
 
             let data = {
@@ -279,7 +306,6 @@ export default {
                 userId: this.user.uid
             };
             await this.createCategory(data);
-            // this.loadCategories();
             this.close();
         },
         async update() {
@@ -316,4 +342,19 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.service {
+    &__border {
+        border: 1px solid #ffdd57;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
+        color: rgba(0, 0, 0, 0.7);
+        padding: 1.5rem;
+    }
+}
+
+.dialog {
+    height: 400px;
+}
+</style>

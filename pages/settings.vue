@@ -1,89 +1,82 @@
 <template>
     <div class="settings">
-        <v-app>
-            <v-app>
-                <v-navigation-drawer
-                    class="margin"
-                    v-model="drawer"
-                    app
-                    permanent
-                    :mini-variant="mini"
+        <div class="sidebar-page">
+            <section class="sidebar-layout">
+                <b-sidebar
+                    position="static"
+                    :mobile="mobile"
+                    :expand-on-hover="expandOnHover"
+                    :reduce="reduce"
+                    :fullheight="true"
+                    type="is-light"
+                    open
+                    class="sidebar"
                 >
-                    <v-list-item class="px-2">
-                        <v-list-item-avatar v-if="user.photoURL">
-                            <v-img :src="user.photoURL"></v-img>
-                        </v-list-item-avatar>
-                        <v-list-item-avatar v-else>
-                            <v-img
-                                src="https://via.placeholder.com/250"
-                            ></v-img>
-                        </v-list-item-avatar>
+                    <div class="p-1">
+                        <div class="block">
+                            <ul>
+                                <li v-if="user.photoURL">
+                                    <img
+                                        :src="user.photoURL"
+                                        style="height: 100px"
+                                    />
+                                </li>
+                                <li v-else>
+                                    <img
+                                        src="https://via.placeholder.com/250"
+                                    />
+                                </li>
 
-                        <v-list-item-title>{{
-                            user.displayName
-                        }}</v-list-item-title>
-                    </v-list-item>
-                    <v-list dense>
-                        <template v-for="(item, i) in items">
-                            <v-divider
-                                v-if="item.divider"
-                                :key="i"
-                                dark
-                                class="my-4"
-                            ></v-divider>
+                                <li>{{ user.displayName }}</li>
+                            </ul>
+                        </div>
+                        <b-menu class="is-custom-mobile">
+                            <b-menu-list label="Settings">
+                                <div v-for="(item, i) in items" :key="i">
+                                    <b-menu-item
+                                        @click="onLinkClick(item)"
+                                        :icon="item.icon"
+                                        :label="item.text"
+                                    >
+                                    </b-menu-item>
+                                </div>
+                            </b-menu-list>
 
-                            <v-list-item
-                                v-else
-                                :key="i"
-                                @click="onLinkClick(item)"
-                                link
-                            >
-                                <v-list-item-action>
-                                    <v-icon color="teal darker-1">{{
-                                        item.icon
-                                    }}</v-icon>
-                                </v-list-item-action>
-                                <v-list-item-content>
-                                    <v-list-item-title class="grey--text">
-                                        {{ item.text }}
-                                    </v-list-item-title>
-                                </v-list-item-content>
-                            </v-list-item>
-                        </template>
-                    </v-list>
-                </v-navigation-drawer>
+                            <b-menu-list label="Actions">
+                                <b-menu-item
+                                    icon="logout"
+                                    label="Logout"
+                                ></b-menu-item>
+                            </b-menu-list>
+                        </b-menu>
+                    </div>
+                </b-sidebar>
 
-                <v-main>
-                    <v-container fluid class="fill-height">
-                        <v-row class="settings__right-row">
-                            <v-col>
-                                <ProfileInformation
-                                    v-if="
-                                        this.selected ===
-                                            'Profile Information' ||
-                                        this.selected === ''
-                                    "
-                                />
-                                <StoreSettings
-                                    v-if="
-                                        this.selected === 'Store Settings' &&
-                                        role.admin
-                                    "
-                                />
-                                <Security v-if="this.selected === 'Security'" />
-                                <Notifications
-                                    v-if="this.selected === 'Notifications'"
-                                />
-                                <Billing v-if="this.selected === 'Billing'" />
-                                <AccountSettings
-                                    v-if="this.selected === 'Account Settings'"
-                                />
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </v-main>
-            </v-app>
-        </v-app>
+                <div class="settings-container">
+                    <div class="ml-5 mr-5">
+                        <ProfileInformation
+                            v-if="
+                                this.selected === 'Profile Information' ||
+                                this.selected === ''
+                            "
+                        />
+                        <StoreSettings
+                            v-if="
+                                this.selected === 'Store Settings' && role.admin
+                            "
+                        />
+                        <Security v-if="this.selected === 'Security'" />
+                        <Notifications
+                            v-if="this.selected === 'Notifications'"
+                        />
+                        <Billing v-if="this.selected === 'Billing'" />
+                        <AccountSettings
+                            v-if="this.selected === 'Account Settings'"
+                        />
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
 </template>
 
@@ -96,11 +89,12 @@ export default {
     data: () => ({
         user: [],
         role: null,
-        drawer: null,
         items: null,
-        mini: false,
         source: 'https://via.placeholder.com/500',
-        selected: ''
+        selected: '',
+        expandOnHover: false,
+        mobile: 'reduce',
+        reduce: false
     }),
     methods: {
         onLinkClick(item) {
@@ -111,28 +105,22 @@ export default {
         validatedItems() {
             if (this.role.admin) {
                 return [
-                    { icon: 'mdi-account', text: 'Profile Information' },
-                    { icon: 'mdi-cart', text: 'Store Settings' },
-                    { divider: true },
-                    { icon: 'mdi-shield', text: 'Security' },
-                    { divider: true },
-                    { icon: 'mdi-bell', text: 'Notifications' },
-                    { divider: true },
-                    { icon: 'mdi-credit-card', text: 'Billing' },
-                    { icon: 'mdi-cog', text: 'Account Settings' },
-                    { icon: 'mdi-help-circle', text: 'Help' }
+                    { icon: 'account-outline', text: 'Profile Information' },
+                    { icon: 'cart-outline', text: 'Store Settings' },
+                    { icon: 'shield-outline', text: 'Security' },
+                    { icon: 'bell-outline', text: 'Notifications' },
+                    { icon: 'credit-card-outline', text: 'Billing' },
+                    { icon: 'cog-outline', text: 'Account Settings' },
+                    { icon: 'help-circle-outline', text: 'Help' }
                 ];
             } else if (this.role.customer) {
                 return [
-                    { icon: 'mdi-account', text: 'Profile Information' },
-                    { divider: true },
-                    { icon: 'mdi-shield', text: 'Security' },
-                    { divider: true },
-                    { icon: 'mdi-bell', text: 'Notifications' },
-                    { divider: true },
-                    { icon: 'mdi-credit-card', text: 'Billing' },
-                    { icon: 'mdi-cog', text: 'Account Settings' },
-                    { icon: 'mdi-help-circle', text: 'Help' }
+                    { icon: 'account-outline', text: 'Profile Information' },
+                    { icon: 'shield-outline', text: 'Security' },
+                    { icon: 'bell-outline', text: 'Notifications' },
+                    { icon: 'credit-card-outline', text: 'Billing' },
+                    { icon: 'cog-outline', text: 'Account Settings' },
+                    { icon: 'help-circle-outline', text: 'Help' }
                 ];
             }
         },
@@ -195,14 +183,95 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.margin {
-    // margin: 90px auto 0 auto;
-    margin-top: 64px;
+<style lang="scss">
+.p-1 {
+    padding: 1em;
 }
-.settings {
-    &__right-row {
-        height: 100%;
+.sidebar-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    // height: 100%;
+    min-height: 100vh;
+    .sidebar-layout {
+        display: flex;
+        flex-direction: row;
+        // height: calc(100vh - 56px);
+        min-height: 100vh;
     }
+}
+@media screen and (max-width: 1023px) {
+    .b-sidebar {
+        .sidebar-content {
+            box-shadow: none;
+            &.is-mini-mobile {
+                &:not(.is-mini-expand),
+                &.is-mini-expand:not(:hover) {
+                    .menu-list {
+                        li {
+                            a {
+                                span:nth-child(2) {
+                                    display: none;
+                                }
+                            }
+                            ul {
+                                padding-left: 0;
+                                li {
+                                    a {
+                                        display: inline-block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .menu-label:not(:last-child) {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (min-width: 1024px) {
+    .b-sidebar {
+        .sidebar-content {
+            box-shadow: none;
+            &.is-mini {
+                &:not(.is-mini-expand),
+                &.is-mini-expand:not(:hover) {
+                    .menu-list {
+                        li {
+                            a {
+                                span:nth-child(2) {
+                                    display: none;
+                                }
+                            }
+                            ul {
+                                padding-left: 0;
+                                li {
+                                    a {
+                                        display: inline-block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .menu-label:not(:last-child) {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+.is-mini-expand {
+    .menu-list a {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+.settings-container {
+    width: 100%;
 }
 </style>

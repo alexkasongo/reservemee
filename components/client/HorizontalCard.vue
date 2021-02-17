@@ -2,55 +2,51 @@
     <div class="mt-5">
         <v-row dense>
             <v-col v-for="(item, i) in items" :key="i" cols="12">
-                <v-card :color="item.color" dark>
+                <div :color="item.color" dark>
                     <div class="d-flex flex-no-wrap justify-space-between">
                         <div>
-                            <v-card-title
+                            <div-title
                                 class="headline"
                                 v-text="item.title"
-                            ></v-card-title>
+                            ></div-title>
 
-                            <v-card-subtitle
-                                v-text="item.description"
-                            ></v-card-subtitle>
+                            <div v-text="item.description"></div>
 
-                            <v-card-action>
-                                <v-btn class="ml-2 mt-5" small text>
-                                    View All
-                                </v-btn>
-                            </v-card-action>
+                            <div-action>
+                                <div class="ml-2 mt-5" small text>View All</div>
+                            </div-action>
                         </div>
 
-                        <v-avatar class="ma-3" size="125" tile>
-                            <v-img :src="item.src"></v-img>
-                        </v-avatar>
+                        <div class="ma-3" size="125" tile>
+                            <img :src="item.src" />
+                        </div>
                     </div>
-                </v-card>
+                </div>
             </v-col>
             <v-col cols="12">
-                <v-card class="mx-auto elevation-20" color="purple" dark>
+                <div color="purple" dark>
                     <v-row justify="space-between">
                         <v-col cols="8">
-                            <v-card-title>
+                            <div-title>
                                 <div>
                                     <div class="headline">Halycon Days</div>
                                     <div>Ellie Goulding</div>
                                     <div>(2013)</div>
                                 </div>
-                            </v-card-title>
+                            </div-title>
                         </v-col>
-                        <v-img
+                        <img
                             class="shrink ma-2"
                             contain
                             height="125px"
                             src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
                             style="flex-basis: 125px"
-                        ></v-img>
+                        />
                     </v-row>
                     <v-divider dark></v-divider>
-                    <v-card-actions class="pa-4">
+                    <div class="pa-4">
                         Rate this album
-                        <v-spacer></v-spacer>
+
                         <span class="grey--text text--lighten-2 caption mr-2">
                             ({{ rating }})
                         </span>
@@ -63,8 +59,8 @@
                             hover
                             size="18"
                         ></v-rating>
-                    </v-card-actions>
-                </v-card>
+                    </div>
+                </div>
             </v-col>
         </v-row>
     </div>

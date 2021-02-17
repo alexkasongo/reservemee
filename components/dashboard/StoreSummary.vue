@@ -1,6 +1,6 @@
 <template>
     <!-- StoreSummary -->
-    <div class="row">
+    <section class="summary is-flex is-justify-content-space-between">
         <div class="col-sm-4">
             <div class="tilebox-one">
                 <i class="icon-layers float-right text-muted"></i>
@@ -34,7 +34,7 @@
             </div>
         </div>
         <!-- end col -->
-    </div>
+    </section>
     <!-- StoreSummary -->
 </template>
 
@@ -52,4 +52,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.summary {
+    border: 1px solid #ffdd57;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    color: rgba(0, 0, 0, 0.7);
+    padding: 1.5rem;
+}
 </style>

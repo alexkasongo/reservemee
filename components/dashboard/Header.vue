@@ -1,141 +1,74 @@
 <template>
     <!-- Header -->
     <div class="header">
-        <!-- IF PROFILE EXISTS -->
-        <div
-            v-if="storeProfile !== null && Object.keys(storeProfile).length > 1"
-            class="parallax"
-        >
-            <v-parallax
-                class="rounded-xl"
-                height="300"
-                v-if="storeProfile.storeBanner !== ''"
-                :src="storeProfile.storeBanner"
+        <client-only>
+            <section
+                v-if="
+                    storeProfile !== null &&
+                    Object.keys(storeProfile).length > 1
+                "
             >
-                <div class="header__profile-image">
-                    <!-- FIXME -->
-                    <!-- SSR ISSUE -->
-                    <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                            <div class="float-left mr-3">
-                                <img
-                                    v-if="storeProfile.storeLogo !== ''"
-                                    @click="$router.push('/settings')"
-                                    :src="storeProfile.storeLogo"
-                                    alt
-                                    class="header__thumb-lg rounded-circle"
-                                    v-bind="attrs"
-                                    v-on="on"
-                                />
-                                <img
-                                    v-else
-                                    @click="$router.push('/settings')"
-                                    :src="defaultStoreLogo"
-                                    alt
-                                    class="header__thumb-lg rounded-circle"
-                                    v-bind="attrs"
-                                    v-on="on"
-                                />
-                            </div>
-                        </template>
-                        <span>Settings</span>
-                    </v-tooltip>
-
-                    <div class="header__titles">
-                        <h4>
+                <section
+                    v-if="storeProfile.storeBanner !== ''"
+                    :src="storeProfile.storeBanner"
+                    class="hero is-small is-link header__bg"
+                >
+                    <div class="hero-body">
+                        <img
+                            v-if="storeProfile.storeLogo !== ''"
+                            @click="$router.push('/settings')"
+                            :src="storeProfile.storeLogo"
+                            alt
+                            class="header__thumb-lg rounded-circle"
+                        />
+                        <img
+                            v-else
+                            @click="$router.push('/settings')"
+                            :src="defaultStoreLogo"
+                            alt
+                            class="header__thumb-lg rounded-circle"
+                        />
+                        <h1 class="title">
                             {{ storeProfile.storeName | capitalize }}
-                        </h4>
-                        <p class="header__subtitle">
-                            {{ user.displayName }}
-                        </p>
+                        </h1>
+                        <h2 class="subtitle">{{ user.displayName }}</h2>
                     </div>
-                </div>
-            </v-parallax>
-            <v-parallax
-                v-else
-                class="rounded-xl"
-                height="300"
-                :src="defaultStoreBanner"
-            >
-                <div class="bg-center">
-                    <div class="header__profile-image">
-                        <!-- FIXME -->
-                        <!-- SSR ISSUE -->
-                        <v-tooltip bottom>
-                            <template v-slot:activator="{ on, attrs }">
-                                <div class="float-left mr-3">
-                                    <img
-                                        v-if="storeProfile.storeLogo !== ''"
-                                        @click="$router.push('/settings')"
-                                        :src="storeProfile.storeLogo"
-                                        alt
-                                        class="header__thumb-lg rounded-circle"
-                                        v-bind="attrs"
-                                        v-on="on"
-                                    />
-                                    <img
-                                        v-else
-                                        @click="$router.push('/settings')"
-                                        :src="defaultStoreLogo"
-                                        alt
-                                        class="header__thumb-lg rounded-circle"
-                                        v-bind="attrs"
-                                        v-on="on"
-                                    />
-                                </div>
-                            </template>
-                            <span>Settings</span>
-                        </v-tooltip>
-
-                        <div class="header__titles">
-                            <h4 class="mt-1 mb-1 font-18">
-                                {{ storeProfile.storeName | capitalize }}
-                            </h4>
-                            <p class="header__subtitle">
-                                {{ user.displayName }}
-                            </p>
-                        </div>
+                </section>
+                <section v-else class="hero is-small is-link">
+                    <div class="hero-body" :src="defaultStoreBanner">
+                        <img
+                            v-if="storeProfile.storeLogo !== ''"
+                            @click="$router.push('/settings')"
+                            :src="storeProfile.storeLogo"
+                            alt
+                            class="header__thumb-lg rounded-circle"
+                        />
+                        <img
+                            v-else
+                            @click="$router.push('/settings')"
+                            :src="defaultStoreLogo"
+                            alt
+                            class="header__thumb-lg rounded-circle"
+                        />
+                        <h1 class="title">
+                            {{ storeProfile.storeName | capitalize }}
+                        </h1>
+                        <h2 class="subtitle">{{ user.displayName }}</h2>
                     </div>
+                </section>
+            </section>
+            <section v-else class="hero is-small is-link">
+                <div class="hero-body">
+                    <img
+                        @click="$router.push('/settings')"
+                        src="https://via.placeholder.com/1200/00897b"
+                        alt
+                        class="header__thumb-lg rounded-circle"
+                    />
+                    <h2 class="subtitle">{{ user.displayName }}</h2>
                 </div>
-            </v-parallax>
-        </div>
-        <!-- IF PROFILE EXISTS -->
-
-        <!-- IF PROFILE DOESN'T EXISTS -->
-        <div v-else class="parallax">
-            <v-parallax
-                class="rounded-xl"
-                height="300"
-                src="https://via.placeholder.com/1200"
-            >
-                <div class="bg-center">
-                    <!-- FIXME -->
-                    <!-- SSR ISSUE -->
-                    <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                            <span class="float-left mr-3">
-                                <img
-                                    @click="$router.push('/settings')"
-                                    src="https://via.placeholder.com/1200/00897b"
-                                    alt
-                                    class="header__thumb-lg rounded-circle"
-                                    v-bind="attrs"
-                                    v-on="on"
-                                />
-                            </span>
-                        </template>
-                        <span>Settings</span>
-                    </v-tooltip>
-
-                    <div class="media-body text-white">
-                        <p>
-                            {{ user.displayName }}
-                        </p>
-                    </div>
-                </div>
-            </v-parallax>
-        </div>
-        <!-- IF PROFILE DOESN'T EXISTS -->
+            </section>
+        </client-only>
     </div>
     <!-- Header End-->
 </template>
@@ -193,7 +126,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.parallax {
-    width: 100%;
+.header {
+    &__bg {
+        border-radius: 24px;
+    }
 }
 </style>

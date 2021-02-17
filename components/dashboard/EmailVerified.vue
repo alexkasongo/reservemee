@@ -1,24 +1,22 @@
 <template>
     <!-- EmailVerified -->
-    <div class="w-100">
-        <v-alert
-            class="mb-0"
-            style="cursor: pointer"
-            @click="onSubmit"
-            icon="mdi-alert-circle-outline"
-            text
-            type="info"
-            ><span v-if="user">
-                Click to verify your email {{ user.name }}.
-            </span></v-alert
-        >
-        <v-progress-linear
-            v-if="loading"
-            indeterminate
-            class="rounded-xl"
-            color="primary"
-        ></v-progress-linear>
-    </div>
+    <section class="b-tooltips">
+        <b-tooltip position="is-bottom" multilined style="width: 100%">
+            <b-notification
+                :closable="false"
+                style="cursor: pointer"
+                @click="onSubmit"
+                type="is-warning"
+                aria-close-label="Close notification"
+            >
+                Verify your email {{ user.name }}
+            </b-notification>
+            <template v-slot:content>
+                <b>Email verification</b>, click on this notification to get a
+                verification email sent to you.
+            </template>
+        </b-tooltip>
+    </section>
     <!-- EmailVerified -->
 </template>
 
@@ -26,6 +24,7 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
+    name: 'EmailVerified',
     computed: {
         ...mapGetters({
             user: 'user',
@@ -43,8 +42,10 @@ export default {
                 .auth()
                 .signOut()
                 .then(() => {
-                    window.localStorage.removeItem('email');
-                    window.localStorage.removeItem('vuex');
+                    if (process.browser) {
+                        localStorage.removeItem('email');
+                        localStorage.removeItem('vuex');
+                    }
                 });
             this.$router.push('/signin');
         }

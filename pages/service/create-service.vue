@@ -1,88 +1,85 @@
 <template>
-    <div class="container">
-        <div class="display-1 p-3">Create Service</div>
-        <v-card elevation="0">
-            <form @submit.prevent="onSubmit" class="pt-5">
-                <div class="form-group">
-                    <v-select
-                        label="Select Category"
-                        :items="categoryNames"
-                        required
-                        v-model="category"
+    <div>
+        <h1 class="title">Create Service</h1>
+        <h2 class="subtitle">Create new service</h2>
+
+        <!-- Beaufy -->
+        <section>
+            <b-field label="Category">
+                <b-select
+                    placeholder="Select a category"
+                    v-model="category"
+                    expanded
+                >
+                    <option
+                        v-for="(category, id) in categoryNames"
+                        :key="id"
+                        :value="category"
                     >
-                        {{ categoryNames }}
-                    </v-select>
-                </div>
-                <div class="form-group">
-                    <v-text-field
-                        label="Name"
-                        required
-                        type="name"
-                        id="exampleFormControlInput1"
-                        placeholder="Service Name"
-                        v-model="name"
-                    ></v-text-field>
-                </div>
-                <div class="form-group">
-                    <v-textarea
-                        outlined
-                        required
-                        class="form-control"
-                        style="min-width: 100%"
-                        label="Description"
-                        v-model="description"
-                    ></v-textarea>
-                </div>
-                <div class="form-group">
-                    <div class="form-group">
-                        <label for="exampleFormControlFile1">Picture</label>
-                        <v-file-input
+                        {{ category }}
+                    </option>
+                </b-select>
+            </b-field>
+
+            <b-field label="Name">
+                <b-input v-model="name"></b-input>
+            </b-field>
+
+            <b-field label="Description">
+                <b-input
+                    v-model="description"
+                    maxlength="200"
+                    type="textarea"
+                ></b-input>
+            </b-field>
+
+            <b-field label="Image upload">
+                <div class="file has-name is-fullwidth">
+                    <label class="file-label">
+                        <input
+                            class="file-input"
                             type="file"
-                            color="teal accent-4"
-                            @change="onUploadServiceImage"
-                            label="Upload profile image"
-                            outlined
-                            truncate-length="50"
-                            prepend-icon="mdi-camera"
-                            dense
+                            name="resume"
+                            @change="
+                                onUploadServiceImage($event.target.files[0])
+                            "
                             accept="image/*"
                             ref="fileInputOne"
-                        >
-                            <template v-slot:selection="{ text }">
-                                <v-chip small label dark color="teal darken-1">
-                                    {{ text }}
-                                </v-chip>
-                            </template>
-                        </v-file-input>
-                    </div>
-                    <div
-                        class="form-group imgPreview"
-                        v-bind:style="{
-                            'background-image': 'url(' + serviceImage + ')',
-                            display: serviceImageDisplay
-                        }"
-                    ></div>
+                        />
+                        <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label"> Choose a file… </span>
+                        </span>
+                        <span class="file-name">
+                            {{ previewImgName }}
+                        </span>
+                    </label>
                 </div>
-                <div class="form-group">
-                    <v-text-field
-                        label="Price"
-                        required
-                        type="number"
-                        min="1"
-                        step="any"
-                        placeholder="50"
-                        v-model="price"
-                    ></v-text-field>
-                </div>
-                <v-btn
+            </b-field>
+
+            <b-field>
+                <div
+                    class="form-group imgPreview"
+                    v-bind:style="{
+                        'background-image': 'url(' + serviceImage + ')',
+                        display: serviceImageDisplay
+                    }"
+                ></div>
+            </b-field>
+
+            <b-field>
+                <b-button
+                    class="is-primary"
                     :loading="loading"
-                    class="teal darken-1"
-                    dark
-                    type="submit"
-                    >Create</v-btn
+                    @click="onSubmit"
                 >
-            </form>
-        </v-card>
+                    Create
+                </b-button>
+            </b-field>
+        </section>
+        <!-- Beaufy End -->
     </div>
 </template>
 
@@ -100,7 +97,8 @@ export default {
             serviceImage: '',
             serviceImageDisplay: '',
             rawServiceImage: null,
-            categoryNames: []
+            categoryNames: [],
+            previewImgName: '' || 'no image uploaded'
         };
     },
     computed: {
@@ -130,10 +128,11 @@ export default {
                 price: this.price
             };
             this.createService(data);
-            // this.$router.push(`/service/${res}`);
         },
         // UPLOAD IMAGE
         onUploadServiceImage(event) {
+            this.previewImgName = event.name;
+
             // if a file is inserted or a logo exists then show it
             if (event || this.storeLogo) {
                 this.serviceImageDisplay = 'block';
@@ -161,11 +160,9 @@ export default {
         }
         // UPLOAD IMAGE END
     },
-    mounted() {
+    async mounted() {
         // If serviceImageDisplay state is empty, run this
         this.serviceImageDisplay = 'none';
-
-        // this.categoryNames = new Array(this.categories.name);
 
         for (let key in this.categories) {
             this.categoryNames.push(this.categories[key].name);

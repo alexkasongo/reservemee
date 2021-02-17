@@ -1,6 +1,6 @@
 <template>
     <div class="categories">
-        <div class="display-1">Popular Stores</div>
+        <h1 class="title">Popular Stores</h1>
 
         <!-- SORT -->
         <div class="categories__sort-card">
@@ -20,49 +20,54 @@
         <div v-if="storesLoading">
             <p>Loading...</p>
         </div>
-        <v-row v-if="!storesLoading" class="categories__popular">
-            <v-col v-for="(store, id) in stores" :key="id" class="col-md-6">
-                <v-card
+
+        <div v-if="!storesLoading" class="categories__grid">
+            <div v-for="(store, id) in stores" :key="id">
+                <div
+                    class="card categories__grid-card m-0"
                     @click="viewStore(store)"
-                    class="rounded-xl"
-                    :ripple="false"
+                    style="cursor: pointer"
                 >
-                    <div
-                        class="categories__left-card d-flex flex-no-wrap justify-space-between"
-                    >
-                        <div class="categories__left-card-img-container">
-                            <img
-                                class="categories__left-service-img"
-                                :src="store.storeBanner"
-                                alt=""
-                            />
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-48x48">
+                                    <img
+                                        :src="store.storeBanner"
+                                        :alt="store.storeBanner"
+                                    />
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">
+                                    {{ store.storeName | capitalize }}
+                                </p>
+                            </div>
                         </div>
-                        <div class="categories__left-card-info">
-                            <v-card-title class="headline">{{
-                                store.storeName | capitalize
-                            }}</v-card-title>
 
-                            <v-card-subtitle
-                                v-text="store.description"
-                            ></v-card-subtitle>
-
-                            <v-card-text
-                                class="text--primary categories__left-card-price"
-                            >
-                                {{ store.storeBio | truncate(100, '...') }}
-                            </v-card-text>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-
-                                <v-btn icon>
-                                    <v-icon>mdi-heart</v-icon>
-                                </v-btn>
-                            </v-card-actions>
+                        <div class="content">
+                            <div class="columns">
+                                <div class="column">
+                                    {{ store.storeBio | truncate(100, '...') }}
+                                </div>
+                                <div class="column">
+                                    <div
+                                        class="block is-flex is-justify-content-flex-end"
+                                    >
+                                        <div>
+                                            <b-icon
+                                                style="cursor: pointer"
+                                                icon="heart"
+                                            ></b-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </v-card>
-            </v-col>
-        </v-row>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 

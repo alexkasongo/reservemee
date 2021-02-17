@@ -1,4 +1,9 @@
 /*
+** Beufy
+*/
+$sidebar-width: 600px !default;
+
+/*
 * Color Variables
 * Using http://chir.ag/projects/name-that-color/#6195ED for color names
 */
@@ -18,9 +23,9 @@ $cello: #131b23;
 /*
 * Fonts
 */
-$primary-font: "Lato-Regular", sans-serif;
-$bold-font: "Lato-Bold", sans-serif;
-$Light-font: "Lato-Light", sans-serif;
+$primary-font: 'Lato-Regular', sans-serif;
+$bold-font: 'Lato-Bold', sans-serif;
+$Light-font: 'Lato-Light', sans-serif;
 
 /*
 * Font Sizes
@@ -71,10 +76,10 @@ $header-close-zindex: 2100;
 */
 .page-enter-active,
 .page-leave-active {
-  transition: opacity 0.35s;
+    transition: opacity 0.35s;
 }
 
 .page-enter,
 .page-leave-active {
-  opacity: 0;
+    opacity: 0;
 }
