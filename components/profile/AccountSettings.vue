@@ -11,7 +11,12 @@
                     be certain.
                 </p>
             </div>
-            <b-button @click="deleteAccount" type="is-danger">
+            <b-button
+                label="Delete Account"
+                aria-label="Delete account"
+                @click="deleteAccount"
+                type="is-danger"
+            >
                 Delete Account
             </b-button>
         </form>

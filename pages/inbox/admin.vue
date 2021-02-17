@@ -145,6 +145,8 @@
                                                     </p>
                                                 </div>
                                                 <b-button
+                                                    label="Send"
+                                                    aria-label="Send message"
                                                     @click="onReply"
                                                     type="is-primary"
                                                     expanded
@@ -181,6 +183,8 @@
                                                     </p>
                                                 </div>
                                                 <b-button
+                                                    label="Send"
+                                                    aria-label="Send message"
                                                     @click="onReply"
                                                     type="is-primary"
                                                     expanded

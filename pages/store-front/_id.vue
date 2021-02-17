@@ -112,6 +112,8 @@
                                         class="block is-flex is-justify-content-flex-end is-align-content-center"
                                     >
                                         <b-button
+                                            label="Book Service"
+                                            aria-label="Book service"
                                             type="is-primary"
                                             @click="quickBook(service)"
                                         >
@@ -218,8 +220,19 @@
                         </b-notification>
 
                         <div>
-                            <b-button @click="close"> Cancel </b-button>
-                            <b-button @click="addToCart" class="is-primary">
+                            <b-button
+                                label="Cancel"
+                                aria-label="Cance add to cart"
+                                @click="close"
+                            >
+                                Cancel
+                            </b-button>
+                            <b-button
+                                label="Add to cart"
+                                aria-label="Add to cart"
+                                @click="addToCart"
+                                class="is-primary"
+                            >
                                 Add to cart
                             </b-button>
                         </div>

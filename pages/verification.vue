@@ -8,6 +8,8 @@
                             Your email address is verified
                         </h3>
                         <b-button
+                            label="Go to Dashboard"
+                            aria-label="Go to dashboard"
                             @click="goToDashboard"
                             type="is-primary"
                             class="btn btn-block btn-primary"
@@ -29,6 +31,8 @@
                     </h2>
                     <b-field>
                         <b-button
+                            label="Signin"
+                            aria-label="Signin"
                             @click="signout"
                             type="is-primary"
                             color="teal darker-1"
@@ -58,6 +62,8 @@
                         </div>
                         <b-field>
                             <b-button
+                                label="Submit"
+                                aria-label="Submit"
                                 type="is-primary"
                                 @click="onSubmit"
                                 color="teal darker-1"

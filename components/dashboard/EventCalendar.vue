@@ -2,6 +2,7 @@
     <div>
         <section class="mb-5">
             <b-button
+                aria-label="View calendar instructions"
                 label="Instructions"
                 :disabled="isActive"
                 @click="isActive = true"

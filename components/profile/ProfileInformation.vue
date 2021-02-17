@@ -49,6 +49,8 @@
                 can change or remove it at any time.
             </p>
             <b-button
+                label="Update Profile"
+                aria-label="Update profile"
                 @click="onUpdprofileForm"
                 :loading="loading"
                 type="is-primary"

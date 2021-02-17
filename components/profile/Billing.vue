@@ -9,7 +9,13 @@
                 <div class="small text-muted mb-3">
                     You have not added a payment method
                 </div>
-                <b-button type="is-primary"> Add Payment Method </b-button>
+                <b-button
+                    label="Add Payment Method"
+                    aria-label="Add payment method"
+                    type="is-primary"
+                >
+                    Add Payment Method
+                </b-button>
             </div>
         </form>
     </div>

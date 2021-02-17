@@ -16,15 +16,20 @@
                         <div class="block">
                             <ul>
                                 <li v-if="user.photoURL">
-                                    <img
+                                    <div
+                                        class="profile__image"
+                                        v-bind:style="{
+                                            'background-image':
+                                                'url(' + user.photoURL + ')'
+                                        }"
+                                    ></div>
+                                    <!-- <img
                                         :src="user.photoURL"
-                                        style="height: 100px"
-                                    />
+                                        style="height: 250px"
+                                    /> -->
                                 </li>
                                 <li v-else>
-                                    <img
-                                        src="https://via.placeholder.com/250"
-                                    />
+                                    <div class="profile__default"></div>
                                 </li>
 
                                 <li>{{ user.displayName }}</li>
@@ -273,5 +278,12 @@ export default {
 }
 .settings-container {
     width: 100%;
+}
+.profile__image {
+    background: #7a7a7a;
+    height: 250px;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
 }
 </style>

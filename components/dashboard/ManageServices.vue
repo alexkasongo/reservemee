@@ -3,6 +3,7 @@
         <!-- BEUFY -->
         <section class="mb-5">
             <b-button
+                aria-label="View service instructions"
                 label="Instructions"
                 :disabled="isActive"
                 @click="isActive = true"
@@ -118,15 +119,25 @@
                         </div>
 
                         <div>
-                            <b-button @click="close"> Cancel </b-button>
+                            <b-button label="close" aria-label="close">
+                                Cancel
+                            </b-button>
                             <b-button
+                                label="Create"
+                                aria-label="Create category"
                                 class="is-primary"
                                 v-if="formTitle === 'New Category'"
                                 @click="save"
                             >
                                 Create
                             </b-button>
-                            <b-button v-else @click="update" class="is-primary">
+                            <b-button
+                                label="Update"
+                                aria-label="Update category"
+                                v-else
+                                @click="update"
+                                class="is-primary"
+                            >
                                 Update
                             </b-button>
                         </div>

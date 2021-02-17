@@ -33,6 +33,8 @@
                     </b-field>
                     <b-field class="buttons">
                         <b-button
+                            label="signin"
+                            aria-label="signin"
                             :loading="loading"
                             type="submit"
                             class="button is-primary"

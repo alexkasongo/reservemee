@@ -21,7 +21,12 @@
                 <small class="form-text text-muted mb-4">{{
                     errors.message
                 }}</small>
-                <b-button @click="resetPassword" type="is-primary">
+                <b-button
+                    label="Send me reset password instructions"
+                    aria-label="Send me password reset instructions"
+                    @click="resetPassword"
+                    type="is-primary"
+                >
                     Send me reset password instructions
                 </b-button>
             </div>

@@ -198,6 +198,8 @@
             </div>
             <div class="mb-5">
                 <b-button
+                    label="Save Settings"
+                    aria-label="Save settings"
                     @click="onUpdStoreInfo"
                     :loading="loading"
                     type="is-primary"

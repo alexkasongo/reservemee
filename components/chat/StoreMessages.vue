@@ -24,6 +24,8 @@
         </div> -->
         <client-only>
             <b-button
+                aria-label="View all messages"
+                label="View All"
                 type="is-primary"
                 expanded
                 v-if="messages.length > 0"

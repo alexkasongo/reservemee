@@ -45,6 +45,8 @@
                         </b-field>
                         <b-field class="buttons">
                             <b-button
+                                label="signup"
+                                aria-label="signup"
                                 :loading="loading"
                                 type="submit"
                                 class="button is-primary"

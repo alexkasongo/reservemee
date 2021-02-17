@@ -74,6 +74,8 @@
 
                 <b-field>
                     <b-button
+                        label="Update"
+                        aria-label="Update"
                         class="is-primary"
                         :loading="loading"
                         @click="onSubmit"

@@ -71,6 +71,8 @@
 
             <b-field>
                 <b-button
+                    label="Create"
+                    aria-label="Create new service"
                     class="is-primary"
                     :loading="loading"
                     @click="onSubmit"

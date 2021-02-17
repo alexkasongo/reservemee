@@ -39,6 +39,8 @@
                 {{ errors.message }}
             </div>
             <b-button
+                label="Change"
+                aria-label="Change password"
                 @click="changePassword"
                 type="is-primary"
                 class="mb-5"

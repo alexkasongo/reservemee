@@ -72,7 +72,12 @@
         <!-- Beufy End -->
         <!-- SERVICE CARD END-->
         <div class="buttons">
-            <b-button @click="onCreate" class="is-primary">
+            <b-button
+                label="Create New Service"
+                aria-label="Create new service"
+                @click="onCreate"
+                class="is-primary"
+            >
                 Create New Service
             </b-button>
         </div>
