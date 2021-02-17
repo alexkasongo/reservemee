@@ -5,14 +5,6 @@
                 <img @click="goHome(user)" :src="logo" alt="Reservemee logo" />
             </b-navbar-item>
         </template>
-        <!-- <template #start>
-            <b-navbar-item @click="goHome(user)" v-if="user && role.admin">
-                Dasboard
-            </b-navbar-item>
-            <b-navbar-item @click="$router.push('/store')">
-                Store
-            </b-navbar-item>
-        </template> -->
 
         <!-- FIXME -->
         <template #start>
@@ -24,59 +16,6 @@
             </b-navbar-item>
         </template>
 
-        <!-- <template #end>
-            <b-navbar-item @click="openCart">
-                <div v-if="user">
-                    <div>Cart</div>
-                </div>
-            </b-navbar-item>
-            <b-navbar-item>
-                <div v-if="user">
-                    <div
-                        @click="$router.push(`/inbox/${user.uid}`)"
-                        v-if="role.customer"
-                    >
-                        Inbox
-                    </div>
-                    <div
-                        @click="$router.push('/inbox/admin')"
-                        v-if="role.admin"
-                    >
-                        Inbox
-                    </div>
-                </div>
-            </b-navbar-item>
-            <b-navbar-item>
-                <b-navbar-dropdown label="Info" v-if="user">
-                    <div v-for="(item, index) in nav" :key="index">
-                        <b-navbar-item @click="dropDown(item)">{{
-                            item.title
-                        }}</b-navbar-item>
-                    </div>
-                </b-navbar-dropdown>
-            </b-navbar-item>
-            <b-navbar-item>
-                <div v-if="$route.name !== 'signin'">
-                    <a @click="signin" v-if="!user" class="button is-light">
-                        Log in
-                    </a>
-                </div>
-                <div v-else>
-                    <a @click="signup" v-if="!user" class="button is-primary">
-                        <strong>Sign up</strong>
-                    </a>
-                    <a
-                        @click="$router.push('/signup-admin')"
-                        v-if="!user"
-                        class="button is-primary"
-                    >
-                        <strong>Admin</strong>
-                    </a>
-                </div>
-            </b-navbar-item>
-        </template> -->
-
-        <!-- FIXME -->
         <template #end>
             <b-navbar-item v-if="user" @click="openCart">
                 <div>Cart</div>
@@ -103,30 +42,6 @@
                     Signin
                 </b-navbar-item>
             </b-navbar-dropdown>
-
-            <!-- <b-navbar-item v-if="!user">
-                <div>
-                    <a @click="signin" class="button is-light"> Log in </a>
-                </div>
-                <div>
-                    <a @click="signup" class="button is-primary">
-                        <strong>Sign up</strong>
-                    </a>
-                    <a
-                        @click="$router.push('/signup-admin')"
-                        class="button is-primary"
-                    >
-                        <strong>Admin</strong>
-                    </a>
-                </div>
-            </b-navbar-item> -->
-
-            <!-- <b-navbar-item @click="signup">
-                <b-button>Sing up</b-button>
-            </b-navbar-item>
-            <b-navbar-item @click="signin">
-                <b-button>Admin</b-button>
-            </b-navbar-item> -->
         </template>
     </b-navbar>
 </template>
