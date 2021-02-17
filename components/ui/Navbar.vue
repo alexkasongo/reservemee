@@ -16,10 +16,12 @@
 
         <!-- FIXME -->
         <template #start>
-            <!-- <b-navbar-item @click="goHome(user)"> Dasboard </b-navbar-item>
             <b-navbar-item @click="$router.push('/store')">
                 Store
-            </b-navbar-item> -->
+            </b-navbar-item>
+            <b-navbar-item v-if="user" @click="goHome(user)">
+                Dasboard
+            </b-navbar-item>
         </template>
 
         <!-- <template #end>
@@ -76,31 +78,33 @@
 
         <!-- FIXME -->
         <template #end>
-            <b-navbar-item @click="openCart">
-                <div>
-                    <div>Cart</div>
-                </div>
+            <b-navbar-item v-if="user" @click="openCart">
+                <div>Cart</div>
             </b-navbar-item>
 
             <b-navbar-dropdown label="Info">
-                <div v-for="(item, index) in nav" :key="index">
-                    <b-navbar-item @click="dropDown(item)">{{
-                        item.title
-                    }}</b-navbar-item>
-                </div>
                 <b-navbar-item
                     @click="$router.push(`/inbox/${user.uid}`)"
-                    v-if="role.customer"
+                    v-if="user && role.customer"
                     >Inbox</b-navbar-item
                 >
                 <b-navbar-item
                     @click="$router.push('/inbox/admin')"
-                    v-if="role.admin"
+                    v-if="user && role.admin"
                     >Inbox</b-navbar-item
                 >
+                <div v-for="(item, index) in nav" :key="index">
+                    <b-navbar-item v-if="user" @click="dropDown(item)">{{
+                        item.title
+                    }}</b-navbar-item>
+                </div>
+
+                <b-navbar-item v-if="!user" @click="signin">
+                    Signin
+                </b-navbar-item>
             </b-navbar-dropdown>
 
-            <!-- <b-navbar-item>
+            <!-- <b-navbar-item v-if="!user">
                 <div>
                     <a @click="signin" class="button is-light"> Log in </a>
                 </div>
@@ -115,6 +119,13 @@
                         <strong>Admin</strong>
                     </a>
                 </div>
+            </b-navbar-item> -->
+
+            <!-- <b-navbar-item @click="signup">
+                <b-button>Sing up</b-button>
+            </b-navbar-item>
+            <b-navbar-item @click="signin">
+                <b-button>Admin</b-button>
             </b-navbar-item> -->
         </template>
     </b-navbar>
@@ -291,7 +302,7 @@ export default {
             // get logged in user role - end
         }
     },
-    mounted() {
+    created() {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.user = user;
