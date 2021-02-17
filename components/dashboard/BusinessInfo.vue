@@ -129,7 +129,11 @@
                     </section>
 
                     <section>
-                        <a :href="storeProfile.facebook" target="_blank">
+                        <a
+                            :href="storeProfile.facebook"
+                            rel="noopener"
+                            target="_blank"
+                        >
                             <b-icon
                                 icon="facebook"
                                 v-if="storeProfile.facebook"
@@ -139,7 +143,11 @@
                                 </div>
                             </b-icon>
                         </a>
-                        <a :href="storeProfile.instagram" target="_blank">
+                        <a
+                            :href="storeProfile.instagram"
+                            rel="noopener"
+                            target="_blank"
+                        >
                             <b-icon
                                 icon="instagram"
                                 v-if="storeProfile.instagram"
@@ -149,7 +157,11 @@
                                 </div>
                             </b-icon>
                         </a>
-                        <a :href="storeProfile.twitter" target="_blank">
+                        <a
+                            :href="storeProfile.twitter"
+                            rel="noopener"
+                            target="_blank"
+                        >
                             <b-icon icon="twitter" v-if="storeProfile.twitter">
                                 <div icon>
                                     <v-icon>mdi-twitter</v-icon>
