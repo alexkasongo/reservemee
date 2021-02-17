@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { normalizeURL } from '@nuxt/ufo'
+import { isSamePath as _isSamePath, joinURL, normalizeURL, withQuery, withoutTrailingSlash } from 'ufo'
 
 // window.{{globals.loadedCallback}} hook
 // Useful for jsdom testing or plugins (https://github.com/tmpvar/jsdom#dealing-with-asynchronous-script-loading)
@@ -7,6 +7,15 @@ if (process.client) {
   window.onNuxtReadyCbs = []
   window.onNuxtReady = (cb) => {
     window.onNuxtReadyCbs.push(cb)
+  }
+}
+
+export function createGetCounter (counterObject, defaultKey = '') {
+  return function getCounter (id = defaultKey) {
+    if (counterObject[id] === undefined) {
+      counterObject[id] = 0
+    }
+    return counterObject[id]++
   }
 }
 
@@ -168,16 +177,18 @@ export async function setContext (app, context) {
       store: app.store,
       payload: context.payload,
       error: context.error,
-      base: '/',
-      env: {"API_KEY":"AIzaSyAjtsjs0bT6R9BxvypR1hq1dB1Gq7314GY","AUTH_DOMAIN":"bookme-7de5a.firebaseapp.com","DATABASE_URL":"https://bookme-7de5a.firebaseio.com","PROJECT_ID":"bookme-7de5a","STORAGE_BUCKET":"bookme-7de5a.appspot.com","MESSAGING_SENDER_ID":"712900995493","APP_ID":"1:712900995493:web:dec7f1a097c48a8709a04c","MEASUREMENT_ID":"G-WT6J1JBQ2B","NGROK_AUTH":"aleko:qwerty"}
+      base: app.router.options.base,
+      env: {"apiKey":"AIzaSyAjtsjs0bT6R9BxvypR1hq1dB1Gq7314GY","authDomain":"bookme-7de5a.firebaseapp.com","databaseURL":"https://bookme-7de5a.firebaseio.com","projectId":"bookme-7de5a","storageBucket":"bookme-7de5a.appspot.com","messagingSenderId":"712900995493","appId":"1:712900995493:web:dec7f1a097c48a8709a04c","measurementId":"G-WT6J1JBQ2B"}
     }
     // Only set once
-    if (!process.static && context.req) {
+
+    if (context.req) {
       app.context.req = context.req
     }
-    if (!process.static && context.res) {
+    if (context.res) {
       app.context.res = context.res
     }
+
     if (context.ssrContext) {
       app.context.ssrContext = context.ssrContext
     }
@@ -205,7 +216,7 @@ export async function setContext (app, context) {
           status
         })
       } else {
-        path = formatUrl(path, query)
+        path = withQuery(path, query)
         if (process.server) {
           app.context.next({
             path,
@@ -572,66 +583,6 @@ function flags (options) {
   return options && options.sensitive ? '' : 'i'
 }
 
-/**
- * Format given url, append query to url query string
- *
- * @param  {string} url
- * @param  {string} query
- * @return {string}
- */
-function formatUrl (url, query) {
-  let protocol
-  const index = url.indexOf('://')
-  if (index !== -1) {
-    protocol = url.substring(0, index)
-    url = url.substring(index + 3)
-  } else if (url.startsWith('//')) {
-    url = url.substring(2)
-  }
-
-  let parts = url.split('/')
-  let result = (protocol ? protocol + '://' : '//') + parts.shift()
-
-  let path = parts.join('/')
-  if (path === '' && parts.length === 1) {
-    result += '/'
-  }
-
-  let hash
-  parts = path.split('#')
-  if (parts.length === 2) {
-    [path, hash] = parts
-  }
-
-  result += path ? '/' + path : ''
-
-  if (query && JSON.stringify(query) !== '{}') {
-    result += (url.split('?').length === 2 ? '&' : '?') + formatQuery(query)
-  }
-  result += hash ? '#' + hash : ''
-
-  return result
-}
-
-/**
- * Transform data object to query string
- *
- * @param  {object} query
- * @return {string}
- */
-function formatQuery (query) {
-  return Object.keys(query).sort().map((key) => {
-    const val = query[key]
-    if (val == null) {
-      return ''
-    }
-    if (Array.isArray(val)) {
-      return val.slice().map(val2 => [key, '=', val2].join('')).join('&')
-    }
-    return key + '=' + val
-  }).filter(Boolean).join('&')
-}
-
 export function addLifecycleHook(vm, hook, fn) {
   if (!vm.$options[hook]) {
     vm.$options[hook] = []
@@ -641,21 +592,11 @@ export function addLifecycleHook(vm, hook, fn) {
   }
 }
 
-export function urlJoin () {
-  return [].slice
-    .call(arguments)
-    .join('/')
-    .replace(/\/+/g, '/')
-    .replace(':/', '://')
-}
+export const urlJoin = joinURL
 
-export function stripTrailingSlash (path) {
-  return path.replace(/\/+$/, '') || '/'
-}
+export const stripTrailingSlash = withoutTrailingSlash
 
-export function isSamePath (p1, p2) {
-  return stripTrailingSlash(p1) === stripTrailingSlash(p2)
-}
+export const isSamePath = _isSamePath
 
 export function setScrollRestoration (newVal) {
   try {

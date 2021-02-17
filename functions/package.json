@@ -1,44 +1,42 @@
 {
-  "name": "functions",
-  "description": "Cloud Functions for Firebase",
-  "scripts": {
-    "lint": "eslint .",
-    "serve": "firebase emulators:start --only functions",
-    "shell": "firebase functions:shell",
-    "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
-  },
-  "engines": {
-    "node": "10"
-  },
-  "main": "index.js",
-  "dependencies": {
-    "@nuxtjs/axios": "^5.12.0",
-    "@nuxtjs/firebase": "^6.1.1",
-    "@nuxtjs/ngrok": "^2.0.0",
-    "@nuxtjs/pwa": "^3.0.2",
-    "@nuxtjs/vuetify": "^1.11.2",
-    "@splidejs/vue-splide": "^0.3.5",
-    "axios": "^0.20.0",
-    "bootstrap": "^4.5.0",
-    "bootstrap-vue": "^2.15.0",
-    "firebase": "^7.21.1",
-    "firebase-admin": "^9.2.0",
-    "firebase-functions": "^3.11.0",
-    "nuxt-start": "^2.14.12",
-    "vee-validate": "^3.4.5",
-    "vue-sweetalert2": "^3.0.8",
-    "vue-textarea-autosize": "^1.1.1",
-    "vuex-persistedstate": "^3.1.0"
-  },
-  "devDependencies": {
-    "eslint": "^5.12.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "firebase-functions-test": "^0.2.0",
-    "node-sass": "^4.14.1",
-    "prettier": "^2.0.5",
-    "sass-loader": "^10.0.2"
-  },
-  "private": true
+    "name": "functions",
+    "description": "Cloud Functions for Firebase",
+    "scripts": {
+        "lint": "eslint .",
+        "serve": "firebase emulators:start --only functions",
+        "shell": "firebase functions:shell",
+        "start": "npm run shell",
+        "deploy": "firebase deploy --only functions",
+        "logs": "firebase functions:log"
+    },
+    "engines": {
+        "node": "10"
+    },
+    "main": "index.js",
+    "dependencies": {
+        "@nuxtjs/axios": "^5.12.0",
+        "@nuxtjs/dotenv": "^1.4.1",
+        "@nuxtjs/firebase": "^6.1.1",
+        "@nuxtjs/pwa": "^3.0.2",
+        "axios": "^0.20.0",
+        "core-js": "^2.6.12",
+        "firebase": "^7.21.1",
+        "firebase-admin": "^9.2.0",
+        "firebase-functions": "^3.11.0",
+        "nuxt-start": "^2.15.0",
+        "nuxt-buefy": "^0.4.4",
+        "vue-cal": "^3.10.0",
+        "vue-sweetalert2": "^3.0.8",
+        "vue-textarea-autosize": "^1.1.1",
+        "vuex-persistedstate": "^3.1.0"
+    },
+    "devDependencies": {
+        "eslint": "^5.12.0",
+        "eslint-plugin-promise": "^4.0.1",
+        "firebase-functions-test": "^0.2.0",
+        "node-sass": "^4.14.1",
+        "prettier": "^2.0.5",
+        "sass-loader": "^10.0.2"
+    },
+    "private": true
 }

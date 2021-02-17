@@ -41,7 +41,7 @@ module.exports = {
         '~/plugins/firebase.js',
         '~plugins/filters.js',
         { src: '~/plugins/localStorage.js', ssr: false },
-        { src: '~/plugins/vee-validate.js', ssr: true }
+        { src: '~plugins/vue-cal.js', ssr: false }
     ],
     /*
      ** Router Settings
@@ -53,14 +53,30 @@ module.exports = {
      ** Auto import components
      ** See https://nuxtjs.org/api/configuration-components
      */
-    components: true,
+    components: {
+        dirs: [
+            '~/components',
+            {
+                path: '~/components/chat/'
+            },
+            {
+                path: '~/components/client/'
+            },
+            {
+                path: '~/components/dashboard/'
+            },
+            {
+                path: '~/components/profile/'
+            },
+            {
+                path: '~/components/ui/'
+            }
+        ]
+    },
     /*
      ** Nuxt.js dev-modules
      */
-    buildModules: [
-        // '@nuxtjs/vuetify',
-        '@nuxtjs/dotenv'
-    ],
+    buildModules: ['@nuxtjs/dotenv', 'nuxt-buefy'],
     /*
      ** Nuxt.js modules
      */
@@ -86,7 +102,6 @@ module.exports = {
      ** See https://nuxtjs.org/api/configuration-build/
      */
     build: {
-        transpile: ['vee-validate/dist/rules'],
         extractCss: true,
         babel: {
             presets: ({ isServer }) => [

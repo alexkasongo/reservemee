@@ -13,16 +13,17 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_63746d88 from 'nuxt_plugin_plugin_63746d88' // Source: ./components/plugin.js (mode: 'all')
-import nuxt_plugin_vuesweetalert2_2c3ed169 from 'nuxt_plugin_vuesweetalert2_2c3ed169' // Source: ./vue-sweetalert2.js (mode: 'client')
-import nuxt_plugin_axios_22beee52 from 'nuxt_plugin_axios_22beee52' // Source: ./axios.js (mode: 'all')
-import nuxt_plugin_workbox_1ee5d224 from 'nuxt_plugin_workbox_1ee5d224' // Source: ./workbox.js (mode: 'client')
-import nuxt_plugin_metaplugin_e3e0dffe from 'nuxt_plugin_metaplugin_e3e0dffe' // Source: ./pwa/meta.plugin.js (mode: 'all')
-import nuxt_plugin_iconplugin_da919516 from 'nuxt_plugin_iconplugin_da919516' // Source: ./pwa/icon.plugin.js (mode: 'all')
+import nuxt_plugin_plugin_03215f6c from 'nuxt_plugin_plugin_03215f6c' // Source: ./components/plugin.js (mode: 'all')
+import nuxt_plugin_vuesweetalert2_3e6a3399 from 'nuxt_plugin_vuesweetalert2_3e6a3399' // Source: ./vue-sweetalert2.js (mode: 'client')
+import nuxt_plugin_axios_35b366fc from 'nuxt_plugin_axios_35b366fc' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_workbox_92d4adc4 from 'nuxt_plugin_workbox_92d4adc4' // Source: ./workbox.js (mode: 'client')
+import nuxt_plugin_metaplugin_bf8a1b9e from 'nuxt_plugin_metaplugin_bf8a1b9e' // Source: ./pwa/meta.plugin.js (mode: 'all')
+import nuxt_plugin_iconplugin_b63ad0b6 from 'nuxt_plugin_iconplugin_b63ad0b6' // Source: ./pwa/icon.plugin.js (mode: 'all')
+import nuxt_plugin_buefy_b1f5685a from 'nuxt_plugin_buefy_b1f5685a' // Source: ./buefy.js (mode: 'all')
 import nuxt_plugin_firebase_34d6f55a from 'nuxt_plugin_firebase_34d6f55a' // Source: ../plugins/firebase.js (mode: 'all')
 import nuxt_plugin_filters_2b4f519a from 'nuxt_plugin_filters_2b4f519a' // Source: ../plugins/filters.js (mode: 'all')
 import nuxt_plugin_localStorage_830ec59e from 'nuxt_plugin_localStorage_830ec59e' // Source: ../plugins/localStorage.js (mode: 'client')
-import nuxt_plugin_veevalidate_1a0c1998 from 'nuxt_plugin_veevalidate_1a0c1998' // Source: ../plugins/vee-validate.js (mode: 'all')
+import nuxt_plugin_vuecal_ca74f6b2 from 'nuxt_plugin_vuecal_ca74f6b2' // Source: ../plugins/vue-cal.js (mode: 'client')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -61,14 +62,18 @@ Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n
 const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
 
 const originalRegisterModule = Vuex.Store.prototype.registerModule
-const baseStoreOptions = { preserveState: process.client }
 
 function registerModule (path, rawModule, options = {}) {
-  return originalRegisterModule.call(this, path, rawModule, { ...baseStoreOptions, ...options })
+  const preserveState = process.client && (
+    Array.isArray(path)
+      ? !!path.reduce((namespacedState, path) => namespacedState && namespacedState[path], this.state)
+      : path in this.state
+  )
+  return originalRegisterModule.call(this, path, rawModule, { preserveState, ...options })
 }
 
 async function createApp(ssrContext, config = {}) {
-  const router = await createRouter(ssrContext)
+  const router = await createRouter(ssrContext, config)
 
   const store = createStore(ssrContext)
   // Add this.$router into store actions/mutations
@@ -82,7 +87,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"reservemee","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"style":[],"script":[]},
+    head: {"title":"reservemee","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"\u003Cp align=\"center\"\u003E   \u003Ca href=\"https:\u002F\u002Fgithub.com\u002Freservemee\u002Freservemee\"\u003E     \u003Cimg src=\"https:\u002F\u002Fi.imgur.com\u002FK6N34GH.png?raw=true\" alt=\"Reservemee logo\" width=\"300\" \u002F\u003E   \u003C\u002Fa\u003E \u003C\u002Fp\u003E"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002F\u002Fcdn.materialdesignicons.com\u002F5.0.45\u002Fcss\u002Fmaterialdesignicons.min.css"}],"style":[],"script":[]},
 
     store,
     router,
@@ -211,28 +216,32 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_63746d88 === 'function') {
-    await nuxt_plugin_plugin_63746d88(app.context, inject)
+  if (typeof nuxt_plugin_plugin_03215f6c === 'function') {
+    await nuxt_plugin_plugin_03215f6c(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_vuesweetalert2_2c3ed169 === 'function') {
-    await nuxt_plugin_vuesweetalert2_2c3ed169(app.context, inject)
+  if (process.client && typeof nuxt_plugin_vuesweetalert2_3e6a3399 === 'function') {
+    await nuxt_plugin_vuesweetalert2_3e6a3399(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_22beee52 === 'function') {
-    await nuxt_plugin_axios_22beee52(app.context, inject)
+  if (typeof nuxt_plugin_axios_35b366fc === 'function') {
+    await nuxt_plugin_axios_35b366fc(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_workbox_1ee5d224 === 'function') {
-    await nuxt_plugin_workbox_1ee5d224(app.context, inject)
+  if (process.client && typeof nuxt_plugin_workbox_92d4adc4 === 'function') {
+    await nuxt_plugin_workbox_92d4adc4(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_metaplugin_e3e0dffe === 'function') {
-    await nuxt_plugin_metaplugin_e3e0dffe(app.context, inject)
+  if (typeof nuxt_plugin_metaplugin_bf8a1b9e === 'function') {
+    await nuxt_plugin_metaplugin_bf8a1b9e(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_iconplugin_da919516 === 'function') {
-    await nuxt_plugin_iconplugin_da919516(app.context, inject)
+  if (typeof nuxt_plugin_iconplugin_b63ad0b6 === 'function') {
+    await nuxt_plugin_iconplugin_b63ad0b6(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_buefy_b1f5685a === 'function') {
+    await nuxt_plugin_buefy_b1f5685a(app.context, inject)
   }
 
   if (typeof nuxt_plugin_firebase_34d6f55a === 'function') {
@@ -247,8 +256,8 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_localStorage_830ec59e(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_veevalidate_1a0c1998 === 'function') {
-    await nuxt_plugin_veevalidate_1a0c1998(app.context, inject)
+  if (process.client && typeof nuxt_plugin_vuecal_ca74f6b2 === 'function') {
+    await nuxt_plugin_vuecal_ca74f6b2(app.context, inject)
   }
 
   // Lock enablePreview in context

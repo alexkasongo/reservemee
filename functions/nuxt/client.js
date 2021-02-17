@@ -15,7 +15,8 @@ import {
   compile,
   getQueryDiff,
   globalHandleError,
-  isSamePath
+  isSamePath,
+  urlJoin
 } from './utils.js'
 import { createApp, NuxtError } from './index.js'
 import fetchMixin from './mixins/fetch.client'
@@ -41,6 +42,11 @@ let store
 
 // Try to rehydrate SSR data from window
 const NUXT = window.__NUXT__ || {}
+
+const $config = NUXT.config || {}
+if ($config.app) {
+  __webpack_public_path__ = urlJoin($config.app.cdnURL, $config.app.assetsPath)
+}
 
 Object.assign(Vue.config, {"silent":true,"performance":false})
 
