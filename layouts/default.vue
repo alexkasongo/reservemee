@@ -11,10 +11,8 @@
                 v-model="open"
                 :on-cancel="closeCart"
             >
-                <div>
-                    <!-- <img :src="logo" alt="Reservemee logo" /> -->
-                    <Cart />
-                </div>
+                <!-- <img :src="logo" alt="Reservemee logo" /> -->
+                <Cart />
             </b-sidebar>
             <!-- TODO move to settings -->
             <!-- <div class="block">
