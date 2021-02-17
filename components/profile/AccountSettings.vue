@@ -64,8 +64,10 @@ export default {
                 .signOut()
                 .then(() => {
                     this.user = '';
-                    window.localStorage.removeItem('email');
-                    window.localStorage.removeItem('vuex');
+                    if (process.browser) {
+                        localStorage.removeItem('email');
+                        localStorage.removeItem('vuex');
+                    }
                 });
             this.$router.push('/signin');
         },

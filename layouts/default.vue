@@ -255,8 +255,10 @@ export default {
                 this.loadServices(user.uid);
             } else {
                 // No user is signed in.
-                window.localStorage.removeItem('vuex');
-                localStorage.clear();
+                if (process.browser) {
+                    localStorage.removeItem('vuex');
+                    localStorage.clear();
+                }
             }
         });
     }

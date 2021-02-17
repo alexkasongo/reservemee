@@ -80,18 +80,24 @@ export default {
             if (user !== null) {
                 this.loading = false;
                 // No user is signed in.
-                window.localStorage.removeItem('email');
-                window.localStorage.removeItem('vuex');
+                if (process.browser) {
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('vuex');
+                }
             }
         });
     },
     methods: {
         onSubmit() {
-            localStorage.setItem('email', this.email);
+            if (process.browser) {
+                localStorage.setItem('email', this.email);
+            }
             this.$router.push('/signup');
         },
         clearStorage() {
-            localStorage.clear();
+            if (process.browser) {
+                localStorage.clear();
+            }
         }
     }
 };

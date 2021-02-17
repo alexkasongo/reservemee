@@ -100,7 +100,9 @@ export default {
         }
     },
     mounted() {
-        this.email = localStorage.getItem('email');
+        if (process.browser) {
+            this.email = localStorage.getItem('email');
+        }
     }
 };
 </script>

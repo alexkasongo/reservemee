@@ -545,10 +545,12 @@ export default {
             }
         }
     },
-    mounted() {
+    created() {
         if (process.client) {
             const VueCal = () => import('vue-cal');
         }
+    },
+    mounted() {
         this.getEvents(this.user.uid);
     }
 };
