@@ -1,70 +1,74 @@
 <template>
     <!-- Header -->
     <div class="header">
-        <section
-            v-if="storeProfile !== null && Object.keys(storeProfile).length > 1"
-        >
+        <client-only>
             <section
-                v-if="storeProfile.storeBanner !== ''"
-                :src="storeProfile.storeBanner"
-                class="hero is-small is-link header__bg"
+                v-if="
+                    storeProfile !== null &&
+                    Object.keys(storeProfile).length > 1
+                "
             >
-                <div class="hero-body">
-                    <img
-                        v-if="storeProfile.storeLogo !== ''"
-                        @click="$router.push('/settings')"
-                        :src="storeProfile.storeLogo"
-                        alt
-                        class="header__thumb-lg rounded-circle"
-                    />
-                    <img
-                        v-else
-                        @click="$router.push('/settings')"
-                        :src="defaultStoreLogo"
-                        alt
-                        class="header__thumb-lg rounded-circle"
-                    />
-                    <h1 class="title">
-                        {{ storeProfile.storeName | capitalize }}
-                    </h1>
-                    <h2 class="subtitle">{{ user.displayName }}</h2>
-                </div>
+                <section
+                    v-if="storeProfile.storeBanner !== ''"
+                    :src="storeProfile.storeBanner"
+                    class="hero is-small is-link header__bg"
+                >
+                    <div class="hero-body">
+                        <img
+                            v-if="storeProfile.storeLogo !== ''"
+                            @click="$router.push('/settings')"
+                            :src="storeProfile.storeLogo"
+                            alt
+                            class="header__thumb-lg rounded-circle"
+                        />
+                        <img
+                            v-else
+                            @click="$router.push('/settings')"
+                            :src="defaultStoreLogo"
+                            alt
+                            class="header__thumb-lg rounded-circle"
+                        />
+                        <h1 class="title">
+                            {{ storeProfile.storeName | capitalize }}
+                        </h1>
+                        <h2 class="subtitle">{{ user.displayName }}</h2>
+                    </div>
+                </section>
+                <section v-else class="hero is-small is-link">
+                    <div class="hero-body" :src="defaultStoreBanner">
+                        <img
+                            v-if="storeProfile.storeLogo !== ''"
+                            @click="$router.push('/settings')"
+                            :src="storeProfile.storeLogo"
+                            alt
+                            class="header__thumb-lg rounded-circle"
+                        />
+                        <img
+                            v-else
+                            @click="$router.push('/settings')"
+                            :src="defaultStoreLogo"
+                            alt
+                            class="header__thumb-lg rounded-circle"
+                        />
+                        <h1 class="title">
+                            {{ storeProfile.storeName | capitalize }}
+                        </h1>
+                        <h2 class="subtitle">{{ user.displayName }}</h2>
+                    </div>
+                </section>
             </section>
             <section v-else class="hero is-small is-link">
-                <div class="hero-body" :src="defaultStoreBanner">
+                <div class="hero-body">
                     <img
-                        v-if="storeProfile.storeLogo !== ''"
                         @click="$router.push('/settings')"
-                        :src="storeProfile.storeLogo"
+                        src="https://via.placeholder.com/1200/00897b"
                         alt
                         class="header__thumb-lg rounded-circle"
                     />
-                    <img
-                        v-else
-                        @click="$router.push('/settings')"
-                        :src="defaultStoreLogo"
-                        alt
-                        class="header__thumb-lg rounded-circle"
-                    />
-                    <h1 class="title">
-                        {{ storeProfile.storeName | capitalize }}
-                    </h1>
                     <h2 class="subtitle">{{ user.displayName }}</h2>
                 </div>
             </section>
-        </section>
-
-        <section v-else class="hero is-small is-link">
-            <div class="hero-body">
-                <img
-                    @click="$router.push('/settings')"
-                    src="https://via.placeholder.com/1200/00897b"
-                    alt
-                    class="header__thumb-lg rounded-circle"
-                />
-                <h2 class="subtitle">{{ user.displayName }}</h2>
-            </div>
-        </section>
+        </client-only>
     </div>
     <!-- Header End-->
 </template>

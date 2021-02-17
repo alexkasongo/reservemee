@@ -1,197 +1,202 @@
 <template>
     <div class="settings">
-        <div class="sidebar-page">
-            <section class="sidebar-layout">
-                <b-sidebar
-                    position="static"
-                    :mobile="mobile"
-                    :expand-on-hover="expandOnHover"
-                    :reduce="reduce"
-                    :fullheight="true"
-                    type="is-light"
-                    open
-                    class="sidebar"
-                >
-                    <div class="p-1">
-                        <div class="block">
-                            <ul>
-                                <li v-if="loggedInUser.photoURL">
-                                    <img
-                                        :src="loggedInUser.photoURL"
-                                        style="height: 100px"
-                                    />
-                                </li>
-                                <li v-else>
-                                    <img
-                                        src="https://via.placeholder.com/250"
-                                    />
-                                </li>
+        <client-only>
+            <div class="sidebar-page">
+                <section class="sidebar-layout">
+                    <b-sidebar
+                        position="static"
+                        :mobile="mobile"
+                        :expand-on-hover="expandOnHover"
+                        :reduce="reduce"
+                        :fullheight="true"
+                        type="is-light"
+                        open
+                        class="sidebar"
+                    >
+                        <div class="p-1">
+                            <div class="block">
+                                <ul>
+                                    <li v-if="loggedInUser.photoURL">
+                                        <img
+                                            :src="loggedInUser.photoURL"
+                                            style="height: 100px"
+                                        />
+                                    </li>
+                                    <li v-else>
+                                        <img
+                                            src="https://via.placeholder.com/250"
+                                        />
+                                    </li>
 
-                                <li>{{ loggedInUser.displayName }}</li>
-                            </ul>
-                        </div>
-                        <b-menu class="is-custom-mobile">
-                            <b-menu-list label="From:">
-                                <div
-                                    v-for="(messenger, i) in allMessages"
-                                    :key="i"
-                                >
-                                    <b-menu-item
-                                        expanded
-                                        icon="checkbox-blank-circle"
-                                        :label="messenger.name"
+                                    <li>{{ loggedInUser.displayName }}</li>
+                                </ul>
+                            </div>
+                            <b-menu class="is-custom-mobile">
+                                <b-menu-list label="From:">
+                                    <div
+                                        v-for="(messenger, i) in allMessages"
+                                        :key="i"
                                     >
                                         <b-menu-item
-                                            active
-                                            class="is-active"
-                                            @click="onChange(messenger)"
-                                            :label="messenger.message"
-                                        ></b-menu-item>
-                                    </b-menu-item>
-                                </div>
-                            </b-menu-list>
-                        </b-menu>
-                    </div>
-                </b-sidebar>
+                                            expanded
+                                            icon="checkbox-blank-circle"
+                                            :label="messenger.name"
+                                        >
+                                            <b-menu-item
+                                                active
+                                                class="is-active"
+                                                @click="onChange(messenger)"
+                                                :label="messenger.message"
+                                            ></b-menu-item>
+                                        </b-menu-item>
+                                    </div>
+                                </b-menu-list>
+                            </b-menu>
+                        </div>
+                    </b-sidebar>
 
-                <div class="settings-container">
-                    <div
-                        class="inbox-view ml-5 mr-5 is-flex is-flex-direction-column is-justify-content-space-between"
-                    >
-                        <div class="inbox__right-card-top">
-                            <div
-                                v-if="messagePreview.length > 0"
-                                elevation="0"
-                                class="inbox__right-card-head"
-                            >
-                                <div>
-                                    <p class="display-1 text--primary">
-                                        {{
-                                            messagePreview[0].name | capitalize
-                                        }}
-                                    </p>
-                                    <p>
-                                        {{
-                                            new Date(
-                                                messagePreview[0].timestamp
-                                            )
-                                        }}
-                                    </p>
-                                    <div class="text--primary">
-                                        {{ messagePreview[0].message }}
+                    <div class="settings-container">
+                        <div
+                            class="inbox-view ml-5 mr-5 is-flex is-flex-direction-column is-justify-content-space-between"
+                        >
+                            <div class="inbox__right-card-top">
+                                <div
+                                    v-if="messagePreview.length > 0"
+                                    elevation="0"
+                                    class="inbox__right-card-head"
+                                >
+                                    <div>
+                                        <p class="display-1 text--primary">
+                                            {{
+                                                messagePreview[0].name
+                                                    | capitalize
+                                            }}
+                                        </p>
+                                        <p>
+                                            {{
+                                                new Date(
+                                                    messagePreview[0].timestamp
+                                                )
+                                            }}
+                                        </p>
+                                        <div class="text--primary">
+                                            {{ messagePreview[0].message }}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <hr v-if="messagePreview.length > 0" />
+                                <hr v-if="messagePreview.length > 0" />
 
-                            <div class="inbox__right-card-middle">
-                                <ul
-                                    v-for="(message, index) in messages"
-                                    :key="index"
-                                >
-                                    <li :key="index" class="is-flex mb-5">
-                                        <div class="inbox__right-avatar">
-                                            <img
-                                                class="message-avatar"
-                                                :src="message.storeOwnerImage"
-                                            />
-                                        </div>
+                                <div class="inbox__right-card-middle">
+                                    <ul
+                                        v-for="(message, index) in messages"
+                                        :key="index"
+                                    >
+                                        <li :key="index" class="is-flex mb-5">
+                                            <div class="inbox__right-avatar">
+                                                <img
+                                                    class="message-avatar"
+                                                    :src="
+                                                        message.storeOwnerImage
+                                                    "
+                                                />
+                                            </div>
+                                            <div>
+                                                <div class="ml-2">
+                                                    {{ message.from }}
+                                                </div>
+                                                <div
+                                                    v-bind:class="{
+                                                        purple:
+                                                            message.from ===
+                                                            `${user.name}`,
+                                                        grey:
+                                                            message.from !==
+                                                            `${user.name}`
+                                                    }"
+                                                    class="ml-2"
+                                                >
+                                                    {{ message.message }}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="inbox__right-card-btm">
+                                <ul v-if="allMessages.length > 0">
+                                    <li>
                                         <div>
-                                            <div class="ml-2">
-                                                {{ message.from }}
-                                            </div>
-                                            <div
-                                                v-bind:class="{
-                                                    purple:
-                                                        message.from ===
-                                                        `${user.name}`,
-                                                    grey:
-                                                        message.from !==
-                                                        `${user.name}`
-                                                }"
-                                                class="ml-2"
-                                            >
-                                                {{ message.message }}
-                                            </div>
+                                            <form>
+                                                <div class="field">
+                                                    <label for="reply"
+                                                        >Write Message</label
+                                                    >
+                                                    <b-input
+                                                        type="text"
+                                                        name="reply"
+                                                        v-model="newReply"
+                                                    ></b-input>
+                                                    <p
+                                                        v-if="feedback"
+                                                        class="red-text center"
+                                                    >
+                                                        {{ feedback }}
+                                                    </p>
+                                                </div>
+                                                <b-button
+                                                    @click="onReply"
+                                                    type="is-primary"
+                                                    expanded
+                                                >
+                                                    Send
+                                                </b-button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div
+                                v-if="allMessages.length <= 0"
+                                class="inbox__right-card-btm"
+                            >
+                                <ul>
+                                    <li>
+                                        <div>
+                                            <form>
+                                                <div class="field">
+                                                    <label for="reply"
+                                                        >Write Message</label
+                                                    >
+                                                    <b-input
+                                                        type="text"
+                                                        name="reply"
+                                                        v-model="newReply"
+                                                    ></b-input>
+                                                    <p
+                                                        v-if="feedback"
+                                                        class="red-text center"
+                                                    >
+                                                        {{ feedback }}
+                                                    </p>
+                                                </div>
+                                                <b-button
+                                                    @click="onReply"
+                                                    type="is-primary"
+                                                    expanded
+                                                >
+                                                    Send
+                                                </b-button>
+                                            </form>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-
-                        <div class="inbox__right-card-btm">
-                            <ul v-if="allMessages.length > 0">
-                                <li>
-                                    <div>
-                                        <form>
-                                            <div class="field">
-                                                <label for="reply"
-                                                    >Write Message</label
-                                                >
-                                                <b-input
-                                                    type="text"
-                                                    name="reply"
-                                                    v-model="newReply"
-                                                ></b-input>
-                                                <p
-                                                    v-if="feedback"
-                                                    class="red-text center"
-                                                >
-                                                    {{ feedback }}
-                                                </p>
-                                            </div>
-                                            <b-button
-                                                @click="onReply"
-                                                type="is-primary"
-                                                expanded
-                                            >
-                                                Send
-                                            </b-button>
-                                        </form>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div
-                            v-if="allMessages.length <= 0"
-                            class="inbox__right-card-btm"
-                        >
-                            <ul>
-                                <li>
-                                    <div>
-                                        <form>
-                                            <div class="field">
-                                                <label for="reply"
-                                                    >Write Message</label
-                                                >
-                                                <b-input
-                                                    type="text"
-                                                    name="reply"
-                                                    v-model="newReply"
-                                                ></b-input>
-                                                <p
-                                                    v-if="feedback"
-                                                    class="red-text center"
-                                                >
-                                                    {{ feedback }}
-                                                </p>
-                                            </div>
-                                            <b-button
-                                                @click="onReply"
-                                                type="is-primary"
-                                                expanded
-                                            >
-                                                Send
-                                            </b-button>
-                                        </form>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
-                </div>
-            </section>
-        </div>
+                </section>
+            </div>
+        </client-only>
     </div>
 </template>
 

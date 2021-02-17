@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- <section class="mb-5">
+        <section class="mb-5">
             <b-button
                 label="Instructions"
                 :disabled="isActive"
@@ -31,32 +31,37 @@
                     </li>
                 </ul>
             </b-notification>
-        </section> -->
+        </section>
+        <client-only>
+            <vue-cal
+                style="height: 650px"
+                :selected-date="selectedDate"
+                today-button
+                :time-from="8 * 60"
+                :time-to="20 * 60"
+                :snap-to-time="15"
+                editable-events
+                :events="events"
+                class="vuecal--full-height-delete"
+                @cell-click="logEvents('cell-click', $event)"
+                @event-focus="logEvents('event-focus', $event)"
+                @event-title-change="logEvents('event-title-change', $event)"
+                @event-content-change="
+                    logEvents('event-content-change', $event)
+                "
+                @event-duration-change="
+                    logEvents('event-duration-change', $event)
+                "
+                @event-drop="logEvents('event-drop', $event)"
+                @event-create="logEvents('event-create', $event)"
+                @event-drag-create="logEvents('event-drag-create', $event)"
+                @event-delete="logEvents('event-delete', $event)"
+                :on-event-click="onEventClick"
+            >
+            </vue-cal>
+        </client-only>
 
-        <vue-cal
-            style="height: 650px"
-            :selected-date="selectedDate"
-            today-button
-            :time-from="8 * 60"
-            :time-to="20 * 60"
-            :snap-to-time="15"
-            editable-events
-            :events="events"
-            class="vuecal--full-height-delete"
-            @cell-click="logEvents('cell-click', $event)"
-            @event-focus="logEvents('event-focus', $event)"
-            @event-title-change="logEvents('event-title-change', $event)"
-            @event-content-change="logEvents('event-content-change', $event)"
-            @event-duration-change="logEvents('event-duration-change', $event)"
-            @event-drop="logEvents('event-drop', $event)"
-            @event-create="logEvents('event-create', $event)"
-            @event-drag-create="logEvents('event-drag-create', $event)"
-            @event-delete="logEvents('event-delete', $event)"
-            :on-event-click="onEventClick"
-        >
-        </vue-cal>
-
-        <!-- <section>
+        <section>
             <b-modal
                 v-model="isCardModalActive"
                 :width="960"
@@ -125,7 +130,7 @@
                     </div>
                 </section>
             </b-modal>
-        </section> -->
+        </section>
     </div>
 </template>
 
@@ -547,11 +552,8 @@ export default {
     },
     created() {
         if (process.client) {
-            const VueCal = () => import('vue-cal');
+            this.getEvents(this.user.uid);
         }
-    },
-    mounted() {
-        this.getEvents(this.user.uid);
     }
 };
 </script>

@@ -3,7 +3,7 @@
         <div v-if="user">
             <!-- Header -->
             <div>
-                <!-- <Header /> -->
+                <Header />
             </div>
             <!-- Header End-->
 
@@ -13,7 +13,7 @@
                 >
                     <!-- Personal-Information -->
                     <div class="mb-5">
-                        <!-- <BusinessInfo /> -->
+                        <BusinessInfo />
                     </div>
                     <!-- Personal-Information -->
                     <div v-if="user">
@@ -27,12 +27,12 @@
                     <div v-if="user">
                         <div v-if="categories.length <= 0" class="mb-5">
                             <!-- CategoryCheck -->
-                            <!-- <CategoryCheck /> -->
+                            <CategoryCheck />
                             <!-- CategoryCheck -->
                         </div>
                         <div v-if="!user.emailVerified" class="mb-5">
                             <!-- EmailVerified -->
-                            <!-- <EmailVerified /> -->
+                            <EmailVerified />
                             <!-- EmailVerified -->
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     <div>
                         <h5 class="title is-5 mt-10 mb-5">Messages</h5>
                         <!-- Messages -->
-                        <!-- <StoreMessages /> -->
+                        <StoreMessages />
                         <!-- Messages -->
                     </div>
                 </div>
