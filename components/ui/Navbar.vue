@@ -6,7 +6,6 @@
             </b-navbar-item>
         </template>
 
-        <!-- FIXME -->
         <template #start>
             <b-navbar-item @click="$router.push('/store')">
                 Store
