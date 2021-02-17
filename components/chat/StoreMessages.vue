@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- FIXME -->
         <!-- <div
             class="inbox-widget"
             v-for="message in messages.slice(0, 3)"
@@ -20,15 +21,15 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <b-button
-            type="is-primary"
-            expanded
-            v-if="messages.length > 0"
-            @click="$router.push('/inbox/admin')"
-            >View All</b-button
-        > -->
+        </div> -->
         <client-only>
+            <b-button
+                type="is-primary"
+                expanded
+                v-if="messages.length > 0"
+                @click="$router.push('/inbox/admin')"
+                >View All</b-button
+            >
             <div v-if="messages.length <= 0">
                 <b-notification
                     type="is-success is-light"

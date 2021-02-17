@@ -1,10 +1,34 @@
 <template>
     <div class="service">
         <!-- BEUFY -->
+        <section class="mb-5">
+            <b-button
+                label="Instructions"
+                :disabled="isActive"
+                @click="isActive = true"
+            />
+            <b-notification
+                class="mb-5"
+                v-model="isActive"
+                aria-close-label="Close notification"
+                animation="fade"
+            >
+                <ul>
+                    <li>
+                        - Create a new category by clicking create category.
+                    </li>
+                    <li>
+                        - Edit the category name by clicking on the pencil icon.
+                    </li>
+                    <li>- Delete a category by clicking on the trash icon.</li>
+                </ul>
+            </b-notification>
+        </section>
+
         <section class="service__border">
             <b-field>
                 <b-button @click="onCreateCategory" class="is-primary mb-5"
-                    >Create Service</b-button
+                    >Create Category</b-button
                 >
             </b-field>
             <b-table
@@ -153,7 +177,8 @@ export default {
         currentPage: 1,
         perPage: 5,
         // MODAL
-        isCardModalActive: false
+        isCardModalActive: false,
+        isActive: false
     }),
     computed: {
         ...mapGetters({

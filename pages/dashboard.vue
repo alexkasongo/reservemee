@@ -47,7 +47,7 @@
                 <div class="column">
                     <!-- StoreSummary -->
                     <div class="mb-5">
-                        <!-- <StoreSummary /> -->
+                        <StoreSummary />
                     </div>
                     <!-- StoreSummary -->
 
@@ -68,11 +68,7 @@
                             each category
                         </h2>
                         <!-- ManageServices -->
-                        <!-- <ManageServices v-if="categories.length !== 0" /> -->
-                        <!-- ManageServices -->
-
-                        <!-- ManageServices -->
-                        <!-- <ManageServices v-else /> -->
+                        <ManageServices />
                         <!-- ManageServices -->
                     </div>
                 </div>
