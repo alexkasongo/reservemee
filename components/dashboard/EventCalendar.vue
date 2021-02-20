@@ -36,6 +36,7 @@
         <client-only>
             <vue-cal
                 style="height: 650px"
+                active-view="day"
                 :selected-date="selectedDate"
                 today-button
                 :time-from="8 * 60"
