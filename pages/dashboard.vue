@@ -7,10 +7,11 @@
             </div>
             <!-- Header End-->
 
-            <div class="columns pl-3 mt-5">
-                <div
+            <div class="dashboard__columns mt-5">
+                <div class="dashboard__col-one dashboard__bg">
+                    <!-- <div
                     class="dashboard__bg column is-full-mobile is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd"
-                >
+                > -->
                     <!-- Personal-Information -->
                     <div class="mb-5">
                         <BusinessInfo />
@@ -44,7 +45,7 @@
                         <!-- Messages -->
                     </div>
                 </div>
-                <div class="column">
+                <div class="dashboard__col-two">
                     <!-- StoreSummary -->
                     <div class="mb-5">
                         <StoreSummary />
@@ -144,12 +145,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.dashboard {
-    margin: 0 0 200px 0;
-    .dashboard__bg {
-        background-color: #f5f5f5;
-        border-radius: 4px;
-    }
-}
-</style>
+<style lang="scss" scoped></style>

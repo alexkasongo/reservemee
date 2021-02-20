@@ -126,9 +126,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header {
-    &__bg {
-        border-radius: 24px;
-    }
-}
+// .header {
+//     &__bg {
+//         border-radius: 24px;
+//     }
+// }
 </style>
