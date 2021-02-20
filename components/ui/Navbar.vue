@@ -1,5 +1,5 @@
 <template>
-    <b-navbar class="container">
+    <b-navbar class="mb-5">
         <template #brand>
             <b-navbar-item @click="$router.push('/')">
                 <img

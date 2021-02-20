@@ -58,7 +58,7 @@
             </v-snackbar> -->
         <!-- SNACKBAR -->
 
-        <div class="container">
+        <div>
             <Nuxt />
         </div>
     </div>
