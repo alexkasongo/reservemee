@@ -36,7 +36,7 @@
         <client-only>
             <vue-cal
                 style="height: 650px"
-                active-view="day"
+                :active-view="mini"
                 :selected-date="selectedDate"
                 today-button
                 :time-from="8 * 60"
@@ -158,7 +158,8 @@ export default {
         end: '',
         details: '',
         title: '',
-        errors: []
+        errors: [],
+        mini: ''
     }),
     computed: {
         user() {
@@ -181,6 +182,40 @@ export default {
                 timezome: 'UTC'
             });
             return dtf.format(new Date(2000, 12, 12, 22, 23, 24));
+        },
+        // Watch for window width size changes
+        viewPort() {
+            // Define our viewportWidth variable
+            let viewportWidth;
+
+            // Set/update the viewportWidth value
+            let setViewportWidth = function () {
+                viewportWidth =
+                    window.innerWidth || document.documentElement.clientWidth;
+            };
+
+            // Log the viewport width into the console
+            let logWidth = () => {
+                if (viewportWidth > 768) {
+                    this.mini = 'week';
+                } else {
+                    this.mini = 'day';
+                }
+            };
+
+            // Set our initial width and log it
+            setViewportWidth();
+            logWidth();
+
+            // On resize events, recalculate and log
+            window.addEventListener(
+                'resize',
+                function () {
+                    setViewportWidth();
+                    logWidth();
+                },
+                false
+            );
         }
     },
     methods: {
@@ -554,6 +589,9 @@ export default {
     },
     created() {
         if (process.client) {
+            // start tracking the viewport
+            this.viewPort;
+            // Get calendar events
             this.getEvents(this.user.uid);
         }
     }
