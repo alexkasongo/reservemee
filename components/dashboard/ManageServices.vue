@@ -354,16 +354,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.service {
-    &__border {
-        border: 1px solid #ffdd57;
-        border-top-right-radius: 4px;
-        border-bottom-right-radius: 4px;
-        border-bottom-left-radius: 4px;
-        color: rgba(0, 0, 0, 0.7);
-        padding: 1.5rem;
-    }
-}
+// .service {
+//     &__border {
+//         border: 1px solid #ffdd57;
+//         border-top-right-radius: 4px;
+//         border-bottom-right-radius: 4px;
+//         border-bottom-left-radius: 4px;
+//         color: rgba(0, 0, 0, 0.7);
+//         padding: 1.5rem;
+//     }
+// }
 
 .dialog {
     height: 400px;

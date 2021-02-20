@@ -17,9 +17,9 @@
     }
     &__col-one {
         width: 100%;
+        padding: 10px;
         @media (min-width: $tablet) {
             width: 30%;
-            padding: 10px;
         }
     }
     &__col-two {

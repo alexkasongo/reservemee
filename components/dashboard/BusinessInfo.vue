@@ -14,71 +14,73 @@
                 >
 
                 <div class="mt-5">
-                    <p>
-                        <strong>Store Name :</strong>
-                        <span class="m-l-15">{{
-                            storeProfile.storeName | capitalize
-                        }}</span>
-                    </p>
-                    <p>
-                        <strong>Mobile :</strong>
-                        <span class="m-l-15">{{
-                            storeProfile.storePhoneNumber
-                        }}</span>
-                    </p>
-                    <p>
-                        <strong>Email :</strong>
-                        <span class="m-l-15">{{
-                            storeProfile.storeEmail
-                        }}</span>
-                    </p>
-                    <p>
-                        <strong>Location :</strong>
-                        <span class="m-l-15">{{
-                            storeProfile.storeLocation
-                        }}</span>
-                    </p>
-                    <!-- Services start -->
-                    <div v-if="this.storeProfile">
-                        <div v-if="beauty !== null">
-                            <b-taglist>
-                                <div
-                                    v-for="service in beauty"
-                                    :key="service.name"
-                                >
-                                    <b-tag
-                                        class="ml-1 mr-1"
-                                        type="is-link is-light"
-                                        >{{ service }}</b-tag
+                    <b-notification :closable="false">
+                        <p>
+                            <strong>Store Name :</strong>
+                            <span class="m-l-15">{{
+                                storeProfile.storeName | capitalize
+                            }}</span>
+                        </p>
+                        <p>
+                            <strong>Mobile :</strong>
+                            <span class="m-l-15">{{
+                                storeProfile.storePhoneNumber
+                            }}</span>
+                        </p>
+                        <p>
+                            <strong>Email :</strong>
+                            <span class="m-l-15">{{
+                                storeProfile.storeEmail
+                            }}</span>
+                        </p>
+                        <p>
+                            <strong>Location :</strong>
+                            <span class="m-l-15">{{
+                                storeProfile.storeLocation
+                            }}</span>
+                        </p>
+                        <!-- Services start -->
+                        <div v-if="this.storeProfile">
+                            <div v-if="beauty !== null">
+                                <b-taglist>
+                                    <div
+                                        v-for="service in beauty"
+                                        :key="service.name"
                                     >
-                                </div>
-                            </b-taglist>
-                            <b-taglist>
-                                <div
-                                    v-for="service in wellness"
-                                    :key="service.name"
-                                >
-                                    <b-tag
-                                        class="ml-1 mr-1"
-                                        type="is-link is-light"
-                                        >{{ service }}</b-tag
+                                        <b-tag
+                                            class="ml-1 mr-1"
+                                            type="is-link is-light"
+                                            >{{ service }}</b-tag
+                                        >
+                                    </div>
+                                </b-taglist>
+                                <b-taglist>
+                                    <div
+                                        v-for="service in wellness"
+                                        :key="service.name"
                                     >
-                                </div>
-                            </b-taglist>
-                            <b-taglist>
-                                <div
-                                    v-for="service in fitness"
-                                    :key="service.name"
-                                >
-                                    <b-tag
-                                        class="mr-1"
-                                        type="is-link is-light"
-                                        >{{ service }}</b-tag
+                                        <b-tag
+                                            class="ml-1 mr-1"
+                                            type="is-link is-light"
+                                            >{{ service }}</b-tag
+                                        >
+                                    </div>
+                                </b-taglist>
+                                <b-taglist>
+                                    <div
+                                        v-for="service in fitness"
+                                        :key="service.name"
                                     >
-                                </div>
-                            </b-taglist>
+                                        <b-tag
+                                            class="mr-1"
+                                            type="is-link is-light"
+                                            >{{ service }}</b-tag
+                                        >
+                                    </div>
+                                </b-taglist>
+                            </div>
                         </div>
-                    </div>
+                    </b-notification>
                 </div>
                 <!-- Services end -->
                 <!-- Social media card start -->

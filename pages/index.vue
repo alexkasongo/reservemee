@@ -9,19 +9,20 @@
                             data-aos="fade-down"
                         >
                             <h1 class="title titled is-1 mb-6">
-                                absurd illustrations that make sense
+                                Scheduling and Management Nuxt.js PWA
+                                boilerplate
                             </h1>
                             <h2
                                 class="subtitled subtitle has-text-grey is-4 has-text-weight-normal is-family-sans-serif"
                             >
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Laborum cupiditate dolorum
-                                vitae dolores nesciunt totam magni quas.
+                                Reservemee is an open source project that serves
+                                as a scalable starting point for small to medium
+                                sized business. The app is Server Side Rendered
+                                (SSR) via Firebase Cloud Functions and hosted on
+                                Google Firebase.
                             </h2>
                             <div class="buttons">
-                                <button class="button is-black">
-                                    Download
-                                </button>
+                                <button class="button is-black">Login</button>
                                 <button class="button">Subscribe</button>
                             </div>
                         </div>
