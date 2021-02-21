@@ -3,120 +3,140 @@
     "name": "dashboard",
     "path": "/dashboard",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/dashboard.vue",
-    "chunkName": "pages/dashboard"
+    "chunkName": "pages/dashboard",
+    "_name": "_6736fb5e"
   },
   {
     "name": "password-reset",
     "path": "/password-reset",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/password-reset.vue",
-    "chunkName": "pages/password-reset"
+    "chunkName": "pages/password-reset",
+    "_name": "_31346ec3"
   },
   {
     "name": "settings",
     "path": "/settings",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/settings.vue",
-    "chunkName": "pages/settings"
+    "chunkName": "pages/settings",
+    "_name": "_5c3de26e"
   },
   {
     "name": "signin",
     "path": "/signin",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/signin.vue",
-    "chunkName": "pages/signin"
+    "chunkName": "pages/signin",
+    "_name": "_2188f648"
   },
   {
     "name": "signup",
     "path": "/signup",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/signup.vue",
-    "chunkName": "pages/signup"
+    "chunkName": "pages/signup",
+    "_name": "_361f4cbe"
   },
   {
     "name": "signup-admin",
     "path": "/signup-admin",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/signup-admin.vue",
-    "chunkName": "pages/signup-admin"
+    "chunkName": "pages/signup-admin",
+    "_name": "_48018300"
   },
   {
     "name": "store",
     "path": "/store",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/store.vue",
-    "chunkName": "pages/store"
+    "chunkName": "pages/store",
+    "_name": "_4ebd042b"
   },
   {
     "name": "verification",
     "path": "/verification",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/verification.vue",
-    "chunkName": "pages/verification"
+    "chunkName": "pages/verification",
+    "_name": "_486a147e"
   },
   {
     "name": "inbox-admin",
     "path": "/inbox/admin",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/inbox/admin.vue",
-    "chunkName": "pages/inbox/admin"
+    "chunkName": "pages/inbox/admin",
+    "_name": "_5949f1d0"
   },
   {
     "name": "playground-landing",
     "path": "/playground/landing",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/playground/landing.vue",
-    "chunkName": "pages/playground/landing"
+    "chunkName": "pages/playground/landing",
+    "_name": "_1eb022e9"
   },
   {
     "name": "playground-playground",
     "path": "/playground/playground",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/playground/playground.vue",
-    "chunkName": "pages/playground/playground"
+    "chunkName": "pages/playground/playground",
+    "_name": "_11b95ed9"
   },
   {
     "name": "service-bookings",
     "path": "/service/bookings",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/service/bookings.vue",
-    "chunkName": "pages/service/bookings"
+    "chunkName": "pages/service/bookings",
+    "_name": "_1fd5850c"
   },
   {
     "name": "service-create-service",
     "path": "/service/create-service",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/service/create-service.vue",
-    "chunkName": "pages/service/create-service"
+    "chunkName": "pages/service/create-service",
+    "_name": "_2a2e73b8"
   },
   {
     "name": "customer-id",
     "path": "/customer/:id?",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/customer/_id.vue",
-    "chunkName": "pages/customer/_id"
+    "chunkName": "pages/customer/_id",
+    "_name": "_1ba3a8af"
   },
   {
     "name": "inbox-id",
     "path": "/inbox/:id?",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/inbox/_id.vue",
-    "chunkName": "pages/inbox/_id"
+    "chunkName": "pages/inbox/_id",
+    "_name": "_e9e80e0a"
   },
   {
     "name": "service-id",
     "path": "/service/:id?",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/service/_id.vue",
-    "chunkName": "pages/service/_id"
+    "chunkName": "pages/service/_id",
+    "_name": "_4e208cac"
   },
   {
     "name": "store-front-id",
     "path": "/store-front/:id?",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/store-front/_id.vue",
-    "chunkName": "pages/store-front/_id"
+    "chunkName": "pages/store-front/_id",
+    "_name": "_42ca7f9c"
   },
   {
     "name": "update-category-id",
     "path": "/update-category/:id?",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/update-category/_id.vue",
-    "chunkName": "pages/update-category/_id"
+    "chunkName": "pages/update-category/_id",
+    "_name": "_89c84512"
   },
   {
     "name": "update-service-id",
     "path": "/update-service/:id?",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/update-service/_id.vue",
-    "chunkName": "pages/update-service/_id"
+    "chunkName": "pages/update-service/_id",
+    "_name": "_0637e5fc"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/aleko/projects/dev/Nuxt/booking-apps/reservemee/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_8c7c58c8"
   }
 ]
