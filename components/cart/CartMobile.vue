@@ -167,340 +167,340 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// img {
-//     max-width: 100%;
-//     vertical-align: middle;
-//     border-radius: 4px;
-// }
+img {
+    max-width: 100%;
+    vertical-align: middle;
+    border-radius: 4px;
+}
 
-// a {
-//     text-decoration: none;
-//     color: #333333;
-// }
+a {
+    text-decoration: none;
+    color: #333333;
+}
 
-// a:hover {
-//     color: #f58551;
-// }
+a:hover {
+    color: #f58551;
+}
 
-// button {
-//     background-color: #16cc9b;
-//     border: 2px solid #16cc9b;
-//     color: #ffffff;
-//     transition: all 0.25s linear;
-//     cursor: pointer;
-// }
+button {
+    background-color: #16cc9b;
+    border: 2px solid #16cc9b;
+    color: #ffffff;
+    transition: all 0.25s linear;
+    cursor: pointer;
+}
 
-// button::after {
-//     position: relative;
-//     right: 0;
-//     content: ' \276f';
-//     transition: all 0.15s linear;
-// }
+button::after {
+    position: relative;
+    right: 0;
+    content: ' \276f';
+    transition: all 0.15s linear;
+}
 
-// button:hover {
-//     background-color: #f58551;
-//     border-color: #f58551;
-// }
+button:hover {
+    background-color: #f58551;
+    border-color: #f58551;
+}
 
-// button:hover::after {
-//     right: -5px;
-// }
+button:hover::after {
+    right: -5px;
+}
 
-// button:focus {
-//     outline: none;
-// }
+button:focus {
+    outline: none;
+}
 
-// ul {
-//     padding: 0;
-//     margin: 0;
-//     list-style-type: none;
-// }
+ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
 
-// input {
-//     transition: all 0.25s linear;
-// }
+input {
+    transition: all 0.25s linear;
+}
 
-// input[type='number']::-webkit-inner-spin-button,
-// input[type='number']::-webkit-outer-spin-button {
-//     -webkit-appearance: none;
-//     -moz-appearance: none;
-//     appearance: none;
-//     margin: 0;
-// }
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
 
-// input {
-//     outline: none;
-// }
+input {
+    outline: none;
+}
 
-// .container {
-//     width: 90%;
-//     margin: 0 auto;
-//     overflow: auto;
-// }
+.container {
+    width: 90%;
+    margin: 0 auto;
+    overflow: auto;
+}
 
-// /* --- HEADER --- */
-// header.container {
-//     margin-bottom: 1.5rem;
-// }
+/* --- HEADER --- */
+header.container {
+    margin-bottom: 1.5rem;
+}
 
-// header .breadcrumb {
-//     color: #7d7d7d;
-// }
+header .breadcrumb {
+    color: #7d7d7d;
+}
 
-// header .breadcrumb li {
-//     float: left;
-//     padding: 0 6px;
-// }
+header .breadcrumb li {
+    float: left;
+    padding: 0 6px;
+}
 
-// header .breadcrumb li:first-child {
-//     padding-left: 2px;
-// }
+header .breadcrumb li:first-child {
+    padding-left: 2px;
+}
 
-// header .breadcrumb li:not(:last-child)::after {
-//     content: ' \276f';
-//     padding-left: 8px;
-// }
+header .breadcrumb li:not(:last-child)::after {
+    content: ' \276f';
+    padding-left: 8px;
+}
 
-// header .count {
-//     float: right;
-//     color: #333333;
-// }
+header .count {
+    float: right;
+    color: #333333;
+}
 
-// /* --- PRODUCT LIST --- */
-// .products {
-//     border-top: 1px solid #ddd;
-// }
+/* --- PRODUCT LIST --- */
+.products {
+    border-top: 1px solid #ddd;
+}
 
-// .products > li {
-//     padding: 1rem 0;
-//     border-bottom: 1px solid #ddd;
-// }
+.products > li {
+    padding: 1rem 0;
+    border-bottom: 1px solid #ddd;
+}
 
-// .row {
-//     position: relative;
-//     overflow: auto;
-//     width: 100%;
-// }
+.row {
+    position: relative;
+    overflow: auto;
+    width: 100%;
+}
 
-// .col,
-// .quantity,
-// .remove {
-//     float: left;
-// }
+.col,
+.quantity,
+.remove {
+    float: left;
+}
 
-// .col.left {
-//     width: 70%;
-// }
+.col.left {
+    width: 70%;
+}
 
-// .col.right {
-//     width: 30%;
-//     position: absolute;
-//     right: 0;
-//     top: calc(50% - 30px);
-// }
+.col.right {
+    width: 30%;
+    position: absolute;
+    right: 0;
+    top: calc(50% - 30px);
+}
 
-// .detail {
-//     padding: 0 0.5rem;
-//     line-height: 2.2rem;
-// }
+.detail {
+    padding: 0 0.5rem;
+    line-height: 2.2rem;
+}
 
-// .detail .name {
-//     font-size: 1.2rem;
-// }
+.detail .name {
+    font-size: 1.2rem;
+}
 
-// .detail .description {
-//     color: #7d7d7d;
-//     font-size: 1rem;
-// }
+.detail .description {
+    color: #7d7d7d;
+    font-size: 1rem;
+}
 
-// .detail .price {
-//     font-size: 1.5rem;
-// }
+.detail .price {
+    font-size: 1.5rem;
+}
 
-// .quantity,
-// .remove {
-//     width: 50%;
-//     text-align: center;
-// }
+.quantity,
+.remove {
+    width: 50%;
+    text-align: center;
+}
 
-// .remove svg {
-//     width: 60px;
-//     height: 60px;
-// }
+.remove svg {
+    width: 60px;
+    height: 60px;
+}
 
-// .quantity > input {
-//     display: inline-block;
-//     width: 60px;
-//     height: 60px;
-//     position: relative;
-//     left: calc(50% - 30px);
-//     background: #fff;
-//     border: 2px solid #ddd;
-//     color: #7f7f7f;
-//     text-align: center;
-//     font: 600 1.5rem Helvetica, Arial, sans-serif;
-// }
+.quantity > input {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    position: relative;
+    left: calc(50% - 30px);
+    background: #fff;
+    border: 2px solid #ddd;
+    color: #7f7f7f;
+    text-align: center;
+    font: 600 1.5rem Helvetica, Arial, sans-serif;
+}
 
-// .quantity > input:hover,
-// .quantity > input:focus {
-//     border-color: #f58551;
-// }
+.quantity > input:hover,
+.quantity > input:focus {
+    border-color: #f58551;
+}
 
-// .close {
-//     fill: #7d7d7d;
-//     transition: color 150ms linear, background-color 150ms linear,
-//         fill 150ms linear, 150ms opacity linear;
-//     cursor: pointer;
-// }
+.close {
+    fill: #7d7d7d;
+    transition: color 150ms linear, background-color 150ms linear,
+        fill 150ms linear, 150ms opacity linear;
+    cursor: pointer;
+}
 
-// .close:hover {
-//     fill: #f58551;
-// }
+.close:hover {
+    fill: #f58551;
+}
 
-// /* --- SUMMARY --- */
-// .promotion,
-// .summary,
-// .checkout {
-//     float: left;
-//     width: 100%;
-//     margin-top: 1.5rem;
-// }
+/* --- SUMMARY --- */
+.promotion,
+.summary,
+.checkout {
+    float: left;
+    width: 100%;
+    margin-top: 1.5rem;
+}
 
-// .promotion > label {
-//     float: left;
-//     width: 100%;
-//     margin-bottom: 1rem;
-// }
+.promotion > label {
+    float: left;
+    width: 100%;
+    margin-bottom: 1rem;
+}
 
-// .promotion > input {
-//     float: left;
-//     width: 80%;
-//     font-size: 1rem;
-//     padding: 0.5rem 0 0.5rem 1.8rem;
-//     border: 2px solid #16cc9b;
-//     border-radius: 2rem 0 0 2rem;
-// }
+.promotion > input {
+    float: left;
+    width: 80%;
+    font-size: 1rem;
+    padding: 0.5rem 0 0.5rem 1.8rem;
+    border: 2px solid #16cc9b;
+    border-radius: 2rem 0 0 2rem;
+}
 
-// .promotion:hover > input {
-//     border-color: #f58551;
-// }
+.promotion:hover > input {
+    border-color: #f58551;
+}
 
-// .promotion > button {
-//     float: left;
-//     width: 20%;
-//     padding: 0.5rem 0;
-//     border-radius: 0 2rem 2rem 0;
-// }
+.promotion > button {
+    float: left;
+    width: 20%;
+    padding: 0.5rem 0;
+    border-radius: 0 2rem 2rem 0;
+}
 
-// .promotion:hover > button {
-//     border-color: #f58551;
-//     background-color: #f58551;
-// }
+.promotion:hover > button {
+    border-color: #f58551;
+    background-color: #f58551;
+}
 
-// .promotion > button::after {
-//     content: '\276f';
-//     font-size: 1rem;
-// }
+.promotion > button::after {
+    content: '\276f';
+    font-size: 1rem;
+}
 
-// .summary {
-//     font-size: 1.2rem;
-//     text-align: right;
-// }
+.summary {
+    font-size: 1.2rem;
+    text-align: right;
+}
 
-// .summary ul li {
-//     padding: 0.5rem 0;
-// }
+.summary ul li {
+    padding: 0.5rem 0;
+}
 
-// .summary ul li span {
-//     display: inline-block;
-//     width: 30%;
-// }
+.summary ul li span {
+    display: inline-block;
+    width: 30%;
+}
 
-// .summary ul li.total {
-//     font-weight: bold;
-// }
+.summary ul li.total {
+    font-weight: bold;
+}
 
-// .checkout {
-//     text-align: right;
-// }
+.checkout {
+    text-align: right;
+}
 
-// .checkout > button {
-//     font-size: 1.2rem;
-//     padding: 0.8rem 2.8rem;
-//     border-radius: 1.5rem;
-// }
+.checkout > button {
+    font-size: 1.2rem;
+    padding: 0.8rem 2.8rem;
+    border-radius: 1.5rem;
+}
 
-// .empty-product {
-//     text-align: center;
-// }
+.empty-product {
+    text-align: center;
+}
 
-// .empty-product > button {
-//     font-size: 1.3rem;
-//     padding: 10px 30px;
-//     border-radius: 5px;
-// }
+.empty-product > button {
+    font-size: 1.3rem;
+    padding: 10px 30px;
+    border-radius: 5px;
+}
 
-// /* --- SMALL SCREEN --- */
-// @media all and (max-width: 599px) {
-//     .thumbnail img {
-//         display: none;
-//     }
+/* --- SMALL SCREEN --- */
+@media all and (max-width: 599px) {
+    .thumbnail img {
+        display: none;
+    }
 
-//     .quantity > input {
-//         width: 40px;
-//         height: 40px;
-//         left: calc(50% - 20px);
-//     }
+    .quantity > input {
+        width: 40px;
+        height: 40px;
+        left: calc(50% - 20px);
+    }
 
-//     .remove svg {
-//         width: 40px;
-//         height: 40px;
-//     }
-// }
+    .remove svg {
+        width: 40px;
+        height: 40px;
+    }
+}
 
-// /* --- MEDIUM & LARGE SCREEN --- */
-// @media all and (min-width: 600px) {
-//     html {
-//         font-size: 14px;
-//     }
+/* --- MEDIUM & LARGE SCREEN --- */
+@media all and (min-width: 600px) {
+    html {
+        font-size: 14px;
+    }
 
-//     .container {
-//         width: 75%;
-//         max-width: 960px;
-//     }
+    .container {
+        width: 75%;
+        max-width: 960px;
+    }
 
-//     .thumbnail,
-//     .detail {
-//         float: left;
-//     }
+    .thumbnail,
+    .detail {
+        float: left;
+    }
 
-//     .thumbnail {
-//         width: 35%;
-//     }
+    .thumbnail {
+        width: 35%;
+    }
 
-//     .detail {
-//         width: 65%;
-//     }
+    .detail {
+        width: 65%;
+    }
 
-//     .promotion,
-//     .summary {
-//         width: 50%;
-//     }
+    .promotion,
+    .summary {
+        width: 50%;
+    }
 
-//     .checkout {
-//         width: 100%;
-//     }
+    .checkout {
+        width: 100%;
+    }
 
-//     .checkout,
-//     .summary {
-//         text-align: right;
-//     }
-// }
+    .checkout,
+    .summary {
+        text-align: right;
+    }
+}
 
-// /* --- LARGE SCREEN --- */
-// @media all and (min-width: 992px) {
-//     html {
-//         font-size: 16px;
-//     }
-// }
+/* --- LARGE SCREEN --- */
+@media all and (min-width: 992px) {
+    html {
+        font-size: 16px;
+    }
+}
 </style>
