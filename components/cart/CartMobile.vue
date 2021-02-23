@@ -1,68 +1,8 @@
 <template>
     <div class="cart mt-5">
-        <!-- <div class="">
-            <v-data-table
-                :headers="headers"
-                :items="orders"
-                :items-per-page="5"
-                sort-by="calories"
-                class="elevation-1"
-            >
-                <template v-slot:top> </template>
-                <template v-slot:[`item.serviceImage`]="{ item }">
-                    <div class="p-3">
-                        <img
-                            class="cart__image"
-                            lazy-src="https://picsum.photos/id/11/10/6"
-                            :src="item.serviceImage"
-                        />
-                    </div>
-                </template>
-                <template v-slot:[`item.actions`]="{ item }">
-                    <v-icon small @click="deleteItem(item)">
-                        mdi-delete
-                    </v-icon>
-                </template>
-                <template v-slot:[`item.quantity`]>
-                    <v-text-field label="1"></v-text-field>
-                </template>
-            </v-data-table>
-
-            <div class="pt-10 pr-10 cart__total-container">
-                <v-row class="cart__totals">
-                    <v-col class="cart__totals-item">
-                        <div class="cart__totals-label">Subtotal</div>
-                        <div class="cart__totals-label">Tax (6.5%)</div>
-                        <div class="cart__totals-grand-label">Grand Total</div>
-                    </v-col>
-                    <v-col class="cart__totals-item">
-                        <div class="cart__totals-value" id="cart-tax">
-                            {{ subTotal }}
-                        </div>
-                        <div class="cart__totals-value" id="cart-shipping">
-                            {{ tax }}
-                        </div>
-                        <div class="cart__totals-value" id="cart-total">
-                            {{ grandTotal }}
-                        </div>
-                    </v-col>
-                </v-row>
-                <div class="cart__checkout-btn pt-5 pr-0 pb-10">
-                    <div
-                        color="teal darker-1"
-                        dark
-                        x-large
-                        class="cart__checkout"
-                    >
-                        Checkout
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
         <!-- Header -->
         <header class="container">
-            <h1 class="title">Shopping Cart</h1>
+            <h1 class="title">Mobile Cart</h1>
 
             <ul class="breadcrumb">
                 <li>Home</li>

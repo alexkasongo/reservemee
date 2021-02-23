@@ -91,7 +91,8 @@ export default {
                 {
                     title: 'Logout'
                 }
-            ]
+            ],
+            mobile: false
         };
     },
     computed: {
@@ -131,6 +132,39 @@ export default {
             set() {
                 return this.setSnackbar(false);
             }
+        },
+        viewPort() {
+            // Define our viewportWidth variable
+            let viewportWidth;
+
+            // Set/update the viewportWidth value
+            let setViewportWidth = function () {
+                viewportWidth =
+                    window.innerWidth || document.documentElement.clientWidth;
+            };
+
+            // Log the viewport width into the console
+            let logWidth = () => {
+                if (viewportWidth > 768) {
+                    this.mobile = 'false';
+                } else {
+                    this.mobile = 'true';
+                }
+            };
+
+            // Set our initial width and log it
+            setViewportWidth();
+            logWidth();
+
+            // On resize events, recalculate and log
+            window.addEventListener(
+                'resize',
+                function () {
+                    setViewportWidth();
+                    logWidth();
+                },
+                false
+            );
         }
     },
     methods: {
