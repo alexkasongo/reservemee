@@ -119,8 +119,12 @@
                         </div>
 
                         <div>
-                            <b-button label="close" aria-label="close">
-                                Cancel
+                            <b-button
+                                @click="isCardModalActive = false"
+                                label="close"
+                                aria-label="close"
+                            >
+                                Close
                             </b-button>
                             <b-button
                                 label="Create"
