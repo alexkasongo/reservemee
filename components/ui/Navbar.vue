@@ -52,6 +52,32 @@
                     Signin
                 </b-navbar-item>
             </b-navbar-dropdown>
+            <!-- <b-button type="is-primary" @click="isMobileModalActive = true">
+                test
+            </b-button> -->
+
+            <!-- Fullscreen cart modal -->
+            <b-modal
+                v-model="isMobileModalActive"
+                full-screen
+                scroll="keep"
+                :destroy-on-hide="false"
+                aria-role="dialog"
+                aria-label="Cart Modal"
+                aria-modal
+            >
+                <div>
+                    <CartMobile />
+                    <b-button
+                        label="Cancel"
+                        aria-label="Cance add to cart"
+                        @click="close"
+                    >
+                        Cancel
+                    </b-button>
+                </div>
+            </b-modal>
+            <!-- Fullscreen cart modal end -->
         </template>
     </b-navbar>
 </template>
@@ -98,7 +124,8 @@ export default {
                     title: 'Logout'
                 }
             ],
-            mobile: false
+            mobile: false,
+            isMobileModalActive: false
         };
     },
     computed: {
@@ -107,6 +134,7 @@ export default {
             userId: 'userId'
         }),
         ...mapState({
+            loaders: 'loaders',
             snackbarState: 'loaders',
             cart: 'cart'
         }),
@@ -138,6 +166,9 @@ export default {
             set() {
                 return this.setSnackbar(false);
             }
+        },
+        mobileCartState() {
+            return this.loaders.mobileCartState;
         },
         viewPort() {
             // Define our viewportWidth variable
@@ -171,6 +202,11 @@ export default {
                 },
                 false
             );
+        }
+    },
+    watch: {
+        mobileCartState() {
+            this.isMobileModalActive = this.mobileCartState;
         }
     },
     methods: {
@@ -263,6 +299,10 @@ export default {
                 .get();
             this.role = userRole.data().role;
             // get logged in user role - end
+        },
+        close() {
+            this.isMobileModalActive = false;
+            this.setMobileCartState(false);
         }
     },
     created() {
@@ -298,6 +338,7 @@ export default {
         if (process.client) {
             // start tracking the viewport
             this.viewPort;
+            this.setMobileCartState(false);
         }
     }
 };
