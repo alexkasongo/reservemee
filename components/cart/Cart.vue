@@ -200,12 +200,6 @@ export default {
     methods: {
         deleteItem(ev) {}
     },
-    created() {
-        if (process.client) {
-            // start tracking the viewport
-            this.viewPort;
-        }
-    },
     async mounted() {
         this.orders = await this.ordersState.order;
 

@@ -2,7 +2,8 @@ export const state = () => ({
     // USER ACCOUNTS START
     snackbar: false,
     loading: false,
-    cartState: false
+    cartState: false,
+    mobileCartState: false
     // LOADING & ERRORS END
 });
 
@@ -19,6 +20,9 @@ export const actions = {
     },
     setCartState({ commit }, payload) {
         commit('SET_CART_STATE', payload);
+    },
+    setMobileCartState({ commit }, payload) {
+        commit('SET_MOBILE_CART_STATE', payload);
     }
 };
 
@@ -33,6 +37,9 @@ export const mutations = {
     },
     SET_CART_STATE(state, payload) {
         state.cartState = payload;
+    },
+    SET_MOBILE_CART_STATE(state, payload) {
+        state.mobileCartState = payload;
     }
     // END
 };

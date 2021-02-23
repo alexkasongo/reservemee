@@ -15,6 +15,10 @@
                     <!-- <img :src="logo" alt="Reservemee logo" /> -->
                     <Cart />
                 </div>
+                <div class="cart-sidebar">
+                    <!-- <img :src="logo" alt="Reservemee logo" /> -->
+                    <CartMobile />
+                </div>
             </b-sidebar>
             <!-- TODO move to settings -->
             <!-- <div class="block">
@@ -82,6 +86,7 @@ export default {
             user: '',
             role: '',
             open: false,
+            openMobileCart: false,
             overlay: false,
             fullheight: true,
             fullwidth: false,
@@ -130,6 +135,10 @@ export default {
             // const data = this.loaders.cartState
             return this.loaders.cartState;
         },
+        mobileCartState() {
+            // const data = this.loaders.cartState
+            return this.loaders.mobileCartState;
+        },
         warning() {
             if (this.snackbar) {
                 // this.$buefy.snackbar.open({
@@ -152,6 +161,9 @@ export default {
     watch: {
         cartState() {
             this.open = this.cartState;
+        },
+        mobileCartState() {
+            this.openMobileCart = this.mobileCartState;
         }
     },
     methods: {

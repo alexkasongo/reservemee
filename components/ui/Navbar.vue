@@ -21,7 +21,13 @@
         </template>
 
         <template #end>
-            <b-navbar-item v-if="user" @click="openCart">
+            <b-navbar-item v-if="user && mobile === false" @click="openCart">
+                <div>Cart</div>
+            </b-navbar-item>
+            <b-navbar-item
+                v-if="user && mobile === true"
+                @click="openMobileCart"
+            >
                 <div>Cart</div>
             </b-navbar-item>
 
@@ -146,9 +152,9 @@ export default {
             // Log the viewport width into the console
             let logWidth = () => {
                 if (viewportWidth > 768) {
-                    this.mobile = 'false';
+                    this.mobile = false;
                 } else {
-                    this.mobile = 'true';
+                    this.mobile = true;
                 }
             };
 
@@ -179,10 +185,14 @@ export default {
             setSnackbar: 'loaders/setSnackbar',
             removeUserData: 'removeUserData',
             orders: null,
-            setCartState: 'loaders/setCartState'
+            setCartState: 'loaders/setCartState',
+            setMobileCartState: 'loaders/setMobileCartState'
         }),
         openCart() {
             this.setCartState(true);
+        },
+        openMobileCart() {
+            this.setMobileCartState(true);
         },
         clickToggleDrawer() {
             this.drawerDown = !this.drawerDown;
@@ -285,6 +295,10 @@ export default {
                 }
             }
         });
+        if (process.client) {
+            // start tracking the viewport
+            this.viewPort;
+        }
     }
 };
 </script>
