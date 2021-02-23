@@ -52,9 +52,6 @@
                     Signin
                 </b-navbar-item>
             </b-navbar-dropdown>
-            <!-- <b-button type="is-primary" @click="isMobileModalActive = true">
-                test
-            </b-button> -->
 
             <!-- Fullscreen cart modal -->
             <b-modal
@@ -68,13 +65,9 @@
             >
                 <div>
                     <CartMobile />
-                    <b-button
-                        label="Cancel"
-                        aria-label="Cance add to cart"
-                        @click="close"
-                    >
-                        Cancel
-                    </b-button>
+                    <div class="close-btn" @click="close">
+                        <b-icon icon="close" size="is-medium"> </b-icon>
+                    </div>
                 </div>
             </b-modal>
             <!-- Fullscreen cart modal end -->
@@ -343,3 +336,12 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" scoped>
+.close-btn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+}
+</style>
