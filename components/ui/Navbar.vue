@@ -66,7 +66,7 @@
                 <div>
                     <CartMobile />
                     <div class="close-btn" @click="close">
-                        <b-icon icon="close" size="is-medium"> </b-icon>
+                        <b-icon icon="close`" size="is-medium"> </b-icon>
                     </div>
                 </div>
             </b-modal>

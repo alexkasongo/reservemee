@@ -16,10 +16,10 @@
 
 ## Features 🚀
 
-- Ease of Styling: ReserveMee ships with Vuetify. Vuetify is a Vue UI Library with beautifully handcrafted Material Components. No design skills required — everything you need to create amazing applications is at your fingertips.
-  [Learn more](https://vuetifyjs.com/en/)
-- Flexible & scalable: ReserveMee is built using Nuxtjs and Firebase for easy scalability through Firebase.
-- Dark Mode 😍: ReserveMee ships with dark mode out the box.
+-   Ease of Styling: ReserveMee ships with Beufy. Beufy is a Vue UI Library with beautifully handcrafted Material Components. No design skills required — everything you need to create amazing applications is at your fingertips.
+    [Learn more](https://Beufyjs.com/en/)
+-   Flexible & scalable: ReserveMee is built using Nuxtjs and Firebase for easy scalability through Firebase.
+-   Dark Mode 😍: ReserveMee ships with dark mode out the box.
 
 ## Support ReverveMee 💖
 
@@ -35,6 +35,7 @@ To use ReserveMee, all you need to do download, install and run the commands bel
 $ yarn or npm install
 $ yarn or npm run dev
 ```
+
 ## Contributing
 
 Feel like contributing? That's awesome! We have a

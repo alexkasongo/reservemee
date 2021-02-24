@@ -9,8 +9,8 @@
                             data-aos="fade-down"
                         >
                             <h1 class="title titled is-1 mb-6">
-                                Scheduling and Management Nuxt.js PWA
-                                boilerplate
+                                Multi-tenant SaaS Scheduling and Management
+                                Nuxt.js boilerplate
                             </h1>
                             <h2
                                 class="subtitled subtitle has-text-grey is-4 has-text-weight-normal is-family-sans-serif"
@@ -118,7 +118,7 @@ export default {
     font-family: 'Merriweather', serif !important;
     font-size: 30px !important;
     @media (min-width: 768px) {
-        font-size: 58px !important;
+        font-size: 54px !important;
         font-weight: 400 !important;
         line-height: 64px !important;
     }

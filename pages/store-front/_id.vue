@@ -290,8 +290,7 @@ export default {
             }
         },
         // filter services using category name
-        // because v-select is a custom select vuetify component, $event does not trigger
-        // therefore we use a watcher to act as onChange($event)
+        // we use a watcher to act as onChange($event)
         selectedItem(newVal) {
             const services = this.services;
             // replace empty space with dash and transform to lowercase as value Array.filter()
