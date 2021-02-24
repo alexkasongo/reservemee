@@ -4,6 +4,7 @@
             <div class="signup__left"></div>
             <div class="signup__right">
                 <div class="signup__right-card">
+                    <h1 class="title" style="color: #ccc">Admin Signup</h1>
                     <form @keyup.enter="onSubmit">
                         <b-field>
                             <b-input

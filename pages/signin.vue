@@ -47,7 +47,7 @@
                         <b-field>
                             <p
                                 @click="$router.push('/signup')"
-                                style="cursor: pointer"
+                                style="cursor: pointer; color: #ccc"
                             >
                                 Create customer account
                             </p>
@@ -55,7 +55,7 @@
                         <b-field>
                             <p
                                 @click="$router.push('/signup-admin')"
-                                style="cursor: pointer"
+                                style="cursor: pointer; color: #ccc"
                             >
                                 Create store account
                             </p>

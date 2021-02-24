@@ -24,12 +24,17 @@
                             <div class="buttons">
                                 <button
                                     v-if="!user"
-                                    class="button is-black"
+                                    class="button is-primary"
                                     @click="$router.push('/signin')"
                                 >
                                     Login
                                 </button>
-                                <button class="button">Subscribe</button>
+                                <button
+                                    @click="$router.push('/signup-admin')"
+                                    class="button"
+                                >
+                                    Signup
+                                </button>
                             </div>
                         </div>
                         <div
@@ -51,16 +56,13 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
-import headerImage from 'assets/images/e-commerce.png';
-import offer from 'assets/images/offer.png';
-import sell from 'assets/images/sell.png';
+import offer from 'assets/images/logo.png';
 
 export default {
     data() {
         return {
             image: headerImage,
             offer: offer,
-            sell: sell,
             user: '',
             loading: true,
             email: '',
