@@ -6,6 +6,8 @@ You can directly use them in pages and other components without the need to impo
 
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
+- `<Cart>` | `<cart>` (components/cart/Cart.vue)
+- `<CartMobile>` | `<cart-mobile>` (components/cart/CartMobile.vue)
 - `<Messages>` | `<messages>` (components/chat/Messages.vue)
 - `<StoreMessages>` | `<store-messages>` (components/chat/StoreMessages.vue)
 - `<HorizontalCard>` | `<horizontal-card>` (components/client/HorizontalCard.vue)
@@ -31,4 +33,3 @@ You can directly use them in pages and other components without the need to impo
 - `<Security>` | `<security>` (components/profile/Security.vue)
 - `<StoreSettings>` | `<store-settings>` (components/profile/StoreSettings.vue)
 - `<Navbar>` | `<navbar>` (components/ui/Navbar.vue)
-- `<Cart>` | `<cart>` (components/cart/Cart.vue)

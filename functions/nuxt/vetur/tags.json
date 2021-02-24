@@ -1,4 +1,10 @@
 {
+  "Cart": {
+    "description": "Auto imported from components/cart/Cart.vue"
+  },
+  "CartMobile": {
+    "description": "Auto imported from components/cart/CartMobile.vue"
+  },
   "Messages": {
     "description": "Auto imported from components/chat/Messages.vue"
   },
@@ -73,8 +79,5 @@
   },
   "Navbar": {
     "description": "Auto imported from components/ui/Navbar.vue"
-  },
-  "Cart": {
-    "description": "Auto imported from components/cart/Cart.vue"
   }
 }

@@ -57,6 +57,9 @@ module.exports = {
         dirs: [
             '~/components',
             {
+                path: '~/components/cart/'
+            },
+            {
                 path: '~/components/chat/'
             },
             {

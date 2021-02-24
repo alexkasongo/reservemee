@@ -1,3 +1,5 @@
+export { default as Cart } from '../../components/cart/Cart.vue'
+export { default as CartMobile } from '../../components/cart/CartMobile.vue'
 export { default as Messages } from '../../components/chat/Messages.vue'
 export { default as StoreMessages } from '../../components/chat/StoreMessages.vue'
 export { default as HorizontalCard } from '../../components/client/HorizontalCard.vue'
@@ -23,8 +25,9 @@ export { default as ProfileInformation } from '../../components/profile/ProfileI
 export { default as Security } from '../../components/profile/Security.vue'
 export { default as StoreSettings } from '../../components/profile/StoreSettings.vue'
 export { default as Navbar } from '../../components/ui/Navbar.vue'
-export { default as Cart } from '../../components/cart/Cart.vue'
 
+export const LazyCart = import('../../components/cart/Cart.vue' /* webpackChunkName: "components/cart" */).then(c => c.default || c)
+export const LazyCartMobile = import('../../components/cart/CartMobile.vue' /* webpackChunkName: "components/cart-mobile" */).then(c => c.default || c)
 export const LazyMessages = import('../../components/chat/Messages.vue' /* webpackChunkName: "components/messages" */).then(c => c.default || c)
 export const LazyStoreMessages = import('../../components/chat/StoreMessages.vue' /* webpackChunkName: "components/store-messages" */).then(c => c.default || c)
 export const LazyHorizontalCard = import('../../components/client/HorizontalCard.vue' /* webpackChunkName: "components/horizontal-card" */).then(c => c.default || c)
@@ -50,4 +53,3 @@ export const LazyProfileInformation = import('../../components/profile/ProfileIn
 export const LazySecurity = import('../../components/profile/Security.vue' /* webpackChunkName: "components/security" */).then(c => c.default || c)
 export const LazyStoreSettings = import('../../components/profile/StoreSettings.vue' /* webpackChunkName: "components/store-settings" */).then(c => c.default || c)
 export const LazyNavbar = import('../../components/ui/Navbar.vue' /* webpackChunkName: "components/navbar" */).then(c => c.default || c)
-export const LazyCart = import('../../components/cart/Cart.vue' /* webpackChunkName: "components/cart" */).then(c => c.default || c)

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 
 const components = {
+  Cart: () => import('../../components/cart/Cart.vue' /* webpackChunkName: "components/cart" */).then(c => c.default || c),
+  CartMobile: () => import('../../components/cart/CartMobile.vue' /* webpackChunkName: "components/cart-mobile" */).then(c => c.default || c),
   Messages: () => import('../../components/chat/Messages.vue' /* webpackChunkName: "components/messages" */).then(c => c.default || c),
   StoreMessages: () => import('../../components/chat/StoreMessages.vue' /* webpackChunkName: "components/store-messages" */).then(c => c.default || c),
   HorizontalCard: () => import('../../components/client/HorizontalCard.vue' /* webpackChunkName: "components/horizontal-card" */).then(c => c.default || c),
@@ -25,8 +27,7 @@ const components = {
   ProfileInformation: () => import('../../components/profile/ProfileInformation.vue' /* webpackChunkName: "components/profile-information" */).then(c => c.default || c),
   Security: () => import('../../components/profile/Security.vue' /* webpackChunkName: "components/security" */).then(c => c.default || c),
   StoreSettings: () => import('../../components/profile/StoreSettings.vue' /* webpackChunkName: "components/store-settings" */).then(c => c.default || c),
-  Navbar: () => import('../../components/ui/Navbar.vue' /* webpackChunkName: "components/navbar" */).then(c => c.default || c),
-  Cart: () => import('../../components/cart/Cart.vue' /* webpackChunkName: "components/cart" */).then(c => c.default || c)
+  Navbar: () => import('../../components/ui/Navbar.vue' /* webpackChunkName: "components/navbar" */).then(c => c.default || c)
 }
 
 for (const name in components) {
