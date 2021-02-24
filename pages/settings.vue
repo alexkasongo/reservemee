@@ -15,7 +15,7 @@
                     <div class="p-1">
                         <div class="block">
                             <ul>
-                                <li v-if="user.photoURL">
+                                <!-- <li v-if="user.photoURL">
                                     <div
                                         class="profile__image"
                                         v-bind:style="{
@@ -23,14 +23,10 @@
                                                 'url(' + user.photoURL + ')'
                                         }"
                                     ></div>
-                                    <!-- <img
-                                        :src="user.photoURL"
-                                        style="height: 250px"
-                                    /> -->
                                 </li>
                                 <li v-else>
                                     <div class="profile__default"></div>
-                                </li>
+                                </li> -->
 
                                 <li>{{ user.displayName }}</li>
                             </ul>
