@@ -17,6 +17,10 @@
 -   Flexible & scalable: ReserveMee is built using Nuxtjs and Firebase for easy scalability through Firebase.
 -   Dark Mode 😍: ReserveMee ships with dark mode out the box.
 
+## Screenshots
+
+![alt text](https://github.com/alexkasongo/reservemee/blob/master/assets/images/dashboard.png?raw=true)
+
 ## Support ReverveMee 💖
 
 By donating \$5 or more you can support the ongoing development of this project.
