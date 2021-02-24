@@ -52,17 +52,13 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
 import headerImage from 'assets/images/e-commerce.png';
-import create from 'assets/images/create.png';
 import offer from 'assets/images/offer.png';
 import sell from 'assets/images/sell.png';
-
-import { mapGetters } from 'vuex';
 
 export default {
     data() {
         return {
             image: headerImage,
-            create: create,
             offer: offer,
             sell: sell,
             user: '',
