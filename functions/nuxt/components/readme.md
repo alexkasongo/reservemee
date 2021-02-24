@@ -9,6 +9,7 @@ You can directly use them in pages and other components without the need to impo
 - `<Cart>` | `<cart>` (components/cart/Cart.vue)
 - `<CartMobile>` | `<cart-mobile>` (components/cart/CartMobile.vue)
 - `<Messages>` | `<messages>` (components/chat/Messages.vue)
+- `<Messenger>` | `<messenger>` (components/chat/Messenger.vue)
 - `<StoreMessages>` | `<store-messages>` (components/chat/StoreMessages.vue)
 - `<HorizontalCard>` | `<horizontal-card>` (components/client/HorizontalCard.vue)
 - `<Ratings>` | `<ratings>` (components/client/Ratings.vue)

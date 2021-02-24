@@ -8,6 +8,9 @@
   "Messages": {
     "description": "Auto imported from components/chat/Messages.vue"
   },
+  "Messenger": {
+    "description": "Auto imported from components/chat/Messenger.vue"
+  },
   "StoreMessages": {
     "description": "Auto imported from components/chat/StoreMessages.vue"
   },

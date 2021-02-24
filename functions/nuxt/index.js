@@ -87,7 +87,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"reservemee","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"\u003Cp align=\"center\"\u003E   \u003Ca href=\"https:\u002F\u002Fgithub.com\u002Freservemee\u002Freservemee\"\u003E     \u003Cimg src=\"https:\u002F\u002Fi.imgur.com\u002FK6N34GH.png?raw=true\" alt=\"Reservemee logo\" width=\"300\" \u002F\u003E   \u003C\u002Fa\u003E \u003C\u002Fp\u003E"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002F\u002Fcdn.materialdesignicons.com\u002F5.0.45\u002Fcss\u002Fmaterialdesignicons.min.css"}],"style":[],"script":[]},
+    head: {"title":"reservemee","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"![alt text](https:\u002F\u002Fgithub.com\u002Falexkasongo\u002Freservemee\u002Fblob\u002Fmaster\u002Fassets\u002Fimages\u002Flogo.png?raw=true)"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","type":"text\u002Fcss","href":"\u002F\u002Fcdn.materialdesignicons.com\u002F5.0.45\u002Fcss\u002Fmaterialdesignicons.min.css"}],"style":[],"script":[]},
 
     store,
     router,

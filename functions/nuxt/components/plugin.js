@@ -4,6 +4,7 @@ const components = {
   Cart: () => import('../../components/cart/Cart.vue' /* webpackChunkName: "components/cart" */).then(c => c.default || c),
   CartMobile: () => import('../../components/cart/CartMobile.vue' /* webpackChunkName: "components/cart-mobile" */).then(c => c.default || c),
   Messages: () => import('../../components/chat/Messages.vue' /* webpackChunkName: "components/messages" */).then(c => c.default || c),
+  Messenger: () => import('../../components/chat/Messenger.vue' /* webpackChunkName: "components/messenger" */).then(c => c.default || c),
   StoreMessages: () => import('../../components/chat/StoreMessages.vue' /* webpackChunkName: "components/store-messages" */).then(c => c.default || c),
   HorizontalCard: () => import('../../components/client/HorizontalCard.vue' /* webpackChunkName: "components/horizontal-card" */).then(c => c.default || c),
   Ratings: () => import('../../components/client/Ratings.vue' /* webpackChunkName: "components/ratings" */).then(c => c.default || c),
