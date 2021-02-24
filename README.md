@@ -1,8 +1,4 @@
-<p align="center">
-  <a href="https://github.com/reservemee/reservemee">
-    <img src="https://i.imgur.com/K6N34GH.png?raw=true" alt="Reservemee logo" width="300" />
-  </a>
-</p>
+![alt text](https://github.com/alexkasongo/reservemee/blob/master/assets/images/logo.png?raw=true)
 
 <h1 align="center">Multi-tenant SaaS Scheduling and Management Nuxt.js boilerplate 🌱</h1>
 
