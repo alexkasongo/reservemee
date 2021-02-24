@@ -61,7 +61,6 @@ import offer from 'assets/images/logo.png';
 export default {
     data() {
         return {
-            image: headerImage,
             offer: offer,
             user: '',
             loading: true,

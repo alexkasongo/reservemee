@@ -333,7 +333,8 @@ export default {
             loading: 'loaders/loading'
         }),
         ...mapState({
-            booking: 'booking'
+            booking: 'booking',
+            user: 'user' || null
         }),
         bookingState() {
             if (this.booking.bookingState !== '') {
@@ -396,8 +397,12 @@ export default {
             }
         },
         quickBook(service) {
-            this.selectedService = service;
-            this.isCardModalActive = true;
+            if (this.user.length === 0) {
+                this.$router.push('/signin');
+            } else {
+                this.selectedService = service;
+                this.isCardModalActive = true;
+            }
         },
         updateBookingState(event) {
             // this.setBookingState('');
