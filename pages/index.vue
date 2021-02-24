@@ -22,7 +22,13 @@
                                 Google Firebase.
                             </h2>
                             <div class="buttons">
-                                <button class="button is-black">Login</button>
+                                <button
+                                    v-if="!user"
+                                    class="button is-black"
+                                    @click="$router.push('/signin')"
+                                >
+                                    Login
+                                </button>
                                 <button class="button">Subscribe</button>
                             </div>
                         </div>
@@ -114,16 +120,22 @@ export default {
 
 .titled {
     font-family: 'Merriweather', serif !important;
-    font-size: 58px !important;
-    font-weight: 400 !important;
-    line-height: 64px !important;
+    font-size: 30px !important;
+    @media (min-width: 768px) {
+        font-size: 58px !important;
+        font-weight: 400 !important;
+        line-height: 64px !important;
+    }
 }
 
 .subtitled {
     font-family: 'Merriweather', serif !important;
-    font-size: 22px !important;
-    font-weight: 400 !important;
-    line-height: 36px !important;
+    font-size: 16px !important;
+    @media (min-width: 768px) {
+        font-size: 22px !important;
+        font-weight: 400 !important;
+        line-height: 36px !important;
+    }
 }
 .is-fullh {
     height: calc(100vh - 56px);
