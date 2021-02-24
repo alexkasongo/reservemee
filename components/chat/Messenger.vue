@@ -70,7 +70,8 @@ export default {
         feedback: null,
         warning: null,
         uid: '',
-        role: null
+        role: null,
+        user: null
     }),
     computed: {
         ...mapGetters({
@@ -78,7 +79,7 @@ export default {
             storeProfile: 'storeFront/loadedStoreProfile'
         }),
         ...mapState({
-            user: 'user',
+            // user: 'user',
             allUserData: 'dashboard'
         }),
         userProfile() {
@@ -119,11 +120,11 @@ export default {
                             'https://via.placeholder.com/150',
                         storePhoneNumber: this.storeProfile.storePhoneNumber,
                         userId: this.user.uid,
-                        name: this.user.name,
+                        name: this.user.displayName,
                         message: this.newMessage
                     };
-                    console.log(`admin.vue - 342 - 🍎`, createdMessage);
-                    // this.$store.dispatch('chat/addMsg', createdMessage);
+
+                    this.$store.dispatch('chat/addMsg', createdMessage);
                     this.newMessage = null;
                     this.feedback = null;
                 } else {
@@ -142,11 +143,11 @@ export default {
                             'https://via.placeholder.com/150',
                         storePhoneNumber: this.storeProfile.storePhoneNumber,
                         userId: this.user.uid,
-                        name: this.user.name,
+                        name: this.user.displayName,
                         message: this.newMessage
                     };
-                    console.log(`admin.vue - 342 - 🔥`, createdMessage);
-                    // this.$store.dispatch('chat/addMsg', createdMessage);
+
+                    this.$store.dispatch('chat/addMsg', createdMessage);
                     this.newMessage = null;
                     this.feedback = null;
                 } else {
@@ -158,13 +159,9 @@ export default {
         // NEW MESSAGE
     },
     mounted() {
-        if (this.user.name === null) {
-            this.warning =
-                'You must have a username to send a message. Go to settings and create a username';
-        }
-
         firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {
+                this.user = user;
                 // get logged in user role
                 await db
                     .collection('roles')
@@ -174,6 +171,12 @@ export default {
                         this.role = res.data().role;
                     });
                 // get logged in user role - end
+
+                if (user.displayName === null) {
+                    this.warning =
+                        'You must have a username to send a message. Go to settings and create a username';
+                }
+                console.log(`Messenger.vue - 179 - 💋`, user);
             }
         });
     }
