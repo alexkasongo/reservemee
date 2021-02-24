@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!loading" class="container margin store-front">
+    <div v-if="!loading" class="g-padding margin store-front">
         <section
             class="hero is-medium is-link store__bg"
             v-bind:style="{

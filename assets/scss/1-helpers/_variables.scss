@@ -83,3 +83,9 @@ $header-close-zindex: 2100;
 .page-leave-active {
     opacity: 0;
 }
+.g-padding {
+    padding: 10px;
+    @media (min-width: $tablet) {
+        padding: 0px;
+    }
+}

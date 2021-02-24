@@ -1,5 +1,5 @@
 <template>
-    <div class="store margin">
+    <div class="g-padding store margin">
         <div class="container">
             <!-- BANNER -->
             <StoreBanner />
@@ -33,5 +33,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
