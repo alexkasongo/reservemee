@@ -5,9 +5,15 @@
             <div>
                 <!-- NEW MESSAGE -->
                 <div class="new-message">
-                    <form @submit.prevent="addMessage()">
-                        <!-- <label for="new-message">New Message (enter to add):</label> -->
-                        <p class="red-text" v-if="feedback">{{ feedback }}</p>
+                    <form>
+                        <b-notification
+                            v-if="feedback"
+                            type="is-danger is-light"
+                            aria-close-label="Close notification"
+                            role="alert"
+                        >
+                            {{ feedback }}
+                        </b-notification>
                         <b-input
                             maxlength="200"
                             type="textarea"
@@ -15,7 +21,9 @@
                             placeholder="Type in a message and click send"
                             v-model="newMessage"
                         ></b-input>
-                        <b-button dark type="is-primary"> Send Me </b-button>
+                        <b-button dark type="is-primary" @click="addMessage()">
+                            Send Me
+                        </b-button>
                     </form>
                 </div>
                 <!-- NEW MESSAGE END -->
@@ -89,7 +97,9 @@ export default {
                         storeId: this.storeProfile.storeId,
                         storeEmail: this.storeProfile.storeEmail,
                         storeName: this.storeProfile.storeName,
-                        storeOwnerImage: this.userProfile.storeOwnerImage,
+                        storeOwnerImage:
+                            this.user.photoUrl ||
+                            'https://via.placeholder.com/150',
                         storePhoneNumber: this.storeProfile.storePhoneNumber,
                         userId: this.user.uid,
                         name: this.user.name,
@@ -109,7 +119,9 @@ export default {
                         storeId: this.storeProfile.storeId,
                         storeEmail: this.storeProfile.storeEmail,
                         storeName: this.storeProfile.storeName,
-                        storeOwnerImage: this.userProfile.storeOwnerImage,
+                        storeOwnerImage:
+                            this.user.photoUrl ||
+                            'https://via.placeholder.com/150',
                         storePhoneNumber: this.storeProfile.storePhoneNumber,
                         userId: this.user.uid,
                         name: this.user.name,
@@ -127,11 +139,12 @@ export default {
         // NEW MESSAGE
     },
     mounted() {
-        this.$store.dispatch('chat/loadMessages', this.user.uid);
+        console.log(`Messenger.vue - 140 - 🌎`, this.user);
+        // this.$store.dispatch('chat/loadMessages', this.user.uid);
 
         // this.uis = this.currentUserId;
-        this.$store.dispatch('chat/loadMessages', this.user.uid);
-        this.$store.dispatch('chat/loadReplies', this.user.uid);
+        // this.$store.dispatch('chat/loadMessages', this.user.uid);
+        // this.$store.dispatch('chat/loadReplies', this.user.uid);
         // NEW MESSAGE
 
         firebase.auth().onAuthStateChanged(async (user) => {
@@ -150,3 +163,5 @@ export default {
     }
 };
 </script>
+
+<style></style>

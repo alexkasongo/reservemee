@@ -75,6 +75,7 @@ import logo from 'assets/images/logo.png';
 
 import { mapState, mapGetters, mapActions } from 'vuex';
 import Navbar from '~/components/ui/Navbar.vue';
+import { SnackbarProgrammatic as Snackbar } from 'buefy';
 
 export default {
     components: { Navbar },
@@ -88,7 +89,8 @@ export default {
             overlay: false,
             fullheight: true,
             fullwidth: false,
-            right: true
+            right: true,
+            errors: null
         };
     },
     computed: {
@@ -121,13 +123,16 @@ export default {
                 return data;
             }
         },
-        snackbar: {
-            get() {
-                return this.loaders.snackbar;
-            },
-            set() {
-                return this.setSnackbar(false);
-            }
+        // snackbar: {
+        //     get() {
+        //         return this.loaders.snackbar;
+        //     },
+        //     set() {
+        //         return this.setSnackbar(false);
+        //     }
+        // },
+        snackbar() {
+            return this.loaders.snackbar;
         },
         cartState() {
             // const data = this.loaders.cartState
@@ -155,6 +160,31 @@ export default {
     watch: {
         cartState() {
             this.open = this.cartState;
+        },
+        snackbar() {
+            if (this.snackbar) {
+                try {
+                    Snackbar.open({
+                        message: 'Saved',
+                        type: 'is-success',
+                        position: 'is-top',
+                        actionText: 'Ok',
+                        queue: false,
+                        onAction: () => {
+                            // this.$buefy.toast.open({
+                            //     queue: false
+                            // });
+                            this.setSnackbar(false);
+                        }
+                    });
+                } catch (error) {
+                    this.errors = error;
+                } finally {
+                    setTimeout(() => {
+                        this.setSnackbar(false);
+                    }, 100);
+                }
+            }
         }
     },
     methods: {
