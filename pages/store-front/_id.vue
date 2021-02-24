@@ -374,7 +374,6 @@ export default {
             if (this.bookingState === null || this.bookingState === undefined) {
                 this.errors = 'Please select a time';
             } else {
-                console.log(`_id.vue - 588 - 🇨🇩`, this.selectedService);
                 const data = {
                     name: this.selectedService.name,
                     note: this.note,
