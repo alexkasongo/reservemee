@@ -218,7 +218,6 @@ export default {
             this.$router.push('/service/create-service');
         },
         onCreateCategory() {
-            console.log(`ManageServices.vue - 316 - ✅`, this.formTitle);
             this.isCardModalActive = true;
         },
         goToService(service) {
@@ -279,8 +278,6 @@ export default {
                 userId: this.user.uid,
                 id: item.id
             };
-
-            console.log(`ManageServices.vue - 374 - 🌎`, payload);
             this.deleteCategory(payload);
             this.loadCategories(this.user.uid);
             this.$swal({

@@ -139,7 +139,6 @@ export default {
         // NEW MESSAGE
     },
     mounted() {
-        console.log(`Messenger.vue - 140 - 🌎`, this.user);
         // this.$store.dispatch('chat/loadMessages', this.user.uid);
 
         // this.uis = this.currentUserId;
