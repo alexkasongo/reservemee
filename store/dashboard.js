@@ -10,7 +10,7 @@ export const state = () => ({
     services: [],
     categories: [],
     filteredServiceId: [],
-    storeProfile: [],
+    storeProfile: []
     // DASHBOARD END
 });
 
@@ -26,7 +26,7 @@ export const getters = {
 
         return data[0];
     },
-    storeProfile: (state) => state.storeProfile[0],
+    storeProfile: (state) => state.storeProfile[0]
     // DASHBOARD END
 };
 
@@ -136,7 +136,7 @@ export const actions = {
                     ...category,
                     id: key
                 });
-                commit('loaders/SET_SNACKBAR', true, { root: true })
+                commit('loaders/SET_SNACKBAR', true, { root: true });
                 commit('loaders/SET_LOADING', false, { root: true });
             })
             .catch((error) => {
@@ -153,8 +153,7 @@ export const actions = {
             });
     },
     async createService({ commit, dispatch }, payload) {
-
-        // IF NO IMAGE 
+        // IF NO IMAGE
         if (payload.rawServiceImage === null) {
             commit('loaders/SET_LOADING', true, { root: true });
             const service = {
@@ -162,7 +161,7 @@ export const actions = {
                 price: payload.price,
                 userId: payload.userId,
                 category: payload.category,
-                description: payload.description,
+                description: payload.description
             };
             await firebase
                 .database()
@@ -195,20 +194,28 @@ export const actions = {
         if (payload.rawServiceImage !== null) {
             commit('loaders/SET_LOADING', true, { root: true });
             // upload service Image
-            let serviceImage = ''
+            let serviceImage = '';
 
-            const serviceImageFilename = payload.rawServiceImage.name
-            const serviceImageFileExt = serviceImageFilename.slice(serviceImageFilename.lastIndexOf('.'))
-            firebase.storage().ref('serviceImages/')
-                .child(`${payload.userId}/` + payload.serviceImageName + serviceImageFileExt)
+            const serviceImageFilename = payload.rawServiceImage.name;
+            const serviceImageFileExt = serviceImageFilename.slice(
+                serviceImageFilename.lastIndexOf('.')
+            );
+            firebase
+                .storage()
+                .ref('serviceImages/')
+                .child(
+                    `${payload.userId}/` +
+                        payload.serviceImageName +
+                        serviceImageFileExt
+                )
                 .put(payload.rawServiceImage)
-                .then(fileData => {
-                    let fullPath = fileData.metadata.fullPath
-                    return firebase.storage().ref(fullPath).getDownloadURL()
+                .then((fileData) => {
+                    let fullPath = fileData.metadata.fullPath;
+                    return firebase.storage().ref(fullPath).getDownloadURL();
                 })
                 .then((URL) => {
-                    serviceImage = URL
-                    return serviceImage
+                    serviceImage = URL;
+                    return serviceImage;
                 })
                 .then((image) => {
                     const service = {
@@ -233,29 +240,34 @@ export const actions = {
                             });
                         })
                         .then(() => {
-                            commit('loaders/SET_SNACKBAR', true, { root: true })
-                            dispatch('loadServices', payload.userId)
-                            commit('loaders/SET_LOADING', false, { root: true });
+                            commit('loaders/SET_SNACKBAR', true, {
+                                root: true
+                            });
+                            dispatch('loadServices', payload.userId);
+                            commit('loaders/SET_LOADING', false, {
+                                root: true
+                            });
                         })
                         .then(() => {
                             this.$router.push(`/service/${payload.category}`);
                         })
                         .catch((error) => {
                             commit('ERRORS', error);
-                            commit('loaders/SET_LOADING', false, { root: true });
+                            commit('loaders/SET_LOADING', false, {
+                                root: true
+                            });
                         });
                 })
                 .catch((error) => {
                     commit('ERRORS', error);
                     commit('loaders/SET_LOADING', false, { root: true });
                 });
-            return
+            return;
         }
         // 1. IF IMAGE EXISTS END
     },
     async updateService({ commit, dispatch }, payload) {
-
-        // IF NO IMAGE 
+        // IF NO IMAGE
         if (payload.rawServiceImage === null) {
             commit('loaders/SET_LOADING', true, { root: true });
             await firebase
@@ -269,8 +281,8 @@ export const actions = {
                     price: payload.price
                 })
                 .then(() => {
-                    commit('loaders/SET_SNACKBAR', true, { root: true })
-                    dispatch('loadServices', payload.userId)
+                    commit('loaders/SET_SNACKBAR', true, { root: true });
+                    dispatch('loadServices', payload.userId);
                     commit('loaders/SET_LOADING', false, { root: true });
                 })
                 .then(() => {
@@ -287,20 +299,28 @@ export const actions = {
         if (payload.rawServiceImage !== null) {
             commit('loaders/SET_LOADING', true, { root: true });
             // upload service Image
-            let serviceImage = ''
+            let serviceImage = '';
 
-            const serviceImageFilename = payload.rawServiceImage.name
-            const serviceImageFileExt = serviceImageFilename.slice(serviceImageFilename.lastIndexOf('.'))
-            firebase.storage().ref('serviceImages/')
-                .child(`${payload.userId}/` + payload.serviceImageName + serviceImageFileExt)
+            const serviceImageFilename = payload.rawServiceImage.name;
+            const serviceImageFileExt = serviceImageFilename.slice(
+                serviceImageFilename.lastIndexOf('.')
+            );
+            firebase
+                .storage()
+                .ref('serviceImages/')
+                .child(
+                    `${payload.userId}/` +
+                        payload.serviceImageName +
+                        serviceImageFileExt
+                )
                 .put(payload.rawServiceImage)
-                .then(fileData => {
-                    let fullPath = fileData.metadata.fullPath
-                    return firebase.storage().ref(fullPath).getDownloadURL()
+                .then((fileData) => {
+                    let fullPath = fileData.metadata.fullPath;
+                    return firebase.storage().ref(fullPath).getDownloadURL();
                 })
                 .then((URL) => {
-                    serviceImage = URL
-                    return serviceImage
+                    serviceImage = URL;
+                    return serviceImage;
                 })
                 .then((image) => {
                     // successful
@@ -317,23 +337,29 @@ export const actions = {
                             userId: payload.userId
                         })
                         .then(() => {
-                            commit('loaders/SET_SNACKBAR', true, { root: true })
-                            dispatch('loadServices', payload.userId)
-                            commit('loaders/SET_LOADING', false, { root: true });
+                            commit('loaders/SET_SNACKBAR', true, {
+                                root: true
+                            });
+                            dispatch('loadServices', payload.userId);
+                            commit('loaders/SET_LOADING', false, {
+                                root: true
+                            });
                         })
                         .then(() => {
                             this.$router.push(`/service/${payload.category}`);
                         })
                         .catch((error) => {
                             commit('ERRORS', error);
-                            commit('loaders/SET_LOADING', false, { root: true });
+                            commit('loaders/SET_LOADING', false, {
+                                root: true
+                            });
                         });
                 })
                 .catch((error) => {
                     commit('ERRORS', error);
                     commit('loaders/SET_LOADING', false, { root: true });
                 });
-            return
+            return;
         }
         // 1. IF IMAGE EXISTS PROFILE IMAGE END
     },
@@ -407,11 +433,11 @@ export const actions = {
                             .child('storeProfile/')
                             .update({
                                 // this allows the store to display properly on the store page!
-                                storeId: payload.userId,
-                            })
+                                storeId: payload.userId
+                            });
                     })
                     .then(() => {
-                        commit('loaders/SET_SNACKBAR', true, { root: true })
+                        commit('loaders/SET_SNACKBAR', true, { root: true });
                         commit('loaders/SET_LOADING', false, { root: true });
                     })
                     .catch((error) => {
@@ -422,7 +448,7 @@ export const actions = {
                 // if the storeOwnerImage does exist then run the code below
             } else {
                 user.updateProfile({
-                    displayName: payload.name,
+                    displayName: payload.name
                 })
                     .then(() => {
                         firebase
@@ -431,11 +457,11 @@ export const actions = {
                             .child('storeProfile/')
                             .update({
                                 // this allows the store to display properly on the store page!
-                                storeId: payload.userId,
-                            })
+                                storeId: payload.userId
+                            });
                     })
                     .then(() => {
-                        commit('loaders/SET_SNACKBAR', true, { root: true })
+                        commit('loaders/SET_SNACKBAR', true, { root: true });
                         commit('loaders/SET_LOADING', false, { root: true });
                     })
                     .catch((error) => {
@@ -443,26 +469,30 @@ export const actions = {
                         commit('ERRORS', error);
                         commit('loaders/SET_LOADING', false, { root: true });
                     });
-
             }
         }
         // 1. IF NO PROFILE IMAGE
 
         // 2. IF IMAGE EXISTS PROFILE IMAGE
         if (payload.rawStoreOwnerImage !== null) {
-            let storeOwnerImage = ''
+            let storeOwnerImage = '';
 
             // upload store banner
-            const ownerImageFilename = payload.rawStoreOwnerImage.name
-            const ownerImageFileExt = ownerImageFilename.slice(ownerImageFilename.lastIndexOf('.'))
-            firebase.storage().ref('storeOwnerImages/' + payload.userId + ownerImageFileExt).put(payload.rawStoreOwnerImage)
-                .then(fileData => {
-                    let fullPath = fileData.metadata.fullPath
-                    return firebase.storage().ref(fullPath).getDownloadURL()
+            const ownerImageFilename = payload.rawStoreOwnerImage.name;
+            const ownerImageFileExt = ownerImageFilename.slice(
+                ownerImageFilename.lastIndexOf('.')
+            );
+            firebase
+                .storage()
+                .ref('storeOwnerImages/' + payload.userId + ownerImageFileExt)
+                .put(payload.rawStoreOwnerImage)
+                .then((fileData) => {
+                    let fullPath = fileData.metadata.fullPath;
+                    return firebase.storage().ref(fullPath).getDownloadURL();
                 })
                 .then((URL) => {
-                    storeOwnerImage = URL
-                    return storeOwnerImage
+                    storeOwnerImage = URL;
+                    return storeOwnerImage;
                 })
                 .then((image) => {
                     // successful
@@ -474,7 +504,7 @@ export const actions = {
                             // image: image URL from firebase storage
                             storeOwnerImage: image,
                             // if only the image is added we add the storeId too so that we can access the store in store-front
-                            storeId: payload.userId,
+                            storeId: payload.userId
                         })
                         .then(() => {
                             // 2. Update user profile
@@ -489,15 +519,21 @@ export const actions = {
                                 .then(() => {
                                     // Update successful.
                                     dispatch('loadUserIdData', payload.userId);
-                                    commit('loaders/SET_SNACKBAR', true, { root: true })
-                                    commit('loaders/SET_LOADING', false, { root: true });
+                                    commit('loaders/SET_SNACKBAR', true, {
+                                        root: true
+                                    });
+                                    commit('loaders/SET_LOADING', false, {
+                                        root: true
+                                    });
                                 })
                                 .catch((error) => {
                                     // An error happened.
                                     commit('ERRORS', error);
-                                    commit('loaders/SET_LOADING', false, { root: true });
+                                    commit('loaders/SET_LOADING', false, {
+                                        root: true
+                                    });
                                 });
-                        })
+                        });
 
                     // commit('loaders/SET_LOADING', false, { root: true });
                 })
@@ -505,11 +541,9 @@ export const actions = {
                     commit('ERRORS', error);
                     commit('loaders/SET_LOADING', false, { root: true });
                 });
-            return
+            return;
         }
         // 2. IF IMAGE EXISTS END
-
-
     },
     /*
      ** update store profile information, no need to create
@@ -519,8 +553,8 @@ export const actions = {
         commit('loaders/SET_LOADING', true, { root: true });
 
         // if both logo and banner have been added run the code below
-        let logoImageUrl = ''
-        let bannerImageUrl = ''
+        let logoImageUrl = '';
+        let bannerImageUrl = '';
 
         // if no new logo or banner added, only update the rest of the information
         if (payload.rawStoreLogo === null && payload.rawStoreBanner === null) {
@@ -543,36 +577,34 @@ export const actions = {
                     twitter: payload.twitter,
                     facebook: payload.facebook,
                     instagram: payload.instagram
-                })
+                });
 
             // update successful
-            this.$swal({
-                toast: true,
-                position: 'top-end',
-                icon: 'success',
-                title: 'Saved',
-                showConfirmButton: false,
-                timer: 2500
-            });
+            commit('loaders/SET_SNACKBAR', true, { root: true });
             dispatch('loadUserIdData', payload.userId);
             commit('loaders/SET_LOADING', false, { root: true });
-            return
+            return;
         }
 
         // NO BANNER
         if (payload.rawStoreBanner === null) {
-            let logoImageUrl = ''
+            let logoImageUrl = '';
 
-            const logoFilename = payload.rawStoreLogo.name
-            const logoFileExt = logoFilename.slice(logoFilename.lastIndexOf('.'))
-            firebase.storage().ref('storeLogo/' + payload.userId + logoFileExt).put(payload.rawStoreLogo)
-                .then(fileData => {
-                    let fullPath = fileData.metadata.fullPath
-                    return firebase.storage().ref(fullPath).getDownloadURL()
+            const logoFilename = payload.rawStoreLogo.name;
+            const logoFileExt = logoFilename.slice(
+                logoFilename.lastIndexOf('.')
+            );
+            firebase
+                .storage()
+                .ref('storeLogo/' + payload.userId + logoFileExt)
+                .put(payload.rawStoreLogo)
+                .then((fileData) => {
+                    let fullPath = fileData.metadata.fullPath;
+                    return firebase.storage().ref(fullPath).getDownloadURL();
                 })
                 .then((URL) => {
-                    logoImageUrl = URL
-                    return logoImageUrl
+                    logoImageUrl = URL;
+                    return logoImageUrl;
                 })
                 .then((logo) => {
                     // successful
@@ -594,7 +626,7 @@ export const actions = {
                             twitter: payload.twitter,
                             facebook: payload.facebook,
                             instagram: payload.instagram
-                        })
+                        });
 
                     // update successful
                     this.$swal({
@@ -612,24 +644,29 @@ export const actions = {
                     commit('ERRORS', error);
                     commit('loaders/SET_LOADING', false, { root: true });
                 });
-            return
+            return;
         }
 
         // NO LOGO
         if (payload.rawStoreLogo === null) {
-            let bannerImageUrl = ''
+            let bannerImageUrl = '';
 
             // upload store banner
-            const bannerFilename = payload.rawStoreBanner.name
-            const bannerFileExt = bannerFilename.slice(bannerFilename.lastIndexOf('.'))
-            firebase.storage().ref('storeBanner/' + payload.userId + bannerFileExt).put(payload.rawStoreBanner)
-                .then(fileData => {
-                    let fullPath = fileData.metadata.fullPath
-                    return firebase.storage().ref(fullPath).getDownloadURL()
+            const bannerFilename = payload.rawStoreBanner.name;
+            const bannerFileExt = bannerFilename.slice(
+                bannerFilename.lastIndexOf('.')
+            );
+            firebase
+                .storage()
+                .ref('storeBanner/' + payload.userId + bannerFileExt)
+                .put(payload.rawStoreBanner)
+                .then((fileData) => {
+                    let fullPath = fileData.metadata.fullPath;
+                    return firebase.storage().ref(fullPath).getDownloadURL();
                 })
                 .then((URL) => {
-                    bannerImageUrl = URL
-                    return bannerImageUrl
+                    bannerImageUrl = URL;
+                    return bannerImageUrl;
                 })
                 .then((banner) => {
                     // successful
@@ -651,7 +688,7 @@ export const actions = {
                             twitter: payload.twitter,
                             facebook: payload.facebook,
                             instagram: payload.instagram
-                        })
+                        });
 
                     // update successful
                     this.$swal({
@@ -669,32 +706,46 @@ export const actions = {
                     commit('ERRORS', error);
                     commit('loaders/SET_LOADING', false, { root: true });
                 });
-            return
+            return;
         }
 
         // upload store banner and logo
-        const bannerFilename = payload.rawStoreBanner.name
-        const bannerFileExt = bannerFilename.slice(bannerFilename.lastIndexOf('.'))
-        firebase.storage().ref('storeBanner/' + payload.userId + bannerFileExt).put(payload.rawStoreBanner)
-            .then(fileData => {
-                let fullPath = fileData.metadata.fullPath
-                return firebase.storage().ref(fullPath).getDownloadURL()
+        const bannerFilename = payload.rawStoreBanner.name;
+        const bannerFileExt = bannerFilename.slice(
+            bannerFilename.lastIndexOf('.')
+        );
+        firebase
+            .storage()
+            .ref('storeBanner/' + payload.userId + bannerFileExt)
+            .put(payload.rawStoreBanner)
+            .then((fileData) => {
+                let fullPath = fileData.metadata.fullPath;
+                return firebase.storage().ref(fullPath).getDownloadURL();
             })
             .then((URL) => {
-                bannerImageUrl = URL
-                return bannerImageUrl
-            }).then((banner) => {
+                bannerImageUrl = URL;
+                return bannerImageUrl;
+            })
+            .then((banner) => {
                 // upload store logo
-                const logoFilename = payload.rawStoreLogo.name
-                const logoFileExt = logoFilename.slice(logoFilename.lastIndexOf('.'))
-                firebase.storage().ref('storeLogo/' + payload.userId + logoFileExt).put(payload.rawStoreLogo)
-                    .then(fileData => {
-                        let fullPath = fileData.metadata.fullPath
-                        return firebase.storage().ref(fullPath).getDownloadURL()
+                const logoFilename = payload.rawStoreLogo.name;
+                const logoFileExt = logoFilename.slice(
+                    logoFilename.lastIndexOf('.')
+                );
+                firebase
+                    .storage()
+                    .ref('storeLogo/' + payload.userId + logoFileExt)
+                    .put(payload.rawStoreLogo)
+                    .then((fileData) => {
+                        let fullPath = fileData.metadata.fullPath;
+                        return firebase
+                            .storage()
+                            .ref(fullPath)
+                            .getDownloadURL();
                     })
                     .then((URL) => {
-                        logoImageUrl = URL
-                        return logoImageUrl
+                        logoImageUrl = URL;
+                        return logoImageUrl;
                     })
                     .then((logo) => {
                         // successful
@@ -713,7 +764,7 @@ export const actions = {
                                 beauty: payload.beauty,
                                 wellness: payload.wellness,
                                 fitness: payload.fitness
-                            })
+                            });
 
                         // update successful
                         this.$swal({
@@ -731,9 +782,7 @@ export const actions = {
                         commit('ERRORS', error);
                         commit('loaders/SET_LOADING', false, { root: true });
                     });
-            })
-
-
+            });
     },
     updateServiceId({ commit }, payload) {
         commit('UPDATE_SERVICE_ID', payload);
@@ -742,7 +791,6 @@ export const actions = {
 };
 
 export const mutations = {
-
     // DASHBOARD START
     NEW_SERVICE: (state, payload) => state.services.push(payload),
     NEW_CATEGORY: (state, payload) => state.categories.push(payload),
@@ -763,7 +811,6 @@ export const mutations = {
     },
     // DASHBOARD END
 
-
     // LOADING START
     ERRORS: (state, error) => (state.signupError = error),
     // loaders/ SET_LOADING(state, payload) {
@@ -771,6 +818,6 @@ export const mutations = {
     // },
     SET_ALERT(state, payload) {
         state.alert = payload;
-    },
+    }
     // LOADING END
 };
