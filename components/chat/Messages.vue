@@ -1,40 +1,6 @@
 <template>
     <div>
-        <client-only>
-            <!-- If Messages -->
-            <div>
-                <!-- NEW MESSAGE -->
-                <div class="new-message">
-                    <form @submit.prevent="addMessage()">
-                        <!-- <label for="new-message">New Message (enter to add):</label> -->
-                        <p class="red-text" v-if="feedback">{{ feedback }}</p>
-                        <v-textarea
-                            type="text"
-                            name="new-message"
-                            placeholder="type in a message and press enter"
-                            v-model="newMessage"
-                        ></v-textarea>
-                        <div dark type="submit" class="teal darker-1">
-                            Send Me
-                        </div>
-                    </form>
-                </div>
-                <!-- NEW MESSAGE END -->
-            </div>
-
-            <!--If Messages end-->
-            <v-list-item-content v-if="!messages">
-                <div
-                    style="cursor: pointer"
-                    icon="mdi-alert-circle-outline"
-                    text
-                    type="info"
-                >
-                    <span> You have no messages. </span>
-                </div>
-            </v-list-item-content>
-            <!--If No Messages end-->
-        </client-only>
+        <h1 class="title">TEST</h1>
     </div>
 </template>
 
@@ -145,7 +111,6 @@ export default {
                     .then((res) => {
                         this.role = res.data().role;
                     });
-
                 // get logged in user role - end
             }
         });

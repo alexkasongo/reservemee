@@ -15,8 +15,8 @@
             <b-navbar-item @click="$router.push('/store')">
                 Store
             </b-navbar-item>
-            <b-navbar-item v-if="user" @click="goHome(user)">
-                Dasboard
+            <b-navbar-item v-if="user && role.admin" @click="goHome(user)">
+                Dashboard
             </b-navbar-item>
         </template>
 

@@ -211,6 +211,7 @@
 <script>
 import * as firebase from 'firebase/app';
 import { mapState, mapGetters, mapActions } from 'vuex';
+import { db } from '@/plugins/firebase';
 
 export default {
     data: () => ({
@@ -336,19 +337,21 @@ export default {
             }
         }
     },
-    mounted() {
-        firebase.auth().onAuthStateChanged((user) => {
+    created() {
+        firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {
                 // User is signed in.
                 // check user status
-                firebase
-                    .auth()
-                    .currentUser.getIdTokenResult()
-                    .then((tokenResult) => {
-                        if (tokenResult) {
-                            this.role = tokenResult.claims;
-                        }
+
+                // get logged in user role
+                await db
+                    .collection('roles')
+                    .doc(user.uid)
+                    .get()
+                    .then((res) => {
+                        this.role = res.data().role;
                     });
+                // get logged in user role - end
             }
         });
 

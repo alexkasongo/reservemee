@@ -51,6 +51,7 @@
 
 <script>
 import * as firebase from 'firebase/app';
+import { db } from '@/plugins/firebase';
 import { mapState, mapGetters } from 'vuex';
 
 export default {
@@ -113,18 +114,28 @@ export default {
             });
 
         // check if signin user is admin or customer
-        firebase.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {
+                await db
+                    .collection('roles')
+                    .doc(user.uid)
+                    .get()
+                    .then((res) => {
+                        this.role = res.data().role;
+                    });
+
+                // get logged in user role - end
+
                 // User is signed in.
                 // check user status
-                firebase
-                    .auth()
-                    .currentUser.getIdTokenResult()
-                    .then((tokenResult) => {
-                        if (tokenResult) {
-                            this.role = tokenResult.claims;
-                        }
-                    });
+                // firebase
+                //     .auth()
+                //     .currentUser.getIdTokenResult()
+                //     .then((tokenResult) => {
+                //         if (tokenResult) {
+                //             this.role = tokenResult.claims;
+                //         }
+                //     });
             }
         });
     },

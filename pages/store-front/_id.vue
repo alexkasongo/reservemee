@@ -47,6 +47,9 @@
             </div>
         </section>
 
+        <h2 class="title is-2">Contact Store</h2>
+        <Messages class="mt-5" />
+
         <h2 class="title is-2">Sort</h2>
         <b-field class="mb-5">
             <b-select
