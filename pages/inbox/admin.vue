@@ -339,6 +339,7 @@ export default {
                         message: this.newReply,
                         messagePreviewId: this.messages[0].id
                     };
+
                     this.$store.dispatch('chat/sendReply', createdMessage);
                     this.newReply = null;
                     this.feedback = null;
@@ -364,6 +365,7 @@ export default {
                         message: this.newReply,
                         messagePreviewId: this.messages[0].messageId
                     };
+
                     this.$store.dispatch('chat/sendReply', createdMessage);
                     this.newReply = null;
                     this.feedback = null;

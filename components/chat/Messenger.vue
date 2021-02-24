@@ -6,6 +6,18 @@
                 <!-- NEW MESSAGE -->
                 <div class="new-message">
                     <form>
+                        <div class="mb-5" @click="$router.push('/settings')">
+                            <b-notification
+                                v-if="warning"
+                                type="is-warning"
+                                :closable="false"
+                                aria-close-label="Close notification"
+                                role="alert"
+                                style="cursor: pointer"
+                            >
+                                {{ warning }}
+                            </b-notification>
+                        </div>
                         <b-notification
                             v-if="feedback"
                             type="is-danger is-light"
@@ -56,6 +68,7 @@ export default {
         isModalVisible: false,
         newMessage: null,
         feedback: null,
+        warning: null,
         uid: '',
         role: null
     }),
@@ -91,6 +104,10 @@ export default {
 
         // NEW MESSAGE
         addMessage() {
+            if (this.user.name === null) {
+                this.newMessage = null;
+                return;
+            }
             if (this.role.customer) {
                 if (this.newMessage) {
                     const createdMessage = {
@@ -105,12 +122,13 @@ export default {
                         name: this.user.name,
                         message: this.newMessage
                     };
-                    this.$store.dispatch('chat/addMsg', createdMessage);
+                    console.log(`admin.vue - 342 - 🍎`, createdMessage);
+                    // this.$store.dispatch('chat/addMsg', createdMessage);
                     this.newMessage = null;
                     this.feedback = null;
                 } else {
                     this.feedback =
-                        'You must enter a message in order to send one';
+                        'You must have a username and enter a message in order to send one';
                 }
             }
             if (this.role.admin) {
@@ -127,24 +145,23 @@ export default {
                         name: this.user.name,
                         message: this.newMessage
                     };
-                    this.$store.dispatch('chat/addMsg', createdMessage);
+                    console.log(`admin.vue - 342 - 🔥`, createdMessage);
+                    // this.$store.dispatch('chat/addMsg', createdMessage);
                     this.newMessage = null;
                     this.feedback = null;
                 } else {
                     this.feedback =
-                        'You must enter a message in order to send one';
+                        'You must have a username and enter a message in order to send one';
                 }
             }
         }
         // NEW MESSAGE
     },
     mounted() {
-        // this.$store.dispatch('chat/loadMessages', this.user.uid);
-
-        // this.uis = this.currentUserId;
-        // this.$store.dispatch('chat/loadMessages', this.user.uid);
-        // this.$store.dispatch('chat/loadReplies', this.user.uid);
-        // NEW MESSAGE
+        if (this.user.name === null) {
+            this.warning =
+                'You must have a username to send a message. Go to settings and create a username';
+        }
 
         firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {
