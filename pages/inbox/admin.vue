@@ -302,6 +302,7 @@ export default {
                             messageData.messagePreviewId
                         );
                     });
+                    console.log(`admin.vue - 305 - 🩴`, filteredMessages);
                     this.messages = filteredMessages;
                 });
         },
@@ -309,7 +310,9 @@ export default {
             this.messagePreview = new Array(e);
 
             const value = e.id;
+            console.log(`admin.vue - 313 - 🧣`, value);
             this.loadReplies(e.userId).then(() => {
+                console.log(`admin.vue - 314 - 🧤`, this.replies);
                 // filter replies by message ID
                 const data = this.replies.filter((res) => {
                     return res.messageId === value;
