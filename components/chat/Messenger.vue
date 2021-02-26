@@ -176,7 +176,6 @@ export default {
                     this.warning =
                         'You must have a username to send a message. Go to settings and create a username';
                 }
-                console.log(`Messenger.vue - 179 - 💋`, user);
             }
         });
     }

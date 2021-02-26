@@ -165,16 +165,6 @@ export default {
         },
         // MANIPULATE EVENTS START
         async logEvents(name, event) {
-            // event CLICK
-            // if (name === 'event-focus') {
-            //     console.log(`EventCalendar.vue - 171 - event-focus`);
-            // }
-
-            // event FOCUS
-            // if (name === 'event-focus') {
-            //     console.log(`EventCalendar.vue - 171 - event-focus`);
-            // }
-
             // event TITLE CHANGE
             if (name === 'event-title-change') {
                 const docId = event.event.id;
