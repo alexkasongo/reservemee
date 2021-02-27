@@ -12,8 +12,8 @@
                 <div
                     @click="onCatClicked(category.text)"
                     :style="[
-                        isClicked
-                            ? { background: '#7957d5' }
+                        isClicked && category.text === itemClicked
+                            ? { background: '#7957d5', color: '#fff' }
                             : { background: '#cccccc' }
                     ]"
                     class="categories__sort-text"
@@ -108,9 +108,8 @@ export default {
         ],
         fav: false,
         error: null,
-        isClicked: false
-        // on: "red",
-        // off: ""
+        isClicked: false,
+        itemClicked: ''
     }),
     computed: {
         user() {
@@ -132,7 +131,9 @@ export default {
             });
         },
         onCatClicked(e) {
-            console.log(`StoreCategories.vue - 135 - 🍎`, e);
+            this.isClicked = true;
+            // use name to check if it matches name of clicked ite
+            this.itemClicked = e;
         }
     },
     created() {
