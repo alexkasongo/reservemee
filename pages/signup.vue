@@ -3,6 +3,7 @@
         <div class="signup__left"></div>
         <div class="signup__right">
             <div class="signup__right-card">
+                <h1 class="title" style="color: #ccc">Customer Signup</h1>
                 <form @keyup.enter="onSubmit">
                     <b-field>
                         <b-input
@@ -54,6 +55,24 @@
                             >signup</b-button
                         >
                     </b-field>
+                    <div class="is-flex is-justify-content-space-between">
+                        <b-field>
+                            <a
+                                @click="$router.push('/signin')"
+                                style="cursor: pointer; color: #7957d5"
+                            >
+                                Login
+                            </a>
+                        </b-field>
+                        <b-field>
+                            <a
+                                @click="$router.push('/signup-admin')"
+                                style="cursor: pointer; color: #7957d5"
+                            >
+                                Create store account
+                            </a>
+                        </b-field>
+                    </div>
                 </form>
             </div>
         </div>

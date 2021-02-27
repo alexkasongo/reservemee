@@ -19,6 +19,7 @@
         align-items: center;
         display: none;
         border-radius: 4px;
+        cursor: pointer;
         @media (min-width: $large-desktop) {
             display: block;
         }

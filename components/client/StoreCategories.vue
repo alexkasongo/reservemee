@@ -9,7 +9,15 @@
                 v-for="(category, id) in sorting"
                 :key="id"
             >
-                <div class="categories__sort-text">
+                <div
+                    @click="onCatClicked(category.text)"
+                    :style="[
+                        isClicked
+                            ? { background: '#7957d5' }
+                            : { background: '#cccccc' }
+                    ]"
+                    class="categories__sort-text"
+                >
                     {{ category.text }}
                 </div>
             </div>
@@ -99,7 +107,10 @@ export default {
             { text: 'Store 6', image: 'https://via.placeholder.com/150' }
         ],
         fav: false,
-        error: null
+        error: null,
+        isClicked: false
+        // on: "red",
+        // off: ""
     }),
     computed: {
         user() {
@@ -119,6 +130,9 @@ export default {
                     id: store.storeId
                 }
             });
+        },
+        onCatClicked(e) {
+            console.log(`StoreCategories.vue - 135 - 🍎`, e);
         }
     },
     created() {

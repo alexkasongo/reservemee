@@ -56,6 +56,24 @@
                                 >signup</b-button
                             >
                         </b-field>
+                        <div class="is-flex is-justify-content-space-between">
+                            <b-field>
+                                <a
+                                    @click="$router.push('/signin')"
+                                    style="cursor: pointer; color: #7957d5"
+                                >
+                                    Login
+                                </a>
+                            </b-field>
+                            <b-field>
+                                <a
+                                    @click="$router.push('/signup')"
+                                    style="cursor: pointer; color: #7957d5"
+                                >
+                                    Create customer account
+                                </a>
+                            </b-field>
+                        </div>
                     </form>
                 </div>
             </div>

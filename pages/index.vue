@@ -29,12 +29,34 @@
                                 >
                                     Login
                                 </button>
-                                <button
+                                <!-- <button
+                                    v-if="!user"
                                     @click="$router.push('/signup-admin')"
                                     class="button"
                                 >
                                     Signup
-                                </button>
+                                </button> -->
+                            </div>
+                            <div
+                                v-if="!user"
+                                class="is-flex is-justify-content-space-between"
+                            >
+                                <b-field>
+                                    <a
+                                        @click="$router.push('/signup')"
+                                        style="cursor: pointer; color: #7957d5"
+                                    >
+                                        Create customer account
+                                    </a>
+                                </b-field>
+                                <b-field>
+                                    <a
+                                        @click="$router.push('/signup-admin')"
+                                        style="cursor: pointer; color: #7957d5"
+                                    >
+                                        Create store account
+                                    </a>
+                                </b-field>
                             </div>
                         </div>
                         <div
