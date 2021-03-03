@@ -123,19 +123,6 @@ export default {
                     .then((res) => {
                         this.role = res.data().role;
                     });
-
-                // get logged in user role - end
-
-                // User is signed in.
-                // check user status
-                // firebase
-                //     .auth()
-                //     .currentUser.getIdTokenResult()
-                //     .then((tokenResult) => {
-                //         if (tokenResult) {
-                //             this.role = tokenResult.claims;
-                //         }
-                //     });
             }
         });
     },
