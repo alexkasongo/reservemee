@@ -188,7 +188,7 @@ export default {
 
                     this.loadAllReplies();
                 } else {
-                    this.feedback = 'You must enter a reply to add it';
+                    this.feedback = 'You must enter a reply to send it';
                 }
             }
         }
