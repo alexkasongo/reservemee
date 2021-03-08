@@ -373,13 +373,10 @@ export default {
     display: flex;
     flex-direction: column;
     width: 100%;
-    // height: calc(100vh - 56px);
-    // min-height: 100vh;
     .sidebar-layout {
         display: flex;
         flex-direction: row;
         height: calc(100vh - 56px);
-        // min-height: 100vh;
     }
 }
 @media screen and (max-width: 1023px) {
