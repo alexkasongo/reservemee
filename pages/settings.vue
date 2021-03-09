@@ -178,7 +178,7 @@ export default {
             }
         });
 
-        // start tracking the viewport
+        // start tracking the viewport here
         this.viewPort;
     }
 };
