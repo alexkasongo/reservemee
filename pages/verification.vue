@@ -108,6 +108,7 @@ export default {
                 email: this.userLoaded.email
             };
             this.verifyEmail(emailAddress).then((res) => {
+                // you can do something here
                 // this.user();
             });
         },
