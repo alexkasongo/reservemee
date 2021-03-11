@@ -4,7 +4,6 @@ export { default as Messages } from '../../components/chat/Messages.vue'
 export { default as Messenger } from '../../components/chat/Messenger.vue'
 export { default as StoreMessages } from '../../components/chat/StoreMessages.vue'
 export { default as HorizontalCard } from '../../components/client/HorizontalCard.vue'
-export { default as Ratings } from '../../components/client/Ratings.vue'
 export { default as SideBar } from '../../components/client/SideBar.vue'
 export { default as SideBarAd } from '../../components/client/SideBarAd.vue'
 export { default as StoreBanner } from '../../components/client/StoreBanner.vue'
@@ -33,7 +32,6 @@ export const LazyMessages = import('../../components/chat/Messages.vue' /* webpa
 export const LazyMessenger = import('../../components/chat/Messenger.vue' /* webpackChunkName: "components/messenger" */).then(c => c.default || c)
 export const LazyStoreMessages = import('../../components/chat/StoreMessages.vue' /* webpackChunkName: "components/store-messages" */).then(c => c.default || c)
 export const LazyHorizontalCard = import('../../components/client/HorizontalCard.vue' /* webpackChunkName: "components/horizontal-card" */).then(c => c.default || c)
-export const LazyRatings = import('../../components/client/Ratings.vue' /* webpackChunkName: "components/ratings" */).then(c => c.default || c)
 export const LazySideBar = import('../../components/client/SideBar.vue' /* webpackChunkName: "components/side-bar" */).then(c => c.default || c)
 export const LazySideBarAd = import('../../components/client/SideBarAd.vue' /* webpackChunkName: "components/side-bar-ad" */).then(c => c.default || c)
 export const LazyStoreBanner = import('../../components/client/StoreBanner.vue' /* webpackChunkName: "components/store-banner" */).then(c => c.default || c)

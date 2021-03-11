@@ -17,9 +17,6 @@
   "HorizontalCard": {
     "description": "Auto imported from components/client/HorizontalCard.vue"
   },
-  "Ratings": {
-    "description": "Auto imported from components/client/Ratings.vue"
-  },
   "SideBar": {
     "description": "Auto imported from components/client/SideBar.vue"
   },

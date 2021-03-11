@@ -7,7 +7,6 @@ const components = {
   Messenger: () => import('../../components/chat/Messenger.vue' /* webpackChunkName: "components/messenger" */).then(c => c.default || c),
   StoreMessages: () => import('../../components/chat/StoreMessages.vue' /* webpackChunkName: "components/store-messages" */).then(c => c.default || c),
   HorizontalCard: () => import('../../components/client/HorizontalCard.vue' /* webpackChunkName: "components/horizontal-card" */).then(c => c.default || c),
-  Ratings: () => import('../../components/client/Ratings.vue' /* webpackChunkName: "components/ratings" */).then(c => c.default || c),
   SideBar: () => import('../../components/client/SideBar.vue' /* webpackChunkName: "components/side-bar" */).then(c => c.default || c),
   SideBarAd: () => import('../../components/client/SideBarAd.vue' /* webpackChunkName: "components/side-bar-ad" */).then(c => c.default || c),
   StoreBanner: () => import('../../components/client/StoreBanner.vue' /* webpackChunkName: "components/store-banner" */).then(c => c.default || c),
