@@ -4,14 +4,14 @@ import 'firebase/firestore';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-    apiKey: '**********',
-    authDomain: '**********',
-    databaseURL: '**********',
-    projectId: '**********',
-    storageBucket: '**********',
-    messagingSenderId: '**********',
-    appId: '**********',
-    measurementId: '**********'
+    apiKey: 'AIzaSyAjtsjs0bT6R9BxvypR1hq1dB1Gq7314GY',
+    authDomain: 'bookme-7de5a.firebaseapp.com',
+    databaseURL: 'https://bookme-7de5a.firebaseio.com',
+    projectId: 'bookme-7de5a',
+    storageBucket: 'bookme-7de5a.appspot.com',
+    messagingSenderId: '712900995493',
+    appId: '1:712900995493:web:dec7f1a097c48a8709a04c',
+    measurementId: 'G-WT6J1JBQ2B'
 };
 // Initialize Firebase
 

@@ -30,7 +30,10 @@
                         </b-input>
                     </b-field>
                     <b-field v-if="error">
-                        <p>{{ this.error }}</p>
+                        <p style="color: red">{{ this.error }}</p>
+                    </b-field>
+                    <b-field v-if="errors">
+                        <p style="color: red">{{ this.errors }}</p>
                     </b-field>
                     <b-field class="buttons">
                         <b-button
@@ -59,6 +62,16 @@
                                 style="cursor: pointer; color: #7957d5"
                             >
                                 Create store account
+                            </p>
+                        </b-field>
+                    </div>
+                    <div class="is-flex is-justify-content-space-between">
+                        <b-field>
+                            <p
+                                @click="$router.push('/password-reset')"
+                                style="cursor: pointer; color: #7957d5"
+                            >
+                                Forgot password?
                             </p>
                         </b-field>
                     </div>
@@ -91,6 +104,7 @@ export default {
                 this.error = 'you must enter both email and password.';
                 return;
             }
+            this.error = '';
             let loginDetails = {
                 email: this.email,
                 password: this.password
