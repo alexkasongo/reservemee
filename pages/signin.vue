@@ -109,6 +109,11 @@ export default {
                 email: this.email,
                 password: this.password
             };
+            // clear local errors
+            this.error = '';
+            // clear vuex errors
+            this.$store.commit('ERRORS', '');
+            // signin
             this.login(loginDetails);
         },
         clearIconClick() {

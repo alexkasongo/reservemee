@@ -40,8 +40,11 @@
                         >
                         </b-input>
                     </b-field>
-                    <b-field v-if="error">
+                    <b-field v-if="error" style="color: red">
                         <p>{{ this.error }}</p>
+                    </b-field>
+                    <b-field v-if="errors" style="color: red">
+                        <p>{{ this.errors }}</p>
                     </b-field>
                     <b-field class="buttons">
                         <b-button
@@ -111,6 +114,11 @@ export default {
                     customer: true
                 }
             };
+            // clear local errors
+            this.error = '';
+            // clear vuex errors
+            this.$store.commit('ERRORS', '');
+            // signup
             this.signup(signupDetails);
             this.clear;
         },
