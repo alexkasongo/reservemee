@@ -134,7 +134,7 @@ export default {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 // User is signed in.
-                // check user status
+                // check user status here
                 this.user = user;
             } else {
                 // No user is signed in.
