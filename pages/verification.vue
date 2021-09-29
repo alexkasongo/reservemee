@@ -109,7 +109,6 @@ export default {
             };
             this.verifyEmail(emailAddress).then((res) => {
                 // you can do something here
-                // this.user();
             });
         },
         async signout() {
