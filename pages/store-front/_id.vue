@@ -398,6 +398,7 @@ export default {
                 this.isCardModalActive = false;
             }
         },
+        // Quickly make a booking
         quickBook(service) {
             if (this.user.length === 0) {
                 this.$router.push('/signin');
@@ -406,8 +407,8 @@ export default {
                 this.isCardModalActive = true;
             }
         },
+        // update booking state
         updateBookingState(event) {
-            // this.setBookingState('');
             this.isActive = false;
             this.setBookingState('');
         }
