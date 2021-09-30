@@ -457,10 +457,7 @@ export default {
 }
 .service__card {
     border-radius: 0.25rem;
-    // -webkit-box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
-    //     0 0px 0 1px rgb(10 10 10 / 2%);
     box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.2);
-    //     0 0px 0 1px rgb(10 10 10 / 2%);
 }
 .modal__settings {
     overflow: auto;
